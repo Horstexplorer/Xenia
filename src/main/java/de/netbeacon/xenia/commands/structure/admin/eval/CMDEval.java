@@ -163,7 +163,7 @@ public class CMDEval extends Command {
             // start process
             long start = System.currentTimeMillis();
             ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command(XeniaCore.getInstance().getConfig().getString("javaEvalCMD"), "-jar", "EvalHelper.jar", XeniaCore.getInstance().getConfig().getString("evalTmpPath")+filename);
+            processBuilder.command("java", "-jar", "EvalHelper.jar", new String(XeniaCore.getInstance().getConfig().getString("evalTmpPath")+filename));
             Process process = processBuilder.start();
             // start process timeout
             ScheduledFuture<?> timeout = executorService.schedule(process::destroyForcibly,15, TimeUnit.SECONDS);
