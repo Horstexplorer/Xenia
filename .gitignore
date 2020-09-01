@@ -1,6 +1,6 @@
-.gradle
-.idea
+/.gradle
+/.idea
 /build
-eval
+/eval
 *.config
 *.log
