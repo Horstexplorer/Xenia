@@ -1,0 +1,32 @@
+plugins {
+    id'java'
+    id'application'
+    id'com.github.johnrengelman.shadow' version '6.0.0'
+}
+
+group 'de.netbeacon'
+
+mainClassName = 'de.netbeacon.xenia.core.Init'
+
+sourceCompatibility = 13
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation 'net.dv8tion:JDA:4.2.0_200'
+    // https://mvnrepository.com/artifact/org.json/json
+    implementation group: 'org.json', name: 'json', version: '20200518'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+    // https://mvnrepository.com/artifact/org.graalvm.js/js
+    implementation group: 'org.graalvm.js', name: 'js', version: '20.2.0'
+    // https://mvnrepository.com/artifact/org.graalvm.js/js
+    implementation group: 'org.graalvm.js', name: 'js-scriptengine', version: '20.2.0'
+}
