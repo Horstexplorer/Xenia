@@ -21,6 +21,6 @@ package de.netbeacon.xenia.tools.statics;
  */
 public class Info {
 
-    public final static String VERSION = "0.0.1";
+    public final static String VERSION = "0.0.2";
 
 }
