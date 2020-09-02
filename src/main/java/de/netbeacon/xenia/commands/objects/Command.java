@@ -147,13 +147,6 @@ public abstract class Command {
     }
 
     /**
-     * Used to check if the command requires the author to be resolved to a member object
-     *
-     * @return boolean
-     */
-    public boolean requiresAuthorResolved(){return false;}
-
-    /**
      * Used to execute the command
      * @param args remaining arguments
      * @param commandEvent CommandEvent
@@ -172,15 +165,11 @@ public abstract class Command {
                 commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{},e->{});
                 return;
             }
-            if(!(getMemberPermissions().isEmpty() || (getMemberPermissions().containsAll(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)) && getMemberPermissions().size() == 2)) || requiresAuthorResolved()){
-                // retrieve member
-                Member member = commandEvent.getEvent().getGuild().retrieveMember(commandEvent.getEvent().getAuthor()).complete();
-                if(member == null || !member.hasPermission(getMemberPermissions())){
-                    // invalid permission
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
-                    return;
-                }
-                commandEvent.setRetrievedAuthor(member);
+            System.out.println(commandEvent.getEvent().getMember());
+            if(!commandEvent.getEvent().getMember().hasPermission(getMemberPermissions())){
+                // invalid permission
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
+                return;
             }
             // everything alright
             onExecution(args, commandEvent);
@@ -191,42 +180,6 @@ public abstract class Command {
                 command.execute(args, commandEvent);
             }
         }
-    }
-
-    /**
-     * Returns an message embed if the execution of the command failed due to bad arguments
-     *
-     * @return MessageEmbed
-     */
-    public MessageEmbed onHelpNeeded(){
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Help <"+alias+">")
-                .setColor(Color.CYAN);
-        StringBuilder help = new StringBuilder();
-        if(isCommandHandler){
-            for(Map.Entry<String, Command> entry : children.entrySet()){
-                Command c = entry.getValue();
-                help.append("<> ").append(c.getAlias()).append(" ");
-                if(c.isCommandHandler()){
-                    help.append("#");
-                }else{
-                    for(String s : c.getRequiredArgs()){
-                        help.append("<").append(s).append(">").append(" ");
-                    }
-                }
-                help.append("- ").append(description);
-                help.append("\n");
-            }
-            embedBuilder.addField("Commands", help.toString(), false);
-        }else{
-            help.append("<> ").append(alias).append(" ");
-            for(String s : requiredArgs){
-                help.append("<").append(s).append(">").append(" ");
-            }
-            help.append("\n");
-            embedBuilder.addField("Syntax", help.toString(), false);
-        }
-        return embedBuilder.build();
     }
 
     /**
