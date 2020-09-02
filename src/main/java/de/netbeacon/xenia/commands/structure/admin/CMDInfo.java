@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.commands.structure.admin.info;
+package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
