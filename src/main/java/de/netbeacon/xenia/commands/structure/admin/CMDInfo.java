@@ -19,6 +19,7 @@ package de.netbeacon.xenia.commands.structure.admin;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -68,9 +69,7 @@ public class CMDInfo extends Command {
         Runtime runtime = Runtime.getRuntime();
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Info")
-                .setColor(Color.CYAN)
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia","Version: "+VERSION, false)
                 .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
                 .addField("Shard", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)

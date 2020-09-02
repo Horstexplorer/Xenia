@@ -18,6 +18,7 @@ package de.netbeacon.xenia.commands.structure;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 
@@ -39,9 +40,7 @@ public class CMDInfo extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Info")
-                .setColor(Color.CYAN)
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia:", "Version "+VERSION, true)
                 .addField("Website:", "[Visit Website](https://xenia.netbeacon.de/)", true);
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});

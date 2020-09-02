@@ -19,6 +19,7 @@ package de.netbeacon.xenia.commands.structure.admin;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 
@@ -60,9 +61,7 @@ public class CMDPing extends Command {
         double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
         double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
 
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Ping")
-                .setColor(Color.CYAN)
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
                 .addField("Gateway Ping:", gatewayPing+"ms", true)
                 .addField("Rest Ping", restPing+"ms", true);
