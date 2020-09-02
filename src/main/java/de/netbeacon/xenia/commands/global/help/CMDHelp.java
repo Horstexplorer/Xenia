@@ -19,6 +19,7 @@ package de.netbeacon.xenia.commands.global.help;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.commands.objects.CommandGroup;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -62,9 +63,7 @@ public class CMDHelp extends Command {
         }
         String commandPath = commandPathBuilder.toString().trim();
         // build help page
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""))
-                .setColor(Color.CYAN);
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
         StringBuilder help = new StringBuilder();
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
             Command c = entry.getValue();

@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.tools.config;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -96,6 +97,60 @@ public class Config {
             return config.getBoolean(key);
         }catch (Exception e){
             return false;
+        }
+    }
+
+    /**
+     * Returns an int array for the given key
+     *
+     * @param key key
+     * @return value
+     */
+    public int[] getIntArray(String key){
+        try{
+            JSONArray jsonArray = config.getJSONArray(key);
+            int[] ia = new int[jsonArray.length()];
+            for(int i = 0; i < jsonArray.length(); i++)
+                ia[i] = jsonArray.getInt(i);
+            return ia;
+        }catch (Exception e){
+            return new int[0];
+        }
+    }
+
+    /**
+     * Returns an long array for the given key
+     *
+     * @param key key
+     * @return value
+     */
+    public long[] getLongArray(String key){
+        try{
+            JSONArray jsonArray = config.getJSONArray(key);
+            long[] ia = new long[jsonArray.length()];
+            for(int i = 0; i < jsonArray.length(); i++)
+                ia[i] = jsonArray.getLong(i);
+            return ia;
+        }catch (Exception e){
+            return new long[0];
+        }
+    }
+
+    /**
+     * Returns an string array for the given key
+     *
+     * @param key key
+     * @return value
+     */
+    public String[] getStringArray(String key){
+        try{
+            JSONArray jsonArray = config.getJSONArray(key);
+            String[] ia = new String[jsonArray.length()];
+            for(int i = 0; i < jsonArray.length(); i++)
+                ia[i] = jsonArray.getString(i);
+            return ia;
+        }catch (Exception e){
+            return new String[0];
         }
     }
 }

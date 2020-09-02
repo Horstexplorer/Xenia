@@ -16,14 +16,15 @@
 
 package de.netbeacon.xenia.commands.objects;
 
-import net.dv8tion.jda.api.EmbedBuilder;
+import de.netbeacon.xenia.core.XeniaCore;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Command {
 
@@ -147,13 +148,6 @@ public abstract class Command {
     }
 
     /**
-     * Used to check if the command requires the author to be resolved to a member object
-     *
-     * @return boolean
-     */
-    public boolean requiresAuthorResolved(){return false;}
-
-    /**
      * Used to execute the command
      * @param args remaining arguments
      * @param commandEvent CommandEvent
@@ -163,24 +157,19 @@ public abstract class Command {
             // check required args
             if(getRequiredArgCount() > args.size()){
                 // missing args
-                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                 return;
             }
             // check bot permissions
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
                 // bot does not have the required permissions
-                commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 return;
             }
-            if(!(getMemberPermissions().isEmpty() || (getMemberPermissions().containsAll(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)) && getMemberPermissions().size() == 2)) || requiresAuthorResolved()){
-                // retrieve member
-                Member member = commandEvent.getEvent().getGuild().retrieveMember(commandEvent.getEvent().getAuthor()).complete();
-                if(member == null || !member.hasPermission(getMemberPermissions())){
-                    // invalid permission
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
-                    return;
-                }
-                commandEvent.setRetrievedAuthor(member);
+            if(commandEvent.getEvent().getMember() == null || !commandEvent.getEvent().getMember().hasPermission(getMemberPermissions())){
+                // invalid permission
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                return;
             }
             // everything alright
             onExecution(args, commandEvent);
@@ -194,49 +183,12 @@ public abstract class Command {
     }
 
     /**
-     * Returns an message embed if the execution of the command failed due to bad arguments
-     *
-     * @return MessageEmbed
-     */
-    public MessageEmbed onHelpNeeded(){
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Help <"+alias+">")
-                .setColor(Color.CYAN);
-        StringBuilder help = new StringBuilder();
-        if(isCommandHandler){
-            for(Map.Entry<String, Command> entry : children.entrySet()){
-                Command c = entry.getValue();
-                help.append("<> ").append(c.getAlias()).append(" ");
-                if(c.isCommandHandler()){
-                    help.append("#");
-                }else{
-                    for(String s : c.getRequiredArgs()){
-                        help.append("<").append(s).append(">").append(" ");
-                    }
-                }
-                help.append("- ").append(description);
-                help.append("\n");
-            }
-            embedBuilder.addField("Commands", help.toString(), false);
-        }else{
-            help.append("<> ").append(alias).append(" ");
-            for(String s : requiredArgs){
-                help.append("<").append(s).append(">").append(" ");
-            }
-            help.append("\n");
-            embedBuilder.addField("Syntax", help.toString(), false);
-        }
-        return embedBuilder.build();
-    }
-
-    /**
      * Returns an message embed if the execution of the command is missing permissions on the bot side
      *
      * @return MessageEmbed
      */
     public MessageEmbed onMissingBotPerms(){
-        return new EmbedBuilder()
-                .setTitle("Failed: Bot Is Missing Permissions")
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Bot Is Missing Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("I am unable to execute the command due to missing permissions!")
                 .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
@@ -249,8 +201,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onMissingMemberPerms(){
-        return new EmbedBuilder()
-                .setTitle("Failed: Not Enough Permissions")
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this !")
                 .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
@@ -267,8 +218,7 @@ public abstract class Command {
         for(String s : requiredArgs){
             usage.append("<").append(s).append(">").append(" ");
         }
-        return new EmbedBuilder()
-                .setTitle("Failed: Not Enough Arguments")
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("This command requires more arguments.")
                 .addField("Usage", usage.toString(), false)

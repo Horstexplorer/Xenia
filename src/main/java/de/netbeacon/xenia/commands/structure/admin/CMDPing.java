@@ -14,31 +14,24 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.commands.structure.admin.info;
+package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.sharding.ShardManager;
 
 import java.awt.*;
-import java.lang.management.ManagementFactory;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static de.netbeacon.xenia.tools.statics.Info.VERSION;
+public class CMDPing extends Command {
 
-/**
- * Displays some stats to the user
- */
-public class CMDInfo extends Command {
-
-    public CMDInfo(){
-        super("info", "Displays some statistics about this bot", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+    public CMDPing() {
+        super("ping", "Can be used to check the ping to discord and other linked services", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
     }
 
     @Override
@@ -64,25 +57,15 @@ public class CMDInfo extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        ShardManager shardManager = XeniaCore.getInstance().getShardManager();
-        Runtime runtime = Runtime.getRuntime();
-        GuildMessageReceivedEvent event = commandEvent.getEvent();
-        long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Info")
-                .setColor(Color.CYAN)
-                .addField("Xenia","Version: "+VERSION, false)
-                .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
-                .addField("Shard", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)
-                .addField("Shards", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)
-                .addField("Uptime:", String.format("%d days, %d hours, %d min, %d seconds",
-                        (int)((uptime / (1000*60*60*24))),
-                        (int)((uptime / (1000*60*60)) % 24),
-                        (int)((uptime / (1000*60)) % 60),
-                        (int)((uptime / (1000)) % 60)), true)
-                .addField("Threads:", String.valueOf(Thread.activeCount()), true)
-                .addField("Memory Usage:", (runtime.totalMemory()-runtime.freeMemory())/(1048576)+"Mb/"+runtime.totalMemory()/(1048576)+"Mb", true);
+        double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
+        double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
+        double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
 
-        event.getChannel().sendMessage(embedBuilder.build()).queue();
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
+                .addField("Gateway Ping:", gatewayPing+"ms", true)
+                .addField("Rest Ping", restPing+"ms", true);
+
+        commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
     }
 }

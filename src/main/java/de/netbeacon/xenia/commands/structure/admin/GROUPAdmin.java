@@ -17,8 +17,6 @@
 package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.CommandGroup;
-import de.netbeacon.xenia.commands.structure.admin.eval.CMDEval;
-import de.netbeacon.xenia.commands.structure.admin.info.CMDInfo;
 
 /**
  * Contains all commands providing some admin features to the developer
@@ -29,6 +27,7 @@ public class GROUPAdmin extends CommandGroup {
         super(parent, "admin", "Contains commands only available to the developer");
         addChildCommand(new CMDEval());
         addChildCommand(new CMDInfo());
+        addChildCommand(new CMDPing());
     }
 
 }

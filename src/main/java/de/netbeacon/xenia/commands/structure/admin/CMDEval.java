@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.commands.structure.admin.eval;
+package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
+import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
@@ -106,10 +107,10 @@ public class CMDEval extends Command {
                         evalJavaScriptCode(commandEvent, message, engine, code);
                     }
                 }catch (Exception e){
-                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, e.getMessage())).queue(s->{},ex->{});
+                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, code, e.getMessage())).queue(s->{},ex->{});
                 }
             }catch (Exception e){
-                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, e.getMessage())).queue(s->{},ex->{});
+                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, "Unknown", e.getMessage())).queue(s->{},ex->{});
             }
         }
     }
@@ -131,13 +132,13 @@ public class CMDEval extends Command {
         try{
             ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName(engine);
             Object o = scriptEngine.eval(code);
-            message.editMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, o.toString())).queue(s->{},e->{
-                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, o.toString())).queue(s->{},ex->{});
+            message.editMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, code, o.toString())).queue(s->{},e->{
+                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, code, o.toString())).queue(s->{},ex->{});
             });
         }catch (Exception e){
             String finalEngine = engine;
-            message.editMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, e.getMessage())).queue(s->{}, ex->{
-                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, e.getMessage())).queue(s->{}, exe->{});
+            message.editMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, code, e.getMessage())).queue(s->{}, ex->{
+                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, code, e.getMessage())).queue(s->{}, exe->{});
             });
         }
         logger.info("! EVAL FINISHED ! Engine: \""+engine+"\"");
@@ -179,17 +180,17 @@ public class CMDEval extends Command {
             process.waitFor();
             timeout.cancel(true);
             if(process.exitValue() != 0){
-                message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, stringBuilder.toString())).queue(s->{}, ex->{
-                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, stringBuilder.toString())).queue(s->{}, exe->{});
+                message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, ex->{
+                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, exe->{});
                 });
             }else{
-                message.editMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, stringBuilder.toString())).queue(s->{}, ex->{
-                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, stringBuilder.toString())).queue(s->{}, exe->{});
+                message.editMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, ex->{
+                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, exe->{});
                 });
             }
         }catch (Exception e){
-            message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, e.getMessage())).queue(s->{}, ex->{
-                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, e.getMessage())).queue(s->{}, exe->{});
+            message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code,  e.getMessage())).queue(s->{}, ex->{
+                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue(s->{}, exe->{});
             });
         }finally {
             logger.info("! EVAL FINISHED ! Engine: Java");
@@ -198,8 +199,7 @@ public class CMDEval extends Command {
 
     @Override
     public MessageEmbed onMissingMemberPerms(){
-        return new EmbedBuilder()
-                .setTitle("Failed: Not Enough Permissions")
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this !")
                 .build();
@@ -213,13 +213,11 @@ public class CMDEval extends Command {
         if(code == null || code.isBlank()){
             code = "Unknown";
         }
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Eval")
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.ORANGE)
                 .addField("Engine:", engine, true)
                 .addField("Status:", status, true)
-                .addField("Timeout:", 15000+"ms", true)
-                .addBlankField(false);
+                .addField("Timeout:", 15000+"ms", true);
         if(code.length() >= 1900){
             int i = code.length()-1900;
             code = code.substring(0, 1900)+"....\nCode shortened by "+i+" words.";
@@ -228,7 +226,7 @@ public class CMDEval extends Command {
         return embedBuilder.build();
     }
 
-    private MessageEmbed getResultEmbed(Color color, String status, String engine, long duration, String result){
+    private MessageEmbed getResultEmbed(Color color, String status, String engine, long duration, String code, String result){
         if(status == null || status.isBlank()){status = "Unknown";}
         if(result == null || result.isBlank()){
             result = "Unknown";
@@ -236,13 +234,16 @@ public class CMDEval extends Command {
         if(engine == null || engine.isBlank()){
             engine = "Unknown";
         }
-        EmbedBuilder embedBuilder = new EmbedBuilder()
-                .setTitle("Eval")
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(color)
                 .addField("Engine:", engine, true)
                 .addField("Status:", status, true)
-                .addField("Duration:", duration+"ms", true)
-                .addBlankField(false);
+                .addField("Duration:", duration+"ms", true);
+        if(code.length() >= 1900){
+            int i = code.length()-1900;
+            code = code.substring(0, 1900)+"....\nCode shortened by "+i+" words.";
+        }
+        embedBuilder.addField("Code:", "```"+engine.toLowerCase()+" "+code+"```", false);
         if(result.length() >= 1900){
             int i = result.length()-1900;
             result = result.substring(0, 1900)+"....\nResult shortened by "+i+" words.";

@@ -65,7 +65,7 @@ public class GuildCommandListener extends ListenerAdapter {
      */
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        if(!event.getAuthor().isBot() && !XeniaCore.getInstance().getEventWaiter().waitingOnThis(event)){
+        if(!event.getAuthor().isBot() && !event.getMessage().isWebhookMessage() && !XeniaCore.getInstance().getEventWaiter().waitingOnThis(event)){
             scalingExecutor.execute(()->commandHandler.process(event));
         }
     }

@@ -25,7 +25,6 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class CommandEvent {
 
     private final GuildMessageReceivedEvent event;
-    private Member retrievedMember;
 
     /**
      * Creates a new instance of this class
@@ -34,24 +33,6 @@ public class CommandEvent {
      */
     public CommandEvent(GuildMessageReceivedEvent event){
         this.event = event;
-    }
-
-    /**
-     * Used to add the retrieved author
-     *
-     * @param member retrieved member
-     */
-    protected void setRetrievedAuthor(Member member){
-        this.retrievedMember = member;
-    }
-
-    /**
-     * Used to get the retrieved author
-     *
-     * @return member or null
-     */
-    public Member getRetrievedAuthor(){
-        return retrievedMember;
     }
 
     /**
