@@ -18,6 +18,7 @@ package de.netbeacon.xenia.core;
 
 import de.netbeacon.xenia.listener.messages.GuildCommandListener;
 import de.netbeacon.xenia.listener.messages.GuildMessageListener;
+import de.netbeacon.xenia.listener.messages.GuildReactionListener;
 import de.netbeacon.xenia.tools.config.Config;
 import de.netbeacon.xenia.tools.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
@@ -58,7 +59,7 @@ public class XeniaCore {
                 .setActivity(Activity.playing(config.getString("activity")))
                 .setShardsTotal(1)
                 .setShards(0)
-                .addEventListeners(new GuildCommandListener(), new GuildMessageListener());
+                .addEventListeners(new GuildCommandListener(), new GuildMessageListener(), new GuildReactionListener());
         logger.info("Building Shards...");
         shardManager = builder.build();
     }

@@ -16,7 +16,10 @@
 
 package de.netbeacon.xenia.listener.messages;
 
+import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,10 +31,40 @@ public class GuildMessageListener extends ListenerAdapter {
     /**
      * Currently unused
      *
-     * @param event GuildMessageReceivedEvent event
+     * @param event GuildMessageReceivedEvent
      */
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+
+    }
+
+    /**
+     * Currently unused
+     *
+     * @param event GuildMessageUpdateEvent
+     */
+    @Override
+    public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event) {
+
+    }
+
+    /**
+     * Currently unused
+     *
+     * @param event GuildMessageDeleteEvent
+     */
+    @Override
+    public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
+
+    }
+
+    /**
+     * Currently unused
+     *
+     * @param event GuildMessageEmbedEvent
+     */
+    @Override
+    public void onGuildMessageEmbed(@NotNull GuildMessageEmbedEvent event) {
 
     }
 }
