@@ -21,17 +21,12 @@ import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
-
-import java.awt.*;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 public class CMDPing extends Command {
 
     public CMDPing() {
-        super("ping", "Can be used to check the ping to discord and other linked services", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("ping", "Can be used to check the ping to discord and other linked services", null, null, null);
     }
 
     @Override

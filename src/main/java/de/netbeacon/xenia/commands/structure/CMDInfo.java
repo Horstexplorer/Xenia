@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.tools.statics.Info.VERSION;
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Shows some basic information about me", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("info", "Shows some basic information about me", null, null, null);
     }
 
     @Override
