@@ -199,7 +199,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Bot Is Missing Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("I am unable to execute the command due to missing permissions!")
-                .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
+                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -212,7 +212,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this !")
-                .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
+                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -229,7 +229,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("This command requires more arguments.")
-                .addField("Usage", usage.toString(), false)
+                .addField("Usage:", usage.toString(), false)
                 .build();
     };
 

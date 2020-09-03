@@ -65,16 +65,15 @@ public class CMDHelp extends Command {
         StringBuilder help = new StringBuilder();
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
             Command c = entry.getValue();
-            help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
+            help.append("`").append(commandPath).append(" ").append(c.getAlias()).append(" ");
             if(c.isCommandHandler()){
-                help.append("#");
+                help.append("#").append(" ");
             }else{
                 for(String s : c.getRequiredArgs()){
                     help.append("<").append(s).append(">").append(" ");
                 }
             }
-            help.append("-").append(" ").append(c.getDescription());
-            help.append("\n");
+            help.append("-").append(" ").append(c.getDescription()).append("`").append("\n\n");
         }
         embedBuilder.addField("Commands", help.toString(), false);
         // send result
