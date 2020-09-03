@@ -21,7 +21,6 @@ import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.slf4j.Logger;

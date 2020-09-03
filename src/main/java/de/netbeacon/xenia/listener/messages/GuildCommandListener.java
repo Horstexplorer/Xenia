@@ -59,7 +59,7 @@ public class GuildCommandListener extends ListenerAdapter {
     }
 
     /**
-     * Starts processing the incomming events
+     * Starts processing the incoming events
      *
      * @param event GuildMessageReceivedEvent
      */

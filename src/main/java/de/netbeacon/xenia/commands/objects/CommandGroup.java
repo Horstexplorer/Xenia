@@ -17,7 +17,6 @@
 package de.netbeacon.xenia.commands.objects;
 
 import de.netbeacon.xenia.commands.global.help.CMDHelp;
-
 import java.util.List;
 
 /**

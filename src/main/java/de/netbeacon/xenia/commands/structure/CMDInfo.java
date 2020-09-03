@@ -20,11 +20,7 @@ import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 
-import java.awt.*;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static de.netbeacon.xenia.tools.statics.Info.VERSION;
