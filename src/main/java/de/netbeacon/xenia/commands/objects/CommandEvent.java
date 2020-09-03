@@ -16,7 +16,6 @@
 
 package de.netbeacon.xenia.commands.objects;
 
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**

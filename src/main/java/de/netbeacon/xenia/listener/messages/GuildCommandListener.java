@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.listener.messages;
 
+import de.netbeacon.xenia.commands.games.GROUPGames;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.commands.structure.CMDInfo;
@@ -52,6 +53,7 @@ public class GuildCommandListener extends ListenerAdapter {
         register.accept(new GROUPAdmin(null));
         register.accept(new GROUPSetup(null));
         register.accept(new GROUPSettings(null));
+        register.accept(new GROUPGames(null));
         register.accept(new CMDInfo());
 
         commandHandler = new CommandHandler("~", commandMap);
@@ -59,7 +61,7 @@ public class GuildCommandListener extends ListenerAdapter {
     }
 
     /**
-     * Starts processing the incomming events
+     * Starts processing the incoming events
      *
      * @param event GuildMessageReceivedEvent
      */

@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.tools.statics;
+package de.netbeacon.xenia.commands.games;
+
+import de.netbeacon.xenia.commands.objects.CommandGroup;
 
 /**
- * Containing static values used for local information
+ * Contains all commands regarding games
  */
-public class Info {
+public class GROUPGames extends CommandGroup {
 
-    public final static String VERSION = "0.0.3";
-
+    public GROUPGames(CommandGroup parent) {
+        super(parent, "games", "Contains commands to play some games");
+    }
 }

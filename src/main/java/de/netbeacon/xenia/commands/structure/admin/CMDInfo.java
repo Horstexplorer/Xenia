@@ -21,14 +21,10 @@ import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
-import java.awt.*;
 import java.lang.management.ManagementFactory;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static de.netbeacon.xenia.tools.statics.Info.VERSION;
@@ -39,7 +35,7 @@ import static de.netbeacon.xenia.tools.statics.Info.VERSION;
 public class CMDInfo extends Command {
 
     public CMDInfo(){
-        super("info", "Displays some statistics about this bot", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("info", "Displays some statistics about this bot", null, null, null);
     }
 
     @Override

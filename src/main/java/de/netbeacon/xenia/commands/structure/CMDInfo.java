@@ -20,11 +20,7 @@ import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 
-import java.awt.*;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import static de.netbeacon.xenia.tools.statics.Info.VERSION;
@@ -35,7 +31,7 @@ import static de.netbeacon.xenia.tools.statics.Info.VERSION;
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Shows some basic information about me", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("info", "Shows some basic information about me", null, null, null);
     }
 
     @Override

@@ -22,8 +22,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.*;
 import java.util.List;
+import java.util.regex.Matcher;
 
-import static de.netbeacon.xenia.tools.pattern.StaticPattern.MultiWhiteSpacePattern;
+import static de.netbeacon.xenia.tools.pattern.StaticPattern.ArgPattern;
 
 /**
  * Acts as the first layer of command handling
@@ -54,7 +55,11 @@ public class CommandHandler{
             return;
         }
         // split to list
-        List<String> args = new ArrayList<>(Arrays.asList(MultiWhiteSpacePattern.split(msg.replace(prefix, ""))));
+        List<String> args = new ArrayList<>();
+        Matcher matcher = ArgPattern.matcher(msg.substring(prefix.length()));
+        while(matcher.find()){
+            args.add((matcher.group(2) != null)?matcher.group(2):matcher.group());
+        }
         if(args.size() <= 0){
             return;
         }

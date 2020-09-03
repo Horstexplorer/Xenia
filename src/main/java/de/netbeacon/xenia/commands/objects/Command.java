@@ -31,9 +31,9 @@ public abstract class Command {
     private final String alias;
     private final String description;
     private final boolean isCommandHandler;
-    private HashSet<Permission> memberPermissions;
-    private HashSet<Permission> botPermissions;
-    private List<String> requiredArgs;
+    private final HashSet<Permission> memberPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
+    private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
+    private final List<String> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
 
     /**
@@ -48,9 +48,15 @@ public abstract class Command {
     public Command(String alias, String description, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
         this.alias = alias;
         this.description = description;
-        this.botPermissions = botPermissions;
-        this.memberPermissions = memberPermissions;
-        this.requiredArgs = requiredArgs;
+        if(botPermissions != null){
+            this.botPermissions.addAll(botPermissions);
+        }
+        if(memberPermissions != null){
+            this.memberPermissions.addAll(memberPermissions);
+        }
+        if(requiredArgs != null){
+            this.requiredArgs.addAll(requiredArgs);
+        }
         this.isCommandHandler = false;
     }
 
@@ -161,9 +167,11 @@ public abstract class Command {
                 return;
             }
             // check bot permissions
-            if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
+            if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(),getBotPermissions())){
                 // bot does not have the required permissions
-                commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
+                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                }
                 return;
             }
             if(commandEvent.getEvent().getMember() == null || !commandEvent.getEvent().getMember().hasPermission(getMemberPermissions())){
@@ -191,7 +199,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Bot Is Missing Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("I am unable to execute the command due to missing permissions!")
-                .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
+                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -204,7 +212,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this !")
-                .addField("Required Permissions", Arrays.toString(botPermissions.toArray()), false)
+                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -221,7 +229,7 @@ public abstract class Command {
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("This command requires more arguments.")
-                .addField("Usage", usage.toString(), false)
+                .addField("Usage:", usage.toString(), false)
                 .build();
     };
 

@@ -21,7 +21,6 @@ import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.slf4j.Logger;
@@ -35,8 +34,6 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -54,7 +51,7 @@ public class CMDEval extends Command {
     private final Logger logger = LoggerFactory.getLogger(CMDEval.class);
 
     public CMDEval(){
-        super("eval", "Can be used to evaluate code", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("eval", "Can be used to evaluate code", null, null, null);
     }
 
     @Override

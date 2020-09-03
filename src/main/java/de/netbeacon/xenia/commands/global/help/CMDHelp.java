@@ -21,10 +21,8 @@ import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.commands.objects.CommandGroup;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", "Displays a list of commands", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("help", "Displays a list of commands", null, null, null);
         this.parent = parent;
     }
 
@@ -47,7 +45,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", "Displays a list of commands", new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ)),new HashSet<>(Arrays.asList()), Arrays.asList());
+        super("help", "Displays a list of commands", null, null, null);
         this.commandMap = commandMap;
     }
 
@@ -67,16 +65,15 @@ public class CMDHelp extends Command {
         StringBuilder help = new StringBuilder();
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
             Command c = entry.getValue();
-            help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
+            help.append("`").append(commandPath).append(" ").append(c.getAlias()).append(" ");
             if(c.isCommandHandler()){
-                help.append("#");
+                help.append("#").append(" ");
             }else{
                 for(String s : c.getRequiredArgs()){
                     help.append("<").append(s).append(">").append(" ");
                 }
             }
-            help.append("-").append(" ").append(c.getDescription());
-            help.append("\n");
+            help.append("-").append(" ").append(c.getDescription()).append("`").append("\n\n");
         }
         embedBuilder.addField("Commands", help.toString(), false);
         // send result
