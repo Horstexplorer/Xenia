@@ -32,7 +32,7 @@ public class Init {
      */
     public static void main(String... args){
         try{
-            logger.info("Starting Xenia");
+            logger.warn("Starting Xenia");
             XeniaCore.getInstance(true);
         }catch (Exception e){
             logger.error("Failed To Start Xenia: ", e);
