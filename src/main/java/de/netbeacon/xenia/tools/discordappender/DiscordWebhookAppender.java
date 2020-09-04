@@ -17,8 +17,6 @@
 package de.netbeacon.xenia.tools.discordappender;
 
 import club.minnced.discord.webhook.WebhookClient;
-import club.minnced.discord.webhook.send.WebhookEmbed;
-import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import de.netbeacon.xenia.tools.config.Config;
 import org.apache.log4j.AppenderSkeleton;
@@ -47,24 +45,21 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
             if(eventCache.isEmpty()){
                 return;
             }
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder().append("```");
             while(stringBuilder.length() <= 1500){
                 if(eventCache.isEmpty()){
                     break;
                 }
                 LoggingEvent loggingEvent = eventCache.remove();
-                stringBuilder.append("[").append(new Date(loggingEvent.timeStamp)).append("][").append(loggingEvent.getLevel()).append("]")
-                        .append("\n\t").append("Message: ").append(loggingEvent.getMessage())
-                        .append("\n\t").append("Caused by: ").append(loggingEvent.getLocationInformation().fullInfo)
+                stringBuilder.append("[").append(new Date(loggingEvent.timeStamp)).append("][").append(loggingEvent.getLevel()).append("] ")
+                        .append("Message: ").append(loggingEvent.getMessage())
+                        .append("\tCaused by: ").append(loggingEvent.getLocationInformation().fullInfo)
                         .append("\n");
             }
-            WebhookEmbedBuilder webhookEmbedBuilder = new WebhookEmbedBuilder()
-                    .setTitle(new WebhookEmbed.EmbedTitle("Log Report", null))
-                    .setDescription(stringBuilder.toString())
-                    .setFooter(new WebhookEmbed.EmbedFooter("Errors cached: "+eventCache.size(), null));
+            stringBuilder.append("Additional errors cached: ").append(eventCache.size()).append("\n").append("```");
             WebhookMessageBuilder webhookMessageBuilder = new WebhookMessageBuilder()
                     .setUsername("Xenia")
-                    .addEmbeds(webhookEmbedBuilder.build());
+                    .setContent("**Log Report**\n"+stringBuilder.toString());
             webhookClient.send(webhookMessageBuilder.build());
         }, 2, 2, TimeUnit.SECONDS);
     }
