@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.commands.games;
+package de.netbeacon.xenia.commands.structure.games;
 
 import de.netbeacon.xenia.commands.objects.CommandGroup;
 

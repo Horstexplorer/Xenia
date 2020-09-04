@@ -19,6 +19,7 @@ package de.netbeacon.xenia.core;
 import de.netbeacon.xenia.listener.messages.GuildCommandListener;
 import de.netbeacon.xenia.listener.messages.GuildMessageListener;
 import de.netbeacon.xenia.listener.messages.GuildReactionListener;
+import de.netbeacon.xenia.listener.messages.StatusListener;
 import de.netbeacon.xenia.tools.config.Config;
 import de.netbeacon.xenia.tools.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
@@ -49,20 +50,20 @@ public class XeniaCore {
      */
     private XeniaCore() throws LoginException, IOException {
         // prepare config
-        logger.info("Preparing Config..");
+        logger.warn("Preparing Config..");
         config = new Config(new File("./xenia/config/sys.config"));
-        logger.info("Preparing Other Things...");
+        logger.warn("Preparing Other Things...");
         eventWaiter = new EventWaiter();
-        logger.info("Preparing Shard Builder...");
+        logger.warn("Preparing Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(config.getString("loginToken"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setActivity(Activity.playing(config.getString("activity")))
-                .addEventListeners(new GuildCommandListener(), new GuildMessageListener(), new GuildReactionListener())
+                .addEventListeners(new StatusListener(), new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener())
                 .setShardsTotal(config.getInt("maxShards"));
         if(config.getIntArray("selectedShards").length > 0){
             builder.setShards(config.getIntArray("shards"));
         }
-        logger.info("Building Shards...");
+        logger.warn("Building Shards...");
         shardManager = builder.build();
     }
 

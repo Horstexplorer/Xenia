@@ -62,10 +62,10 @@ public class CMDHelp extends Command {
         String commandPath = commandPathBuilder.toString().trim();
         // build help page
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
-        StringBuilder help = new StringBuilder();
+        StringBuilder help = new StringBuilder().append("```");
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
             Command c = entry.getValue();
-            help.append("`").append(commandPath).append(" ").append(c.getAlias()).append(" ");
+            help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
             if(c.isCommandHandler()){
                 help.append("#").append(" ");
             }else{
@@ -73,10 +73,11 @@ public class CMDHelp extends Command {
                     help.append("<").append(s).append(">").append(" ");
                 }
             }
-            help.append("-").append(" ").append(c.getDescription()).append("`").append("\n\n");
+            help.append("-").append(" ").append(c.getDescription()).append("\n");
         }
+        help.append("```");
         embedBuilder.addField("Commands", help.toString(), false);
         // send result
-        event.getChannel().sendMessage(embedBuilder.build()).queue();
+        event.getChannel().sendMessage("**Help / Commands***\n"+help.toString()).queue();
     }
 }

@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.listener.messages;
 
-import de.netbeacon.xenia.commands.games.GROUPGames;
+import de.netbeacon.xenia.commands.structure.games.GROUPGames;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.commands.structure.CMDInfo;
