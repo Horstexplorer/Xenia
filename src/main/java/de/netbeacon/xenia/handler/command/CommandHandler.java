@@ -18,6 +18,7 @@ package de.netbeacon.xenia.handler.command;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.*;
@@ -33,6 +34,7 @@ public class CommandHandler{
 
     private final String prefix;
     private final HashMap<String, Command> commandMap;
+    private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
 
     /**
      * Creates a new instance of this class
@@ -49,6 +51,11 @@ public class CommandHandler{
      * @param event GuildMessageReceivedEvent
      */
     public void process(GuildMessageReceivedEvent event){
+        // cd
+        if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
+            return;
+        }
+        commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
         // get the message
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(prefix)){

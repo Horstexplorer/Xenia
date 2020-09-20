@@ -19,6 +19,7 @@ package de.netbeacon.xenia.commands.global.help;
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
 import de.netbeacon.xenia.commands.objects.CommandGroup;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -35,7 +36,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", "Displays a list of commands", null, null, null);
+        super("help", "Displays a list of commands", null,null, null, null);
         this.parent = parent;
     }
 
@@ -45,7 +46,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", "Displays a list of commands", null, null, null);
+        super("help", "Displays a list of commands", null, null, null, null);
         this.commandMap = commandMap;
     }
 

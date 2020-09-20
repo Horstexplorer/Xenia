@@ -18,6 +18,7 @@ package de.netbeacon.xenia.commands.structure;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 
@@ -31,7 +32,7 @@ import static de.netbeacon.xenia.tools.statics.Info.VERSION;
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Shows some basic information about me", null, null, null);
+        super("info", "Shows some basic information about me", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
     }
 
     @Override

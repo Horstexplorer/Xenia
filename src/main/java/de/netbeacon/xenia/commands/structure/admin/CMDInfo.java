@@ -18,6 +18,7 @@ package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -35,7 +36,7 @@ import static de.netbeacon.xenia.tools.statics.Info.VERSION;
 public class CMDInfo extends Command {
 
     public CMDInfo(){
-        super("info", "Displays some statistics about this bot", null, null, null);
+        super("info", "Displays some statistics about this bot", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
     }
 
     @Override

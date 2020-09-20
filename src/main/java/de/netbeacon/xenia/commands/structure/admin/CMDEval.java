@@ -18,6 +18,7 @@ package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -51,7 +52,7 @@ public class CMDEval extends Command {
     private final Logger logger = LoggerFactory.getLogger(CMDEval.class);
 
     public CMDEval(){
-        super("eval", "Can be used to evaluate code", null, null, null);
+        super("eval", "Can be used to evaluate code", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null);
     }
 
     @Override
