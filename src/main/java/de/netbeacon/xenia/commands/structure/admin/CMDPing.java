@@ -18,6 +18,7 @@ package de.netbeacon.xenia.commands.structure.admin;
 
 import de.netbeacon.xenia.commands.objects.Command;
 import de.netbeacon.xenia.commands.objects.CommandEvent;
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -26,7 +27,7 @@ import java.util.List;
 public class CMDPing extends Command {
 
     public CMDPing() {
-        super("ping", "Can be used to check the ping to discord and other linked services", null, null, null);
+        super("ping", "Can be used to check the ping to discord and other linked services", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
     }
 
     @Override

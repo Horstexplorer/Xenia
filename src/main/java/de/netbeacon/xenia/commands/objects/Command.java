@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.commands.objects;
 
+import de.netbeacon.xenia.commands.objects.misc.CommandCooldown;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
@@ -31,6 +32,7 @@ public abstract class Command {
     private final String alias;
     private final String description;
     private final boolean isCommandHandler;
+    private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final List<String> requiredArgs = new ArrayList<>();
@@ -45,9 +47,10 @@ public abstract class Command {
      * @param memberPermissions required for the member
      * @param requiredArgs required for the command
      */
-    public Command(String alias, String description, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
+    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
         this.alias = alias;
         this.description = description;
+        this.commandCooldown = commandCooldown;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
         }
@@ -160,6 +163,18 @@ public abstract class Command {
      */
     public void execute(List<String> args, CommandEvent commandEvent){
         if(!isCommandHandler){
+            long guildId = commandEvent.getEvent().getGuild().getIdLong();
+            long authorId = commandEvent.getEvent().getAuthor().getIdLong();
+            if(commandCooldown != null){
+                // process cd
+                if(!commandCooldown.allow(guildId, authorId)){
+                    // cd running
+                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                    return;
+                }
+                // activate cd
+                commandCooldown.deny(guildId, authorId);
+            }
             // check required args
             if(getRequiredArgCount() > args.size()){
                 // missing args
@@ -188,6 +203,18 @@ public abstract class Command {
                 command.execute(args, commandEvent);
             }
         }
+    }
+
+    /**
+     * Returns an message embed if the execution of the command is not allowed due to it being rate limited
+     *
+     * @return MessageEmbed
+     */
+    public MessageEmbed onCooldownActive(){
+        return EmbedBuilderFactory.getDefaultEmbed("Cooldown Active", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .appendDescription("Please wait some time before doing that again")
+                .build();
     }
 
     /**

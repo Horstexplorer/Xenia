@@ -25,6 +25,7 @@ import de.netbeacon.xenia.commands.structure.settings.GROUPSettings;
 import de.netbeacon.xenia.commands.structure.setup.GROUPSetup;
 import de.netbeacon.xenia.core.XeniaCore;
 import de.netbeacon.xenia.handler.command.CommandHandler;
+import de.netbeacon.xenia.tools.config.Config;
 import de.netbeacon.xenia.tools.executor.ScalingExecutor;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -45,7 +46,7 @@ public class GuildCommandListener extends ListenerAdapter {
     /**
      * Creates a new instance of this class
      */
-    public GuildCommandListener(){
+    public GuildCommandListener(Config config, int shards){
         HashMap<String, Command> commandMap = new HashMap<>();
         Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
 
@@ -56,8 +57,8 @@ public class GuildCommandListener extends ListenerAdapter {
         register.accept(new GROUPGames(null));
         register.accept(new CMDInfo());
 
-        commandHandler = new CommandHandler("~", commandMap);
-        scalingExecutor = new ScalingExecutor(16, 128, 1024*1024, 10, TimeUnit.SECONDS);
+        commandHandler = new CommandHandler(config.getString("commandPrefix"), commandMap);
+        scalingExecutor = new ScalingExecutor(2*shards, 20*shards, 2048*shards, 10, TimeUnit.SECONDS);
     }
 
     /**

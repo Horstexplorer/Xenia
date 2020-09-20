@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_202'
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_204'
     // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.4.1'
     // https://mvnrepository.com/artifact/org.json/json

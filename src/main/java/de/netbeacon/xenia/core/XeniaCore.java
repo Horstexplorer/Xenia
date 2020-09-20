@@ -55,15 +55,19 @@ public class XeniaCore {
         logger.warn("Preparing Other Things...");
         eventWaiter = new EventWaiter();
         logger.warn("Preparing Shard Builder...");
+        int shardCount =0;
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(config.getString("loginToken"), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setActivity(Activity.playing(config.getString("activity")))
-                .addEventListeners(new StatusListener(), new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener())
                 .setShardsTotal(config.getInt("maxShards"));
         if(config.getIntArray("selectedShards").length > 0){
             builder.setShards(config.getIntArray("shards"));
+            shardCount = config.getIntArray("shards").length;
+        }else{
+            shardCount = config.getInt("maxShards");
         }
-        logger.warn("Building Shards...");
+        builder.addEventListeners(new StatusListener(), new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener(config, shardCount));
+        logger.warn("Building "+shardCount+" Shards...");
         shardManager = builder.build();
     }
 
