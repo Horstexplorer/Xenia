@@ -18,6 +18,11 @@ package de.netbeacon.xenia.commands.objects.misc;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Used to make sure a command isn't spammed by the users
+ *
+ * @author horstexplorer
+ */
 public class CommandCooldown {
 
     private final Type type;
@@ -30,19 +35,40 @@ public class CommandCooldown {
         Guild;
     }
 
+    /**
+     * Creates a new instance of this class
+     * @param type whether this cooldown is guild or user based
+     * @param cooldownMs cooldown in ms
+     */
     public CommandCooldown(Type type, long cooldownMs){
         this.type = type;
         this.cooldownMs = cooldownMs;
     }
 
+    /**
+     * Returns how long the cooldown will run when activated
+     *
+     * @return long
+     */
     public long getCooldownMs() {
         return cooldownMs;
     }
 
+    /**
+     * Returns the type of cooldown
+     *
+     * @return Type
+     */
     public Type getType(){
         return type;
     }
 
+    /**
+     * Activates the cooldown for the id combination
+     *
+     * @param guildID id of the guild
+     * @param userID id of the user
+     */
     public void deny(long guildID, long userID){
         if(type == Type.User){
             if(!userCooldown.containsKey(guildID)){
@@ -54,6 +80,13 @@ public class CommandCooldown {
         }
     }
 
+    /**
+     * Checks for if the id combination is able to be blocked or not
+     *
+     * @param guildID id of the guild
+     * @param userID id of the user
+     * @return true if allowed
+     */
     public boolean allow(long guildID, long userID){
         if(type == Type.User){
             if(userCooldown.containsKey(guildID) && userCooldown.get(guildID).containsKey(userID))
