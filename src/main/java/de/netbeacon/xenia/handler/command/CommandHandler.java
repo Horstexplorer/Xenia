@@ -51,16 +51,16 @@ public class CommandHandler{
      * @param event GuildMessageReceivedEvent
      */
     public void process(GuildMessageReceivedEvent event){
-        // cd
-        if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
-            return;
-        }
-        commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
         // get the message
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(prefix)){
             return;
         }
+        // cd
+        if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
+            return;
+        }
+        commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
         // split to list
         List<String> args = new ArrayList<>();
         Matcher matcher = ArgPattern.matcher(msg.substring(prefix.length()));
