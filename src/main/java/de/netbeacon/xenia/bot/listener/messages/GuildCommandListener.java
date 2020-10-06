@@ -16,6 +16,8 @@
 
 package de.netbeacon.xenia.bot.listener.messages;
 
+import de.netbeacon.utils.config.Config;
+import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.xenia.bot.commands.structure.games.GROUPGames;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
@@ -25,8 +27,6 @@ import de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings;
 import de.netbeacon.xenia.bot.commands.structure.setup.GROUPSetup;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.handler.command.CommandHandler;
-import de.netbeacon.xenia.bot.tools.config.Config;
-import de.netbeacon.xenia.bot.tools.executor.ScalingExecutor;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;

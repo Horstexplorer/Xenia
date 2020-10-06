@@ -14,21 +14,25 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.tools.ratelimiter;
+package de.netbeacon.utils.ratelimiter;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * This class is used to calculate if an action has been performed x times within a given time interval
+ * Calculates if an action has been performed x times within a given time interval
  *
  * @author horstexplorer
  */
 public class RateLimiter {
 
+    private final TimeUnit refillUnit;
+    private final long refillUnitNumbers;
     private final long nsWindowSize;
     private long filler;
     private long maxUsages;
     private long nsPerUsage;
+    private final ReentrantLock reentrantLock = new ReentrantLock();
 
     /**
      * This creates a new RateLimiter object
@@ -37,10 +41,30 @@ public class RateLimiter {
      * @param refillUnitNumbers number of timeunits it should take to fully refill the bucket
      */
     public RateLimiter(TimeUnit refillUnit, long refillUnitNumbers){
+        this.refillUnit = refillUnit;
+        this.refillUnitNumbers = refillUnitNumbers;
         nsWindowSize = refillUnit.toNanos(Math.abs(refillUnitNumbers));
     }
 
     /*                  GET                 */
+
+    /**
+     * Returns the TimeUnit used to calculate the window size
+     *
+     * @return TimeUnit
+     */
+    public TimeUnit getRefillUnit(){
+        return refillUnit;
+    }
+
+    /**
+     * Returns the number of TimeUnits used to calculate toe window size
+     *
+     * @return long
+     */
+    public long getRefillUnitNumbers(){
+        return refillUnitNumbers;
+    }
 
     /**
      * Returns the setting on how many usages are allowed within each refill cycle
@@ -57,12 +81,17 @@ public class RateLimiter {
      * @return long
      */
     public long getRemainingUsages(){
-        long current = System.nanoTime();
-        if(filler < current){
-            filler = current;
+        try{
+            reentrantLock.lock();
+            long current = System.nanoTime();
+            if(filler < current){
+                filler = current;
+            }
+            long div = Math.max(current + nsWindowSize - filler, 0);
+            return (div / nsPerUsage);
+        }finally {
+            reentrantLock.unlock();
         }
-        long div = Math.max(current + nsWindowSize - filler, 0);
-        return (div / nsPerUsage);
     }
 
     /**
@@ -71,7 +100,12 @@ public class RateLimiter {
      * @return long
      */
     public long getRefillTime(){
-        return System.currentTimeMillis()+((nsWindowSize-(getRemainingUsages()*nsPerUsage))/1000000);
+        try{
+            reentrantLock.lock();
+            return System.currentTimeMillis()+((nsWindowSize-(getRemainingUsages()*nsPerUsage))/1000000);
+        }finally {
+            reentrantLock.unlock();
+        }
     }
 
     /*                  SET                 */
@@ -82,8 +116,13 @@ public class RateLimiter {
      * @param maxUsages long
      */
     public void setMaxUsages(long maxUsages){
-        this.maxUsages = maxUsages;
-        nsPerUsage = nsWindowSize / maxUsages;
+        try{
+            reentrantLock.lock();
+            this.maxUsages = maxUsages;
+            nsPerUsage = nsWindowSize / maxUsages;
+        }finally {
+            reentrantLock.unlock();
+        }
     }
 
     /*                  CHECK                   */
@@ -96,19 +135,24 @@ public class RateLimiter {
      * @return boolean
      */
     public boolean takeNice(){
-        long current = System.nanoTime();
-        // lower limit
-        if(filler < current){
-            filler = current;
+        try{
+            reentrantLock.lock();
+            long current = System.nanoTime();
+            // lower limit
+            if(filler < current){
+                filler = current;
+            }
+            // add take to filler
+            filler += nsPerUsage;
+            // upper limit
+            if(filler > current+(nsWindowSize*2)){
+                filler = current+(nsWindowSize*2);
+            }
+            // check if filler fits inside the window
+            return (current+nsWindowSize) >= filler;
+        }finally {
+            reentrantLock.unlock();
         }
-        // add take to filler
-        filler += nsPerUsage;
-        // upper limit
-        if(filler > current+(nsWindowSize*2)){
-            filler = current+(nsWindowSize*2);
-        }
-        // check if filler fits inside the window
-        return (current+nsWindowSize) >= filler;
     }
 
     /**
@@ -119,20 +163,25 @@ public class RateLimiter {
      * @throws RateLimitException if the usage wont fit into the limit
      */
     public void take() throws RateLimitException {
-        long current = System.nanoTime();
-        // lower limit
-        if(filler < current){
-            filler = current;
-        }
-        // add take to filler
-        filler += nsPerUsage;
-        // upper limit
-        if(filler > current+(nsWindowSize*2)){
-            filler = current+(nsWindowSize*2);
-        }
-        // check if filler fits inside the window
-        if((current+nsWindowSize) < filler){
-            throw new RateLimitException("Ratelimit Exceeded");
+        try{
+            reentrantLock.lock();
+            long current = System.nanoTime();
+            // lower limit
+            if(filler < current){
+                filler = current;
+            }
+            // add take to filler
+            filler += nsPerUsage;
+            // upper limit
+            if(filler > current+(nsWindowSize*2)){
+                filler = current+(nsWindowSize*2);
+            }
+            // check if filler fits inside the window
+            if((current+nsWindowSize) < filler){
+                throw new RateLimitException("Ratelimit Exceeded");
+            }
+        }finally {
+            reentrantLock.unlock();
         }
     }
 

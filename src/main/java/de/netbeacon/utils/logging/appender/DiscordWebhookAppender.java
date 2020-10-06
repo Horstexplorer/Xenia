@@ -14,31 +14,41 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.tools.discordappender;
+package de.netbeacon.utils.logging.appender;
 
 import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
-import de.netbeacon.xenia.bot.tools.config.Config;
+import de.netbeacon.utils.config.Config;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LoggingEvent;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Can be used to log warnings and errors directly to discord via webhook
+ *
+ * @author horstexplorer
+ */
 public class DiscordWebhookAppender extends AppenderSkeleton {
 
     private final WebhookClient webhookClient;
     private final Queue<LoggingEvent> eventCache = new LinkedList<>();
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
-    public DiscordWebhookAppender() throws IOException {
-        // load config
-        Config config = new Config(new File("./xenia/config/sys.config"));
+    /**
+     * Creates a new instance of this class
+     *
+     * @param config config
+     * @throws IOException on exception
+     */
+    public DiscordWebhookAppender(Config config) throws IOException {
         String webhookURL = config.getString("webhookURL");
         webhookClient = WebhookClient.withUrl(webhookURL);
         scheduledExecutorService.scheduleAtFixedRate(()->{
@@ -58,7 +68,7 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
             }
             stringBuilder.append("Additional errors cached: ").append(eventCache.size()).append("\n").append("```");
             WebhookMessageBuilder webhookMessageBuilder = new WebhookMessageBuilder()
-                    .setUsername("Xenia")
+                    .setUsername(config.getString("username"))
                     .setContent("**Log Report**\n"+stringBuilder.toString());
             webhookClient.send(webhookMessageBuilder.build());
         }, 2, 2, TimeUnit.SECONDS);

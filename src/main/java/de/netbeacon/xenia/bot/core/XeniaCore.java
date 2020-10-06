@@ -16,11 +16,11 @@
 
 package de.netbeacon.xenia.bot.core;
 
+import de.netbeacon.utils.config.Config;
 import de.netbeacon.xenia.bot.listener.messages.GuildCommandListener;
 import de.netbeacon.xenia.bot.listener.messages.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.messages.GuildReactionListener;
 import de.netbeacon.xenia.bot.listener.messages.StatusListener;
-import de.netbeacon.xenia.bot.tools.config.Config;
 import de.netbeacon.xenia.bot.tools.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.tools.executor;
+package de.netbeacon.utils.executor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Used to handle executions in a fast scaling way
+ * Can be used to handle executions in a fast scaling way
  *
  * @author horstexplorer
  */
