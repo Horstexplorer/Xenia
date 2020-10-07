@@ -52,8 +52,8 @@ public class XeniaBackendClient implements IShutdown {
         this.guildCache = new GuildCache(backendProcessor);
         this.licenseCache = new LicenseCache(backendProcessor);
         // add shutdown hook
-        ShutdownHook shutdownHook = new ShutdownHook();
-        shutdownHook.addShutdownAble(this);
+        // ShutdownHook shutdownHook = new ShutdownHook();
+        // shutdownHook.addShutdownAble(this);
     }
 
     public SetupData getSetupData() {
