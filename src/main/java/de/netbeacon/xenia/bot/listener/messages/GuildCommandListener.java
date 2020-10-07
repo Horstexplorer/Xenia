@@ -18,6 +18,8 @@ package de.netbeacon.xenia.bot.listener.messages;
 
 import de.netbeacon.utils.config.Config;
 import de.netbeacon.utils.executor.ScalingExecutor;
+import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.structure.games.GROUPGames;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
@@ -42,11 +44,12 @@ public class GuildCommandListener extends ListenerAdapter {
 
     private final CommandHandler commandHandler;
     private final ScalingExecutor scalingExecutor;
+    private final XeniaBackendClient backendClient;
 
     /**
      * Creates a new instance of this class
      */
-    public GuildCommandListener(Config config, int shards){
+    public GuildCommandListener(Config config, int shards, XeniaBackendClient backendClient){
         HashMap<String, Command> commandMap = new HashMap<>();
         Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
 
@@ -59,6 +62,7 @@ public class GuildCommandListener extends ListenerAdapter {
 
         commandHandler = new CommandHandler(config.getString("commandPrefix"), commandMap);
         scalingExecutor = new ScalingExecutor(2*shards, 20*shards, 2048*shards, 10, TimeUnit.SECONDS);
+        this.backendClient = backendClient;
     }
 
     /**
@@ -69,7 +73,8 @@ public class GuildCommandListener extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         if(!event.getAuthor().isBot() && !event.getMessage().isWebhookMessage() && !XeniaCore.getInstance().getEventWaiter().waitingOnThis(event)){
-            scalingExecutor.execute(()->commandHandler.process(event));
+            scalingExecutor.execute(()->commandHandler.process(event, backendClient));
         }
     }
+
 }

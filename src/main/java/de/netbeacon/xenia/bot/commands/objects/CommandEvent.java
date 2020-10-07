@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
+import de.netbeacon.xenia.backend.client.objects.external.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -25,13 +26,24 @@ public class CommandEvent {
 
     private final GuildMessageReceivedEvent event;
 
+    private final Guild bGuild;
+    private final License bLicense;
+    private final User bUser;
+    private final Member bMember;
+    private final Channel bChannel;
+
     /**
      * Creates a new instance of this class
      *
      * @param event GuildMessageReceivedEvent
      */
-    public CommandEvent(GuildMessageReceivedEvent event){
+    public CommandEvent(GuildMessageReceivedEvent event, Guild bGuild, License bLicense, User bUser,  Member bMember, Channel bChannel){
         this.event = event;
+        this.bGuild = bGuild;
+        this.bLicense = bLicense;
+        this.bUser = bUser;
+        this.bMember = bMember;
+        this.bChannel = bChannel;
     }
 
     /**
@@ -41,5 +53,25 @@ public class CommandEvent {
      */
     public GuildMessageReceivedEvent getEvent() {
         return event;
+    }
+
+    public Guild getbGuild() {
+        return bGuild;
+    }
+
+    public License getbLicense() {
+        return bLicense;
+    }
+
+    public User getbUser() {
+        return bUser;
+    }
+
+    public Member getbMember() {
+        return bMember;
+    }
+
+    public Channel getbChannel() {
+        return bChannel;
     }
 }

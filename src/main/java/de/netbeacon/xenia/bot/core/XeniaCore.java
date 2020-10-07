@@ -20,15 +20,17 @@ import de.netbeacon.utils.config.Config;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
+import de.netbeacon.xenia.bot.listener.guild.GuildAccessListener;
 import de.netbeacon.xenia.bot.listener.messages.GuildCommandListener;
 import de.netbeacon.xenia.bot.listener.messages.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.messages.GuildReactionListener;
-import de.netbeacon.xenia.bot.listener.messages.StatusListener;
+import de.netbeacon.xenia.bot.listener.utils.StatusListener;
 import de.netbeacon.xenia.bot.tools.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.internal.handle.GuildSetupController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +81,7 @@ public class XeniaCore {
                 .setActivity(Activity.playing(config.getString("activity")))
                 .setShardsTotal(setupData.getTotalShards())
                 .setShards(Arrays.stream(setupData.getShards()).mapToInt(Integer::intValue).toArray())
-                .addEventListeners(new StatusListener(), new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener(config, setupData.getShards().length));
+                .addEventListeners(new StatusListener(), new GuildAccessListener(backendClient),new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener(config, setupData.getShards().length, backendClient));
         logger.warn("Building "+setupData.getShards().length+" Shards...");
         shardManager = builder.build();
     }
