@@ -23,6 +23,7 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.LoggingEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedList;
@@ -45,10 +46,11 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
     /**
      * Creates a new instance of this class
      *
-     * @param config config
      * @throws IOException on exception
      */
-    public DiscordWebhookAppender(Config config) throws IOException {
+    public DiscordWebhookAppender() throws IOException {
+        // load config
+        Config config = new Config(new File("./xenia/config/sys.config"));
         String webhookURL = config.getString("webhookURL");
         webhookClient = WebhookClient.withUrl(webhookURL);
         scheduledExecutorService.scheduleAtFixedRate(()->{
@@ -68,7 +70,7 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
             }
             stringBuilder.append("Additional errors cached: ").append(eventCache.size()).append("\n").append("```");
             WebhookMessageBuilder webhookMessageBuilder = new WebhookMessageBuilder()
-                    .setUsername(config.getString("username"))
+                    .setUsername("Xenia")
                     .setContent("**Log Report**\n"+stringBuilder.toString());
             webhookClient.send(webhookMessageBuilder.build());
         }, 2, 2, TimeUnit.SECONDS);
