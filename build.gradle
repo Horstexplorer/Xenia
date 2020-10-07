@@ -18,18 +18,42 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/net.dv8tion/JDA
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_204'
+
+    // OKHTTP
+
+    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0' // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+
+    // JDA & WEBHOOK
+
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_204' // https://mvnrepository.com/artifact/net.dv8tion/JDA
     // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.4.1'
+
     // https://mvnrepository.com/artifact/org.json/json
     implementation group: 'org.json', name: 'json', version: '20200518'
+
+    // LOGGING
+
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
     implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+
+    // SCRIPT ENGINE
+
     // https://mvnrepository.com/artifact/org.graalvm.js/js
     implementation group: 'org.graalvm.js', name: 'js', version: '20.2.0'
     // https://mvnrepository.com/artifact/org.graalvm.js/js
     implementation group: 'org.graalvm.js', name: 'js-scriptengine', version: '20.2.0'
+}
+
+processResources {
+    //inject values into app.properties
+    filesMatching("**/app.properties") {
+        filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+                "env.BUILD_VERSION"  : (System.getenv('CI') ? System.getenv('BUILD_VERSION') : '#.#.#'),
+                "env.BUILD_NUMBER"  : (System.getenv('CI') ? System.getenv('BUILD_NUMBER') : 'Unofficial'),
+                "env.BUILD_TIME"    : System.currentTimeMillis() + ''
+        ]
+    }
 }
