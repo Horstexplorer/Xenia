@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
+import de.netbeacon.utils.appinfo.AppInfo;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
@@ -28,7 +29,6 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 
-import static de.netbeacon.xenia.bot.tools.statics.Info.VERSION;
 
 /**
  * Displays some stats to the user
@@ -67,7 +67,7 @@ public class CMDInfo extends Command {
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .addField("Xenia","Version: "+VERSION, false)
+                .addField("Xenia","Version: "+ AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), false)
                 .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
                 .addField("Shard", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)
                 .addField("Shards", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)

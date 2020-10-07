@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.tools.config;
+package de.netbeacon.utils.config;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +25,8 @@ import java.nio.file.Files;
 
 /**
  * Reads json config files
+ *
+ * @author horstexplorer
  */
 public class Config {
 
