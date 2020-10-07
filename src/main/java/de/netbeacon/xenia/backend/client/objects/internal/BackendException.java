@@ -21,12 +21,12 @@ public class BackendException extends RuntimeException{
     private final int id;
 
     public BackendException(int id, String string){
-        super(string);
+        super("Error Code: "+id +" "+ string);
         this.id = id;
     }
 
     public BackendException(int id, Exception exception){
-        super(exception);
+        super("Error Code: "+id, exception);
         this.id = id;
     }
 
