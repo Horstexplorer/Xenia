@@ -21,7 +21,7 @@ import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataObject;
 import org.json.JSONObject;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class Member extends APIDataObject {
     private final long userId;
 
     private long creationTimestamp;
-    private Set<Long> roles = new HashSet<>();
+    private ArrayList<Long> roles = new ArrayList<>();
 
     public Member(BackendProcessor backendProcessor, long guildId, long userId) {
         super(backendProcessor, List.of("data", "guild", String.valueOf(guildId), "member", String.valueOf(userId)));
@@ -47,12 +47,13 @@ public class Member extends APIDataObject {
         return creationTimestamp;
     }
 
-    public Set<Long> getRoles() {
+    public ArrayList<Long> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Long> roles){
-        this.roles = roles;
+        this.roles.clear();
+        this.roles.addAll(roles);
         update();
     }
 
@@ -71,6 +72,8 @@ public class Member extends APIDataObject {
             throw new JSONSerializationException("Object Do Not Match");
         }
         this.creationTimestamp = jsonObject.getLong("creationTimestamp");
-        this.roles = (Set<Long>)(Set<?>)jsonObject.getJSONArray("roles");
+        for(int i = 0; i < jsonObject.getJSONArray("roles").length(); i++){
+            this.roles.add(jsonObject.getJSONArray("roles").getLong(i));
+        }
     }
 }

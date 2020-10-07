@@ -30,7 +30,6 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
-import net.dv8tion.jda.internal.handle.GuildSetupController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +79,7 @@ public class XeniaCore {
                 .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setActivity(Activity.playing(config.getString("activity")))
                 .setShardsTotal(setupData.getTotalShards())
-                .setShards(Arrays.stream(setupData.getShards()).mapToInt(Integer::intValue).toArray())
+                .setShards(setupData.getShards())
                 .addEventListeners(new StatusListener(), new GuildAccessListener(backendClient),new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener(config, setupData.getShards().length, backendClient));
         logger.warn("Building "+setupData.getShards().length+" Shards...");
         shardManager = builder.build();
