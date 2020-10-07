@@ -93,6 +93,6 @@ public class SetupData extends APIDataObject {
         for(int i = 0; i < jsonObject.getJSONObject("shards").getJSONArray("use").length(); i++){
             shardIdsI[i] = jsonObject.getJSONObject("shards").getJSONArray("use").getInt(i);
         }
-        this.shardIds = shardIds;
+        this.shardIds = shardIdsI;
     }
 }
