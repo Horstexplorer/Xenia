@@ -17,6 +17,8 @@
 package de.netbeacon.xenia.bot.core;
 
 import de.netbeacon.utils.config.Config;
+import de.netbeacon.utils.shutdownhook.IShutdown;
+import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
@@ -56,6 +58,8 @@ public class XeniaCore {
      * @throws IOException on config errors
      */
     private XeniaCore() throws LoginException, IOException {
+        logger.warn("Preparing Shutdownhook...");
+        ShutdownHook shutdownHook = new ShutdownHook();
         // prepare config
         logger.warn("Preparing Config...");
         config = new Config(new File("./xenia/config/sys.config"));
@@ -63,6 +67,7 @@ public class XeniaCore {
         logger.warn("Prepare Backend...");
         BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"));
         backendClient = new XeniaBackendClient(backendSettings);
+        shutdownHook.addShutdownAble(backendClient);
         // get setup data
         logger.warn("Retrieving Setup Data...");
         SetupData setupData = backendClient.getSetupData();
@@ -72,8 +77,10 @@ public class XeniaCore {
                 "Total Shards: "+setupData.getTotalShards()+"\n"+
                 "Use Shards: "+ Arrays.toString(setupData.getShards())
         );
+        // prepare event waiter
         logger.warn("Preparing Other Things...");
         eventWaiter = new EventWaiter();
+        // prepare shard manager
         logger.warn("Preparing Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
@@ -83,6 +90,17 @@ public class XeniaCore {
                 .addEventListeners(new StatusListener(), new GuildAccessListener(backendClient),new GuildMessageListener(), new GuildReactionListener(), new GuildCommandListener(config, setupData.getShards().length, backendClient));
         logger.warn("Building "+setupData.getShards().length+" Shards...");
         shardManager = builder.build();
+        class SMS implements IShutdown {
+            private final ShardManager shardManager;
+            public SMS(ShardManager shardManager){
+                this.shardManager = shardManager;
+            }
+            @Override
+            public void onShutdown() throws Exception {
+                shardManager.shutdown();
+            }
+        }
+        shutdownHook.addShutdownAble(new SMS(shardManager));
     }
 
     /**
