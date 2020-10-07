@@ -27,10 +27,14 @@ import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class XeniaBackendClient implements IShutdown {
 
-    private final OkHttpClient okHttpClient;
     private final BackendProcessor backendProcessor;
+    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     private final UserCache userCache;
     private final GuildCache guildCache;
@@ -42,11 +46,13 @@ public class XeniaBackendClient implements IShutdown {
         dispatcher.setMaxRequests(128);
         dispatcher.setMaxRequestsPerHost(128);
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder().dispatcher(dispatcher);
-        this.okHttpClient = okHttpClientBuilder.build();
+        OkHttpClient okHttpClient = okHttpClientBuilder.build();
         // create processor
         backendProcessor = new BackendProcessor(okHttpClient, backendSettings);
         // check login
         backendProcessor.activateToken();
+        // enable auto token renewal task
+        scheduledExecutorService.scheduleAtFixedRate(backendProcessor::activateToken, 1, 1, TimeUnit.MINUTES);
         // create main caches
         this.userCache = new UserCache(backendProcessor);
         this.guildCache = new GuildCache(backendProcessor);
@@ -76,6 +82,7 @@ public class XeniaBackendClient implements IShutdown {
 
     @Override
     public void onShutdown() throws Exception {
+        scheduledExecutorService.shutdownNow();
         backendProcessor.onShutdown();
     }
 }

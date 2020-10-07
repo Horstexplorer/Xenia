@@ -177,6 +177,10 @@ public class BackendProcessor implements IShutdown {
         }
     }
 
+    public ExecutorService getExecutorService() {
+        return executorService;
+    }
+
     @Override
     public void onShutdown() throws Exception {
         executorService.shutdown();
