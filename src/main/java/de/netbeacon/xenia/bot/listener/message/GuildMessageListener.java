@@ -21,7 +21,7 @@ import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo;
+import de.netbeacon.xenia.bot.commands.structure.CMDInfo;
 import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
 import de.netbeacon.xenia.bot.commands.structure.games.GROUPGames;
 import de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings;
