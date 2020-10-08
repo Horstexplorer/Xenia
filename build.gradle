@@ -6,7 +6,7 @@ plugins {
 
 group 'de.netbeacon'
 
-mainClassName = 'de.netbeacon.xenia.core.Init'
+mainClassName = 'de.netbeacon.xenia.bot.core.Init'
 
 sourceCompatibility = 13
 
