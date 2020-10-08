@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.tools.eventwaiter;
+package de.netbeacon.xenia.bot.utils.eventwaiter;
 
 import net.dv8tion.jda.api.events.GenericEvent;
 
