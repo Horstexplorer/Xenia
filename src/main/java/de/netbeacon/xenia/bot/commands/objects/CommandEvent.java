@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
+import de.netbeacon.xenia.backend.client.objects.external.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -24,14 +25,16 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 public class CommandEvent {
 
     private final GuildMessageReceivedEvent event;
+    private final BackendDataPack backendDataPack;
 
     /**
      * Creates a new instance of this class
      *
      * @param event GuildMessageReceivedEvent
      */
-    public CommandEvent(GuildMessageReceivedEvent event){
+    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack){
         this.event = event;
+        this.backendDataPack = backendDataPack;
     }
 
     /**
@@ -41,5 +44,46 @@ public class CommandEvent {
      */
     public GuildMessageReceivedEvent getEvent() {
         return event;
+    }
+
+    public BackendDataPack backendDataPack(){
+        return backendDataPack;
+    }
+
+
+    public static class BackendDataPack{
+        private final Guild bGuild;
+        private final User bUser;
+        private final Member bMember;
+        private final Channel bChannel;
+        private final License bLicense;
+
+        public BackendDataPack(Guild bGuild, User bUser, Member bMember, Channel bChannel, License bLicense){
+            this.bGuild = bGuild;
+            this.bUser = bUser;
+            this.bMember = bMember;
+            this.bChannel = bChannel;
+            this.bLicense = bLicense;
+        }
+
+        public Guild getbGuild() {
+            return bGuild;
+        }
+
+        public User getbUser() {
+            return bUser;
+        }
+
+        public Member getbMember() {
+            return bMember;
+        }
+
+        public Channel getbChannel() {
+            return bChannel;
+        }
+
+        public License getbLicense() {
+            return bLicense;
+        }
     }
 }
