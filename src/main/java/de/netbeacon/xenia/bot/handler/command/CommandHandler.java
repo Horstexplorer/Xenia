@@ -47,6 +47,13 @@ public class CommandHandler {
     }
 
     public void process(GuildMessageReceivedEvent event){
+        // get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
+        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
+        Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
+        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+        License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+        CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(prefix)){
@@ -72,15 +79,8 @@ public class CommandHandler {
             return;
         }
         args.remove(0);
-        // get backend data
-        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
-        Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
-        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-        License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
-        CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
         // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack));
+        command.execute(args, new CommandEvent(event, backendDataPack, backendClient));
     }
 
 }

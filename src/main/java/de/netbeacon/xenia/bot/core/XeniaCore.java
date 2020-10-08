@@ -22,6 +22,7 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
+import de.netbeacon.xenia.bot.listener.access.ChannelAccessListener;
 import de.netbeacon.xenia.bot.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.message.GuildReactionListener;
@@ -87,6 +88,7 @@ public class XeniaCore {
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
+                        new ChannelAccessListener(xeniaBackendClient),
                         new GuildMessageListener(config, xeniaBackendClient, eventWaiter, setupData.getShards().length),
                         new GuildReactionListener(eventWaiter)
                 );
