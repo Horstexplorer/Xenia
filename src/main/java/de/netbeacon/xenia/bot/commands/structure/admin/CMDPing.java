@@ -19,8 +19,8 @@ package de.netbeacon.xenia.bot.commands.structure.admin;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.core.XeniaCore;
-import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
+import de.netbeacon.xenia.bot.core.XeniaCore;
+import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.util.List;

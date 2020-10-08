@@ -19,8 +19,8 @@ package de.netbeacon.xenia.bot.commands.structure.admin;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.core.XeniaCore;
-import de.netbeacon.xenia.tools.embedfactory.EmbedBuilderFactory;
+import de.netbeacon.xenia.bot.core.XeniaCore;
+import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -43,8 +43,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
-import static de.netbeacon.xenia.tools.pattern.StaticPattern.CodeBlock;
-import static de.netbeacon.xenia.tools.pattern.StaticPattern.JavaClass;
+import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.CodeBlock;
+import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.JavaClass;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 public class CMDEval extends Command {
