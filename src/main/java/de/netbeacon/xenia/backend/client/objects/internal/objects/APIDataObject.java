@@ -46,7 +46,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         BackendResult backendResult = backendProcessor.process(backendRequest);
         if(backendResult.getStatusCode() != 200){
             logger.debug("Failed To GET APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
-            throw new BackendException(backendResult.getStatusCode(), "Failed To GET APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+            throw new BackendException(backendResult.getStatusCode(), "Failed To GET APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
         }
         fromJSON(backendResult.getPayloadAsJSON());
     }
@@ -56,7 +56,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         backendProcessor.processAsync(backendRequest, br->{
             if(br.getStatusCode() != 200){
                 logger.debug("Failed To GET APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
-                throw new BackendException(br.getStatusCode(), "Failed To GET APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+                throw new BackendException(br.getStatusCode(), "Failed To GET APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
             }
             fromJSON(br.getPayloadAsJSON());
         });
@@ -67,7 +67,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         BackendResult backendResult = backendProcessor.process(backendRequest);
         if(backendResult.getStatusCode() != 202){
             logger.debug("Failed To CREATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
-            throw new BackendException(backendResult.getStatusCode(), "Failed To CREATE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+            throw new BackendException(backendResult.getStatusCode(), "Failed To CREATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
         }
         fromJSON(backendResult.getPayloadAsJSON());
     }
@@ -77,7 +77,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         backendProcessor.processAsync(backendRequest, br->{
             if(br.getStatusCode() != 202){
                 logger.debug("Failed To CREATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
-                throw new BackendException(br.getStatusCode(), "Failed To CREATE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+                throw new BackendException(br.getStatusCode(), "Failed To CREATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
             }
             fromJSON(br.getPayloadAsJSON());
         });
@@ -88,7 +88,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         BackendResult backendResult = backendProcessor.process(backendRequest);
         if(backendResult.getStatusCode() != 200){
             logger.debug("Failed To UPDATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
-            throw new BackendException(backendResult.getStatusCode(), "Failed To UPDATE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+            throw new BackendException(backendResult.getStatusCode(), "Failed To UPDATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
         }
         fromJSON(backendResult.getPayloadAsJSON());
     }
@@ -98,7 +98,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         backendProcessor.processAsync(backendRequest, br->{
             if(br.getStatusCode() != 200){
                 logger.debug("Failed To UPDATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
-                throw new BackendException(br.getStatusCode(), "Failed To UPDATE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+                throw new BackendException(br.getStatusCode(), "Failed To UPDATE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
             }
             fromJSON(br.getPayloadAsJSON());
         });
@@ -109,7 +109,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         BackendResult backendResult = backendProcessor.process(backendRequest);
         if(backendResult.getStatusCode() != 200){
             logger.debug("Failed To DELETE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
-            throw new BackendException(backendResult.getStatusCode(), "Failed To DELETE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+            throw new BackendException(backendResult.getStatusCode(), "Failed To DELETE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+backendResult.getStatusCode()+")");
         }
     }
 
@@ -118,7 +118,7 @@ public abstract class APIDataObject implements IJSONSerializable {
         backendProcessor.processAsync(backendRequest, br->{
             if(br.getStatusCode() != 200){
                 logger.debug("Failed To DELETE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
-                throw new BackendException(br.getStatusCode(), "Failed To DELETE APIDataObject With Path "+ Arrays.toString(backendPath.toArray()));
+                throw new BackendException(br.getStatusCode(), "Failed To DELETE APIDataObject With Path "+Arrays.toString(backendPath.toArray())+" ("+br.getStatusCode()+")");
             }
         });
     }
