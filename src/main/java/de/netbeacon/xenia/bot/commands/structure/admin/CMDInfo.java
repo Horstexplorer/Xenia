@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
 import de.netbeacon.utils.appinfo.AppInfo;
+import de.netbeacon.xenia.backend.client.objects.external.Info;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
@@ -66,6 +67,8 @@ public class CMDInfo extends Command {
         Runtime runtime = Runtime.getRuntime();
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
+        Info bInfo = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Private);
+        bInfo.get();
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia","Version: "+AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), false)
                 .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
@@ -80,5 +83,14 @@ public class CMDInfo extends Command {
                 .addField("Memory Usage:", (runtime.totalMemory()-runtime.freeMemory())/(1048576)+"Mb/"+runtime.totalMemory()/(1048576)+"Mb", true);
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
+        EmbedBuilder embedBuilder2 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                .addField("Xenia-Backend","Version: Unknown", false)
+                .addField("Request Ping:", bInfo.getPing()+"ms", false)
+                .addField("Guilds", String.valueOf(bInfo.getGuildCount()), true)
+                .addField("Users", String.valueOf(bInfo.getUserCount()), true)
+                .addField("Members", String.valueOf(bInfo.getMemberCount()), true)
+                .addField("Channels", bInfo.getChannelCount()+"("+(bInfo.getChannelCount()-bInfo.getForbiddenChannels())+")", true);
+
+        event.getChannel().sendMessage(embedBuilder2.build()).queue();
     }
 }

@@ -80,7 +80,7 @@ public class CommandHandler {
         }
         args.remove(0);
         // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack));
+        command.execute(args, new CommandEvent(event, backendDataPack, backendClient));
     }
 
 }

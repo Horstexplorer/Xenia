@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
+import de.netbeacon.xenia.backend.client.objects.external.Info;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
@@ -57,11 +58,14 @@ public class CMDPing extends Command {
         double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
         double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
         double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
+        Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
+        info.get();
 
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
                 .addField("Gateway Ping:", gatewayPing+"ms", true)
-                .addField("Rest Ping", restPing+"ms", true);
+                .addField("Rest Ping", restPing+"ms", true)
+                .addField("Backend Ping", info.getPing()+"ms", true);
 
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
     }
