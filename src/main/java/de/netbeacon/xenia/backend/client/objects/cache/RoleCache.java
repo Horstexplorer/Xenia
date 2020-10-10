@@ -66,7 +66,7 @@ public class RoleCache extends Cache<Role>{
             for(int i = 0; i < roles.length(); i++){
                 JSONObject jsonObject = roles.getJSONObject(i);
                 Role role = new Role(getBackendProcessor(), guildId, jsonObject.getLong("roleId"));
-                role.fromJSON(jsonObject); // manually insert the data
+                role.fromJSON(jsonObject); // manually insert the data as we already recieved it
                 addToCache(role.getId(), role); // this will overwrite already existing ones
                 rolesList.add(role);
             }

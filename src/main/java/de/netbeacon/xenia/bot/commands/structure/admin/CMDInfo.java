@@ -67,7 +67,7 @@ public class CMDInfo extends Command {
         Runtime runtime = Runtime.getRuntime();
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
-        Info bInfo = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Private);
+        Info bInfo = commandEvent.getBackendClient().getInfo(Info.Mode.Private);
         bInfo.get();
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia","Version: "+AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), false)
@@ -84,7 +84,7 @@ public class CMDInfo extends Command {
 
         event.getChannel().sendMessage(embedBuilder.build()).queue();
         EmbedBuilder embedBuilder2 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .addField("Xenia-Backend","Version: Unknown", false)
+                .addField("Xenia-Backend","Version: "+bInfo.getVersion(), false)
                 .addField("Request Ping:", bInfo.getPing()+"ms", false)
                 .addField("Guilds", String.valueOf(bInfo.getGuildCount()), true)
                 .addField("Users", String.valueOf(bInfo.getUserCount()), true)

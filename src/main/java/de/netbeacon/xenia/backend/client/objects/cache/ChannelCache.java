@@ -73,7 +73,7 @@ public class ChannelCache extends Cache<Channel> {
             List<Channel> channelList = new ArrayList<>();
             for(int i = 0; i < channels.length(); i++){
                 JSONObject jsonObject = channels.getJSONObject(i);
-                Channel channel = new Channel(getBackendProcessor(), guildId, jsonObject.getLong("channeldID"));
+                Channel channel = new Channel(getBackendProcessor(), guildId, jsonObject.getLong("channelID"));
                 channel.fromJSON(jsonObject); // manually insert the data
                 addToCache(channel.getId(), channel); // this will overwrite already existing ones
                 channelList.add(channel);
