@@ -33,7 +33,7 @@ public class EmbedBuilderFactory {
         return new EmbedBuilder()
                 .setColor(Color.CYAN)
                 .setAuthor(title, "https://xenia.netbeacon.de/",selfUser.getEffectiveAvatarUrl())
-                .setFooter(requester.getAsTag(), requester.getAvatarUrl());
+                .setFooter("Requested By "+requester.getAsTag(), requester.getAvatarUrl());
     }
 
 }
