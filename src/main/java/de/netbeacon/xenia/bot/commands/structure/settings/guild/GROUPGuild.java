@@ -17,6 +17,9 @@
 package de.netbeacon.xenia.bot.commands.structure.settings.guild;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import de.netbeacon.xenia.bot.commands.structure.settings.guild.info.CMDGuildInfo;
+import de.netbeacon.xenia.bot.commands.structure.settings.guild.member.GROUPMember;
+import de.netbeacon.xenia.bot.commands.structure.settings.guild.settings.CMDGuildSettings;
 
 /**
  * Contains all commands regarding guild settings
@@ -25,6 +28,9 @@ public class GROUPGuild extends CommandGroup{
 
     public GROUPGuild(CommandGroup parent) {
         super(parent, "guild", "Contains commands to change guild specific settings");
+        addChildCommand(new GROUPMember(this));
+        addChildCommand(new CMDGuildInfo());
+        addChildCommand(new CMDGuildSettings());
     }
 
 }

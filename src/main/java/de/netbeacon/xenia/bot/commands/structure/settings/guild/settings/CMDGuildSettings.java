@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.user.settings;
+package de.netbeacon.xenia.bot.commands.structure.settings.guild.settings;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
@@ -22,10 +22,10 @@ import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
 
-public class CMDUserSettings extends Command {
+public class CMDGuildSettings extends Command {
 
-    public CMDUserSettings() {
-        super("modify", "Modify settings of your user", new CommandCooldown(CommandCooldown.Type.User, 5000),null, null, List.of("setting", "value"));
+    public CMDGuildSettings() {
+        super("modify", "Modify settings of the guild", new CommandCooldown(CommandCooldown.Type.User, 5000),null, null, List.of("setting", "value"));
     }
 
     @Override
