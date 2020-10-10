@@ -68,6 +68,10 @@ public class Info extends APIDataObject {
     @Override
     public void deleteAsync() {}
 
+    public String getVersion(){
+        return version;
+    }
+
     public int getGuildCount() {
         return guildCount;
     }
