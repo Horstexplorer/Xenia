@@ -62,7 +62,7 @@ public class CMDMember extends Command {
                 .setThumbnail(user.getEffectiveAvatarUrl())
                 .addField("ID", user.getId(), true)
                 .addField("Name", user.getName(), true)
-                .addField("Thumbnail Url", "[Link]("+user.getEffectiveAvatarUrl()+")", true)
+                .addField("Avatar Url", "[Link]("+user.getEffectiveAvatarUrl()+")", true)
                 .addField("Roles",roles, false);
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }

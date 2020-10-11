@@ -39,7 +39,7 @@ public class CMDUser extends Command {
                 .setThumbnail(event.getAuthor().getEffectiveAvatarUrl())
                 .addField("ID", event.getAuthor().getId(), true)
                 .addField("Name", event.getAuthor().getName(), true)
-                .addField("Thumbnail Url", "[Link]("+event.getAuthor().getEffectiveAvatarUrl()+")", true)
+                .addField("Avatar Url", "[Link]("+event.getAuthor().getEffectiveAvatarUrl()+")", true)
                 .addField("Preferred Language", backendDataPack.getbUser().getPreferredLanguage(), true)
                 .addField("Internal Role", backendDataPack.getbUser().getInternalRole(), true);
         event.getChannel().sendMessage(embedBuilder.build()).queue();
