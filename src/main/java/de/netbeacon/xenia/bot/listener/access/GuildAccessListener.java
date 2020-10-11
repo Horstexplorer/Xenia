@@ -35,7 +35,7 @@ public class GuildAccessListener extends ListenerAdapter {
 
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
-        logger.warn("Loaded Guild "+event.getGuild().getId());
+        logger.info("Loaded Guild "+event.getGuild().getId());
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.getRoleCache().retrieveAllFromBackend();
         g.getChannelCache().retrieveAllFromBackend();
@@ -45,35 +45,35 @@ public class GuildAccessListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
-        logger.warn("Joined A New Guild: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
+        logger.info("Joined A New Guild: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
         backendClient.getGuildCache().get(event.getGuild().getIdLong());
     }
 
     @Override
     public void onGuildLeave(@NotNull GuildLeaveEvent event) {
-        logger.warn("Guild Has Been Left: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
+        logger.info("Guild Has Been Left: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
         backendClient.getGuildCache().delete(event.getGuild().getIdLong());
     }
 
     @Override
     public void onUnavailableGuildJoined(@NotNull UnavailableGuildJoinedEvent event) {
-        logger.warn("Joined A New Guild Which Is Unavailable ATM: Unknown_Name ("+event.getGuildId()+")");
+        logger.info("Joined A New Guild Which Is Unavailable ATM: Unknown_Name ("+event.getGuildId()+")");
         backendClient.getGuildCache().get(event.getGuildIdLong());
     }
 
     @Override
     public void onUnavailableGuildLeave(@NotNull UnavailableGuildLeaveEvent event) {
-        logger.warn("Left A Guild Which Is Unavailable ATM: Unknown_Name ("+event.getGuildId()+")");
+        logger.info("Left A Guild Which Is Unavailable ATM: Unknown_Name ("+event.getGuildId()+")");
         backendClient.getGuildCache().delete(event.getGuildIdLong());
     }
 
     @Override
     public void onGuildAvailable(@NotNull GuildAvailableEvent event) {
-        logger.warn("Guild "+event.getGuild().getName()+"("+event.getGuild().getId()+") Is Available");
+        logger.info("Guild "+event.getGuild().getName()+"("+event.getGuild().getId()+") Is Available");
     }
 
     @Override
     public void onGuildUnavailable(@NotNull GuildUnavailableEvent event) {
-        logger.warn("Guild "+event.getGuild().getName()+"("+event.getGuild().getId()+") Is Unavailable");
+        logger.info("Guild "+event.getGuild().getName()+"("+event.getGuild().getId()+") Is Unavailable");
     }
 }
