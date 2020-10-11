@@ -87,7 +87,9 @@ public class CMDInfo extends Command {
                 .addField("Xenia-Backend","Version: "+bInfo.getVersion(), false)
                 .addField("Request Ping:", bInfo.getPing()+"ms", false)
                 .addField("Guilds", String.valueOf(bInfo.getGuildCount()), true)
+                .addField("GuildsCOTI", String.valueOf(commandEvent.getBackendClient().getGuildCache().getAllAsList().size()), true)
                 .addField("Users", String.valueOf(bInfo.getUserCount()), true)
+                .addField("UsersCOTI", String.valueOf(commandEvent.getBackendClient().getUserCache().getAllAsList().size()), true)
                 .addField("Members", String.valueOf(bInfo.getMemberCount()), true)
                 .addField("Channels", bInfo.getChannelCount()+"("+(bInfo.getChannelCount()-bInfo.getForbiddenChannels())+")", true);
 
