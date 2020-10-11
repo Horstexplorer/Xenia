@@ -16,9 +16,15 @@
 
 package de.netbeacon.xenia.bot.commands.structure.list;
 
+import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.external.Permission;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
+import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
@@ -30,6 +36,18 @@ public class CMDRole extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-
+        GuildMessageReceivedEvent event = commandEvent.getEvent();
+        Guild guild = commandEvent.backendDataPack().getbGuild();
+        List<Role> rolesL = commandEvent.backendDataPack().getbGuild().getRoleCache().getAllAsList();
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Guild Roles Info: "+event.getGuild().getName(), event.getJDA().getSelfUser(), event.getAuthor());
+        for(Role role : rolesL){
+            List<Permission> permissions = role.getPermissions();
+            StringBuilder permissionS = new StringBuilder();
+            for(Permission permission : permissions){
+                permissionS.append(permission.getPermissionName()).append("::").append(permission.isPermissionGranted()).append("\n").append(permission.getPermissionDescription());
+            }
+            embedBuilder.addField(role.getRoleName(), permissionS.toString(), false);
+        }
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

@@ -16,11 +16,17 @@
 
 package de.netbeacon.xenia.bot.commands.structure.list;
 
+import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
+import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CMDMember extends Command {
 
@@ -30,6 +36,34 @@ public class CMDMember extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-
+        GuildMessageReceivedEvent event = commandEvent.getEvent();
+        List<User> mentionedUsers = event.getMessage().getMentionedUsers();
+        User user;
+        Member bMember;
+        if(mentionedUsers.isEmpty()){user = event.getAuthor();}else{user = mentionedUsers.get(0);}
+        if(!user.equals(event.getAuthor())){
+            try{
+                bMember = new Member(commandEvent.backendDataPack().getbGuild().getMemberCache().getBackendProcessor(), event.getGuild().getIdLong(), user.getIdLong());
+                bMember.get();
+            }catch (Exception e){
+                EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Member Info: "+event.getAuthor().getName(), event.getJDA().getSelfUser(), event.getAuthor())
+                        .addField("Error", "Member Not Found On Backend", false);
+                event.getChannel().sendMessage(embedBuilder.build()).queue(m->m.delete().queueAfter(5, TimeUnit.SECONDS));
+                return;
+            }
+        }else{ bMember = commandEvent.backendDataPack().getbMember(); }
+        StringBuilder stringBuilder = new StringBuilder();
+        for(long l : bMember.getRoleIds()){
+            stringBuilder.append(commandEvent.backendDataPack().getbGuild().getRoleCache().get(l).getRoleName()).append(" ");
+        }
+        String roles = stringBuilder.toString();
+        if(roles.isBlank()){roles = "none";}
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Member Info: "+event.getAuthor().getName(), event.getJDA().getSelfUser(), event.getAuthor())
+                .setThumbnail(user.getEffectiveAvatarUrl())
+                .addField("ID", user.getId(), true)
+                .addField("Name", user.getName(), true)
+                .addField("Thumbnail Url", "[Link]("+user.getEffectiveAvatarUrl()+")", true)
+                .addField("Roles",roles, false);
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

@@ -19,6 +19,9 @@ package de.netbeacon.xenia.bot.commands.structure.list;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
+import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
@@ -30,6 +33,15 @@ public class CMDUser extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-
+        GuildMessageReceivedEvent event = commandEvent.getEvent();
+        CommandEvent.BackendDataPack backendDataPack = commandEvent.backendDataPack();
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("User Info: "+event.getAuthor().getName(), event.getJDA().getSelfUser(), event.getAuthor())
+                .setThumbnail(event.getAuthor().getEffectiveAvatarUrl())
+                .addField("ID", event.getAuthor().getId(), true)
+                .addField("Name", event.getAuthor().getName(), true)
+                .addField("Thumbnail Url", "[Link]("+event.getAuthor().getEffectiveAvatarUrl()+")", true)
+                .addField("Preferred Language", backendDataPack.getbUser().getPreferredLanguage(), true)
+                .addField("Internal Role", backendDataPack.getbUser().getInternalRole(), true);
+        event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }
