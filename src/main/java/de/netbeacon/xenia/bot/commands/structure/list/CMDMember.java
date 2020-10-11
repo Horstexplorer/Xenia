@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings;
+package de.netbeacon.xenia.bot.commands.structure.list;
 
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.structure.settings.guild.GROUPGuild;
-import de.netbeacon.xenia.bot.commands.structure.settings.user.GROUPUser;
+import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
-/**
- * Contains all commands regarding settings
- */
-public class GROUPSettings extends CommandGroup{
+import java.util.List;
 
-    public GROUPSettings(CommandGroup parent) {
-        super(parent, "settings", "Contains commands to change the settings for users and guilds");
-        addChildCommand(new GROUPGuild(this));
-        addChildCommand(new GROUPUser(this));
+public class CMDMember extends Command {
+
+    public CMDMember() {
+        super("member", "Show information about a given member (or yourself)", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, null);
     }
 
+    @Override
+    public void onExecution(List<String> args, CommandEvent commandEvent) {
+
+    }
 }

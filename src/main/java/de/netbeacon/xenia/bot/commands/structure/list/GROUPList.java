@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.guild;
+package de.netbeacon.xenia.bot.commands.structure.list;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.structure.settings.guild.info.CMDGuildInfo;
-import de.netbeacon.xenia.bot.commands.structure.settings.guild.member.GROUPMember;
-import de.netbeacon.xenia.bot.commands.structure.settings.guild.settings.CMDGuildSettings;
 
-/**
- * Contains all commands regarding guild settings
- */
-public class GROUPGuild extends CommandGroup{
+public class GROUPList extends CommandGroup {
 
-    public GROUPGuild(CommandGroup parent) {
-        super(parent, "guild", "Contains commands to change guild specific settings");
-        addChildCommand(new GROUPMember(this));
-        addChildCommand(new CMDGuildInfo());
-        addChildCommand(new CMDGuildSettings());
+    public GROUPList(CommandGroup parent) {
+        super(parent, "list", "Contains all commands to show information about a user/member/role/guild");
+        addChildCommand(new CMDGuild());
+        addChildCommand(new CMDRole());
+        addChildCommand(new CMDMember());
+        addChildCommand(new CMDUser());
     }
 
 }
