@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.guild.member.info;
+package de.netbeacon.xenia.bot.commands.structure.list;
 
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.bot.commands.objects.Command;
@@ -28,9 +28,10 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class CMDMemberInfo extends Command {
-    public CMDMemberInfo() {
-        super("list", "Display information about yourself / another member", new CommandCooldown(CommandCooldown.Type.User, 2500),null, null, null);
+public class CMDMember extends Command {
+
+    public CMDMember() {
+        super("member", "Show information about a given member (or yourself)", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, null);
     }
 
     @Override
@@ -55,12 +56,14 @@ public class CMDMemberInfo extends Command {
         for(long l : bMember.getRoleIds()){
             stringBuilder.append(commandEvent.backendDataPack().getbGuild().getRoleCache().get(l).getRoleName()).append(" ");
         }
+        String roles = stringBuilder.toString();
+        if(roles.isBlank()){roles = "none";}
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Member Info: "+event.getAuthor().getName(), event.getJDA().getSelfUser(), event.getAuthor())
                 .setThumbnail(user.getEffectiveAvatarUrl())
                 .addField("ID", user.getId(), true)
                 .addField("Name", user.getName(), true)
                 .addField("Thumbnail Url", "[Link]("+user.getEffectiveAvatarUrl()+")", true)
-                .addField("Roles",stringBuilder.toString(), false);
+                .addField("Roles",roles, false);
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

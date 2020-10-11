@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.user.info;
+package de.netbeacon.xenia.bot.commands.structure.list;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
@@ -25,10 +25,10 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class CMDUserInfo extends Command {
+public class CMDUser extends Command {
 
-    public CMDUserInfo() {
-        super("list", "Display information about yourself", new CommandCooldown(CommandCooldown.Type.User, 2500),null, null, null);
+    public CMDUser() {
+        super("user", "Show information about yourself", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, null);
     }
 
     @Override

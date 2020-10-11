@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.listener.access;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,16 @@ public class GuildAccessListener extends ListenerAdapter {
 
     public GuildAccessListener(XeniaBackendClient backendClient){
         this.backendClient = backendClient;
+    }
+
+    @Override
+    public void onGuildReady(@NotNull GuildReadyEvent event) {
+        logger.warn("Loaded Guild "+event.getGuild().getId());
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        g.getRoleCache().retrieveAllFromBackend();
+        g.getChannelCache().retrieveAllFromBackend();
+        g.getMemberCache().retrieveAllFromBackend();
+        g.getRoleCache().retrieveAllFromBackend();
     }
 
     @Override

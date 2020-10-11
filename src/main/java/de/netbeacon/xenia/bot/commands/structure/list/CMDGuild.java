@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.guild.info;
+package de.netbeacon.xenia.bot.commands.structure.list;
 
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
@@ -26,23 +27,30 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class CMDGuildInfo extends Command {
+public class CMDGuild extends Command {
 
-    public CMDGuildInfo() {
-        super("list", "Display information about yourself / another member", new CommandCooldown(CommandCooldown.Type.User, 2500),null, null, null);
+    public CMDGuild() {
+        super("guild", "Show information about this guild", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, null);
     }
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         Guild guild = commandEvent.backendDataPack().getbGuild();
+        List<Role> rolesL = commandEvent.backendDataPack().getbGuild().getRoleCache().getAllAsList();
+        StringBuilder rolesBuilder = new StringBuilder();
+        for(Role role : rolesL){
+            rolesBuilder.append(role.getRoleName()).append(" ");
+        }
+        String roles = rolesBuilder.toString();
+        if(roles.isBlank()){roles = "none";}
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Guild Info: "+event.getGuild().getName(), event.getJDA().getSelfUser(), event.getAuthor())
                 .setThumbnail(event.getGuild().getIconUrl())
                 .addField("ID", event.getGuild().getId(), true)
                 .addField("Name", event.getGuild().getName(), true)
                 .addField("Owner", event.getGuild().getOwnerId(), true)
                 .addField("Preferred Language", guild.getPreferredLanguage(), true)
-                .addField("Roles", "-", false);
+                .addField("Roles", roles, false);
         event.getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

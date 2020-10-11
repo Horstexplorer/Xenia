@@ -24,7 +24,8 @@ import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.structure.CMDInfo;
 import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
 import de.netbeacon.xenia.bot.commands.structure.games.GROUPGames;
-import de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings;
+import de.netbeacon.xenia.bot.commands.structure.list.GROUPList;
+import de.netbeacon.xenia.bot.commands.structure.modify.GROUPModify;
 import de.netbeacon.xenia.bot.commands.structure.setup.GROUPSetup;
 import de.netbeacon.xenia.bot.handler.command.CommandHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -56,7 +57,8 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new CMDHelp(commandMap));
         register.accept(new GROUPAdmin(null));
         register.accept(new GROUPSetup(null));
-        register.accept(new GROUPSettings(null));
+        register.accept(new GROUPList(null));
+        register.accept(new GROUPModify(null));
         register.accept(new GROUPGames(null));
         register.accept(new CMDInfo());
 
