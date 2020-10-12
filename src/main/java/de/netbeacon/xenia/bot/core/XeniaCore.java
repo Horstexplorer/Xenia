@@ -60,7 +60,7 @@ public class XeniaCore {
 
         // load backend
         logger.warn("Loading Backend...");
-        BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"));
+        BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"), config.getString("messageCryptKey"));
         xeniaBackendClient = new XeniaBackendClient(backendSettings);
         shutdownHook.addShutdownAble(xeniaBackendClient);
 

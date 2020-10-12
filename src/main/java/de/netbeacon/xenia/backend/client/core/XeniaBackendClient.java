@@ -22,16 +22,20 @@ import de.netbeacon.xenia.backend.client.objects.cache.LicenseCache;
 import de.netbeacon.xenia.backend.client.objects.cache.UserCache;
 import de.netbeacon.xenia.backend.client.objects.external.Info;
 import de.netbeacon.xenia.backend.client.objects.external.SetupData;
+import de.netbeacon.xenia.backend.client.objects.internal.BackendException;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class XeniaBackendClient implements IShutdown {
+
+    private final BackendSettings backendSettings;
 
     private final OkHttpClient okHttpClient;
     private final BackendProcessor backendProcessor;
@@ -43,6 +47,7 @@ public class XeniaBackendClient implements IShutdown {
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     public XeniaBackendClient(BackendSettings backendSettings){
+        this.backendSettings = backendSettings;
         // create okhttp client
         Dispatcher dispatcher = new Dispatcher();
         dispatcher.setMaxRequests(128);
@@ -50,7 +55,7 @@ public class XeniaBackendClient implements IShutdown {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder().dispatcher(dispatcher);
         this.okHttpClient = okHttpClientBuilder.build();
         // create processor
-        backendProcessor = new BackendProcessor(okHttpClient, backendSettings);
+        backendProcessor = new BackendProcessor(this);
         // check login
         backendProcessor.activateToken();
         // create update task
@@ -61,6 +66,14 @@ public class XeniaBackendClient implements IShutdown {
         this.licenseCache = new LicenseCache(backendProcessor);
     }
 
+    public BackendSettings getBackendSettings() {
+        return backendSettings;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
+
     public BackendProcessor getBackendProcessor(){
         return backendProcessor;
     }
@@ -68,6 +81,10 @@ public class XeniaBackendClient implements IShutdown {
     public SetupData getSetupData() {
         SetupData setupData = new SetupData(backendProcessor);
         setupData.get();
+        // check if the setup data matches the gived key
+        if(!BCrypt.checkpw(setupData.getMessageCryptHash(), setupData.getMessageCryptHash())){
+            throw new BackendException(-1, "Invalid Message Crypt Hash Specified");
+        }
         return setupData;
     }
 
