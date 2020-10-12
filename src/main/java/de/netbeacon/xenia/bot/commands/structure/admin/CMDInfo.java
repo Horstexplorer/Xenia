@@ -91,6 +91,7 @@ public class CMDInfo extends Command {
                 .addField("Users", String.valueOf(bInfo.getUserCount()), true)
                 .addField("UsersCOTI", String.valueOf(commandEvent.getBackendClient().getUserCache().getAllAsList().size()), true)
                 .addField("Members", String.valueOf(bInfo.getMemberCount()), true)
+                .addField("Messages", String.valueOf(bInfo.getMessageCount()), true)
                 .addField("Channels", bInfo.getChannelCount()+"("+(bInfo.getChannelCount()-bInfo.getForbiddenChannels())+")", true);
 
         event.getChannel().sendMessage(embedBuilder2.build()).queue();
