@@ -42,6 +42,9 @@ public class Message extends APIDataObject {
 
     public Message(BackendProcessor backendProcessor, long guildId, long channelId, long messageId) {
         super(backendProcessor, List.of("data", "guilds", String.valueOf(guildId), "channels", String.valueOf(channelId), "messages", String.valueOf(messageId)));
+        this.guildId = guildId;
+        this.channelId = channelId;
+        this.messageId = messageId;
     }
 
     public Message setInitialData(long userId, long creationTimestamp, String messageContent, String cryptKey){
@@ -53,7 +56,7 @@ public class Message extends APIDataObject {
             throw new BackendException(-5, "Failed To Encrypt Content");
         }
         this.userId = userId;
-        this.creationTimestamp = creationTimestamp;
+        this.creationTimestampDiscord = creationTimestamp;
         return this;
     }
 

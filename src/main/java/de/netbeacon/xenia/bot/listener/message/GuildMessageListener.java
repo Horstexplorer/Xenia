@@ -68,6 +68,9 @@ public class GuildMessageListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
+        if(event.isWebhookMessage() || event.getAuthor().isBot()){
+            return;
+        }
         if(eventWaiter.waitingOnThis(event)){
            return;
         }
@@ -76,12 +79,17 @@ public class GuildMessageListener extends ListenerAdapter {
 
     @Override
     public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event) {
+        if(event.getAuthor().isBot()){
+            return;
+        }
         eventWaiter.waitingOnThis(event);
+        scalingExecutor.execute(()->commandHandler.processUpdate(event));
     }
 
     @Override
     public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
         eventWaiter.waitingOnThis(event);
+        scalingExecutor.execute(()->commandHandler.processDelete(event));
     }
 
     @Override
