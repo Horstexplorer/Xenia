@@ -17,12 +17,15 @@
 package de.netbeacon.xenia.bot.listener.access;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class GuildAccessListener extends ListenerAdapter {
 
@@ -38,7 +41,10 @@ public class GuildAccessListener extends ListenerAdapter {
         logger.info("Loaded Guild "+event.getGuild().getId());
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.getRoleCache().retrieveAllFromBackend();
-        g.getChannelCache().retrieveAllFromBackend();
+        List<Channel> channelList = g.getChannelCache().retrieveAllFromBackend();
+        for(Channel channel : channelList){
+            channel.getMessageCache().retrieveAllFromBackend();
+        }
         g.getMemberCache().retrieveAllFromBackend();
         g.getRoleCache().retrieveAllFromBackend();
     }
