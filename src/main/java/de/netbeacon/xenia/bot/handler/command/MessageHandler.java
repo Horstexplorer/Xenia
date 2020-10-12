@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +61,7 @@ public class MessageHandler {
         License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
         // check if the message should be logged
         if(bChannel.tmpLoggingIsActive()){
-            bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toEpochSecond(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
+            bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toLocalDateTime().toEpochSecond(ZoneOffset.UTC), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
         }
         // wrap in single object
         CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
