@@ -59,15 +59,15 @@ public class MessageHandler {
         Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
         Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
         License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
-        // check if the message should be logged
-        if(bChannel.tmpLoggingIsActive()){
-            bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toLocalDateTime().toEpochSecond(ZoneOffset.UTC), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
-        }
         // wrap in single object
         CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(prefix)){
+            // check if the message should be logged
+            if(bChannel.tmpLoggingIsActive()){
+                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toLocalDateTime().toEpochSecond(ZoneOffset.UTC), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
+            }
             return;
         }
         // check cool down
