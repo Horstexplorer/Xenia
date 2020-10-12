@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.games;
+package de.netbeacon.xenia.bot.commands.structure.last;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 
-/**
- * Contains all commands regarding games
- */
-public class GROUPGames extends CommandGroup {
+public class GROUPLast extends CommandGroup {
 
-    public GROUPGames(CommandGroup parent) {
-        super(parent, "games", "Contains commands to play some games");
+    public GROUPLast(CommandGroup parent) {
+        super(parent, "last", "Restore messages");
+        addChildCommand(new CMDDeleted());
+        addChildCommand(new CMDEdited());
     }
 }

@@ -23,11 +23,11 @@ import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.structure.CMDInfo;
 import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
-import de.netbeacon.xenia.bot.commands.structure.games.GROUPGames;
+import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
 import de.netbeacon.xenia.bot.commands.structure.list.GROUPList;
 import de.netbeacon.xenia.bot.commands.structure.modify.GROUPModify;
 import de.netbeacon.xenia.bot.commands.structure.setup.GROUPSetup;
-import de.netbeacon.xenia.bot.handler.command.CommandHandler;
+import de.netbeacon.xenia.bot.handler.command.MessageHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
@@ -44,7 +44,7 @@ public class GuildMessageListener extends ListenerAdapter {
 
     private final XeniaBackendClient backendClient;
     private final EventWaiter eventWaiter;
-    private final CommandHandler commandHandler;
+    private final MessageHandler commandHandler;
     private final ScalingExecutor scalingExecutor;
 
     public GuildMessageListener(Config config, XeniaBackendClient backendClient, EventWaiter eventWaiter, int shards){
@@ -59,10 +59,10 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new GROUPSetup(null));
         register.accept(new GROUPList(null));
         register.accept(new GROUPModify(null));
-        register.accept(new GROUPGames(null));
+        register.accept(new GROUPLast(null));
         register.accept(new CMDInfo());
 
-        commandHandler = new CommandHandler(config.getString("commandPrefix"), commandMap, eventWaiter, backendClient);
+        commandHandler = new MessageHandler(config.getString("commandPrefix"), commandMap, eventWaiter, backendClient);
         scalingExecutor = new ScalingExecutor(2*shards, 20*shards, 2048*shards, 10, TimeUnit.SECONDS);
     }
 
@@ -71,7 +71,7 @@ public class GuildMessageListener extends ListenerAdapter {
         if(eventWaiter.waitingOnThis(event)){
            return;
         }
-        scalingExecutor.execute(()->commandHandler.process(event));
+        scalingExecutor.execute(()->commandHandler.processNew(event));
     }
 
     @Override

@@ -38,6 +38,7 @@ public class MessageCache extends Cache<Message> {
     private final long channelid;
     private final IdBasedLockHolder<Long> idBasedLockHolder = new IdBasedLockHolder<>();
     private final Logger logger = LoggerFactory.getLogger(MessageCache.class);
+    private final HashMap<String, Message> lastMap = new HashMap<>();
 
     public MessageCache(BackendProcessor backendProcessor, long guildId, long channelId) {
         super(backendProcessor);
@@ -69,13 +70,13 @@ public class MessageCache extends Cache<Message> {
         }
     }
 
-    public Message create(long messageId, long userId, String messageContent){
+    public Message create(long messageId, long creationTime, long userId, String messageContent){
         try{
             idBasedLockHolder.getLock(messageId).lock();
             if(contains(messageId)){
                 return getFromCache(messageId);
             }
-            Message message = new Message(getBackendProcessor(), guildId, channelid, messageId).setInitialData(userId, messageContent, getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
+            Message message = new Message(getBackendProcessor(), guildId, channelid, messageId).setInitialData(userId, creationTime, messageContent, getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
             message.create();
             addToCache(messageId, message);
             return message;
@@ -84,9 +85,10 @@ public class MessageCache extends Cache<Message> {
         }
     }
 
-    public List<Message> retrieveAllFromBackend(int limit) throws BackendException {
+    public List<Message> retrieveAllFromBackend() throws BackendException {
         try{
             idBasedLockHolder.getLock().writeLock().lock();
+            int limit = getBackendProcessor().getBackendClient().getLicenseCache().get(guildId).getPerk_CHANNEL_LOGGING_C();
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("limit", String.valueOf(limit));
             BackendRequest backendRequest = new BackendRequest(BackendRequest.Method.GET, BackendRequest.AuthType.Token, List.of("data", "guilds", String.valueOf(guildId), "channels", String.valueOf(channelid), "messages"), hashMap, null);
@@ -123,5 +125,27 @@ public class MessageCache extends Cache<Message> {
         }finally {
             idBasedLockHolder.getLock(messageId).unlock();
         }
+    }
+
+    public void setLast(String type, long messageId){
+        Message message = get(messageId);
+        if(message == null){
+            return;
+        }
+        lastMap.put(type.toLowerCase(), message);
+    }
+
+    public Message getLast(String type){
+        return lastMap.get(type.toLowerCase());
+    }
+
+    @Override
+    public Message addToCache(long id, Message message) {
+        super.addToCache(id, message);
+        // remove entries which are too much
+        while(getOrderedKeyMap().size() > getBackendProcessor().getBackendClient().getLicenseCache().get(guildId).getPerk_CHANNEL_LOGGING_C()){
+            removeFromCache(getOrderedKeyMap().get(0));
+        }
+        return message;
     }
 }
