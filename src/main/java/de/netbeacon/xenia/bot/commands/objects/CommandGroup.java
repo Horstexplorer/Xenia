@@ -57,8 +57,8 @@ public abstract class CommandGroup extends Command{
     protected CommandGroup(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
         super(alias, description, commandCooldown, botPermissions, memberPermissions, requiredArgs);
         this.parent = parent;
-        addChildCommand(new CMDHelp(this));
         activateHybridMode();
+        addChildCommand(new CMDHelp(this));
     }
 
     /**
