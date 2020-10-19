@@ -20,6 +20,8 @@ import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import net.dv8tion.jda.api.events.guild.*;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -47,6 +49,7 @@ public class GuildAccessListener extends ListenerAdapter {
         }
         g.getMemberCache().retrieveAllFromBackend();
         g.getRoleCache().retrieveAllFromBackend();
+        g.getMiscCaches().getTagCache().retrieveAllFromBackend();
     }
 
     @Override
@@ -81,5 +84,21 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onGuildUnavailable(@NotNull GuildUnavailableEvent event) {
         logger.info("Guild "+event.getGuild().getName()+"("+event.getGuild().getId()+") Is Unavailable");
+    }
+
+    // will only work if the guild_member intent is set
+
+    @Override
+    public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        g.getMemberCache().get(event.getMember().getIdLong());
+    }
+
+    @Override
+    public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        if(event.getMember() != null){
+            g.getMemberCache().delete(event.getMember().getIdLong());
+        }
     }
 }
