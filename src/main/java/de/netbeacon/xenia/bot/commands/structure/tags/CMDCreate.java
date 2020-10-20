@@ -41,14 +41,18 @@ public class CMDCreate extends Command {
                 commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Tag Name Can Only Be 32 Chars Long And Support Chars, Numbers And Underscores")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
                 return;
             }
+            if(args.get(0).equalsIgnoreCase("create") || args.get(0).equalsIgnoreCase("modify") || args.get(0).equalsIgnoreCase("delete")){
+                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Tag Cannot Be Named Like That ;)")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+                return;
+            }
             if(args.get(1).length() > 1500){
                 commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Content Cant Be Longer Than 1500 Chars")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
                 return;
             }
             tagCache.createNew(args.get(0), commandEvent.getEvent().getAuthor().getIdLong(), args.get(1));
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Created")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Created")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag "+args.get(0))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag "+args.get(0))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

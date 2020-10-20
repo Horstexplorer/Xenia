@@ -41,9 +41,9 @@ public class CMDModify extends Command {
                 return;
             }
             tag.setTagContent(args.get(1), commandEvent.getEvent().getAuthor().getIdLong());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Updated")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Updated")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+args.get(0)+" Not Found / Not Owner")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+args.get(0)+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

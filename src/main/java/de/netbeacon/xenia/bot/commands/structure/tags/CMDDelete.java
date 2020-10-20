@@ -22,6 +22,7 @@ import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CMDDelete extends Command {
 
@@ -34,9 +35,9 @@ public class CMDDelete extends Command {
         TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             tagCache.delete(args.get(0), commandEvent.getEvent().getAuthor().getIdLong());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Deleted")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Deleted")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+args.get(0)+" Not Found / Not Owner")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+args.get(0)+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }
