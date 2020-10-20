@@ -31,18 +31,20 @@ public abstract class Command {
 
     private final String alias;
     private final String description;
-    private final boolean isCommandHandler;
+    private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final List<String> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
+    private boolean isHybrid = false;
 
     /**
      * Creates a new instance of the command as command
      *
      * @param alias of the command
      * @param description of the command
+     * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
      * @param memberPermissions required for the member
      * @param requiredArgs required for the command
@@ -157,12 +159,30 @@ public abstract class Command {
     }
 
     /**
+     * Enables hybrid mode for commands so that they can act as command groups aswell
+     */
+    protected void activateHybridMode(){
+        isCommandHandler = true;
+        isHybrid = true;
+    }
+
+    /**
      * Used to execute the command
      * @param args remaining arguments
      * @param commandEvent CommandEvent
      */
     public void execute(List<String> args, CommandEvent commandEvent){
-        if(!isCommandHandler){
+        execute(args, commandEvent, false);
+    }
+
+    /**
+     * Used to execute the command
+     * @param args remaining arguments
+     * @param commandEvent CommandEvent
+     * @param s2 true on recursive call to check with the alternate mode
+     */
+    private void execute(List<String> args, CommandEvent commandEvent, boolean s2){
+        if(!isCommandHandler || (s2 && isHybrid)){
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
             long authorId = commandEvent.getEvent().getAuthor().getIdLong();
             if(commandCooldown != null){
@@ -196,11 +216,17 @@ public abstract class Command {
             }
             // everything alright
             onExecution(args, commandEvent);
-        }else if(args.size() > 0){
-            Command command = children.get(args.get(0).toLowerCase());
-            if(command != null){
-                args.remove(0);
-                command.execute(args, commandEvent);
+        }else{
+            if(args.size() > 0) {
+                Command command = children.get(args.get(0).toLowerCase());
+                if (command != null) {
+                    args.remove(0);
+                    command.execute(args, commandEvent);
+                }else if(isHybrid){
+                    execute(args, commandEvent, true); // execute handler again
+                }
+            }else if (isHybrid){
+                children.get("help").execute(args, commandEvent);
             }
         }
     }
@@ -259,6 +285,32 @@ public abstract class Command {
                 .addField("Usage:", usage.toString(), false)
                 .build();
     };
+
+    /**
+     * Returns an message embed which can be used to tell that something is wrong
+     *
+     * @param message the message which should be displayed
+     * @return MessageEmbed
+     */
+    public MessageEmbed onError(String message){
+        return EmbedBuilderFactory.getDefaultEmbed("Error", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .setDescription(message)
+                .build();
+    }
+
+    /**
+     * Returns an message embed which can be used to tell that things went good
+     *
+     * @param message the message which should be displayed
+     * @return MessageEmbed
+     */
+    public MessageEmbed onSuccess(String message){
+        return EmbedBuilderFactory.getDefaultEmbed("Success", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.GREEN)
+                .setDescription(message)
+                .build();
+    }
 
     /**
      * Called on execution of the command

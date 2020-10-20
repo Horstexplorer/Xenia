@@ -27,6 +27,7 @@ import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
 import de.netbeacon.xenia.bot.commands.structure.list.GROUPList;
 import de.netbeacon.xenia.bot.commands.structure.modify.GROUPModify;
 import de.netbeacon.xenia.bot.commands.structure.setup.GROUPSetup;
+import de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag;
 import de.netbeacon.xenia.bot.handler.command.MessageHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
@@ -55,11 +56,18 @@ public class GuildMessageListener extends ListenerAdapter {
         Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
 
         register.accept(new CMDHelp(commandMap));
+
         register.accept(new GROUPAdmin(null));
+
         register.accept(new GROUPSetup(null));
+
         register.accept(new GROUPList(null));
         register.accept(new GROUPModify(null));
+
         register.accept(new GROUPLast(null));
+
+        register.accept(new HYBRIDTag(null));
+
         register.accept(new CMDInfo());
 
         commandHandler = new MessageHandler(config.getString("commandPrefix"), commandMap, eventWaiter, backendClient);

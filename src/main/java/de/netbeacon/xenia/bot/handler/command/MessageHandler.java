@@ -91,7 +91,7 @@ public class MessageHandler {
         }
         args.remove(0);
         // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack, backendClient));
+        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter));
     }
 
     public void processUpdate(GuildMessageUpdateEvent event){

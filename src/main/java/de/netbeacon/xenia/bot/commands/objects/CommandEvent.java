@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.objects;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
+import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -28,16 +29,18 @@ public class CommandEvent {
     private final GuildMessageReceivedEvent event;
     private final BackendDataPack backendDataPack;
     private final XeniaBackendClient backendClient;
+    private final EventWaiter eventWaiter;
 
     /**
      * Creates a new instance of this class
      *
      * @param event GuildMessageReceivedEvent
      */
-    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient){
+    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter){
         this.event = event;
         this.backendDataPack = backendDataPack;
         this.backendClient = backendClient;
+        this.eventWaiter = eventWaiter;
     }
 
     /**
@@ -55,6 +58,10 @@ public class CommandEvent {
 
     public XeniaBackendClient getBackendClient() {
         return backendClient;
+    }
+
+    public EventWaiter getEventWaiter() {
+        return eventWaiter;
     }
 
     public static class BackendDataPack{

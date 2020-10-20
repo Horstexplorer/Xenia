@@ -16,32 +16,13 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
-import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Acts as container for multiple commands
- */
-public abstract class CommandGroup extends Command{
-
-    private final CommandGroup parent;
-
-    /**
-     * Creates a new instance of this class which acts as a command group
-     *
-     * @param parent if this group is located inside of another group this should be set accordingly, else null
-     * @param alias of the command group
-     * @param description of the command group
-     */
-    public CommandGroup(CommandGroup parent, String alias, String description){
-        super(alias, description);
-        this.parent = parent;
-        addChildCommand(new CMDHelp(this));
-    }
+public abstract class HybridCommand extends CommandGroup{
 
     /**
      * Creates a new instance of this class which acts both as a command and as a command group
@@ -54,22 +35,16 @@ public abstract class CommandGroup extends Command{
      * @param memberPermissions required for the member on execution in command mode
      * @param requiredArgs required for the command on execution in command mode
      */
-    protected CommandGroup(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
-        super(alias, description, commandCooldown, botPermissions, memberPermissions, requiredArgs);
-        this.parent = parent;
-        activateHybridMode();
-        addChildCommand(new CMDHelp(this));
+    public HybridCommand(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs) {
+        super(parent, alias, description, commandCooldown, botPermissions, memberPermissions, requiredArgs);
     }
 
     /**
-     * Returns the parent group
+     * Called on execution of the command
      *
-     * @return parent group or null
+     * @param args remaining arguments of the message
+     * @param commandEvent CommandEvent
      */
-    public CommandGroup getParent(){
-        return parent;
-    }
-
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {}
+    public abstract void onExecution(List<String> args, CommandEvent commandEvent);
 }

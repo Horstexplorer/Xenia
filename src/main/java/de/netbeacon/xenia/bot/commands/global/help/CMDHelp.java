@@ -79,6 +79,6 @@ public class CMDHelp extends Command {
         help.append("```");
         embedBuilder.addField("Commands", help.toString(), false);
         // send result
-        event.getChannel().sendMessage("**Help / Commands***\n"+help.toString()).queue();
+        event.getChannel().sendMessage("**Help / Commands**\n"+help.toString()).queue();
     }
 }
