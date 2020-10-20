@@ -16,12 +16,12 @@
 
 package de.netbeacon.xenia.bot.commands.structure.tags;
 
+import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class CMDDelete extends Command {
 
@@ -31,6 +31,12 @@ public class CMDDelete extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        commandEvent.getEvent().getChannel().sendMessage("Delete Not Implemented Yet").queue(m->m.delete().queueAfter(2000, TimeUnit.MILLISECONDS));
+        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        try{
+            tagCache.delete(args.get(0), commandEvent.getEvent().getAuthor().getIdLong());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Deleted")).queue();;
+        }catch (Exception e){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+args.get(0)+" Not Found / Not Owner")).queue();
+        }
     }
 }

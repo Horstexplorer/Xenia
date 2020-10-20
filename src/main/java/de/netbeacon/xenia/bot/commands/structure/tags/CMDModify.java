@@ -16,13 +16,13 @@
 
 package de.netbeacon.xenia.bot.commands.structure.tags;
 
+import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
+import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 public class CMDModify extends Command {
 
     public CMDModify() {
@@ -31,6 +31,13 @@ public class CMDModify extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        commandEvent.getEvent().getChannel().sendMessage("Modify Not Implemented Yet").queue(m->m.delete().queueAfter(2000, TimeUnit.MILLISECONDS));
+        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        try{
+            Tag tag = tagCache.get(args.get(0));
+            tag.setTagContent(args.get(1), commandEvent.getEvent().getAuthor().getIdLong());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Updated")).queue();;
+        }catch (Exception e){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+args.get(0)+" Not Found / Not Owner")).queue();
+        }
     }
 }

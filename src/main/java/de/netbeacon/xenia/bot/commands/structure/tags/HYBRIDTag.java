@@ -16,13 +16,14 @@
 
 package de.netbeacon.xenia.bot.commands.structure.tags;
 
+import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
+import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class HYBRIDTag extends HybridCommand {
 
@@ -35,6 +36,12 @@ public class HYBRIDTag extends HybridCommand {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        commandEvent.getEvent().getChannel().sendMessage("Not Implemented Yet").queue(m->m.delete().queueAfter(2000, TimeUnit.MILLISECONDS));
+        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        try{
+            Tag tag = tagCache.get(args.get(0));
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(tag.getTagContent()+"\n\n"+"*Tag Created By "+tag.getUserId()+"*")).queue();
+        }catch (Exception e){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Tag "+args.get(0)+" Not Found")).queue();
+        }
     }
 }
