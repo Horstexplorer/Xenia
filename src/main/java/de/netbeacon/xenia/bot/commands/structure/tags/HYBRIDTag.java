@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HYBRIDTag extends HybridCommand {
 
@@ -39,9 +40,9 @@ public class HYBRIDTag extends HybridCommand {
         TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             Tag tag = tagCache.get(args.get(0));
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(tag.getTagContent()+"\n\n"+"*Tag Created By "+tag.getUserId()+"*")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(tag.getTagContent()+"\n\n"+"*Tag Created By "+tag.getUserId()+"*").queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Tag "+args.get(0)+" Not Found")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Tag "+args.get(0)+" Not Found")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

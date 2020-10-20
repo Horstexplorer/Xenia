@@ -121,6 +121,17 @@ public class ScalingExecutor {
     }
 
     /**
+     * Used to await termination
+     * @param scale time units
+     * @param timeUnit time unit
+     * @throws InterruptedException on exception
+     */
+    public void awaitTermination(long scale, TimeUnit timeUnit) throws InterruptedException {
+        baseExecutor.awaitTermination(scale, timeUnit);
+        scalingExecutor.awaitTermination(scale, timeUnit);
+    }
+
+    /**
      * Used to shutdown
      */
     public void shutdown(){
