@@ -23,6 +23,8 @@ import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 public class CMDModify extends Command {
 
     public CMDModify() {
@@ -34,6 +36,10 @@ public class CMDModify extends Command {
         TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             Tag tag = tagCache.get(args.get(0));
+            if(args.get(1).length() > 1500){
+                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag. Content Cant Be Longer Than 1500 Chars")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+                return;
+            }
             tag.setTagContent(args.get(1), commandEvent.getEvent().getAuthor().getIdLong());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag Updated")).queue();;
         }catch (Exception e){
