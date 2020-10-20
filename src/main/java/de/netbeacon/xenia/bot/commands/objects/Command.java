@@ -287,6 +287,32 @@ public abstract class Command {
     };
 
     /**
+     * Returns an message embed which can be used to tell that something is wrong
+     *
+     * @param message the message which should be displayed
+     * @return MessageEmbed
+     */
+    public MessageEmbed onError(String message){
+        return EmbedBuilderFactory.getDefaultEmbed("Error", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .setDescription(message)
+                .build();
+    }
+
+    /**
+     * Returns an message embed which can be used to tell that things went good
+     *
+     * @param message the message which should be displayed
+     * @return MessageEmbed
+     */
+    public MessageEmbed onSuccess(String message){
+        return EmbedBuilderFactory.getDefaultEmbed("Success", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.GREEN)
+                .setDescription(message)
+                .build();
+    }
+
+    /**
      * Called on execution of the command
      *
      * @param args remaining arguments of the message
