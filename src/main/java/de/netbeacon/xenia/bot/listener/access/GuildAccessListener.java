@@ -19,6 +19,8 @@ package de.netbeacon.xenia.bot.listener.access;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import net.dv8tion.jda.api.events.DisconnectEvent;
+import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
+import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -36,6 +38,8 @@ public class GuildAccessListener extends ListenerAdapter {
     public GuildAccessListener(XeniaBackendClient backendClient){
         this.backendClient = backendClient;
     }
+
+    // GUILD
 
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
@@ -105,5 +109,19 @@ public class GuildAccessListener extends ListenerAdapter {
         if(event.getMember() != null){
             g.getMemberCache().delete(event.getMember().getIdLong());
         }
+    }
+
+    // CHANNEL
+
+    @Override
+    public void onTextChannelCreate(@NotNull TextChannelCreateEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        g.getChannelCache().get(event.getChannel().getIdLong());
+    }
+
+    @Override
+    public void onTextChannelDelete(@NotNull TextChannelDeleteEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        g.getChannelCache().delete(event.getChannel().getIdLong());
     }
 }
