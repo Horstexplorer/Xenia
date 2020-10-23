@@ -22,7 +22,6 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
-import de.netbeacon.xenia.bot.listener.access.ChannelAccessListener;
 import de.netbeacon.xenia.bot.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.message.GuildReactionListener;
@@ -81,14 +80,13 @@ public class XeniaCore {
         // setup shard builder
         logger.warn("Setting Up Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
-                .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setActivity(Activity.playing(config.getString("activity")))
                 .setShardsTotal(setupData.getTotalShards())
                 .setShards(setupData.getShards())
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new ChannelAccessListener(xeniaBackendClient),
                         new GuildMessageListener(config, xeniaBackendClient, eventWaiter, setupData.getShards().length),
                         new GuildReactionListener(eventWaiter)
                 );
