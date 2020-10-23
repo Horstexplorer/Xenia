@@ -125,16 +125,16 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                 {
                     long newHeartBeat = message.getLong("timestamp");
                     long delay = (newHeartBeat-lastHeartBeat);
-                    if(delay < 30000*2){
-                        logger.warn("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+") Missed At Least "+(delay/30000)+ "Heartbeats. The Network Might Be Faulty!");
-                    }else if(delay < 30000*1.5){
+                    if(delay > 30000*2){
+                        logger.warn("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+") Missed At Least "+(delay/30000)+" Heartbeat(s). The Network Might Be Faulty!");
+                    }else if(delay > 30000*1.5){
                         logger.info("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+") The Service Might Be Slow.");
                     }else{
                         logger.debug("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+")");
                     }
                     lastHeartBeat = newHeartBeat;
                 }
-                    break;
+                break;
                 case "user":
                 {
                     if(!xeniaBackendClient.getUserCache().contains(message.getLong("userId"))){
@@ -151,7 +151,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -168,7 +168,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_role":
                 case "guild_role_permission":
                 {
@@ -189,7 +189,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_channel":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -209,7 +209,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_message":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -233,7 +233,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_license":
                 {
                     if(!xeniaBackendClient.getLicenseCache().contains(message.getLong("guildId"))){
@@ -242,7 +242,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                         xeniaBackendClient.getLicenseCache().remove(message.getLong("guildId"));
                     }
                 }
-                    break;
+                break;
                 case "guild_member":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -262,7 +262,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_misc_tag":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -282,7 +282,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
                             break;
                     }
                 }
-                    break;
+                break;
             }
         }catch (Exception e){
             logger.warn("Error Processing Message, Cache Might Be Inconsistent: "+message.toString());
