@@ -99,6 +99,7 @@ public class GuildAccessListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
+        backendClient.getUserCache().get(event.getUser().getIdLong());
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.getMemberCache().get(event.getMember().getIdLong());
     }
