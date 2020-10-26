@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.backend.client.objects.cache;
+package de.netbeacon.xenia.backend.client.objects.internal.objects;
 
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
-import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,20 +52,20 @@ public abstract class Cache<K, T extends APIDataObject> {
 
     // qol
 
-    public List<T> getAllAsList(){
-        return new ArrayList<>(dataMap.values());
-    }
-
-    public HashMap<K, T> getAllAsMap(){
-        return new HashMap<>(dataMap);
-    }
-
     public BackendProcessor getBackendProcessor() {
         return backendProcessor;
     }
 
     public boolean contains(K id){
         return dataMap.containsKey(id);
+    }
+
+    public List<T> getAllAsList(){
+        return new ArrayList<>(dataMap.values());
+    }
+
+    public HashMap<K, T> getAllAsMap(){
+        return new HashMap<>(dataMap);
     }
 
     public ConcurrentHashMap<K, T> getDataMap(){
