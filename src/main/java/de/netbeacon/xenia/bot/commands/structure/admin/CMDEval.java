@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -124,12 +125,14 @@ public class CMDEval extends Command {
      */
     public void evalJavaScriptCode(CommandEvent commandEvent, Message message, String engine, String code) {
         if(engine == null || engine.isBlank()){
-            engine = "graal.js";
+            engine = "groovy";
         }
         logger.info("! EVAL RUNNING ! Engine: \""+engine+"\"");
         long start = System.currentTimeMillis();
         try{
+            System.out.println(Arrays.toString(new ScriptEngineManager().getEngineFactories().toArray()));
             ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName(engine);
+            scriptEngine.put("commandEvent", commandEvent); // this might be dangerous
             Object o = scriptEngine.eval(code);
             message.editMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, code, o.toString())).queue(s->{},e->{
                 commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis()-start, code, o.toString())).queue(s->{},ex->{});
@@ -163,7 +166,7 @@ public class CMDEval extends Command {
             // start process
             long start = System.currentTimeMillis();
             ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command("java", "-jar", "EvalHelper.jar", new String(XeniaCore.getInstance().getConfig().getString("evalTmpPath")+filename));
+            processBuilder.command("java", "-jar", "EvalHelper.jar", XeniaCore.getInstance().getConfig().getString("evalTmpPath") + filename);
             Process process = processBuilder.start();
             // start process timeout
             ScheduledFuture<?> timeout = executorService.schedule(process::destroyForcibly,15, TimeUnit.SECONDS);
@@ -219,9 +222,9 @@ public class CMDEval extends Command {
                 .addField("Timeout:", 15000+"ms", true);
         if(code.length() >= 1900){
             int i = code.length()-1900;
-            code = code.substring(0, 1900)+"....\nCode shortened by "+i+" words.";
+            code = code.substring(0, 1900)+"....\nCode shortened by "+i+" chars.";
         }
-        embedBuilder.addField("Code:", "```"+engine.toLowerCase()+" "+code+"```", false);
+        embedBuilder.addField("Code:", "```"+code+"```", false);
         return embedBuilder.build();
     }
 
@@ -240,12 +243,12 @@ public class CMDEval extends Command {
                 .addField("Duration:", duration+"ms", true);
         if(code.length() >= 1900){
             int i = code.length()-1900;
-            code = code.substring(0, 1900)+"....\nCode shortened by "+i+" words.";
+            code = code.substring(0, 1900)+"....\nCode shortened by "+i+" chars.";
         }
-        embedBuilder.addField("Code:", "```"+engine.toLowerCase()+" "+code+"```", false);
+        embedBuilder.addField("Code:", "```"+code+"```", false);
         if(result.length() >= 1900){
             int i = result.length()-1900;
-            result = result.substring(0, 1900)+"....\nResult shortened by "+i+" words.";
+            result = result.substring(0, 1900)+"....\nResult shortened by "+i+" chars.";
         }
         embedBuilder.addField("Result:", result, false);
         return embedBuilder.build();

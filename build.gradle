@@ -43,6 +43,7 @@ dependencies {
 
     implementation group: 'org.graalvm.js', name: 'js', version: '20.2.0' // https://mvnrepository.com/artifact/org.graalvm.js/js
     implementation group: 'org.graalvm.js', name: 'js-scriptengine', version: '20.2.0' // https://mvnrepository.com/artifact/org.graalvm.js/js
+    implementation group: 'org.codehaus.groovy', name: 'groovy-jsr223', version: '3.0.6' // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-jsr223
 
     // OKHTTP
 
