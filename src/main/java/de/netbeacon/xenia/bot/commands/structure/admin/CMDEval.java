@@ -35,7 +35,6 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -130,7 +129,6 @@ public class CMDEval extends Command {
         logger.info("! EVAL RUNNING ! Engine: \""+engine+"\"");
         long start = System.currentTimeMillis();
         try{
-            System.out.println(Arrays.toString(new ScriptEngineManager().getEngineFactories().toArray()));
             ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName(engine);
             scriptEngine.put("commandEvent", commandEvent); // this might be dangerous
             Object o = scriptEngine.eval(code);
