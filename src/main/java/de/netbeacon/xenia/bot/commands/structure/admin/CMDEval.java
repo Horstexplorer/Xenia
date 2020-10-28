@@ -140,7 +140,6 @@ public class CMDEval extends Command {
             message.editMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, code, e.getMessage())).queue(s->{}, ex->{
                 commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "\""+ finalEngine +"\"", System.currentTimeMillis()-start, code, e.getMessage())).queue(s->{}, exe->{});
             });
-            e.printStackTrace();
         }
         logger.info("! EVAL FINISHED ! Engine: \""+engine+"\"");
     }
