@@ -23,7 +23,6 @@ public class Init {
 
     private static final Logger logger = LoggerFactory.getLogger(Init.class);
 
-
     public static void main(String...args){
         try{
             logger.warn("Starting Xenia");
