@@ -19,15 +19,19 @@ package de.netbeacon.xenia.bot.utils;
 import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.utils.shutdownhook.IShutdown;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class SharedExecutor implements IShutdown {
 
     private static SharedExecutor instance;
     private ScalingExecutor scalingExecutor;
+    private ScheduledExecutorService scheduledExecutorService;
 
     private SharedExecutor(){
         scalingExecutor = new ScalingExecutor(2, 24, 24000, 30, TimeUnit.SECONDS);
+        scheduledExecutorService = Executors.newScheduledThreadPool(8);
     }
 
     public static SharedExecutor getInstance(boolean initIfNeeded){
@@ -45,9 +49,15 @@ public class SharedExecutor implements IShutdown {
         return scalingExecutor;
     }
 
+    public ScheduledExecutorService getScheduledExecutor() { return scheduledExecutorService; }
+
     @Override
     public void onShutdown() throws Exception {
         scalingExecutor.shutdown();
+        scalingExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
         scalingExecutor = null;
+        scheduledExecutorService.shutdown();
+        scheduledExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+        scheduledExecutorService = null;
     }
 }
