@@ -33,7 +33,7 @@ public class CMDDelete extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             tagCache.delete(args.get(0), commandEvent.getEvent().getAuthor().getIdLong());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Deleted")).queue();;

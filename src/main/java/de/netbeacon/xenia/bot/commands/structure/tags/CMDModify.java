@@ -33,7 +33,7 @@ public class CMDModify extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             Tag tag = tagCache.get(args.get(0));
             if(args.get(1).length() > 1500){
