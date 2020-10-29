@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.Guild, 10000), null, null, List.of("tag_name", "\"content\""));
+        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("tag_name", "\"content\""));
     }
 
     private final static Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");

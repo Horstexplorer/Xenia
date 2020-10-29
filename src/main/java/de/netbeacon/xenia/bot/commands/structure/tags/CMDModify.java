@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.Guild, 5000), null, null, List.of("tag_name", "\"content\""));
+        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of("tag_name", "\"content\""));
     }
 
     @Override

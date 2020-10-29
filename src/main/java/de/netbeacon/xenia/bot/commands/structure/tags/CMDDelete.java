@@ -27,7 +27,8 @@ import java.util.concurrent.TimeUnit;
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.Guild, 5000), null, null, List.of("tag_name"));
+        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User
+                , 5000), null, null, List.of("tag_name"));
     }
 
     @Override
