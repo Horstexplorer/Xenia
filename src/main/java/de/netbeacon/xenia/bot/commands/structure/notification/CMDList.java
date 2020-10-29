@@ -41,12 +41,12 @@ public class CMDList extends Command {
         // list all notifications
         NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("NotificationId - UserId@ChannelId - NotificationTime");
+        stringBuilder.append("NotificationId - UserId@ChannelId - NotificationTime\n\n");
         for(Notification notification : notificationCache.getAllAsList()){
-            stringBuilder.append(notification.getId()).append(" - ").append(notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.ofInstant(Instant.ofEpochMilli(notification.getNotificationTarget()), ZoneId.of("ECT"))));
+            stringBuilder.append(notification.getId()).append(" - ").append(notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.ofInstant(Instant.ofEpochMilli(notification.getNotificationTarget()), ZoneId.of("ECT")))).append("\n");
         }
         MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed("Notifications", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .setDescription(stringBuilder.toString()).build();
+                .setDescription(stringBuilder.substring(0, 2000)).build();
         commandEvent.getEvent().getChannel().sendMessage(messageEmbed).queue();
     }
 }
