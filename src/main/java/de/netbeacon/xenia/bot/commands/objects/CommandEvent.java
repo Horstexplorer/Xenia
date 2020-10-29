@@ -52,7 +52,7 @@ public class CommandEvent {
         return event;
     }
 
-    public BackendDataPack backendDataPack(){
+    public BackendDataPack getBackendDataPack(){
         return backendDataPack;
     }
 

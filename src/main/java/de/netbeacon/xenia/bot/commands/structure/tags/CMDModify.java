@@ -28,12 +28,12 @@ import java.util.concurrent.TimeUnit;
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.Guild, 5000), null, null, List.of("tag_name", "\"content\""));
+        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of("tag_name", "\"content\""));
     }
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             Tag tag = tagCache.get(args.get(0));
             if(args.get(1).length() > 1500){

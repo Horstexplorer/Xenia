@@ -36,7 +36,7 @@ public class CMDDeleted extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        Channel bChannel = commandEvent.backendDataPack().getbChannel();
+        Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = messageCache.getLast("deleted");
         if(bMessage == null){

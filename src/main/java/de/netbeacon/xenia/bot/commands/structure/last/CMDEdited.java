@@ -36,7 +36,7 @@ public class CMDEdited extends Command {
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        Channel bChannel = commandEvent.backendDataPack().getbChannel();
+        Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = bChannel.getMessageCache().getLast("edited");
         if(bMessage == null){

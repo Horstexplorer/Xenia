@@ -26,6 +26,7 @@ import de.netbeacon.xenia.bot.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.listener.status.StatusListener;
+import de.netbeacon.xenia.bot.utils.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -76,6 +77,7 @@ public class XeniaCore {
         // setup other things
         logger.warn("Preparing Other Things...");
         eventWaiter = new EventWaiter();
+        shutdownHook.addShutdownAble(SharedExecutor.getInstance(true));
 
         // setup shard builder
         logger.warn("Setting Up Shard Builder...");

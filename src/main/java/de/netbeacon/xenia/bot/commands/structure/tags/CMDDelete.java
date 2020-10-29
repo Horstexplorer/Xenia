@@ -27,12 +27,13 @@ import java.util.concurrent.TimeUnit;
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.Guild, 5000), null, null, List.of("tag_name"));
+        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User
+                , 5000), null, null, List.of("tag_name"));
     }
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             tagCache.delete(args.get(0), commandEvent.getEvent().getAuthor().getIdLong());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Deleted")).queue();;

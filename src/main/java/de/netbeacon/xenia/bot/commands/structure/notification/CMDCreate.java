@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.modify;
+package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
@@ -22,10 +22,10 @@ import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
 
-public class CMDRole extends Command {
+public class CMDCreate extends Command {
 
-    public CMDRole() {
-        super("guild", "Modify settings for the roles of this guild", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, List.of("setting", "value"));
+    public CMDCreate() {
+        super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("target_time", "\"notification_message\""));
     }
 
     @Override

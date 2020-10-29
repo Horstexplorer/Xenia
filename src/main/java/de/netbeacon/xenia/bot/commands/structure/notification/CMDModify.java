@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.modify;
+package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
@@ -22,10 +22,10 @@ import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
 import java.util.List;
 
-public class CMDUser extends Command {
+public class CMDModify extends Command {
 
-    public CMDUser() {
-        super("user", "Modify your settings", new CommandCooldown(CommandCooldown.Type.User, 3000), null, null, List.of("setting", "value"));
+    public CMDModify() {
+        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("notificationId", "target_time", "\"notification_message\""));
     }
 
     @Override

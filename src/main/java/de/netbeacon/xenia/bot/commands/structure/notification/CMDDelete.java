@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.list;
+package de.netbeacon.xenia.bot.commands.structure.notification;
 
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
 
-public class GROUPList extends CommandGroup {
+import java.util.List;
 
-    public GROUPList(CommandGroup parent) {
-        super(parent, "list", "Contains all commands to show information about a user/member/role/guild");
-        addChildCommand(new CMDGuild());
-        addChildCommand(new CMDRole());
-        addChildCommand(new CMDMember());
-        addChildCommand(new CMDUser());
+public class CMDDelete extends Command {
+
+    public CMDDelete() {
+        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of("notificationId"));
     }
 
+    @Override
+    public void onExecution(List<String> args, CommandEvent commandEvent) {
+
+    }
 }

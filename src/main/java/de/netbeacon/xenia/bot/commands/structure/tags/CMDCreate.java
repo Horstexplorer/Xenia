@@ -28,14 +28,14 @@ import java.util.regex.Pattern;
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.Guild, 10000), null, null, List.of("tag_name", "\"content\""));
+        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("tag_name", "\"content\""));
     }
 
     private final static Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
 
     @Override
     public void onExecution(List<String> args, CommandEvent commandEvent) {
-        TagCache tagCache = commandEvent.backendDataPack().getbGuild().getMiscCaches().getTagCache();
+        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         try{
             if(!KEY_PATTERN.matcher(args.get(0)).matches() || args.get(0).length() > 32){
                 commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Tag Name Can Only Be 32 Chars Long And Support Chars, Numbers And Underscores")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
