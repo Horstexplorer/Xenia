@@ -17,8 +17,8 @@
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
 
 import java.util.List;
 
