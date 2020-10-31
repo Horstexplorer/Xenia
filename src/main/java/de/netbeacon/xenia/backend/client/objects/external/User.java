@@ -30,6 +30,8 @@ public class User extends APIDataObject {
     private long creationTimestamp;
     private String internalRole;
     private String preferredLanguage;
+    // meta data - initialize with values
+    private String metaUsername = "unknown_username";
 
     public User(BackendProcessor backendProcessor, long userId) {
         super(backendProcessor, List.of("data", "users", String.valueOf(userId)));
@@ -52,6 +54,19 @@ public class User extends APIDataObject {
         return preferredLanguage;
     }
 
+    public void lSetMetaData(String username){
+        this.metaUsername = username;
+    }
+
+    public void setMetaData(String username){
+        lSetMetaData(username);
+        update();
+    }
+
+    public String getMetaUsername() {
+        return metaUsername;
+    }
+
     public void setInternalRole(String internalRole){
         this.internalRole = internalRole;
         update();
@@ -68,7 +83,10 @@ public class User extends APIDataObject {
                 .put("userId", userId)
                 .put("creationTimestamp", creationTimestamp)
                 .put("internalRole", internalRole)
-                .put("preferredLanguage", preferredLanguage);
+                .put("preferredLanguage", preferredLanguage)
+                .put("meta", new JSONObject()
+                        .put("username", metaUsername)
+                );
     }
 
     @Override
@@ -79,5 +97,7 @@ public class User extends APIDataObject {
         this.creationTimestamp = jsonObject.getLong("creationTimestamp");
         this.internalRole = jsonObject.getString("internalRole");
         this.preferredLanguage = jsonObject.getString("preferredLanguage");
+        JSONObject meta = jsonObject.getJSONObject("meta");
+        this.metaUsername = meta.getString("username");
     }
 }
