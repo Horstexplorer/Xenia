@@ -108,7 +108,7 @@ public class GuildAccessListener extends ListenerAdapter {
         u.updateAsync();
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Member m = g.getMemberCache().get(event.getMember().getIdLong());
-        m.lSetMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
         m.updateAsync();
     }
 
@@ -127,7 +127,7 @@ public class GuildAccessListener extends ListenerAdapter {
         Member m = g.getMemberCache().get(event.getUser().getIdLong());
         u.lSetMetaData(event.getUser().getAsTag());
         u.updateAsync();
-        m.lSetMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
         m.updateAsync();
     }
 
