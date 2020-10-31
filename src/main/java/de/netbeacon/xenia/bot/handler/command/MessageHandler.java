@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +65,7 @@ public class MessageHandler {
         if(!msg.startsWith(prefix)){
             // check if the message should be logged
             if(bChannel.tmpLoggingIsActive()){
-                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toLocalDateTime().toEpochSecond(ZoneOffset.UTC), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
+                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
             }
             return;
         }
