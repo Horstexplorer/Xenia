@@ -18,12 +18,16 @@ package de.netbeacon.xenia.bot.listener.access;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.external.Member;
+import de.netbeacon.xenia.backend.client.objects.external.User;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.DisconnectEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.CloseCode;
 import org.jetbrains.annotations.NotNull;
@@ -99,9 +103,13 @@ public class GuildAccessListener extends ListenerAdapter {
 
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
-        backendClient.getUserCache().get(event.getUser().getIdLong());
+        User u = backendClient.getUserCache().get(event.getUser().getIdLong());
+        u.setMetaData(event.getUser().getAsTag());
+        u.updateAsync();
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.getMemberCache().get(event.getMember().getIdLong());
+        Member m = g.getMemberCache().get(event.getMember().getIdLong());
+        m.setMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.updateAsync();
     }
 
     @Override
@@ -110,6 +118,17 @@ public class GuildAccessListener extends ListenerAdapter {
         if(event.getMember() != null){
             g.getMemberCache().delete(event.getMember().getIdLong());
         }
+    }
+
+    @Override
+    public void onGuildMemberUpdate(@NotNull GuildMemberUpdateEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        User u = backendClient.getUserCache().get(event.getUser().getIdLong());
+        Member m = g.getMemberCache().get(event.getUser().getIdLong());
+        u.setMetaData(event.getUser().getAsTag());
+        u.updateAsync();
+        m.setMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.updateAsync();
     }
 
     // CHANNEL
