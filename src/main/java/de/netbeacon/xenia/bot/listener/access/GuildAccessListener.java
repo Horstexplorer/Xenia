@@ -104,11 +104,11 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-        u.setMetaData(event.getUser().getAsTag());
+        u.lSetMetaData(event.getUser().getAsTag());
         u.updateAsync();
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Member m = g.getMemberCache().get(event.getMember().getIdLong());
-        m.setMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.lSetMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
         m.updateAsync();
     }
 
@@ -125,9 +125,9 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         User u = backendClient.getUserCache().get(event.getUser().getIdLong());
         Member m = g.getMemberCache().get(event.getUser().getIdLong());
-        u.setMetaData(event.getUser().getAsTag());
+        u.lSetMetaData(event.getUser().getAsTag());
         u.updateAsync();
-        m.setMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
+        m.lSetMetaData(event.getMember().getNickname(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
         m.updateAsync();
     }
 
