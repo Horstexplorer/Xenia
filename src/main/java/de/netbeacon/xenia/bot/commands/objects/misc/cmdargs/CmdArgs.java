@@ -24,8 +24,16 @@ public class CmdArgs {
     private final HashMap<String, CmdArg> argHashMap = new HashMap<>();
     private final ArrayList<CmdArg> cmdArgs = new ArrayList<>();
 
+    /**
+     * Creates a new instance of this class
+     */
     public CmdArgs(){}
 
+    /**
+     * Creates a new instance of this class
+     *
+     * @param args predefined arguements
+     */
     public CmdArgs(CmdArg...args){
         for(CmdArg arg : args){
             if(argHashMap.containsKey(arg.getArgDef().getName())){
@@ -36,6 +44,11 @@ public class CmdArgs {
         }
     }
 
+    /**
+     * Adds arguments to this container
+     *
+     * @param args cmd args
+     */
     public void add(CmdArg...args){
         for(CmdArg arg : args){
             if(argHashMap.containsKey(arg.getArgDef().getName().toLowerCase())){
@@ -46,6 +59,11 @@ public class CmdArgs {
         }
     }
 
+    /**
+     * Removes arguments from this container
+     *
+     * @param args cmd args
+     */
     public void remove(CmdArg...args){
         for(CmdArg arg : args){
             if(!argHashMap.containsKey(arg.getArgDef().getName())){
@@ -57,14 +75,32 @@ public class CmdArgs {
         }
     }
 
+    /**
+     * Returns the argument by a given index
+     *
+     * @param index index
+     * @param <T> return type
+     * @return CmdArg
+     */
     public <T extends CmdArg> T getByIndex(int index){
         return (T) cmdArgs.get(index);
     }
 
+    /**
+     * Returns the argument by a given name
+     *
+     * @param name name
+     * @param <T> return type
+     * @return CmdArg
+     */
     public <T extends CmdArg> T getByName(String name){
         return (T) argHashMap.get(name.toLowerCase());
     }
 
+    /**
+     * Verifies that all argument definitions within this container are fulfilled.
+     * @return true on success
+     */
     public boolean verify(){
         for(CmdArg arg : cmdArgs){
             if(!arg.verify()){
@@ -74,6 +110,10 @@ public class CmdArgs {
         return true;
     }
 
+    /**
+     * Returns the number of elements within this container
+     * @return size
+     */
     public int size(){
         return argHashMap.size();
     }
