@@ -18,6 +18,8 @@ package de.netbeacon.xenia.bot.commands.structure.admin;
 
 import de.netbeacon.xenia.backend.client.objects.external.Info;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
@@ -25,6 +27,7 @@ import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CMDPing extends Command {
 
@@ -34,9 +37,11 @@ public class CMDPing extends Command {
 
     @Override
     public void execute(List<String> args, CommandEvent commandEvent) {
-        if(getRequiredArgCount() > args.size()){
+        // check required args
+        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
+        if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
@@ -50,11 +55,11 @@ public class CMDPing extends Command {
             return;
         }
         // everything alright
-        onExecution(args, commandEvent);
+        onExecution(cmdArgs, commandEvent);
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
         double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
         double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
         double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();

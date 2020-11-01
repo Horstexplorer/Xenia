@@ -18,13 +18,14 @@ package de.netbeacon.xenia.bot.commands.global.help;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +52,7 @@ public class CMDHelp extends Command {
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         // build command path
         StringBuilder commandPathBuilder = new StringBuilder();
@@ -70,8 +71,8 @@ public class CMDHelp extends Command {
             if(c.isCommandHandler()){
                 help.append("#").append(" ");
             }else{
-                for(String s : c.getRequiredArgs()){
-                    help.append("<").append(s).append(">").append(" ");
+                for(CmdArgDef s : c.getCommandArgs()){
+                    help.append("<").append(s.getName()).append(">").append(" ");
                 }
             }
             help.append("-").append(" ").append(c.getDescription()).append("\n");

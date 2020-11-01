@@ -17,19 +17,22 @@
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
 
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_ID_DEF;
+
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of("notificationId"));
+        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of(NOTIFICATION_ID_DEF));
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
 
     }
 }

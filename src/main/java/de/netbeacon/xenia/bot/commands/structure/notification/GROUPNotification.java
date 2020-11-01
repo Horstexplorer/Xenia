@@ -16,19 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
-import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class GROUPNotification extends CommandGroup {
 
@@ -40,17 +29,4 @@ public class GROUPNotification extends CommandGroup {
         addChildCommand(new CMDList());
     }
 
-    @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
-        // list all notifications
-        NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("NotificationId - UserId@ChannelId - NotificationTime");
-        for(Notification notification : notificationCache.getAllAsList()){
-            stringBuilder.append(notification.getId()).append(" - ").append(notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.ofInstant(Instant.ofEpochMilli(notification.getNotificationTarget()), ZoneId.of("ECT"))));
-        }
-        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed("Notifications", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .setDescription(stringBuilder.toString()).build();
-        commandEvent.getEvent().getChannel().sendMessage(messageEmbed).queue();
-    }
 }

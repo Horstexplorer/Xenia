@@ -18,41 +18,33 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
+
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_CONTENT_DEF;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
 
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("tag_name", "\"content\""));
+        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
     }
 
-    private final static Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
-
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+        CmdArg<String> tag = cmdArgs.getByIndex(0);
+        CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
-            if(!KEY_PATTERN.matcher(args.get(0)).matches() || args.get(0).length() > 32){
-                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Tag Name Can Only Be 32 Chars Long And Support Chars, Numbers And Underscores")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
-                return;
-            }
-            if(args.get(0).equalsIgnoreCase("create") || args.get(0).equalsIgnoreCase("modify") || args.get(0).equalsIgnoreCase("delete")){
-                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Tag Cannot Be Named Like That ;)")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
-                return;
-            }
-            if(args.get(1).length() > 1500){
-                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag. Content Cant Be Longer Than 1500 Chars")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
-                return;
-            }
-            tagCache.createNew(args.get(0), commandEvent.getEvent().getAuthor().getIdLong(), args.get(1));
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Created")).queue();;
+            tagCache.createNew(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong(), content.getValue());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tag.getValue()+" Created")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag "+args.get(0))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag "+tag.getValue())).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

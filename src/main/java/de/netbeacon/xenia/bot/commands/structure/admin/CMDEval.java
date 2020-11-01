@@ -17,6 +17,8 @@
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
@@ -58,9 +60,11 @@ public class CMDEval extends Command {
 
     @Override
     public void execute(List<String> args, CommandEvent commandEvent) {
-        if(getRequiredArgCount() > args.size()){
+        // check required args
+        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
+        if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
@@ -74,11 +78,11 @@ public class CMDEval extends Command {
             return;
         }
         // everything alright
-        onExecution(args, commandEvent);
+        onExecution(cmdArgs, commandEvent);
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
         // parse java things
         String msg = commandEvent.getEvent().getMessage().getContentRaw();
         Matcher matcher = CodeBlock.matcher(msg);
