@@ -18,27 +18,32 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
 
 public class CMDDelete extends Command {
 
     public CMDDelete() {
         super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User
-                , 5000), null, null, List.of("tag_name"));
+                , 5000), null, null, List.of(TAG_NAME_DEF));
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+        CmdArg<String> tag = cmdArgs.getByIndex(0);
         try{
-            tagCache.delete(args.get(0), commandEvent.getEvent().getAuthor().getIdLong());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Deleted")).queue();;
+            tagCache.delete(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tag.getValue()+" Deleted")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+args.get(0)+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+tag.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

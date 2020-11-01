@@ -16,8 +16,11 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
@@ -36,7 +39,7 @@ public abstract class Command {
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
-    private final List<String> requiredArgs = new ArrayList<>();
+    private final List<CmdArgDef> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
     private boolean isHybrid = false;
 
@@ -48,9 +51,9 @@ public abstract class Command {
      * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
      * @param memberPermissions required for the member
-     * @param requiredArgs required for the command
+     * @param commandArgs for the command
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
+    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<CmdArgDef> commandArgs){
         this.alias = alias;
         this.description = description;
         this.commandCooldown = commandCooldown;
@@ -128,7 +131,7 @@ public abstract class Command {
      *
      * @return required args
      */
-    public List<String> getRequiredArgs(){
+    public List<CmdArgDef> getCommandArgs(){
         return requiredArgs;
     }
 
@@ -197,7 +200,8 @@ public abstract class Command {
                 commandCooldown.deny(guildId, authorId);
             }
             // check required args
-            if(getRequiredArgCount() > args.size()){
+            CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
+            if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
                 // missing args
                 commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                 return;
@@ -216,7 +220,7 @@ public abstract class Command {
                 return;
             }
             // everything alright
-            onExecution(args, commandEvent);
+            onExecution(cmdArgs, commandEvent);
         }else{
             if(args.size() > 0) {
                 Command command = children.get(args.get(0).toLowerCase());
@@ -277,8 +281,8 @@ public abstract class Command {
      */
     public MessageEmbed onMissingArgs(){
         StringBuilder usage = new StringBuilder().append("<> ").append(alias).append(" ");
-        for(String s : requiredArgs){
-            usage.append("<").append(s).append(">").append(" ");
+        for(CmdArgDef s : requiredArgs){
+            usage.append("<").append(s.getName()).append(">").append(" ");
         }
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
@@ -319,5 +323,5 @@ public abstract class Command {
      * @param args remaining arguments of the message
      * @param commandEvent CommandEvent
      */
-    public abstract void onExecution(List<String> args, CommandEvent commandEvent);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent);
 }

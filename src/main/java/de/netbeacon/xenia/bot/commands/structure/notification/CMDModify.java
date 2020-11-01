@@ -17,19 +17,22 @@
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
+
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.*;
 
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of("notificationId", "target_time", "\"notification_message\""));
+        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of(NOTIFICATION_ID_DEF, NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
 
     }
 }

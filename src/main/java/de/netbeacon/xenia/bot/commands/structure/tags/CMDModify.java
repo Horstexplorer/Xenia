@@ -19,31 +19,34 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_CONTENT_DEF;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
+
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of("tag_name", "\"content\""));
+        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+        CmdArg<String> tagA = cmdArgs.getByIndex(0);
+        CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
-            Tag tag = tagCache.get(args.get(0));
-            if(args.get(1).length() > 1500){
-                commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag. Content Cant Be Longer Than 1500 Chars")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
-                return;
-            }
-            tag.setTagContent(args.get(1), commandEvent.getEvent().getAuthor().getIdLong());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+args.get(0)+" Updated")).queue();;
+            Tag tag = tagCache.get(tagA.getValue());
+            tag.setTagContent(content.getValue(), commandEvent.getEvent().getAuthor().getIdLong());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tagA.getValue()+" Updated")).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+args.get(0)+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+tagA.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

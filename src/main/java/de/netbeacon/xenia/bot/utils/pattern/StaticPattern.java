@@ -40,4 +40,6 @@ public class StaticPattern {
     public final static Pattern ArgPattern = Pattern.compile("(\"(\\X*?)\")|([^\\s]\\X*?(?=\\s|\"|$))");
     public final static Pattern CodeBlock = Pattern.compile("(`{1,3})(.*?\\s)(.*?)(`{1,3})", Pattern.MULTILINE|Pattern.DOTALL);
     public final static Pattern JavaClass = Pattern.compile("(public class)(.*?)(\\{)", Pattern.MULTILINE | Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+
+    public final static Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
 }

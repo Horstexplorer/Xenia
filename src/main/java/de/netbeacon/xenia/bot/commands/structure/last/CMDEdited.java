@@ -20,12 +20,12 @@ import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
 import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 
 import java.awt.*;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CMDEdited extends Command {
@@ -35,7 +35,7 @@ public class CMDEdited extends Command {
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = bChannel.getMessageCache().getLast("edited");

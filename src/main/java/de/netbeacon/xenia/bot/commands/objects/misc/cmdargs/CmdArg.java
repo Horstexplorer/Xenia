@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.notification;
+package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+public class CmdArg<T> {
 
-public class GROUPNotification extends CommandGroup {
+    private final CmdArgDef<T> argDef;
+    private final T value;
 
-    public GROUPNotification(CommandGroup parent) {
-        super(parent, "notification", "List all notifications within this guild", new CommandCooldown(CommandCooldown.Type.User, 2500), null, null, null);
-        addChildCommand(new CMDCreate());
-        addChildCommand(new CMDModify());
-        addChildCommand(new CMDDelete());
-        addChildCommand(new CMDList());
+    protected CmdArg(CmdArgDef<T> def, T value){
+        this.argDef = def;
+        this.value = value;
     }
 
+    public boolean verify(){
+        if(value == null){
+            return argDef.isOptional();
+        }else{
+            return argDef.test(value);
+        }
+    }
+
+    public CmdArgDef<?> getArgDef() {
+        return argDef;
+    }
+
+    public T getValue() {
+        return value;
+    }
 }

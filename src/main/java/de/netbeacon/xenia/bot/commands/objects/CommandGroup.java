@@ -17,8 +17,10 @@
 package de.netbeacon.xenia.bot.commands.objects;
 
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -53,10 +55,10 @@ public abstract class CommandGroup extends Command{
      * @param commandCooldown cooldown of the command on execution in command mode
      * @param botPermissions required for the user on execution in command mode
      * @param memberPermissions required for the member on execution in command mode
-     * @param requiredArgs required for the command on execution in command mode
+     * @param commandArgs for the command on execution in command mode
      */
-    protected CommandGroup(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<String> requiredArgs){
-        super(alias, description, commandCooldown, botPermissions, memberPermissions, requiredArgs);
+    protected CommandGroup(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<CmdArgDef> commandArgs){
+        super(alias, description, commandCooldown, botPermissions, memberPermissions, commandArgs);
         this.parent = parent;
         activateHybridMode();
         addChildCommand(new CMDHelp(this));
@@ -72,5 +74,5 @@ public abstract class CommandGroup extends Command{
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {}
+    public void onExecution(CmdArgs args, CommandEvent commandEvent) {}
 }
