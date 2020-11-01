@@ -38,7 +38,7 @@ public class CmdArg<T> {
         return argDef;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 }

@@ -73,4 +73,8 @@ public class CmdArgs {
         }
         return true;
     }
+
+    public int size(){
+        return argHashMap.size();
+    }
 }

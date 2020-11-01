@@ -35,7 +35,7 @@ public class CmdArgFactory {
             i++;
         }
         while (i < argList.size()){
-            CmdArgDef def = new CmdArgDef.Builder<>("unknown_"+i, String.class).buildAnyMatch();
+            CmdArgDef def = new CmdArgDef.Builder<>("unknown_"+i, String.class).buildAnyMatch().setOptional(true);
             cmdArgs.add(new CmdArg(def, argList.get(i)));
             i++;
         }
