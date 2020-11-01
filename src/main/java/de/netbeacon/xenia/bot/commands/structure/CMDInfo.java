@@ -18,12 +18,11 @@ package de.netbeacon.xenia.bot.commands.structure;
 
 import de.netbeacon.utils.appinfo.AppInfo;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-
-import java.util.List;
 
 
 /**
@@ -36,7 +35,7 @@ public class CMDInfo extends Command {
     }
 
     @Override
-    public void onExecution(List<String> args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia:", "Version "+ AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Website:", "[Visit Website](https://xenia.netbeacon.de/)", true);
