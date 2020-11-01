@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.objects.misc;
+package de.netbeacon.xenia.bot.commands.objects.misc.cooldown;
 
 import java.util.concurrent.ConcurrentHashMap;
 

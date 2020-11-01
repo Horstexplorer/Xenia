@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandCooldown;
-import de.netbeacon.xenia.bot.commands.objects.misc.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
+import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
