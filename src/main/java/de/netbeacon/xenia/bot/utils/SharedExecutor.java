@@ -29,11 +29,20 @@ public class SharedExecutor implements IShutdown {
     private ScalingExecutor scalingExecutor;
     private ScheduledExecutorService scheduledExecutorService;
 
+    /**
+     * Creates a new instance of this class
+     */
     private SharedExecutor(){
         scalingExecutor = new ScalingExecutor(2, 24, 24000, 30, TimeUnit.SECONDS);
         scheduledExecutorService = Executors.newScheduledThreadPool(8);
     }
 
+    /**
+     * Returns the instance of this class
+     *
+     * @param initIfNeeded initializes an instance of this class if no other exists
+     * @return this
+     */
     public static SharedExecutor getInstance(boolean initIfNeeded){
         if(instance == null && initIfNeeded){
             instance = new SharedExecutor();
@@ -41,14 +50,28 @@ public class SharedExecutor implements IShutdown {
         return instance;
     }
 
+    /**
+     * Returns the instance of this class
+     * @return this
+     */
     public static SharedExecutor getInstance(){
         return getInstance(false);
     }
 
+    /**
+     * Returns the scaling executor
+     *
+     * @return scaling executor
+     */
     public ScalingExecutor getScalingExecutor(){
         return scalingExecutor;
     }
 
+    /**
+     * Returns the schedules executor
+     *
+     * @return scheduled executor
+     */
     public ScheduledExecutorService getScheduledExecutor() { return scheduledExecutorService; }
 
     @Override

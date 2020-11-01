@@ -52,14 +52,29 @@ public class CommandEvent {
         return event;
     }
 
+    /**
+     * Returns the bundled data relating to the backend
+     *
+     * @return backend data
+     */
     public BackendDataPack getBackendDataPack(){
         return backendDataPack;
     }
 
+    /**
+     * Returns the backend client
+     *
+     * @return Backend client
+     */
     public XeniaBackendClient getBackendClient() {
         return backendClient;
     }
 
+    /**
+     * Returns the event waiter
+     *
+     * @return event waiter
+     */
     public EventWaiter getEventWaiter() {
         return eventWaiter;
     }
@@ -71,6 +86,15 @@ public class CommandEvent {
         private final Channel bChannel;
         private final License bLicense;
 
+        /**
+         * Creates a new instance of this class
+         *
+         * @param bGuild
+         * @param bUser
+         * @param bMember
+         * @param bChannel
+         * @param bLicense
+         */
         public BackendDataPack(Guild bGuild, User bUser, Member bMember, Channel bChannel, License bLicense){
             this.bGuild = bGuild;
             this.bUser = bUser;
@@ -79,22 +103,45 @@ public class CommandEvent {
             this.bLicense = bLicense;
         }
 
+        /**
+         * Returns the guild
+         *
+         * @return guild
+         */
         public Guild getbGuild() {
             return bGuild;
         }
 
+        /**
+         * Returns the user
+         *
+         * @return user
+         */
         public User getbUser() {
             return bUser;
         }
 
+        /**
+         * Returns the member
+         *
+         * @return member
+         */
         public Member getbMember() {
             return bMember;
         }
 
+        /**
+         * Returns the channel
+         * @return channel
+         */
         public Channel getbChannel() {
             return bChannel;
         }
 
+        /**
+         * Returns the license
+         * @return
+         */
         public License getbLicense() {
             return bLicense;
         }

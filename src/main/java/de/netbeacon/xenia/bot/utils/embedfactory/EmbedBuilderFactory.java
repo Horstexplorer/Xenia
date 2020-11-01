@@ -24,11 +24,27 @@ import java.awt.*;
 
 public class EmbedBuilderFactory {
 
+    /**
+     * Returns an embed with a given title and the self user as author
+     *
+     * @param title title
+     * @param selfUser author
+     * @return embed builder
+     */
     public static EmbedBuilder getDefaultEmbed(String title, SelfUser selfUser){
         return new EmbedBuilder()
                 .setColor(Color.CYAN)
                 .setAuthor(title, "https://xenia.netbeacon.de/",selfUser.getEffectiveAvatarUrl());
     }
+
+    /**
+     * Returns an embed with a given title and the self user as author and a user as requester
+     *
+     * @param title title
+     * @param selfUser author
+     * @param requester requester
+     * @return embed builder
+     */
     public static EmbedBuilder getDefaultEmbed(String title, SelfUser selfUser, User requester){
         return new EmbedBuilder()
                 .setColor(Color.CYAN)

@@ -21,11 +21,24 @@ public class CmdArg<T> {
     private final CmdArgDef<T> argDef;
     private final T value;
 
+    /**
+     * Creates a new instance of this class
+     *
+     * @param def definition of this argument
+     * @param value of this argument
+     */
     protected CmdArg(CmdArgDef<T> def, T value){
         this.argDef = def;
         this.value = value;
     }
 
+    /**
+     * Checks if the value matches the definition
+     *
+     * Will return true if it either matches or doesnt exist while being optional
+     *
+     * @return true if it does match
+     */
     public boolean verify(){
         if(value == null){
             return argDef.isOptional();
@@ -34,10 +47,20 @@ public class CmdArg<T> {
         }
     }
 
+    /**
+     * Returns the definition of this argument
+     *
+     * @return CmdArgDef
+     */
     public CmdArgDef<?> getArgDef() {
         return argDef;
     }
 
+    /**
+     * Returns the value of the argument
+     *
+     * @return value
+     */
     public T getValue() {
         return value;
     }

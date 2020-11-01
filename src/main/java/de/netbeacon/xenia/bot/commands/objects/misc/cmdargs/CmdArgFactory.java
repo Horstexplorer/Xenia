@@ -23,6 +23,16 @@ import java.util.List;
 
 public class CmdArgFactory {
 
+    /**
+     * Builds the CmdArgs from a given list of arguments and definitions
+     *
+     * If argsList > argDefs all additional args will be set as optional strings
+     * If argsList < argDefs all missing args will be created as null
+     *
+     * @param argList list of strings
+     * @param argDefs list of definitions
+     * @return CmdArgs
+     */
     public static CmdArgs getArgs(List<String> argList, List<CmdArgDef> argDefs){
         int i = 0;
         CmdArgs cmdArgs = new CmdArgs();
@@ -45,6 +55,14 @@ public class CmdArgFactory {
     private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final static DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Tries to convert the string into any of the known types
+     *
+     * @param string input
+     * @param tClass target class
+     * @param <T> return this object
+     * @return T or null if its an unknown class
+     */
     private static <T> T fromString(String string, Class<T> tClass){
         if(Boolean.class.equals(tClass)){
             return (T) (Boolean) Boolean.parseBoolean(string);
