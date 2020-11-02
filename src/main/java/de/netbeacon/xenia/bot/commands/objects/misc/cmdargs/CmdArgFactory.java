@@ -64,23 +64,28 @@ public class CmdArgFactory {
      * @return T or null if its an unknown class
      */
     private static <T> T fromString(String string, Class<T> tClass){
-        if(Boolean.class.equals(tClass)){
-            return (T) (Boolean) Boolean.parseBoolean(string);
-        }else if(Integer.class.equals(tClass)){
-            return (T) (Integer) Integer.parseInt(string);
-        }else if(Double.class.equals(tClass)){
-            return (T) (Double) Double.parseDouble(string);
-        }else if(Float.class.equals(tClass)){
-            return (T) (Float) Float.parseFloat(string);
-        }else if(Long.class.equals(tClass)){
-            return (T) (Long) Long.parseLong(string);
-        }else if(String.class.equals(tClass)){
-            return (T) (String) string;
-        }else if(LocalDateTime.class.equals(tClass)){
-            return (T) (LocalDateTime) LocalDateTime.parse(string, DTF);
-        }else if(LocalDate.class.equals(tClass)){
-            return (T) (LocalDate) LocalDate.parse(string, DF);
-        }else{
+        try{
+            if(Boolean.class.equals(tClass)){
+                return (T) (Boolean) Boolean.parseBoolean(string);
+            }else if(Integer.class.equals(tClass)){
+                return (T) (Integer) Integer.parseInt(string);
+            }else if(Double.class.equals(tClass)){
+                return (T) (Double) Double.parseDouble(string);
+            }else if(Float.class.equals(tClass)){
+                return (T) (Float) Float.parseFloat(string);
+            }else if(Long.class.equals(tClass)){
+                return (T) (Long) Long.parseLong(string);
+            }else if(String.class.equals(tClass)){
+                return (T) (String) string;
+            }else if(LocalDateTime.class.equals(tClass)){
+                return (T) (LocalDateTime) LocalDateTime.parse(string, DTF);
+            }else if(LocalDate.class.equals(tClass)){
+                return (T) (LocalDate) LocalDate.parse(string, DF);
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }

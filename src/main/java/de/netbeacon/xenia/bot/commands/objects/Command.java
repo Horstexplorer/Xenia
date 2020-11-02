@@ -63,8 +63,8 @@ public abstract class Command {
         if(memberPermissions != null){
             this.memberPermissions.addAll(memberPermissions);
         }
-        if(requiredArgs != null){
-            this.requiredArgs.addAll(requiredArgs);
+        if(commandArgs != null){
+            this.requiredArgs.addAll(commandArgs);
         }
         this.isCommandHandler = false;
     }
