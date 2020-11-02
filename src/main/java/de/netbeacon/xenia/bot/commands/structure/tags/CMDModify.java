@@ -43,7 +43,10 @@ public class CMDModify extends Command {
         CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
             Tag tag = tagCache.get(tagA.getValue());
-            tag.setTagContent(content.getValue(), commandEvent.getEvent().getAuthor().getIdLong());
+            if(commandEvent.getEvent().getAuthor().getIdLong() != tag.getUserId()){
+                throw new RuntimeException("Cant Modify Tag When Not Owner");
+            }
+            tag.setTagContent(content.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tagA.getValue()+" Updated")).queue();;
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+tagA.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));

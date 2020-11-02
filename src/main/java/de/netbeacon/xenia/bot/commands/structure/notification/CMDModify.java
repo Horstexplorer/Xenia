@@ -16,11 +16,15 @@
 
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
+import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.*;
@@ -33,6 +37,21 @@ public class CMDModify extends Command {
 
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+        CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
+        CmdArg<LocalDateTime> localDateTimeCmdArg = cmdArgs.getByIndex(1);
+        CmdArg<String> stringCmdArg = cmdArgs.getByIndex(2);
+        try{
+            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
+            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+                throw new RuntimeException("User Does Not Own This Notification");
+            }
+            notification.lSetNotificationTarget(localDateTimeCmdArg.getValue().toInstant(ZoneOffset.UTC).toEpochMilli());
+            notification.lSetNotificationMessage(stringCmdArg.getValue());
+            notification.update();
 
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification updated!")).queue(s->{},e->{});
+        }catch (Exception ex){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to modify notification. Perhaps this got created by someone else or does not exist?")).queue(s->{},e->{});
+        }
     }
 }
