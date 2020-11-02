@@ -65,11 +65,14 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
                 }
                 textChannel.sendMessage(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s->{}, f->{});
             }catch (Exception ignore){}
+            try{
+                XeniaCore.getInstance().getBackendClient().getGuildCache().get(notification.getGuildId()).getMiscCaches().getNotificationCache().delete(notification.getId());
+            }catch (Exception ignore){}
         };
     }
 
     private MessageEmbed getNotificationMessage(long author, String message){
-        User requester = XeniaCore.getInstance().getShardManager().getUserById(author);
+        User requester = XeniaCore.getInstance().getShardManager().retrieveUserById(author).complete();
         if(requester == null){
             return EmbedBuilderFactory.getDefaultEmbed("Notification", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                     .setDescription(message)
@@ -84,7 +87,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
 
     @Override
     public void onDeletion(APIDataObject apiDataObject) {
-        apiDataObject.removeEventListener(); // remove listeners from this object if deleted
+        apiDataObject.removeEventListeners(); // remove listeners from this object if deleted
         // proof check - cancel the task
         onRemoval(((Notification) apiDataObject).getId());
     }
