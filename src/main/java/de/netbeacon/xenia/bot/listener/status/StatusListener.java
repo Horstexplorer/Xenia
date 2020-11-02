@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.listener.status;
 
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.CloseCode;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,11 @@ public class StatusListener extends ListenerAdapter {
 
     @Override
     public void onDisconnect(@NotNull DisconnectEvent event) {
-        logger.warn("Shard Disconnected: "+event.getJDA().getShardInfo().getShardString());
+        if(event.getCloseCode() != null && !event.getCloseCode().equals(CloseCode.RECONNECT)){
+            logger.warn("Connection Got Closed With Code "+ event.getCloseCode().toString());
+        }else{
+            logger.warn("Shard Disconnected: "+event.getJDA().getShardInfo().getShardString());
+        }
     }
 
     @Override

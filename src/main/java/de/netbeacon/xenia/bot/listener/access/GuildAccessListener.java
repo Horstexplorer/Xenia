@@ -21,7 +21,6 @@ import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.User;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.events.DisconnectEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.guild.*;
@@ -29,7 +28,6 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.CloseCode;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,16 +51,6 @@ public class GuildAccessListener extends ListenerAdapter {
         }
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.initAsync();
-    }
-
-    @Override
-    public void onDisconnect(@NotNull DisconnectEvent event) {
-        if(event.getCloseCode() != null && !event.getCloseCode().equals(CloseCode.RECONNECT)){
-            logger.warn("Connection Got Closed With Code "+ event.getCloseCode().toString()+" - Dropping Cache.");
-            backendClient.getGuildCache().clear();
-            backendClient.getUserCache().clear();
-            backendClient.getLicenseCache().clear();
-        }
     }
 
     @Override
