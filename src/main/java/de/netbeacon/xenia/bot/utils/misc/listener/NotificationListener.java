@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.utils.misc.notification;
+package de.netbeacon.xenia.bot.utils.misc.listener;
 
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataEventListener;
@@ -29,7 +29,7 @@ import net.dv8tion.jda.api.entities.User;
 
 public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener {
 
-    private TaskManager taskManager;
+    private final TaskManager taskManager;
 
     public NotificationListener(TaskManager taskManager){
         this.taskManager = taskManager;
