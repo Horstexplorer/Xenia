@@ -18,7 +18,7 @@ package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
 import java.time.LocalDateTime;
 
-import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.KEY_PATTERN;
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
 public class CmdArgDefStatics {
 

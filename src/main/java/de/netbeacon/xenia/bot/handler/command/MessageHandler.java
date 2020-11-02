@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.ArgPattern;
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPattern;
 
 public class MessageHandler {
 
