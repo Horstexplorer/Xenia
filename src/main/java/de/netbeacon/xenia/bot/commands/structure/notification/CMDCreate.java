@@ -16,11 +16,16 @@
 
 package de.netbeacon.xenia.bot.commands.structure.notification;
 
+import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
+import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_MESSAGE_DEF;
@@ -34,6 +39,15 @@ public class CMDCreate extends Command {
 
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
-
+        CmdArg<LocalDateTime> localDateTimeCmdArg = cmdArgs.getByIndex(0);
+        CmdArg<String> stringCmdArg = cmdArgs.getByIndex(1);
+        // create a new notification
+        NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+        try{
+            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+") created")).queue(s->{},e->{});
+        }catch (Exception ex){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to create notification! Perhaps the cache is full?")).queue(s->{},e->{});
+        }
     }
 }
