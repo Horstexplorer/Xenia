@@ -28,6 +28,7 @@ import de.netbeacon.xenia.bot.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.utils.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -134,5 +135,14 @@ public class XeniaCore {
 
     public EventWaiter getEventWaiter(){
         return eventWaiter;
+    }
+
+    public JDA getShardByGuildId(long guildId){
+        for(JDA jda : shardManager.getShards()){
+            if(jda.getGuildCache().getElementById(guildId) != null){
+                return jda;
+            }
+        }
+        return null;
     }
 }
