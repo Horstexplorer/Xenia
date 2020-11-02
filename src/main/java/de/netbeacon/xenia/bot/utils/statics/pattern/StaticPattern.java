@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.utils.pattern;
+package de.netbeacon.xenia.bot.utils.statics.pattern;
 
 import java.util.regex.Pattern;
 

@@ -45,8 +45,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
-import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.CodeBlock;
-import static de.netbeacon.xenia.bot.utils.pattern.StaticPattern.JavaClass;
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.CodeBlock;
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.JavaClass;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 public class CMDEval extends Command {
