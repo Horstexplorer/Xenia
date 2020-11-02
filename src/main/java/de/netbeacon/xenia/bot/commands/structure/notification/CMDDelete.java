@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_ID_DEF;
 
@@ -42,9 +43,9 @@ public class CMDDelete extends Command {
                 throw new RuntimeException("User Does Not Own This Notification");
             }
             commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification deleted!")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+") deleted!")).queue(s->{},e->{});
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to delete notification. Perhaps this got created by someone else or does not exist?")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to delete notification. Perhaps this got created by someone else or does not exist?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
         }
     }
 }
