@@ -26,6 +26,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.*;
 
@@ -49,9 +50,9 @@ public class CMDModify extends Command {
             notification.lSetNotificationMessage(stringCmdArg.getValue());
             notification.update();
 
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification updated!")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+" ) updated!")).queue(s->{},e->{});
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to modify notification. Perhaps this got created by someone else or does not exist?")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to modify notification. Perhaps this got created by someone else or does not exist?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
         }
     }
 }
