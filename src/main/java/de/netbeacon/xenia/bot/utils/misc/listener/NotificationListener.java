@@ -40,7 +40,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
         // new object has been inserted, add event listener
         notification.addEventListener(this);
         // and schedule
-        taskManager.schedule(notification.getId(), getRunnable(notification), Math.min(notification.getNotificationTarget()-System.currentTimeMillis(),1));
+        taskManager.schedule(notification.getId(), getRunnable(notification), Math.max(notification.getNotificationTarget()-System.currentTimeMillis(),1));
     }
 
     @Override
