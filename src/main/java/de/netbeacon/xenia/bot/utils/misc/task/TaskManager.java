@@ -16,41 +16,42 @@
 
 package de.netbeacon.xenia.bot.utils.misc.task;
 
-import de.netbeacon.xenia.bot.utils.SharedExecutor;
+import de.netbeacon.utils.shutdownhook.IShutdown;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
-public class TaskManager {
+public class TaskManager implements IShutdown {
 
-    private TaskManager instance;
+    private static TaskManager instance;
     private final ConcurrentHashMap<Long, ScheduledFuture<?>> taskMap = new ConcurrentHashMap<>();
-    private TaskManager(){}
+    private final ScheduledExecutorService scheduledExecutorService;
 
-    public TaskManager getInstance(boolean initializeIfPossible){
+    private TaskManager(){
+        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+    }
+
+    public static TaskManager getInstance(boolean initializeIfPossible){
         if(instance == null && initializeIfPossible){
             instance = new TaskManager();
         }
         return instance;
     }
 
-    public TaskManager getInstance(){
+    public static TaskManager getInstance(){
         return instance;
     }
 
     public boolean schedule(long taskId, Runnable runnable, long delay){
-        if(taskMap.containsKey(taskId)){
+        if(scheduledExecutorService.isShutdown() || taskMap.containsKey(taskId)){
             return false;
         }
-        ScheduledFuture<?> future = SharedExecutor.getInstance().getScheduledExecutor()
-                .schedule(runnable, delay, TimeUnit.MILLISECONDS);
+        ScheduledFuture<?> future = scheduledExecutorService.schedule(runnable, delay, TimeUnit.MILLISECONDS);
         taskMap.put(taskId, future);
         return true;
     }
 
     public boolean update(long taskId, Runnable runnable, long delay){
-        if(!taskMap.containsKey(taskId)){
+        if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
             return false;
         }
         cancel(taskId);
@@ -58,11 +59,17 @@ public class TaskManager {
     }
 
     public boolean cancel(long taskId){
-        if(!taskMap.containsKey(taskId)){
+        if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
             return false;
         }
         taskMap.get(taskId).cancel(true);
         taskMap.remove(taskId);
         return true;
+    }
+
+    @Override
+    public void onShutdown() throws Exception {
+        scheduledExecutorService.shutdownNow();
+        instance = null;
     }
 }

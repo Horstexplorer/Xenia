@@ -26,8 +26,11 @@ import de.netbeacon.xenia.bot.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.listener.status.StatusListener;
-import de.netbeacon.xenia.bot.utils.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
+import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
+import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
+import de.netbeacon.xenia.bot.utils.sharedexecutor.SharedExecutor;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -77,8 +80,10 @@ public class XeniaCore {
 
         // setup other things
         logger.warn("Preparing Other Things...");
-        eventWaiter = new EventWaiter();
-        shutdownHook.addShutdownAble(SharedExecutor.getInstance(true));
+        eventWaiter = new EventWaiter(); // Event Waiter
+        shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
+        shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
+        xeniaBackendClient.getGuildCache().addEventListeners(new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
 
         // setup shard builder
         logger.warn("Setting Up Shard Builder...");
