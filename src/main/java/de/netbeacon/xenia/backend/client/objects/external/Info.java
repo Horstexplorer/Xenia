@@ -16,7 +16,6 @@
 
 package de.netbeacon.xenia.backend.client.objects.external;
 
-import de.netbeacon.utils.appinfo.AppInfo;
 import de.netbeacon.utils.json.serial.JSONSerializationException;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
@@ -24,8 +23,6 @@ import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataObject;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.function.Function;
 
 public class Info extends APIDataObject {
 
@@ -49,7 +46,7 @@ public class Info extends APIDataObject {
     public Info(BackendProcessor backendProcessor, Mode mode) {
         super(backendProcessor);
         this.mode = mode;
-        setBackendPath("info", (Function<Void, String>) o -> mode.toString().toLowerCase());
+        setBackendPath("info", mode.toString().toLowerCase());
     }
 
     @Override
@@ -106,13 +103,13 @@ public class Info extends APIDataObject {
     public JSONObject asJSON() throws JSONSerializationException {
         if(mode == Mode.Public){
             return new JSONObject()
-                    .put("version", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"))
+                    .put("version", version)
                     .put("guilds", guildCount)
                     .put("users", userCount)
                     .put("members", memberCount);
         }else{
             return new JSONObject()
-                    .put("version", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"))
+                    .put("version", version)
                     .put("guilds", guildCount)
                     .put("users", userCount)
                     .put("members", memberCount)
