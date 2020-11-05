@@ -43,7 +43,8 @@ public class EventWaiter {
         eventList.put(tPackage, 0);
         long l = System.currentTimeMillis();
         synchronized (tPackage){ tPackage.wait(timeout); }
-        if(l+timeout < System.currentTimeMillis()){
+        eventList.remove(tPackage);
+        if(l+timeout-1 < System.currentTimeMillis()){ // the 1ms diff makes it a lot easier to detect a timeout (but also a bit more likely to get it wrong)
             return null;
         }
         return tPackage.getEvent();

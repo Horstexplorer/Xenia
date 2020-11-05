@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.backend.client.objects.external;
 
+import de.netbeacon.utils.appinfo.AppInfo;
 import de.netbeacon.utils.json.serial.JSONSerializationException;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
@@ -103,13 +104,13 @@ public class Info extends APIDataObject {
     public JSONObject asJSON() throws JSONSerializationException {
         if(mode == Mode.Public){
             return new JSONObject()
-                    .put("version", version)
+                    .put("version", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"))
                     .put("guilds", guildCount)
                     .put("users", userCount)
                     .put("members", memberCount);
         }else{
             return new JSONObject()
-                    .put("version", version)
+                    .put("version", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"))
                     .put("guilds", guildCount)
                     .put("users", userCount)
                     .put("members", memberCount)
