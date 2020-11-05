@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class RoleCache extends Cache<Long, Role> {
 
@@ -92,8 +93,14 @@ public class RoleCache extends Cache<Long, Role> {
         }
     }
 
+    private final ReentrantLock creationLock = new ReentrantLock();
+
     public Role createNew() throws CacheException {
         try{
+            creationLock.lock();
+            if(getOrderedKeyMap().size()+1 > getBackendProcessor().getBackendClient().getLicenseCache().get(guildId).getPerk_GUILD_ROLE_C()){
+                throw new RuntimeException("Cache Is Full");
+            }
             Role role = new Role(getBackendProcessor(), guildId, -1);
             role.create();
             addToCache(role.getId(), role);
@@ -102,6 +109,8 @@ public class RoleCache extends Cache<Long, Role> {
             throw e;
         }catch (Exception e){
             throw new CacheException(-2, "Failed To Create Role", e);
+        }finally {
+            creationLock.unlock();
         }
     }
 
