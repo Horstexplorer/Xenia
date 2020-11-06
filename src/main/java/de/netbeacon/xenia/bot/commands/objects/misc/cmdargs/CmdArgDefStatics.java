@@ -22,6 +22,11 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PAT
 
 public class CmdArgDefStatics {
 
+    // LAST
+    public static final CmdArgDef<Integer> LAST_RESTORE_NUM_DEF = new CmdArgDef.Builder<Integer>("count*", Integer.class)
+            .buildAllMatch()
+            .setOptional(true);
+
     // NOTIFICATION CMD
     public static final CmdArgDef<Long> NOTIFICATION_ID_DEF = new CmdArgDef.Builder<Long>("id", Long.class)
             .buildAllMatch();
@@ -38,5 +43,24 @@ public class CmdArgDefStatics {
             .buildAllMatch();
     public static final CmdArgDef<String> TAG_CONTENT_DEF = new CmdArgDef.Builder<String>("content", String.class)
             .predicateAddStringLengthRange(1, 1500)
+            .buildAllMatch();
+
+    // POLL
+    public static final CmdArgDef<Long> POLL_ID_OPT_DEF = new CmdArgDef.Builder<Long>("id*", Long.class)
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<Long> POLL_ID_DEF = new CmdArgDef.Builder<Long>("id", Long.class)
+            .buildAllMatch();
+    public static final CmdArgDef<Integer> POLL_OPTION_ID_DEF = new CmdArgDef.Builder<Integer>("option_id", Integer.class)
+            .buildAllMatch();
+    public static final CmdArgDef<String> POLL_OPTION_DEF = new CmdArgDef.Builder<String>("option", String.class)
+            .predicateAddStringLengthRange(1, 255)
+            .buildAllMatch();
+    public static final CmdArgDef<String> POLL_OPTION_OPT_DEF = new CmdArgDef.Builder<String>("option", String.class)
+            .predicateAddStringLengthRange(1, 255)
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<String> POLL_DESCRIPTION_DEF = new CmdArgDef.Builder<String>("option*", String.class)
+            .predicateAddStringLengthRange(1, 255)
             .buildAllMatch();
 }
