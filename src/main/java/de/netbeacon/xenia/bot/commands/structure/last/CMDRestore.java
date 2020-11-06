@@ -48,7 +48,7 @@ public class CMDRestore extends Command {
             count = countT.getValue();
         }
         for(Message message : messages){
-            if(--count <= 0){
+            if(--count < 0){
                 break;
             }
             String newContent = message.getMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
