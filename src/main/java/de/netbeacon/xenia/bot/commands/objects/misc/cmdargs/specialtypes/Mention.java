@@ -14,16 +14,29 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.last;
+package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes;
 
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import net.dv8tion.jda.api.entities.Message;
 
-public class GROUPLast extends CommandGroup {
+public class Mention {
 
-    public GROUPLast(CommandGroup parent) {
-        super(parent, "last", "Restore deleted or edited messages");
-        addChildCommand(new CMDDeleted());
-        addChildCommand(new CMDEdited());
-        addChildCommand(new CMDRestore());
+    private final long id;
+    private final Message.MentionType mentionType;
+
+    private Mention(long id, Message.MentionType mentionType){
+        this.id = id;
+        this.mentionType = mentionType;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Message.MentionType getMentionType() {
+        return mentionType;
+    }
+
+    public static Mention parse(String string){
+        return null;
     }
 }

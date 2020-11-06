@@ -16,6 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -81,11 +84,14 @@ public class CmdArgFactory {
                 return (T) (LocalDateTime) LocalDateTime.parse(string, DTF);
             }else if(LocalDate.class.equals(tClass)){
                 return (T) (LocalDate) LocalDate.parse(string, DF);
+            }else if(HumanTime.class.equals(tClass)){
+                return (T) (HumanTime) HumanTime.parse(string);
+            }else if(Mention.class.equals(tClass)){
+                return (T) (Mention) Mention.parse(string);
             }else{
                 return null;
             }
         }catch (Exception e){
-            e.printStackTrace();
             return null;
         }
     }

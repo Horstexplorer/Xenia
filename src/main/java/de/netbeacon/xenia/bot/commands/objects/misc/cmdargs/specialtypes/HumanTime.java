@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.last;
+package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes;
 
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import java.time.LocalDateTime;
 
-public class GROUPLast extends CommandGroup {
+public class HumanTime {
 
-    public GROUPLast(CommandGroup parent) {
-        super(parent, "last", "Restore deleted or edited messages");
-        addChildCommand(new CMDDeleted());
-        addChildCommand(new CMDEdited());
-        addChildCommand(new CMDRestore());
+    private final LocalDateTime futureTime;
+
+    private HumanTime(LocalDateTime futureTime){
+        this.futureTime = futureTime;
+    }
+
+    public LocalDateTime getFutureTime() {
+        return futureTime;
+    }
+
+    public static HumanTime parse(String string){
+        return null;
     }
 }

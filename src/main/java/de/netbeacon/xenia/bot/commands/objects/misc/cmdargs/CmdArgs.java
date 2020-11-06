@@ -17,11 +17,9 @@
 package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class CmdArgs {
 
-    private final HashMap<String, CmdArg> argHashMap = new HashMap<>();
     private final ArrayList<CmdArg> cmdArgs = new ArrayList<>();
 
     /**
@@ -36,10 +34,6 @@ public class CmdArgs {
      */
     public CmdArgs(CmdArg...args){
         for(CmdArg arg : args){
-            if(argHashMap.containsKey(arg.getArgDef().getName())){
-                continue;
-            }
-            argHashMap.put(arg.getArgDef().getName(), arg);
             cmdArgs.add(arg);
         }
     }
@@ -51,10 +45,6 @@ public class CmdArgs {
      */
     public void add(CmdArg...args){
         for(CmdArg arg : args){
-            if(argHashMap.containsKey(arg.getArgDef().getName().toLowerCase())){
-                continue;
-            }
-            argHashMap.put(arg.getArgDef().getName().toLowerCase(), arg);
             cmdArgs.add(arg);
         }
     }
@@ -66,12 +56,7 @@ public class CmdArgs {
      */
     public void remove(CmdArg...args){
         for(CmdArg arg : args){
-            if(!argHashMap.containsKey(arg.getArgDef().getName())){
-                continue;
-            }
-            CmdArg cmdArg = argHashMap.get(arg.getArgDef().getName());
-            argHashMap.remove(arg.getArgDef().getName(), arg);
-            cmdArgs.remove(cmdArg);
+            cmdArgs.remove(arg);
         }
     }
 
@@ -84,17 +69,6 @@ public class CmdArgs {
      */
     public <T extends CmdArg> T getByIndex(int index){
         return (T) cmdArgs.get(index);
-    }
-
-    /**
-     * Returns the argument by a given name
-     *
-     * @param name name
-     * @param <T> return type
-     * @return CmdArg
-     */
-    public <T extends CmdArg> T getByName(String name){
-        return (T) argHashMap.get(name.toLowerCase());
     }
 
     /**
@@ -115,6 +89,6 @@ public class CmdArgs {
      * @return size
      */
     public int size(){
-        return argHashMap.size();
+        return cmdArgs.size();
     }
 }
