@@ -24,5 +24,6 @@ public class GROUPLast extends CommandGroup {
         super(parent, "last", "Restore deleted or edited messages");
         addChildCommand(new CMDDeleted());
         addChildCommand(new CMDEdited());
+        addChildCommand(new CMDRestore());
     }
 }
