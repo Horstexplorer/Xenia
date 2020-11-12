@@ -48,17 +48,17 @@ public class CMDRestore extends Command {
             count = countT.getValue();
         }
         for(Message message : messages){
-            if(--count <= 0){
+            if(--count < 0){
                 break;
             }
             String newContent = message.getMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
             String oldContent = message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
 
-            EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Edited Message Restored:", commandEvent.getEvent().getJDA().getSelfUser())
+            EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Message Restored:", commandEvent.getEvent().getJDA().getSelfUser())
                     .addField("MessageID", String.valueOf(message.getId()), true)
                     .addField("AuthorID", String.valueOf(message.getUserId()), true);
             if(newContent.equals(oldContent)){
-                embedBuilder.setDescription(newContent).addField("Type", "Message", true);
+                embedBuilder.setDescription(newContent).addField("Type", "---", true);
             }else{
                 embedBuilder.setDescription(oldContent).addField("Type", "Modified", true);
             }

@@ -56,11 +56,11 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> POLL_OPTION_DEF = new CmdArgDef.Builder<String>("option", String.class)
             .predicateAddStringLengthRange(1, 255)
             .buildAllMatch();
-    public static final CmdArgDef<String> POLL_OPTION_OPT_DEF = new CmdArgDef.Builder<String>("option", String.class)
+    public static final CmdArgDef<String> POLL_OPTION_OPT_DEF = new CmdArgDef.Builder<String>("option*", String.class)
             .predicateAddStringLengthRange(1, 255)
             .buildAllMatch()
             .setOptional(true);
-    public static final CmdArgDef<String> POLL_DESCRIPTION_DEF = new CmdArgDef.Builder<String>("option*", String.class)
+    public static final CmdArgDef<String> POLL_DESCRIPTION_DEF = new CmdArgDef.Builder<String>("description", String.class)
             .predicateAddStringLengthRange(1, 255)
             .buildAllMatch();
 }
