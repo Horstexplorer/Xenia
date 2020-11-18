@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.listener.message;
+package de.netbeacon.xenia.bot.event.listener.message;
 
 import de.netbeacon.utils.config.Config;
 import de.netbeacon.utils.executor.ScalingExecutor;
@@ -26,7 +26,7 @@ import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
 import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
 import de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification;
 import de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag;
-import de.netbeacon.xenia.bot.handler.command.MessageHandler;
+import de.netbeacon.xenia.bot.event.handler.command.MessageHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
