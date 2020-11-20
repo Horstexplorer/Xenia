@@ -122,7 +122,7 @@ public class CmdArgDef<T> {
          */
         public Builder<T> predicateAddEquals(T object){
             predicates.add(t->{
-                if(object instanceof Number && object instanceof Comparable && t instanceof Number && t instanceof Comparable){
+                if(object instanceof Comparable && t instanceof Comparable){
                     return ((Comparable<T>) object).compareTo(t) == 0;
                 }else{
                     return object.equals(t);
@@ -139,7 +139,7 @@ public class CmdArgDef<T> {
          */
         public Builder<T> predicateAddMinValue(T object){
             predicates.add(t->{
-                if(object instanceof Number && object instanceof Comparable && t instanceof Number && t instanceof Comparable){
+                if(object instanceof Comparable && t instanceof Comparable){
                     return ((Comparable<T>) object).compareTo(t) <= 0;
                 }
                 return true; // its not a number so we dont know - assume true (this is not great but should do for us)
@@ -155,7 +155,7 @@ public class CmdArgDef<T> {
          */
         public Builder<T> predicateAddMaxValue(T object){
             predicates.add(t->{
-                if(object instanceof Number && object instanceof Comparable && t instanceof Number && t instanceof Comparable){
+                if(object instanceof Comparable && t instanceof Comparable){
                     return ((Comparable<T>) object).compareTo(t) >= 0;
                 }
                 return true; // its not a number so we dont know - assume true (this is not great but should do for us)
@@ -172,7 +172,7 @@ public class CmdArgDef<T> {
          */
         public Builder<T> predicateAddValueRange(T min, T max){
             predicates.add(t->{
-                if(min instanceof Number && min instanceof Comparable && max instanceof Number && max instanceof Comparable && t instanceof Number && t instanceof Comparable){
+                if(min instanceof Comparable && max instanceof Comparable && t instanceof Comparable){
                     return ((Comparable<T>) max).compareTo(t) >= 0 && ((Comparable<T>) min).compareTo(t) <= 0;
                 }
                 return true; // its not a number so we dont know - assume true (this is not great but should do for us)
@@ -189,7 +189,7 @@ public class CmdArgDef<T> {
         public Builder<T> predicateAddEqualsAnyOf(T...objects){
             predicates.add(t->{
                 for(T object : objects){
-                    if(object instanceof Number && object instanceof Comparable && t instanceof Number && t instanceof Comparable){
+                    if(object instanceof Comparable && t instanceof Comparable){
                         if(((Comparable<T>) object).compareTo(t) == 0){
                             return true;
                         }

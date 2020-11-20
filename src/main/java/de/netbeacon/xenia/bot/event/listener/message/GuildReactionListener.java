@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.listener.message;
+package de.netbeacon.xenia.bot.event.listener.message;
 
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;

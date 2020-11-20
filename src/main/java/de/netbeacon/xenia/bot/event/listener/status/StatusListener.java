@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.listener.status;
+package de.netbeacon.xenia.bot.event.listener.status;
 
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
