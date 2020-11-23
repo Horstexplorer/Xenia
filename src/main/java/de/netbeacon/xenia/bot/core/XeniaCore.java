@@ -90,14 +90,17 @@ public class XeniaCore {
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setActivity(Activity.playing(config.getString("activity")))
-                .setShardsTotal(setupData.getTotalShards())
-                .setShards(setupData.getShards())
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(config, xeniaBackendClient, eventWaiter, setupData.getShards().length),
+                        new GuildMessageListener(config, xeniaBackendClient, eventWaiter, Math.max(setupData.getShards().length, 1)),
                         new GuildReactionListener(eventWaiter)
                 );
+        if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
+            builder
+                    .setShardsTotal(setupData.getTotalShards())
+                    .setShards(setupData.getShards());
+        }
         // prepare helper class
         class SMH implements IShutdown {
             private final ShardManager shardManager;
