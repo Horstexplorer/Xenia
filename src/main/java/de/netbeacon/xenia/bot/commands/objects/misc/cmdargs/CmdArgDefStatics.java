@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
-import java.time.LocalDateTime;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
@@ -30,7 +30,7 @@ public class CmdArgDefStatics {
     // NOTIFICATION CMD
     public static final CmdArgDef<Long> NOTIFICATION_ID_DEF = new CmdArgDef.Builder<Long>("id", Long.class)
             .buildAllMatch();
-    public static final CmdArgDef<LocalDateTime> NOTIFICATION_TARGET_TIME_DEF = new CmdArgDef.Builder<LocalDateTime>("time", LocalDateTime.class)
+    public static final CmdArgDef<HumanTime> NOTIFICATION_TARGET_TIME_DEF = new CmdArgDef.Builder<HumanTime>("time", HumanTime.class)
             .buildAllMatch();
     public static final CmdArgDef<String> NOTIFICATION_MESSAGE_DEF = new CmdArgDef.Builder<String>("message", String.class)
             .buildAllMatch();
@@ -43,24 +43,5 @@ public class CmdArgDefStatics {
             .buildAllMatch();
     public static final CmdArgDef<String> TAG_CONTENT_DEF = new CmdArgDef.Builder<String>("content", String.class)
             .predicateAddStringLengthRange(1, 1500)
-            .buildAllMatch();
-
-    // POLL
-    public static final CmdArgDef<Long> POLL_ID_OPT_DEF = new CmdArgDef.Builder<Long>("id*", Long.class)
-            .buildAllMatch()
-            .setOptional(true);
-    public static final CmdArgDef<Long> POLL_ID_DEF = new CmdArgDef.Builder<Long>("id", Long.class)
-            .buildAllMatch();
-    public static final CmdArgDef<Integer> POLL_OPTION_ID_DEF = new CmdArgDef.Builder<Integer>("option_id", Integer.class)
-            .buildAllMatch();
-    public static final CmdArgDef<String> POLL_OPTION_DEF = new CmdArgDef.Builder<String>("option", String.class)
-            .predicateAddStringLengthRange(1, 255)
-            .buildAllMatch();
-    public static final CmdArgDef<String> POLL_OPTION_OPT_DEF = new CmdArgDef.Builder<String>("option*", String.class)
-            .predicateAddStringLengthRange(1, 255)
-            .buildAllMatch()
-            .setOptional(true);
-    public static final CmdArgDef<String> POLL_DESCRIPTION_DEF = new CmdArgDef.Builder<String>("description", String.class)
-            .predicateAddStringLengthRange(1, 255)
             .buildAllMatch();
 }
