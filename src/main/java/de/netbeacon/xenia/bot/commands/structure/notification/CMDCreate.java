@@ -21,10 +21,10 @@ import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,12 +40,12 @@ public class CMDCreate extends Command {
 
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
-        CmdArg<LocalDateTime> localDateTimeCmdArg = cmdArgs.getByIndex(0);
+        CmdArg<HumanTime> localDateTimeCmdArg = cmdArgs.getByIndex(0);
         CmdArg<String> stringCmdArg = cmdArgs.getByIndex(1);
         // create a new notification
         NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
         try{
-            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
+            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+") created by "+commandEvent.getEvent().getAuthor().getAsTag())).queue(s->{},e->{});
         }catch (Exception ex){
             commandEvent.getEvent().getChannel().sendMessage(onError("Failed to create notification! Perhaps the cache is full?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});

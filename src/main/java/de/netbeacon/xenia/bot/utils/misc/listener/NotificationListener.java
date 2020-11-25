@@ -27,6 +27,9 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
 public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener {
 
     private final TaskManager taskManager;
@@ -40,7 +43,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
         // new object has been inserted, add event listener
         notification.addEventListener(this);
         // and schedule
-        taskManager.schedule(notification.getId(), getRunnable(notification), Math.max(notification.getNotificationTarget()-System.currentTimeMillis(),1));
+        taskManager.schedule(notification.getId(), getRunnable(notification), Math.max(notification.getNotificationTarget()-LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli(),1));
     }
 
     @Override
