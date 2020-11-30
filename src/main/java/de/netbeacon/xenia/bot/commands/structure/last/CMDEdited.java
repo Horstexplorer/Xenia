@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDEdited extends Command {
 
     public CMDEdited() {
-        super("edited", "Restores the message which has been edited last in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null);
+        super("edited", "Restores the message which has been edited last in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null, null);
     }
 
     @Override

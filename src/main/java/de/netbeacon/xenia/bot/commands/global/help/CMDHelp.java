@@ -37,7 +37,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", "Displays a list of commands", null,null, null, null);
+        super("help", "Displays a list of commands", null,null, null, null, null);
         this.parent = parent;
     }
 
@@ -47,7 +47,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", "Displays a list of commands", null, null, null, null);
+        super("help", "Displays a list of commands", null, null, null,null, null);
         this.commandMap = commandMap;
     }
 

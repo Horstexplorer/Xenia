@@ -33,7 +33,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of(NOTIFICATION_ID_DEF, NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
+        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, null, List.of(NOTIFICATION_ID_DEF, NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
     }
 
     @Override

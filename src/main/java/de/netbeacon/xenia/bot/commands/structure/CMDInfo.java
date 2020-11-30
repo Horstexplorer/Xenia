@@ -33,7 +33,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Shows some basic information about me", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
+        super("info", "Shows some basic information about me", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
     }
 
     @Override

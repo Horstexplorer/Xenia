@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
+        super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, null, List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
     }
 
     @Override

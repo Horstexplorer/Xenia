@@ -55,7 +55,7 @@ public class CMDEval extends Command {
     private final Logger logger = LoggerFactory.getLogger(CMDEval.class);
 
     public CMDEval(){
-        super("eval", "Can be used to evaluate code", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null);
+        super("eval", "Can be used to evaluate code", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class CMDEval extends Command {
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(false)).queue(s->{},e->{});
             return;
         }
         // everything alright
@@ -202,7 +202,7 @@ public class CMDEval extends Command {
     }
 
     @Override
-    public MessageEmbed onMissingMemberPerms(){
+    public MessageEmbed onMissingMemberPerms(boolean v){
         return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this !")

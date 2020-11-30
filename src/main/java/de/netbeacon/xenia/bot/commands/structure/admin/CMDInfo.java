@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDInfo extends Command {
 
     public CMDInfo(){
-        super("info", "Displays some statistics about this bot", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
+        super("info", "Displays some statistics about this bot", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CMDInfo extends Command {
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(false)).queue(s->{},e->{});
             return;
         }
         // everything alright
