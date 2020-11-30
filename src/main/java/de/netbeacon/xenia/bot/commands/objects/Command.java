@@ -16,6 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
+import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.external.Member;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -23,6 +26,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -37,7 +41,8 @@ public abstract class Command {
     private final String description;
     private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
-    private final HashSet<Permission> memberPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
+    private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
+    private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>();
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final List<CmdArgDef> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
@@ -50,18 +55,22 @@ public abstract class Command {
      * @param description of the command
      * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
-     * @param memberPermissions required for the member
+     * @param memberPrimaryPermissions required for the member using discord perms
+     * @param memberSecondaryPermission required for the member using v perms
      * @param commandArgs for the command
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<CmdArgDef> commandArgs){
+    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
         this.alias = alias;
         this.description = description;
         this.commandCooldown = commandCooldown;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
         }
-        if(memberPermissions != null){
-            this.memberPermissions.addAll(memberPermissions);
+        if(memberPrimaryPermissions != null){
+            this.memberPrimaryPermissions.addAll(memberPrimaryPermissions);
+        }
+        if(memberSecondaryPermission != null){
+            this.memberSecondaryPermissions.addAll(memberSecondaryPermission);
         }
         if(commandArgs != null){
             this.requiredArgs.addAll(commandArgs);
@@ -122,8 +131,12 @@ public abstract class Command {
      *
      * @return list of the required permissions
      */
-    public HashSet<Permission> getMemberPermissions(){
-        return memberPermissions;
+    public HashSet<Permission> getMemberPrimaryPermissions(){
+        return memberPrimaryPermissions;
+    }
+
+    public HashSet<Role.Permissions.Bit> getMemberSecondaryPermissions(){
+        return memberSecondaryPermissions;
     }
 
     /**
@@ -214,11 +227,27 @@ public abstract class Command {
                 }
                 return;
             }
-            if(commandEvent.getEvent().getMember() == null || !commandEvent.getEvent().getMember().hasPermission(getMemberPermissions())){
+
+            Guild bGuild = commandEvent.getBackendDataPack().getbGuild();
+            Member bMember = commandEvent.getBackendDataPack().getbMember();
+            net.dv8tion.jda.api.entities.Member member = commandEvent.getEvent().getMember();
+
+            if(
+                    !bMember.metaIsOwner()
+                    &&
+                    ((
+                            bGuild.useVPerms() && (member == null || bMember.getRoles().stream()//e
+                                    .filter(r->r.getPermissions().hasAllPermission(memberSecondaryPermissions.toArray(Role.Permissions.Bit[]::new)))
+                                    .findFirst().isEmpty())
+                    ) || (
+                            !bGuild.useVPerms() && (member == null || (!member.hasPermission(getMemberPrimaryPermissions())))
+                    ))
+            ){
                 // invalid permission
-                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(bGuild.useVPerms())).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 return;
             }
+
             // everything alright
             onExecution(cmdArgs, commandEvent);
         }else{
@@ -264,14 +293,20 @@ public abstract class Command {
     /**
      * Returns an message embed if the execution of the command is missing permissions on the user side
      *
+     * @param vPerms show vPerms or default
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingMemberPerms(){
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onMissingMemberPerms(boolean vPerms){
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this !")
-                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
-                .build();
+                .appendDescription("You are not allowed to do this !");
+        if(vPerms){
+            embedBuilder.addField("Required Permissions:", Arrays.toString(memberSecondaryPermissions.toArray()), false);
+        }else{
+            embedBuilder.addField("Required Permissions:", Arrays.toString(memberPrimaryPermissions.toArray()), false);
+        }
+
+        return embedBuilder.build();
     }
 
     /**
