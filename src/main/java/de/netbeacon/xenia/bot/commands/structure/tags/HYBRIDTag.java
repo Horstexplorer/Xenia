@@ -33,7 +33,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class HYBRIDTag extends HybridCommand {
 
     public HYBRIDTag(CommandGroup parent) {
-        super(parent,"tag", "Create, manage and use tags for this guild", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, List.of(TAG_NAME_DEF));
+        super(parent,"tag", "Create, manage and use tags for this guild", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null, List.of(TAG_NAME_DEF));
         addChildCommand(new CMDCreate());
         addChildCommand(new CMDModify());
         addChildCommand(new CMDDelete());

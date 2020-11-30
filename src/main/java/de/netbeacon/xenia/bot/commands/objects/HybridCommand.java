@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
@@ -35,11 +36,12 @@ public abstract class HybridCommand extends CommandGroup{
      * @param description of the command group / command
      * @param commandCooldown cooldown of the command on execution in command mode
      * @param botPermissions required for the user on execution in command mode
-     * @param memberPermissions required for the member on execution in command mode
+     * @param memberPrimaryPermission required for the member on execution in command mode
+     * @param memberSecondaryPermission required for the member on execution in command mode
      * @param commandArgs for the command on execution in command mode
      */
-    public HybridCommand(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPermissions, List<CmdArgDef> commandArgs) {
-        super(parent, alias, description, commandCooldown, botPermissions, memberPermissions, commandArgs);
+    public HybridCommand(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
+        super(parent, alias, description, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
     }
 
     /**

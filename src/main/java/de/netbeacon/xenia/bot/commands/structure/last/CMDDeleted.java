@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDDeleted extends Command {
 
     public CMDDeleted() {
-        super("deleted", "Restores the last message which has been deleted in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null);
+        super("deleted", "Restores the last message which has been deleted in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null, null);
     }
 
     @Override

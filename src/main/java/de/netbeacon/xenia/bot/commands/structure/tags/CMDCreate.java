@@ -32,7 +32,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
+        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
     }
 
     @Override

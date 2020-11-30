@@ -31,7 +31,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of(NOTIFICATION_ID_DEF));
+        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, null, List.of(NOTIFICATION_ID_DEF));
     }
 
     @Override

@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 public class CMDList extends Command {
 
     public CMDList() {
-        super("list", "View, manage and create notifications", new CommandCooldown(CommandCooldown.Type.User, 2500), null, null, null);
+        super("list", "View, manage and create notifications", new CommandCooldown(CommandCooldown.Type.User, 2500), null, null, null, null);
     }
 
     @Override

@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDPing extends Command {
 
     public CMDPing() {
-        super("ping", "Can be used to check the ping to discord and other linked services", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null);
+        super("ping", "Can be used to check the ping to discord and other linked services", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CMDPing extends Command {
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(false)).queue(s->{},e->{});
             return;
         }
         // everything alright

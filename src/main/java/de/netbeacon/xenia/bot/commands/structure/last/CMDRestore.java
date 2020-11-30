@@ -34,7 +34,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDRestore extends Command {
 
     public CMDRestore() {
-        super("restore", "Restore the last n messages", new CommandCooldown(CommandCooldown.Type.Guild, 120000), null, null, List.of(LAST_RESTORE_NUM_DEF));
+        super("restore", "Restore the last n messages", new CommandCooldown(CommandCooldown.Type.Guild, 120000), null, null, null, List.of(LAST_RESTORE_NUM_DEF));
     }
 
     @Override

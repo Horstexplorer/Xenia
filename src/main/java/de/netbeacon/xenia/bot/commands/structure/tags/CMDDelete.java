@@ -31,8 +31,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User
-                , 5000), null, null, List.of(TAG_NAME_DEF));
+        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, null, List.of(TAG_NAME_DEF));
     }
 
     @Override

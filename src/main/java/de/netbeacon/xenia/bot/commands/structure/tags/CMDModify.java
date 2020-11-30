@@ -33,7 +33,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
+        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
     }
 
     @Override
