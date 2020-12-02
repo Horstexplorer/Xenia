@@ -231,9 +231,8 @@ public abstract class Command {
             Guild bGuild = commandEvent.getBackendDataPack().getbGuild();
             Member bMember = commandEvent.getBackendDataPack().getbMember();
             net.dv8tion.jda.api.entities.Member member = commandEvent.getEvent().getMember();
-
             if(
-                    !bMember.metaIsOwner()
+                    !(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == commandEvent.getEvent().getAuthor().getIdLong())
                     &&
                     ((
                             bGuild.useVPerms() && (member == null || bMember.getRoles().stream()//e

@@ -33,6 +33,7 @@ import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.sharedexecutor.SharedExecutor;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.ApplicationInfo;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
@@ -52,6 +53,7 @@ public class XeniaCore {
     private final XeniaBackendClient xeniaBackendClient;
     private final ShardManager shardManager;
     private final EventWaiter eventWaiter;
+    private final long ownerId;
     
     private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
 
@@ -116,6 +118,10 @@ public class XeniaCore {
         logger.warn("Building Shards...");
         shardManager = builder.build();
         shutdownHook.addShutdownAble(new SMH(shardManager));
+        // application info
+        logger.warn("Getting Application Info...");
+        ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();
+        ownerId = applicationInfo.getOwner().getIdLong();
     }
 
     public static XeniaCore getInstance(){
@@ -152,5 +158,9 @@ public class XeniaCore {
             }
         }
         return null;
+    }
+
+    public long getOwnerID(){
+        return ownerId;
     }
 }
