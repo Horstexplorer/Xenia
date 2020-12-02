@@ -17,12 +17,14 @@
 package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +34,11 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000), null, null, null, List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
+        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000),
+                null,
+                null,
+                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+                List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
     }
 
     @Override

@@ -19,19 +19,27 @@ package de.netbeacon.xenia.bot.commands.structure.last;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import net.dv8tion.jda.api.Permission;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CMDEdited extends Command {
 
     public CMDEdited() {
-        super("edited", "Restores the message which has been edited last in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null, null);
+        super("edited", "Restores the message which has been edited last in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000),
+                null,
+                new HashSet<>(java.util.List.of(Permission.MESSAGE_MANAGE)),
+                new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
+                null);
     }
 
     @Override

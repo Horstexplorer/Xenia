@@ -42,7 +42,7 @@ public abstract class Command {
     private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
-    private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>();
+    private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final List<CmdArgDef> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
