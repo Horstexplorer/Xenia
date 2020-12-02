@@ -260,7 +260,11 @@ public abstract class Command {
                     execute(args, commandEvent, true); // execute handler again
                 }
             }else if (isHybrid){
-                children.get("help").execute(args, commandEvent);
+                if(!requiredArgs.isEmpty()){
+                    children.get("help").execute(args, commandEvent);
+                }else{
+                    execute(args, commandEvent, true); // execute handler again
+                }
             }
         }
     }
