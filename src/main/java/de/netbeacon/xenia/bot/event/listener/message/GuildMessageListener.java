@@ -25,6 +25,7 @@ import de.netbeacon.xenia.bot.commands.structure.CMDInfo;
 import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
 import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
 import de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification;
+import de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings;
 import de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag;
 import de.netbeacon.xenia.bot.event.handler.command.MessageHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -58,6 +59,7 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new GROUPLast(null));
         register.accept(new HYBRIDTag(null));
         register.accept(new GROUPNotification(null));
+        register.accept(new GROUPSettings(null));
 
         register.accept(new CMDInfo());
 

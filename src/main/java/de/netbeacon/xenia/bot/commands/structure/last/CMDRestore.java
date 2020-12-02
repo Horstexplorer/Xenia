@@ -19,6 +19,7 @@ package de.netbeacon.xenia.bot.commands.structure.last;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -26,7 +27,9 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.LAST_RESTORE_NUM_DEF;
@@ -34,7 +37,11 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDRestore extends Command {
 
     public CMDRestore() {
-        super("restore", "Restore the last n messages", new CommandCooldown(CommandCooldown.Type.Guild, 120000), null, null, null, List.of(LAST_RESTORE_NUM_DEF));
+        super("restore", "Restore the last n messages", new CommandCooldown(CommandCooldown.Type.Guild, 120000),
+                null,
+                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+                new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
+                List.of(LAST_RESTORE_NUM_DEF));
     }
 
     @Override

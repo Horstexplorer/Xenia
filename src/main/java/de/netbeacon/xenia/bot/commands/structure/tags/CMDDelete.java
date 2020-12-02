@@ -17,12 +17,14 @@
 package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
+import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +33,11 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User, 5000), null, null, null, List.of(TAG_NAME_DEF));
+        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User, 5000),
+                null,
+                null,
+                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+                List.of(TAG_NAME_DEF));
     }
 
     @Override
