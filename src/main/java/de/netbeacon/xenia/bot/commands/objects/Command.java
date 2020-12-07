@@ -234,13 +234,13 @@ public abstract class Command {
             if(
                     !(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == commandEvent.getEvent().getAuthor().getIdLong())
                     &&
-                    ((
-                            bGuild.useVPerms() && (member == null || bMember.getRoles().stream()//e
+                    (
+                            (bGuild.useVPerms() && (member == null || bMember.getRoles().stream()//e
                                     .filter(r->r.getPermissions().hasAllPermission(memberSecondaryPermissions.toArray(Role.Permissions.Bit[]::new)))
-                                    .findFirst().isEmpty())
-                    ) || (
-                            !bGuild.useVPerms() && (member == null || (!member.hasPermission(getMemberPrimaryPermissions())))
-                    ))
+                                    .findFirst().isEmpty()))
+                            ||
+                            (!bGuild.useVPerms() && (member == null || (!member.hasPermission(getMemberPrimaryPermissions()))))
+                    )
             ){
                 // invalid permission
                 commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(bGuild.useVPerms())).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});

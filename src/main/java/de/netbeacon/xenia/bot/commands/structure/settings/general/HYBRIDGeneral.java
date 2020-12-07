@@ -39,6 +39,7 @@ public class HYBRIDGeneral extends HybridCommand {
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
                 null);
+        addChildCommand(new CMDLicense());
     }
 
     @Override

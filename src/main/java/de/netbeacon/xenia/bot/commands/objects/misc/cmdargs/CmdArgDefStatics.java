@@ -44,4 +44,10 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> TAG_CONTENT_DEF = new CmdArgDef.Builder<String>("content", String.class)
             .predicateAddStringLengthRange(1, 1500)
             .buildAllMatch();
+
+    // SETTINGS
+    public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<String>("licensekey", String.class)
+            .predicateAddStringLengthRange(64,64)
+            .buildAllMatch();
+
 }
