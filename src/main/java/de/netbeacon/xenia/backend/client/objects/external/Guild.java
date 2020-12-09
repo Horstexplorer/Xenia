@@ -36,6 +36,9 @@ public class Guild extends APIDataObject {
     private long creationTimestamp;
     private String preferredLanguage;
     private boolean useVPerms;
+    // meta data - initialize with values
+    private String metaGuildName = "unknown_name";
+    private String metaIconUrl = null;
 
     private final ChannelCache channelCache;
     private final MemberCache memberCache;
@@ -87,6 +90,25 @@ public class Guild extends APIDataObject {
     }
 
 
+    public String getMetaGuildName(){
+        return metaGuildName;
+    }
+
+    public String getMetaIconUrl(){
+        return metaIconUrl;
+    }
+
+    public void lSetMetaData(String guildName, String iconUrl){
+        this.metaGuildName = guildName;
+        this.metaIconUrl = iconUrl;
+    }
+
+    public void setMetaData(String metaGuildName, String iconUrl){
+        lSetMetaData(metaGuildName, iconUrl);
+        update();
+    }
+
+
     public ChannelCache getChannelCache() {
         return channelCache;
     }
@@ -124,7 +146,11 @@ public class Guild extends APIDataObject {
                 .put("guildId", guildId)
                 .put("creationTimestamp", creationTimestamp)
                 .put("preferredLanguage", preferredLanguage)
-                .put("useVPerms", useVPerms);
+                .put("useVPerms", useVPerms)
+                .put("meta", new JSONObject()
+                        .put("name", metaGuildName)
+                        .put("iconUrl", metaIconUrl != null ? metaIconUrl : JSONObject.NULL)
+                );
     }
 
     @Override
@@ -133,6 +159,9 @@ public class Guild extends APIDataObject {
         this.creationTimestamp = jsonObject.getLong("creationTimestamp");
         this.preferredLanguage = jsonObject.getString("preferredLanguage");
         this.useVPerms = jsonObject.getBoolean("useVPerms");
+        JSONObject meta = jsonObject.getJSONObject("meta");
+        this.metaGuildName = meta.getString("name");
+        this.metaIconUrl = meta.get("iconUrl") != JSONObject.NULL ? meta.getString("iconUrl") : null;
     }
 
     public void clear(){
