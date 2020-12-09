@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberUpdateEvent;
+import net.dv8tion.jda.api.events.guild.update.GuildUpdateIconEvent;
 import net.dv8tion.jda.api.events.guild.update.GuildUpdateNameEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +59,7 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onGuildJoin(@NotNull GuildJoinEvent event) {
         logger.info("Joined A New Guild: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.lSetMetaData(event.getGuild().getName());
+        g.lSetMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
         g.updateAsync();
     }
 
@@ -140,8 +141,17 @@ public class GuildAccessListener extends ListenerAdapter {
 
     @Override
     public void onGuildUpdateName(@NotNull GuildUpdateNameEvent event) {
-        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.lSetMetaData(event.getNewName());
+        guildMetaUpdate(event.getGuild());
+    }
+
+    @Override
+    public void onGuildUpdateIcon(@NotNull GuildUpdateIconEvent event) {
+        guildMetaUpdate(event.getGuild());
+    }
+
+    public void guildMetaUpdate(net.dv8tion.jda.api.entities.Guild guild){
+        Guild g = backendClient.getGuildCache().get(guild.getIdLong());
+        g.lSetMetaData(guild.getName(), guild.getIconUrl());
         g.updateAsync();
     }
 }
