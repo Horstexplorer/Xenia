@@ -66,7 +66,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
                 if(textChannel == null){
                     return;
                 }
-                textChannel.sendMessage(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s->{}, f->{});
+                textChannel.sendMessage("<@!"+notification.getUserId()+">").embed(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s->{}, f->{});
             }catch (Exception ignore){}
             try{
                 XeniaCore.getInstance().getBackendClient().getGuildCache().get(notification.getGuildId()).getMiscCaches().getNotificationCache().delete(notification.getId());
