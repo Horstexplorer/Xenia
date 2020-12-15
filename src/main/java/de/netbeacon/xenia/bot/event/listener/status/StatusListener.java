@@ -29,12 +29,12 @@ public class StatusListener extends ListenerAdapter {
 
     @Override
     public void onResume(@NotNull ResumedEvent event) {
-        logger.warn("Shard Resumed: "+event.getJDA().getShardInfo().getShardString());
+        logger.debug("Shard Resumed: "+event.getJDA().getShardInfo().getShardString());
     }
 
     @Override
     public void onReconnect(@NotNull ReconnectedEvent event) {
-        logger.warn("Shard Reconnected: "+event.getJDA().getShardInfo().getShardString());
+        logger.debug("Shard Reconnected: "+event.getJDA().getShardInfo().getShardString());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class StatusListener extends ListenerAdapter {
         if(event.getCloseCode() != null && !event.getCloseCode().equals(CloseCode.RECONNECT)){
             logger.warn("Connection Got Closed With Code "+ event.getCloseCode().toString());
         }else{
-            logger.warn("Shard Disconnected: "+event.getJDA().getShardInfo().getShardString());
+            logger.debug("Shard Disconnected: "+event.getJDA().getShardInfo().getShardString());
         }
     }
 
