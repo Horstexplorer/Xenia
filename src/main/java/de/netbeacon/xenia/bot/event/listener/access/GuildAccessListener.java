@@ -96,7 +96,7 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-        u.lSetMetaData(event.getUser().getAsTag());
+        u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
         u.updateAsync();
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Member m = g.getMemberCache().get(event.getMember().getIdLong());
@@ -117,7 +117,7 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         User u = backendClient.getUserCache().get(event.getUser().getIdLong());
         Member m = g.getMemberCache().get(event.getUser().getIdLong());
-        u.lSetMetaData(event.getUser().getAsTag());
+        u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
         u.updateAsync();
         m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
         m.updateAsync();
