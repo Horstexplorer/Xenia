@@ -23,7 +23,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import net.dv8tion.jda.api.Permission;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -38,7 +37,7 @@ public class CMDModify extends Command {
     public CMDModify() {
         super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+                null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
                 List.of(NOTIFICATION_ID_DEF, NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
     }

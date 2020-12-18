@@ -25,7 +25,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import net.dv8tion.jda.api.Permission;
 
 import java.time.ZoneOffset;
 import java.util.HashSet;
@@ -40,7 +39,7 @@ public class CMDCreate extends Command {
     public CMDCreate() {
         super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+                null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
                 List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
     }
