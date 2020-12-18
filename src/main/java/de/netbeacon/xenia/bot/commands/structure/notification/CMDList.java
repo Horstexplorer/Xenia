@@ -24,7 +24,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.time.Instant;
@@ -38,7 +37,7 @@ public class CMDList extends Command {
     public CMDList() {
         super("list", "View, manage and create notifications", new CommandCooldown(CommandCooldown.Type.User, 2500),
                 null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+                null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
                 null);
     }
