@@ -53,6 +53,8 @@ public class GuildAccessListener extends ListenerAdapter {
         }
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.initAsync();
+        g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
+        g.updateAsync();
     }
 
     @Override
