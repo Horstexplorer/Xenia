@@ -21,8 +21,8 @@ dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_222' // https://mvnrepository.com/artifact/net.dv8tion/JDA
-    implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.3' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_223' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.4' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
 
     // JSON
 
@@ -35,9 +35,9 @@ dependencies {
 
     // CRYPT
 
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.67' // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
-    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67' // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4' // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68' // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.68' // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
 
     // JS Engine (eval)
 
