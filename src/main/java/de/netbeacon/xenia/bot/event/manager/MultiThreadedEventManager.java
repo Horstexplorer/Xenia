@@ -17,10 +17,8 @@
 package de.netbeacon.xenia.bot.event.manager;
 
 import de.netbeacon.utils.executor.ScalingExecutor;
-import de.netbeacon.utils.shutdownhook.IShutdown;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
-import net.dv8tion.jda.api.hooks.IEventManager;
 import net.dv8tion.jda.internal.JDAImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +26,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class MultiThreadedEventManager implements IEventManager, IShutdown {
+public class MultiThreadedEventManager implements IExtendedEventManager {
 
+    private long lastEvent;
     private final ScalingExecutor scalingExecutor;
     private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
 
@@ -55,6 +54,7 @@ public class MultiThreadedEventManager implements IEventManager, IShutdown {
 
     @Override
     public void handle(@NotNull GenericEvent event) {
+        lastEvent = System.currentTimeMillis();
         for(EventListener listener : listeners){
             try {
                 scalingExecutor.execute(()->{
@@ -83,5 +83,15 @@ public class MultiThreadedEventManager implements IEventManager, IShutdown {
     @Override
     public void onShutdown() throws Exception {
         scalingExecutor.shutdown();
+    }
+
+    @Override
+    public long getLastEventTimestamp() {
+        return lastEvent;
+    }
+
+    @Override
+    public long getLastEventTimeDif() {
+        return System.currentTimeMillis()-lastEvent;
     }
 }

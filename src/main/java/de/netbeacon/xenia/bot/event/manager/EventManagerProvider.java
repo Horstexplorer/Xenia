@@ -66,8 +66,8 @@ public class EventManagerProvider implements IShutdown {
     @Override
     public void onShutdown() throws Exception {
         for(var manager : eventManagers.values()){
-            if(manager instanceof  IShutdown){
-                ((IShutdown) manager).onShutdown();
+            if(manager instanceof IExtendedEventManager){
+                ((IExtendedEventManager) manager).onShutdown();
             }
         }
     }
