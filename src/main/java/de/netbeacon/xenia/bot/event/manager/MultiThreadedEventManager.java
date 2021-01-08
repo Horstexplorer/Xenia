@@ -42,6 +42,7 @@ public class MultiThreadedEventManager implements IEventManager, IShutdown {
         if(!(listener instanceof EventListener)){
             throw new IllegalArgumentException("Listener must implement EventListener");
         }
+        listeners.add((EventListener) listener);
     }
 
     @Override
@@ -49,6 +50,7 @@ public class MultiThreadedEventManager implements IEventManager, IShutdown {
         if(!(listener instanceof EventListener)){
             throw new IllegalArgumentException("Listener must implement EventListener");
         }
+        listeners.remove(listener);
     }
 
     @Override
