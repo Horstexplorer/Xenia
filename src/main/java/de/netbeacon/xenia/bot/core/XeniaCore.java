@@ -26,6 +26,8 @@ import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
+import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
+import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
@@ -87,15 +89,22 @@ public class XeniaCore {
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
         xeniaBackendClient.getGuildCache().addEventListeners(new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
 
+        // set up event manager
+        logger.warn("Preparing Event Manager (Provider)...");
+        EventManagerProvider eventManagerProvider = new EventManagerProvider()
+                .setFactory(obj -> new MultiThreadedEventManager());
+        shutdownHook.addShutdownAble(eventManagerProvider);
+
         // setup shard builder
         logger.warn("Setting Up Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
+                .setEventManagerProvider(eventManagerProvider::provideOrCreate)
                 .setActivity(Activity.playing(config.getString("activity")))
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(config, xeniaBackendClient, eventWaiter, Math.max(setupData.getShards().length, 1)),
+                        new GuildMessageListener(config, xeniaBackendClient, eventWaiter),
                         new GuildReactionListener(eventWaiter)
                 );
         if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){

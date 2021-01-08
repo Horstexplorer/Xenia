@@ -17,7 +17,6 @@
 package de.netbeacon.xenia.bot.event.listener.message;
 
 import de.netbeacon.utils.config.Config;
-import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.Command;
@@ -37,16 +36,14 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class GuildMessageListener extends ListenerAdapter {
 
     private final EventWaiter eventWaiter;
     private final MessageHandler commandHandler;
-    private final ScalingExecutor scalingExecutor;
 
-    public GuildMessageListener(Config config, XeniaBackendClient backendClient, EventWaiter eventWaiter, int shards){
+    public GuildMessageListener(Config config, XeniaBackendClient backendClient, EventWaiter eventWaiter){
         this.eventWaiter = eventWaiter;
 
         HashMap<String, Command> commandMap = new HashMap<>();
@@ -64,7 +61,6 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new CMDInfo());
 
         commandHandler = new MessageHandler(config.getString("commandPrefix"), commandMap, eventWaiter, backendClient);
-        scalingExecutor = new ScalingExecutor(2*shards, 20*shards, 2048*shards, 10, TimeUnit.SECONDS);
     }
 
     @Override
@@ -75,7 +71,7 @@ public class GuildMessageListener extends ListenerAdapter {
         if(eventWaiter.waitingOnThis(event)){
            return;
         }
-        scalingExecutor.execute(()->commandHandler.processNew(event));
+        commandHandler.processNew(event);
     }
 
     @Override
@@ -84,13 +80,13 @@ public class GuildMessageListener extends ListenerAdapter {
             return;
         }
         eventWaiter.waitingOnThis(event);
-        scalingExecutor.execute(()->commandHandler.processUpdate(event));
+        commandHandler.processUpdate(event);
     }
 
     @Override
     public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
         eventWaiter.waitingOnThis(event);
-        scalingExecutor.execute(()->commandHandler.processDelete(event));
+        commandHandler.processDelete(event);
     }
 
     @Override
