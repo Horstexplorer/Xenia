@@ -131,6 +131,12 @@ public class XeniaCore {
         logger.warn("Getting Application Info...");
         ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();
         ownerId = applicationInfo.getOwner().getIdLong();
+        // watchdog
+        logger.warn("Starting Watchdog...");
+        XeniaWatchdog xeniaWatchdog = new XeniaWatchdog();
+        shutdownHook.addShutdownAble(xeniaWatchdog);
+        // add wd tasks here
+
     }
 
     public static XeniaCore getInstance(){
