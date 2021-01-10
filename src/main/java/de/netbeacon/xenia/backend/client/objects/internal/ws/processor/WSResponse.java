@@ -28,7 +28,7 @@ public class WSResponse {
     private final String action;
     private JSONObject payload;
 
-    private IO way;
+    private final IO way;
 
     private static final SecureRandom secureRandom = new SecureRandom();
 
@@ -84,6 +84,7 @@ public class WSResponse {
     public JSONObject asJSON(){
         return new JSONObject()
                 .put("requestId", requestId)
+                .put("requestMode", "RESPONSE")
                 .put("recipient", recipient)
                 .put("sender", sender)
                 .put("action", action)
