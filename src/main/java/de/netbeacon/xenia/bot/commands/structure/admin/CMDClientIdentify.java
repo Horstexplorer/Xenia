@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
+import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.SecondaryWebsocketListener;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSRequest;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSResponse;
@@ -80,9 +81,9 @@ public class CMDClientIdentify extends Command {
             // send request
             List<WSResponse> wsResponses = secondaryWebsocketListener.getWsProcessorCore().process(wsRequest);
             // send result
-            m.editMessage(getResultEmbed(true, wsResponses)).queue();
+            m.editMessage(getResultEmbed(true, commandEvent.getBackendClient().getSetupData(), wsResponses)).queue();
         }catch (Exception e){
-            m.editMessage(getResultEmbed(false, new ArrayList<>())).queue();
+            m.editMessage(getResultEmbed(false, commandEvent.getBackendClient().getSetupData(), new ArrayList<>())).queue();
         }
     }
 
@@ -103,7 +104,7 @@ public class CMDClientIdentify extends Command {
         return embedBuilder.build();
     }
 
-    private MessageEmbed getResultEmbed(boolean success, List<WSResponse> responses){
+    private MessageEmbed getResultEmbed(boolean success, SetupData setupData, List<WSResponse> responses){
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser());
         if(success){
             embedBuilder
@@ -115,6 +116,7 @@ public class CMDClientIdentify extends Command {
                     .setColor(Color.RED);
         }
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(">").append(setupData.getClientId()).append(" - ").append(setupData.getClientName()).append("\n");
         for(WSResponse wsResponse : responses){
             JSONObject jsonObject = wsResponse.getPayload();
             if(jsonObject != null){
