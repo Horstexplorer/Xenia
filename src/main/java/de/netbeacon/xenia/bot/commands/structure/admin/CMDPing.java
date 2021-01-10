@@ -25,7 +25,9 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 
+import java.awt.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -73,5 +75,13 @@ public class CMDPing extends Command {
                 .addField("Backend Ping", info.getPing()+"ms", true);
 
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
+    }
+
+    @Override
+    public MessageEmbed onMissingMemberPerms(boolean v){
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .appendDescription("You are not allowed to do this !")
+                .build();
     }
 }
