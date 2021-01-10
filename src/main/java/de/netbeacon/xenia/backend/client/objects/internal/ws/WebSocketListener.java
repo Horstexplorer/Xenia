@@ -1,5 +1,5 @@
 /*
- *     Copyright 2020 Horstexplorer @ https://www.netbeacon.de
+ *     Copyright 2021 Horstexplorer @ https://www.netbeacon.de
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package de.netbeacon.xenia.backend.client.objects.internal.ws;
 import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.utils.shutdownhook.IShutdown;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,25 +26,23 @@ import okhttp3.WebSocket;
 import okio.ByteString;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class WebSocketListener extends okhttp3.WebSocketListener implements IShutdown {
+public abstract class WebsocketListener extends okhttp3.WebSocketListener implements IShutdown {
 
-    private final Logger logger = LoggerFactory.getLogger(WebSocketListener.class);
-    private final XeniaBackendClient xeniaBackendClient;
-    private ScalingExecutor scalingExecutor;
-    private WebSocket webSocket;
-    private AtomicBoolean shutdown = new AtomicBoolean(true);
+    protected final XeniaBackendClient xeniaBackendClient;
+    protected ScalingExecutor scalingExecutor;
+    protected WebSocket webSocket;
+    protected AtomicBoolean shutdown = new AtomicBoolean(true);
+    private final String wsPath;
 
-    public WebSocketListener(XeniaBackendClient xeniaBackendClient){
+    public WebsocketListener(XeniaBackendClient xeniaBackendClient, String wsPath){
         this.xeniaBackendClient = xeniaBackendClient;
+        this.wsPath = wsPath;
     }
 
     public void start(){
@@ -62,7 +58,7 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
         int port = backendSettings.getPort();
         String token = backendSettings.getToken();
         // build request
-        Request request = new Request.Builder().url("wss://"+host+":"+port+"/ws?token="+URLEncoder.encode(token, StandardCharsets.UTF_8)).build();
+        Request request = new Request.Builder().url("wss://"+host+":"+port+"/"+wsPath+"?token="+ URLEncoder.encode(token, StandardCharsets.UTF_8)).build();
         webSocket = xeniaBackendClient.getOkHttpClient().newWebSocket(request, this);
         shutdown.set(false);
     }
@@ -75,253 +71,27 @@ public class WebSocketListener extends okhttp3.WebSocketListener implements IShu
         webSocket = null;
     }
 
-    @Override
-    public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
-        logger.warn("Connected To Websocket");
+    public void send(String message){
+        webSocket.send(message);
     }
 
     @Override
-    public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
-        handle(new JSONObject(text));
-    }
+    public abstract void onOpen(@NotNull WebSocket webSocket, @NotNull Response response);
 
     @Override
-    public void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes) {
-        handle(new JSONObject(bytes.toString()));
-    }
+    public abstract void onMessage(@NotNull WebSocket webSocket, @NotNull String text);
 
     @Override
-    public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
-        logger.debug("Websocket Closing: "+code+" "+reason);
-        webSocket.close(code, reason);
-    }
+    public abstract void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes);
 
     @Override
-    public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
-        logger.debug("Websocket Closed: "+code+" "+reason);
-        // normal closure & shutdown || unauthorized || forbidden
-        if(code == 1000 && shutdown.get()|| code == 3401 || code == 3403){
-            logger.warn("Websocket Closed - Wont Open Again "+code+" "+reason);
-        }else{
-            logger.debug("Reconnecting On: "+code);
-            try{
-                TimeUnit.SECONDS.sleep(1);
-                start();
-            }catch (Exception ignore){}
-        }
-    }
+    public abstract void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason);
 
     @Override
-    public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
-        if(response != null){
-            logger.warn("Websocket Failure - Trying To Reconnect: "+response.code()+" "+response.message(), t);
-        }else{
-            logger.warn("Websocket Failure - Trying To Reconnect: No Response", t);
-        }
-        try{
-            TimeUnit.SECONDS.sleep(2);
-            start();
-        }catch (Exception ignore){}
-    }
+    public abstract void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason);
 
-    private long lastHeartBeat = System.currentTimeMillis();
-
-    public void handle(JSONObject message){
-        try{
-            String type = message.getString("type");
-            String action = message.getString("action");
-            logger.debug("Received Message From WS: "+message.toString());
-            switch (type.toLowerCase()){
-                case "status":
-                    logger.debug("Received Status From WS: "+action);
-                    break;
-                case "heartbeat":
-                {
-                    long newHeartBeat = message.getLong("timestamp");
-                    long delay = (newHeartBeat-lastHeartBeat);
-                    if(delay > 30000*2){
-                        logger.warn("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+") Missed At Least "+(delay/30000)+" Heartbeat(s). The Network Might Be Faulty!");
-                    }else if(delay > 30000*1.5){
-                        logger.info("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+") The Service Might Be Slow.");
-                    }else{
-                        logger.debug("Received Heartbeat After "+delay+"ms (Delay To Target "+(delay-30000)+")");
-                    }
-                    lastHeartBeat = newHeartBeat;
-                }
-                break;
-                case "user":
-                {
-                    if(!xeniaBackendClient.getUserCache().contains(message.getLong("userId"))){
-                        return;
-                    }
-                    switch (action.toLowerCase()){
-                        case "create":
-                            break;
-                        case "update":
-                            xeniaBackendClient.getUserCache().get(message.getLong("userId")).getAsync();
-                            break;
-                        case "delete":
-                            xeniaBackendClient.getUserCache().remove(message.getLong("userId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    switch (action.toLowerCase()){
-                        case "create":
-                            break;
-                        case "update":
-                            xeniaBackendClient.getGuildCache().get(message.getLong("guildId")).getAsync(); // this just gets the new data as we dont want to reload all channels, roles, members,...
-                            break;
-                        case "delete":
-                            xeniaBackendClient.getGuildCache().remove(message.getLong("guildId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_role":
-                case "guild_role_permission":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->g.getRoleCache().get(message.getLong("roleId")));
-                            break;
-                        case "update":
-                            g.getRoleCache().remove(message.getLong("roleId"));
-                            scalingExecutor.execute(()->g.getRoleCache().get(message.getLong("roleId")));
-                            break;
-                        case "delete":
-                            g.getRoleCache().remove(message.getLong("roleId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_channel":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->g.getChannelCache().get(message.getLong("channelId")));
-                            break;
-                        case "update":
-                            g.getChannelCache().remove(message.getLong("channelId"));
-                            scalingExecutor.execute(()->g.getChannelCache().get(message.getLong("channelId")));
-                            break;
-                        case "delete":
-                            g.getChannelCache().remove(message.getLong("channelId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_message":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    if(!g.getChannelCache().contains(message.getLong("channelId"))){
-                        return;
-                    }
-                    Channel c = g.getChannelCache().get(message.getLong("channelId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->c.getMessageCache().get(message.getLong("messageId")));
-                            break;
-                        case "update":
-                            c.getMessageCache().remove(message.getLong("messageId"));
-                            scalingExecutor.execute(()->c.getMessageCache().get(message.getLong("messageId")));
-                            break;
-                        case "delete":
-                            c.getMessageCache().remove(message.getLong("messageId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_license":
-                {
-                    if(!xeniaBackendClient.getLicenseCache().contains(message.getLong("guildId"))){
-                        return;
-                    }else{
-                        xeniaBackendClient.getLicenseCache().remove(message.getLong("guildId"));
-                    }
-                }
-                break;
-                case "guild_member":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->g.getMemberCache().get(message.getLong("userId")));
-                            break;
-                        case "update":
-                            g.getMemberCache().remove(message.getLong("userId"));
-                            scalingExecutor.execute(()->g.getMemberCache().get(message.getLong("userId")));
-                            break;
-                        case "delete":
-                            g.getMemberCache().remove(message.getLong("userId"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_misc_tag":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->g.getMiscCaches().getTagCache().get(message.getString("tagName")));
-                            break;
-                        case "update":
-                            g.getMiscCaches().getTagCache().remove(message.getString("tagName"));
-                            scalingExecutor.execute(()->g.getMiscCaches().getTagCache().get(message.getString("tagName")));
-                            break;
-                        case "delete":
-                            g.getMiscCaches().getTagCache().remove(message.getString("tagName"));
-                            break;
-                    }
-                }
-                break;
-                case "guild_misc_notification":
-                {
-                    if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
-                        return;
-                    }
-                    Guild g = xeniaBackendClient.getGuildCache().get(message.getLong("guildId"));
-                    switch (action.toLowerCase()){
-                        case "create":
-                            scalingExecutor.execute(()->g.getMiscCaches().getNotificationCache().get(message.getLong("notificationId")));
-                            break;
-                        case "update":
-                            g.getMiscCaches().getNotificationCache().remove(message.getLong("notificationId"));
-                            scalingExecutor.execute(()->g.getMiscCaches().getNotificationCache().get(message.getLong("notificationId")));
-                            break;
-                        case "delete":
-                            g.getMiscCaches().getNotificationCache().remove(message.getLong("notificationId"));
-                            break;
-                    }
-                }
-                break;
-            }
-        }catch (Exception e){
-            logger.warn("Error Processing Message, Cache Might Be Inconsistent: "+message.toString());
-        }
-    }
+    @Override
+    public abstract void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response);
 
     @Override
     public void onShutdown() throws Exception {

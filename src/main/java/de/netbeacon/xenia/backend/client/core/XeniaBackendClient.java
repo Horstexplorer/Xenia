@@ -25,7 +25,11 @@ import de.netbeacon.xenia.backend.client.objects.external.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
-import de.netbeacon.xenia.backend.client.objects.internal.ws.WebSocketListener;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.PrimaryWebsocketListener;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.SecondaryWebsocketListener;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSProcessorCore;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.HeartbeatProcessor;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.IdentifyProcessor;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import org.mindrot.jbcrypt.BCrypt;
@@ -40,11 +44,14 @@ public class XeniaBackendClient implements IShutdown {
 
     private final OkHttpClient okHttpClient;
     private final BackendProcessor backendProcessor;
-    private final WebSocketListener webSocketListener;
+    private final PrimaryWebsocketListener primaryWebSocketListener;
+    private final SecondaryWebsocketListener secondaryWebsocketListener;
 
     private final UserCache userCache;
     private final GuildCache guildCache;
     private final LicenseCache licenseCache;
+
+    private SetupData setupDataCache = null;
 
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -67,8 +74,16 @@ public class XeniaBackendClient implements IShutdown {
             try{backendProcessor.activateToken();}catch (Exception ignore){}
         }, 2, 2, TimeUnit.MINUTES);
         // activate websocket
-        webSocketListener = new WebSocketListener(this);
-        webSocketListener.start();
+        primaryWebSocketListener = new PrimaryWebsocketListener(this);
+        primaryWebSocketListener.start();
+
+        WSProcessorCore wsProcessorCore = new WSProcessorCore()
+                .registerProcessors(
+                        new HeartbeatProcessor(),
+                        new IdentifyProcessor(this)
+                );
+        secondaryWebsocketListener = new SecondaryWebsocketListener(this, wsProcessorCore);
+        secondaryWebsocketListener.start();
         // create main caches
         this.userCache = new UserCache(backendProcessor);
         this.guildCache = new GuildCache(backendProcessor);
@@ -88,9 +103,12 @@ public class XeniaBackendClient implements IShutdown {
     }
 
     public SetupData getSetupData() {
+        if(setupDataCache != null){
+            return setupDataCache;
+        }
         SetupData setupData = new SetupData(backendProcessor);
         setupData.get();
-        // check if the setup data matches the gived key
+        // check if the setup data matches the given key
         if(!BCrypt.checkpw(backendSettings.getMessageCryptKey(), setupData.getMessageCryptHash())){
             throw new BackendException(-1, "Invalid Message Crypt Hash Specified");
         }
@@ -115,10 +133,18 @@ public class XeniaBackendClient implements IShutdown {
         return licenseCache;
     }
 
+    public PrimaryWebsocketListener getPrimaryWebSocketListener() {
+        return primaryWebSocketListener;
+    }
+
+    public SecondaryWebsocketListener getSecondaryWebsocketListener() {
+        return secondaryWebsocketListener;
+    }
+
     @Override
     public void onShutdown() throws Exception {
         scheduledExecutorService.shutdownNow();
-        webSocketListener.onShutdown();
+        primaryWebSocketListener.onShutdown();
         backendProcessor.onShutdown();
     }
 }
