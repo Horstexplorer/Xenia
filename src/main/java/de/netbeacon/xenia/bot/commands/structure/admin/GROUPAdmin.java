@@ -28,6 +28,7 @@ public class GROUPAdmin extends CommandGroup {
         addChildCommand(new CMDEval());
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDPing());
+        addChildCommand(new CMDClientIdentify());
     }
 
 }

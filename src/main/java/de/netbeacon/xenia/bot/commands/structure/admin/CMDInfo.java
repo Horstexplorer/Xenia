@@ -26,9 +26,11 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
+import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -100,5 +102,13 @@ public class CMDInfo extends Command {
                 .addField("Channels", bInfo.getChannelCount()+"("+(bInfo.getChannelCount()-bInfo.getForbiddenChannels())+")", true);
 
         event.getChannel().sendMessage(embedBuilder2.build()).queue();
+    }
+
+    @Override
+    public MessageEmbed onMissingMemberPerms(boolean v){
+        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .appendDescription("You are not allowed to do this !")
+                .build();
     }
 }
