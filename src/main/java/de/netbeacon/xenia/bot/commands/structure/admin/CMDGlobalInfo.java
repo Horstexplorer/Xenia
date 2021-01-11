@@ -159,17 +159,18 @@ public class CMDGlobalInfo extends Command {
 
     private StringBuilder getFormattedStats(long clientId, String clientName, long memoryUsed, long memoryTotal, int threads, long ping, long uptime){
         return new StringBuilder()
+                .append("```")
                 .append(clientId) // id
-                .append(" // ")
+                .append(" - ")
                 .append(clientName) // name
-                .append("\n\t").append("**Memory:**")
-                .append("\n\t\t").append(memoryUsed).append(" mb used / ").append(memoryTotal).append(" mb total")
-                .append("\n\t").append("**Threads:**")
+                .append("\n\t").append("Memory:")
+                .append("\n\t\t").append(memoryUsed).append("  / ").append(memoryTotal).append(" mb")
+                .append("\n\t").append("Threads:")
                 .append("\n\t\t").append(threads).append(" threads")
-                .append("\n\t").append("**Ping:**")
+                .append("\n\t").append("Ping:")
                 .append("\n\t\t").append(ping).append(" ms")
-                .append("\n\t").append("**Uptime:**")
+                .append("\n\t").append("Uptime:")
                 .append("\n\t\t").append(String.format("%d days, %d hours, %d min, %d seconds", (int)((uptime / (1000*60*60*24))), (int)((uptime / (1000*60*60)) % 24), (int)((uptime / (1000*60)) % 60),(int)((uptime / (1000)) % 60)))
-                .append("\n\n");
+                .append("```");
     }
 }
