@@ -69,8 +69,14 @@ public class CMDHastebin extends Command {
                 .append("Here is your haste "+commandEvent.getEvent().getAuthor().getAsMention()+":\n");
         Lock lock = new ReentrantLock();
         List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
-        attachments.stream().filter(attachment -> !attachment.isImage() && !attachment.isVideo())
+        attachments.stream()
                 .forEach(attachment -> {
+                    if(attachment.isImage() || attachment.isVideo()){
+                        lock.lock();
+                        stringBuilder.append("! ").append(attachment.getFileName()).append("\n");
+                        lock.unlock();
+                        return;
+                    }
                     var future = attachment.retrieveInputStream().thenAccept(inputStream -> {
                         try(inputStream) {
                             // create copy
@@ -85,12 +91,12 @@ public class CMDHastebin extends Command {
                                 String text = IOUtils.toString(input, StandardCharsets.UTF_8);
                                 String url = uploadToHastebin(text);
                                 lock.lock();
-                                stringBuilder.append("+").append("[").append(mediaTypeS).append("] ").append("[").append(attachment.getFileName()).append("](").append(url).append(")").append("\n");
+                                stringBuilder.append("+ ").append("[").append(mediaTypeS).append("] ").append("[").append(attachment.getFileName()).append("](").append(url).append(")").append("\n");
                                 lock.unlock();
                             }
                         }catch (Exception e){
                             lock.lock();
-                            stringBuilder.append("!").append(attachment.getFileName()).append("\n");
+                            stringBuilder.append("! ").append(attachment.getFileName()).append("\n");
                             lock.unlock();
                         }
                     });
