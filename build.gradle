@@ -45,7 +45,13 @@ dependencies {
 
     // OKHTTP
 
-    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0' // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0' // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+
+    // OTHER THINGS
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+
 }
 
 processResources {

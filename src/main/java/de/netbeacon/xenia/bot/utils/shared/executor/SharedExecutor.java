@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.utils.sharedexecutor;
+package de.netbeacon.xenia.bot.utils.shared.executor;
 
 import de.netbeacon.utils.executor.ScalingExecutor;
 import de.netbeacon.utils.shutdownhook.IShutdown;
