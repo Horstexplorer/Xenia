@@ -29,23 +29,31 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
+import org.apache.tika.Tika;
+import org.apache.tika.metadata.Metadata;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 public class CMDHastebin extends Command {
 
     public CMDHastebin() {
-        super("hastebin", "Upload the attached file to haste.hypercdn.de", new CommandCooldown(CommandCooldown.Type.User, 30000),
+        super("hastebin", "Upload the attached file to haste.hypercdn.de", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.HASTEBIN_UPLOAD_USE)),
                 null
         );
     }
+
+    private static final Tika TIKA = new Tika();
 
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
@@ -55,19 +63,35 @@ public class CMDHastebin extends Command {
         if(attachments.isEmpty()){
             textChannel.sendMessage(onError("No file provided")).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
         }
-
+        StringBuilder stringBuilder = new StringBuilder()
+                .append("Here is your haste "+commandEvent.getEvent().getAuthor().getAsMention()+":\n");
+        List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
         attachments.stream().filter(attachment -> !attachment.isImage() && !attachment.isVideo())
                 .forEach(attachment -> {
-                    attachment.retrieveInputStream().thenAccept(inputStream -> {
+                    var future = attachment.retrieveInputStream().thenAccept(inputStream -> {
                         try(inputStream) {
-                            String text = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-                            textChannel.sendMessage(onSuccess("Here is your haste "+commandEvent.getEvent().getAuthor().getAsMention()+" : ["+attachment.getFileName()+"]("+uploadToHastebin(text)+")")).queue();
+                            // create copy
+                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                            inputStream.transferTo(byteArrayOutputStream);
+                            String mediaTypeS;
+                            try(var input = new ByteArrayInputStream(byteArrayOutputStream.toByteArray())){
+                                var mediaType = TIKA.getDetector().detect(input, new Metadata());
+                                mediaTypeS = mediaType.toString();
+                            }
+                            try(var input = new ByteArrayInputStream(byteArrayOutputStream.toByteArray())){
+                                String text = IOUtils.toString(input, StandardCharsets.UTF_8);
+                                String url = uploadToHastebin(text);
+                                stringBuilder.append("+").append("[").append(mediaTypeS).append("] ").append("[").append(attachment.getFileName()).append("](").append(url).append(")").append("\n");
+                            }
                         }catch (Exception e){
-                            textChannel.sendMessage(onError("An error occurred while creating your haste")).queue();
+                            stringBuilder.append("!").append(attachment.getFileName()).append("\n");
                         }
                     });
+                    completableFutureList.add(future);
                 });
 
+        CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0])).join();
+        textChannel.sendMessage(onSuccess(stringBuilder.toString())).queue();
         // delete original message
         commandEvent.getEvent().getMessage().delete().queue();
     }
