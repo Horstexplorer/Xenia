@@ -21,14 +21,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Container {
 
-    private ConcurrentHashMap<List<Object>, Object> containedObjcts = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<List<Object>, Object> containedObjects = new ConcurrentHashMap<>();
 
     public void insert(Object object, Object...additionalIdentifiers){
-        containedObjcts.put(List.of(object.getClass(), additionalIdentifiers), object);
+        containedObjects.put(List.of(object.getClass(), additionalIdentifiers), object);
     }
 
     public <T> T get(Class<?> clazz, Object...additionalIdentifiers){
-        return (T) clazz.cast(containedObjcts.get(List.of(clazz, additionalIdentifiers)));
+        return (T) clazz.cast(containedObjects.get(List.of(clazz, additionalIdentifiers)));
     }
 
 }
