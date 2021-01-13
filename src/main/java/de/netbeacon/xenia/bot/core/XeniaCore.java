@@ -33,6 +33,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
+import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.ApplicationInfo;
@@ -87,6 +88,7 @@ public class XeniaCore {
         eventWaiter = new EventWaiter(); // Event Waiter
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
+        SharedOkHttpClient.getInstance(true);
         xeniaBackendClient.getGuildCache().addEventListeners(new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
 
         // set up event manager
