@@ -32,7 +32,7 @@ import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
-import de.netbeacon.xenia.bot.utils.sharedexecutor.SharedExecutor;
+import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.ApplicationInfo;
