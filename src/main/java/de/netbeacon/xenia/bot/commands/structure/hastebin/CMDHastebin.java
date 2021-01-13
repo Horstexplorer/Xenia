@@ -41,6 +41,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class CMDHastebin extends Command {
 
@@ -65,6 +67,7 @@ public class CMDHastebin extends Command {
         }
         StringBuilder stringBuilder = new StringBuilder()
                 .append("Here is your haste "+commandEvent.getEvent().getAuthor().getAsMention()+":\n");
+        Lock lock = new ReentrantLock();
         List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
         attachments.stream().filter(attachment -> !attachment.isImage() && !attachment.isVideo())
                 .forEach(attachment -> {
@@ -81,10 +84,14 @@ public class CMDHastebin extends Command {
                             try(var input = new ByteArrayInputStream(byteArrayOutputStream.toByteArray())){
                                 String text = IOUtils.toString(input, StandardCharsets.UTF_8);
                                 String url = uploadToHastebin(text);
+                                lock.lock();
                                 stringBuilder.append("+").append("[").append(mediaTypeS).append("] ").append("[").append(attachment.getFileName()).append("](").append(url).append(")").append("\n");
+                                lock.unlock();
                             }
                         }catch (Exception e){
+                            lock.lock();
                             stringBuilder.append("!").append(attachment.getFileName()).append("\n");
+                            lock.unlock();
                         }
                     });
                     completableFutureList.add(future);
