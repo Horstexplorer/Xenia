@@ -1,5 +1,5 @@
 /*
- *     Copyright 2020 Horstexplorer @ https://www.netbeacon.de
+ *     Copyright 2021 Horstexplorer @ https://www.netbeacon.de
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,30 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
-import de.netbeacon.xenia.backend.client.objects.external.Info;
+import de.netbeacon.xenia.backend.client.objects.external.Message;
 import de.netbeacon.xenia.bot.commands.objects.Command;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
-import net.dv8tion.jda.api.EmbedBuilder;
+import de.netbeacon.xenia.bot.utils.hastebin.HastebinUtil;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.awt.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class CMDPing extends Command {
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_CHANNEL;
 
-    public CMDPing() {
-        super("ping", "Can be used to check the ping to discord and other linked services", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
+public class CMDChatlog extends Command {
+
+    public CMDChatlog() {
+        super("chatlog", "Export a log of the cached messages for a given channel", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL));
     }
 
     @Override
@@ -62,19 +67,23 @@ public class CMDPing extends Command {
 
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
-        double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
-        double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
-        double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
-        Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
-        info.get();
+        CmdArg<String> channelArg = args.getByIndex(0); // unused for now
 
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
-                .addField("Gateway Ping:", gatewayPing+"ms", true)
-                .addField("Rest Ping", restPing+"ms", true)
-                .addField("Backend Ping", info.getPing()+"ms", true);
-
-        commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
+        List<Message> messages = commandEvent.getBackendDataPack().getbChannel().getMessageCache().retrieveAllFromBackend(false, false);
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject()
+                .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
+                .put("channelId", commandEvent.getEvent().getChannel().getIdLong())
+                .put("messages", jsonArray);
+        messages.stream().forEach(message -> jsonArray.put(message.asJSON()));
+        // upload to hastebin
+        String jsonString = jsonObject.toString(3);
+        try{
+            String url = HastebinUtil.uploadToHastebin(jsonString);
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Here is the [chatlog]("+url+")")).queue();
+        }catch (Exception e){
+            commandEvent.getEvent().getChannel().sendMessage(onError("Something Went Wrong Uploading The Chat Log (sizeOf: "+jsonString.length()+")")).queue();
+        }
     }
 
     @Override

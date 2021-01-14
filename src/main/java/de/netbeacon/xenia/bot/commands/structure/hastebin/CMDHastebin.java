@@ -21,17 +21,12 @@ import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
+import de.netbeacon.xenia.bot.utils.hastebin.HastebinUtil;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
-import okhttp3.MediaType;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.tika.Tika;
 import org.apache.tika.metadata.Metadata;
-import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -89,7 +84,7 @@ public class CMDHastebin extends Command {
                             }
                             try(var input = new ByteArrayInputStream(byteArrayOutputStream.toByteArray())){
                                 String text = IOUtils.toString(input, StandardCharsets.UTF_8);
-                                String url = uploadToHastebin(text);
+                                String url = HastebinUtil.uploadToHastebin(text);
                                 lock.lock();
                                 stringBuilder.append("+ ").append("[").append(mediaTypeS).append("] ").append("[").append(attachment.getFileName()).append("](").append(url).append(")").append("\n");
                                 lock.unlock();
@@ -107,19 +102,5 @@ public class CMDHastebin extends Command {
         textChannel.sendMessage(onSuccess(stringBuilder.toString())).queue();
         // delete original message
         commandEvent.getEvent().getMessage().delete().queue();
-    }
-
-    private static final String HASTEBIN_URL = "https://haste.hypercdn.de";
-
-    private String uploadToHastebin(String content) throws Exception {
-        RequestBody requestBody = RequestBody.create(content, MediaType.parse("text/html; charset=utf-8"));
-        Request request = new Request.Builder().post(requestBody).url(HASTEBIN_URL+"/documents").build();
-        try(Response response = SharedOkHttpClient.getInstance().newCall(request).execute()){
-            if(response.code() != 200){
-                throw new Exception("Error Executing Request: "+response.code()+" "+request.toString());
-            }
-            JSONObject jsonObject = new JSONObject(response.body().string());
-            return HASTEBIN_URL+"/"+jsonObject.getString("key");
-        }
     }
 }

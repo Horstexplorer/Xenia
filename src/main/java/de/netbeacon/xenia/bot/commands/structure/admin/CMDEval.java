@@ -62,7 +62,7 @@ public class CMDEval extends Command {
     public void execute(List<String> args, CommandEvent commandEvent) {
         // check required args
         CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
-        if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
+        if(!cmdArgs.verify()){
             // missing args
             commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
             return;
