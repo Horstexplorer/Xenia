@@ -16,11 +16,13 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
+import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
@@ -68,14 +70,23 @@ public class CMDChatlog extends Command {
 
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
-        CmdArg<String> channelArg = args.getByIndex(0); // unused for now
+        CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
         CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
-        List<Message> messages = commandEvent.getBackendDataPack().getbChannel().getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
+        Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+
+        if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
+            long cId = channelArg.getValue().getId();
+            if(commandEvent.getBackendDataPack().getbGuild().getChannelCache().contains(cId)){
+                bChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(cId);
+            }
+        }
+
+        List<Message> messages = bChannel.getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject()
                 .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
-                .put("channelId", commandEvent.getEvent().getChannel().getIdLong())
+                .put("channelId", bChannel.getChannelId())
                 .put("messages", jsonArray);
         messages.stream().forEach(message -> {
             var json = message.asJSON();
