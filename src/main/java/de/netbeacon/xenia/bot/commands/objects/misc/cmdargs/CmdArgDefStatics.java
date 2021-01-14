@@ -50,4 +50,8 @@ public class CmdArgDefStatics {
             .predicateAddStringLengthRange(64,64)
             .buildAllMatch();
 
+    // ADMIN
+    public static final CmdArgDef<String> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<String>("channel", String.class)
+            .buildAllMatch()
+            .setOptional(true);
 }
