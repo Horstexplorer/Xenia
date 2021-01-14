@@ -30,6 +30,7 @@ public class GROUPAdmin extends CommandGroup {
         addChildCommand(new CMDPing());
         addChildCommand(new CMDClientIdentify());
         addChildCommand(new CMDGlobalInfo());
+        addChildCommand(new CMDChatlog());
     }
 
 }
