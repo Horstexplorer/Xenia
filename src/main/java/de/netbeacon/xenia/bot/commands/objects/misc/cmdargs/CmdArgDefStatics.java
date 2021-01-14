@@ -54,4 +54,7 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<String>("channel", String.class)
             .buildAllMatch()
             .setOptional(true);
+    public static final CmdArgDef<Boolean> ADMIN_CHATLOG_LIMIT = new CmdArgDef.Builder<Boolean>("respLimit", Boolean.class)
+            .buildAllMatch()
+            .setOptional(true);
 }
