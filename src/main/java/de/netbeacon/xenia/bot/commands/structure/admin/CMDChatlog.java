@@ -75,7 +75,12 @@ public class CMDChatlog extends Command {
                 .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
                 .put("channelId", commandEvent.getEvent().getChannel().getIdLong())
                 .put("messages", jsonArray);
-        messages.stream().forEach(message -> jsonArray.put(message.asJSON()));
+        messages.stream().forEach(message -> {
+            var json = message.asJSON();
+            json.remove("channelId");
+            json.remove("guildId");
+            jsonArray.put(json);
+        });
         // upload to hastebin
         String jsonString = jsonObject.toString(3);
         try{
