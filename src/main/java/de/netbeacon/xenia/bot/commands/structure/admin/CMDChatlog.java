@@ -35,11 +35,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_CHANNEL;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_LIMIT;
 
 public class CMDChatlog extends Command {
 
     public CMDChatlog() {
-        super("chatlog", "Export a log of the cached messages for a given channel", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL));
+        super("chatlog", "Export a log of the cached messages for a given channel", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
     }
 
     @Override
@@ -68,8 +69,9 @@ public class CMDChatlog extends Command {
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
         CmdArg<String> channelArg = args.getByIndex(0); // unused for now
+        CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
-        List<Message> messages = commandEvent.getBackendDataPack().getbChannel().getMessageCache().retrieveAllFromBackend(false, false);
+        List<Message> messages = commandEvent.getBackendDataPack().getbChannel().getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject()
                 .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
