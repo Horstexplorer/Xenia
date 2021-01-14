@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class CmdArgDef<T> {
@@ -249,6 +250,31 @@ public class CmdArgDef<T> {
                     return ((String) t).length() >= min && ((String) t).length() <= max;
                 }
                 return true; // its not a string so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        /**
+         * Add a custom predicate
+         *
+         * @param gen function to get Q from T
+         * @param compareTo Q
+         * @param result int
+         * @return this
+         */
+        public <Q> Builder<T> predicateAddCompare(Function<T,Q> gen, Q compareTo, int result){
+            predicates.add(t->{
+                Q res = gen.apply(t);
+                if(res instanceof Comparable && compareTo instanceof Comparable){
+                    if(((Comparable<Q>) compareTo).compareTo(res) == result){
+                        return true;
+                    }
+                }else{
+                    if(compareTo.equals(res)){
+                        return true;
+                    }
+                }
+                return false;
             });
             return this;
         }

@@ -17,6 +17,8 @@
 package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
+import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
+import net.dv8tion.jda.api.entities.Message;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
@@ -51,7 +53,8 @@ public class CmdArgDefStatics {
             .buildAllMatch();
 
     // ADMIN
-    public static final CmdArgDef<String> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<String>("channel", String.class)
+    public static final CmdArgDef<Mention> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<Mention>("channel", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
             .buildAllMatch()
             .setOptional(true);
     public static final CmdArgDef<Boolean> ADMIN_CHATLOG_LIMIT = new CmdArgDef.Builder<Boolean>("respLimit", Boolean.class)
