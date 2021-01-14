@@ -85,7 +85,7 @@ public class CMDChatlog extends Command {
         String jsonString = jsonObject.toString(3);
         try{
             String url = HastebinUtil.uploadToHastebin(jsonString);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Here is the [chatlog]("+url+")")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Here is the [chatlog]("+url+") ["+jsonArray.length()+" messages]")).queue();
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Something Went Wrong Uploading The Chat Log (sizeOf: "+jsonString.length()+")")).queue();
         }
