@@ -140,6 +140,15 @@ public class CMDGlobalInfo extends Command {
             JSONObject jsonObject = wsResponse.getPayload();
             if(jsonObject.getLong("id") == 0){
                 // is backend - this will get added later
+                stringBuilder.append(getFormattedStats(
+                        jsonObject.getLong("id"),
+                        jsonObject.getString("name"),
+                        jsonObject.getJSONObject("statistics").getJSONObject("memory").getLong("used"),
+                        jsonObject.getJSONObject("statistics").getJSONObject("memory").getLong("total"),
+                        jsonObject.getJSONObject("statistics").getInt("threads"),
+                        0,
+                        jsonObject.getJSONObject("statistics").getLong("uptime")
+                ));
             }else{
                 // is client
                 stringBuilder.append(getFormattedStats(

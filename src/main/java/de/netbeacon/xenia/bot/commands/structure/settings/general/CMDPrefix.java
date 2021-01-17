@@ -1,5 +1,5 @@
 /*
- *     Copyright 2020 Horstexplorer @ https://www.netbeacon.de
+ *     Copyright 2021 Horstexplorer @ https://www.netbeacon.de
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.settings.general;
 
-import de.netbeacon.xenia.backend.client.objects.external.License;
+import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
@@ -29,27 +29,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.LICENSE_KEY_DEF;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.GUILD_PREFIX_DEF;
 
-public class CMDLicense extends Command {
+public class CMDPrefix extends Command {
 
-    public CMDLicense() {
-        super("upgradelicense", "Update the license using a license key", new CommandCooldown(CommandCooldown.Type.User, 2000),
+    public CMDPrefix() {
+        super("prefix", "Update the prefix used for commands", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(LICENSE_KEY_DEF));
+                List.of(GUILD_PREFIX_DEF));
     }
 
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
-        CmdArg<String> licenseKey = args.getByIndex(0);
-        License license = commandEvent.getBackendDataPack().getbLicense();
+        CmdArg<String> newPrefix = args.getByIndex(0);
+        String prefix = (newPrefix.getValue() != null) ? newPrefix.getValue() : "~";
+        Guild guild = commandEvent.getBackendDataPack().getbGuild();
         try{
-            license.update(licenseKey.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("License Updated")).queue();
+            guild.setPrefix(prefix);
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Prefix Updated To ***"+guild.getPrefix()+"***")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Updating License Failed")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError("Updating Prefix Failed")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

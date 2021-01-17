@@ -62,7 +62,7 @@ public class MessageHandler {
         CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
-        if(!msg.startsWith(prefix)){
+        if(!msg.startsWith(bGuild.getPrefix())){
             // check if the message should be logged
             if(bChannel.tmpLoggingIsActive()){
                 bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
