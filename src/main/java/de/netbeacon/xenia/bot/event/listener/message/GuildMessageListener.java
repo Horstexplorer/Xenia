@@ -62,7 +62,7 @@ public class GuildMessageListener extends ListenerAdapter {
 
         register.accept(new CMDInfo());
 
-        commandHandler = new MessageHandler(config.getString("commandPrefix"), commandMap, eventWaiter, backendClient);
+        commandHandler = new MessageHandler(commandMap, eventWaiter, backendClient);
     }
 
     @Override

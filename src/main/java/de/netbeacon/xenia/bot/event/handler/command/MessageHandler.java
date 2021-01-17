@@ -38,14 +38,12 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPatt
 
 public class MessageHandler {
 
-    private final String prefix;
     private final HashMap<String, Command> commandMap;
     private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
     private final EventWaiter eventWaiter;
     private final XeniaBackendClient backendClient;
 
-    public MessageHandler(String prefix, HashMap<String, Command> commandMap, EventWaiter eventWaiter, XeniaBackendClient backendClient){
-        this.prefix = prefix;
+    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, XeniaBackendClient backendClient){
         this.commandMap = commandMap;
         this.eventWaiter = eventWaiter;
         this.backendClient = backendClient;
@@ -76,7 +74,7 @@ public class MessageHandler {
         commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
         // split to list
         List<String> args = new ArrayList<>();
-        Matcher matcher = ArgPattern.matcher(msg.substring(prefix.length()));
+        Matcher matcher = ArgPattern.matcher(msg.substring(bGuild.getPrefix().length()));
         while(matcher.find()){
             args.add((matcher.group(2) != null)?matcher.group(2):matcher.group());
         }
