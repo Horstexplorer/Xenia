@@ -47,9 +47,9 @@ public class CMDLicense extends Command {
         License license = commandEvent.getBackendDataPack().getbLicense();
         try{
             license.update(licenseKey.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("License Updated")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("License Updated")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Updating License Failed")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));;
+            commandEvent.getEvent().getChannel().sendMessage(onError("Updating License Failed")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }
