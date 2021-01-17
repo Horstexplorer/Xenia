@@ -40,6 +40,7 @@ public class HYBRIDGeneral extends HybridCommand {
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
                 null);
         addChildCommand(new CMDLicense());
+        addChildCommand(new CMDPrefix());
     }
 
     @Override
@@ -49,6 +50,7 @@ public class HYBRIDGeneral extends HybridCommand {
         commandEvent.getEvent().getChannel().sendMessage(
                 EmbedBuilderFactory.getDefaultEmbed("General Guild Setting", commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
                         .addField("preferred language", guild.getPreferredLanguage(), true)
+                        .addField("prefix", guild.getPrefix(), true)
                         .addField("use VPerms", String.valueOf(guild.useVPerms()), true)
                         .addBlankField(false)
                         .addField("license name", license.getLicenseName(), false)

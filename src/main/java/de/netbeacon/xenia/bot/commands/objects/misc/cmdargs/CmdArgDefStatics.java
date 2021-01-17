@@ -51,6 +51,10 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<String>("licensekey", String.class)
             .predicateAddStringLengthRange(64,64)
             .buildAllMatch();
+    public static final CmdArgDef<String> GUILD_PREFIX_DEF = new CmdArgDef.Builder<String>("prefix", String.class)
+            .predicateAddStringLengthRange(1, 4)
+            .buildAllMatch()
+            .setOptional(true);
 
     // ADMIN
     public static final CmdArgDef<Mention> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<Mention>("channel", Mention.class)
