@@ -48,7 +48,7 @@ public class CMDPrefix extends Command {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         try{
             guild.setPrefix(prefix);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Prefix Updated To ***"+guild.getPrefix()+"***")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Prefix Updated To ```"+guild.getPrefix()+"```")).queue();
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Updating Prefix Failed")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
