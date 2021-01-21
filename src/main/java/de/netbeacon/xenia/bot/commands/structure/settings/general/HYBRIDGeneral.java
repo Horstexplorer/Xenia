@@ -58,6 +58,7 @@ public class HYBRIDGeneral extends HybridCommand {
                         .addField("max VPerm roles", String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
                         .addField("max tags", String.valueOf(license.getPerk_MISC_TAGS_C()), true)
                         .addField("max notification", String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
+                        .addField("max twitch notification", String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
                         .addField("max message logging", String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
                         .build()
         ).queue();

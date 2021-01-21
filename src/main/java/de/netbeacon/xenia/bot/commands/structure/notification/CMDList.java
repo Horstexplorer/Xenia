@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.structure.notification;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.external.User;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -49,7 +50,11 @@ public class CMDList extends Command {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("NotificationId - UserId@ChannelId - NotificationTime\n\n");
         for(Notification notification : notificationCache.getAllAsList()){
-            stringBuilder.append(notification.getId()).append(" - ").append(notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
+            User user = null;
+            try{
+                user = commandEvent.getBackendClient().getUserCache().get(notification.getUserId());
+            }catch (Exception ignore){}
+            stringBuilder.append(notification.getId()).append(" - ").append((user != null) ? user.getMetaUsername() : notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
         }
         MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed("Notifications", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();

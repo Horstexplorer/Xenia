@@ -19,7 +19,6 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -34,8 +33,8 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 
 public class HYBRIDTag extends HybridCommand {
 
-    public HYBRIDTag(CommandGroup parent) {
-        super(parent,"tag", "Create, manage and use tags for this guild", new CommandCooldown(CommandCooldown.Type.User, 1000),
+    public HYBRIDTag() {
+        super(null,"tag", "Create, manage and use tags for this guild", new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),

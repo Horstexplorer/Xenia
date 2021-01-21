@@ -22,8 +22,8 @@ import de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles;
 
 public class GROUPSettings extends CommandGroup {
 
-    public GROUPSettings(CommandGroup parent) {
-        super(parent, "settings", "Contains all settings for the guild");
+    public GROUPSettings() {
+        super(null, "settings", "Contains all settings for the guild");
         addChildCommand(new HYBRIDRoles(this));
         addChildCommand(new HYBRIDGeneral(this));
     }
