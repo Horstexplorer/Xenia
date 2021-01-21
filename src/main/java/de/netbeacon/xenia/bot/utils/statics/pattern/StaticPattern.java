@@ -23,23 +23,25 @@ import java.util.regex.Pattern;
  */
 public class StaticPattern {
 
-    public final static Pattern SingleWordPattern = Pattern.compile("^[\\S]*$");
-    public final static Pattern WordPattern = Pattern.compile("\\p{L}*"); // only letters
-    public final static Pattern NumberPattern = Pattern.compile("\\p{N}*"); // only numbers
-    public final static Pattern PunctuationPattern = Pattern.compile("\\p{Punct}");
+    public static final Pattern SingleWordPattern = Pattern.compile("^[\\S]*$");
+    public static final Pattern WordPattern = Pattern.compile("\\p{L}*"); // only letters
+    public static final Pattern NumberPattern = Pattern.compile("\\p{N}*"); // only numbers
+    public static final Pattern PunctuationPattern = Pattern.compile("\\p{Punct}");
 
-    public final static Pattern WhiteSpacePattern = Pattern.compile("\\s");
-    public final static Pattern MultiWhiteSpacePattern = Pattern.compile("\\s+");
-    public final static Pattern LineEndingPattern = Pattern.compile("\n+|\r+|(\r\n)+");
-    public final static Pattern LeadingPunctuationPattern = Pattern.compile("^(\\p{Punct}+)");
-    public final static Pattern TrailingPunctuationPattern = Pattern.compile("(\\p{Punct}+)$");
-    public final static Pattern EnclosingPunctuationPattern = Pattern.compile("^(\\p{Punct}+)[^\\p{Punct}]+(\\p{Punct}+)$");
+    public static final Pattern WhiteSpacePattern = Pattern.compile("\\s");
+    public static final Pattern MultiWhiteSpacePattern = Pattern.compile("\\s+");
+    public static final Pattern LineEndingPattern = Pattern.compile("\n+|\r+|(\r\n)+");
+    public static final Pattern LeadingPunctuationPattern = Pattern.compile("^(\\p{Punct}+)");
+    public static final Pattern TrailingPunctuationPattern = Pattern.compile("(\\p{Punct}+)$");
+    public static final Pattern EnclosingPunctuationPattern = Pattern.compile("^(\\p{Punct}+)[^\\p{Punct}]+(\\p{Punct}+)$");
 
-    public final static Pattern UrlPattern = Pattern.compile("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
+    public static final Pattern UrlPattern = Pattern.compile("[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)");
 
-    public final static Pattern ArgPattern = Pattern.compile("(\"(\\X*?)\")|([^\\s]\\X*?(?=\\s|\"|$))");
-    public final static Pattern CodeBlock = Pattern.compile("(`{1,3})(.*?\\s)(.*?)(`{1,3})", Pattern.MULTILINE|Pattern.DOTALL);
-    public final static Pattern JavaClass = Pattern.compile("(public class)(.*?)(\\{)", Pattern.MULTILINE | Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+    public static final Pattern ArgPattern = Pattern.compile("(\"(\\X*?)\")|([^\\s]\\X*?(?=\\s|\"|$))");
+    public static final Pattern CodeBlock = Pattern.compile("(`{1,3})(.*?\\s)(.*?)(`{1,3})", Pattern.MULTILINE|Pattern.DOTALL);
+    public static final Pattern JavaClass = Pattern.compile("(public class)(.*?)(\\{)", Pattern.MULTILINE | Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
 
-    public final static Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
+    public static final Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
+
+    public static final Pattern TWITCH_URL_PATTERN = Pattern.compile("https:\\/\\/www\\.twitch\\.tv\\/([a-zA-Z0-9_]{4,25})$");
 }

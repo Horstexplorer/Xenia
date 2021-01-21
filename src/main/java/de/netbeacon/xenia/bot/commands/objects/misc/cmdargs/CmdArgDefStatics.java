@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention
 import net.dv8tion.jda.api.entities.Message;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.TWITCH_URL_PATTERN;
 
 public class CmdArgDefStatics {
 
@@ -36,6 +37,19 @@ public class CmdArgDefStatics {
             .buildAllMatch();
     public static final CmdArgDef<String> NOTIFICATION_MESSAGE_DEF = new CmdArgDef.Builder<String>("message", String.class)
             .buildAllMatch();
+    // TWITCH NOTIFICATION
+    public static final CmdArgDef<String> TWITCH_NOTIFICATION_CHANNEL_URL = new CmdArgDef.Builder<String>("twitch link", String.class)
+            .predicateAddPredicate(string -> TWITCH_URL_PATTERN.matcher(string).matches())
+            .buildAllMatch();
+    public static final CmdArgDef<String> TWITCH_NOTIFICATION_CUSTOM_MESSAGE_OPTIONAL = new CmdArgDef.Builder<String>("custom message", String.class)
+            .predicateAddStringLengthRange(1, 512)
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<String> TWITCH_NOTIFICATION_CUSTOM_MESSAGE = new CmdArgDef.Builder<String>("custom message", String.class)
+            .predicateAddStringLengthRange(1, 512)
+            .buildAllMatch();
+    public static final CmdArgDef<Long> TWITCH_NOTIFICATION_ID = new CmdArgDef.Builder<Long>("custom message", Long.class)
+            .buildAllMatch();
 
     // TAG CMD
     public static final CmdArgDef<String> TAG_NAME_DEF = new CmdArgDef.Builder<String>("name", String.class)
@@ -46,7 +60,6 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> TAG_CONTENT_DEF = new CmdArgDef.Builder<String>("content", String.class)
             .predicateAddStringLengthRange(1, 1500)
             .buildAllMatch();
-
     // SETTINGS
     public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<String>("licensekey", String.class)
             .predicateAddStringLengthRange(64,64)
