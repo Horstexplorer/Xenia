@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.twitch;
 
-import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
+import de.netbeacon.xenia.backend.client.objects.cache.misc.TwitchNotificationCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
@@ -45,11 +45,12 @@ public class CMDDelete extends Command {
     public void onExecution(CmdArgs args, CommandEvent commandEvent) {
         try{
             CmdArg<Long> notificationid = args.getByIndex(0);
-            NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+            TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.delete(notificationid.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Deleted Stream Notification")).queue();
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Stream Notification")).queue();
+            e.printStackTrace();
         }
     }
 }
