@@ -43,5 +43,5 @@ public class StaticPattern {
 
     public static final Pattern KEY_PATTERN = Pattern.compile("^[a-zA-Z0-9_.-]*$");
 
-    public static final Pattern TWITCH_URL_PATTERN = Pattern.compile("https:\\/\\/www\\.twitch\\.tv\\/([a-zA-Z0-9_]{4,25})$");
+    public static final Pattern TWITCH_URL_PATTERN = Pattern.compile("https:\\/\\/(www\\.)?twitch\\.tv\\/([a-zA-Z0-9_]{4,25})$");
 }
