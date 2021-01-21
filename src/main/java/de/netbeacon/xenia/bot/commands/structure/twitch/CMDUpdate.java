@@ -53,7 +53,7 @@ public class CMDUpdate extends Command {
             notification.setNotificationMessage(customMessage.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Stream Notification")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Stream Notification.")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Stream Notification")).queue();
         }
     }
 }

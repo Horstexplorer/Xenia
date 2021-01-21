@@ -49,7 +49,7 @@ public class CMDDelete extends Command {
             notificationCache.delete(notificationid.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess("Deleted Stream Notification")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Stream Notification.")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Stream Notification")).queue();
         }
     }
 }
