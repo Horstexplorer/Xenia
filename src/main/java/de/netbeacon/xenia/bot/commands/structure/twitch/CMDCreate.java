@@ -56,7 +56,7 @@ public class CMDCreate extends Command {
             }
             // get all stream notifications
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
-            notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(1), customMessageC.getValue());
+            notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Request Another Stream Notification.")).queue();
         }

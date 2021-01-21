@@ -78,7 +78,7 @@ public class MessageHandler {
         while(matcher.find()){
             args.add((matcher.group(2) != null)?matcher.group(2):matcher.group());
         }
-        if(args.size() <= 0){
+        if(args.isEmpty()){
             return;
         }
         // get the command
