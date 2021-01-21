@@ -58,9 +58,9 @@ public class CMDCreate extends Command {
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
             // send response
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Successfully Requested Another Stream Notification.")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Successfully Requested Another Stream Notification")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Request Another Stream Notification.")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Request Another Stream Notification")).queue();
         }
     }
 }
