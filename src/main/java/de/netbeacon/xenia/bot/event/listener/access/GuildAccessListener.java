@@ -17,12 +17,17 @@
 package de.netbeacon.xenia.bot.event.listener.access;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.cache.ChannelCache;
+import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.User;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
+import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateNameEvent;
+import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateTopicEvent;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -52,7 +57,20 @@ public class GuildAccessListener extends ListenerAdapter {
             backendClient.getGuildCache().remove(event.getGuild().getIdLong());
         }
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.initAsync();
+        g.initAsync((guild) -> {
+            // update all channels
+            ChannelCache channelCache = guild.getChannelCache();
+            for(Channel channel : channelCache.getAllAsList()){
+                TextChannel textChannel = event.getGuild().getTextChannelById(channel.getId());
+                if(textChannel == null){ // does no longer exist
+                    channelCache.delete(channel.getId());
+                    continue;
+                }
+                // update all names & topics
+                channel.lSetMetaData(textChannel.getName(), textChannel.getTopic());
+                channel.updateAsync();
+            }
+        });
         g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
         g.updateAsync();
     }
@@ -130,7 +148,25 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onTextChannelCreate(@NotNull TextChannelCreateEvent event) {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.getChannelCache().get(event.getChannel().getIdLong());
+        Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
+        c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        c.updateAsync();
+    }
+
+    @Override
+    public void onTextChannelUpdateName(@NotNull TextChannelUpdateNameEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
+        c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        c.updateAsync();
+    }
+
+    @Override
+    public void onTextChannelUpdateTopic(@NotNull TextChannelUpdateTopicEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
+        c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        c.updateAsync();
     }
 
     @Override
