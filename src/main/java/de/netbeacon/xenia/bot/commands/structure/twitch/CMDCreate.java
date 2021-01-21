@@ -54,9 +54,11 @@ public class CMDCreate extends Command {
             if(!m.matches()){
                 throw new RuntimeException("Error Matching URL");
             }
-            // get all stream notifications
+            // create new
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
+            // send response
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Successfully Requested Another Stream Notification.")).queue();
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Request Another Stream Notification.")).queue();
         }
