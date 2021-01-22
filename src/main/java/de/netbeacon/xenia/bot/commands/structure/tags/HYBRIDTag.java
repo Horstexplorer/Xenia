@@ -38,7 +38,8 @@ public class HYBRIDTag extends HybridCommand {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
-                List.of(TAG_NAME_DEF));
+                List.of(TAG_NAME_DEF)
+        );
         addChildCommand(new CMDCreate());
         addChildCommand(new CMDModify());
         addChildCommand(new CMDDelete());

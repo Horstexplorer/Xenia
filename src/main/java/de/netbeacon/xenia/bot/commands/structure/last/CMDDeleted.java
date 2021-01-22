@@ -39,7 +39,8 @@ public class CMDDeleted extends Command {
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
-                null);
+                null
+        );
     }
 
     @Override

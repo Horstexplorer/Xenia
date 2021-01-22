@@ -39,7 +39,8 @@ public class CMDEdited extends Command {
                 null,
                 new HashSet<>(java.util.List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
-                null);
+                null
+        );
     }
 
     @Override

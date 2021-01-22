@@ -255,6 +255,28 @@ public class CmdArgDef<T> {
         }
 
         /**
+         * Add a predicate to check if the test string matches any of the given strings ignoring case sensitivity
+         *
+         * @param strings where any of em need to match the test one
+         * @return this
+         */
+        public Builder<T> predicateAddStringEqualsAnyOf(String...strings){
+            predicates.add(t->{
+                for(String string : strings){
+                    if(string != null && t instanceof String){
+                        if(string.equalsIgnoreCase((String) t)){
+                            return true;
+                        }
+                    }else{
+                        return false;
+                    }
+                }
+                return false;
+            });
+            return this;
+        }
+
+        /**
          * Add a custom predicate
          *
          * @param gen function to get Q from T

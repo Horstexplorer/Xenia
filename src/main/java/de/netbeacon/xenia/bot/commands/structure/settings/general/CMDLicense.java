@@ -38,7 +38,8 @@ public class CMDLicense extends Command {
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(LICENSE_KEY_DEF));
+                List.of(LICENSE_KEY_DEF)
+        );
     }
 
     @Override

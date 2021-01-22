@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.commands.structure.settings;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import de.netbeacon.xenia.bot.commands.structure.settings.channel.HYBRIDChannel;
 import de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral;
 import de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles;
 
@@ -26,5 +27,6 @@ public class GROUPSettings extends CommandGroup {
         super(null, "settings", "Contains all settings for the guild");
         addChildCommand(new HYBRIDRoles(this));
         addChildCommand(new HYBRIDGeneral(this));
+        addChildCommand(new HYBRIDChannel(this));
     }
 }

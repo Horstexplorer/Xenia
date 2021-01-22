@@ -39,7 +39,8 @@ public class CMDModify extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                List.of(TAG_NAME_DEF, TAG_CONTENT_DEF));
+                List.of(TAG_NAME_DEF, TAG_CONTENT_DEF)
+        );
     }
 
     @Override
