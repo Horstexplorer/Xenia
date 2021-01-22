@@ -38,7 +38,8 @@ public class CMDPrefix extends Command {
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(GUILD_PREFIX_DEF));
+                List.of(GUILD_PREFIX_DEF)
+        );
     }
 
     @Override

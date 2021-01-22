@@ -40,7 +40,8 @@ public class CMDList extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                null);
+                null
+        );
     }
 
     @Override

@@ -37,7 +37,8 @@ public class CMDDelete extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(NOTIFICATION_ID_DEF));
+                List.of(NOTIFICATION_ID_DEF)
+        );
     }
 
     @Override

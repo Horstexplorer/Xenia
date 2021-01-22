@@ -41,7 +41,8 @@ public class CMDCreate extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF));
+                List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF)
+        );
     }
 
     @Override
