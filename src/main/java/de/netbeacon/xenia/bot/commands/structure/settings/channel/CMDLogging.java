@@ -26,7 +26,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.Permission;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -58,9 +57,9 @@ public class CMDLogging extends Command {
                 channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
             }
             channel.update();
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Access Mode")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Logging Mode")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Access Mode. \n Available Options: "+ Arrays.toString(Channel.AccessMode.Mode.values()))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Logging Mode. \n Available Options: [true, false]")).queue();
         }
     }
 }
