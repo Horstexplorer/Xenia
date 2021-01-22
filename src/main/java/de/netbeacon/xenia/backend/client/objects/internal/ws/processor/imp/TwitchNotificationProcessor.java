@@ -72,7 +72,6 @@ public class TwitchNotificationProcessor extends WSProcessor {
             customMessage = customMessage.replace("$title$", data.getJSONObject("data").getString("streamTitle"));
             customMessage = customMessage.replace("$game$", data.getJSONObject("data").getString("game"));
             String url = "https://twitch.tv/"+twitchNotification.getTwitchChannelName();
-            customMessage += "\n["+data.getJSONObject("data").getString("streamTitle")+"]("+url+")";
             // prepare embed
             MessageEmbed messageEmbed = new EmbedBuilder()
                     .setTitle(data.getJSONObject("data").getString("streamTitle"), url)
