@@ -68,6 +68,19 @@ public class CmdArgDefStatics {
             .predicateAddStringLengthRange(1, 4)
             .buildAllMatch()
             .setOptional(true);
+    // CHANNEL SETTINGS
+    public static final CmdArgDef<Mention> CHANNEL_ID_OPTIONAL = new CmdArgDef.Builder<>("channel", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<Mention> CHANNEL_ID_TMPLOGGING_OPTIONAL = new CmdArgDef.Builder<>("tmp logging channel", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<String> CHANNEL_ACCESS_MODE = new CmdArgDef.Builder<>("access mode", String.class)
+            .buildAllMatch();
+    public static final CmdArgDef<Boolean> CHANNEL_LOGGING_ENABLE = new CmdArgDef.Builder<>("enable", Boolean.class)
+            .buildAllMatch();
 
     // ADMIN
     public static final CmdArgDef<Mention> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<Mention>("channel", Mention.class)
