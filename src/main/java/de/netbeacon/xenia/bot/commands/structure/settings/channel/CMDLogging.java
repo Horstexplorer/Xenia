@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDLogging extends Command {
 
     public CMDLogging() {
-        super("logging", "Update the logging settings for this channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("logging", "Update the logging settings for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

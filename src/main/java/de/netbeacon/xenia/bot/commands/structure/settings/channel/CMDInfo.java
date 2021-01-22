@@ -18,8 +18,7 @@ package de.netbeacon.xenia.bot.commands.structure.settings.channel;
 
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
+import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
@@ -34,17 +33,15 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ID_OPTIONAL;
 
-public class HYBRIDChannel extends HybridCommand {
+public class CMDInfo extends Command {
 
-    public HYBRIDChannel(CommandGroup parent) {
-        super(parent, "channel", "Contains commands to manage the current channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+    public CMDInfo() {
+        super("info", "Displays information for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
                 List.of(CHANNEL_ID_OPTIONAL)
         );
-        addChildCommand(new CMDAccessMode());
-        addChildCommand(new CMDLogging());
     }
 
     @Override
