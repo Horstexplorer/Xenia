@@ -44,7 +44,7 @@ public class HYBRIDRoles extends HybridCommand {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         StringBuilder stringBuilder = new StringBuilder();
         for(Role role : guild.getRoleCache().getAllAsList()){
-            stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(role.getPermissions().getPermVal());
+            stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(role.getPermissions().getValue());
         }
         String roleS = stringBuilder.toString();
         if(roleS.isEmpty()){

@@ -26,7 +26,9 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
+import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateNSFWEvent;
 import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateNameEvent;
+import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateNewsEvent;
 import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateTopicEvent;
 import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -44,6 +46,8 @@ public class GuildAccessListener extends ListenerAdapter {
     private final XeniaBackendClient backendClient;
     private final Logger logger = LoggerFactory.getLogger(GuildAccessListener.class);
 
+    private static final int MEMBER_COUNT_THRESHOLD = Integer.MAX_VALUE; // disabled for now
+
     public GuildAccessListener(XeniaBackendClient backendClient){
         this.backendClient = backendClient;
     }
@@ -57,7 +61,7 @@ public class GuildAccessListener extends ListenerAdapter {
             backendClient.getGuildCache().remove(event.getGuild().getIdLong());
         }
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.initAsync((guild) -> {
+        g.initAsync(guild -> {
             // update all channels
             ChannelCache channelCache = guild.getChannelCache();
             for(Channel channel : channelCache.getAllAsList()){
@@ -68,6 +72,11 @@ public class GuildAccessListener extends ListenerAdapter {
                 }
                 // update all names & topics
                 channel.lSetMetaData(textChannel.getName(), textChannel.getTopic());
+                // update flags
+                Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(channel.getChannelFlags().getValue());
+                if (textChannel.isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+                if (textChannel.isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+                channel.lSetChannelFlags(channelFlags);
                 channel.updateAsync();
             }
         });
@@ -81,6 +90,17 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         g.lSetMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
         g.updateAsync();
+        event.getGuild().getTextChannels().forEach(textChannel -> {
+            backendClient.getBackendProcessor().getScalingExecutor().execute(()->{
+                Channel channel = g.getChannelCache().get(textChannel.getIdLong());
+                if(event.getGuild().getMemberCount() >= MEMBER_COUNT_THRESHOLD){ channel.lSetTmpLoggingActive(false); }
+                Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(channel.getChannelFlags().getValue());
+                if (textChannel.isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+                if (textChannel.isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+                channel.lSetChannelFlags(channelFlags);
+                channel.updateAsync();
+            });
+        });
     }
 
     @Override
@@ -150,6 +170,7 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
         c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        if(event.getGuild().getMemberCount() >= MEMBER_COUNT_THRESHOLD){ c.lSetTmpLoggingActive(false); }
         c.updateAsync();
     }
 
@@ -158,6 +179,10 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
         c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
+        if (event.getChannel().isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+        if (event.getChannel().isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+        c.lSetChannelFlags(channelFlags);
         c.updateAsync();
     }
 
@@ -166,6 +191,34 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
         c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
+        if (event.getChannel().isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+        if (event.getChannel().isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+        c.lSetChannelFlags(channelFlags);
+        c.updateAsync();
+    }
+
+    @Override
+    public void onTextChannelUpdateNSFW(@NotNull TextChannelUpdateNSFWEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
+        c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
+        if (event.getChannel().isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+        if (event.getChannel().isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+        c.lSetChannelFlags(channelFlags);
+        c.updateAsync();
+    }
+
+    @Override
+    public void onTextChannelUpdateNews(@NotNull TextChannelUpdateNewsEvent event) {
+        Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
+        c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
+        Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
+        if (event.getChannel().isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
+        if (event.getChannel().isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
+        c.lSetChannelFlags(channelFlags);
         c.updateAsync();
     }
 

@@ -42,7 +42,7 @@ public class BackendProcessor implements IShutdown {
     private final OkHttpClient okHttpClient;
     private final BackendSettings backendSettings;
     private final Logger logger = LoggerFactory.getLogger(BackendProcessor.class);
-    private final ScalingExecutor scalingExecutor = new ScalingExecutor(4, 64, 12500, 30, TimeUnit.SECONDS);
+    private final ScalingExecutor scalingExecutor = new ScalingExecutor(4, 128, 125000, 30, TimeUnit.SECONDS);
     private final ReentrantLock lock = new ReentrantLock();
 
     public BackendProcessor(XeniaBackendClient xeniaBackendClient){
@@ -216,8 +216,8 @@ public class BackendProcessor implements IShutdown {
         private long lastUpdate;
         private final Lock lock = new ReentrantLock();
 
-        private final static long forceUpdateDelay = 2500;
-        private final static int maxRetries = 4;
+        private static final long forceUpdateDelay = 2500;
+        private static final int maxRetries = 4;
 
         private final Logger logger = LoggerFactory.getLogger(BackendProcessor.Interceptor.class);
 

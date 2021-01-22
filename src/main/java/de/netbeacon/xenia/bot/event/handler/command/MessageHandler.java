@@ -58,6 +58,8 @@ public class MessageHandler {
         License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
         // wrap in single object
         CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
+        // check if xenia has been disabled in which case we dont do anything
+        if(bChannel.getAccessMode().has(Channel.AccessMode.Mode.DISABLED)) return;
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(bGuild.getPrefix())){
@@ -67,7 +69,9 @@ public class MessageHandler {
             }
             return;
         }
-        // check cool down
+        // check if xenia is not active or inactive in which case we dont do anything
+        if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE) || bChannel.getAccessMode().has(Channel.AccessMode.Mode.INACTIVE)) return;
+        // check cooldown
         if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
             return;
         }
