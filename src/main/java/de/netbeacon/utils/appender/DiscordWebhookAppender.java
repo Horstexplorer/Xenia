@@ -60,7 +60,7 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
                 return;
             }
             WebhookMessageBuilder webhookMessageBuilder = new WebhookMessageBuilder()
-                    .setUsername("Xenia-Backend");
+                    .setUsername("Xenia");
             int i = 0;
             while(i++ < 10 && !eventCache.isEmpty()){
                 LogContainer logContainer = eventCache.remove();
