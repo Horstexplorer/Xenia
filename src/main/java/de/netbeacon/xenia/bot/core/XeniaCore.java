@@ -64,19 +64,19 @@ public class XeniaCore {
         // shutdown hook
         ShutdownHook shutdownHook = new ShutdownHook();
         // load config
-        logger.warn("Loading Config...");
+        logger.info("Loading Config...");
         config = new Config(new File("./xenia/config/sys.config"));
 
         // load backend
-        logger.warn("Loading Backend...");
+        logger.info("Loading Backend...");
         BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"), config.getString("messageCryptKey"));
         xeniaBackendClient = new XeniaBackendClient(backendSettings, this::getShardManager);
         shutdownHook.addShutdownAble(xeniaBackendClient);
 
         // setup data
-        logger.warn("Retrieving Setup Data...");
+        logger.info("Retrieving Setup Data...");
         SetupData setupData = xeniaBackendClient.getSetupData();
-        logger.warn("Retrieved Setup Data:"+"\n"+
+        logger.info("Retrieved Setup Data:"+"\n"+
                     "ClientName: "+setupData.getClientName()+"\n"+
                     "ClientDescription: "+setupData.getClientDescription()+"\n"+
                     "Total Shards: "+setupData.getTotalShards()+"\n"+
@@ -84,7 +84,7 @@ public class XeniaCore {
                 );
 
         // setup other things
-        logger.warn("Preparing Other Things...");
+        logger.info("Preparing Other Things...");
         eventWaiter = new EventWaiter(); // Event Waiter
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
@@ -92,13 +92,13 @@ public class XeniaCore {
         xeniaBackendClient.getGuildCache().addEventListeners(new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
 
         // set up event manager
-        logger.warn("Preparing Event Manager (Provider)...");
+        logger.info("Preparing Event Manager (Provider)...");
         EventManagerProvider eventManagerProvider = new EventManagerProvider()
                 .setFactory(obj -> new MultiThreadedEventManager());
         shutdownHook.addShutdownAble(eventManagerProvider);
 
         // setup shard builder
-        logger.warn("Setting Up Shard Builder...");
+        logger.info("Setting Up Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
                 .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
                 .setEventManagerProvider(eventManagerProvider::provideOrCreate)
@@ -126,15 +126,15 @@ public class XeniaCore {
             }
         }
         // create shards
-        logger.warn("Building Shards...");
+        logger.info("Building Shards...");
         shardManager = builder.build();
         shutdownHook.addShutdownAble(new SMH(shardManager));
         // application info
-        logger.warn("Getting Application Info...");
+        logger.info("Getting Application Info...");
         ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();
         ownerId = applicationInfo.getOwner().getIdLong();
         // watchdog
-        logger.warn("Starting Watchdog...");
+        logger.info("Starting Watchdog...");
         XeniaWatchdog xeniaWatchdog = new XeniaWatchdog();
         shutdownHook.addShutdownAble(xeniaWatchdog);
         // add wd tasks here

@@ -42,7 +42,10 @@ public class CMDInfo extends Command {
                 .addField("Xenia:", "Version "+ AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Xenia-Backend:","Version "+ XeniaCore.getInstance().getBackendClient().getInfo(Info.Mode.Public).getVersion(), true)
                 .addField("Current Shard:", String.valueOf(commandEvent.getEvent().getJDA().getShardInfo().getShardId()) , true)
-                .addField("Website:", "[Visit Website](https://xenia.netbeacon.de/)", true);
+                .addField("Instance:", commandEvent.getBackendClient().getSetupData().getClientName() , true)
+                .addField("Location:", commandEvent.getBackendClient().getSetupData().getClientLocation() , true)
+                .addField("Website:", "[Visit Website](https://xenia.netbeacon.de/)", true)
+                .addField("Privacy:", "[Visit Website](https://xenia.netbeacon.de/botprivacy)", true);
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
     }
 }

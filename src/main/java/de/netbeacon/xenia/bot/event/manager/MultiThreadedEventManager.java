@@ -33,7 +33,7 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
     private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
 
     public MultiThreadedEventManager(){
-        this.scalingExecutor = new ScalingExecutor(2, 20, 2048, 10, TimeUnit.SECONDS);
+        this.scalingExecutor = new ScalingExecutor(2, 25, 2048, 10, TimeUnit.SECONDS);
     }
 
     @Override
