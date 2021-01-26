@@ -52,7 +52,7 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
      * @throws IOException on exception
      */
     public DiscordWebhookAppender() throws IOException {
-        Config config = new Config(new File("./xenia-backend/config/webhook"));
+        Config config = new Config(new File("./xenia/config/sys.config"));
         String webhookURL = config.getString("webhookURL");
         webhookClient = WebhookClient.withUrl(webhookURL);
         scheduledExecutorService.scheduleAtFixedRate(()->{
@@ -60,7 +60,7 @@ public class DiscordWebhookAppender extends AppenderSkeleton {
                 return;
             }
             WebhookMessageBuilder webhookMessageBuilder = new WebhookMessageBuilder()
-                    .setUsername("Xenia-Backend");
+                    .setUsername("Xenia");
             int i = 0;
             while(i++ < 10 && !eventCache.isEmpty()){
                 LogContainer logContainer = eventCache.remove();
