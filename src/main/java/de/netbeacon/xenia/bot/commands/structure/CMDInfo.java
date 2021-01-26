@@ -45,7 +45,9 @@ public class CMDInfo extends Command {
                 .addField("Instance:", commandEvent.getBackendClient().getSetupData().getClientName() , true)
                 .addField("Location:", commandEvent.getBackendClient().getSetupData().getClientLocation() , true)
                 .addField("Website:", "[Visit Website](https://xenia.netbeacon.de/)", true)
-                .addField("Privacy:", "[Visit Website](https://xenia.netbeacon.de/botprivacy)", true);
+                .addField("Data Processing", "[Visit Website](https://xenia.netbeacon.de/processing)", true)
+                .addField("Report Content", "[Visit Website](https://xenia.netbeacon.de/report)", true)
+                .addField("Contact", "[Visit Website](https://xenia.netbeacon.de/contact)", true);
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
     }
 }
