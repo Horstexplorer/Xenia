@@ -25,10 +25,10 @@ public class Init {
 
     public static void main(String...args){
         try{
-            logger.warn("Starting Xenia");
+            logger.info("! Starting Xenia !");
             XeniaCore.getInstance(true);
         }catch (Exception e){
-            logger.error("Failed To Start Xenia: ", e);
+            logger.error(" ! Failed To Start Xenia !", e);
         }
     }
 }
