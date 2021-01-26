@@ -79,8 +79,10 @@ public class CMDInfo extends Command {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia","Version: "+AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), false)
                 .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
-                .addField("Shard", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)
-                .addField("Shards", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)
+                .addField("Shards:", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)
+                .addField("Shard:", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)
+                .addField("Instance:", commandEvent.getBackendClient().getSetupData().getClientName() , true)
+                .addField("Location:", commandEvent.getBackendClient().getSetupData().getClientLocation() , true)
                 .addField("Uptime:", String.format("%d days, %d hours, %d min, %d seconds",
                         (int)((uptime / (1000*60*60*24))),
                         (int)((uptime / (1000*60*60)) % 24),
