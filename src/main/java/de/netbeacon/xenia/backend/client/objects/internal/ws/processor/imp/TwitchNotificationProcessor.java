@@ -32,27 +32,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
-import java.util.function.Supplier;
 
 public class TwitchNotificationProcessor extends WSProcessor {
 
     private final XeniaBackendClient xeniaBackendClient;
-    private final Supplier<ShardManager> shardManagerSupplier;
     private final Logger logger = LoggerFactory.getLogger(TwitchNotificationProcessor.class);
 
-    public TwitchNotificationProcessor(XeniaBackendClient xeniaBackendClient, Supplier<ShardManager> shardManagerSupplier) {
+    public TwitchNotificationProcessor(XeniaBackendClient xeniaBackendClient) {
         super("twitchnotify");
         this.xeniaBackendClient = xeniaBackendClient;
-        this.shardManagerSupplier = shardManagerSupplier;
     }
 
     @Override
     public WSResponse process(WSRequest wsRequest) {
         try{
             JSONObject data = wsRequest.getPayload();
-            if(shardManagerSupplier.get() == null) return null;
+            if(xeniaBackendClient.getShardManagerSupplier().get() == null) return null;
             // get the guild
-            ShardManager shardManager = shardManagerSupplier.get();
+            ShardManager shardManager = xeniaBackendClient.getShardManagerSupplier().get() ;
             Guild guild = shardManager.getGuildById(data.getLong("guildId"));
             if(guild == null){ return null; }
             // get the notification details
