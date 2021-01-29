@@ -81,7 +81,7 @@ public class ShutdownInterruptProcessor extends WSProcessor {
         // initialize backend client shutdown
         scheduledExecutorService.schedule(()->{
             try{
-                xeniaBackendClient.pauseExecution();
+                xeniaBackendClient.suspendExecution(true);
                 future = scheduledExecutorService.scheduleAtFixedRate(()->{
                     try{
                         Ping p = new Ping(xeniaBackendClient.getBackendProcessor());
@@ -90,7 +90,7 @@ public class ShutdownInterruptProcessor extends WSProcessor {
                         }
                         future.cancel(false); // let it run but this is the last time
                         // reenable everything
-                        xeniaBackendClient.resumeExecution();
+                        xeniaBackendClient.suspendExecution(false);
                         shardManager.getShards().stream().map(JDA::getEventManager).forEach(eventManager -> {
                             if(eventManager instanceof MultiThreadedEventManager){
                                 ((MultiThreadedEventManager) eventManager).halt(false);
