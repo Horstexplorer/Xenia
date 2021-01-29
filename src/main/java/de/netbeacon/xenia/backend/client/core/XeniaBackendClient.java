@@ -179,10 +179,9 @@ public class XeniaBackendClient implements IShutdown {
 
     @Override
     public void onShutdown() throws Exception {
-        primaryWebSocketListener.stop();
-        secondaryWebsocketListener.stop();
         keyUpdateTaskExecutor.shutdownNow();
         primaryWebSocketListener.onShutdown();
+        secondaryWebsocketListener.onShutdown();
         backendProcessor.onShutdown();
     }
 }
