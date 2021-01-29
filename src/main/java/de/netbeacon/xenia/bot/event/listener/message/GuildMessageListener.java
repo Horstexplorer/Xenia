@@ -16,7 +16,6 @@
 
 package de.netbeacon.xenia.bot.event.listener.message;
 
-import de.netbeacon.utils.config.Config;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.Command;
@@ -45,7 +44,7 @@ public class GuildMessageListener extends ListenerAdapter {
     private final EventWaiter eventWaiter;
     private final MessageHandler commandHandler;
 
-    public GuildMessageListener(Config config, XeniaBackendClient backendClient, EventWaiter eventWaiter){
+    public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter){
         this.eventWaiter = eventWaiter;
 
         HashMap<String, Command> commandMap = new HashMap<>();

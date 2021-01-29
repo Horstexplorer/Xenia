@@ -64,23 +64,17 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
         if(halt.get()){
             return;
         }
-        for(EventListener listener : listeners){
-            try {
-                scalingExecutor.execute(()->{
-                    try {
-                        listener.onEvent(event);
-                    }catch (Throwable t){
-                        JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-                        if (t instanceof Error)
-                            throw (Error) t;
-                    }
-                });
-            }catch (Throwable t){
-                JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-                if (t instanceof Error)
-                    throw (Error) t;
+        scalingExecutor.execute(()->{
+            for(EventListener listener : listeners){
+                try {
+                    listener.onEvent(event);
+                }catch (Throwable t){
+                    JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
+                    if (t instanceof Error)
+                        throw (Error) t;
+                }
             }
-        }
+        });
     }
 
     @NotNull

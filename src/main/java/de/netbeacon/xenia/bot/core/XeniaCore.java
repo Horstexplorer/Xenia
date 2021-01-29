@@ -106,7 +106,7 @@ public class XeniaCore {
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(config, xeniaBackendClient, eventWaiter),
+                        new GuildMessageListener(xeniaBackendClient, eventWaiter),
                         new GuildReactionListener(eventWaiter)
                 );
         if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
