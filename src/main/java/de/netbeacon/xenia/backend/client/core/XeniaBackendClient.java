@@ -20,18 +20,15 @@ import de.netbeacon.utils.shutdownhook.IShutdown;
 import de.netbeacon.xenia.backend.client.objects.cache.GuildCache;
 import de.netbeacon.xenia.backend.client.objects.cache.LicenseCache;
 import de.netbeacon.xenia.backend.client.objects.cache.UserCache;
-import de.netbeacon.xenia.backend.client.objects.external.Info;
-import de.netbeacon.xenia.backend.client.objects.external.SetupData;
+import de.netbeacon.xenia.backend.client.objects.external.system.Info;
+import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.PrimaryWebsocketListener;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.SecondaryWebsocketListener;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSProcessorCore;
-import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.HeartbeatProcessor;
-import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.IdentifyProcessor;
-import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.StatisticsProcessor;
-import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.TwitchNotificationProcessor;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp.*;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
@@ -39,7 +36,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 public class XeniaBackendClient implements IShutdown {
@@ -57,9 +56,10 @@ public class XeniaBackendClient implements IShutdown {
 
     private SetupData setupDataCache = null;
 
-    private Supplier<ShardManager> shardManagerSupplier;
+    private final Supplier<ShardManager> shardManagerSupplier;
 
-    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService keyUpdateTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledFuture<?> keyUpdateTask;
 
     public XeniaBackendClient(BackendSettings backendSettings, Supplier<ShardManager> shardManagerSupplier){
         this.backendSettings = backendSettings;
@@ -77,7 +77,7 @@ public class XeniaBackendClient implements IShutdown {
         // check login
         backendProcessor.activateToken();
         // create update task
-        scheduledExecutorService.scheduleAtFixedRate(()->{
+        keyUpdateTask = keyUpdateTaskExecutor.scheduleAtFixedRate(()->{
             try{backendProcessor.activateToken();}catch (Exception ignore){}
         }, 2, 2, TimeUnit.MINUTES);
         // activate websocket
@@ -89,7 +89,8 @@ public class XeniaBackendClient implements IShutdown {
                         new HeartbeatProcessor(),
                         new IdentifyProcessor(this),
                         new StatisticsProcessor(this),
-                        new TwitchNotificationProcessor(this, shardManagerSupplier)
+                        new TwitchNotificationProcessor(this),
+                        new ShutdownInterruptProcessor(this)
                 );
         secondaryWebsocketListener = new SecondaryWebsocketListener(this, wsProcessorCore);
         secondaryWebsocketListener.start();
@@ -151,9 +152,35 @@ public class XeniaBackendClient implements IShutdown {
         return secondaryWebsocketListener;
     }
 
+    public Supplier<ShardManager> getShardManagerSupplier() {
+        return shardManagerSupplier;
+    }
+
+    private final AtomicBoolean suspended = new AtomicBoolean(false);
+
+    public void pauseExecution(){
+        if(!suspended.get()){
+            keyUpdateTask.cancel(true);
+            secondaryWebsocketListener.stop();
+            primaryWebSocketListener.stop();
+        }
+    }
+
+    public void resumeExecution(){
+        if(suspended.get()){
+            primaryWebSocketListener.start();
+            keyUpdateTask = keyUpdateTaskExecutor.scheduleAtFixedRate(()->{
+                try{backendProcessor.activateToken();}catch (Exception ignore){}
+            }, 2, 2, TimeUnit.MINUTES);
+            secondaryWebsocketListener.start();
+        }
+    }
+
     @Override
     public void onShutdown() throws Exception {
-        scheduledExecutorService.shutdownNow();
+        primaryWebSocketListener.stop();
+        secondaryWebsocketListener.stop();
+        keyUpdateTaskExecutor.shutdownNow();
         primaryWebSocketListener.onShutdown();
         backendProcessor.onShutdown();
     }

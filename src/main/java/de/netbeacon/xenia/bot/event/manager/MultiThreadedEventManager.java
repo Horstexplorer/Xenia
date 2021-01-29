@@ -25,12 +25,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MultiThreadedEventManager implements IExtendedEventManager {
 
     private long lastEvent;
     private final ScalingExecutor scalingExecutor;
     private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
+    private final AtomicBoolean halt = new AtomicBoolean(false);
 
     public MultiThreadedEventManager(){
         this.scalingExecutor = new ScalingExecutor(2, 25, 2048, 10, TimeUnit.SECONDS);
@@ -52,9 +54,16 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
         listeners.remove(listener);
     }
 
+    public void halt(boolean value){
+        halt.set(value);
+    }
+
     @Override
     public void handle(@NotNull GenericEvent event) {
         lastEvent = System.currentTimeMillis();
+        if(halt.get()){
+            return;
+        }
         for(EventListener listener : listeners){
             try {
                 scalingExecutor.execute(()->{
