@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
-import de.netbeacon.xenia.backend.client.objects.external.Info;
+import de.netbeacon.xenia.backend.client.objects.external.system.Info;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
