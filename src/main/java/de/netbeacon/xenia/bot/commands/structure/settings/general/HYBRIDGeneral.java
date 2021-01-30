@@ -27,6 +27,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -52,7 +53,7 @@ public class HYBRIDGeneral extends HybridCommand {
                 EmbedBuilderFactory.getDefaultEmbed("General Guild Setting", commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
                         .addField("preferred language", guild.getPreferredLanguage(), true)
                         .addField("prefix", guild.getPrefix(), true)
-                        .addField("use VPerms", String.valueOf(guild.useVPerms()), true)
+                        .addField("settings", Arrays.toString(guild.getSettings().getBits().toArray()), true)
                         .addBlankField(false)
                         .addField("license name", license.getLicenseName(), false)
                         .addField("valid until", (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)

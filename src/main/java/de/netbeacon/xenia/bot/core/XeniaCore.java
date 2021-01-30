@@ -22,6 +22,7 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
@@ -29,8 +30,10 @@ import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.misc.listener.GuildLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
+import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
@@ -89,8 +92,9 @@ public class XeniaCore {
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
         SharedOkHttpClient.getInstance(true);
-        xeniaBackendClient.getGuildCache().addEventListeners(new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
-
+        TranslationManager translationManager = TranslationManager.getInstance(true);
+        xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
+        xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
         // set up event manager
         logger.info("Preparing Event Manager (Provider)...");
         EventManagerProvider eventManagerProvider = new EventManagerProvider()

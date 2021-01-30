@@ -97,6 +97,7 @@ public class ShutdownInterruptProcessor extends WSProcessor {
                             }
                         });
                         shardManager.setPresence(OnlineStatus.ONLINE, Activity.playing(descriptionOld));
+                        logger.warn("! Restored From Shutdown Interrupt !");
                     }catch (Exception e){
                         logger.warn(
                                 "! Failed To Restore From Shutdown Interrupt !\n" +
