@@ -43,7 +43,7 @@ public class SharedExecutor implements IShutdown {
      * @param initIfNeeded initializes an instance of this class if no other exists
      * @return this
      */
-    public static SharedExecutor getInstance(boolean initIfNeeded){
+    public static synchronized SharedExecutor getInstance(boolean initIfNeeded){
         if(instance == null && initIfNeeded){
             instance = new SharedExecutor();
         }

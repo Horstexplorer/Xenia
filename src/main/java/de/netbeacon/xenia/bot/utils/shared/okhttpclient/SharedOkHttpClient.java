@@ -28,7 +28,7 @@ public class SharedOkHttpClient {
      * @param initIfNeeded initializes an instance of this class if no other exists
      * @return this
      */
-    public static OkHttpClient getInstance(boolean initIfNeeded){
+    public static synchronized OkHttpClient getInstance(boolean initIfNeeded){
         if(okHttpClient == null && initIfNeeded){
             okHttpClient = new OkHttpClient.Builder().build();
         }

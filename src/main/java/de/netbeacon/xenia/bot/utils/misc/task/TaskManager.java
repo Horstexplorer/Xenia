@@ -30,7 +30,7 @@ public class TaskManager implements IShutdown {
         scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     }
 
-    public static TaskManager getInstance(boolean initializeIfPossible){
+    public static synchronized TaskManager getInstance(boolean initializeIfPossible){
         if(instance == null && initializeIfPossible){
             instance = new TaskManager();
         }
