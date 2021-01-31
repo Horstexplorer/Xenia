@@ -49,7 +49,7 @@ public class CMDDelete extends Command {
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
             Tag tag = tagCache.get(tagA.getValue());
-            if(tag.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+            if(tag.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
                 throw new RuntimeException("User Does Not Own This Tag");
             }
             tagCache.delete(tag.getId());

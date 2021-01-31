@@ -47,7 +47,7 @@ public class CMDDelete extends Command {
         CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
         try{
             Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
-            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
                 throw new RuntimeException("User Does Not Own This Notification");
             }
             commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
