@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
@@ -43,19 +44,19 @@ public class CMDDeleted extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = messageCache.getLast("deleted");
         if(bMessage == null){
             commandEvent.getEvent().getChannel().sendMessage(
-                    onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))
+                    onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))
             ).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});
         }else{
-            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
-                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
-                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
-                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
+                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
+                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
+                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
                     .build()
             ).queue(s->{}, e->{});
         }

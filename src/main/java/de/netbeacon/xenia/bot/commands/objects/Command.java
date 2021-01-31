@@ -49,11 +49,6 @@ public abstract class Command {
     private final HashMap<String, Command> children = new HashMap<>();
     private boolean isHybrid = false;
 
-    private boolean isCopy = false;
-    // lang related things
-    private TranslationPackage translationPackage;
-    private String description;
-
     /**
      * Creates a new instance of the command as command
      *
@@ -99,9 +94,6 @@ public abstract class Command {
      * @param translationPackage of the target language
      */
     public Command(Command command, TranslationPackage translationPackage){
-        this.isCopy = true;
-        this.translationPackage = translationPackage;
-        this.description = translationPackage.getTranslation(getClass().getName()+".description");
         // COPY DATA
         this.alias = command.getAlias();
         this.commandCooldown = command.getCommandCooldown();
@@ -136,8 +128,8 @@ public abstract class Command {
      *
      * @return description
      */
-    public String getDescription() {
-        return description;
+    public String getDescription(TranslationPackage translationPackage) {
+        return translationPackage.getTranslation(getClass().getName()+".description");
     }
 
     /**
@@ -201,27 +193,6 @@ public abstract class Command {
     public HashMap<String, Command> getChildCommands(){return children;}
 
     /**
-     * Returns if this is a copy of the command
-     *
-     * @return boolean
-     */
-    public boolean isCopy() {
-        return isCopy;
-    }
-
-    public abstract Command createCopy(TranslationPackage translationPackage);
-
-    /**
-     * Returns the translation package set for the current instance.
-     * This might return null if this is not a copy of the original command
-     *
-     * @return TranslationPackage or null
-     */
-    public TranslationPackage getTranslationPackage() {
-        return translationPackage;
-    }
-
-    /**
      * Used to add child commands to this command
      *
      * This wont do anything if this object is not a command handler
@@ -265,10 +236,9 @@ public abstract class Command {
      */
     private void execute(List<String> args, CommandEvent commandEvent, boolean s2){
         if(!isCommandHandler || (s2 && isHybrid)){
-            if(!isCopy){
-                // create a copy of this object with the right language data
-                Command copy = createCopy(TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember()));
-                copy.execute(args, commandEvent, s2);
+            TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+            if(translationPackage == null){
+                commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                 return;
             }
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
@@ -277,7 +247,7 @@ public abstract class Command {
                 // process cd
                 if(!commandCooldown.allow(guildId, authorId)){
                     // cd running
-                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                     return;
                 }
                 // activate cd
@@ -288,14 +258,14 @@ public abstract class Command {
             //if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
             if(!cmdArgs.verify()){
                 // missing args
-                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                 return;
             }
             // check bot permissions
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(),getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 }
                 return;
             }
@@ -315,12 +285,12 @@ public abstract class Command {
                     )
             ){
                 // invalid permission
-                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 return;
             }
 
             // everything alright
-            onExecution(cmdArgs, commandEvent);
+            onExecution(cmdArgs, commandEvent, translationPackage);
         }else{
             if(args.size() > 0) {
                 Command command = children.get(args.get(0).toLowerCase());
@@ -345,7 +315,7 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onCooldownActive(){
+    public MessageEmbed onCooldownActive(TranslationPackage translationPackage){
         return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onCooldownActive.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onCooldownActive.description"))
@@ -357,7 +327,7 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingBotPerms(){
+    public MessageEmbed onMissingBotPerms(TranslationPackage translationPackage){
         return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingBotPerms.description"))
@@ -371,7 +341,7 @@ public abstract class Command {
      * @param vPerms show vPerms or default
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingMemberPerms(boolean vPerms){
+    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean vPerms){
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingMemberPerms.description"));
@@ -388,7 +358,7 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingArgs(){
+    public MessageEmbed onMissingArgs(TranslationPackage translationPackage){
         StringBuilder usage = new StringBuilder().append("<> ").append(alias).append(" ");
         for(CmdArgDef s : requiredArgs){
             usage.append("<").append(s.getName()).append(">").append(" ");
@@ -406,7 +376,7 @@ public abstract class Command {
      * @param message the message which should be displayed
      * @return MessageEmbed
      */
-    public MessageEmbed onError(String message){
+    public MessageEmbed onError(TranslationPackage translationPackage, String message){
         return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onError.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .setDescription(message)
@@ -419,7 +389,7 @@ public abstract class Command {
      * @param message the message which should be displayed
      * @return MessageEmbed
      */
-    public MessageEmbed onSuccess(String message){
+    public MessageEmbed onSuccess(TranslationPackage translationPackage, String message){
         return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onSuccess.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.GREEN)
                 .setDescription(message)
@@ -428,9 +398,9 @@ public abstract class Command {
 
     /**
      * Called on execution of the command
-     *
-     * @param args remaining arguments of the message
+     *  @param args remaining arguments of the message
      * @param commandEvent CommandEvent
+     * @param translationPackage translation package which should be used
      */
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage);
 }

@@ -66,19 +66,6 @@ public abstract class CommandGroup extends Command{
     }
 
     /**
-     * Added copy constructor
-     * @param commandGroup to copy
-     * @param translationPackage to insert
-     */
-    public CommandGroup(CommandGroup commandGroup, TranslationPackage translationPackage){
-        super(commandGroup, translationPackage);
-        this.parent = commandGroup.getParent();
-        if(commandGroup.isHybrid()){
-            activateHybridMode();
-        }
-    }
-
-    /**
      * Returns the parent group
      *
      * @return parent group or null
@@ -88,5 +75,5 @@ public abstract class CommandGroup extends Command{
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {}
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {}
 }

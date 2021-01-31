@@ -26,8 +26,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class TranslationManager {
 
@@ -79,6 +81,10 @@ public class TranslationManager {
         }else{
             return getTranslationPackage(member.getUser().getPreferredLanguage());
         }
+    }
+
+    public List<String> getLanguageIds(){
+        return translationPackages.values().stream().map(TranslationPackage::getLanguageId).collect(Collectors.toList());
     }
 
 }

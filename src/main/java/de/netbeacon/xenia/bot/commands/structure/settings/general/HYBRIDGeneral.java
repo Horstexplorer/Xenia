@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
@@ -43,25 +44,26 @@ public class HYBRIDGeneral extends HybridCommand {
         );
         addChildCommand(new CMDLicense());
         addChildCommand(new CMDPrefix());
+        addChildCommand(new CMDLanguage());
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         License license = commandEvent.getBackendDataPack().getbLicense();
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.1.title"), guild.getPreferredLanguage(), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.2.title"), guild.getPrefix(), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)
+                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.1.title"), guild.getPreferredLanguage(), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.2.title"), guild.getPrefix(), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)
                         .addBlankField(false)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.4.title"), license.getLicenseName(), false)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.5.title"), (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.6.title"), String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.7.title"), String.valueOf(license.getPerk_MISC_TAGS_C()), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
-                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.4.title"), license.getLicenseName(), false)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.5.title"), (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.6.title"), String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.7.title"), String.valueOf(license.getPerk_MISC_TAGS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
                         .build()
         ).queue();
     }

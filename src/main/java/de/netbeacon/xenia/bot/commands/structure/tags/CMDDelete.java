@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +44,7 @@ public class CMDDelete extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
@@ -52,9 +53,9 @@ public class CMDDelete extends Command {
                 throw new RuntimeException("User Does Not Own This Tag");
             }
             tagCache.delete(tag.getId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getId()))).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getId()))).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

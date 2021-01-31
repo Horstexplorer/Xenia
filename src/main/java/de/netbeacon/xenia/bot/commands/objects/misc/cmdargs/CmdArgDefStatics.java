@@ -61,6 +61,8 @@ public class CmdArgDefStatics {
             .predicateAddStringLengthRange(1, 1500)
             .buildAllMatch();
     // SETTINGS
+    public static final CmdArgDef<String> GUILD_LANGUAGE_ID_DEF = new CmdArgDef.Builder<String>("language", String.class)
+            .buildAllMatch();
     public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<String>("licensekey", String.class)
             .predicateAddStringLengthRange(64,64)
             .buildAllMatch();

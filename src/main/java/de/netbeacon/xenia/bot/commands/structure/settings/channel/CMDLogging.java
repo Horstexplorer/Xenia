@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -43,7 +44,7 @@ public class CMDLogging extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         try{
             CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
             CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
@@ -57,9 +58,9 @@ public class CMDLogging extends Command {
                 channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
             }
             channel.update();
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

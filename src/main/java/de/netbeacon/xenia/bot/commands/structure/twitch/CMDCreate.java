@@ -23,6 +23,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -45,7 +46,7 @@ public class CMDCreate extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         try{
             CmdArg<String> channelUrl = args.getByIndex(0);
             CmdArg<String> customMessageC = args.getByIndex(1);
@@ -58,9 +59,9 @@ public class CMDCreate extends Command {
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
             // send response
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

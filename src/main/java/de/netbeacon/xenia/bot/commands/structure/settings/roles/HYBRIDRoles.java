@@ -23,6 +23,7 @@ import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
@@ -42,7 +43,7 @@ public class HYBRIDRoles extends HybridCommand {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         StringBuilder stringBuilder = new StringBuilder();
         for(Role role : guild.getRoleCache().getAllAsList()){
@@ -50,10 +51,10 @@ public class HYBRIDRoles extends HybridCommand {
         }
         String roleS = stringBuilder.toString();
         if(roleS.isEmpty()){
-            roleS = getTranslationPackage().getTranslation(getClass().getName()+".response.is_empty");
+            roleS = translationPackage.getTranslation(getClass().getName()+".response.is_empty");
         }
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
                 .setDescription(roleS)
                 .build()
         ).queue();

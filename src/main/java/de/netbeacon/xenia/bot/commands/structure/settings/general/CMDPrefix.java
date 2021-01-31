@@ -23,6 +23,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -43,15 +44,15 @@ public class CMDPrefix extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         CmdArg<String> newPrefix = args.getByIndex(0);
         String prefix = (newPrefix.getValue() != null) ? newPrefix.getValue() : "~";
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         try{
             guild.setPrefix(prefix);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslationWithPlaceholders(".response.success.msg", guild.getPrefix()))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(".response.success.msg", guild.getPrefix()))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

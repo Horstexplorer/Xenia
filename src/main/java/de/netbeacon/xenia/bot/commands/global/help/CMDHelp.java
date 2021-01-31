@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -52,7 +53,7 @@ public class CMDHelp extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         // build command path
         StringBuilder commandPathBuilder = new StringBuilder();
@@ -66,7 +67,7 @@ public class CMDHelp extends Command {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
         StringBuilder help = new StringBuilder().append("```");
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
-            Command c = entry.getValue().createCopy(getTranslationPackage());
+            Command c = entry.getValue();
             help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
             if(c.isCommandHandler()){
                 help.append("#").append(" ");
@@ -75,11 +76,11 @@ public class CMDHelp extends Command {
                     help.append("<").append(s.getName()).append(">").append(" ");
                 }
             }
-            help.append("-").append(" ").append(c.getDescription()).append("\n");
+            help.append("-").append(" ").append(c.getDescription(translationPackage)).append("\n");
         }
         help.append("```");
-        embedBuilder.addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.1.title"), help.toString(), false);
+        embedBuilder.addField(translationPackage.getTranslation(getClass().getName()+".response.field.1.title"), help.toString(), false);
         // send result
-        event.getChannel().sendMessage(getTranslationPackage().getTranslation(getClass().getName()+".response.title")+"\n"+help.toString()).queue();
+        event.getChannel().sendMessage(translationPackage.getTranslation(getClass().getName()+".response.title")+"\n"+help.toString()).queue();
     }
 }

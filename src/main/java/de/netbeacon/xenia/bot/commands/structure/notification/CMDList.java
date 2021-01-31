@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
@@ -45,7 +46,7 @@ public class CMDList extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         // list all notifications
         NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
         StringBuilder stringBuilder = new StringBuilder();
@@ -56,7 +57,7 @@ public class CMDList extends Command {
             }catch (Exception ignore){}
             stringBuilder.append(notification.getId()).append(" - ").append((user != null) ? user.getMetaUsername() : notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
         }
-        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();
         commandEvent.getEvent().getChannel().sendMessage(messageEmbed).queue();
     }

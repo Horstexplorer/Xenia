@@ -45,20 +45,11 @@ public abstract class HybridCommand extends CommandGroup{
     }
 
     /**
-     * Copy constructor
-     * @param hybridCommand to copy
-     * @param translationPackage to insert
-     */
-    public HybridCommand(HybridCommand hybridCommand, TranslationPackage translationPackage){
-        super(hybridCommand, translationPackage);
-    }
-
-    /**
      * Called on execution of the command
-     *
-     * @param args remaining arguments of the message
+     *  @param args remaining arguments of the message
      * @param commandEvent CommandEvent
+     * @param translationPackage translation package
      */
     @Override
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage);
 }

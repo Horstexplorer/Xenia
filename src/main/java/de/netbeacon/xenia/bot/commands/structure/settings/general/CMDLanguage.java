@@ -14,53 +14,49 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.channel;
+package de.netbeacon.xenia.bot.commands.structure.settings.general;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
-import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ACCESS_MODE;
-import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ID_OPTIONAL;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.GUILD_LANGUAGE_ID_DEF;
 
-public class CMDAccessMode extends Command {
+public class CMDLanguage extends Command {
 
-    public CMDAccessMode() {
-        super("accessmode", new CommandCooldown(CommandCooldown.Type.User, 2000),
+    public CMDLanguage() {
+        super("language", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CHANNEL_ACCESS_MODE, CHANNEL_ID_OPTIONAL)
+                List.of(GUILD_LANGUAGE_ID_DEF)
         );
     }
 
     @Override
     public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+        CmdArg<String> langIdA = args.getByIndex(0);
+        String languageId = langIdA.getValue();
+        TranslationPackage translationPackage1 = TranslationManager.getInstance().getTranslationPackage(languageId);
         try{
-            CmdArg<String> channelAccessModeArg = args.getByIndex(0);
-            CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
-            Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
-            if(channel == null){
-                throw new Exception();
+            if(translationPackage1 == null){
+                throw new RuntimeException();
             }
-            Channel.AccessMode.Mode accessModeMode = Channel.AccessMode.Mode.valueOf(channelAccessModeArg.getValue().toUpperCase());
-            Channel.AccessMode accessMode = new Channel.AccessMode(0);
-            accessMode.set(accessModeMode);
-            channel.setAccessMode(accessMode);
+            commandEvent.getBackendDataPack().getbGuild().setPreferredLanguage(translationPackage1.getLanguageId());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

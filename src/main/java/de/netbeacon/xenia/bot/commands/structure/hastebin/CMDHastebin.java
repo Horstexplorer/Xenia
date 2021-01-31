@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.hastebin.HastebinUtil;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -41,6 +42,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class CMDHastebin extends Command {
 
+    private static final Tika TIKA = new Tika();
+
     public CMDHastebin() {
         super("hastebin", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
@@ -50,18 +53,16 @@ public class CMDHastebin extends Command {
         );
     }
 
-    private static final Tika TIKA = new Tika();
-
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         List<Message.Attachment> attachments = commandEvent.getEvent().getMessage().getAttachments();
         TextChannel textChannel = commandEvent.getEvent().getChannel();
 
         if(attachments.isEmpty()){
-            textChannel.sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
+            textChannel.sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
         }
         StringBuilder stringBuilder = new StringBuilder()
-                .append(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))
+                .append(translationPackage.getTranslation(getClass().getName()+".response.success.msg"))
                 .append(commandEvent.getEvent().getAuthor().getAsMention())
                 .append(":\n");
         Lock lock = new ReentrantLock();
@@ -101,7 +102,7 @@ public class CMDHastebin extends Command {
                 });
 
         CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0])).join();
-        textChannel.sendMessage(onSuccess(stringBuilder.toString())).queue();
+        textChannel.sendMessage(onSuccess(translationPackage, stringBuilder.toString())).queue();
         // delete original message
         commandEvent.getEvent().getMessage().delete().queue();
     }
