@@ -45,6 +45,7 @@ public class HYBRIDGeneral extends HybridCommand {
         addChildCommand(new CMDLicense());
         addChildCommand(new CMDPrefix());
         addChildCommand(new CMDLanguage());
+        addChildCommand(new CMDSettings());
     }
 
     @Override
