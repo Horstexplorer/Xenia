@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("modify", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
@@ -51,12 +51,12 @@ public class CMDModify extends Command {
         try{
             Tag tag = tagCache.get(tagA.getValue());
             if(commandEvent.getEvent().getAuthor().getIdLong() != tag.getUserId()){
-                throw new RuntimeException("Cant Modify Tag When Not Owner");
+                throw new RuntimeException("User Does Not Own This Tag");
             }
             tag.setTagContent(content.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tagA.getValue()+" Updated")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getId()))).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+tagA.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

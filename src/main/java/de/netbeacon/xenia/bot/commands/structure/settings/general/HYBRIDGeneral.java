@@ -35,7 +35,7 @@ import java.util.List;
 public class HYBRIDGeneral extends HybridCommand {
 
     public HYBRIDGeneral(CommandGroup parent) {
-        super(parent, "general", "Contains general guild settings", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(parent, "general", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -50,18 +50,18 @@ public class HYBRIDGeneral extends HybridCommand {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         License license = commandEvent.getBackendDataPack().getbLicense();
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed("General Guild Setting", commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
-                        .addField("preferred language", guild.getPreferredLanguage(), true)
-                        .addField("prefix", guild.getPrefix(), true)
-                        .addField("settings", Arrays.toString(guild.getSettings().getBits().toArray()), true)
+                EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.1.title"), guild.getPreferredLanguage(), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.2.title"), guild.getPrefix(), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)
                         .addBlankField(false)
-                        .addField("license name", license.getLicenseName(), false)
-                        .addField("valid until", (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
-                        .addField("max VPerm roles", String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
-                        .addField("max tags", String.valueOf(license.getPerk_MISC_TAGS_C()), true)
-                        .addField("max notification", String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
-                        .addField("max twitch notification", String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
-                        .addField("max message logging", String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.4.title"), license.getLicenseName(), false)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.5.title"), (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.6.title"), String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.7.title"), String.valueOf(license.getPerk_MISC_TAGS_C()), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
+                        .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
                         .build()
         ).queue();
     }

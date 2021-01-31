@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("create", new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
@@ -53,9 +53,9 @@ public class CMDCreate extends Command {
         NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
         try{
             Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+") created by "+commandEvent.getEvent().getAuthor().getAsTag())).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))+" (ID: "+notification.getId()+" | "+commandEvent.getEvent().getAuthor().getAsTag()+")").queue(s->{}, e->{});
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to create notification! Perhaps the cache is full?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});
         }
     }
 }

@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDUpdate extends Command {
 
     public CMDUpdate() {
-        super("update", "Update stream notifications for a channel", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("update", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
@@ -51,9 +51,9 @@ public class CMDUpdate extends Command {
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             TwitchNotification notification = notificationCache.get(notificationid.getValue());
             notification.setNotificationMessage(customMessage.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

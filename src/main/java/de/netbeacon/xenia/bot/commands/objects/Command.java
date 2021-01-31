@@ -24,6 +24,8 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -38,7 +40,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class Command {
 
     private final String alias;
-    private final String description;
     private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
@@ -48,20 +49,23 @@ public abstract class Command {
     private final HashMap<String, Command> children = new HashMap<>();
     private boolean isHybrid = false;
 
+    private boolean isCopy = false;
+    // lang related things
+    private TranslationPackage translationPackage;
+    private String description;
+
     /**
      * Creates a new instance of the command as command
      *
      * @param alias of the command
-     * @param description of the command
      * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
      * @param memberPrimaryPermissions required for the member using discord perms
      * @param memberSecondaryPermission required for the member using v perms
      * @param commandArgs for the command
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+    public Command(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
         this.alias = alias;
-        this.description = description;
         this.commandCooldown = commandCooldown;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
@@ -82,13 +86,41 @@ public abstract class Command {
      * Creates a new instance of the command as command handler
      *
      * @param alias of the command handler
-     * @param description of the command handler
      */
-    public Command(String alias, String description){
+    public Command(String alias){
         this.alias = alias;
-        this.description = description;
         this.isCommandHandler = true;
     }
+
+
+    /**
+     * Create a copy of an existing command to apply the translation to
+     * @param command command
+     * @param translationPackage of the target language
+     */
+    public Command(Command command, TranslationPackage translationPackage){
+        this.isCopy = true;
+        this.translationPackage = translationPackage;
+        this.description = translationPackage.getTranslation(getClass().getName()+".description");
+        // COPY DATA
+        this.alias = command.getAlias();
+        this.commandCooldown = command.getCommandCooldown();
+        if(command.getBotPermissions() != null){
+            this.botPermissions.addAll(command.botPermissions);
+        }
+        if(command.getMemberPrimaryPermissions() != null){
+            this.memberPrimaryPermissions.addAll(command.getMemberPrimaryPermissions());
+        }
+        if(command.getMemberSecondaryPermissions() != null){
+            this.memberSecondaryPermissions.addAll(command.getMemberSecondaryPermissions());
+        }
+        if(command.getCommandArgs() != null){
+            this.requiredArgs.addAll(command.getCommandArgs());
+        }
+        this.isCommandHandler = command.isCommandHandler;
+        command.getChildCommands().values().forEach(this::addChildCommand);
+    }
+
 
     /**
      * Returns the alias of the command
@@ -148,6 +180,10 @@ public abstract class Command {
         return requiredArgs;
     }
 
+    public CommandCooldown getCommandCooldown(){
+        return commandCooldown;
+    }
+
     /**
      * Returns the number of args required to use this command
      *
@@ -163,6 +199,27 @@ public abstract class Command {
      * @return Child commands
      */
     public HashMap<String, Command> getChildCommands(){return children;}
+
+    /**
+     * Returns if this is a copy of the command
+     *
+     * @return boolean
+     */
+    public boolean isCopy() {
+        return isCopy;
+    }
+
+    public abstract Command createCopy(TranslationPackage translationPackage);
+
+    /**
+     * Returns the translation package set for the current instance.
+     * This might return null if this is not a copy of the original command
+     *
+     * @return TranslationPackage or null
+     */
+    public TranslationPackage getTranslationPackage() {
+        return translationPackage;
+    }
 
     /**
      * Used to add child commands to this command
@@ -184,6 +241,14 @@ public abstract class Command {
     }
 
     /**
+     * Check if this command is hybrid
+     * @return boolean
+     */
+    public boolean isHybrid(){
+        return isHybrid;
+    }
+
+    /**
      * Used to execute the command
      * @param args remaining arguments
      * @param commandEvent CommandEvent
@@ -200,6 +265,12 @@ public abstract class Command {
      */
     private void execute(List<String> args, CommandEvent commandEvent, boolean s2){
         if(!isCommandHandler || (s2 && isHybrid)){
+            if(!isCopy){
+                // create a copy of this object with the right language data
+                Command copy = createCopy(TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember()));
+                copy.execute(args, commandEvent, s2);
+                return;
+            }
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
             long authorId = commandEvent.getEvent().getAuthor().getIdLong();
             if(commandCooldown != null){
@@ -275,9 +346,9 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onCooldownActive(){
-        return EmbedBuilderFactory.getDefaultEmbed("Cooldown Active", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onCooldownActive.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("Please wait some time before doing that again")
+                .appendDescription(translationPackage.getTranslation("default.onCooldownActive.description"))
                 .build();
     }
 
@@ -287,10 +358,10 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onMissingBotPerms(){
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Bot Is Missing Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("I am unable to execute the command due to missing permissions!")
-                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
+                .appendDescription(translationPackage.getTranslation("default.onMissingBotPerms.description"))
+                .addField(translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn"), Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -301,15 +372,14 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onMissingMemberPerms(boolean vPerms){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this !");
+                .appendDescription(translationPackage.getTranslation("default.onMissingMemberPerms.description"));
         if(vPerms){
-            embedBuilder.addField("Required Permissions:", Arrays.toString(memberSecondaryPermissions.toArray()), false);
+            embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberSecondaryPermissions.toArray()), false);
         }else{
-            embedBuilder.addField("Required Permissions:", Arrays.toString(memberPrimaryPermissions.toArray()), false);
+            embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberPrimaryPermissions.toArray()), false);
         }
-
         return embedBuilder.build();
     }
 
@@ -323,10 +393,10 @@ public abstract class Command {
         for(CmdArgDef s : requiredArgs){
             usage.append("<").append(s.getName()).append(">").append(" ");
         }
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("This command requires more arguments.")
-                .addField("Usage:", usage.toString(), false)
+                .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
+                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false)
                 .build();
     };
 
@@ -337,7 +407,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onError(String message){
-        return EmbedBuilderFactory.getDefaultEmbed("Error", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onError.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .setDescription(message)
                 .build();
@@ -350,7 +420,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onSuccess(String message){
-        return EmbedBuilderFactory.getDefaultEmbed("Success", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onSuccess.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.GREEN)
                 .setDescription(message)
                 .build();

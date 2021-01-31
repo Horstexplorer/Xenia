@@ -53,7 +53,15 @@ public class TranslationPackage {
         return isDefault;
     }
 
-    public String getTranslations(String key) {
+    public String getTranslation(String key) {
+        return translations.get(key);
+    }
+
+    public String getTranslationWithPlaceholders(String key, Object...objects) {
+        int i = 0;
+        for(Object o : objects){
+            key = key.replace("%"+i+++"%", o.toString());
+        }
         return translations.get(key);
     }
 }

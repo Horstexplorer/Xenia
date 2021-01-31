@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDPing extends Command {
 
     public CMDPing() {
-        super("ping", "Can be used to check the ping to discord and other linked services", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
+        super("ping", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
     }
 
     @Override

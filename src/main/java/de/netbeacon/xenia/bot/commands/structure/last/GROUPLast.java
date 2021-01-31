@@ -21,9 +21,8 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 public class GROUPLast extends CommandGroup {
 
     public GROUPLast() {
-        super(null, "last", "Restore deleted or edited messages");
+        super(null, "last");
         addChildCommand(new CMDDeleted());
         addChildCommand(new CMDEdited());
-        addChildCommand(new CMDRestore());
     }
 }

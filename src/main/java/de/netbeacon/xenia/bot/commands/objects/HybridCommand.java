@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -33,15 +34,23 @@ public abstract class HybridCommand extends CommandGroup{
      *
      * @param parent if this group is located inside of another group this should be set accordingly, else null
      * @param alias of the command group / command
-     * @param description of the command group / command
      * @param commandCooldown cooldown of the command on execution in command mode
      * @param botPermissions required for the user on execution in command mode
      * @param memberPrimaryPermission required for the member on execution in command mode
      * @param memberSecondaryPermission required for the member on execution in command mode
      * @param commandArgs for the command on execution in command mode
      */
-    public HybridCommand(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
-        super(parent, alias, description, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
+    public HybridCommand(CommandGroup parent, String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
+        super(parent, alias, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
+    }
+
+    /**
+     * Copy constructor
+     * @param hybridCommand to copy
+     * @param translationPackage to insert
+     */
+    public HybridCommand(HybridCommand hybridCommand, TranslationPackage translationPackage){
+        super(hybridCommand, translationPackage);
     }
 
     /**

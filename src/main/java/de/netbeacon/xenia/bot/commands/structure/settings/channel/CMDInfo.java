@@ -36,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Displays information for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("info", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -53,15 +53,15 @@ public class CMDInfo extends Command {
                 throw new Exception();
             }
             commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed("Channel Setting", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                            .addField("flags", Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
-                            .addField("access mode", Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
-                            .addField("logging", String.valueOf(channel.tmpLoggingIsActive()), false)
-                            .addField("logging auto restore channel", String.valueOf(channel.getTmpLoggingChannelId()), false)
+                    EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                            .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
+                            .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
+                            .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
+                            .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
                             .build()
             ).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Channel Not Found")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

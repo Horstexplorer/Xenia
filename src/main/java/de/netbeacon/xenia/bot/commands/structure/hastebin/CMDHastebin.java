@@ -42,7 +42,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CMDHastebin extends Command {
 
     public CMDHastebin() {
-        super("hastebin", "Upload the attached file to haste.hypercdn.de", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("hastebin", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.HASTEBIN_UPLOAD_USE)),
@@ -58,10 +58,12 @@ public class CMDHastebin extends Command {
         TextChannel textChannel = commandEvent.getEvent().getChannel();
 
         if(attachments.isEmpty()){
-            textChannel.sendMessage(onError("No file provided")).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
+            textChannel.sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
         }
         StringBuilder stringBuilder = new StringBuilder()
-                .append("Here is your haste "+commandEvent.getEvent().getAuthor().getAsMention()+":\n");
+                .append(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))
+                .append(commandEvent.getEvent().getAuthor().getAsMention())
+                .append(":\n");
         Lock lock = new ReentrantLock();
         List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
         attachments.stream()

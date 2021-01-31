@@ -55,7 +55,7 @@ public class CMDEval extends Command {
     private final Logger logger = LoggerFactory.getLogger(CMDEval.class);
 
     public CMDEval(){
-        super("eval", "Can be used to evaluate code", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
+        super("eval", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
     }
 
     @Override

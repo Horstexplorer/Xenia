@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDClientIdentify extends Command {
 
     public CMDClientIdentify() {
-        super("client_identify", "Ask who is connected to the backends secondary socket", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, null);
+        super("client_identify", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, null);
     }
 
     @Override

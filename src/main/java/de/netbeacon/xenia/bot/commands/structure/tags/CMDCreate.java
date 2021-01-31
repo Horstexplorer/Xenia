@@ -34,7 +34,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("create", new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
@@ -49,9 +49,9 @@ public class CMDCreate extends Command {
         CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
             tagCache.createNew(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong(), content.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tag.getValue()+" Created")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getValue()))).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Create Tag "+tag.getValue())).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

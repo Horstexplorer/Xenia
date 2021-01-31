@@ -27,7 +27,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDDeleted extends Command {
 
     public CMDDeleted() {
-        super("deleted", "Restores the last message which has been deleted in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super("deleted", new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
@@ -49,16 +48,14 @@ public class CMDDeleted extends Command {
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = messageCache.getLast("deleted");
         if(bMessage == null){
-            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed("Error Restoring Deleted Message", commandEvent.getEvent().getJDA().getSelfUser())
-                    .setColor(Color.red)
-                    .addField("Error", "No message found to restore", true)
-                    .build()
+            commandEvent.getEvent().getChannel().sendMessage(
+                    onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))
             ).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});
         }else{
-            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed("Deleted Message Restored:", commandEvent.getEvent().getJDA().getSelfUser())
-                    .addField("MessageID", String.valueOf(bMessage.getId()), true)
-                    .addField("AuthorID", String.valueOf(bMessage.getUserId()), true)
-                    .addField("Old Message", bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
+                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
+                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
+                    .addField(getTranslationPackage().getTranslation(getClass().getName()+".response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
                     .build()
             ).queue(s->{}, e->{});
         }

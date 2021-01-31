@@ -37,7 +37,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", "Displays a list of commands", null,null, null, null, null);
+        super("help", null,null, null, null, null);
         this.parent = parent;
     }
 
@@ -47,7 +47,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", "Displays a list of commands", null, null, null,null, null);
+        super("help", null, null, null,null, null);
         this.commandMap = commandMap;
     }
 
@@ -66,7 +66,7 @@ public class CMDHelp extends Command {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
         StringBuilder help = new StringBuilder().append("```");
         for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
-            Command c = entry.getValue();
+            Command c = entry.getValue().createCopy(getTranslationPackage());
             help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
             if(c.isCommandHandler()){
                 help.append("#").append(" ");
@@ -78,8 +78,8 @@ public class CMDHelp extends Command {
             help.append("-").append(" ").append(c.getDescription()).append("\n");
         }
         help.append("```");
-        embedBuilder.addField("Commands", help.toString(), false);
+        embedBuilder.addField(getTranslationPackage().getTranslation(getClass().getName()+".response.field.1.title"), help.toString(), false);
         // send result
-        event.getChannel().sendMessage("**Help / Commands**\n"+help.toString()).queue();
+        event.getChannel().sendMessage(getTranslationPackage().getTranslation(getClass().getName()+".response.title")+"\n"+help.toString()).queue();
     }
 }

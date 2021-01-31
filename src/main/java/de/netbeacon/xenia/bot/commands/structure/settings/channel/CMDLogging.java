@@ -34,7 +34,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDLogging extends Command {
 
     public CMDLogging() {
-        super("logging", "Update the logging settings for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("logging", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -57,9 +57,9 @@ public class CMDLogging extends Command {
                 channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
             }
             channel.update();
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Logging Mode")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Logging Mode. \n Available Options: [true, false]")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

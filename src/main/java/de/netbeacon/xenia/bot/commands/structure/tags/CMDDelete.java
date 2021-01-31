@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -33,7 +34,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
@@ -44,12 +45,16 @@ public class CMDDelete extends Command {
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> tag = cmdArgs.getByIndex(0);
+        CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
-            tagCache.delete(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tag.getValue()+" Deleted")).queue();;
+            Tag tag = tagCache.get(tagA.getValue());
+            if(tag.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+                throw new RuntimeException("User Does Not Own This Tag");
+            }
+            tagCache.delete(tag.getId());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getId()))).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Tag "+tag.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

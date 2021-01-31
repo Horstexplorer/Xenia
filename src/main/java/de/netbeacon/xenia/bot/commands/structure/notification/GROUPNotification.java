@@ -22,7 +22,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 public class GROUPNotification extends CommandGroup {
 
     public GROUPNotification() {
-        super(null, "notification", "List all notifications within this guild", new CommandCooldown(CommandCooldown.Type.User, 2500), null, null, null, null);
+        super(null, "notification", new CommandCooldown(CommandCooldown.Type.User, 2500), null, null, null, null);
         addChildCommand(new CMDCreate());
         addChildCommand(new CMDModify());
         addChildCommand(new CMDDelete());

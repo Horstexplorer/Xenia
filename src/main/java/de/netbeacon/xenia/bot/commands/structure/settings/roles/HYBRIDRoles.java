@@ -26,13 +26,14 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
 public class HYBRIDRoles extends HybridCommand {
 
     public HYBRIDRoles(CommandGroup parent) {
-        super(parent, "roles", "Contains commands to manage v roles", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(parent, "roles", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -45,14 +46,14 @@ public class HYBRIDRoles extends HybridCommand {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         StringBuilder stringBuilder = new StringBuilder();
         for(Role role : guild.getRoleCache().getAllAsList()){
-            stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(role.getPermissions().getValue());
+            stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(Arrays.toString(role.getPermissions().getBits().toArray()));
         }
         String roleS = stringBuilder.toString();
         if(roleS.isEmpty()){
-            roleS = "No roles found";
+            roleS = getTranslationPackage().getTranslation(getClass().getName()+".response.is_empty");
         }
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed("Role Setting", commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                EmbedBuilderFactory.getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
                 .setDescription(roleS)
                 .build()
         ).queue();

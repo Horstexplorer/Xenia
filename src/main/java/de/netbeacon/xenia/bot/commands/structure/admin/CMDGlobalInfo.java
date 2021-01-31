@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CMDGlobalInfo extends Command {
     public CMDGlobalInfo() {
-        super("ginfo", "Displays stats of all instances", new CommandCooldown(CommandCooldown.Type.User, 6000),null, null, null, null);
+        super("ginfo", new CommandCooldown(CommandCooldown.Type.User, 6000),null, null, null, null);
     }
 
     @Override

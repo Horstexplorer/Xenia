@@ -36,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDAccessMode extends Command {
 
     public CMDAccessMode() {
-        super("accessmode", "Update the access mode for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("accessmode", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -57,9 +57,9 @@ public class CMDAccessMode extends Command {
             Channel.AccessMode accessMode = new Channel.AccessMode(0);
             accessMode.set(accessModeMode);
             channel.setAccessMode(accessMode);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Updated Access Mode")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Access Mode. \n Available Options: "+ Arrays.toString(Channel.AccessMode.Mode.values()))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg")+" "+ Arrays.toString(Channel.AccessMode.Mode.values()))).queue();
         }
     }
 }

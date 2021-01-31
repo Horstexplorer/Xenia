@@ -42,7 +42,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDChatlog extends Command {
 
     public CMDChatlog() {
-        super("chatlog", "Export a log of the cached messages for a given channel", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
+        super("chatlog", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
     }
 
     @Override

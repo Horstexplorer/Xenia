@@ -36,7 +36,7 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.TWITCH_
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Request stream notifications for a channel", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("create", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
@@ -58,9 +58,9 @@ public class CMDCreate extends Command {
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
             // send response
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Successfully Requested Another Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Request Another Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

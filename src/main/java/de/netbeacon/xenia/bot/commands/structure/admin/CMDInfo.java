@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 public class CMDInfo extends Command {
 
     public CMDInfo(){
-        super("info", "Displays some statistics about this bot", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
+        super("info", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
     }
 
     @Override

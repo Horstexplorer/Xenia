@@ -33,7 +33,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Remove stream notifications for a channel", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
@@ -47,9 +47,9 @@ public class CMDDelete extends Command {
             CmdArg<Long> notificationid = args.getByIndex(0);
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.delete(notificationid.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Deleted Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(getTranslationPackage().getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Delete Stream Notification")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
             e.printStackTrace();
         }
     }

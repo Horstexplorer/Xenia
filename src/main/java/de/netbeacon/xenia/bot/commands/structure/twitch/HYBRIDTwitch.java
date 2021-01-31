@@ -32,7 +32,7 @@ import java.util.List;
 public class HYBRIDTwitch extends HybridCommand {
 
     public HYBRIDTwitch() {
-        super(null, "twitch", "Create and manage stream notifications", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(null, "twitch", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
@@ -50,16 +50,16 @@ public class HYBRIDTwitch extends HybridCommand {
             List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
             StringBuilder stringBuilder = new StringBuilder();
             for(TwitchNotification twitchNotification : twitchNotifications){
-                stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" to #").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
+                stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
             }
             // send message
             MessageEmbed result = EmbedBuilderFactory
-                    .getDefaultEmbed("Stream Notifications", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                    .getDefaultEmbed(getTranslationPackage().getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                     .setDescription(stringBuilder)
                     .build();
             commandEvent.getEvent().getChannel().sendMessage(result).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Get Stream Notifications")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(getTranslationPackage().getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }
