@@ -53,9 +53,9 @@ public class CMDLanguage extends Command {
                 throw new RuntimeException();
             }
             commandEvent.getBackendDataPack().getbGuild().setPreferredLanguage(translationPackage1.getLanguageId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
         }
     }
 }

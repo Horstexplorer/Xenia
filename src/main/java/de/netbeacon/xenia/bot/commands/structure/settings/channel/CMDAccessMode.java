@@ -58,9 +58,9 @@ public class CMDAccessMode extends Command {
             Channel.AccessMode accessMode = new Channel.AccessMode(0);
             accessMode.set(accessModeMode);
             channel.setAccessMode(accessMode);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
         }
     }
 }

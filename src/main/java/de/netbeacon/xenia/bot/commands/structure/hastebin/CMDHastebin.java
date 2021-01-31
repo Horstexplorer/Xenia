@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -59,16 +58,16 @@ public class CMDHastebin extends Command {
         TextChannel textChannel = commandEvent.getEvent().getChannel();
 
         if(attachments.isEmpty()){
-            textChannel.sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(m -> m.delete().queueAfter(5, TimeUnit.SECONDS));
+            textChannel.sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+            return;
         }
         StringBuilder stringBuilder = new StringBuilder()
-                .append(translationPackage.getTranslation(getClass().getName()+".response.success.msg"))
+                .append(translationPackage.getTranslation(getClass(), "response.success.msg"))
                 .append(commandEvent.getEvent().getAuthor().getAsMention())
                 .append(":\n");
         Lock lock = new ReentrantLock();
         List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
-        attachments.stream()
-                .forEach(attachment -> {
+        attachments.forEach(attachment -> {
                     if(attachment.isImage() || attachment.isVideo()){
                         lock.lock();
                         stringBuilder.append("! ").append(attachment.getFileName()).append("\n");

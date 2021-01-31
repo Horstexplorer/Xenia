@@ -49,13 +49,13 @@ public class CMDDeleted extends Command {
         Message bMessage = messageCache.getLast("deleted");
         if(bMessage == null){
             commandEvent.getEvent().getChannel().sendMessage(
-                    onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))
+                    onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))
             ).queue();
         }else{
-            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
-                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
-                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
-                    .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
+                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
+                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
+                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
                     .build()
             ).queue();
         }

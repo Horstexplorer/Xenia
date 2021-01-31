@@ -57,9 +57,9 @@ public class CMDSettings extends Command {
                 guildSettings.unset(setting);
             }
             commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
         }
     }
 }
