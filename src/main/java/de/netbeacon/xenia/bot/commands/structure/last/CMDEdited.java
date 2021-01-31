@@ -30,7 +30,6 @@ import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class CMDEdited extends Command {
 
@@ -51,14 +50,14 @@ public class CMDEdited extends Command {
         if(bMessage == null){
             commandEvent.getEvent().getChannel().sendMessage(
                     onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))
-            ).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});
+            ).queue();
         }else{
             commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
                     .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
                     .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
                     .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
                     .build()
-            ).queue(s->{}, e->{});
+            ).queue();
         }
     }
 }

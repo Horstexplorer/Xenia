@@ -28,7 +28,6 @@ import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.GUILD_PREFIX_DEF;
 
@@ -52,7 +51,7 @@ public class CMDPrefix extends Command {
             guild.setPrefix(prefix);
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(".response.success.msg", guild.getPrefix()))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

@@ -28,7 +28,6 @@ import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPack
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
 
@@ -54,7 +53,7 @@ public class HYBRIDTag extends HybridCommand {
             Tag tag = tagCache.get(tagA.getValue());
             commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", tag.getTagContent(), tag.getId())).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", tagA.getValue()))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", tagA.getValue()))).queue();
         }
     }
 }

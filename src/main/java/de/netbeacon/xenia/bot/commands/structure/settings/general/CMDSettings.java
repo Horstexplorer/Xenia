@@ -29,7 +29,6 @@ import net.dv8tion.jda.api.Permission;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.GUILD_SETTINGS_SETTING_DEF;
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.GUILD_SETTINGS_SETTING_MODE_DEF;
@@ -60,7 +59,7 @@ public class CMDSettings extends Command {
             commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
         }
     }
 }

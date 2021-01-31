@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.*;
 
@@ -58,9 +57,9 @@ public class CMDModify extends Command {
             notification.lSetNotificationMessage(stringCmdArg.getValue());
             notification.update();
 
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))+" (ID: "+notification.getId()+")").queue(s->{}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))+" (ID: "+notification.getId()+")").queue();
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

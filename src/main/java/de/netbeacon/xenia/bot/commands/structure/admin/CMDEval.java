@@ -192,16 +192,16 @@ public class CMDEval extends Command {
             timeout.cancel(true);
             if(process.exitValue() != 0){
                 message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, ex->{
-                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, exe->{});
+                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue();
                 });
             }else{
                 message.editMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, ex->{
-                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue(s->{}, exe->{});
+                    commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis()-start, code, stringBuilder.toString())).queue();
                 });
             }
         }catch (Exception e){
             message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code,  e.getMessage())).queue(s->{}, ex->{
-                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue(s->{}, exe->{});
+                commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue();
             });
         }finally {
             logger.info("! EVAL FINISHED ! Engine: Java");

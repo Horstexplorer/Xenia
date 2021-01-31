@@ -49,6 +49,6 @@ public class CMDInfo extends Command {
                 .addField(translationPackage.getTranslation(getClass().getName()+".response.field.7.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.7.link_text")+"](https://xenia.netbeacon.de/processing)", true)
                 .addField(translationPackage.getTranslation(getClass().getName()+".response.field.8.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.8.link_text")+"](https://xenia.netbeacon.de/report)", true)
                 .addField(translationPackage.getTranslation(getClass().getName()+".response.field.9.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.9.link_text")+"](https://xenia.netbeacon.de/contact)", true);
-        commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue(s->{},e->{});
+        commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }
