@@ -69,7 +69,9 @@ public class TranslationPackage {
             return translation;
         }
         for(Object o : objects){
-            translation = translations.replace("%"+i+++"%", o.toString());
+            String placeholder = "%"+i+"%";
+            translation = translation.replace(placeholder, o.toString());
+            i++;
         }
         return translation;
     }
