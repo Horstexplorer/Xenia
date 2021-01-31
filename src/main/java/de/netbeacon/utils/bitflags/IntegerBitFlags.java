@@ -48,7 +48,7 @@ public abstract class IntegerBitFlags {
     }
 
     public boolean has(IntBit bit){
-        return ((value >> bit.getPos()) & 1) == 1;
+        return ((value >>> bit.getPos()) & 1) == 1;
     }
 
     public <T extends IntBit> List<T> getBits(){ return new ArrayList<>(); }

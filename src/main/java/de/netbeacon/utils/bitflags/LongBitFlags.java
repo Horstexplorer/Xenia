@@ -48,7 +48,7 @@ public abstract class LongBitFlags {
     }
 
     public boolean has(LongBit bit){
-        return ((value >> bit.getPos()) & 1) == 1;
+        return ((value >>> bit.getPos()) & 1) == 1;
     }
 
     public <T extends LongBit> List<T> getBits(){ return new ArrayList<>(); }
