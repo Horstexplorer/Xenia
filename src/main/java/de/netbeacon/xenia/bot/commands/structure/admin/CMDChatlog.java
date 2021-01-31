@@ -36,7 +36,6 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_CHANNEL;
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_LIMIT;
@@ -51,24 +50,24 @@ public class CMDChatlog extends Command {
     public void execute(List<String> args, CommandEvent commandEvent) {
         TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
         if(translationPackage == null){
-            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
             return;
         }
         // check required args
         CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
         if(!cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
             // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
             return;
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue();
             return;
         }
         // everything alright

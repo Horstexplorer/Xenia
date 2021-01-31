@@ -58,17 +58,17 @@ public class CMDInfo extends Command {
         CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
         if(!cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
             // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
             return;
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage,false)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage,false)).queue();
             return;
         }
         // everything alright
