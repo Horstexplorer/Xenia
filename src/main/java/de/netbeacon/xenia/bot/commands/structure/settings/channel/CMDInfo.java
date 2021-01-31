@@ -54,15 +54,15 @@ public class CMDInfo extends Command {
                 throw new Exception();
             }
             commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
-                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
-                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
-                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
+                    EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
+                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
+                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
+                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
                             .build()
             ).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
         }
     }
 }

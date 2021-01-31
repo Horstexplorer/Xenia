@@ -39,16 +39,16 @@ public class CMDInfo extends Command {
 
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Xenia-Backend", XeniaCore.getInstance().getBackendClient().getInfo(Info.Mode.Public).getVersion(), true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.3.title"), String.valueOf(commandEvent.getEvent().getJDA().getShardInfo().getShardId()) , true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.4.title"), commandEvent.getBackendClient().getSetupData().getClientName() , true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.5.title"), commandEvent.getBackendClient().getSetupData().getClientLocation() , true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.6.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.6.link_text")+"](https://xenia.netbeacon.de/)", true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.7.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.7.link_text")+"](https://xenia.netbeacon.de/processing)", true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.8.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.8.link_text")+"](https://xenia.netbeacon.de/report)", true)
-                .addField(translationPackage.getTranslation(getClass().getName()+".response.field.9.title"), "["+translationPackage.getTranslation(getClass().getName()+".response.field.9.link_text")+"](https://xenia.netbeacon.de/contact)", true);
+                .addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), String.valueOf(commandEvent.getEvent().getJDA().getShardInfo().getShardId()) , true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.4.title"), commandEvent.getBackendClient().getSetupData().getClientName() , true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.5.title"), commandEvent.getBackendClient().getSetupData().getClientLocation() , true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.6.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.6.link_text", "https://xenia.netbeacon.de/"), true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.7.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.7.link_text", "https://xenia.netbeacon.de/processing"), true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.8.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.8.link_text", "https://xenia.netbeacon.de/report"), true)
+                .addField(translationPackage.getTranslation(getClass(), "response.field.9.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.9.link_text", "https://xenia.netbeacon.de/contact"), true);
         commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue();
     }
 }

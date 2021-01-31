@@ -55,12 +55,12 @@ public class HYBRIDTwitch extends HybridCommand {
             }
             // send message
             MessageEmbed result = EmbedBuilderFactory
-                    .getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                    .getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                     .setDescription(stringBuilder)
                     .build();
             commandEvent.getEvent().getChannel().sendMessage(result).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue();
         }
     }
 }

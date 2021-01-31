@@ -29,13 +29,13 @@
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "Instance",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "Location",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "Website",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "Data Processing",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "Report Content",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "Contact",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "[Visit Website](%0%)",
 
       "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "Upload the attached file to haste.hypercdn.de",
       "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "No file provided",
@@ -58,11 +58,11 @@
       "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "Restore deleted or edited messages",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "Create a new notification",
-      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification created",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification created (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "Failed to create notification! Perhaps the cache is full?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "Delete an existing notification",
-      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification deleted",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification (ID: %0%) deleted",
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "View existing notifications",
@@ -197,13 +197,13 @@
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "Instance",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "Wocation",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "Website",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "Data pwocessing",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "Wepowt content",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "[Visit Website](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "Contact",
-      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "[Visit Website](%0%)",
 
       "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "Upwoad the attached fiwe tuwu haste.hypercdn.de",
       "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "No fiwe pwovided",
@@ -226,11 +226,11 @@
       "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "Westowe deweted ow edited messages",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "Cweate a new notification",
-      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification cweated",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification cweated (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "Dewete an existing notification",
-      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification deweted",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification (ID: %0%) deweted",
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Faiwed tuwu dewete notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "View existing notifications",

@@ -53,18 +53,18 @@ public class HYBRIDGeneral extends HybridCommand {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         License license = commandEvent.getBackendDataPack().getbLicense();
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.1.title"), guild.getPreferredLanguage(), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.2.title"), guild.getPrefix(), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)
+                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), guild.getPreferredLanguage(), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.2.title"), guild.getPrefix(), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)
                         .addBlankField(false)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.4.title"), license.getLicenseName(), false)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.5.title"), (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.6.title"), String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.7.title"), String.valueOf(license.getPerk_MISC_TAGS_C()), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
-                        .addField(translationPackage.getTranslation(getClass().getName()+".response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.4.title"), license.getLicenseName(), false)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.5.title"), (license.getActivationTimestamp() > -1)? new Date(license.getActivationTimestamp()+ (license.getDurationDays()* 86400000L)).toString() : "-", false)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.6.title"), String.valueOf(license.getPerk_GUILD_ROLE_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.7.title"), String.valueOf(license.getPerk_MISC_TAGS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
                         .build()
         ).queue();
     }

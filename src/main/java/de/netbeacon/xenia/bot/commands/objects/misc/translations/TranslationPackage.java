@@ -53,12 +53,20 @@ public class TranslationPackage {
         return isDefault;
     }
 
+    public String getTranslation(Class<?> clazz, String key){
+        return getTranslation(clazz.getName()+"."+key);
+    }
+
     public String getTranslation(String key) {
         String translation = translations.get(key);
         if(translation == null){
             translation = "Missing translation for: "+key;
         }
         return translation;
+    }
+
+    public String getTranslationWithPlaceholders(Class<?> clazz, String key, Object...objects) {
+        return getTranslationWithPlaceholders(clazz.getName()+"."+key, objects);
     }
 
     public String getTranslationWithPlaceholders(String key, Object...objects) {
