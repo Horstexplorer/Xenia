@@ -91,6 +91,10 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Failed To Update Logging Mode.\nAvailable options are: [true, false]",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands to manage channel settings",
 
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Update the settings for this guild",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.success.msg": "Guild settings updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.error.msg": "Failed to update guild settings.\nAvailable options are: %0%",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Update the response language of Xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Response language updated",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "Failed to update response language.\nAvailable options are: %0%",
@@ -254,6 +258,10 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Updated wogging setting",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Faiwed tuwu update wogging mode.\nAvaiwabwe options awe: [true, false],",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands tuwu manage channew settings",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Update the settings fow thiws guiwd",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.success.msg": "Guiwd settings updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.error.msg": "Faiwed tuwu update guiwd settings.\nAvaiwabwe options awe: %0%",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Update the wesponse wanguage of xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Wesponse wanguage updated",
