@@ -24,7 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 public class GROUPAdmin extends CommandGroup {
 
     public GROUPAdmin() {
-        super(null, "admin", "Contains commands only available to the developer");
+        super(null, "admin");
         addChildCommand(new CMDEval());
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDPing());

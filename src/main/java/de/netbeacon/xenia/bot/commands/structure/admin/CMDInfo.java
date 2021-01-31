@@ -23,6 +23,8 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -42,34 +44,39 @@ import java.util.concurrent.TimeUnit;
 public class CMDInfo extends Command {
 
     public CMDInfo(){
-        super("info", "Displays some statistics about this bot", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
+        super("info", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null,null, null);
     }
 
     @Override
     public void execute(List<String> args, CommandEvent commandEvent) {
+        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+        if(translationPackage == null){
+            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            return;
+        }
         // check required args
         CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
         if(!cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
             // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{},e->{});
             return;
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(false)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage,false)).queue(s->{},e->{});
             return;
         }
         // everything alright
-        onExecution(cmdArgs, commandEvent);
+        onExecution(cmdArgs, commandEvent, translationPackage);
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         ShardManager shardManager = XeniaCore.getInstance().getShardManager();
         Runtime runtime = Runtime.getRuntime();
         GuildMessageReceivedEvent event = commandEvent.getEvent();
@@ -107,10 +114,10 @@ public class CMDInfo extends Command {
     }
 
     @Override
-    public MessageEmbed onMissingMemberPerms(boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this !")
+                .appendDescription("You are not allowed to do this")
                 .build();
     }
 }

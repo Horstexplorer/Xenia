@@ -24,6 +24,8 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -38,7 +40,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class Command {
 
     private final String alias;
-    private final String description;
     private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
@@ -52,16 +53,14 @@ public abstract class Command {
      * Creates a new instance of the command as command
      *
      * @param alias of the command
-     * @param description of the command
      * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
      * @param memberPrimaryPermissions required for the member using discord perms
      * @param memberSecondaryPermission required for the member using v perms
      * @param commandArgs for the command
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+    public Command(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
         this.alias = alias;
-        this.description = description;
         this.commandCooldown = commandCooldown;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
@@ -82,13 +81,38 @@ public abstract class Command {
      * Creates a new instance of the command as command handler
      *
      * @param alias of the command handler
-     * @param description of the command handler
      */
-    public Command(String alias, String description){
+    public Command(String alias){
         this.alias = alias;
-        this.description = description;
         this.isCommandHandler = true;
     }
+
+
+    /**
+     * Create a copy of an existing command to apply the translation to
+     * @param command command
+     * @param translationPackage of the target language
+     */
+    public Command(Command command, TranslationPackage translationPackage){
+        // COPY DATA
+        this.alias = command.getAlias();
+        this.commandCooldown = command.getCommandCooldown();
+        if(command.getBotPermissions() != null){
+            this.botPermissions.addAll(command.botPermissions);
+        }
+        if(command.getMemberPrimaryPermissions() != null){
+            this.memberPrimaryPermissions.addAll(command.getMemberPrimaryPermissions());
+        }
+        if(command.getMemberSecondaryPermissions() != null){
+            this.memberSecondaryPermissions.addAll(command.getMemberSecondaryPermissions());
+        }
+        if(command.getCommandArgs() != null){
+            this.requiredArgs.addAll(command.getCommandArgs());
+        }
+        this.isCommandHandler = command.isCommandHandler;
+        command.getChildCommands().values().forEach(this::addChildCommand);
+    }
+
 
     /**
      * Returns the alias of the command
@@ -104,8 +128,8 @@ public abstract class Command {
      *
      * @return description
      */
-    public String getDescription() {
-        return description;
+    public String getDescription(TranslationPackage translationPackage) {
+        return translationPackage.getTranslation(getClass().getName()+".description");
     }
 
     /**
@@ -148,6 +172,10 @@ public abstract class Command {
         return requiredArgs;
     }
 
+    public CommandCooldown getCommandCooldown(){
+        return commandCooldown;
+    }
+
     /**
      * Returns the number of args required to use this command
      *
@@ -184,6 +212,14 @@ public abstract class Command {
     }
 
     /**
+     * Check if this command is hybrid
+     * @return boolean
+     */
+    public boolean isHybrid(){
+        return isHybrid;
+    }
+
+    /**
      * Used to execute the command
      * @param args remaining arguments
      * @param commandEvent CommandEvent
@@ -200,13 +236,18 @@ public abstract class Command {
      */
     private void execute(List<String> args, CommandEvent commandEvent, boolean s2){
         if(!isCommandHandler || (s2 && isHybrid)){
+            TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+            if(translationPackage == null){
+                commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                return;
+            }
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
             long authorId = commandEvent.getEvent().getAuthor().getIdLong();
             if(commandCooldown != null){
                 // process cd
                 if(!commandCooldown.allow(guildId, authorId)){
                     // cd running
-                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                     return;
                 }
                 // activate cd
@@ -217,14 +258,14 @@ public abstract class Command {
             //if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
             if(!cmdArgs.verify()){
                 // missing args
-                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
                 return;
             }
             // check bot permissions
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(),getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 }
                 return;
             }
@@ -244,12 +285,12 @@ public abstract class Command {
                     )
             ){
                 // invalid permission
-                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 return;
             }
 
             // everything alright
-            onExecution(cmdArgs, commandEvent);
+            onExecution(cmdArgs, commandEvent, translationPackage);
         }else{
             if(args.size() > 0) {
                 Command command = children.get(args.get(0).toLowerCase());
@@ -274,10 +315,10 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onCooldownActive(){
-        return EmbedBuilderFactory.getDefaultEmbed("Cooldown Active", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onCooldownActive(TranslationPackage translationPackage){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onCooldownActive.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("Please wait some time before doing that again")
+                .appendDescription(translationPackage.getTranslation("default.onCooldownActive.description"))
                 .build();
     }
 
@@ -286,11 +327,11 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingBotPerms(){
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Bot Is Missing Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onMissingBotPerms(TranslationPackage translationPackage){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("I am unable to execute the command due to missing permissions!")
-                .addField("Required Permissions:", Arrays.toString(botPermissions.toArray()), false)
+                .appendDescription(translationPackage.getTranslation("default.onMissingBotPerms.description"))
+                .addField(translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn"), Arrays.toString(botPermissions.toArray()), false)
                 .build();
     }
 
@@ -300,16 +341,15 @@ public abstract class Command {
      * @param vPerms show vPerms or default
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingMemberPerms(boolean vPerms){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean vPerms){
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this !");
+                .appendDescription(translationPackage.getTranslation("default.onMissingMemberPerms.description"));
         if(vPerms){
-            embedBuilder.addField("Required Permissions:", Arrays.toString(memberSecondaryPermissions.toArray()), false);
+            embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberSecondaryPermissions.toArray()), false);
         }else{
-            embedBuilder.addField("Required Permissions:", Arrays.toString(memberPrimaryPermissions.toArray()), false);
+            embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberPrimaryPermissions.toArray()), false);
         }
-
         return embedBuilder.build();
     }
 
@@ -318,15 +358,15 @@ public abstract class Command {
      *
      * @return MessageEmbed
      */
-    public MessageEmbed onMissingArgs(){
+    public MessageEmbed onMissingArgs(TranslationPackage translationPackage){
         StringBuilder usage = new StringBuilder().append("<> ").append(alias).append(" ");
         for(CmdArgDef s : requiredArgs){
             usage.append("<").append(s.getName()).append(">").append(" ");
         }
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Arguments", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("This command requires more arguments.")
-                .addField("Usage:", usage.toString(), false)
+                .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
+                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false)
                 .build();
     };
 
@@ -336,8 +376,8 @@ public abstract class Command {
      * @param message the message which should be displayed
      * @return MessageEmbed
      */
-    public MessageEmbed onError(String message){
-        return EmbedBuilderFactory.getDefaultEmbed("Error", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onError(TranslationPackage translationPackage, String message){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onError.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .setDescription(message)
                 .build();
@@ -349,8 +389,8 @@ public abstract class Command {
      * @param message the message which should be displayed
      * @return MessageEmbed
      */
-    public MessageEmbed onSuccess(String message){
-        return EmbedBuilderFactory.getDefaultEmbed("Success", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onSuccess(TranslationPackage translationPackage, String message){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onSuccess.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.GREEN)
                 .setDescription(message)
                 .build();
@@ -358,9 +398,9 @@ public abstract class Command {
 
     /**
      * Called on execution of the command
-     *
-     * @param args remaining arguments of the message
+     *  @param args remaining arguments of the message
      * @param commandEvent CommandEvent
+     * @param translationPackage translation package which should be used
      */
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage);
 }

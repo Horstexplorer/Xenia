@@ -23,6 +23,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -35,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("update", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("update", new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
@@ -44,7 +45,7 @@ public class CMDModify extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
         CmdArg<LocalDateTime> localDateTimeCmdArg = cmdArgs.getByIndex(1);
         CmdArg<String> stringCmdArg = cmdArgs.getByIndex(2);
@@ -57,9 +58,9 @@ public class CMDModify extends Command {
             notification.lSetNotificationMessage(stringCmdArg.getValue());
             notification.update();
 
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+" ) updated!")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))+" (ID: "+notification.getId()+")").queue(s->{}, e->{});
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to modify notification. Perhaps this got created by someone else or does not exist?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
         }
     }
 }

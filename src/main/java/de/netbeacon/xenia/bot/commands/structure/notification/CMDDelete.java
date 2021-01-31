@@ -23,6 +23,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +34,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
@@ -42,17 +43,17 @@ public class CMDDelete extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
         try{
             Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
-            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
                 throw new RuntimeException("User Does Not Own This Notification");
             }
             commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Notification (ID: "+notification.getId()+") deleted!")).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.success.msg"))+" (ID: "+notification.getId()+")").queue(s->{}, e->{});
         }catch (Exception ex){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed to delete notification. Perhaps this got created by someone else or does not exist?")).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->{s.delete().queueAfter(5, TimeUnit.SECONDS);}, e->{});;
         }
     }
 }

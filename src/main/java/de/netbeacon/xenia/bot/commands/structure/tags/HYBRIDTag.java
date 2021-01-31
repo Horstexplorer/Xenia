@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class HYBRIDTag extends HybridCommand {
 
     public HYBRIDTag() {
-        super(null,"tag", "Create, manage and use tags for this guild", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super(null,"tag", new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
@@ -46,14 +47,14 @@ public class HYBRIDTag extends HybridCommand {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
             Tag tag = tagCache.get(tagA.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(tag.getTagContent()+"\n\n"+"*Tag Created By "+tag.getUserId()+"*").queue();
+            commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", tag.getTagContent(), tag.getId())).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Tag "+tagA.getValue()+" Not Found")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.error.msg", tagA.getValue()))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

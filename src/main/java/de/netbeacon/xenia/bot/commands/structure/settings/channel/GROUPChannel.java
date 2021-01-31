@@ -21,7 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 public class GROUPChannel extends CommandGroup {
 
     public GROUPChannel(CommandGroup parent) {
-        super(parent, "channel", "Contains commands to manage channel settings");
+        super(parent, "channel");
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDAccessMode());
         addChildCommand(new CMDLogging());

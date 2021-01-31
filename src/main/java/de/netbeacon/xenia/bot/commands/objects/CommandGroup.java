@@ -22,6 +22,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
@@ -39,10 +40,9 @@ public abstract class CommandGroup extends Command{
      *
      * @param parent if this group is located inside of another group this should be set accordingly, else null
      * @param alias of the command group
-     * @param description of the command group
      */
-    public CommandGroup(CommandGroup parent, String alias, String description){
-        super(alias, description);
+    public CommandGroup(CommandGroup parent, String alias){
+        super(alias);
         this.parent = parent;
         addChildCommand(new CMDHelp(this));
     }
@@ -52,15 +52,14 @@ public abstract class CommandGroup extends Command{
      *
      * @param parent if this group is located inside of another group this should be set accordingly, else null
      * @param alias of the command group / command
-     * @param description of the command group / command
      * @param commandCooldown cooldown of the command on execution in command mode
      * @param botPermissions required for the user on execution in command mode
      * @param memberPrimaryPermission required for the member on execution in command mode
      * @param memberSecondaryPermission required for the member on execution in command mode
      * @param commandArgs for the command on execution in command mode
      */
-    protected CommandGroup(CommandGroup parent, String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
-        super(alias, description, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
+    protected CommandGroup(CommandGroup parent, String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+        super(alias, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
         this.parent = parent;
         activateHybridMode();
         addChildCommand(new CMDHelp(this));
@@ -76,5 +75,5 @@ public abstract class CommandGroup extends Command{
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {}
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {}
 }

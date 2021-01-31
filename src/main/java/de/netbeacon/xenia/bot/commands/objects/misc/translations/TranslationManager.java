@@ -18,22 +18,43 @@ package de.netbeacon.xenia.bot.commands.objects.misc.translations;
 
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class TranslationManager {
 
     private static TranslationManager instance;
+    private static final Logger logger = LoggerFactory.getLogger(TranslationManager.class);
 
     private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
 
-    private TranslationManager(){
-
+    private TranslationManager() throws IOException {
+        String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("cmd_translations.json")), StandardCharsets.UTF_8);
+        JSONArray jsonArray = new JSONArray(fileContent);
+        for(int i = 0; i < jsonArray.length(); i++){
+            TranslationPackage translationPackage = new TranslationPackage(jsonArray.getJSONObject(i));
+            translationPackages.put(translationPackage.getLanguageId(), translationPackage);
+        }
+        logger.info("Loaded Languages: "+ Arrays.toString(translationPackages.values().stream().map(TranslationPackage::getLanguageId).toArray()));
     }
 
     public static synchronized TranslationManager getInstance(boolean initIfNeeded){
         if(instance == null && initIfNeeded){
-            instance = new TranslationManager();
+            try{
+                instance = new TranslationManager();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         return instance;
     }
@@ -46,7 +67,7 @@ public class TranslationManager {
         return translationPackages.containsKey(languageId.toLowerCase());
     }
 
-    public TranslationPackage getDefault(){
+    public TranslationPackage getDefaultTranslationPackage(){
         return translationPackages.values().stream().filter(TranslationPackage::isDefault).findFirst().orElse(null);
     }
 
@@ -55,7 +76,15 @@ public class TranslationManager {
     }
 
     public TranslationPackage getTranslationPackage(Guild guild, Member member){
-        return null;
+        if(guild.getSettings().has(Guild.GuildSettings.Settings.ENFORCE_LANGUAGE)){
+            return getTranslationPackage(guild.getPreferredLanguage());
+        }else{
+            return getTranslationPackage(member.getUser().getPreferredLanguage());
+        }
+    }
+
+    public List<String> getLanguageIds(){
+        return translationPackages.values().stream().map(TranslationPackage::getLanguageId).collect(Collectors.toList());
     }
 
 }

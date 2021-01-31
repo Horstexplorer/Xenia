@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
 
@@ -36,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDInfo extends Command {
 
     public CMDInfo() {
-        super("info", "Displays information for the specified channel", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("info", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
@@ -45,7 +46,7 @@ public class CMDInfo extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         try{
             CmdArg<Mention> mentionCmdArg = args.getByIndex(0);
             Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
@@ -53,15 +54,15 @@ public class CMDInfo extends Command {
                 throw new Exception();
             }
             commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed("Channel Setting", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                            .addField("flags", Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
-                            .addField("access mode", Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
-                            .addField("logging", String.valueOf(channel.tmpLoggingIsActive()), false)
-                            .addField("logging auto restore channel", String.valueOf(channel.getTmpLoggingChannelId()), false)
+                    EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass().getName()+".response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
+                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
+                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
+                            .addField(translationPackage.getTranslation(getClass().getName()+".response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
                             .build()
             ).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Channel Not Found")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue();
         }
     }
 }

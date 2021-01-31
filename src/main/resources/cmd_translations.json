@@ -1,3 +1,330 @@
-{
+[
+  {
+    "languageId": "en_US",
+    "languageName": "English-Default",
+    "languageDescription": "The default english language package",
+    "isDefault": true,
+    "translations": {
+      "default.onSuccess.title": "Success",
+      "default.onError.title": "Error",
+      "default.onMissingArgs.title": "Failed: Not Enough Arguments",
+      "default.onMissingArgs.description": "This command requires more/different arguments",
+      "default.onMissingArgs.usage.fn": "Usage:",
+      "default.onMissingMemberPerms.title": "Failed: Not Enough Permissions",
+      "default.onMissingMemberPerms.description": "You are not allowed to do this!",
+      "default.onMissingMemberPerms.requiredPerms.fn": "Required Permissions:",
+      "default.onMissingBotPerms.title": "Failed: Bot Is Missing Permissions",
+      "default.onMissingBotPerms.description": "I am unable to execute the command due to missing permissions!",
+      "default.onMissingBotPerms.requiredPerms.fn": "Required Permissions:",
+      "default.onCooldownActive.title": "Failed: Cooldown Active",
+      "default.onCooldownActive.description": "Please wait some time before doing that again",
 
-}
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Displays a list of commands",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Help / Commands**",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.field.commands": "Commands",
+
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.description": "Shows some basic information about me",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.3.title": "Current Shard",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "Instance",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "Location",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "Data Processing",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "Report Content",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "Contact",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "Visit Website",
+
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "Upload the attached file to haste.hypercdn.de",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "No file provided",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.success.msg": "Here is your haste",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.description": "Restores the last message which has been deleted in this channel",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.error.msg": "No message found to restore",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.title": "Restored deleted message",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.2.title": "Author",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.3.title": "Old Message",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.description": "Restores the last message which has been edited in this channel",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.error.msg": "No message found to restore",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.title": "Restored edited message",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.2.title": "Author",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "Restore deleted or edited messages",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "Create a new notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification created",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "Failed to create notification! Perhaps the cache is full?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "Delete an existing notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification deleted",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "View existing notifications",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "View existing notifications",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.description": "Update an existing notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.success.msg": "Notification edited",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Manage notifications for this guild",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Update the access mode for the specified channel",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Access mode updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "Failed to update access mode.\nAvailable options are: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.description": "Displays information for the specified channel",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.title": "Channel settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.1.title": "Flags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.2.title": "Access mode",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.3.title": "Logging enabled",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.4.title": "Logging auto restore channel",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.error.msg": "Failed to update access mode.\nAvailable options are:",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "Update the logging settings for the specified channel",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Updated logging setting",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Failed To Update Logging Mode.\nAvailable options are: [true, false]",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands to manage channel settings",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Update the response language of Xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Response language updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "Failed to update response language.\nAvailable options are: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.description": "Update the license using a license key",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.success.msg": "License updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.error.msg": "Updating license failed",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.description": "Update the prefix used for commands",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.success.msg": "Prefix updated to ```%0%```",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.error.msg": "Updating prefix failed. Maybe its too long?",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.description": "Contains general guild settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.title": "General guild settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.1.title": "Preferred language",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.2.title": "Prefix",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.3.title": "Settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.4.title": "License name",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.5.title": "Is valid until",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.6.title": "max vperm roles",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.7.title": "max tags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.8.title": "max notifications",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.9.title": "max twitch notifications",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.10.title": "max message logging",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contains commands to manage v roles and v perms",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Roles",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.is_empty": "No role created yet",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings.description": "Contains all settings for the guild",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.description": "Creates a new tag with a given tag name and content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.success.msg": "Tag %0% created",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.error.msg": "Failed to create tag",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Deletes an existing tag",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% deleted",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Failed to update tag. Are you the owner?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Create, manage and use tags for this guild",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag created by %1%*",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.error.msg": "Tag %0% not found",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.description": "Request stream notifications for a channel",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.success.msg": "Requested stream notifications. After evaluation this will show up in the overview",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.error.msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Remove stream notifications for a channel",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Deleted stream notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Failed to delete stream notification",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Update stream notifications for a channel",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Updated stream notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Failed to update stream notification",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Create and manage and list stream notifications",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Requested stream notifications. After evaluation this will show up in the overview",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Failed to list stream notifications",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Export a log of the encrypted cached messages for a given channel in the current guild",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Ask who is connected to the backends secondary socket",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Can be used to evaluate code",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Displays stats of all instances connected to the secondary socket of the backend",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Displays some statistics about this bot",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Can be used to check the ping to discord and other linked services",
+      "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands only available to the developer"
+    }
+  },
+  {
+    "languageId": "en_UWU",
+    "languageName": "English-UwU",
+    "languageDescription": "A more UwU version of the default english language package",
+    "isDefault": false,
+    "translations": {
+      "default.onSuccess.title": "Success",
+      "default.onError.title": "Ewwow",
+      "default.onMissingArgs.title": "Faiwed: nowt enough awguments",
+      "default.onMissingArgs.description": "Thiws command wequiwes mowe/diffewent awguments",
+      "default.onMissingArgs.usage.fn": "Usage:",
+      "default.onMissingMemberPerms.title": "Faiwed: nowt enough pewmissions",
+      "default.onMissingMemberPerms.description": "Uwu awe nowt awwowed tuwu duwu thiws!",
+      "default.onMissingMemberPerms.requiredPerms.fn": "Wequiwed pewmissions:",
+      "default.onMissingBotPerms.title": "Faiwed: bot iws missing pewmissions",
+      "default.onMissingBotPerms.description": "I am unabwe tuwu execute the command due tuwu missing pewmissions!",
+      "default.onMissingBotPerms.requiredPerms.fn": "RWequiwed pewmissions:",
+      "default.onCooldownActive.title": "Faiwed: Coowdown active",
+      "default.onCooldownActive.description": "Pwease wait sowme time befowe doing thawt again",
+
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Dispways a wist of commands",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hewp / Commands**",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.field.commands": "Commands",
+
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.description": "Shows sowme basic infowmation abouwt me",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.3.title": "Cuwwent shawd",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "Instance",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "Wocation",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "Data pwocessing",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "Wepowt content",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "Visit Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "Contact",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "Visit Website",
+
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "Upwoad the attached fiwe tuwu haste.hypercdn.de",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "No fiwe pwovided",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.success.msg": "Hewe iws youw haste",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.description": "Westowes the wast message which has bewn deweted in thiws channew",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.error.msg": "No message found tuwu westowe",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.title": "Westowed deweted message",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.2.title": "Authow",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.3.title": "Owd message",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.description": "Westowes the wast message which has bewn edited in thiws channew",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.error.msg": "No message found tuwu westowe",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.title": "Westowed edited message",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.2.title": "Author",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "Westowe deweted ow edited messages",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "Cweate a new notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Notification cweated",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "Dewete an existing notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Notification deweted",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Faiwed tuwu dewete notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "View existing notifications",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "Notifications",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.description": "Update an existing notification",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.success.msg": "Notification edited",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Manage notifications fow thiws guiwd",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Update the access mode fow the specified channew",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Access mode updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "Faiwed tuwu update access mode.\nAvaiwabwe options awe: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.description": "Dispways infowmation fow the specified channew",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.title": "Channew settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.1.title": "Fwags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.2.title": "Access mode",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.3.title": "Wogging enabwed",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.4.title": "Wogging auto westowe channew",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.error.msg": "Faiwed tuwu update access mode.\nAvaiwabwe options awe:",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "Update the wogging settings fow the specified channew",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Updated wogging setting",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Faiwed tuwu update wogging mode.\nAvaiwabwe options awe: [true, false],",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands tuwu manage channew settings",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Update the wesponse wanguage of xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Wesponse wanguage updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "Faiwed tuwu update wesponse wanguage.\nAvaiwabwe options awe: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.description": "Update the wicense using a wicense key",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.success.msg": "Wicense updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.error.msg": "Updating wicense faiwed",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.description": "Update the pwefix used fow commands",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.success.msg": "Pwefix updated tuwu ```%0%```",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.error.msg": "Updating pwefix faiwed. Maybe its too wong?",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.description": "Contains genewaw guiwd settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.title": "Genewaw guiwd settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.1.title": "Pwefewwed wanguage",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.2.title": "Pwefix",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.3.title": "Settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.4.title": "Wicense nawme",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.5.title": "Iws vawid untiw",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.6.title": "max vpewm wowes",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.7.title": "max tags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.8.title": "max notifications",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.9.title": "max twitch notifications",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.10.title": "max message wogging",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contains commands tuwu manage v wowes awnd v pewms",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Wowes",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.is_empty": "No wowes cweated yet",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings.description": "Contains aww settings fow the guiwd",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.description": "Cweates a new tag with a given tag nawme awnd content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.success.msg": "Tag %0% cweated",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.error.msg": "Faiwed tuwu cweate tag",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Dewetes an existing tag",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% deweted",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Faiwed tuwu dewete tag. Awe uwu the ownew?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Faiwed tuwu update tag. Awe uwu the ownew?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Cweate, manage awnd use tags fow thiws guiwd",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag cweated by %1%*",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.error.msg": "Tag %0% nowt found",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.description": "Wequest stweam notifications fow a channew",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.success.msg": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview.",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.error.msg": "Faiwed tuwu wequest anothew stweam notification. Iws the uww vawid, does a channew awweady weceive notifications fow thiws channew ow duwu u hit the wimit?",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Wemove stweam notifications fow a channew",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Deweted stweam notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Faiwed tuwu dewete stweam notification",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Update stweam notifications fow a channew",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Updated stweam notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Faiwed tuwu update stweam notification",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Cweate awnd manage awnd wist stweam notifications",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Faiwed tuwu wist stweam notifications",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Expowt a wog of the encwypted cached messages fow a given channew in the cuwwent guiwd",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Awsk who iws connected tuwu the backends secondawy socket",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Cawn be used tuwu evawuate code",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Dispways stats of aww instances connected tuwu the secondawy socket of the backend",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Dispways sowme statistics abouwt thiws bot",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Cawn be used tuwu check the ping tuwu discowd awnd othew winked sewvices",
+      "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands onwy avaiwabwe tuwu the devewopew"
+    }
+  }
+]

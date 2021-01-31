@@ -24,6 +24,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("modify", new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
@@ -44,19 +45,19 @@ public class CMDModify extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
             Tag tag = tagCache.get(tagA.getValue());
             if(commandEvent.getEvent().getAuthor().getIdLong() != tag.getUserId()){
-                throw new RuntimeException("Cant Modify Tag When Not Owner");
+                throw new RuntimeException("User Does Not Own This Tag");
             }
             tag.setTagContent(content.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Tag "+tagA.getValue()+" Updated")).queue();;
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass().getName()+".response.success.msg", tag.getId()))).queue();;
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Failed To Update Tag "+tagA.getValue()+" Not Found / Not Owner")).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass().getName()+".response.error.msg"))).queue(s->s.delete().queueAfter(3000, TimeUnit.MILLISECONDS));
         }
     }
 }

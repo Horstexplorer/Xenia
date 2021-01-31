@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -37,7 +38,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", "Displays a list of commands", null,null, null, null, null);
+        super("help", null,null, null, null, null);
         this.parent = parent;
     }
 
@@ -47,12 +48,12 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", "Displays a list of commands", null, null, null,null, null);
+        super("help", null, null, null,null, null);
         this.commandMap = commandMap;
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
         GuildMessageReceivedEvent event = commandEvent.getEvent();
         // build command path
         StringBuilder commandPathBuilder = new StringBuilder();
@@ -75,11 +76,11 @@ public class CMDHelp extends Command {
                     help.append("<").append(s.getName()).append(">").append(" ");
                 }
             }
-            help.append("-").append(" ").append(c.getDescription()).append("\n");
+            help.append("-").append(" ").append(c.getDescription(translationPackage)).append("\n");
         }
         help.append("```");
-        embedBuilder.addField("Commands", help.toString(), false);
+        embedBuilder.addField(translationPackage.getTranslation(getClass().getName()+".response.field.1.title"), help.toString(), false);
         // send result
-        event.getChannel().sendMessage("**Help / Commands**\n"+help.toString()).queue();
+        event.getChannel().sendMessage(translationPackage.getTranslation(getClass().getName()+".response.title")+"\n"+help.toString()).queue();
     }
 }

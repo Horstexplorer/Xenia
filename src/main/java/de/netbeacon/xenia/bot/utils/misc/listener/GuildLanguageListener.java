@@ -19,10 +19,14 @@ package de.netbeacon.xenia.bot.utils.misc.listener;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GuildLanguageListener implements CacheEventListener<Long, Guild> {
 
     private final TranslationManager translationManager;
+    private final Logger logger = LoggerFactory.getLogger(GuildLanguageListener.class);
 
     public GuildLanguageListener(TranslationManager translationManager){
         this.translationManager = translationManager;
@@ -30,7 +34,16 @@ public class GuildLanguageListener implements CacheEventListener<Long, Guild> {
 
     @Override
     public void onInsertion(Long newKey, Guild newObject) {
-
+        String prefLang = newObject.getPreferredLanguage();
+        if(!translationManager.containsLanguage(prefLang)){
+            TranslationPackage translationPackage = translationManager.getDefaultTranslationPackage();
+            if(translationPackage == null){
+                logger.error("Checked Preferred Language Of Guild "+newObject.getId()+" Which Does Not Exist."+ "\"In the scenario which is occurring intermittently to this dialogue infers a severity to which the degree is attainable to quantify and contrast to human feaces interfering with a strong velocity of a small household air conditioner's vane.\"");
+                return;
+            }
+            newObject.setPreferredLanguage(translationPackage.getLanguageId());
+            newObject.update();
+        }
     }
 
 }

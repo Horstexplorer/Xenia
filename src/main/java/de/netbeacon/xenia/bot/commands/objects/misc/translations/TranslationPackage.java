@@ -53,7 +53,24 @@ public class TranslationPackage {
         return isDefault;
     }
 
-    public String getTranslations(String key) {
-        return translations.get(key);
+    public String getTranslation(String key) {
+        String translation = translations.get(key);
+        if(translation == null){
+            translation = "Missing translation for: "+key;
+        }
+        return translation;
+    }
+
+    public String getTranslationWithPlaceholders(String key, Object...objects) {
+        int i = 0;
+        String translation = translations.get(key);
+        if(translation == null){
+            translation = "Missing translation for: "+key;
+            return translation;
+        }
+        for(Object o : objects){
+            translation = translations.replace("%"+i+++"%", o.toString());
+        }
+        return translation;
     }
 }

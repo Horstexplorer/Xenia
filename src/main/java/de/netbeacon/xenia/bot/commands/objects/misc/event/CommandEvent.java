@@ -140,7 +140,7 @@ public class CommandEvent {
 
         /**
          * Returns the license
-         * @return
+         * @return license
          */
         public License getbLicense() {
             return bLicense;

@@ -25,6 +25,8 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.hastebin.HastebinUtil;
@@ -42,34 +44,39 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDChatlog extends Command {
 
     public CMDChatlog() {
-        super("chatlog", "Export a log of the cached messages for a given channel", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
+        super("chatlog", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
     }
 
     @Override
     public void execute(List<String> args, CommandEvent commandEvent) {
+        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+        if(translationPackage == null){
+            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            return;
+        }
         // check required args
         CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
         if(!cmdArgs.verify()){
             // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs()).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
             return;
         }
         if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
             // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms()).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{},e->{});
             return;
         }
         if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
             // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(false)).queue(s->{},e->{});
+            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue(s->{},e->{});
             return;
         }
         // everything alright
-        onExecution(cmdArgs, commandEvent);
+        onExecution(cmdArgs, commandEvent, translationPackage);
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
         CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
         CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
@@ -98,17 +105,17 @@ public class CMDChatlog extends Command {
         String jsonString = jsonObject.toString(3);
         try{
             String url = HastebinUtil.uploadToHastebin(jsonString);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess("Here is the [chatlog]("+url+") ["+jsonArray.length()+" messages]")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, "Here is the [chatlog]("+url+") ["+jsonArray.length()+" messages]")).queue();
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError("Something Went Wrong Uploading The Chat Log (sizeOf: "+jsonString.length()+")")).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: "+jsonString.length()+")")).queue();
         }
     }
 
     @Override
-    public MessageEmbed onMissingMemberPerms(boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed("Failed: Not Enough Permissions", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this !")
+                .appendDescription("You are not allowed to do this")
                 .build();
     }
 }
