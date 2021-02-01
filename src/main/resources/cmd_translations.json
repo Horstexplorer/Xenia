@@ -66,7 +66,7 @@
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "View existing notifications",
-      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "View existing notifications",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "Notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.description": "Update an existing notification",
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.success.msg": "Notification edited",
@@ -89,6 +89,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "Update the logging settings for the specified channel",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Updated logging setting",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Failed To Update Logging Mode.\nAvailable options are: [true, false]",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands to manage channel settings",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Update the settings for this guild",
@@ -164,6 +165,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Displays stats of all instances connected to the secondary socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Displays some statistics about this bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Can be used to check the ping to discord and other linked services",
+
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands only available to the developer"
     }
   },
@@ -257,6 +259,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "Update the wogging settings fow the specified channew",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Updated wogging setting",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Faiwed tuwu update wogging mode.\nAvaiwabwe options awe: [true, false],",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands tuwu manage channew settings",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Update the settings fow thiws guiwd",
@@ -332,7 +335,178 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Dispways stats of aww instances connected tuwu the secondawy socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Dispways sowme statistics abouwt thiws bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Cawn be used tuwu check the ping tuwu discowd awnd othew winked sewvices",
+
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands onwy avaiwabwe tuwu the devewopew"
+    }
+  },
+  {
+    "languageId": "de_DE",
+    "languageName": "German-Default",
+    "languageDescription": "The default german language package",
+    "isDefault": false,
+    "translations": {
+      "default.onSuccess.title": "Erfolg",
+      "default.onError.title": "Fehler",
+      "default.onMissingArgs.title": "Gescheitert: Nicht genug Argumente",
+      "default.onMissingArgs.description": "Dieser Befehl erfordert mehrere/unterschiedliche Argumente",
+      "default.onMissingArgs.usage.fn": "Verwendung:",
+      "default.onMissingMemberPerms.title": "Fehlgeschlagen: Nicht genügend Berechtigungen",
+      "default.onMissingMemberPerms.description": "Du darfst das nicht tun!",
+      "default.onMissingMemberPerms.requiredPerms.fn": "Erforderliche Berechtigungen:",
+      "default.onMissingBotPerms.title": "Fehlgeschlagen: Dem Bot fehlen die Berechtigungen",
+      "default.onMissingBotPerms.description": "Ich kann den Befehl aufgrund fehlender Berechtigungen nicht ausführen!",
+      "default.onMissingBotPerms.requiredPerms.fn": "Erforderliche Berechtigungen:",
+      "default.onCooldownActive.title": "Gescheitert: Abklingzeit aktiv",
+      "default.onCooldownActive.description": "Bitte warten etwas, bevor du diesen Befehl erneut versuchst",
+
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Zeigt eine Liste von Befehlen an",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hilfe / Befehle**",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.field.commands": "Befehle",
+
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.description": "Zeigt einige grundlegende Informationen über mich an",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.3.title": "Aktuelle Scherbe",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "Instanz",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "Standort",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "Datenverarbeitung",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "Bericht Inhalt",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "Kontakt",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "[Website besuchen](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "Laden Sie die angehängte Datei auf haste.hypercdn.de hoch",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "Keine Datei vorhanden",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.success.msg": "Hier ist deine Datei",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.description": "Stellt die letzte Nachricht die in diesem Kanal gelöscht wurde wieder her",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.title": "Gelöschte Nachricht wiederhergestellt",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.1.title": "NachrichtenId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.3.title": "Alte Nachricht",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.description": "Stellt die letzte Nachricht wieder her, die in diesem Kanal bearbeitet wurde",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.title": "Bearbeitete Nachricht wiederhergestellt",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.1.title": "NachrichtenId",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.3.title": "Alte Nachricht",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "Gelöschte oder bearbeitete Nachrichten wiederherstellen",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "Eine neue Benachrichtigung erstellen",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "Benachrichtigung erstellt (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "Benachrichtigung konnte nicht erstellt werden! Vielleicht ist der Cache voll?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "Löschen einer vorhandenen Benachrichtigung",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "Benachrichtigung (ID: %0%) gelöscht",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "Benachrichtigung konnte nicht gelöscht werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "Vorhandene Benachrichtigungen anzeigen",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "Benachrichtigungen",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.description": "Aktualisieren einer vorhandenen Benachrichtigung",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.success.msg": "Benachrichtigung bearbeitet",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Verwalten von Benachrichtigungen für diese Gilde",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Aktualisieren Sie den Zugriffsmodus für den angegebenen Kanal",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Zugriffsmodus aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "Aktualisierung des Zugriffsmodus fehlgeschlagen.\nVerfügbare Optionen sind: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.description": "Zeigt Informationen für den angegebenen Kanal an",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.title": "Kanaleinstellungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.1.title": "Flags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.2.title": "Zugriffsmodus",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.3.title": "Protokollierung aktiviert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.4.title": "Kanal für die automatische Protokollwiederherstellung",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.error.msg": "Aktualisierung des Zugriffsmodus fehlgeschlagen.\nVerfügbare Optionen sind:",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "Aktualisieren der Protokollierungseinstellungen für den angegebenen Kanal",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "Protokollierungseinstellungen aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "Die Protokollierungeinstellungen konnten nicht aktualisiert werden.\nVerfügbare Optionen sind: [true, false]",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Enthält Befehle zur Verwaltung der Kanaleinstellungen",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Aktualisieren Sie die Einstellungen für diese Gilde",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.success.msg": "Gildeneinstellungen aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.error.msg": "Die Gildeneinstellungen konnten nicht aktualisiert werden.\nVerfügbare Optionen sind: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Wechselt die Sprache von Xenia.",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Sprache aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "Die Sprache konnte nicht geändert werden.\nVerfügbare Optionen sind: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.description": "Aktualisieren der Lizenz mit einem Lizenzschlüssel",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.success.msg": "Lizenz aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.error.msg": "Lizenzaktualisierung fehlgeschlagen",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.description": "Aktualisieren Sie das für Befehle verwendete Präfix",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.success.msg": "Präfix aktualisiert auf ```%0%```",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.error.msg": "Die Aktualisierung des Präfixes ist fehlgeschlagen. Vielleicht ist es zu lang?",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.description": "Enthält allgemeine Gildeneinstellungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.title": "Allgemeine Gildeneinstellungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.1.title": "Bevorzugte Sprache",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.2.title": "Präfix",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.3.title": "Einstellungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.4.title": "Lizenzname",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.5.title": "Ist gültig bis",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.6.title": "max vperm-Rollen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.7.title": "max Tags",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.8.title": "max Benachrichtigungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.9.title": "max Twitch Benachrichtigungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.10.title": "max Nachrichtenprotokollierung",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Enthält Befehle zur Verwaltung von v-Rollen und v-Perms",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Rollen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.is_empty": "Noch keine Rolle angelegt",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings.description": "Enthält alle Einstellungen für die Gilde",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.description": "Erzeugt einen neuen Tag mit einem gegebenen Tag-Namen und Inhalt",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.success.msg": "Tag %0% erstellt",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.error.msg": "Tag kann nicht erstellt werden. Wurde das limit erreicht, oder existiert der Tag bereits?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Löschen ein vorhandenes Tag",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% gelöscht",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer?",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Tags für diese Gilde erstellen, verwalten und verwenden",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag erstellt von %1%*",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.error.msg": "Tag %0% nicht gefunden",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.description": "Stream-Benachrichtigungen für einen Kanal anfordern",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.success.msg": "Stream-Benachrichtigungen angefordert. Nach der Auswertung wird dies in der Übersicht angezeigt",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.error.msg": "Eine weitere Stream-Benachrichtigung konnte nicht angefordert werden. Ist die URL gültig, erhält ein Kanal bereits Benachrichtigungen für diesen Kanal oder haben Sie das Limit erreicht?",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Stream-Benachrichtigungen für einen Kanal entfernen",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Benachrichtigung über gelöschte Streams",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Stream-Benachrichtigung konnte nicht gelöscht werden",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Stream-Benachrichtigungen für einen Kanal aktualisieren",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Stream-Benachrichtigung aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Aktualisierung der Stream-Benachrichtigung fehlgeschlagen",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Erstellen und Verwalten von Stream-Benachrichtigungen und Listen",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Angeforderte Stream-Benachrichtigungen. Nach der Auswertung wird dies in der Übersicht angezeigt",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Stream-Benachrichtigungen konnten nicht aufgelistet werden",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportiert ein Protokoll der verschlüsselten zwischengespeicherten Nachrichten für einen bestimmten Kanal in der aktuellen Gilde",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Kann zur Auswertung von Code verwendet werden",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Zeigt die Statistiken aller Instanzen an, die mit dem sekundären Socket des Backends verbunden sind",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Zeigt einige Statistiken über diesen Bot an",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Kann verwendet werden, um den Ping zu Discord und anderen verknüpften Diensten zu prüfen",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Enthält Befehle, die nur dem Entwickler zur Verfügung stehen"
     }
   }
 ]
