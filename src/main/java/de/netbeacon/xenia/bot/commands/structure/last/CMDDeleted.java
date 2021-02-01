@@ -54,7 +54,7 @@ public class CMDDeleted extends Command {
         }else{
             commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
                     .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
-                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getUser().getMetaUsername(), true)
+                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getMember().getUser().getMetaUsername(), true)
                     .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
                     .build()
             ).queue();

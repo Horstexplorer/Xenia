@@ -41,12 +41,15 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.function.Consumer;
+
 public class GuildAccessListener extends ListenerAdapter {
 
     private final XeniaBackendClient backendClient;
     private final Logger logger = LoggerFactory.getLogger(GuildAccessListener.class);
 
-    private static final int MEMBER_COUNT_THRESHOLD = Integer.MAX_VALUE; // disabled for now
+    private static final int MEMBER_PRELOAD_COUNT_THRESHOLD = 10000; // disabled for now
+    private static final int MEMBER_LOGGING_COUNT_THRESHOLD = Integer.MAX_VALUE; // disabled for now
 
     public GuildAccessListener(XeniaBackendClient backendClient){
         this.backendClient = backendClient;
@@ -61,7 +64,9 @@ public class GuildAccessListener extends ListenerAdapter {
             backendClient.getGuildCache().remove(event.getGuild().getIdLong());
         }
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        g.initAsync(guild -> {
+        g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
+        g.updateAsync();
+        Consumer<Guild> updateChannelInfo = guild -> {
             // update all channels
             ChannelCache channelCache = guild.getChannelCache();
             for(Channel channel : channelCache.getAllAsList()){
@@ -79,9 +84,8 @@ public class GuildAccessListener extends ListenerAdapter {
                 channel.lSetChannelFlags(channelFlags);
                 channel.updateAsync();
             }
-        });
-        g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
-        g.updateAsync();
+        };
+        g.initAsync(event.getGuild().getMemberCount() <= MEMBER_PRELOAD_COUNT_THRESHOLD, updateChannelInfo);
     }
 
     @Override
@@ -93,7 +97,7 @@ public class GuildAccessListener extends ListenerAdapter {
         event.getGuild().getTextChannels().forEach(textChannel -> {
             backendClient.getBackendProcessor().getScalingExecutor().execute(()->{
                 Channel channel = g.getChannelCache().get(textChannel.getIdLong());
-                if(event.getGuild().getMemberCount() >= MEMBER_COUNT_THRESHOLD){ channel.lSetTmpLoggingActive(false); }
+                if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){ channel.lSetTmpLoggingActive(false); }
                 Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(channel.getChannelFlags().getValue());
                 if (textChannel.isNews()) { channelFlags.set(Channel.ChannelFlags.Flags.NEWS); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NEWS); }
                 if (textChannel.isNSFW()) { channelFlags.set(Channel.ChannelFlags.Flags.NSFW); } else { channelFlags.unset(Channel.ChannelFlags.Flags.NSFW); }
@@ -170,7 +174,7 @@ public class GuildAccessListener extends ListenerAdapter {
         Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
         c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
-        if(event.getGuild().getMemberCount() >= MEMBER_COUNT_THRESHOLD){ c.lSetTmpLoggingActive(false); }
+        if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){ c.lSetTmpLoggingActive(false); }
         c.updateAsync();
     }
 
