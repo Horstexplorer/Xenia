@@ -45,7 +45,7 @@ dependencies {
 
     // OKHTTP
 
-    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.1' // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0' // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
 
     // OTHER THINGS
 
