@@ -211,7 +211,6 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->c.getMessageCache().get(message.getLong("messageId")));
                             break;
                         case "delete":
-                            c.getMessageCache().get(message.getLong("messageId")).onDeletion();
                             c.getMessageCache().remove(message.getLong("messageId"));
                             break;
                     }
