@@ -111,7 +111,7 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                     }
                     lastHeartBeat = newHeartBeat;
                 }
-                    break;
+                break;
                 case "user":
                 {
                     if(!xeniaBackendClient.getUserCache().contains(message.getLong("userId"))){
@@ -124,11 +124,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             xeniaBackendClient.getUserCache().get(message.getLong("userId")).getAsync();
                             break;
                         case "delete":
+                            xeniaBackendClient.getUserCache().get(message.getLong("userId")).onDeletion();
                             xeniaBackendClient.getUserCache().remove(message.getLong("userId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -141,11 +142,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             xeniaBackendClient.getGuildCache().get(message.getLong("guildId")).getAsync(); // this just gets the new data as we dont want to reload all channels, roles, members,...
                             break;
                         case "delete":
+                            xeniaBackendClient.getGuildCache().get(message.getLong("guildId")).clear(true);
                             xeniaBackendClient.getGuildCache().remove(message.getLong("guildId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_role":
                 case "guild_role_permission":
                 {
@@ -162,11 +164,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getRoleCache().get(message.getLong("roleId")));
                             break;
                         case "delete":
+                            g.getRoleCache().get(message.getLong("roleId")).onDeletion();
                             g.getRoleCache().remove(message.getLong("roleId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_channel":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -178,15 +181,17 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getChannelCache().get(message.getLong("channelId")));
                             break;
                         case "update":
+                            g.getChannelCache().get(message.getLong("channelId")).clear(false);
                             g.getChannelCache().remove(message.getLong("channelId"));
                             scalingExecutor.execute(()->g.getChannelCache().get(message.getLong("channelId")));
                             break;
                         case "delete":
+                            g.getChannelCache().get(message.getLong("channelId")).clear(true);
                             g.getChannelCache().remove(message.getLong("channelId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_message":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -206,11 +211,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->c.getMessageCache().get(message.getLong("messageId")));
                             break;
                         case "delete":
+                            c.getMessageCache().get(message.getLong("messageId")).onDeletion();
                             c.getMessageCache().remove(message.getLong("messageId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_license":
                 {
                     if(!xeniaBackendClient.getLicenseCache().contains(message.getLong("guildId"))){
@@ -219,7 +225,7 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                         xeniaBackendClient.getLicenseCache().remove(message.getLong("guildId"));
                     }
                 }
-                    break;
+                break;
                 case "guild_member":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -235,11 +241,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getMemberCache().get(message.getLong("userId")));
                             break;
                         case "delete":
+                            g.getMemberCache().get(message.getLong("userId")).onDeletion();
                             g.getMemberCache().remove(message.getLong("userId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_misc_tag":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -255,11 +262,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getMiscCaches().getTagCache().get(message.getString("tagName")));
                             break;
                         case "delete":
+                            g.getMiscCaches().getTagCache().get(message.getString("tagName")).onDeletion();
                             g.getMiscCaches().getTagCache().remove(message.getString("tagName"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_misc_notification":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -275,11 +283,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getMiscCaches().getNotificationCache().get(message.getLong("notificationId")));
                             break;
                         case "delete":
+                            g.getMiscCaches().getNotificationCache().get(message.getLong("notificationId")).onDeletion();
                             g.getMiscCaches().getNotificationCache().remove(message.getLong("notificationId"));
                             break;
                     }
                 }
-                    break;
+                break;
                 case "guild_misc_twitchnotification":
                 {
                     if(!xeniaBackendClient.getGuildCache().contains(message.getLong("guildId"))){
@@ -295,11 +304,12 @@ public class PrimaryWebsocketListener extends WebsocketListener {
                             scalingExecutor.execute(()->g.getMiscCaches().getTwitchNotificationCache().get(message.getLong("twitchNotificationId")));
                             break;
                         case "delete":
+                            g.getMiscCaches().getTwitchNotificationCache().get(message.getLong("twitchNotificationId")).onDeletion();
                             g.getMiscCaches().getTwitchNotificationCache().remove(message.getLong("twitchNotificationId"));
                             break;
                     }
                 }
-                    break;
+                break;
             }
         }catch (Exception e){
             logger.warn("Error Processing Message, Cache Might Be Inconsistent: "+message.toString());
