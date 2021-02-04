@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStat
 public class CMDLanguage extends Command {
 
     public CMDLanguage() {
-        super("language", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("language", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
