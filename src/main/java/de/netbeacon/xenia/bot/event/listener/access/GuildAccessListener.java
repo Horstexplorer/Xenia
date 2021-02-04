@@ -233,11 +233,11 @@ public class GuildAccessListener extends ListenerAdapter {
             m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
             m.updateAsync();
         }catch (CacheException e){
-            logger.error("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (DataException e){
-            logger.error("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (Exception e){
-            logger.error("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }
     }
 
