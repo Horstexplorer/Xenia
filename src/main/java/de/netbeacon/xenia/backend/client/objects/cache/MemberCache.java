@@ -19,8 +19,8 @@ package de.netbeacon.xenia.backend.client.objects.cache;
 import de.netbeacon.utils.locks.IdBasedLockHolder;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendProcessor;
-import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.backend.client.objects.internal.io.BackendRequest;
 import de.netbeacon.xenia.backend.client.objects.internal.io.BackendResult;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.Cache;
@@ -45,11 +45,11 @@ public class MemberCache extends Cache<Long, Member> {
         this.guildId = guildId;
     }
 
-    public Member get(long userId) throws CacheException{
+    public Member get(long userId) throws CacheException, DataException {
         return get(userId, true);
     }
 
-    public Member get(long userId, boolean init) throws CacheException{
+    public Member get(long userId, boolean init) throws CacheException, DataException {
         try{
             idBasedLockHolder.getLock(userId).lock();
             Member member = getFromCache(userId);
@@ -59,8 +59,8 @@ public class MemberCache extends Cache<Long, Member> {
             member = new Member(getBackendProcessor(), guildId, userId);
             try{
                 member.get();
-            }catch (BackendException e){
-                if(e.getId() == 404 && init){
+            }catch (DataException e){
+                if(e.getCode() == 404 && init){
                     member.create();
                 }else{
                     throw e;
@@ -68,16 +68,16 @@ public class MemberCache extends Cache<Long, Member> {
             }
             addToCache(userId, member);
             return member;
-        }catch (CacheException e){
+        }catch (CacheException | DataException e){
             throw e;
         }catch (Exception e){
-            throw new CacheException(-1, "Failed To Get Member", e);
+            throw new CacheException(CacheException.Type.UNKNOWN, "Failed To Get Member", e);
         }finally {
             idBasedLockHolder.getLock(userId).unlock();
         }
     }
 
-    public List<Member> retrieveAllFromBackend(boolean cacheInsert) throws CacheException {
+    public List<Member> retrieveAllFromBackend(boolean cacheInsert) throws CacheException, DataException {
         try{
             if(cacheInsert){
                 idBasedLockHolder.getLock().writeLock().lock();
@@ -100,10 +100,10 @@ public class MemberCache extends Cache<Long, Member> {
                 memberList.add(member);
             }
             return memberList;
-        }catch (CacheException e){
+        }catch (CacheException | DataException e){
             throw e;
         }catch (Exception e){
-            throw new CacheException(-11, "Failed To Retrieve All Members", e);
+            throw new CacheException(CacheException.Type.UNKNOWN, "Failed To Retrieve All Members", e);
         }finally {
             if(cacheInsert){
                 idBasedLockHolder.getLock().writeLock().unlock();
@@ -115,16 +115,16 @@ public class MemberCache extends Cache<Long, Member> {
         removeFromCache(userId);
     }
 
-    public void delete(long userId) throws CacheException{
+    public void delete(long userId) throws CacheException, DataException{
         try{
             idBasedLockHolder.getLock(userId).lock();
             Member member = getFromCache(userId);
             Objects.requireNonNullElseGet(member, ()->new Member(getBackendProcessor(), guildId, userId)).delete();
             removeFromCache(userId);
-        }catch (CacheException e){
+        }catch (CacheException | DataException e){
             throw e;
         }catch (Exception e){
-            throw new CacheException(-3, "Failed To Delete Member", e);
+            throw new CacheException(CacheException.Type.UNKNOWN, "Failed To Delete Member", e);
         }finally {
             idBasedLockHolder.getLock(userId).unlock();
         }
