@@ -1,5 +1,5 @@
 /*
- *     Copyright 2020 Horstexplorer @ https://www.netbeacon.de
+ *     Copyright 2021 Horstexplorer @ https://www.netbeacon.de
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,44 @@
 
 package de.netbeacon.xenia.backend.client.objects.internal.exceptions;
 
-public class CacheException extends RuntimeException {
+public class DataException extends RuntimeException{
 
     public enum Type{
         UNKNOWN,
-        NOT_FOUND,
-        ALREADY_EXISTS,
-        IS_FULL
+        UNSTABLE,
+        HTTP,
+        TIMEOUT
     }
 
+    private int code;
     private final Type type;
-    private Exception exception;
 
-    public CacheException(Type type, String message){
+    public DataException(Type type){
+        super(type.name());
+        this.type = type;
+    }
+
+    public DataException(Type type, String message){
         super(message);
         this.type = type;
     }
 
-    public CacheException(Type type, String message, Exception exception){
-        super(message, exception);
+    public DataException(Type type, int code, String message){
+        super(message);
         this.type = type;
-    }
-
-    @Override
-    public String getMessage() {
-        return "Type: "+type+" Message: "+super.getMessage();
+        this.code = code;
     }
 
     public Type getType() {
         return type;
     }
 
-    public Exception getSubException() {
-        return exception;
+    public int getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return type.name()+" "+code+" "+super.getMessage();
     }
 }

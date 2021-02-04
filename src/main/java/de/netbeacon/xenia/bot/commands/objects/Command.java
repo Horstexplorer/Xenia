@@ -87,33 +87,6 @@ public abstract class Command {
         this.isCommandHandler = true;
     }
 
-
-    /**
-     * Create a copy of an existing command to apply the translation to
-     * @param command command
-     * @param translationPackage of the target language
-     */
-    public Command(Command command, TranslationPackage translationPackage){
-        // COPY DATA
-        this.alias = command.getAlias();
-        this.commandCooldown = command.getCommandCooldown();
-        if(command.getBotPermissions() != null){
-            this.botPermissions.addAll(command.botPermissions);
-        }
-        if(command.getMemberPrimaryPermissions() != null){
-            this.memberPrimaryPermissions.addAll(command.getMemberPrimaryPermissions());
-        }
-        if(command.getMemberSecondaryPermissions() != null){
-            this.memberSecondaryPermissions.addAll(command.getMemberSecondaryPermissions());
-        }
-        if(command.getCommandArgs() != null){
-            this.requiredArgs.addAll(command.getCommandArgs());
-        }
-        this.isCommandHandler = command.isCommandHandler;
-        command.getChildCommands().values().forEach(this::addChildCommand);
-    }
-
-
     /**
      * Returns the alias of the command
      *
@@ -243,16 +216,6 @@ public abstract class Command {
             }
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
             long authorId = commandEvent.getEvent().getAuthor().getIdLong();
-            if(commandCooldown != null){
-                // process cd
-                if(!commandCooldown.allow(guildId, authorId)){
-                    // cd running
-                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
-                    return;
-                }
-                // activate cd
-                commandCooldown.deny(guildId, authorId);
-            }
             // check required args
             CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
             //if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
@@ -288,7 +251,16 @@ public abstract class Command {
                 commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
                 return;
             }
-
+            if(commandCooldown != null){
+                // process cd
+                if(!commandCooldown.allow(guildId, authorId)){
+                    // cd running
+                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                    return;
+                }
+                // activate cd
+                commandCooldown.deny(guildId, authorId);
+            }
             // everything alright
             onExecution(cmdArgs, commandEvent, translationPackage);
         }else{

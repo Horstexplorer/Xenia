@@ -34,7 +34,7 @@ import java.util.List;
 public class HYBRIDRoles extends HybridCommand {
 
     public HYBRIDRoles(CommandGroup parent) {
-        super(parent, "roles", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(parent, "roles", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
