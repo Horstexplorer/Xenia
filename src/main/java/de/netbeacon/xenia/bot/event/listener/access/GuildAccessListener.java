@@ -225,19 +225,19 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onGuildMemberUpdate(@NotNull GuildMemberUpdateEvent event) {
         try{
-            Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
             User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-            Member m = g.getMemberCache().get(event.getUser().getIdLong());
             u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
             u.updateAsync();
+            Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+            Member m = g.getMemberCache().get(event.getUser().getIdLong());
             m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
             m.updateAsync();
         }catch (CacheException e){
-            logger.error("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (DataException e){
-            logger.error("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (Exception e){
-            logger.error("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.debug("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }
     }
 
