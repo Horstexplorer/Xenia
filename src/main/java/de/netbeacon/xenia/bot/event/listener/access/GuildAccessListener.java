@@ -191,12 +191,12 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event) {
         try{
             User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-            u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
-            u.updateAsync();
             Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
             Member m = g.getMemberCache().get(event.getMember().getIdLong());
+            u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
             m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
-            m.updateAsync();
+            u.updateAsync(true);
+            m.updateAsync(true);
         }catch (CacheException e){
             logger.error("A CacheException occurred during the GuildMemberJoinEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (DataException e){
@@ -226,18 +226,18 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onGuildMemberUpdate(@NotNull GuildMemberUpdateEvent event) {
         try{
             User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-            u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
-            u.updateAsync();
             Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
             Member m = g.getMemberCache().get(event.getUser().getIdLong());
+            u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
             m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
-            m.updateAsync();
+            u.updateAsync(true);
+            m.updateAsync(true);
         }catch (CacheException e){
-            logger.debug("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.error("A CacheException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (DataException e){
-            logger.debug("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.error("A DataException occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }catch (Exception e){
-            logger.debug("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
+            logger.error("An unknown error occurred during the GuildMemberUpdateEvent of guild "+event.getGuild().getIdLong()+", member "+event.getMember().getIdLong(), e);
         }
     }
 
