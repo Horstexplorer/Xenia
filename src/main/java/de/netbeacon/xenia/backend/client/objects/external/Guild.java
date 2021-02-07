@@ -55,6 +55,7 @@ public class Guild extends APIDataObject {
         super(backendProcessor);
         this.guildId = guildId;
         this.settings = new GuildSettings(0);
+        this.prefix = "~";
         this.channelCache = new ChannelCache(backendProcessor, guildId);
         this.memberCache = new MemberCache(backendProcessor, guildId);
         this.roleCache = new RoleCache(backendProcessor, guildId);
