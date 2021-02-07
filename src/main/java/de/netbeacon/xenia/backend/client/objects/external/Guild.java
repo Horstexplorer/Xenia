@@ -40,8 +40,8 @@ public class Guild extends APIDataObject {
 
     private long creationTimestamp;
     private String preferredLanguage;
-    private GuildSettings settings;
-    private String prefix;
+    private GuildSettings settings = new GuildSettings(0);
+    private String prefix = "~";
     // meta data - initialize with values
     private String metaGuildName = "unknown_name";
     private String metaIconUrl = null;
@@ -54,8 +54,6 @@ public class Guild extends APIDataObject {
     public Guild(BackendProcessor backendProcessor, long guildId) {
         super(backendProcessor);
         this.guildId = guildId;
-        this.settings = new GuildSettings(0);
-        this.prefix = "~";
         this.channelCache = new ChannelCache(backendProcessor, guildId);
         this.memberCache = new MemberCache(backendProcessor, guildId);
         this.roleCache = new RoleCache(backendProcessor, guildId);
