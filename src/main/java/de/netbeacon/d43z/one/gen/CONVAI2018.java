@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CONVAI2017 {
+public class CONVAI2018 {
 
     public static void main(String...args) throws IOException {
         File file = new File("F:\\D31\\summer_wild_evaluation_dialogs.json");
@@ -53,7 +53,7 @@ public class CONVAI2017 {
             for(int ii = 0; ii < dialog.length(); ii++){
                 contents.add(new Content(dialog.getJSONObject(ii).getString("text")));
             }
-            ContentContext contentContext = new ContentContext("ConvAI-SummerWildEval2017_"+i, new HashSet<>(), contents);
+            ContentContext contentContext = new ContentContext("ConvAI-SummerWildEval2018_"+i, new HashSet<>(), contents);
             if(jsonObject.getInt("eval_score") == 5){
                 a6.add(contentContext);
             }else if(jsonObject.getInt("eval_score") == 4){
@@ -69,12 +69,12 @@ public class CONVAI2017 {
             }
         }
 
-        ContextPool c1 = new ContextPool("ConvAI-SummerWildEval2017-R0", a1);
-        ContextPool c2 = new ContextPool("ConvAI-SummerWildEval2017-R1", a2);
-        ContextPool c3 = new ContextPool("ConvAI-SummerWildEval2017-R2", a3);
-        ContextPool c4 = new ContextPool("ConvAI-SummerWildEval2017-R3", a4);
-        ContextPool c5 = new ContextPool("ConvAI-SummerWildEval2017-R4", a5);
-        ContextPool c6 = new ContextPool("ConvAI-SummerWildEval2017-R5", a6);
+        ContextPool c1 = new ContextPool("ConvAI-SummerWildEval2018-R0", a1);
+        ContextPool c2 = new ContextPool("ConvAI-SummerWildEval2018-R1", a2);
+        ContextPool c3 = new ContextPool("ConvAI-SummerWildEval2018-R2", a3);
+        ContextPool c4 = new ContextPool("ConvAI-SummerWildEval2018-R3", a4);
+        ContextPool c5 = new ContextPool("ConvAI-SummerWildEval2018-R4", a5);
+        ContextPool c6 = new ContextPool("ConvAI-SummerWildEval2018-R5", a6);
 
         File out1 = new File("F:\\D31\\OUT\\"+c1.getUUID().toString()+".json");
         File out2 = new File("F:\\D31\\OUT\\"+c2.getUUID().toString()+".json");
