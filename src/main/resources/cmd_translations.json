@@ -165,6 +165,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Displays stats of all instances connected to the secondary socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Displays some statistics about this bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Can be used to check the ping to discord and other linked services",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Can be used to evaluate the current D43Z1 performance",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands only available to the developer"
     }
@@ -335,6 +336,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Dispways stats of aww instances connected tuwu the secondawy socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Dispways sowme statistics abouwt thiws bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Cawn be used tuwu check the ping tuwu discowd awnd othew winked sewvices",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Cawn be used tuwu evawuate the cuwwent D43Z1 pewfowmance",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contains commands onwy avaiwabwe tuwu the devewopew"
     }
@@ -505,6 +507,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Zeigt die Statistiken aller Instanzen an, die mit dem sekundären Socket des Backends verbunden sind",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Zeigt einige Statistiken über diesen Bot an",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Kann verwendet werden, um den Ping zu Discord und anderen verknüpften Diensten zu prüfen",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Kann verwendet werden, um die aktuelle D43Z1 Leistung zu überprüfen",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Enthält Befehle, die nur dem Entwickler zur Verfügung stehen"
     }
@@ -675,6 +678,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Affiche les statistiques de toutes les instances connectées à la prise secondaire du backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Affiche quelques statistiques sur ce bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Peut être utilisé pour vérifier le ping à la discorde et d'autres services liés",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Peut être utilisé pour évaluer la performance actuelle du D43Z1",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contient des commandes uniquement disponibles pour le développeur"
     }
@@ -845,6 +849,7 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Muestra estadísticas de todas las instancias conectadas al socket secundario del backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Muestra algunas estadísticas sobre este bot",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Se puede usar para verificar el ping a la discordia y otros servicios vinculados",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Puede utilizarse para evaluar el rendimiento actual del D43Z1",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contiene comandos solo disponibles para el desarrollador"
     }

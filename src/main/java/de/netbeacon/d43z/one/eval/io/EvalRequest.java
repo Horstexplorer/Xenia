@@ -17,7 +17,6 @@
 package de.netbeacon.d43z.one.eval.io;
 
 import de.netbeacon.d43z.one.objects.base.Content;
-import de.netbeacon.d43z.one.objects.base.ContextPool;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 
@@ -33,7 +32,7 @@ public class EvalRequest {
     private final ExecutorService evalResultConsumerExecutor;
     private final long requestTimestamp;
 
-    public EvalRequest(ContextPool contextPool, ContentMatchBuffer contentMatchBuffer, Content content, Consumer<EvalResult> evalResultConsumer, ExecutorService evalResultConsumerExecutor){
+    public EvalRequest(IContextPool contextPool, ContentMatchBuffer contentMatchBuffer, Content content, Consumer<EvalResult> evalResultConsumer, ExecutorService evalResultConsumerExecutor){
         this.contextPool = contextPool;
         this.contentMatchBuffer = contentMatchBuffer;
         this.content = content;

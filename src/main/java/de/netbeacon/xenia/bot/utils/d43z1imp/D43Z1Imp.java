@@ -21,6 +21,7 @@ import de.netbeacon.d43z.one.objects.base.CombinedContextPool;
 import de.netbeacon.d43z.one.objects.base.ContextPool;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
+import de.netbeacon.utils.shutdownhook.IShutdown;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,7 +36,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class D43Z1Imp {
+public class D43Z1Imp implements IShutdown {
+
+    private static D43Z1Imp instance;
 
     private final IContextPool contextPoolMaster;
     private final List<IContextPool> contextPools = new LinkedList<>();
@@ -44,13 +47,28 @@ public class D43Z1Imp {
 
     private final Eval eval;
 
-    public D43Z1Imp(InputStream index) throws IOException {
-        JSONObject indexJSON = new JSONObject(IOUtils.toString(index, StandardCharsets.UTF_8));
+    public static D43Z1Imp getInstance() throws IOException{
+        return getInstance(false);
+    }
+
+    public static D43Z1Imp getInstance(boolean initializeIfNeeded) throws IOException{
+        if(instance == null && initializeIfNeeded){
+            instance = new D43Z1Imp();
+        }
+        return instance;
+    }
+
+    private D43Z1Imp() throws IOException {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("d43z1.index.json");
+        if (inputStream == null){
+            throw new RuntimeException("Missing D43Z1 Index");
+        }
+        JSONObject indexJSON = new JSONObject(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
         JSONArray base = indexJSON.getJSONArray("base");
         for(int i = 0; i < base.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+base.getString(i)+".cp.json");
+            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("./d43z1/"+base.getString(i)+".cp.json");
             if(fileInput == null){
-                throw new RuntimeException("Invalid Entry In D43Z1 Base Index");
+                throw new RuntimeException("Invalid Entry In D43Z1 Base Index "+base.getString(i));
             }
             JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
             ContextPool contextPool = new ContextPool();
@@ -59,9 +77,9 @@ public class D43Z1Imp {
         }
         JSONArray extended = indexJSON.getJSONArray("extended");
         for(int i = 0; i < extended.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+extended.getString(i)+".ccp.json");
+            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("./d43z1/"+extended.getString(i)+".ccp.json");
             if(fileInput == null){
-                throw new RuntimeException("Invalid Entry In D43Z1 Extended Index");
+                throw new RuntimeException("Invalid Entry In D43Z1 Extended Index "+extended.getString(i));
             }
             JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
             CombinedContextPool combinedContextPool = new CombinedContextPool(contextPoolJSON, contextPools);
@@ -93,5 +111,10 @@ public class D43Z1Imp {
         }finally {
             lock.unlock();
         }
+    }
+
+    @Override
+    public void onShutdown() throws Exception {
+        eval.onShutdown();
     }
 }
