@@ -66,7 +66,7 @@ public class D43Z1Imp implements IShutdown {
         JSONObject indexJSON = new JSONObject(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
         JSONArray base = indexJSON.getJSONArray("base");
         for(int i = 0; i < base.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("./d43z1/"+base.getString(i)+".cp.json");
+            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+base.getString(i)+".cp.json");
             if(fileInput == null){
                 throw new RuntimeException("Invalid Entry In D43Z1 Base Index "+base.getString(i));
             }
@@ -77,7 +77,7 @@ public class D43Z1Imp implements IShutdown {
         }
         JSONArray extended = indexJSON.getJSONArray("extended");
         for(int i = 0; i < extended.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("./d43z1/"+extended.getString(i)+".ccp.json");
+            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+extended.getString(i)+".ccp.json");
             if(fileInput == null){
                 throw new RuntimeException("Invalid Entry In D43Z1 Extended Index "+extended.getString(i));
             }
