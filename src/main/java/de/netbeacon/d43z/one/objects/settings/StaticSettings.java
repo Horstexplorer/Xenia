@@ -23,7 +23,7 @@ public class StaticSettings {
     // CONTENT SETTINGS
     public static final int CONTENT_SHARD_SIZE = 5000;
     public static final int BUFFER_MAX_SIZE = 4;
-    public static final float BUFFER_BONUS = 0.01F;
+    public static final float BUFFER_BONUS = 0.1F;
     public static final boolean EVAL_ENABLE_BUFFER_BONUS_POLICY = true;
     public static final boolean EVAL_ENABLE_TAG_POLICY = false;
     public static final float EVAL_TAG_BONUS_PER_MATCH = 0.1F;
@@ -31,7 +31,7 @@ public class StaticSettings {
     public static final int EVAL_LIAMUS_JACCARD_NGRAM = 2;
     public static final float EVAL_RANDOM_DIF = 0.00001F;
     public static final int EVAL_MAX_PROCESSING_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int EVAL_MAX_THREADS_PER_REQUEST = EVAL_MAX_PROCESSING_THREADS;
+    public static final int EVAL_MAX_THREADS_PER_REQUEST = EVAL_MAX_PROCESSING_THREADS/4;
     public static final int EVAL_MAX_CONCURRENT_TASKS = EVAL_MAX_PROCESSING_THREADS/EVAL_MAX_THREADS_PER_REQUEST;
     public static final ISimilarity.Algorithm EVAL_ALGORITHM = ISimilarity.Algorithm.LIAMUS_JACCARD;
     public static final int EVAL_MAX_PROCESSING_TIME = 5000;
