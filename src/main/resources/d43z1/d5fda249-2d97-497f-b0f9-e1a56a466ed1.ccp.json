@@ -1,0 +1,10 @@
+{
+ "combinedContextPoolId": "d5fda249-2d97-497f-b0f9-e1a56a466ed1",
+ "description": "Master",
+ "extending": [
+  "471abba0-3ed6-4edd-94ef-902f650a1a48",
+  "dd3af5da-aef9-4233-ad74-532d6ac02a1d",
+  "d16b3dcf-434b-4d17-b724-41c5679fbcfe",
+  "455e7212-cac9-4399-9a18-70b364c7cfaf"
+ ]
+}

@@ -29,6 +29,7 @@ import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
+import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.misc.listener.GuildLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
@@ -93,6 +94,7 @@ public class XeniaCore {
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
+        shutdownHook.addShutdownAble(D43Z1Imp.getInstance(true));
         xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
         xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
         // set up event manager

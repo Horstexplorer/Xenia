@@ -62,12 +62,12 @@ public class CmdArgDefStatics {
             .buildAllMatch();
     public static final CmdArgDef<Boolean> GUILD_SETTINGS_SETTING_MODE_DEF = new CmdArgDef.Builder<>("enable", Boolean.class)
             .buildAllMatch();
-    public static final CmdArgDef<String> GUILD_LANGUAGE_ID_DEF = new CmdArgDef.Builder<String>("language", String.class)
+    public static final CmdArgDef<String> GUILD_LANGUAGE_ID_DEF = new CmdArgDef.Builder<>("language", String.class)
             .buildAllMatch();
-    public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<String>("licensekey", String.class)
+    public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<>("licensekey", String.class)
             .predicateAddStringLengthRange(64,64)
             .buildAllMatch();
-    public static final CmdArgDef<String> GUILD_PREFIX_DEF = new CmdArgDef.Builder<String>("prefix*", String.class)
+    public static final CmdArgDef<String> GUILD_PREFIX_DEF = new CmdArgDef.Builder<>("prefix*", String.class)
             .predicateAddStringLengthRange(1, 4)
             .buildAllMatch()
             .setOptional(true);
@@ -86,11 +86,13 @@ public class CmdArgDefStatics {
             .buildAllMatch();
 
     // ADMIN
-    public static final CmdArgDef<Mention> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<Mention>("channel*", Mention.class)
+    public static final CmdArgDef<Mention> ADMIN_CHATLOG_CHANNEL = new CmdArgDef.Builder<>("channel*", Mention.class)
             .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
             .buildAllMatch()
             .setOptional(true);
-    public static final CmdArgDef<Boolean> ADMIN_CHATLOG_LIMIT = new CmdArgDef.Builder<Boolean>("respLimit*", Boolean.class)
+    public static final CmdArgDef<Boolean> ADMIN_CHATLOG_LIMIT = new CmdArgDef.Builder<>("respLimit*", Boolean.class)
             .buildAllMatch()
             .setOptional(true);
+    public static final CmdArgDef<String> ADMIN_D43Z1_INPUT = new CmdArgDef.Builder<>("input", String.class)
+            .buildAllMatch();
 }
