@@ -23,7 +23,7 @@ public class StaticSettings {
     // CONTENT SETTINGS
     public static final int CONTENT_SHARD_SIZE = 5000;
     public static final int BUFFER_MAX_SIZE = 4;
-    public static final float BUFFER_BONUS = 0.1F;
+    public static final float BUFFER_BONUS = 0.05F;
     public static final boolean EVAL_ENABLE_BUFFER_BONUS_POLICY = true;
     public static final boolean EVAL_ENABLE_TAG_POLICY = false;
     public static final float EVAL_TAG_BONUS_PER_MATCH = 0.1F;
