@@ -31,8 +31,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -44,6 +48,10 @@ public class D43Z1Imp implements IShutdown {
     private final List<IContextPool> contextPools = new LinkedList<>();
 
     private final ConcurrentHashMap<Long, ContentMatchBuffer> contentMatchBuffers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<ContentMatchBuffer, Long> invertedContentMatchBuffers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<ContentMatchBuffer, Long> contentMatchBufferAccessTimestamp = new ConcurrentHashMap<>();
+
+    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
     private final Eval eval;
 
@@ -87,6 +95,14 @@ public class D43Z1Imp implements IShutdown {
         }
         this.contextPoolMaster = contextPools.stream().filter(contextPool -> contextPool.getUUID().toString().equals(indexJSON.getString("master"))).findFirst().orElseThrow();
         this.eval = new Eval();
+        scheduledExecutorService.scheduleAtFixedRate(()->{
+            for(Map.Entry<ContentMatchBuffer, Long> entry : contentMatchBufferAccessTimestamp.entrySet()){
+                if(entry.getValue() + 600000 < System.currentTimeMillis()){
+                    contentMatchBuffers.remove(invertedContentMatchBuffers.remove(entry.getKey()));
+                    contentMatchBufferAccessTimestamp.remove(entry.getKey());
+                }
+            }
+        }, 1, 1, TimeUnit.MINUTES);
     }
 
     public Eval getEval() {
@@ -107,6 +123,8 @@ public class D43Z1Imp implements IShutdown {
         try{
             lock.lock();
             contentMatchBuffers.putIfAbsent(userId, new ContentMatchBuffer());
+            invertedContentMatchBuffers.putIfAbsent(contentMatchBuffers.get(userId), userId);
+            contentMatchBufferAccessTimestamp.put(contentMatchBuffers.get(userId), System.currentTimeMillis());
             return contentMatchBuffers.get(userId);
         }finally {
             lock.unlock();
@@ -116,5 +134,6 @@ public class D43Z1Imp implements IShutdown {
     @Override
     public void onShutdown() throws Exception {
         eval.onShutdown();
+        scheduledExecutorService.shutdownNow();
     }
 }
