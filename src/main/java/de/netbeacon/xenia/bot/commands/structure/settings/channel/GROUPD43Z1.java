@@ -17,14 +17,14 @@
 package de.netbeacon.xenia.bot.commands.structure.settings.channel;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
+import de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDInfo;
+import de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup;
 
-public class GROUPChannel extends CommandGroup {
+public class GROUPD43Z1 extends CommandGroup {
 
-    public GROUPChannel(CommandGroup parent) {
-        super(parent, "channel");
+    public GROUPD43Z1(CommandGroup parent) {
+        super(parent, "D43Z1");
         addChildCommand(new CMDInfo());
-        addChildCommand(new CMDAccessMode());
-        addChildCommand(new CMDLogging());
-        addChildCommand(new GROUPD43Z1(this));
+        addChildCommand(new CMDSetup());
     }
 }

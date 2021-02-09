@@ -16,18 +16,26 @@
 
 package de.netbeacon.xenia.bot.event.handler.command;
 
+import de.netbeacon.d43z.one.eval.io.EvalRequest;
+import de.netbeacon.d43z.one.objects.base.Content;
+import de.netbeacon.d43z.one.objects.bp.IContextPool;
+import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +50,7 @@ public class MessageHandler {
     private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
     private final EventWaiter eventWaiter;
     private final XeniaBackendClient backendClient;
+    private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
     public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, XeniaBackendClient backendClient){
         this.commandMap = commandMap;
@@ -63,8 +72,25 @@ public class MessageHandler {
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(bGuild.getPrefix())){
-            // check if the message should be logged
-            if(bChannel.tmpLoggingIsActive()){
+            if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW()){
+                try{
+                    D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
+                    ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
+                    IContextPool contextPool = d43Z1Imp.getContextPoolByUUID(bChannel.getD43Z1CustomContextPoolUUID());
+                    if(contextPool == null){
+                        contextPool = d43Z1Imp.getContextPoolMaster();
+                    }
+                    EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
+                            evalResult -> {
+                                if(evalResult.ok()){
+                                    event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
+                                }
+                            }, SharedExecutor.getInstance().getScheduledExecutor());
+                    d43Z1Imp.getEval().enqueue(evalRequest);
+                }catch (Exception e){
+                    logger.warn("An exception occurred while handing message over to D43Z1 ", e);
+                }
+            }else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
                 bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
             }
             return;
