@@ -57,7 +57,7 @@ public class CMDSetup extends Command {
                     Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
                     d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
                     existingChatChannel.setD43Z1Settings(d43Z1Settings);
-                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "chat.deactivated"))).queue();
+                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
                 }else{
                     // create new text channel to be used to chat with the bot
                     commandEvent.getEvent().getGuild()
