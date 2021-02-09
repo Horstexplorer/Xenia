@@ -69,9 +69,9 @@ public class CMDSetup extends Command {
                                 d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
                                 channel.lSetD43Z1Settings(d43Z1Settings);
                                 channel.updateAsync(true);
-                                commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "chat.create.success"))).queue();
+                                commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
                             }, failed -> {
-                                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "chat.create.failed"))).queue();
+                                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
                             });
                 }
             }else{
@@ -80,7 +80,7 @@ public class CMDSetup extends Command {
                     Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
                     d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
                     existingChatChannel.setD43Z1Settings(d43Z1Settings);
-                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "chat.deactivated"))).queue();
+                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
                 }else{
                     // activate for the given channel
                     TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMention.getValue().getId());
@@ -93,14 +93,14 @@ public class CMDSetup extends Command {
                         d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
                         channel.lSetD43Z1Settings(d43Z1Settings);
                         channel.updateAsync();
-                        commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "chat.create.success"))).queue();
+                        commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
                     }, failed -> {
-                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "chat.create.failed"))).queue();
+                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
                     });
                 }
             }
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "chat.general.error"))).queue();
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
         }
     }
 }

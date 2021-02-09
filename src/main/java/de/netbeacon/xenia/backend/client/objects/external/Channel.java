@@ -58,6 +58,7 @@ public class Channel extends APIDataObject {
         this.channelFlags = new ChannelFlags(0);
         this.channelSettings = new ChannelSettings(0);
         this.d43z1Settings = new D43Z1Settings(0);
+        this.d43z1CustomContextPoolUUID = new UUID(0,0);
         setBackendPath("data", "guilds", (Supplier<Long>) this::getGuildId, "channels", (Supplier<Long>) this::getChannelId);
     }
 
@@ -214,7 +215,7 @@ public class Channel extends APIDataObject {
                 .put("tmpLoggingActive", tmpLoggingActive)
                 .put("tmpLoggingChannelId", tmpLoggingChannelId)
                 .put("d43z1Settings", d43z1Settings.getValue())
-                .put("d43z1CustomContextPoolUUID", d43z1CustomContextPoolUUID)
+                .put("d43z1CustomContextPoolUUID", d43z1CustomContextPoolUUID.toString())
                 .put("meta", new JSONObject()
                         .put("name", metaChannelName)
                         .put("topic", metaChannelTopic)
