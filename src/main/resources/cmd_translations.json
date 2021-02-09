@@ -95,7 +95,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot features are now ready",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Something went wrong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Failed to create / update the channel settings required to set up the chatbot",
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.deactivated": "Chatbot has been deactivated",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.description": "Allows to set up a channel to chat with Xenia",
 
@@ -283,7 +283,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot featuwes awe now weady",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Something went wwong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Faiwed tuwu cweate / update the channew settings wequiwed tuwu set up the chatbot",
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.deactivated": "Chatbot has bewn deactivated",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.description": "Awwows tuwu set up a channew tuwu chat with xenia",
 
@@ -471,7 +471,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot-Funktionen sind jetzt bereit",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Beim Einrichten des Chatbots ist etwas schief gelaufen",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "nicht in der Lage, die für die Einrichtung des Chatbots erforderlichen Kanaleinstellungen zu erstellen / zu aktualisieren",
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.deactivated": "Der Chatbot wurde deaktiviert",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.description": "Ermöglicht das Einrichten eines Kanals zum Chatten mit Xenia",
 
@@ -659,7 +659,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Les fonctionnalités de Chatbot sont maintenant prêtes",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Quelque chose a mal tourné lors de la mise en place du chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Impossible de créer / mettre à jour les paramètres du canal nécessaires à la mise en place du chatbot",
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.deactivated": "le chatbot a été désactivé",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.description": "Permet de mettre en place un canal pour discuter avec Xenia",
 
@@ -847,7 +847,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Las funciones del chatbot ya están listas",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Algo salió mal al configurar el chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "No se ha podido crear/actualizar la configuración del canal necesaria para configurar el chatbot",
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.deactivated": "El chatbot ha sido desactivado",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.description": "Permite establecer un canal para chatear con Xenia",
 
