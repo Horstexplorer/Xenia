@@ -45,7 +45,6 @@ public class Eval implements IShutdown {
 
     private final AtomicLong queueTimeAVG = new AtomicLong(0);
     private final AtomicLong evalTimeAVG = new AtomicLong(0);
-    private static final long AVG_BASE = 500;
 
     public Eval(){
         REQUESTER_EXECUTOR.execute(this::REQUESTER_LOOP);
@@ -73,13 +72,13 @@ public class Eval implements IShutdown {
 
     private void updateQueueTimeMs(long ms){
         synchronized (queueTimeAVG){
-            queueTimeAVG.set(((queueTimeAVG.get()*AVG_BASE)+ms)/AVG_BASE);
+            queueTimeAVG.set(((queueTimeAVG.get()*EVAL_AVG_BASE)+ms)/EVAL_AVG_BASE);
         }
     }
 
     private void updateEvalTimeNs(long ns){
         synchronized (evalTimeAVG){
-            evalTimeAVG.set(((evalTimeAVG.get()*AVG_BASE)+ns)/AVG_BASE);
+            evalTimeAVG.set(((evalTimeAVG.get()*EVAL_AVG_BASE)+ns)/EVAL_AVG_BASE);
         }
     }
 
