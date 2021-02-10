@@ -17,13 +17,13 @@
 package de.netbeacon.xenia.bot.commands.structure.settings.channel;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDInfo;
-import de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup;
+import de.netbeacon.xenia.bot.commands.structure.settings.channel.chatbot.CMDInfo;
+import de.netbeacon.xenia.bot.commands.structure.settings.channel.chatbot.CMDSetup;
 
-public class GROUPD43Z1 extends CommandGroup {
+public class GROUPChatbot extends CommandGroup {
 
-    public GROUPD43Z1(CommandGroup parent) {
-        super(parent, "D43Z1");
+    public GROUPChatbot(CommandGroup parent) {
+        super(parent, "chatbot");
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDSetup());
     }

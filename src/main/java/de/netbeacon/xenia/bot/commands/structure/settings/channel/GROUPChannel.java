@@ -25,6 +25,6 @@ public class GROUPChannel extends CommandGroup {
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDAccessMode());
         addChildCommand(new CMDLogging());
-        addChildCommand(new GROUPD43Z1(this));
+        addChildCommand(new GROUPChatbot(this));
     }
 }

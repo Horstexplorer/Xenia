@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1;
+package de.netbeacon.xenia.bot.commands.structure.settings.channel.chatbot;
 
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
@@ -69,7 +69,7 @@ public class CMDSetup extends Command {
                                 d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
                                 channel.lSetD43Z1Settings(d43Z1Settings);
                                 channel.updateAsync(true);
-                                commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+                                commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
                             }, failed -> {
                                 commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
                             });
