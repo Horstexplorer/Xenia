@@ -35,7 +35,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Command {
 
@@ -211,7 +210,7 @@ public abstract class Command {
         if(!isCommandHandler || (s2 && isHybrid)){
             TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
             if(translationPackage == null){
-                commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
                 return;
             }
             long guildId = commandEvent.getEvent().getGuild().getIdLong();
@@ -221,14 +220,14 @@ public abstract class Command {
             //if(getRequiredArgCount() > args.size() || !cmdArgs.verify()){
             if(!cmdArgs.verify()){
                 // missing args
-                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
                 return;
             }
             // check bot permissions
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(),getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
                 }
                 return;
             }
@@ -248,14 +247,14 @@ public abstract class Command {
                     )
             ){
                 // invalid permission
-                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);},e->{});
+                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
                 return;
             }
             if(commandCooldown != null){
                 // process cd
                 if(!commandCooldown.allow(guildId, authorId)){
                     // cd running
-                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
+                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue();
                     return;
                 }
                 // activate cd
