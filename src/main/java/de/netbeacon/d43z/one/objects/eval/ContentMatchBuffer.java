@@ -21,8 +21,7 @@ import de.netbeacon.d43z.one.objects.bp.IIdentifiable;
 
 import java.util.*;
 
-import static de.netbeacon.d43z.one.objects.settings.StaticSettings.BUFFER_BONUS;
-import static de.netbeacon.d43z.one.objects.settings.StaticSettings.BUFFER_MAX_SIZE;
+import static de.netbeacon.d43z.one.objects.settings.StaticSettings.*;
 
 public class ContentMatchBuffer implements IIdentifiable {
 
@@ -66,11 +65,15 @@ public class ContentMatchBuffer implements IIdentifiable {
             ContentMatch contentMatch = lastMatches.get(i);
             ContentContext parentContent = contentMatch.getOrigin().getParent();
             if(!map.containsKey(parentContent)){
-                map.put(parentContent, (i+1)*BUFFER_BONUS);
+                map.put(parentContent, getBonusFor(i));
             }else{
-                map.put(parentContent, map.get(parentContent)+(i+1)*BUFFER_BONUS);
+                map.put(parentContent, map.get(parentContent)+getBonusFor(i));
             }
         }
         return map;
+    }
+
+    private float getBonusFor(int pos){
+        return BUFFER_BONUS - BUFFER_BONUS_SUBTRACTION * ((lastMatches.size()-1) - pos);
     }
 }
