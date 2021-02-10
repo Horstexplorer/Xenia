@@ -92,7 +92,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands to manage channel settings",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot features are now ready",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot features are now ready.\nThis feature is only available in English and is intended for entertainment purposes only.\nResponses are generated from unverified messages - Some answers may seem inappropriate in certain contexts.\nLearn more about the origin of the root datasets [here](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Something went wrong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Failed to create / update the channel settings required to set up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
@@ -280,7 +280,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands tuwu manage channew settings",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot featuwes awe now weady",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot featuwes awe now weady.\nThiws featuwe iws onwy avaiwabwe in engwish awnd iws intended fow entewtainment puwposes onwy.\nWesponses awe genewated fwom unvewified messages - Sowme answews may seem inappwopwiate in cewtain contexts.\nWeawn mowe abouwt the owigin of the woot datasets [hewe](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Something went wwong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Faiwed tuwu cweate / update the channew settings wequiwed tuwu set up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
@@ -468,7 +468,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Enthält Befehle zur Verwaltung der Kanaleinstellungen",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot-Funktionen sind jetzt bereit",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Chatbot-Funktionen sind jetzt bereit.\nDiese Funktion ist nur auf Englisch verfügbar und dient nur der Unterhaltung.\nAntworten werden aus ungeprüften Nachrichten generiert - Einige Antworten können in bestimmten Kontexten unangemessen erscheinen.\nErfahre mehr über die Herkunft der Stammdatensätze [hier](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Beim Einrichten des Chatbots ist etwas schief gelaufen",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "nicht in der Lage, die für die Einrichtung des Chatbots erforderlichen Kanaleinstellungen zu erstellen / zu aktualisieren",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
@@ -656,7 +656,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contient des commandes pour gérer les paramètres des canaux",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Les fonctionnalités de Chatbot sont maintenant prêtes",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Les fonctionnalités de Chatbot sont maintenant prêtes.\nCette fonctionnalité n'est disponible qu'en anglais et est destinée à des fins de divertissement uniquement.\nLes réponses sont générées à partir de messages non vérifiés - Certaines réponses peuvent sembler inappropriées dans certains contextes.\nEn savoir plus sur l'origine des données racine [ici](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Quelque chose a mal tourné lors de la mise en place du chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "Impossible de créer / mettre à jour les paramètres du canal nécessaires à la mise en place du chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
@@ -844,7 +844,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contiene comandos para administrar la configuración del canal",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Las funciones del chatbot ya están listas",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.success.msg": "Las funciones de Chatbot ya están listas.\nEsta función sólo está disponible en inglés y está pensada únicamente para fines de entretenimiento.\nLas respuestas se generan a partir de mensajes no verificados - Algunas respuestas pueden parecer inapropiadas en determinados contextos.\nMás información sobre el origen de los conjuntos de datos raíz [aquí](%0%)",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.msg": "Algo salió mal al configurar el chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.response.error.create.failed": "No se ha podido crear/actualizar la configuración del canal necesaria para configurar el chatbot",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.d43z1.CMDSetup.chat.default.name": "xenia",
