@@ -24,6 +24,7 @@ public class StaticSettings {
     public static final int BUFFER_MAX_SIZE = 5;
     public static final boolean EVAL_ENABLE_BUFFER_BONUS_POLICY = true;
     public static final float BUFFER_BONUS = 0.05F;
+    public static final float BUFFER_BONUS_SUBTRACTION = 0.005F;
     public static final boolean EVAL_ENABLE_TAG_POLICY = false;
     public static final float EVAL_TAG_BONUS_PER_MATCH = 0.05F;
     public static final float EVAL_TAG_POLICY_OVERRIDE_THRESHOLD = 0.49F;
