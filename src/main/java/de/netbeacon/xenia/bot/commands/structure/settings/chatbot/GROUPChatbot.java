@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.channel;
+package de.netbeacon.xenia.bot.commands.structure.settings.chatbot;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.structure.settings.channel.chatbot.CMDInfo;
-import de.netbeacon.xenia.bot.commands.structure.settings.channel.chatbot.CMDSetup;
 
 public class GROUPChatbot extends CommandGroup {
 
