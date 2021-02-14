@@ -44,14 +44,14 @@ public class CMDLogging extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         try{
             CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
             CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
             CmdArg<Mention> mention2CmdArg = args.getByIndex(2);
             Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
             if(channel == null){
-                throw new Exception();
+                throw new IllegalArgumentException();
             }
             channel.lSetTmpLoggingActive(channelLoggingArg.getValue());
             if(mention2CmdArg.getValue() != null){
@@ -59,7 +59,7 @@ public class CMDLogging extends Command {
             }
             channel.update();
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
         }
     }

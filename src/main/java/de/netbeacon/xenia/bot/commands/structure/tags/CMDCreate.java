@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.structure.tags;
 
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -43,15 +44,19 @@ public class CMDCreate extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
         CmdArg<String> tag = cmdArgs.getByIndex(0);
         CmdArg<String> content = cmdArgs.getByIndex(1);
         try{
             tagCache.createNew(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong(), content.getValue());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getValue()))).queue();
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+        }catch (CacheException e){
+            if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
+                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+            }else{
+                throw e;
+            }
         }
     }
 }

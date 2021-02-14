@@ -44,17 +44,17 @@ public class CMDLanguage extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         CmdArg<String> langIdA = args.getByIndex(0);
         String languageId = langIdA.getValue();
         TranslationPackage translationPackage1 = TranslationManager.getInstance().getTranslationPackage(languageId);
         try{
             if(translationPackage1 == null){
-                throw new RuntimeException();
+                throw new IllegalArgumentException();
             }
             commandEvent.getBackendDataPack().getbGuild().setPreferredLanguage(translationPackage1.getLanguageId());
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
         }
     }

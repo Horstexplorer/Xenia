@@ -43,7 +43,7 @@ public class HYBRIDRoles extends HybridCommand {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         StringBuilder stringBuilder = new StringBuilder();
         for(Role role : guild.getRoleCache().getAllAsList()){

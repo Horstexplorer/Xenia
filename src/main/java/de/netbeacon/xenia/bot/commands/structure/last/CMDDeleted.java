@@ -43,7 +43,7 @@ public class CMDDeleted extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = messageCache.getLast("deleted");

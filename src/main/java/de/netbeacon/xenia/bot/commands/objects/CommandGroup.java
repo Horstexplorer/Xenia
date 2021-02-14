@@ -75,5 +75,5 @@ public abstract class CommandGroup extends Command{
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {}
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {}
 }

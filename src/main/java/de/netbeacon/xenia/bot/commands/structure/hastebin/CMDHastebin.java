@@ -53,7 +53,7 @@ public class CMDHastebin extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         List<Message.Attachment> attachments = commandEvent.getEvent().getMessage().getAttachments();
         TextChannel textChannel = commandEvent.getEvent().getChannel();
 

@@ -45,7 +45,7 @@ public class CMDSettings extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         CmdArg<String> settingA = args.getByIndex(0);
         CmdArg<Boolean> mode = args.getByIndex(1);
         try{
@@ -58,7 +58,7 @@ public class CMDSettings extends Command {
             }
             commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
         }
     }

@@ -51,5 +51,5 @@ public abstract class HybridCommand extends CommandGroup{
      * @param translationPackage translation package
      */
     @Override
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception;
 }

@@ -38,7 +38,7 @@ public class CMDInfo extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                 .addField("Xenia", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Xenia-Backend", XeniaCore.getInstance().getBackendClient().getInfo(Info.Mode.Public).getVersion(), true)
