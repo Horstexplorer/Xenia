@@ -45,69 +45,24 @@ public class CMDSetup extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        try{
-            CmdArg<Mention> channelMention = args.getByIndex(0);
-            // check if already a channel has been set up
-            Channel existingChatChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream()
-                    .filter(channel -> channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
-            if(channelMention.getValue() == null){
-                if(existingChatChannel != null){
-                    // deactivate chatbot
-                    Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
-                    d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
-                    existingChatChannel.setD43Z1Settings(d43Z1Settings);
-                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
-                }else{
-                    // create new text channel to be used to chat with the bot
-                    commandEvent.getEvent().getGuild()
-                            .createTextChannel(translationPackage.getTranslation(getClass(), "chat.default.name"))
-                            .setNSFW(true)
-                            .queue(textChannel -> {
-                                try{
-                                    Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
-                                    Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
-                                    d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
-                                    channel.lSetD43Z1Settings(d43Z1Settings);
-                                    channel.updateAsync();
-                                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
-                                }catch (Exception e){
-                                    commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-                                }
-                            }, failed -> {
-                                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
-                            });
-                }
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
+        CmdArg<Mention> channelMention = args.getByIndex(0);
+        // check if already a channel has been set up
+        Channel existingChatChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream()
+                .filter(channel -> channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
+        if(channelMention.getValue() == null){
+            if(existingChatChannel != null){
+                // deactivate chatbot
+                Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
+                d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
+                existingChatChannel.setD43Z1Settings(d43Z1Settings);
+                commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
             }else{
-                if(existingChatChannel != null && existingChatChannel.getChannelId() == channelMention.getValue().getId()){
-                    // deactivate chatbot
-                    try{
-                        Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
-                        d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
-                        existingChatChannel.setD43Z1Settings(d43Z1Settings);
-                        commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
-                    }catch (Exception e){
-                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-                    }
-                }else{
-                    // activate for the given channel
-                    TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMention.getValue().getId());
-                    if(textChannel == null){
-                        throw new RuntimeException();
-                    }
-                    if(textChannel.isNSFW()){
-                        try{
-                            Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
-                            Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
-                            d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
-                            channel.lSetD43Z1Settings(d43Z1Settings);
-                            channel.updateAsync();
-                            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
-                        }catch (Exception e){
-                            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-                        }
-                    }else{
-                        textChannel.getManager().setNSFW(true).queue(success -> {
+                // create new text channel to be used to chat with the bot
+                commandEvent.getEvent().getGuild()
+                        .createTextChannel(translationPackage.getTranslation(getClass(), "chat.default.name"))
+                        .setNSFW(true)
+                        .queue(textChannel -> {
                             try{
                                 Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
                                 Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
@@ -121,11 +76,52 @@ public class CMDSetup extends Command {
                         }, failed -> {
                             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
                         });
+            }
+        }else{
+            if(existingChatChannel != null && existingChatChannel.getChannelId() == channelMention.getValue().getId()){
+                // deactivate chatbot
+                try{
+                    Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
+                    d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
+                    existingChatChannel.setD43Z1Settings(d43Z1Settings);
+                    commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
+                }catch (Exception e){
+                    commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+                }
+            }else{
+                // activate for the given channel
+                TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMention.getValue().getId());
+                if(textChannel == null){
+                    throw new RuntimeException();
+                }
+                if(textChannel.isNSFW()){
+                    try{
+                        Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
+                        Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
+                        d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
+                        channel.lSetD43Z1Settings(d43Z1Settings);
+                        channel.updateAsync();
+                        commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
+                    }catch (Exception e){
+                        commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
                     }
+                }else{
+                    textChannel.getManager().setNSFW(true).queue(success -> {
+                        try{
+                            Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
+                            Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
+                            d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
+                            channel.lSetD43Z1Settings(d43Z1Settings);
+                            channel.updateAsync();
+                            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
+                        }catch (Exception e){
+                            commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+                        }
+                    }, failed -> {
+                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
+                    });
                 }
             }
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
         }
     }
 }

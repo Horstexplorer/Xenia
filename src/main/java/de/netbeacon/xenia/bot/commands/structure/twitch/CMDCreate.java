@@ -46,21 +46,21 @@ public class CMDCreate extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         try{
             CmdArg<String> channelUrl = args.getByIndex(0);
             CmdArg<String> customMessageC = args.getByIndex(1);
             // get name
             Matcher m = TWITCH_URL_PATTERN.matcher(channelUrl.getValue());
             if(!m.matches()){
-                throw new RuntimeException("Error Matching URL");
+                throw new IllegalArgumentException("Error Matching URL");
             }
             // create new
             TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
             notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
             // send response
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
         }
     }

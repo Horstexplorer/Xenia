@@ -19,6 +19,9 @@ package de.netbeacon.xenia.bot.commands.objects;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -261,7 +264,11 @@ public abstract class Command {
                 commandCooldown.deny(guildId, authorId);
             }
             // everything alright
-            onExecution(cmdArgs, commandEvent, translationPackage);
+            try{
+                onExecution(cmdArgs, commandEvent, translationPackage);
+            }catch (Exception e){
+                commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+            }
         }else{
             if(args.size() > 0) {
                 Command command = children.get(args.get(0).toLowerCase());
@@ -368,10 +375,30 @@ public abstract class Command {
     }
 
     /**
+     * Returns an message embed which can be used to indicate internal errors to the user
+     *
+     * @param e exception
+     * @return MessageEmbed
+     */
+    public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser());
+        if(e instanceof DataException){
+            embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()));
+        }else if(e instanceof CacheException){
+            embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.cacheexception.msg", ((CacheException) e).getType().name()));
+        }else if(e instanceof BackendException){
+            embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.backendexception.msg.msg", ((BackendException) e).getId()));
+        }else {
+            embedBuilder.setDescription(translationPackage.getTranslation("default.onUnhandledException.exception.msg"));
+        }
+        return embedBuilder.build();
+    }
+
+    /**
      * Called on execution of the command
      *  @param args remaining arguments of the message
      * @param commandEvent CommandEvent
      * @param translationPackage translation package which should be used
      */
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage);
+    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception;
 }

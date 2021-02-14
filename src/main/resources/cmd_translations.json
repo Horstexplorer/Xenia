@@ -18,6 +18,11 @@
       "default.onMissingBotPerms.requiredPerms.fn": "Required Permissions:",
       "default.onCooldownActive.title": "Failed: Cooldown Active",
       "default.onCooldownActive.description": "Please wait some time before doing that again",
+      "default.onUnhandledException.title": "Oops",
+      "default.onUnhandledException.dataexception.msg": "Accessing the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us",
+      "default.onUnhandledException.cacheexception.msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us",
+      "default.onUnhandledException.backendexception.msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us",
+      "default.onUnhandledException.exception.msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Displays a list of commands",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Help / Commands**",
@@ -93,7 +98,6 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands to manage channel settings",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "Chatbot features are now ready.\nThis feature is only available in English and is intended for entertainment purposes only.\nResponses are generated from unverified messages - Some answers may seem inappropriate in certain contexts.\nLearn more about the origin of the root datasets [here](%0%)",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.msg": "Something went wrong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "Failed to create / update the channel settings required to set up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "Chatbot has been deactivated",
@@ -104,7 +108,6 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot information",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channel has been set up",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An error occurred fetching the correct data. Please try again after some time",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows general information about the chatbot setup",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands to manage chatbot settings for a channel",
@@ -174,7 +177,6 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Create and manage and list stream notifications",
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Requested stream notifications. After evaluation this will show up in the overview",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Failed to list stream notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Export a log of the encrypted cached messages for a given channel in the current guild",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Ask who is connected to the backends secondary socket",
@@ -206,6 +208,11 @@
       "default.onMissingBotPerms.requiredPerms.fn": "RWequiwed pewmissions:",
       "default.onCooldownActive.title": "Faiwed: Coowdown active",
       "default.onCooldownActive.description": "Pwease wait sowme time befowe doing thawt again",
+      "default.onUnhandledException.title": "Oops",
+      "default.onUnhandledException.dataexception.msg": "Accessing the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
+      "default.onUnhandledException.cacheexception.msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
+      "default.onUnhandledException.backendexception.msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
+      "default.onUnhandledException.exception.msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Dispways a wist of commands",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hewp / Commands**",
@@ -281,7 +288,6 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contains commands tuwu manage channew settings",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "Chatbot featuwes awe now weady.\nThiws featuwe iws onwy avaiwabwe in engwish awnd iws intended fow entewtainment puwposes onwy.\nWesponses awe genewated fwom unvewified messages - Sowme answews may seem inappwopwiate in cewtain contexts.\nWeawn mowe abouwt the owigin of the woot datasets [hewe](%0%)",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.msg": "Something went wwong setting up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "Faiwed tuwu cweate / update the channew settings wequiwed tuwu set up the chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "Chatbot has bewn deactivated",
@@ -292,7 +298,6 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channew id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot infowmation",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channew has bewn set up",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An ewwow occuwwed fetching the cowwect data. Pwease twy again aftew sowme time",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows genewaw infowmation abouwt the chatbot setup",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands tuwu manage chatbot settings fow a channew",
@@ -362,7 +367,6 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Cweate awnd manage awnd wist stweam notifications",
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Faiwed tuwu wist stweam notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Expowt a wog of the encwypted cached messages fow a given channew in the cuwwent guiwd",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Awsk who iws connected tuwu the backends secondawy socket",
@@ -394,6 +398,11 @@
       "default.onMissingBotPerms.requiredPerms.fn": "Erforderliche Berechtigungen:",
       "default.onCooldownActive.title": "Gescheitert: Abklingzeit aktiv",
       "default.onCooldownActive.description": "Bitte warten etwas, bevor du diesen Befehl erneut versuchst",
+      "default.onUnhandledException.title": "Oh je",
+      "default.onUnhandledException.dataexception.msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte",
+      "default.onUnhandledException.cacheexception.msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte",
+      "default.onUnhandledException.backendexception.msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
+      "default.onUnhandledException.exception.msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Zeigt eine Liste von Befehlen an",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hilfe / Befehle**",
@@ -469,7 +478,6 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Enthält Befehle zur Verwaltung der Kanaleinstellungen",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "Chatbot-Funktionen sind jetzt bereit.\nDiese Funktion ist nur auf Englisch verfügbar und dient nur der Unterhaltung.\nAntworten werden aus ungeprüften Nachrichten generiert - Einige Antworten können in bestimmten Kontexten unangemessen erscheinen.\nErfahre mehr über die Herkunft der Stammdatensätze [hier](%0%)",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.msg": "Beim Einrichten des Chatbots ist etwas schief gelaufen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "nicht in der Lage, die für die Einrichtung des Chatbots erforderlichen Kanaleinstellungen zu erstellen / zu aktualisieren",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "Der Chatbot wurde deaktiviert",
@@ -480,7 +488,6 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Kanal id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot Informationen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Es wurde kein Kanal eingerichtet",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Beim Abrufen der Daten ist ein Fehler aufgetreten. Bitte versuche es nach einiger Zeit erneut",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Enthält Befehle zum Verwalten von Chatbot-Einstellungen für einen Kanal",
@@ -550,7 +557,6 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Erstellen und Verwalten von Stream-Benachrichtigungen und Listen",
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Angeforderte Stream-Benachrichtigungen. Nach der Auswertung wird dies in der Übersicht angezeigt",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Stream-Benachrichtigungen konnten nicht aufgelistet werden",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportiert ein Protokoll der verschlüsselten zwischengespeicherten Nachrichten für einen bestimmten Kanal in der aktuellen Gilde",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist",
@@ -582,6 +588,11 @@
       "default.onMissingBotPerms.requiredPerms.fn": "Autorisations requises:",
       "default.onCooldownActive.title": "Echec : Cooldown Active",
       "default.onCooldownActive.description": "Veuillez attendre un certain temps avant de recommencer",
+      "default.onUnhandledException.title": "Oups",
+      "default.onUnhandledException.dataexception.msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
+      "default.onUnhandledException.cacheexception.msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
+      "default.onUnhandledException.backendexception.msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
+      "default.onUnhandledException.exception.msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Affiche une liste de commandes",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Aide / Commandes**",
@@ -657,7 +668,6 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contient des commandes pour gérer les paramètres des canaux",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "Les fonctionnalités de Chatbot sont maintenant prêtes.\nCette fonctionnalité n'est disponible qu'en anglais et est destinée à des fins de divertissement uniquement.\nLes réponses sont générées à partir de messages non vérifiés - Certaines réponses peuvent sembler inappropriées dans certains contextes.\nEn savoir plus sur l'origine des données racine [ici](%0%)",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.msg": "Quelque chose a mal tourné lors de la mise en place du chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "Impossible de créer / mettre à jour les paramètres du canal nécessaires à la mise en place du chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "le chatbot a été désactivé",
@@ -668,7 +678,6 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Statistiques sur les chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Aucun canal n'a été mis en place",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Une erreur s'est produite lors de l'extraction des données correctes. Veuillez réessayer après un certain temps",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Affiche des informations générales sur la mise en place du chatbot",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contient des commandes pour gérer les paramètres de chatbot d'un canal",
@@ -738,7 +747,6 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Créer, gérer et répertorier les notifications de flux",
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notifications de flux demandées. Après évaluation, cela apparaîtra dans l'aperçu",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "Omission d'énumérer les notifications de flux",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exporter un journal des messages cryptés mis en cache pour un canal donné dans la guilde actuelle",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Demandez qui est connecté à la prise secondaire des backends",
@@ -770,6 +778,11 @@
       "default.onMissingBotPerms.requiredPerms.fn": "Permisos requeridos:",
       "default.onCooldownActive.title": "Fallido: enfriamiento activo",
       "default.onCooldownActive.description": "Espere un tiempo antes de volver a hacerlo",
+      "default.onUnhandledException.title": "Oops",
+      "default.onUnhandledException.dataexception.msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
+      "default.onUnhandledException.cacheexception.msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
+      "default.onUnhandledException.backendexception.msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
+      "default.onUnhandledException.exception.msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Muestra una lista de comandos",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Ayuda / Comandos**",
@@ -845,7 +858,6 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "Contiene comandos para administrar la configuración del canal",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "Las funciones de Chatbot ya están listas.\nEsta función sólo está disponible en inglés y está pensada únicamente para fines de entretenimiento.\nLas respuestas se generan a partir de mensajes no verificados - Algunas respuestas pueden parecer inapropiadas en determinados contextos.\nMás información sobre el origen de los conjuntos de datos raíz [aquí](%0%)",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.msg": "Algo salió mal al configurar el chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "No se ha podido crear/actualizar la configuración del canal necesaria para configurar el chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "El chatbot ha sido desactivado",
@@ -856,7 +868,6 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Configuración general del chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No se ha establecido ningún canal",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Se ha producido un error al obtener los datos correctos. Por favor, inténtelo de nuevo después de algún tiempo",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Muestra la configuración general del chatbot",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contiene comandos para gestionar la configuración del chatbot de un canal",
@@ -926,7 +937,6 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Crear, administrar y enumerar notificaciones de transmisión",
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notificaciones de transmisión solicitadas. Después de la evaluación, esto se mostrará en la descripción general",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.error.msg": "No se pudieron mostrar las notificaciones de transmisión",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportar un registro de los mensajes en caché cifrados para un canal determinado en el gremio actual",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Pregunte quién está conectado al conector secundario de backends",

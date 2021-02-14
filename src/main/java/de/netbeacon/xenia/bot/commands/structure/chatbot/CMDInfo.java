@@ -42,23 +42,19 @@ public class CMDInfo extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        try{
-            Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList()
-                    .stream().filter(channel1 -> channel1.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
-            if(channel == null){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.notfound"))).queue();
-                return;
-            }
-            commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getD43Z1Settings().getBits().toArray()), false)
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), channel.getD43Z1CustomContextPoolUUID().toString(), false)
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), channel.getMetaChannelName()+"("+channel.getChannelId()+")",false)
-                            .build()
-            ).queue();
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
+        Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList()
+                .stream().filter(channel1 -> channel1.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
+        if(channel == null){
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.notfound"))).queue();
+            return;
         }
+        commandEvent.getEvent().getChannel().sendMessage(
+                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                        .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getD43Z1Settings().getBits().toArray()), false)
+                        .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), channel.getD43Z1CustomContextPoolUUID().toString(), false)
+                        .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), channel.getMetaChannelName()+"("+channel.getChannelId()+")",false)
+                        .build()
+        ).queue();
     }
 }

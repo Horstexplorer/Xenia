@@ -45,22 +45,18 @@ public class HYBRIDTwitch extends HybridCommand {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        try{
-            // get all stream notifications
-            List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
-            StringBuilder stringBuilder = new StringBuilder();
-            for(TwitchNotification twitchNotification : twitchNotifications){
-                stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
-            }
-            // send message
-            MessageEmbed result = EmbedBuilderFactory
-                    .getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                    .setDescription(stringBuilder)
-                    .build();
-            commandEvent.getEvent().getChannel().sendMessage(result).queue();
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue();
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
+        // get all stream notifications
+        List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
+        StringBuilder stringBuilder = new StringBuilder();
+        for(TwitchNotification twitchNotification : twitchNotifications){
+            stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
         }
+        // send message
+        MessageEmbed result = EmbedBuilderFactory
+                .getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+                .setDescription(stringBuilder)
+                .build();
+        commandEvent.getEvent().getChannel().sendMessage(result).queue();
     }
 }

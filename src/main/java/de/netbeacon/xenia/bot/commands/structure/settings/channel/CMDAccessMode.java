@@ -46,20 +46,20 @@ public class CMDAccessMode extends Command {
     }
 
     @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
+    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         try{
             CmdArg<String> channelAccessModeArg = args.getByIndex(0);
             CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
             Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
             if(channel == null){
-                throw new Exception();
+                throw new IllegalArgumentException();
             }
             Channel.AccessMode.Mode accessModeMode = Channel.AccessMode.Mode.valueOf(channelAccessModeArg.getValue().toUpperCase());
             Channel.AccessMode accessMode = new Channel.AccessMode(0);
             accessMode.set(accessModeMode);
             channel.setAccessMode(accessMode);
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (Exception e){
+        }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
         }
     }
