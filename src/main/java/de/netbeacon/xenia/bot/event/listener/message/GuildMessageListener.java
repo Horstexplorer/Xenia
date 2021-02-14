@@ -20,6 +20,7 @@ import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
+import de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot;
 import de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin;
 import de.netbeacon.xenia.bot.commands.structure.info.CMDInfo;
 import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
@@ -60,6 +61,7 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new GROUPSettings());
         register.accept(new CMDHastebin());
         register.accept(new HYBRIDTwitch());
+        register.accept(new GROUPChatbot());
 
         register.accept(new CMDInfo());
 
