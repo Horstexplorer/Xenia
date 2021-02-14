@@ -104,7 +104,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot information",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channel has been set up",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An error occurred fetching the correct data",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An error occurred fetching the correct data. Please try again after some time",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows general information about the chatbot setup",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands to manage chatbot settings for a channel",
@@ -292,7 +292,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channew id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot infowmation",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channew has bewn set up",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An ewwow occuwwed fetching the cowwect data",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "An ewwow occuwwed fetching the cowwect data. Pwease twy again aftew sowme time",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows genewaw infowmation abouwt the chatbot setup",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands tuwu manage chatbot settings fow a channew",
@@ -480,7 +480,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Kanal id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot Informationen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Es wurde kein Kanal eingerichtet",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Beim Abrufen der Daten ist ein Fehler aufgetreten",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Beim Abrufen der Daten ist ein Fehler aufgetreten. Bitte versuche es nach einiger Zeit erneut",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Enthält Befehle zum Verwalten von Chatbot-Einstellungen für einen Kanal",
@@ -668,7 +668,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Statistiques sur les chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Aucun canal n'a été mis en place",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Une erreur s'est produite lors de la recherche des données correctes",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Une erreur s'est produite lors de l'extraction des données correctes. Veuillez réessayer après un certain temps",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Affiche des informations générales sur la mise en place du chatbot",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contient des commandes pour gérer les paramètres de chatbot d'un canal",
@@ -856,7 +856,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Configuración general del chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No se ha establecido ningún canal",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Se ha producido un error al obtener los datos correctos",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.msg": "Se ha producido un error al obtener los datos correctos. Por favor, inténtelo de nuevo después de algún tiempo",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Muestra la configuración general del chatbot",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contiene comandos para gestionar la configuración del chatbot de un canal",
