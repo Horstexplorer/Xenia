@@ -68,7 +68,7 @@ public class CMDSetup extends Command {
                                 Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
                                 d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
                                 channel.lSetD43Z1Settings(d43Z1Settings);
-                                channel.updateAsync();
+                                channel.updateAsync(true);
                                 commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
                             }catch (Exception e){
                                 commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
