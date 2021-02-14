@@ -71,7 +71,7 @@ public class CMDSetup extends Command {
                                 channel.updateAsync();
                                 commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage,  translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
                             }catch (Exception e){
-                                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+                                commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
                             }
                         }, failed -> {
                             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage,  translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
