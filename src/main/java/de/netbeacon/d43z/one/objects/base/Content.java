@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
+import static de.netbeacon.d43z.one.objects.settings.StaticSettings.EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH;
+
 public class Content implements IIdentifiable, IContentprovider, ISimilarity, ILJEvaluable, IWeightable, IJSONSerializable {
 
     private UUID uuid;
@@ -37,7 +39,7 @@ public class Content implements IIdentifiable, IContentprovider, ISimilarity, IL
     public Content(String content){
         this.uuid = UUID.randomUUID();
         this.content = content;
-        this.contentHash = LiamusJaccard.hashString(content, StaticSettings.EVAL_LIAMUS_JACCARD_NGRAM);
+        this.contentHash = LiamusJaccard.hashString((EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH) ? content.toLowerCase() : content, StaticSettings.EVAL_LIAMUS_JACCARD_NGRAM);
     }
 
     @Override
@@ -78,6 +80,6 @@ public class Content implements IIdentifiable, IContentprovider, ISimilarity, IL
         this.uuid = UUID.fromString(jsonObject.getString("contentId"));
         this.weight = jsonObject.getFloat("contentWeight");
         this.content = jsonObject.getString("content");
-        this.contentHash = LiamusJaccard.hashString(content, StaticSettings.EVAL_LIAMUS_JACCARD_NGRAM);
+        this.contentHash = LiamusJaccard.hashString((EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH) ? content.toLowerCase() : content, StaticSettings.EVAL_LIAMUS_JACCARD_NGRAM);
     }
 }

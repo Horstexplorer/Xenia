@@ -29,6 +29,7 @@ public class StaticSettings {
     public static final float EVAL_TAG_BONUS_PER_MATCH = 0.05F;
     public static final float EVAL_TAG_POLICY_OVERRIDE_THRESHOLD = 0.49F;
     public static final int EVAL_LIAMUS_JACCARD_NGRAM = 2;
+    public static final boolean EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH = true;
     public static final float EVAL_RANDOM_DIF = 0.00005F;
     public static final int EVAL_MAX_PROCESSING_THREADS = Runtime.getRuntime().availableProcessors()*2;
     public static final int EVAL_MAX_THREADS_PER_REQUEST = EVAL_MAX_PROCESSING_THREADS/8;
