@@ -50,7 +50,7 @@ public interface ISimilarity extends IContentprovider, IWeightable{
 
     public default float evalLMJaccard(ISimilarity iSimilarity){
         if(this instanceof ILJEvaluable && iSimilarity instanceof ILJEvaluable){
-            return (LiamusJaccard.similarityCoefficient(((ILJEvaluable) this).getContentHash(), ((ILJEvaluable) iSimilarity).getContentHash()))+getRandomDif();
+            return (LiamusJaccard.similarityCoefficient(((ILJEvaluable) this).getContentHash(), ((ILJEvaluable) iSimilarity).getContentHash()))*iSimilarity.getWeight()+getRandomDif();
         }else{
             return (LiamusJaccard.similarityCoefficient(getContent(), iSimilarity.getContent(), 2)*iSimilarity.getWeight()+getRandomDif());
         }
