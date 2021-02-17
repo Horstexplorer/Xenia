@@ -33,36 +33,40 @@ public class UserCache extends Cache<Long, User> {
         super(backendProcessor);
     }
 
-    public User get(long userId) throws CacheException {
-        return get(userId, true);
+    public User get(long userId) throws CacheException, DataException {
+        return get(userId, true, false);
     }
 
     public User get(long userId, boolean init) throws CacheException, DataException {
-       try{
-           idBasedLockHolder.getLock(userId).lock();
-           User user = getFromCache(userId);
-           if(user != null){
-               return user;
-           }
-           user = new User(getBackendProcessor(), userId);
-           try{
-               user.get();
-           }catch (DataException e){
-               if(e.getCode() == 404 && init){
-                   user.create();
-               }else{
-                   throw e;
-               }
-           }
-           addToCache(userId, user);
-           return user;
-       }catch (CacheException | DataException e){
-           throw e;
-       }catch (Exception e){
-           throw new CacheException(CacheException.Type.UNKNOWN, "Failed To Get User", e);
-       }finally {
-           idBasedLockHolder.getLock(userId).unlock();
-       }
+        return get(userId, init, false);
+    }
+
+    public User get(long userId, boolean init, boolean securityOverride) throws CacheException, DataException {
+        try{
+            idBasedLockHolder.getLock(userId).lock();
+            User user = getFromCache(userId);
+            if(user != null){
+                return user;
+            }
+            user = new User(getBackendProcessor(), userId);
+            try{
+                user.get(securityOverride);
+            }catch (DataException e){
+                if(e.getCode() == 404 && init){
+                    user.create(securityOverride);
+                }else{
+                    throw e;
+                }
+            }
+            addToCache(userId, user);
+            return user;
+        }catch (CacheException | DataException e){
+            throw e;
+        }catch (Exception e){
+            throw new CacheException(CacheException.Type.UNKNOWN, "Failed To Get User", e);
+        }finally {
+            idBasedLockHolder.getLock(userId).unlock();
+        }
     }
 
     public void remove(long userId){
@@ -70,10 +74,14 @@ public class UserCache extends Cache<Long, User> {
     }
 
     public void delete(long userId) throws CacheException, DataException {
+        delete(userId, false);
+    }
+
+    public void delete(long userId, boolean securityOverride) throws CacheException, DataException {
         try{
             idBasedLockHolder.getLock(userId).lock();
             User user = getFromCache(userId);
-            Objects.requireNonNullElseGet(user, ()->new User(getBackendProcessor(), userId)).delete();
+            Objects.requireNonNullElseGet(user, ()->new User(getBackendProcessor(), userId)).delete(securityOverride);
             removeFromCache(userId);
         }catch (CacheException | DataException e){
             throw e;

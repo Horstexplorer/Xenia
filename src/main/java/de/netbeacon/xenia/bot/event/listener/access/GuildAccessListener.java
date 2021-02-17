@@ -137,7 +137,7 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onGuildLeave(@NotNull GuildLeaveEvent event) {
         try{
             logger.info("Guild Has Been Left: "+event.getGuild().getName()+"("+event.getGuild().getId()+")");
-            backendClient.getGuildCache().delete(event.getGuild().getIdLong());
+            backendClient.getGuildCache().delete(event.getGuild().getIdLong(), true);
         }catch (CacheException e){
             logger.error("A CacheException occurred during the GuildLeaveEvent of guild "+event.getGuild().getIdLong(), e);
         }catch (DataException e){
@@ -165,7 +165,7 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onUnavailableGuildLeave(@NotNull UnavailableGuildLeaveEvent event) {
         try{
             logger.info("Left A Guild Which Is Unavailable ATM: Unknown_Name ("+event.getGuildId()+")");
-            backendClient.getGuildCache().delete(event.getGuildIdLong());
+            backendClient.getGuildCache().delete(event.getGuildIdLong(), true);
         }catch (CacheException e){
             logger.error("A CacheException occurred during the UnavailableGuildLeaveEvent of guild "+event.getGuildIdLong(), e);
         }catch (DataException e){
@@ -211,7 +211,7 @@ public class GuildAccessListener extends ListenerAdapter {
         try{
             Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
             if(event.getMember() != null){
-                g.getMemberCache().delete(event.getMember().getIdLong());
+                g.getMemberCache().delete(event.getMember().getIdLong(), true);
             }
         }catch (CacheException e){
             logger.error("A CacheException occurred during the GuildMemberRemoveEvent of guild "+event.getGuild().getIdLong(), e);
@@ -344,7 +344,7 @@ public class GuildAccessListener extends ListenerAdapter {
     public void onTextChannelDelete(@NotNull TextChannelDeleteEvent event) {
         try{
             Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-            g.getChannelCache().delete(event.getChannel().getIdLong());
+            g.getChannelCache().delete(event.getChannel().getIdLong(), true);
         }catch (CacheException e){
             logger.error("A CacheException occurred during the TextChannelDeleteEvent of guild "+event.getGuild().getIdLong()+", channel "+event.getChannel().getIdLong(), e);
         }catch (DataException e){
