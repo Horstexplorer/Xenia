@@ -150,10 +150,15 @@ public class Eval implements IShutdown {
             Set<String> expectedMetaTags = contentMatchBuffer.expectedMetaTags();
             ContentMatch bestMatch = new ContentMatch(null, null, null, null, -1);
             ContentShard contentShard;
+
+            ContentMatchBuffer.Statistics statistics = contentMatchBuffer.getStatistics();
+            ContentMatchBuffer.Statistics.FillState fillState = statistics.getFillState();
+            float avgOPM = statistics.getAvgOutputMatchCoefficient();
+
             long startNanos = System.nanoTime();
             while((System.nanoTime() - startNanos) < (maxDurationMs * 1000000) && (contentShard = contentShards.poll()) != null){
                 int tagMatches = 0;
-                if(EVAL_ENABLE_TAG_POLICY && lastMatch != null && lastMatch.getAdjustedCoefficient() > EVAL_TAG_POLICY_OVERRIDE_THRESHOLD){
+                if(EVAL_ENABLE_TAG_POLICY && lastMatch != null && fillState.equals(ContentMatchBuffer.Statistics.FillState.FULL) && avgOPM > EVAL_TAG_POLICY_OVERRIDE_THRESHOLD){
                     Set<String> subC = new HashSet<>(contentShard.getParent().getMetaTags());
                     subC.removeAll(expectedMetaTags);
                     tagMatches = contentShard.getParent().getMetaTags().size()-subC.size();
