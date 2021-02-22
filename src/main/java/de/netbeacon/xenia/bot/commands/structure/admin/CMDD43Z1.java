@@ -19,6 +19,7 @@ package de.netbeacon.xenia.bot.commands.structure.admin;
 import de.netbeacon.d43z.one.eval.Eval;
 import de.netbeacon.d43z.one.eval.io.EvalRequest;
 import de.netbeacon.d43z.one.objects.base.Content;
+import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
@@ -110,6 +111,7 @@ public class CMDD43Z1 extends Command {
             EvalRequest evalRequest = new EvalRequest(d43Z1Imp.getContextPoolMaster(), d43Z1Imp.getContentMatchBufferFor(commandEvent.getEvent().getAuthor().getIdLong()), new Content(inputA.getValue()),
                     evalResult -> {
                         if(evalResult.ok()){
+                            ContentMatchBuffer.Statistics statistics = d43Z1Imp.getContentMatchBufferFor(commandEvent.getEvent().getAuthor().getIdLong()).getStatistics();
                             commandEvent.getEvent().getChannel().sendMessage(
                                     EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                                             .addField("Input", evalResult.getContentMatch().getInput().getContent(), false)
@@ -117,6 +119,9 @@ public class CMDD43Z1 extends Command {
                                             .addField("Est Output", evalResult.getContentMatch().getEstimatedOutput().getContent(), false)
                                             .addField("Raw Coefficient", String.valueOf(evalResult.getContentMatch().getCoefficient()), true)
                                             .addField("Adjusted Coefficient", String.valueOf(evalResult.getContentMatch().getAdjustedCoefficient()), true)
+                                            .addField("AVG Coefficient", String.valueOf(statistics.getAvgOutputMatchCoefficient()), true)
+                                            .addField("Cache Fill State", statistics.getFillState()+" ("+statistics.getRawFillState()+")", true)
+                                            .addField("Match Tendency", statistics.getMatchTendency()+" ("+statistics.getRawMatchTendency()+")", true)
                                             .build()
                             ).queue();
                         }else{

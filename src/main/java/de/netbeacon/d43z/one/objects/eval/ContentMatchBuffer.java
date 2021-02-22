@@ -27,6 +27,7 @@ public class ContentMatchBuffer implements IIdentifiable {
 
     private final UUID uuid = UUID.randomUUID();
     private final List<ContentMatch> lastMatches = new LinkedList<>();
+    private final Statistics statistics = new Statistics(this);
 
     public ContentMatchBuffer(){}
 
@@ -65,15 +66,83 @@ public class ContentMatchBuffer implements IIdentifiable {
             ContentMatch contentMatch = lastMatches.get(i);
             ContentContext parentContent = contentMatch.getOrigin().getParent();
             if(!map.containsKey(parentContent)){
-                map.put(parentContent, getBonusFor(i));
+                map.put(parentContent, getPositionBonusFor(i));
             }else{
-                map.put(parentContent, map.get(parentContent)+getBonusFor(i));
+                map.put(parentContent, map.get(parentContent)+ getPositionBonusFor(i));
             }
         }
         return map;
     }
 
-    private float getBonusFor(int pos){
+    private float getPositionBonusFor(int pos){
         return BUFFER_BONUS - BUFFER_BONUS_SUBTRACTION * ((lastMatches.size()-1) - pos);
+    }
+
+    protected int size(){
+        return lastMatches.size();
+    }
+
+    public ContentMatchBuffer.Statistics getStatistics(){
+        return statistics;
+    }
+
+
+
+    public static class Statistics {
+
+        private final ContentMatchBuffer contentMatchBuffer;
+
+        public Statistics(ContentMatchBuffer contentMatchBuffer){
+            this.contentMatchBuffer = contentMatchBuffer;
+        }
+
+        public enum FillState {
+            EMPTY,
+            PARTIAL,
+            FULL;
+        }
+
+        public float getRawFillState(){
+            return contentMatchBuffer.size() / (float) BUFFER_MAX_SIZE;
+        }
+
+        public FillState getFillState(){
+            if(contentMatchBuffer.size() == 0){
+                return  FillState.EMPTY;
+            }else if(contentMatchBuffer.size() != BUFFER_MAX_SIZE){
+                return FillState.PARTIAL;
+            }else{
+                return FillState.FULL;
+            }
+        }
+
+        public float getAvgOutputMatchCoefficient(){
+            return contentMatchBuffer.getLastMatches().stream().map(ContentMatch::getAdjustedCoefficient).reduce(0F, Float::sum) / (float) contentMatchBuffer.size();
+        }
+
+        public enum MatchTendency {
+            GOOD,
+            NEUTRAL,
+            POOR;
+        }
+
+        public float getRawMatchTendency(){
+            if(contentMatchBuffer.size() == 0){
+                return 0;
+            }
+            return contentMatchBuffer.getLastMatch().getAdjustedCoefficient() / getAvgOutputMatchCoefficient();
+        }
+
+        public MatchTendency getMatchTendency(){
+            float f = getRawMatchTendency();
+            if(f > 0.95F){
+                return MatchTendency.GOOD;
+            }else if(f > 0.9F){
+                return MatchTendency.NEUTRAL;
+            }else {
+                return MatchTendency.POOR;
+            }
+        }
+
     }
 }
