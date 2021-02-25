@@ -27,6 +27,7 @@ public class CmdArgDef<T> {
     private final Class<T> aClass;
     private boolean isOptional;
     private final Predicate<T> predicate;
+    private final String predicateAsString;
 
     /**
      * Creates a new instance of this class
@@ -34,11 +35,13 @@ public class CmdArgDef<T> {
      * @param name name of the argument
      * @param aClass of the target type
      * @param predicate to find matching values
+     * @param predicateAsString what the requirements are for this arg in a human readable format
      */
-    private CmdArgDef(String name, Class<T> aClass, Predicate<T> predicate){
+    private CmdArgDef(String name, Class<T> aClass, Predicate<T> predicate, String predicateAsString){
         this.name = name;
         this.aClass = aClass;
         this.predicate = predicate;
+        this.predicateAsString = predicateAsString;
     }
 
     /**
@@ -98,11 +101,21 @@ public class CmdArgDef<T> {
         return predicate.test(t);
     }
 
+    /**
+     * Used to retrieve some human readable information about the string
+     *
+     * @return String
+     */
+    public String getPredicateAsString(){
+        return predicateAsString;
+    }
+
     public static class Builder<T> {
 
         private final String name;
         private final Class<T> aClass;
         private final List<Predicate<T>> predicates = new ArrayList<>();
+        private String predicateAsString = "No description provided";
 
         /**
          * Creates a new instance of this class
@@ -312,6 +325,11 @@ public class CmdArgDef<T> {
             return this;
         }
 
+        public Builder<T> addPredicateDescription(String description){
+            this.predicateAsString = description;
+            return this;
+        }
+
         /**
          * Builds the argument definition
          *
@@ -331,7 +349,7 @@ public class CmdArgDef<T> {
             if(predicate == null){
                 predicate = t -> true;
             }
-            return new CmdArgDef<T>(name, aClass, predicate);
+            return new CmdArgDef<T>(name, aClass, predicate, predicateAsString);
         }
 
         /**
@@ -353,7 +371,7 @@ public class CmdArgDef<T> {
             if(predicate == null){
                 predicate = t -> true;
             }
-            return new CmdArgDef<T>(name, aClass, predicate);
+            return new CmdArgDef<T>(name, aClass, predicate, predicateAsString);
         }
     }
 }

@@ -300,6 +300,11 @@ public abstract class Command {
                         commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
                         return;
                     }
+                    if(commandEvent.getBackendDataPack().getbGuild().getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
+                        args.set(0, estimatedCommands.get(0).getAlias());
+                        execute(args, commandEvent, s2);
+                        return;
+                    }
                     if(this instanceof CommandGroup){
                         StringBuilder commandPathBuilder = new StringBuilder();
                         CommandGroup current = ((CommandGroup) this).getParent();
@@ -377,11 +382,15 @@ public abstract class Command {
         for(CmdArgDef s : requiredArgs){
             usage.append("<").append(s.getName()).append(">").append(" ");
         }
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
-                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false)
-                .build();
+                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false);
+        for(CmdArgDef s : requiredArgs){
+            embedBuilder.addField("<"+s.getName()+">", s.getPredicateAsString(), false);
+        }
+
+        return embedBuilder.build();
     };
 
     /**
