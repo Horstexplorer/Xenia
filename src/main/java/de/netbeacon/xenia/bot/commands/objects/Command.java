@@ -382,11 +382,15 @@ public abstract class Command {
         for(CmdArgDef s : requiredArgs){
             usage.append("<").append(s.getName()).append(">").append(" ");
         }
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
-                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false)
-                .build();
+                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false);
+        for(CmdArgDef s : requiredArgs){
+            embedBuilder.addField("<"+s.getName()+">", s.getPredicateAsString(), false);
+        }
+
+        return embedBuilder.build();
     };
 
     /**
