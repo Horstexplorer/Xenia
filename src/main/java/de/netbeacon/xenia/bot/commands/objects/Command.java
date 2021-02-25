@@ -452,10 +452,6 @@ public abstract class Command {
         return commands.stream()
                 .map(command -> new Pair<>(command, LiamusJaccard.similarityCoefficient(argBitArray, command.getAliasBitArray())))
                 .sorted((o1, o2) -> o2.getValue2().compareTo(o1.getValue2()))
-                .filter(f -> {
-                    System.out.println(f.getValue1().alias+" "+f.getValue2());
-                    return true;
-                })
                 .map(Pair::getValue1)
                 .collect(Collectors.toList());
     }

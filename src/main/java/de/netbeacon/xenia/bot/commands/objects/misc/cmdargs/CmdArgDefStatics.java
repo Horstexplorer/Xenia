@@ -16,9 +16,14 @@
 
 package de.netbeacon.xenia.bot.commands.objects.misc.cmdargs;
 
+import de.netbeacon.xenia.backend.client.objects.external.Channel;
+import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import net.dv8tion.jda.api.entities.Message;
+
+import java.util.Arrays;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.TWITCH_URL_PATTERN;
@@ -68,13 +73,13 @@ public class CmdArgDefStatics {
             .buildAllMatch();
     // SETTINGS
     public static final CmdArgDef<String> GUILD_SETTINGS_SETTING_DEF = new CmdArgDef.Builder<>("setting", String.class)
-            .addPredicateDescription("name of the setting")
+            .addPredicateDescription("name of the setting "+Arrays.toString(Guild.GuildSettings.Settings.values()))
             .buildAllMatch();
     public static final CmdArgDef<Boolean> GUILD_SETTINGS_SETTING_MODE_DEF = new CmdArgDef.Builder<>("enable", Boolean.class)
             .addPredicateDescription("true or false")
             .buildAllMatch();
     public static final CmdArgDef<String> GUILD_LANGUAGE_ID_DEF = new CmdArgDef.Builder<>("language", String.class)
-            .addPredicateDescription("language identifier")
+            .addPredicateDescription("language identifier "+Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray(new String[0])))
             .buildAllMatch();
     public static final CmdArgDef<String> LICENSE_KEY_DEF = new CmdArgDef.Builder<>("licensekey", String.class)
             .predicateAddStringLengthRange(64,64)
@@ -97,7 +102,7 @@ public class CmdArgDefStatics {
             .buildAllMatch()
             .setOptional(true);
     public static final CmdArgDef<String> CHANNEL_ACCESS_MODE = new CmdArgDef.Builder<>("access mode", String.class)
-            .addPredicateDescription("access mode")
+            .addPredicateDescription("access mode "+ Arrays.toString(Channel.AccessMode.Mode.values()))
             .buildAllMatch();
     public static final CmdArgDef<Boolean> CHANNEL_LOGGING_ENABLE = new CmdArgDef.Builder<>("enable", Boolean.class)
             .addPredicateDescription("true or false")
