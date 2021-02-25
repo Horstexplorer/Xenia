@@ -214,7 +214,7 @@
       "default.onUnhandledException.cacheexception.msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.onUnhandledException.backendexception.msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.onUnhandledException.exception.msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
-      "default.estimatedCommand.msg": "The command u typed '%0%' doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU",
+      "default.estimatedCommand.msg": "The command u typed `%0%` doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Dispways a wist of commands",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hewp / Commands**",
