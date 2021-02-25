@@ -52,7 +52,7 @@ public class HYBRIDTag extends HybridCommand {
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
             Tag tag = tagCache.get(tagA.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tag.getTagContent(), tag.getId())).queue();
+            commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getId())).queue();
         }catch (CacheException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
         }
