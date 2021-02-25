@@ -32,6 +32,7 @@ import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -116,6 +117,9 @@ public class MessageHandler {
         // get the command
         Command command = commandMap.get(args.get(0));
         if(command == null){
+            if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)){
+                return;
+            }
             List<Command> estimatedCommands = Command.getBestMatch(args.get(0), commandMap);
             if(estimatedCommands.isEmpty()){
                 return;

@@ -253,7 +253,7 @@ public abstract class Command {
                     &&
                     (
                             (bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE) && (member == null || bMember.getRoles().stream()//e
-                                    .filter(r->r.getPermissions().hasAllPermission(memberSecondaryPermissions.toArray(Role.Permissions.Bit[]::new)))
+                                    .filter(r->r.getPermissions().hasAllPermission(getMemberSecondaryPermissions().toArray(Role.Permissions.Bit[]::new)))
                                     .findFirst().isEmpty()))
                             ||
                             (!bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE) && (member == null || (!member.hasPermission(getMemberPrimaryPermissions()))))
@@ -288,6 +288,9 @@ public abstract class Command {
                 }else if(isHybrid){
                     execute(args, commandEvent, true); // execute handler again
                 }else {
+                    if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
+                        return;
+                    }
                     List<Command> estimatedCommands = Command.getBestMatch(args.get(0), getChildCommands());
                     if(estimatedCommands.isEmpty()){
                         return;
