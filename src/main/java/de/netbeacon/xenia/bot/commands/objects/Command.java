@@ -300,6 +300,11 @@ public abstract class Command {
                         commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
                         return;
                     }
+                    if(commandEvent.getBackendDataPack().getbGuild().getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
+                        args.set(0, estimatedCommands.get(0).getAlias());
+                        execute(args, commandEvent, s2);
+                        return;
+                    }
                     if(this instanceof CommandGroup){
                         StringBuilder commandPathBuilder = new StringBuilder();
                         CommandGroup current = ((CommandGroup) this).getParent();
