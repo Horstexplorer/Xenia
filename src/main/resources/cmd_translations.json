@@ -23,6 +23,7 @@
       "default.onUnhandledException.cacheexception.msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us",
       "default.onUnhandledException.backendexception.msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us",
       "default.onUnhandledException.exception.msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us",
+      "default.estimatedCommand.msg": "The command you typed `%0%` doesnt seem to exist. Maybe you wanted to use `%1%` instead?",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Displays a list of commands",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Help / Commands**",
@@ -213,6 +214,7 @@
       "default.onUnhandledException.cacheexception.msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.onUnhandledException.backendexception.msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.onUnhandledException.exception.msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
+      "default.estimatedCommand.msg": "The command u typed '%0%' doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Dispways a wist of commands",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hewp / Commands**",
@@ -403,6 +405,7 @@
       "default.onUnhandledException.cacheexception.msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte",
       "default.onUnhandledException.backendexception.msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
       "default.onUnhandledException.exception.msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
+      "default.estimatedCommand.msg": "Der eingegebene Befehl `%0%` scheint nicht zu existieren. Vielleicht wolltest du stattdessen `%1%` verwenden?",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Zeigt eine Liste von Befehlen an",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Hilfe / Befehle**",
@@ -593,6 +596,7 @@
       "default.onUnhandledException.cacheexception.msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
       "default.onUnhandledException.backendexception.msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
       "default.onUnhandledException.exception.msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
+      "default.estimatedCommand.msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Affiche une liste de commandes",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Aide / Commandes**",
@@ -783,6 +787,7 @@
       "default.onUnhandledException.cacheexception.msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
       "default.onUnhandledException.backendexception.msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
       "default.onUnhandledException.exception.msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
+      "default.estimatedCommand.msg": "El comando que escribiste `%0%` no parece existir. ¿Quizás querías usar `%1%` en su lugar?",
 
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "Muestra una lista de comandos",
       "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**Ayuda / Comandos**",

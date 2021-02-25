@@ -20,6 +20,7 @@ import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
+import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
@@ -52,8 +53,8 @@ public class HYBRIDTag extends HybridCommand {
         CmdArg<String> tagA = cmdArgs.getByIndex(0);
         try{
             Tag tag = tagCache.get(tagA.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tag.getTagContent(), tag.getId())).queue();
-        }catch (CacheException e){
+            commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getId())).queue();
+        }catch (DataException | CacheException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
         }
     }

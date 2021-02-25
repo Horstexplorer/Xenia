@@ -16,6 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.objects;
 
+import de.netbeacon.d43z.one.algo.LiamusJaccard;
+import de.netbeacon.utils.tuples.Pair;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
@@ -38,10 +40,12 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class Command {
 
     private final String alias;
+    private final LiamusJaccard.BitArray64 aliasBitArray;
     private boolean isCommandHandler;
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
@@ -63,6 +67,7 @@ public abstract class Command {
      */
     public Command(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
         this.alias = alias;
+        this.aliasBitArray = LiamusJaccard.hashString(alias, 1);
         this.commandCooldown = commandCooldown;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
@@ -86,6 +91,7 @@ public abstract class Command {
      */
     public Command(String alias){
         this.alias = alias;
+        this.aliasBitArray = LiamusJaccard.hashString(alias, 1);
         this.isCommandHandler = true;
     }
 
@@ -194,6 +200,10 @@ public abstract class Command {
         return isHybrid;
     }
 
+    public LiamusJaccard.BitArray64 getAliasBitArray(){
+        return aliasBitArray;
+    }
+
     /**
      * Used to execute the command
      * @param args remaining arguments
@@ -277,6 +287,29 @@ public abstract class Command {
                     command.execute(args, commandEvent);
                 }else if(isHybrid){
                     execute(args, commandEvent, true); // execute handler again
+                }else {
+                    List<Command> estimatedCommands = Command.getBestMatch(args.get(0), getChildCommands());
+                    if(estimatedCommands.isEmpty()){
+                        return;
+                    }
+                    TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+                    if(translationPackage == null){
+                        commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+                        return;
+                    }
+                    if(this instanceof CommandGroup){
+                        StringBuilder commandPathBuilder = new StringBuilder();
+                        CommandGroup current = ((CommandGroup) this).getParent();
+                        while(current != null){
+                            commandPathBuilder.insert(0, current.getAlias() + " ");
+                            current = current.getParent();
+                        }
+                        commandPathBuilder.append(" ").append(this.getAlias());
+                        String commandPath = commandPathBuilder.toString().trim();
+                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", commandPath+" "+args.get(0), commandPath+" "+estimatedCommands.get(0).getAlias()))).queue();
+                    }else{
+                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
+                    }
                 }
             }else if (isHybrid){
                 if(!requiredArgs.isEmpty()){
@@ -392,6 +425,27 @@ public abstract class Command {
             embedBuilder.setDescription(translationPackage.getTranslation("default.onUnhandledException.exception.msg"));
         }
         return embedBuilder.build();
+    }
+
+    /**
+     * Used to find the best matching command to the input string
+     *
+     * @param arg the estimated command name
+     * @param commandMap a map of the available commands
+     * @return List<Command>
+     */
+    public static List<Command> getBestMatch(String arg, Map<String, Command> commandMap){
+        LiamusJaccard.BitArray64 argBitArray = LiamusJaccard.hashString(arg.toLowerCase(), 1);
+        List<Command> commands = new ArrayList<>(commandMap.values());
+        return commands.stream()
+                .map(command -> new Pair<>(command, LiamusJaccard.similarityCoefficient(argBitArray, command.getAliasBitArray())))
+                .sorted((o1, o2) -> o2.getValue2().compareTo(o1.getValue2()))
+                .filter(f -> {
+                    System.out.println(f.getValue1().alias+" "+f.getValue2());
+                    return true;
+                })
+                .map(Pair::getValue1)
+                .collect(Collectors.toList());
     }
 
     /**
