@@ -26,6 +26,8 @@ import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -114,6 +116,16 @@ public class MessageHandler {
         // get the command
         Command command = commandMap.get(args.get(0));
         if(command == null){
+            List<Command> estimatedCommands = Command.getBestMatch(args.get(0), commandMap);
+            if(estimatedCommands.isEmpty()){
+                return;
+            }
+            TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(bGuild, bMember);
+            if(translationPackage == null){
+                event.getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+                return;
+            }
+            event.getChannel().sendMessage(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
             return;
         }
         args.remove(0);
