@@ -72,6 +72,9 @@ public class CmdArgDefStatics {
             .addPredicateDescription("text, 1-1500 chars")
             .buildAllMatch();
     // SETTINGS
+    public static final CmdArgDef<String> SELF_LANGUAGE_ID_DEF = new CmdArgDef.Builder<>("language", String.class)
+            .addPredicateDescription("language identifier "+Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray(new String[0])))
+            .buildAllMatch();
     public static final CmdArgDef<String> GUILD_SETTINGS_SETTING_DEF = new CmdArgDef.Builder<>("setting", String.class)
             .addPredicateDescription("name of the setting "+Arrays.toString(Guild.GuildSettings.Settings.values()))
             .buildAllMatch();

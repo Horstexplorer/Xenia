@@ -20,13 +20,15 @@ import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel;
 import de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral;
 import de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles;
+import de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf;
 
 public class GROUPSettings extends CommandGroup {
 
     public GROUPSettings() {
         super(null, "settings");
-        addChildCommand(new HYBRIDRoles(this));
+        addChildCommand(new HYBRIDSelf(this));
         addChildCommand(new HYBRIDGeneral(this));
         addChildCommand(new GROUPChannel(this));
+        addChildCommand(new HYBRIDRoles(this));
     }
 }

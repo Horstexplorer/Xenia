@@ -80,6 +80,19 @@
 
       "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Manage notifications for this guild",
 
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "Contains commands to manage own settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "Self Info",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "Username",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "Id",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "Internal Role",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "Preferred Language",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "Icon URL",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[Link](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "Update the response language of Xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "Response language updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "Failed to update response language.\nAvailable options are: %0%",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Update the access mode for the specified channel",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Access mode updated",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "Failed to update access mode.\nAvailable options are: %0%",
@@ -270,6 +283,19 @@
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Manage notifications fow thiws guiwd",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "Contains commands tuwu manage own settings",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "Sewf info",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "Usewname",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "Id",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "Intewnaw wowe",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "Pwefewwed wanguage",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "Icon uww",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[Wink](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "Update the wesponse wanguage of xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "Wesponse wanguage updated",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "Faiwed tuwu update wesponse wanguage.\nAvaiwabwe options awe: %0%",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Update the access mode fow the specified channew",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Access mode updated",
@@ -495,11 +521,24 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Enthält Befehle zum Verwalten von Chatbot-Einstellungen für einen Kanal",
 
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "Enthält Befehle zur Verwaltung eigener Einstellungen",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "Selbstauskunft",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "Benutzername",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "Id",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "Interne Rolle",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "Bevorzugte Sprache",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "Icon URL",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[Link](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "Wechselt die Sprache von Xenia.",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "Sprache aktualisiert",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "Die Sprache konnte nicht geändert werden.\nVerfügbare Optionen sind: %0%",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "Aktualisieren Sie die Einstellungen für diese Gilde",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.success.msg": "Gildeneinstellungen aktualisiert",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.error.msg": "Die Gildeneinstellungen konnten nicht aktualisiert werden.\nVerfügbare Optionen sind: %0%",
 
-      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Wechselt die Sprache von Xenia.",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "Wechselt die Sprache von Xenia",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "Sprache aktualisiert",
       "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "Die Sprache konnte nicht geändert werden.\nVerfügbare Optionen sind: %0%",
 
@@ -652,6 +691,19 @@
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "N'a pas modifié la notification. Peut-être que cela a été créé par quelqu'un d'autre ou n'existe pas?",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Gérer les notifications pour cette guilde",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "Contient des commandes pour gérer ses propres paramètres",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "Self Info",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "Nom d'utilisateur",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "Id",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "Rôle interne",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "Langue préférée",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "Icône URL",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[Lien](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "Mettre à jour la langue de réponse de Xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "Mise à jour de la langue de réponse",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "N'a pas mis à jour la langue de réponse.\nLes options disponibles sont : %0%",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Mettre à jour le mode d'accès pour le canal spécifié",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Mode d'accès mis à jour",
@@ -844,6 +896,19 @@
 
       "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "Administrar notificaciones para este gremio",
 
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "Contiene comandos para gestionar la configuración propia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "Información personal",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "Nombre de usuario",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "Id",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "Función interna",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "Lengua preferida",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "Icono URL",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[Enlace](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "Actualizar el lenguaje de respuesta de Xenia",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "Actualización de la lengua de respuesta",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "No se ha podido actualizar el idioma de la respuesta.\nLas opciones disponibles son: %0%",
+
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "Actualiza el modo de acceso para el canal especificado",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "Modo de acceso actualizado",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "No se pudo actualizar el modo de acceso.\nLas opciones disponibles son: %0%",
@@ -1034,6 +1099,19 @@
       "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "通知の変更に失敗しました。おそらくこれは他の誰かが作成したか、存在しないのではないでしょうか？",
 
       "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "このギルドの通知を管理する",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.description": "自分の設定を管理するためのコマンドが含まれています。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.title": "自己紹介",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.1.title": "ユーザー名",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.2.title": "いでん",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.3.title": "内部的な役割",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.4.title": "望ましい言語",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.title": "アイコンURL",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.HYBRIDSelf.response.field.5.content": "[リンク](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.description": "ゼニアの対応言語を更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.success.msg": "対応言語の更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.self.CMDLanguage.response.error.msg": "応答言語の更新に失敗しました。\n利用可能なオプションは以下のとおりです。%0%",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "指定したチャンネルのアクセスモードを更新します。",
       "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "アクセスモードの更新",
