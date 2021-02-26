@@ -428,7 +428,11 @@ public abstract class Command {
     public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser());
         if(e instanceof DataException){
-            embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()));
+            if(((DataException) e).getType().equals(DataException.Type.HTTP)){
+                embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()+" ("+((DataException) e).getCode()+")"));
+            }else{
+                embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()));
+            }
         }else if(e instanceof CacheException){
             embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.cacheexception.msg", ((CacheException) e).getType().name()));
         }else if(e instanceof BackendException){

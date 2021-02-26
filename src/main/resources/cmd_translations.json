@@ -154,11 +154,11 @@
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Deletes an existing tag",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% deleted",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner and does the tag exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Failed to update tag. Are you the owner?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Failed to update tag. Are you the owner and does the tag exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Create, manage and use tags for this guild",
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag created by %1%*",
@@ -170,14 +170,14 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Remove stream notifications for a channel",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Deleted stream notification",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Failed to delete stream notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Failed to delete stream notification. Does a notification with this id exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Update stream notifications for a channel",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Updated stream notification",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Failed to update stream notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Failed to update stream notification. Does a notification with this id exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Create and manage and list stream notifications",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Requested stream notifications. After evaluation this will show up in the overview",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Stream notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Export a log of the encrypted cached messages for a given channel in the current guild",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Ask who is connected to the backends secondary socket",
@@ -345,11 +345,11 @@
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Dewetes an existing tag",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% deweted",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Faiwed tuwu dewete tag. Awe uwu the ownew?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Faiwed tuwu dewete tag. Awe uwu the ownew awnd does the tag exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Faiwed tuwu update tag. Awe uwu the ownew?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Faiwed tuwu update tag. Awe uwu the ownew awnd does the tag exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Cweate, manage awnd use tags fow thiws guiwd",
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag cweated by %1%*",
@@ -361,14 +361,14 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Wemove stweam notifications fow a channew",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Deweted stweam notification",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Faiwed tuwu dewete stweam notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Faiwed tuwu dewete stweam notification. Does a notification with thiws id exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Update stweam notifications fow a channew",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Updated stweam notification",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Faiwed tuwu update stweam notification",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Faiwed tuwu update stweam notification. Does a notification with thiws id exist?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Cweate awnd manage awnd wist stweam notifications",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Wequested stweam notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Expowt a wog of the encwypted cached messages fow a given channew in the cuwwent guiwd",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Awsk who iws connected tuwu the backends secondawy socket",
@@ -536,11 +536,11 @@
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Löschen ein vorhandenes Tag",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Tag %0% gelöscht",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer und existiert das Tag?",
 
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifies a given tag with the new content",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Ändert ein gegebenes Tag mit dem neuen Inhalt",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Tag %0% updated",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer und existiert das Tag?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Tags für diese Gilde erstellen, verwalten und verwenden",
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag erstellt von %1%*",
@@ -552,14 +552,14 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Stream-Benachrichtigungen für einen Kanal entfernen",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Benachrichtigung über gelöschte Streams",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Stream-Benachrichtigung konnte nicht gelöscht werden",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "Stream-Benachrichtigung konnte nicht gelöscht werden. Existiert eine Benachrichtigung mit dieser ID?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Stream-Benachrichtigungen für einen Kanal aktualisieren",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Stream-Benachrichtigung aktualisiert",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Aktualisierung der Stream-Benachrichtigung fehlgeschlagen",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Aktualisierung der Stream-Benachrichtigung fehlgeschlagen. Existiert eine Benachrichtigung mit dieser ID?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Erstellen und Verwalten von Stream-Benachrichtigungen und Listen",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Angeforderte Stream-Benachrichtigungen. Nach der Auswertung wird dies in der Übersicht angezeigt",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Angeforderte Stream-Benachrichtigungen",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportiert ein Protokoll der verschlüsselten zwischengespeicherten Nachrichten für einen bestimmten Kanal in der aktuellen Gilde",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist",
@@ -727,11 +727,11 @@
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Supprime une balise existante",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Balise %0% supprimé",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "N'a pas réussi à supprimer la balise. Êtes-vous le propriétaire ?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "N'a pas réussi à supprimer la balise. Êtes-vous le propriétaire et la balise existe-t-elle ?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifie une balise donnée avec le nouveau contenu",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Balise %0% actualisée",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "La mise à jour de la balise n'a pas été effectuée. Êtes-vous le propriétaire?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "La mise à jour de la balise n'a pas été effectuée. Êtes-vous le propriétaire et la balise existe-t-elle ?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Créer, gérer et utiliser des balises pour cette guilde",
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Tag créé par %1%*",
@@ -743,14 +743,14 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Supprimer les notifications de flux pour un canal",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Notification de suppression de flux",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "N'a pas réussi à supprimer la notification de flux",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "N'a pas réussi à supprimer la notification de flux. Une notification avec cet identifiant existe-t-elle ?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Mise à jour des notifications de flux pour un canal",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Mise à jour de la notification des flux",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "Omission de mettre à jour la notification des flux",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "N'a pas mis à jour la notification de flux. Une notification avec cet identifiant existe-t-elle ?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Créer, gérer et répertorier les notifications de flux",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notifications de flux demandées. Après évaluation, cela apparaîtra dans l'aperçu",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notifications de flux demandées",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exporter un journal des messages cryptés mis en cache pour un canal donné dans la guilde actuelle",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Demandez qui est connecté à la prise secondaire des backends",
@@ -918,11 +918,11 @@
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "Elimina una etiqueta existente",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "Etiqueta %0% eliminada",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "No se pudo borrar la etiqueta. ¿Eres tu el dueño?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "No se ha podido eliminar la etiqueta. ¿Es usted el propietario y existe la etiqueta?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "Modifica una etiqueta determinada con el nuevo contenido.",
       "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "Etiqueta % 0% actualizada",
-      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "No se pudo actualizar la etiqueta. ¿Eres tu el dueño?",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "No se ha podido actualizar la etiqueta. ¿Es usted el propietario y existe la etiqueta?",
 
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "Crea, administra y usa etiquetas para este gremio.",
       "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*Etiqueta creada por %1%*",
@@ -934,14 +934,14 @@
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "Eliminar notificaciones de transmisión de un canal",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "Notificación de transmisión eliminada",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "No se pudo borrar la notificación de transmisión",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "No se ha podido eliminar la notificación del flujo. ¿Existe una notificación con este id?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "Actualizar las notificaciones de transmisión de un canal",
       "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "Notificación de transmisión actualizada",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "No se pudo actualizar la notificación de transmisión",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "No se ha podido actualizar la notificación del flujo. ¿Existe una notificación con este id?",
 
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "Crear, administrar y enumerar notificaciones de transmisión",
-      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notificaciones de transmisión solicitadas. Después de la evaluación, esto se mostrará en la descripción general",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notificaciones de transmisión solicitadas",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportar un registro de los mensajes en caché cifrados para un canal determinado en el gremio actual",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Pregunte quién está conectado al conector secundario de backends",
@@ -952,6 +952,197 @@
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "Puede utilizarse para evaluar el rendimiento actual del D43Z1",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "Contiene comandos solo disponibles para el desarrollador"
+    }
+  },
+  {
+    "languageId": "ja_JP",
+    "languageName": "Japanese-Default",
+    "languageDescription": "The default Japanese language package",
+    "isDefault": false,
+    "translations": {
+      "default.onSuccess.title": "成功",
+      "default.onError.title": "エラー",
+      "default.onMissingArgs.title": "失敗しました。議論が足りない",
+      "default.onMissingArgs.description": "このコマンドは、より多くの/異なる引数を必要とします。",
+      "default.onMissingArgs.usage.fn": "使用法",
+      "default.onMissingMemberPerms.title": "失敗しました。許可が十分ではありません。",
+      "default.onMissingMemberPerms.description": "こんなことをしてはいけない！」と思っている人もいるのではないでしょうか？",
+      "default.onMissingMemberPerms.requiredPerms.fn": "必要な許可",
+      "default.onMissingBotPerms.title": "失敗しました。ボットが許可を得られない",
+      "default.onMissingBotPerms.description": "パーミッションが不足していてコマンドを実行できません!",
+      "default.onMissingBotPerms.requiredPerms.fn": "必要なパーミッション",
+      "default.onCooldownActive.title": "失敗しました。クールダウン アクティブ",
+      "default.onCooldownActive.description": "またやる前にしばらく待ってください",
+      "default.onUnhandledException.title": "おっと",
+      "default.onUnhandledException.dataexception.msg": "必要なデータへのアクセスに何らかの理由で失敗しました(%0%)。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
+      "default.onUnhandledException.cacheexception.msg": "必要なデータを取得するためのキャッシュへのアクセスに何らかの理由で失敗しました(%0%)。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
+      "default.onUnhandledException.backendexception.msg": "なぜかバックエンドとの通信に失敗しました(%0%)。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
+      "default.onUnhandledException.exception.msg": "何か悪いことが起きて、それが何なのかよくわかりません。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
+      "default.estimatedCommand.msg": "あなたが入力した `%0%` というコマンドは存在しないようです。代わりに `%1%` を使いたかったのでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.description": "コマンドの一覧を表示します。",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.title": "**ヘルプ / コマンド**",
+      "de.netbeacon.xenia.bot.commands.global.help.CMDHelp.response.field.commands": "コマンド",
+
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.description": "私についての基本的な情報を表示します。",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.title": "情報",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.3.title": "現在のシャード",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.4.title": "インスタンス",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.5.title": "場所",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.title": "ウェブサイト",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.6.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.title": "データ処理",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.7.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.title": "報告内容",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.8.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.title": "連絡先",
+      "de.netbeacon.xenia.bot.commands.structure.info.CMDInfo.response.field.9.link_text": "[ウェブサイトを見る](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.description": "添付ファイルを haste.hypercdn.de にアップロードします。",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.error.msg": "提供されたファイルはありません",
+      "de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin.response.success.msg": "これがその意気込み",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.description": "このチャンネルで削除された最後のメッセージを復元します。",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.error.msg": "復元するためのメッセージが見つかりませんでした。",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.title": "削除されたメッセージを復元",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.1.title": "メッセージID",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.2.title": "著者",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDDeleted.response.success.field.3.title": "古いメッセージ",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.description": "このチャンネルで編集された最後のメッセージを復元します。",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.error.msg": "復元するためのメッセージが見つかりませんでした。",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.title": "編集したメッセージを復元",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.1.title": "メッセージID",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.2.title": "著者",
+      "de.netbeacon.xenia.bot.commands.structure.last.CMDEdited.response.success.field.3.title": "古いメッセージ",
+
+      "de.netbeacon.xenia.bot.commands.structure.last.GROUPLast.description": "削除または編集されたメッセージを復元する",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.description": "新しい通知を作成する",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.success.msg": "作成された通知 (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDCreate.response.error.msg": "通知の作成に失敗しました。キャッシュが一杯になっているのではないでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.description": "既存の通知を削除する",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.success.msg": "通知(ID: %0%)削除",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDDelete.response.error.msg": "通知の削除に失敗しました。もしかして、これは他の誰かが作成したか、存在しないのでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.description": "既存の通知を見る",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDList.response.title": "お知らせ",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.description": "既存の通知を更新する",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.success.msg": "編集した通知",
+      "de.netbeacon.xenia.bot.commands.structure.notification.CMDModify.response.error.msg": "通知の変更に失敗しました。おそらくこれは他の誰かが作成したか、存在しないのではないでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification.description": "このギルドの通知を管理する",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.description": "指定したチャンネルのアクセスモードを更新します。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.success.msg": "アクセスモードの更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDAccessMode.response.error.msg": "アクセスモードの更新に失敗しました。\n利用可能なオプションは以下のとおりです。%0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.description": "指定したチャンネルの情報を表示します。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.title": "チャンネル設定",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.1.title": "国旗",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.2.title": "アクセスモード",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.3.title": "ロギングを有効にする",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.success.field.4.title": "ロギング自動復元チャンネル",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDInfo.response.error.msg": "アクセスモードの更新に失敗しました。\n利用可能なオプションは",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.description": "指定したチャンネルのロギング設定を更新する",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.success.msg": "ロギング設定を更新しました。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.CMDLogging.response.error.msg": "ロギングモードの更新に失敗しました。\n利用可能なオプションは以下の通りです。 [true, false]",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.channel.GROUPChannel.description": "チャンネル設定を管理するコマンドが含まれています。",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.msg": "チャットボット機能が完成しました。\nこの機能は英語でのみ利用可能であり、エンターテイメント目的のみを目的としています。\n回答は未検証のメッセージから生成されます - 一部の回答は文脈によっては不適切と思われる場合があります。\nルートデータセットの起源についての詳細はこちらをご覧ください[ここで](%0%)",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.error.create.failed": "チャットボットの設定に必要なチャンネル設定の作成/更新に失敗しました。",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.chat.default.name": "xenia",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.response.success.deactivated": "チャットボットは無効化されました",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Xeniaとチャットするためのチャンネルを設定することができます。",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "一般的な設定",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "カスタムコンテキストプールUUID",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "チャンネル",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "チャットボット情報",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "チャンネルが設定されていない",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "チャットボットの設定に関する一般的な情報を表示します。",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "チャンネルのチャットボット設定を管理するコマンドが含まれています。",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.description": "このギルドの設定を更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.success.msg": "ギルドの設定を更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDSettings.response.error.msg": "ギルド設定の更新に失敗しました。\n利用可能なオプションは以下の通りです。%0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.description": "ゼニアの対応言語を更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.success.msg": "対応言語の更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLanguage.response.error.msg": "応答言語の更新に失敗しました。\n利用可能なオプションは以下のとおりです。%0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.description": "ライセンスキーを使用してライセンスを更新する",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.success.msg": "ライセンス更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDLicense.response.error.msg": "ライセンスの更新に失敗しました",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.description": "コマンドに使用するプレフィックスを更新",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.success.msg": "接頭辞を `%0%` に更新しました。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.CMDPrefix.response.error.msg": "プレフィックスの更新に失敗しました。長すぎるのでは？",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.description": "一般的なギルド設定を含む",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.title": "一般的なギルド設定",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.1.title": "好ましい言語",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.2.title": "接頭辞",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.3.title": "設定",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.4.title": "ライセンス名",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.5.title": "まで有効です。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.6.title": "最大権限役割",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.7.title": "最大タグ",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.8.title": "最大通知数",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.9.title": "最大twitchの通知",
+      "de.netbeacon.xenia.bot.commands.structure.settings.general.HYBRIDGeneral.response.field.10.title": "最大メッセージロギング",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "v ロールと v パームを管理するコマンドが含まれています。",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "役割",
+      "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.is_empty": "まだ作成されたロールはありません",
+
+      "de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings.description": "ギルドのすべての設定が含まれています。",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.description": "指定したタグ名と内容を持つ新しいタグを作成します。",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.success.msg": "タグ %0% が作成されました。",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDCreate.response.error.msg": "タグの作成に失敗しました。",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.description": "既存のタグを削除します。",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.success.msg": "タグ %0% 削除",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDDelete.response.error.msg": "タグの削除に失敗しました。あなたはオーナーであり、タグは存在しますか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.description": "与えられたタグを新しい内容で変更します。",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.success.msg": "タグ %0% 更新",
+      "de.netbeacon.xenia.bot.commands.structure.tags.CMDModify.response.error.msg": "タグの更新に失敗しました。あなたは所有者であり、タグは存在しますか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.description": "このギルドのタグを作成、管理、使用する",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.success.msg": "%0%\n\n*によって作成されたタグ %1%*",
+      "de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag.response.error.msg": "タグ %0% が見つかりませんでした。",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.description": "チャンネルのストリーム通知を要求する",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.success.msg": "要求されたストリーム通知。評価後、これは概要に表示されます。",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDCreate.response.error.msg": "別のストリーム通知の要求に失敗しました。URLは有効ですか、チャネルはすでにこのチャネルの通知を受信していますか、またはuは制限にヒットしていますか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.description": "チャンネルのストリーム通知を削除する",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.success.msg": "削除されたストリームの通知",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDDelete.response.error.msg": "ストリーム通知の削除に失敗しました。このIDの通知は存在しますか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.description": "チャンネルのストリーム通知を更新する",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.success.msg": "ストリーム通知を更新しました。",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.CMDUpdate.response.error.msg": "ストリーム通知の更新に失敗しました。このIDの通知は存在しますか？",
+
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.description": "ストリーム通知の作成と管理、リスト化",
+      "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "ストリーム通知",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "現在のギルドにある特定のチャンネルの暗号化されたキャッシュされたメッセージのログをエクスポートする",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "バックエンドのセカンダリソケットに誰が接続されているかを聞く",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "コードの評価に使用できる",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "バックエンドのセカンダリソケットに接続されている全てのインスタンスの統計情報を表示します。",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "このボットに関する統計情報を表示します。",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDPing.description": "Discordや他の連携サービスへのpingを確認するために使用することができます。",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDD43Z1.description": "現在のD43Z1の性能評価に使用可能",
+
+      "de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin.description": "開発者のみが利用できるコマンドを含む"
     }
   }
 ]
