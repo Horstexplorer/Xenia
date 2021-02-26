@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.general;
+package de.netbeacon.xenia.bot.commands.structure.settings.guild;
 
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.License;
@@ -33,10 +33,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-public class HYBRIDGeneral extends HybridCommand {
+public class HYBRIDGuild extends HybridCommand {
 
-    public HYBRIDGeneral(CommandGroup parent) {
-        super(parent, "general", new CommandCooldown(CommandCooldown.Type.User, 2000),
+    public HYBRIDGuild(CommandGroup parent) {
+        super(parent, "guild", new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

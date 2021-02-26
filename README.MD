@@ -34,12 +34,12 @@ ja_jp - Japanese
 To set your personal response language, use  
 ```~settings self language LOCALE_ID```  
 To enforce a language for your guild, use  
-```~settings general language LOCALE_ID```  
-```~settings general settings ENFORCE_LANGUAGE true```
+```~settings guild language LOCALE_ID```  
+```~settings guild settings ENFORCE_LANGUAGE true```
 ## Guild Settings
 ### General
 Some settings for the guild in general are available  
-```~settings general settings OPTION true/false```  
+```~settings guild settings OPTION true/false```  
 Options:
 ```
 COMMAND_AUTO_CORRECT - Disables the typo response and executes the command it thinks is correct on typos
@@ -48,10 +48,10 @@ VPERM_ENABLE - Use the virtuale role/permission system provided by Xenia to chec
 ```
 ### Prefix
 The prefix of the bot (default ~) can be changed to any 1-4 characters you want  
-```~settings general prefix PREFIX```
+```~settings guild prefix PREFIX```
 ### License
 Some features of the bot are limited to a certain amount to keep usage reasonable. Those limits can be extended by asking us for a license key if u have the need for more. This will raise the limits as desired.  
-```~settings general upgradelicense LICENSEKEY```  
+```~settings guild upgradelicense LICENSEKEY```  
 The current limits can be viewed on the general overview  
 ```~settings general```
 ## Channel Settings
