@@ -22,18 +22,18 @@ or ```~help``` to see all command-/groups
 ___
 # Settings and configuration
 ## Language
-Most texts the bot sends have been translated. Available languages are:
+Most responses have been translated. Available languages are:
 ```
-en_US - English
-en_UWU - A more UwU version of English
-de_DE - German
-fr_FR - Frensh
-es_ES - Spanish
-ja_JP - Japanese
+en_us - English
+en_uwu - A more UwU version of English
+de_de - German
+fr_fr - Frensh
+es_es - Spanish
+ja_jp - Japanese
 ```
-To set ur personal response language use  
+To set your personal response language, use  
 ```~settings self language LOCALE_ID```  
-To enforce a language for your guild use  
+To enforce a language for your guild, use  
 ```~settings general language LOCALE_ID```  
 ```~settings general settings ENFORCE_LANGUAGE true```
 ## Guild Settings
