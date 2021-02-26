@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.settings.general;
+package de.netbeacon.xenia.bot.commands.structure.settings.guild;
 
 import de.netbeacon.xenia.backend.client.objects.external.License;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
