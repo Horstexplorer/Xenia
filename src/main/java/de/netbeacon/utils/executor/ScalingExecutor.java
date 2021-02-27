@@ -41,7 +41,7 @@ public class ScalingExecutor {
      * @param timeUnit unit of keepAliveTime
      */
     public ScalingExecutor(int baseThreads, int additionalThreads, int maxWaitingTasks, int keepAliveTime, TimeUnit timeUnit){
-        if(maxWaitingTasks >= 0){
+        if(maxWaitingTasks <= 0){
             taskQueue = new LinkedBlockingQueue<>();
         }else{
             taskQueue = new ArrayBlockingQueue<>(maxWaitingTasks);
