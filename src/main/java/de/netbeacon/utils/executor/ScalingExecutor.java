@@ -18,10 +18,7 @@ package de.netbeacon.utils.executor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Can be used to handle executions in a fast scaling way
@@ -32,7 +29,7 @@ public class ScalingExecutor {
 
     private final ThreadPoolExecutor baseExecutor;
     private final ThreadPoolExecutor scalingExecutor;
-    private final ArrayBlockingQueue<Runnable> taskQueue;
+    private final BlockingQueue<Runnable> taskQueue;
 
     /**
      * Creates a new instance of this class
@@ -44,7 +41,11 @@ public class ScalingExecutor {
      * @param timeUnit unit of keepAliveTime
      */
     public ScalingExecutor(int baseThreads, int additionalThreads, int maxWaitingTasks, int keepAliveTime, TimeUnit timeUnit){
-        taskQueue = new ArrayBlockingQueue<>(maxWaitingTasks);
+        if(maxWaitingTasks >= 0){
+            taskQueue = new LinkedBlockingQueue<>();
+        }else{
+            taskQueue = new ArrayBlockingQueue<>(maxWaitingTasks);
+        }
         this.baseExecutor = new ThreadPoolExecutor(baseThreads,baseThreads, keepAliveTime, timeUnit, new ArrayBlockingQueue<>(1));
         this.baseExecutor.prestartAllCoreThreads();
         this.scalingExecutor = new ThreadPoolExecutor(additionalThreads, additionalThreads, keepAliveTime, timeUnit, taskQueue);

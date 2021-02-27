@@ -35,7 +35,7 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
     private final AtomicBoolean halt = new AtomicBoolean(false);
 
     public MultiThreadedEventManager(){
-        this.scalingExecutor = new ScalingExecutor(2, 25, 2048, 10, TimeUnit.SECONDS);
+        this.scalingExecutor = new ScalingExecutor(2, 50, -1, 10, TimeUnit.SECONDS);
     }
 
     @Override
