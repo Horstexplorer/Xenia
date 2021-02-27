@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.event.manager;
 
 import de.netbeacon.utils.executor.ScalingExecutor;
 import net.dv8tion.jda.api.events.GenericEvent;
+import net.dv8tion.jda.api.events.message.guild.GenericGuildMessageEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.internal.JDAImpl;
 import org.jetbrains.annotations.NotNull;
@@ -30,12 +31,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MultiThreadedEventManager implements IExtendedEventManager {
 
     private long lastEvent;
-    private final ScalingExecutor scalingExecutor;
+    private final ScalingExecutor primaryScalingExecutor;
+    private final ScalingExecutor secondaryScalingExecutor;
     private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
     private final AtomicBoolean halt = new AtomicBoolean(false);
 
     public MultiThreadedEventManager(){
-        this.scalingExecutor = new ScalingExecutor(2, 50, -1, 10, TimeUnit.SECONDS);
+        this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
+        this.secondaryScalingExecutor = new ScalingExecutor(2, 16, -1 , 10, TimeUnit.SECONDS);
     }
 
     @Override
@@ -64,17 +67,24 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
         if(halt.get()){
             return;
         }
-        scalingExecutor.execute(()->{
-            for(EventListener listener : listeners){
-                try {
-                    listener.onEvent(event);
-                }catch (Throwable t){
-                    JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-                    if (t instanceof Error)
-                        throw (Error) t;
-                }
+        if(event instanceof GenericGuildMessageEvent){
+            primaryScalingExecutor.execute(()->eventConsumer(event));
+        }else{
+            secondaryScalingExecutor.execute(()->eventConsumer(event));
+        }
+
+    }
+
+    private void eventConsumer(GenericEvent event){
+        for(EventListener listener : listeners){
+            try {
+                listener.onEvent(event);
+            }catch (Throwable t){
+                JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
+                if (t instanceof Error)
+                    throw (Error) t;
             }
-        });
+        }
     }
 
     @NotNull
@@ -85,7 +95,8 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
 
     @Override
     public void onShutdown() throws Exception {
-        scalingExecutor.shutdown();
+        primaryScalingExecutor.shutdown();
+        secondaryScalingExecutor.shutdown();
     }
 
     @Override
