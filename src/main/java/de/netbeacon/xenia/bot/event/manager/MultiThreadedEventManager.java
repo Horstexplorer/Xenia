@@ -64,15 +64,14 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
     @Override
     public void handle(@NotNull GenericEvent event) {
         lastEvent = System.currentTimeMillis();
-        if(halt.get()){
+        if(halt.get()) {
             return;
         }
-        if(event instanceof GenericGuildMessageEvent){
-            primaryScalingExecutor.execute(()->eventConsumer(event));
+        if(event instanceof GenericGuildMessageEvent) {
+            primaryScalingExecutor.execute(() -> eventConsumer(event));
         }else{
-            secondaryScalingExecutor.execute(()->eventConsumer(event));
+            secondaryScalingExecutor.execute(() -> eventConsumer(event));
         }
-
     }
 
     private void eventConsumer(GenericEvent event){
@@ -81,8 +80,9 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
                 listener.onEvent(event);
             }catch (Throwable t){
                 JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-                if (t instanceof Error)
-                    throw (Error) t;
+                if (t instanceof Error) {
+                    throw t;
+                }
             }
         }
     }
