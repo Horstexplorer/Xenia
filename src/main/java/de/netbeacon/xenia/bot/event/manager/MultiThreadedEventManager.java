@@ -17,6 +17,8 @@
 package de.netbeacon.xenia.bot.event.manager;
 
 import de.netbeacon.utils.executor.ScalingExecutor;
+import de.netbeacon.utils.statistics.SlidingTimeframeCounter;
+import de.netbeacon.utils.tuples.Quartet;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.guild.GenericGuildMessageEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
@@ -35,6 +37,11 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
     private final ScalingExecutor secondaryScalingExecutor;
     private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
     private final AtomicBoolean halt = new AtomicBoolean(false);
+
+    private final SlidingTimeframeCounter oneMinute = new SlidingTimeframeCounter(TimeUnit.MINUTES, 1, 60);
+    private final SlidingTimeframeCounter fiveMinutes = new SlidingTimeframeCounter(TimeUnit.MINUTES, 5, 5);
+    private final SlidingTimeframeCounter fifteenMinutes = new SlidingTimeframeCounter(TimeUnit.MINUTES, 15, 15);
+    private final SlidingTimeframeCounter oneHour = new SlidingTimeframeCounter(TimeUnit.HOURS, 1, 60);
 
     public MultiThreadedEventManager(){
         this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
@@ -61,9 +68,26 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
         halt.set(value);
     }
 
+    private void incrementStats(){
+        oneMinute.increment();
+        fiveMinutes.increment();
+        fifteenMinutes.increment();
+        oneHour.increment();
+    }
+
+    public Quartet<Long, Long, Long, Long> getStats(){
+        return new Quartet<>(
+          oneMinute.getCount(),
+          fiveMinutes.getCount(),
+          fifteenMinutes.getCount(),
+          oneHour.getCount()
+        );
+    }
+
     @Override
     public void handle(@NotNull GenericEvent event) {
         lastEvent = System.currentTimeMillis();
+        incrementStats();
         if(halt.get()) {
             return;
         }
