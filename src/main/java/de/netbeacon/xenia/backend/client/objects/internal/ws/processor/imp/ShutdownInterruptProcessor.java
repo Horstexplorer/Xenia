@@ -16,12 +16,10 @@
 
 package de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.system.Ping;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSProcessor;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSRequest;
 import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSResponse;
-import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -37,14 +35,12 @@ import java.util.concurrent.TimeUnit;
 
 public class ShutdownInterruptProcessor extends WSProcessor {
 
-    private final XeniaBackendClient xeniaBackendClient;
     private final Logger logger = LoggerFactory.getLogger(ShutdownInterruptProcessor.class);
     private Future<?> future;
     private final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
 
-    public ShutdownInterruptProcessor(XeniaBackendClient xeniaBackendClient) {
+    public ShutdownInterruptProcessor() {
         super("shutdownirq");
-        this.xeniaBackendClient = xeniaBackendClient;
     }
 
     @Override
@@ -52,7 +48,7 @@ public class ShutdownInterruptProcessor extends WSProcessor {
         // get payload
         JSONObject payload = wsRequest.getPayload();
         // test shardmanager
-        ShardManager shardManager = xeniaBackendClient.getShardManagerSupplier().get();
+        ShardManager shardManager = getWsProcessorCore().getXeniaBackendClient().getShardManagerSupplier().get();
         if(shardManager == null){
             logger.error("Received Interrupt Request While ShardManager Is Null");
             return null;
@@ -68,40 +64,40 @@ public class ShutdownInterruptProcessor extends WSProcessor {
         long delay = System.currentTimeMillis()-payload.getLong("at");
         logger.warn(
                 "! Received Shutdown Interrupt Request From Backend !\n" +
-                "To Make Sure Nothing Breaks Events Will Be Blocked And The Socket Will Be Shut Down.\n" +
-                "Using Automated Pings To Detect When The Backend Is Up Again"
+                        "To Make Sure Nothing Breaks Events Will Be Blocked And The Socket Will Be Shut Down.\n" +
+                        "Using Automated Pings To Detect When The Backend Is Up Again"
         );
         // update presence, "shutdown" event managers
         shardManager.setPresence(OnlineStatus.IDLE, Activity.playing("Backend Offline"));
         shardManager.getShards().stream().map(JDA::getEventManager).forEach(eventManager -> {
-            if(eventManager instanceof MultiThreadedEventManager){
-                ((MultiThreadedEventManager) eventManager).halt(true);
-            }
+            //if(eventManager instanceof MultiThreadedEventManager){
+            //    ((MultiThreadedEventManager) eventManager).halt(true);
+            //}
         });
         // initialize backend client shutdown
         scheduledExecutorService.schedule(()->{
             try{
-                xeniaBackendClient.suspendExecution(true);
+                getWsProcessorCore().getXeniaBackendClient().suspendExecution(true);
                 future = scheduledExecutorService.scheduleAtFixedRate(()->{
                     try{
-                        Ping p = new Ping(xeniaBackendClient.getBackendProcessor());
+                        Ping p = new Ping(getWsProcessorCore().getXeniaBackendClient().getBackendProcessor());
                         if(!p.ping()){
                             return;
                         }
                         future.cancel(false); // let it run but this is the last time
                         // reenable everything
-                        xeniaBackendClient.suspendExecution(false);
+                        getWsProcessorCore().getXeniaBackendClient().suspendExecution(false);
                         shardManager.getShards().stream().map(JDA::getEventManager).forEach(eventManager -> {
-                            if(eventManager instanceof MultiThreadedEventManager){
-                                ((MultiThreadedEventManager) eventManager).halt(false);
-                            }
+                            //if(eventManager instanceof MultiThreadedEventManager){
+                            //    ((MultiThreadedEventManager) eventManager).halt(false);
+                            //}
                         });
                         shardManager.setPresence(OnlineStatus.ONLINE, Activity.playing(descriptionOld));
                         logger.warn("! Restored From Shutdown Interrupt !");
                     }catch (Exception e){
                         logger.warn(
                                 "! Failed To Restore From Shutdown Interrupt !\n" +
-                                "The Bot Needs To Get Restarted Manually"
+                                        "The Bot Needs To Get Restarted Manually"
                         );
                     }
                 }, 10, 10, TimeUnit.SECONDS);
