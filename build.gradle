@@ -21,7 +21,7 @@ dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_229' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_230' // https://mvnrepository.com/artifact/net.dv8tion/JDA
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.4' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
 
     // JSON
@@ -49,7 +49,7 @@ dependencies {
 
     // OTHER THINGS
 
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11' // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0' // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation group: 'commons-io', name: 'commons-io', version: '2.8.0' // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'org.apache.tika', name: 'tika-core', version: '1.25' // https://mvnrepository.com/artifact/org.apache.tika/tika-core
 

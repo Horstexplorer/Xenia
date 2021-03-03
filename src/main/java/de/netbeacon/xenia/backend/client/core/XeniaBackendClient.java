@@ -90,13 +90,13 @@ public class XeniaBackendClient implements IShutdown {
         primaryWebSocketListener = new PrimaryWebsocketListener(this);
         primaryWebSocketListener.start();
 
-        WSProcessorCore wsProcessorCore = new WSProcessorCore()
-                .registerProcessors(
+        WSProcessorCore wsProcessorCore = new WSProcessorCore(this).registerProcessors(
                         new HeartbeatProcessor(),
-                        new IdentifyProcessor(this),
-                        new StatisticsProcessor(this),
-                        new TwitchNotificationProcessor(this),
-                        new ShutdownInterruptProcessor(this)
+                        new IdentifyProcessor(),
+                        new StatisticsProcessor(),
+                        new TwitchNotificationProcessor(),
+                        new ShutdownInterruptProcessor(),
+                        new MetricsProcessor()
                 );
         secondaryWebsocketListener = new SecondaryWebsocketListener(this, wsProcessorCore);
         secondaryWebsocketListener.start();
