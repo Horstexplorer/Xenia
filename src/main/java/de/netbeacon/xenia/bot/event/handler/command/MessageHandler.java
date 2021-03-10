@@ -149,7 +149,8 @@ public class MessageHandler {
             return;
         }
         // update message content
-        message.setMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
+        message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
+        message.updateAsync(true);
         // update thingy
         messageCache.setLast("edited", message.getId());
         // check if notification is active
