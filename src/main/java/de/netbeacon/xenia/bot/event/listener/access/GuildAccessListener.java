@@ -62,9 +62,12 @@ public class GuildAccessListener extends ListenerAdapter {
     @Override
     public void onGuildReady(@NotNull GuildReadyEvent event) {
         try{
-            logger.info("Loading Guild Async "+event.getGuild().getId());
             if(backendClient.getGuildCache().contains(event.getGuild().getIdLong())){
+                logger.info("Reloading Guild Async "+event.getGuild().getId());
+                backendClient.getGuildCache().get(event.getGuild().getIdLong()).clear(false);
                 backendClient.getGuildCache().remove(event.getGuild().getIdLong());
+            }else{
+                logger.info("Loading Guild Async "+event.getGuild().getId());
             }
             Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
             g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
