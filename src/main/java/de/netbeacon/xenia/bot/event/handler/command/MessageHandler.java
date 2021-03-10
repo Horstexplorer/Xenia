@@ -94,7 +94,7 @@ public class MessageHandler {
                     logger.warn("An exception occurred while handing message over to D43Z1 ", e);
                 }
             }else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
-                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw());
+                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw(), true);
             }
             return;
         }
