@@ -1,0 +1,8 @@
+{
+ "combinedContextPoolId": "498a76ba-8597-4b41-912e-ebd93f1214e0",
+ "description": "Anime Subtitles",
+ "extending": [
+  "b4bf47e5-10b6-4b9c-a371-d33d5bc7229a",
+  "b59b2ef5-2271-41f3-bebc-16679d1d6aa8"
+ ]
+}
