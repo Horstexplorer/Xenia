@@ -21,7 +21,7 @@ import de.netbeacon.d43z.one.objects.bp.ISimilarity;
 public class StaticSettings {
 
     public static final int CONTENT_SHARD_SIZE = 5000;
-    public static final int BUFFER_MAX_SIZE = 5;
+    public static final int BUFFER_MAX_SIZE = 10;
     public static final boolean EVAL_ENABLE_BUFFER_BONUS_POLICY = true;
     public static final float BUFFER_BONUS = 0.05F;
     public static final float BUFFER_BONUS_SUBTRACTION = 0.005F;
@@ -36,7 +36,7 @@ public class StaticSettings {
     public static final int EVAL_MAX_CONCURRENT_TASKS = EVAL_MAX_PROCESSING_THREADS/EVAL_MAX_THREADS_PER_REQUEST;
     public static final ISimilarity.Algorithm EVAL_ALGORITHM = ISimilarity.Algorithm.LIAMUS_JACCARD;
     public static final int EVAL_AVG_BASE = 250;
-    public static final int EVAL_MAX_PROCESSING_TIME = 5000;
+    public static final int EVAL_MAX_PROCESSING_TIME = 3000;
     public static final int EVAL_MIN_PROCESSING_TIME = 250;
 
 }
