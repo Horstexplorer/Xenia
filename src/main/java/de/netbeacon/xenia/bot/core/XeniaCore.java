@@ -190,6 +190,10 @@ public class XeniaCore {
         return eventWaiter;
     }
 
+    public PaginatorManager getPaginatorManager(){
+        return paginatorManager;
+    }
+
     public JDA getShardByGuildId(long guildId){
         for(JDA jda : shardManager.getShards()){
             if(jda.getGuildCache().getElementById(guildId) != null){
