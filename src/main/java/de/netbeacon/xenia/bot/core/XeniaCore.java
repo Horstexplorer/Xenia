@@ -51,6 +51,7 @@ import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class XeniaCore {
 
@@ -67,6 +68,15 @@ public class XeniaCore {
     private XeniaCore() throws LoginException, IOException {
         // shutdown hook
         ShutdownHook shutdownHook = new ShutdownHook();
+        // system exit helper
+        class SEH implements IShutdown {
+            @Override
+            public void onShutdown() throws Exception {
+                TimeUnit.MILLISECONDS.sleep(2);
+                System.exit(0);
+            }
+        }
+        shutdownHook.addShutdownAble(new SEH());
         // load config
         logger.info("Loading Config...");
         config = new Config(new File("./xenia/config/sys.config"));
@@ -89,9 +99,9 @@ public class XeniaCore {
 
         // setup other things
         logger.info("Preparing Other Things...");
-        eventWaiter = new EventWaiter(); // Event Waiter
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
+        eventWaiter = new EventWaiter(SharedExecutor.getInstance().getScheduledExecutor(), SharedExecutor.getInstance().getScheduledExecutor()); // Event Waiter
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
         shutdownHook.addShutdownAble(D43Z1Imp.getInstance(true));
