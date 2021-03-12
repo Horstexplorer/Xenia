@@ -84,10 +84,6 @@ public class Paginator {
         return pages.get(position);
     }
 
-    public void drawCurrent(TextChannel textChannel){
-        drawCurrent(textChannel, null, null);
-    }
-
     public void drawCurrent(TextChannel textChannel, User user, MessageReaction.ReactionEmote reactionEmote){
         drawCurrent(textChannel, user, reactionEmote, null, null);
     }
