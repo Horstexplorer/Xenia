@@ -36,6 +36,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
+import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
@@ -61,6 +62,9 @@ public class XeniaCore {
     private final XeniaBackendClient xeniaBackendClient;
     private final ShardManager shardManager;
     private final EventWaiter eventWaiter;
+
+    private final PaginatorManager paginatorManager;
+
     private final long ownerId;
     
     private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
@@ -102,6 +106,7 @@ public class XeniaCore {
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
         eventWaiter = new EventWaiter(SharedExecutor.getInstance().getScheduledExecutor(), SharedExecutor.getInstance().getScheduledExecutor()); // Event Waiter
+        paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
         shutdownHook.addShutdownAble(D43Z1Imp.getInstance(true));
@@ -123,7 +128,8 @@ public class XeniaCore {
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
                         new GuildMessageListener(xeniaBackendClient, eventWaiter),
-                        new GuildReactionListener(eventWaiter)
+                        new GuildReactionListener(eventWaiter),
+                        paginatorManager.getListener()
                 );
         if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
             builder
