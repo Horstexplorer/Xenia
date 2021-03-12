@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.utils.paginator;
 
+import de.netbeacon.utils.shutdownhook.IShutdown;
 import de.netbeacon.utils.tuples.Triplet;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
@@ -25,11 +26,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class PaginatorManager {
+public class PaginatorManager implements IShutdown {
 
     private final Listener listener = new Listener(this);
 
@@ -42,8 +42,19 @@ public class PaginatorManager {
 
     private final ConcurrentHashMap<Long, Boolean> creationRunning = new ConcurrentHashMap<>();
 
+    private final ScheduledFuture<?> cleaner;
+    private static final long CLEAN_INTERVAL = 1000;
+
     private final ReentrantLock reentrantLock = new ReentrantLock();
     private static final long WAIT_TIME = 1000;
+
+    public PaginatorManager(ScheduledExecutorService scheduledExecutorService){
+        cleaner = scheduledExecutorService.scheduleAtFixedRate(()->{
+           try{
+               paginatorConcurrentHashMap.values().stream().filter(tri -> tri.getValue3() < System.currentTimeMillis()).forEach(tri -> removePaginator(tri.getValue1().getMessageId()));
+           }catch (Exception ignore){}
+        }, CLEAN_INTERVAL, CLEAN_INTERVAL, TimeUnit.MILLISECONDS);
+    }
 
     public void createPaginator(TextChannel textChannel, User user, List<Page> pages){
         try{
@@ -105,6 +116,11 @@ public class PaginatorManager {
         return listener;
     }
 
+    @Override
+    public void onShutdown() throws Exception {
+        cleaner.cancel(true);
+    }
+
     public static class Listener extends ListenerAdapter{
 
         private final PaginatorManager paginatorManager;
@@ -126,12 +142,12 @@ public class PaginatorManager {
             }
             switch (event.getReactionEmote().getEmoji()){
                 case NEXT: {
-                    paginator.movePosition(Paginator.Move.UP);
+                    paginator.movePosition(Paginator.Move.NEXT);
                     paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
                     break;
                 }
                 case PREVIOUS: {
-                    paginator.movePosition(Paginator.Move.DOWN);
+                    paginator.movePosition(Paginator.Move.PREVIOUS);
                     paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
                     break;
                 }

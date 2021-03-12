@@ -44,8 +44,8 @@ public class Paginator {
 
     public enum Move{
 
-        UP(1),
-        DOWN(-1);
+        NEXT(1),
+        PREVIOUS(-1);
 
         private final int i;
 
