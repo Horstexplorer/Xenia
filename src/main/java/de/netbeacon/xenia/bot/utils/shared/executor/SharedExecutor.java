@@ -33,8 +33,8 @@ public class SharedExecutor implements IShutdown {
      * Creates a new instance of this class
      */
     private SharedExecutor(){
-        scalingExecutor = new ScalingExecutor(2, 24, 24000, 30, TimeUnit.SECONDS);
-        scheduledExecutorService = Executors.newScheduledThreadPool(8);
+        scalingExecutor = new ScalingExecutor(2, 24, -1, 30, TimeUnit.SECONDS);
+        scheduledExecutorService = Executors.newScheduledThreadPool(16);
     }
 
     /**

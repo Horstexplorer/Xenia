@@ -31,6 +31,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPack
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -53,11 +54,13 @@ public class MessageHandler {
     private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
     private final EventWaiter eventWaiter;
     private final XeniaBackendClient backendClient;
+    private final PaginatorManager paginatorManager;
     private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
-    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, XeniaBackendClient backendClient){
+    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient){
         this.commandMap = commandMap;
         this.eventWaiter = eventWaiter;
+        this.paginatorManager = paginatorManager;
         this.backendClient = backendClient;
     }
 
@@ -137,7 +140,7 @@ public class MessageHandler {
         }
         args.remove(0);
         // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter));
+        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager));
     }
 
     public void processUpdate(GuildMessageUpdateEvent event){

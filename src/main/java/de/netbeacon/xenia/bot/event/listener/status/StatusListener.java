@@ -28,12 +28,12 @@ public class StatusListener extends ListenerAdapter {
     private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
 
     @Override
-    public void onResume(@NotNull ResumedEvent event) {
+    public void onResumed(@NotNull ResumedEvent event) {
         logger.debug("Shard Resumed: "+event.getJDA().getShardInfo().getShardString());
     }
 
     @Override
-    public void onReconnect(@NotNull ReconnectedEvent event) {
+    public void onReconnected(@NotNull ReconnectedEvent event) {
         logger.debug("Shard Reconnected: "+event.getJDA().getShardInfo().getShardString());
     }
 

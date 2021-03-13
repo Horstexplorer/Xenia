@@ -23,11 +23,13 @@ import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
+import de.netbeacon.xenia.bot.utils.paginator.Page;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.apache.commons.collections4.ListUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Global help command
@@ -63,24 +65,31 @@ public class CMDHelp extends Command {
             current = current.getParent();
         }
         String commandPath = commandPathBuilder.toString().trim();
-        // build help page
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
-        StringBuilder help = new StringBuilder().append("```");
-        for(Map.Entry<String, Command> entry : (parent != null)?parent.getChildCommands().entrySet():commandMap.entrySet()){
-            Command c = entry.getValue();
-            help.append(commandPath).append(" ").append(c.getAlias()).append(" ");
-            if(c.isCommandHandler()){
-                help.append("#").append(" ");
-            }else{
-                for(CmdArgDef s : c.getCommandArgs()){
-                    help.append("<").append(s.getName()).append(">").append(" ");
+        // calculate number of pages
+        var commandEntries = ((parent != null) ? parent.getChildCommands().entrySet() : commandMap.entrySet());
+        var cmdPerPage = 5;
+        var subLists = ListUtils.partition(new ArrayList<>(commandEntries), cmdPerPage);
+        ArrayList<Page> pages = new ArrayList<>();
+        for(var subList : subLists){
+            EmbedBuilder embedBuilder = EmbedBuilderFactory
+                    .getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
+            for(var cmdEntry : subList){
+                Command c = cmdEntry.getValue();
+                StringBuilder commandCallBuilder = new StringBuilder()
+                        .append(commandPath).append(" ")
+                        .append(c.getAlias()).append(" ");
+                if(c.isCommandHandler()){
+                    commandCallBuilder.append("#");
+                }else{
+                    for(CmdArgDef s : c.getCommandArgs()){
+                        commandCallBuilder.append("<").append(s.getName()).append(">").append(" ");
+                    }
                 }
+                embedBuilder.addField(commandCallBuilder.toString(), c.getDescription(translationPackage), false);
             }
-            help.append("-").append(" ").append(c.getDescription(translationPackage)).append("\n");
+            pages.add(new Page(embedBuilder.build()));
         }
-        help.append("```");
-        embedBuilder.addField(translationPackage.getTranslation(getClass().getName()+".response.field.1.title"), help.toString(), false);
         // send result
-        event.getChannel().sendMessage(translationPackage.getTranslation(getClass().getName()+".response.title")+"\n"+help.toString()).queue();
+        commandEvent.getPaginatorManager().createPaginator(event.getChannel(), event.getAuthor(), pages);
     }
 }

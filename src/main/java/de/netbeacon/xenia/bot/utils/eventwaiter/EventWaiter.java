@@ -18,7 +18,9 @@ package de.netbeacon.xenia.bot.utils.eventwaiter;
 
 import net.dv8tion.jda.api.events.GenericEvent;
 
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.LinkedList;
+import java.util.concurrent.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -26,7 +28,14 @@ import java.util.function.Predicate;
  */
 public class EventWaiter {
 
-    private final ConcurrentHashMap<Package<?>, Integer> eventList = new ConcurrentHashMap<>();
+    private final LinkedList<Package<?>> eventList = new LinkedList<>();
+    private final ExecutorService asyncExecutor;
+    private final ScheduledExecutorService asyncDeScheduler;
+
+    public EventWaiter(ExecutorService asyncExecutor, ScheduledExecutorService asyncDeScheduler){
+        this.asyncExecutor = asyncExecutor;
+        this.asyncDeScheduler = asyncDeScheduler;
+    }
 
     /**
      * Waits for a specific event to happen, returns the event when detected
@@ -40,14 +49,30 @@ public class EventWaiter {
      */
     public <T extends GenericEvent> T waitFor(Class<T> eventClassToWait, Predicate<T> condition, long timeout) throws Exception {
         Package<T> tPackage = new Package<>(eventClassToWait, condition);
-        eventList.put(tPackage, 0);
+        eventList.add(tPackage);
         long l = System.currentTimeMillis();
         synchronized (tPackage){ tPackage.wait(timeout); }
         eventList.remove(tPackage);
-        if(l+timeout-1 < System.currentTimeMillis()){ // the 1ms diff makes it a lot easier to detect a timeout (but also a bit more likely to get it wrong)
-            return null;
+        if(tPackage.getEvent() == null){
+            throw new TimeoutException("Event wait timed out after "+timeout+" ms");
         }
         return tPackage.getEvent();
+    }
+
+    public <T extends GenericEvent> void executeWhen(Class<T> eventClassToWait, Predicate<T> condition, long timeout, Consumer<T> onSuccess){
+        executeWhen(eventClassToWait, condition, timeout, onSuccess, null);
+    }
+
+    public <T extends GenericEvent> void executeWhen(Class<T> eventClassToWait, Predicate<T> condition, long timeout, Consumer<T> onSuccess, Consumer<Exception> onFailure){
+        Package<T> tPackage = new Package<>(eventClassToWait, condition, onSuccess, onFailure);
+        eventList.add(tPackage);
+        tPackage.setDeSchedulerFuture(
+                asyncDeScheduler.schedule(() -> {
+                    if(tPackage.getFailureConsumer() != null){
+                        asyncExecutor.execute(() -> tPackage.getFailureConsumer().accept(new TimeoutException("Event wait timed out after "+timeout+" ms")));
+                    }
+                }, timeout, TimeUnit.MILLISECONDS)
+        );
     }
 
     /**
@@ -58,12 +83,17 @@ public class EventWaiter {
      * @return true if something has been waiting for this event
      */
     public <T extends GenericEvent> boolean waitingOnThis(T event){
-        for(Package<?> p : eventList.keySet()){
+        boolean wasWaiting = false;
+        for(Package<?> p : new LinkedList<>(eventList)){
             if(p.tryFinish(event)){
-                return true;
+                if(p.isAsync() && p.getSuccessConsumer() != null){
+                    eventList.remove(p);
+                    asyncExecutor.execute(() -> p.getSuccessConsumer().accept(event));
+                }
+                wasWaiting =  true;
             }
         }
-        return false;
+        return wasWaiting;
     }
 
     /**
@@ -72,9 +102,15 @@ public class EventWaiter {
      * @param <E>
      */
     public static class Package<E extends GenericEvent>{
+
         private final Class<E> classToWait;
         private final Predicate<E> condition;
         private E event;
+
+        private final boolean isAsync;
+        private Consumer<E> onSuccess;
+        private Consumer<Exception> onFailure;
+        private Future<?> cancelFuture = null;
 
         /**
          * Creates a new object of this class
@@ -85,6 +121,21 @@ public class EventWaiter {
         protected Package(Class<E> classToWait, Predicate<E> condition){
             this.classToWait = classToWait;
             this.condition = condition;
+            this.isAsync = false;
+        }
+
+        /**
+         * Creates a new object of this class
+         *
+         * @param classToWait wait for objects of this class
+         * @param condition to check wether the object is the desired one
+         */
+        protected Package(Class<E> classToWait, Predicate<E> condition, Consumer<E> onSuccess, Consumer<Exception> onFailure){
+            this.classToWait = classToWait;
+            this.condition = condition;
+            this.isAsync = true;
+            this.onSuccess = onSuccess;
+            this.onFailure = onFailure;
         }
 
         /**
@@ -94,10 +145,11 @@ public class EventWaiter {
          * @return true on success
          */
         @SuppressWarnings({"unchecked"})
-        public boolean tryFinish(GenericEvent event){
-            if(classToWait == event.getClass()){
+        public synchronized boolean tryFinish(GenericEvent event){
+            if(classToWait == event.getClass() && this.event == null){
                 if(condition.test((E) event)){
                     this.event = (E) event;
+                    if(this.cancelFuture != null) cancelFuture.cancel(true);
                     this.notify();
                     return true;
                 }
@@ -110,8 +162,40 @@ public class EventWaiter {
          *
          * @return event
          */
-        public E getEvent(){
+        public synchronized E getEvent(){
             return event;
+        }
+
+        public void setDeSchedulerFuture(Future<?> future){
+            this.cancelFuture = future;
+        }
+
+        /**
+         * Whether or not this is wants async execution
+         *
+         * @return boolean
+         */
+        public boolean isAsync() {
+            return isAsync;
+        }
+
+        /**
+         * Returns the success consumer
+         *
+         * @return consumer
+         */
+        @SuppressWarnings({"unchecked"})
+        public Consumer<GenericEvent> getSuccessConsumer() {
+            return (Consumer<GenericEvent>) onSuccess;
+        }
+
+        /**
+         * Returns the failure consumer
+         *
+         * @return consumer
+         */
+        public Consumer<Exception> getFailureConsumer() {
+            return onFailure;
         }
     }
 }

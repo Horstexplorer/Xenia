@@ -36,6 +36,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
+import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
@@ -51,6 +52,7 @@ import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class XeniaCore {
 
@@ -60,6 +62,9 @@ public class XeniaCore {
     private final XeniaBackendClient xeniaBackendClient;
     private final ShardManager shardManager;
     private final EventWaiter eventWaiter;
+
+    private final PaginatorManager paginatorManager;
+
     private final long ownerId;
     
     private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
@@ -67,6 +72,15 @@ public class XeniaCore {
     private XeniaCore() throws LoginException, IOException {
         // shutdown hook
         ShutdownHook shutdownHook = new ShutdownHook();
+        // system exit helper
+        class SEH implements IShutdown {
+            @Override
+            public void onShutdown() throws Exception {
+                TimeUnit.MILLISECONDS.sleep(2);
+                System.exit(0);
+            }
+        }
+        shutdownHook.addShutdownAble(new SEH());
         // load config
         logger.info("Loading Config...");
         config = new Config(new File("./xenia/config/sys.config"));
@@ -89,9 +103,10 @@ public class XeniaCore {
 
         // setup other things
         logger.info("Preparing Other Things...");
-        eventWaiter = new EventWaiter(); // Event Waiter
         shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
         shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
+        eventWaiter = new EventWaiter(SharedExecutor.getInstance().getScheduledExecutor(), SharedExecutor.getInstance().getScheduledExecutor()); // Event Waiter
+        paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
         shutdownHook.addShutdownAble(D43Z1Imp.getInstance(true));
@@ -112,8 +127,9 @@ public class XeniaCore {
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(xeniaBackendClient, eventWaiter),
-                        new GuildReactionListener(eventWaiter)
+                        new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager),
+                        new GuildReactionListener(eventWaiter),
+                        paginatorManager.getListener()
                 );
         if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
             builder
@@ -172,6 +188,10 @@ public class XeniaCore {
 
     public EventWaiter getEventWaiter(){
         return eventWaiter;
+    }
+
+    public PaginatorManager getPaginatorManager(){
+        return paginatorManager;
     }
 
     public JDA getShardByGuildId(long guildId){
