@@ -70,6 +70,7 @@ public class PaginatorManager implements IShutdown {
                     throw new TimeoutException();
                 }
             }
+            creationRunning.put(user.getIdLong(), false);
             // remove existing
             Paginator old = getPaginatorByUser(user.getIdLong());
             if(old != null){
