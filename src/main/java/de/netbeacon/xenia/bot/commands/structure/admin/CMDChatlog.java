@@ -59,7 +59,7 @@ public class CMDChatlog extends AdminCommand {
                 .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
                 .put("channelId", bChannel.getChannelId())
                 .put("messages", jsonArray);
-        messages.stream().forEach(message -> {
+        messages.forEach(message -> {
             var json = message.asJSON();
             json.remove("channelId");
             json.remove("guildId");
