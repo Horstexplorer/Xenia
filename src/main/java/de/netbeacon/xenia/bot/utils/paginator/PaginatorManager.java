@@ -42,6 +42,8 @@ public class PaginatorManager implements IShutdown {
 
     private final ConcurrentHashMap<Long, Boolean> creationRunning = new ConcurrentHashMap<>();
 
+    private static final long EST_LIFETIME = 1000 * 30;
+
     private final ScheduledFuture<?> cleaner;
     private static final long CLEAN_INTERVAL = 1000;
 
@@ -75,7 +77,7 @@ public class PaginatorManager implements IShutdown {
             // create new
             Paginator paginator = new Paginator(textChannel.getIdLong(), user.getIdLong(), pages);
             paginator.drawCurrent(textChannel, user, null, (user_, message_) -> {
-                paginatorConcurrentHashMap.put(message_.getIdLong(), new Triplet<>(paginator, user_.getIdLong(), System.currentTimeMillis() + (1000 * 60)));
+                paginatorConcurrentHashMap.put(message_.getIdLong(), new Triplet<>(paginator, user_.getIdLong(), System.currentTimeMillis() + EST_LIFETIME));
                 userPaginatorConcurrentHashMap.put(user_.getIdLong(), message_.getIdLong());
                 var waiter_ = creationRunning.remove(user_.getIdLong());
                 synchronized (waiter_){ waiter_.notify(); }

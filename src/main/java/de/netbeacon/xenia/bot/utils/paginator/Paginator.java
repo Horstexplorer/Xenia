@@ -30,6 +30,7 @@ public class Paginator {
     private long messageId = -1;
     private final long userId;
     private final List<Page> pages;
+    private boolean needsRedraw;
     private int position;
 
     public Paginator(long channelId, long userId, List<Page> pages){
@@ -38,7 +39,7 @@ public class Paginator {
         this.pages = pages;
     }
 
-    protected void link(long messageId){
+    protected synchronized void link(long messageId){
         this.messageId = messageId;
     }
 
@@ -58,13 +59,17 @@ public class Paginator {
         }
     }
 
-    public void movePosition(Move move){
+    public synchronized void movePosition(Move move){
+        var tmp = position;
         if(position + move.getI() < 0){
             position = pages.size() - 1;
         }else if(position + move.getI() >= pages.size()){
             position = 0;
         }else {
             position += move.getI();
+        }
+        if(position != tmp){
+            needsRedraw = true;
         }
     }
 
@@ -80,24 +85,26 @@ public class Paginator {
         return channelId;
     }
 
-    public Page getPage(){
+    public synchronized Page getPage(){
         return pages.get(position);
     }
 
-    public void drawCurrent(TextChannel textChannel, User user, MessageReaction.ReactionEmote reactionEmote){
+    public synchronized void drawCurrent(TextChannel textChannel, User user, MessageReaction.ReactionEmote reactionEmote){
         drawCurrent(textChannel, user, reactionEmote, null, null);
     }
 
-    public void drawCurrent(TextChannel textChannel, User user, MessageReaction.ReactionEmote reactionEmote, BiConsumer<User, Message> then, BiConsumer<User, Throwable> thenNot){
+    public synchronized void drawCurrent(TextChannel textChannel, User user, MessageReaction.ReactionEmote reactionEmote, BiConsumer<User, Message> then, BiConsumer<User, Throwable> thenNot){
         if(textChannel.getIdLong() != channelId){
             return;
         }
         if(messageId < 0){
             textChannel.sendMessage(getPage().getAsMessageEmbed()).queue(message -> {
                 link(message.getIdLong());
-                message.addReaction(PaginatorManager.NEXT).queue();
-                message.addReaction(PaginatorManager.PREVIOUS).queue();
-                message.addReaction(PaginatorManager.CLOSE).queue();
+                if(pages.size() > 1){
+                    message.addReaction(PaginatorManager.NEXT).queue();
+                    message.addReaction(PaginatorManager.PREVIOUS).queue();
+                    message.addReaction(PaginatorManager.CLOSE).queue();
+                }
                 if(then != null){
                     then.accept(user, message);
                 }
@@ -106,7 +113,8 @@ public class Paginator {
                     thenNot.accept(user, throwable);
                 }
             });
-        }else{
+        }else if(needsRedraw){
+            needsRedraw = false;
             textChannel.editMessageById(messageId, getPage().getAsMessageEmbed()).queue(message -> {
                 if(reactionEmote != null && user != null){
                     if(reactionEmote.isEmoji()){
