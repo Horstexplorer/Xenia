@@ -56,17 +56,6 @@ public class CMDD43Z1 extends AdminCommand {
         try{
             D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
             Eval eval = d43Z1Imp.getEval();
-            // get stats
-            long queueLength = eval.getQueueLength();
-            long getAVGQueueDuration = eval.getQueueTimeAVGMs();
-            float getAVGEvalTime = eval.getEvalTimeAVGNs()/(float)1000000;
-            commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
-                    .addField("Current Queue Size", String.valueOf(queueLength), true)
-                    .addField("AVG Queue Duration", getAVGQueueDuration+"ms", true)
-                    .addField("AVG Eval Duration", getAVGEvalTime+"ms", true)
-                    .build()
-            ).queue();
             EvalRequest evalRequest = new EvalRequest(d43Z1Imp.getContextPoolMaster(), d43Z1Imp.getContentMatchBufferFor(commandEvent.getEvent().getAuthor().getIdLong()), new Content(inputA.getValue()),
                     evalResult -> {
                         if(evalResult.ok()){

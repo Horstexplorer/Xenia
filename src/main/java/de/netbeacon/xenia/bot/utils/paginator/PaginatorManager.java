@@ -89,9 +89,19 @@ public class PaginatorManager implements IShutdown {
                 synchronized (waiter_){ waiter_.notify(); }
             });
         } catch (InterruptedException | TimeoutException ignore) {
-            ignore.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
+        }finally {
+            reentrantLock.unlock();
+        }
+    }
+
+    public void usePaginator(Paginator paginator){
+        try {
+            reentrantLock.lock();
+            var paginatorTriplet = paginatorConcurrentHashMap.get(paginator.getMessageId());
+            if(paginatorTriplet == null){
+                return;
+            }
+            paginatorConcurrentHashMap.put(paginator.getMessageId(), new Triplet<>(paginatorTriplet.getValue1(), paginatorTriplet.getValue2(), paginatorTriplet.getValue3() + EST_LIFETIME));
         }finally {
             reentrantLock.unlock();
         }
@@ -99,13 +109,17 @@ public class PaginatorManager implements IShutdown {
 
     public Paginator getPaginatorByMessage(long messageId){
         var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
-        if(paginatorTriplet == null) return null;
+        if(paginatorTriplet == null){
+            return null;
+        }
         return paginatorTriplet.getValue1();
     }
 
     public Paginator getPaginatorByUser(long userId){
         var messageId = userPaginatorConcurrentHashMap.get(userId);
-        if(messageId == null) return null;
+        if(messageId == null){
+            return null;
+        }
         return getPaginatorByMessage(messageId);
     }
 
@@ -113,7 +127,9 @@ public class PaginatorManager implements IShutdown {
         try{
             reentrantLock.lock();
             var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
-            if(paginatorTriplet == null) return;
+            if(paginatorTriplet == null){
+                return;
+            }
             paginatorConcurrentHashMap.remove(messageId);
             userPaginatorConcurrentHashMap.remove(paginatorTriplet.getValue2());
         }finally {
@@ -149,6 +165,7 @@ public class PaginatorManager implements IShutdown {
             if(paginator == null || paginator.getUserId() != event.getUserIdLong() || !event.getReactionEmote().isEmoji()){
                 return;
             }
+            paginatorManager.usePaginator(paginator);
             switch (event.getReactionEmote().getEmoji()){
                 case NEXT: {
                     paginator.movePosition(Paginator.Move.NEXT);
