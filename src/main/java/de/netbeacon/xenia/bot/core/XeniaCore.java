@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.core;
 
+import de.netbeacon.d43z.one.objects.base.ContentContext;
 import de.netbeacon.utils.config.Config;
 import de.netbeacon.utils.shutdownhook.IShutdown;
 import de.netbeacon.utils.shutdownhook.ShutdownHook;
@@ -53,6 +54,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class XeniaCore {
 
@@ -109,9 +111,17 @@ public class XeniaCore {
         paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
-        shutdownHook.addShutdownAble(D43Z1Imp.getInstance(true));
         xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
         xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
+        // d43z1
+        logger.info("Preparing D43Z1...");
+        D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
+        AtomicLong atomicLong = new AtomicLong(0);
+        d43z1.getContextPoolMaster().getContentContexts().stream()
+                .map(ContentContext::getContentShards)
+                .forEach(contentShards -> contentShards.forEach(contentShard -> atomicLong.addAndGet(contentShard.getOrderedContent().size())));
+        shutdownHook.addShutdownAble(d43z1);
+        logger.info("D43Z1 loaded with "+atomicLong.get()+" lines on master");
         // set up event manager
         logger.info("Preparing Event Manager (Provider)...");
         EventManagerProvider eventManagerProvider = new EventManagerProvider()
