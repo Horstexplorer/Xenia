@@ -20,29 +20,24 @@ import de.netbeacon.d43z.one.eval.Eval;
 import de.netbeacon.d43z.one.eval.io.EvalRequest;
 import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
-import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
-import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_D43Z1_INPUT;
 
-public class CMDD43Z1 extends Command {
+public class CMDD43Z1 extends AdminCommand {
 
     private final Logger logger = LoggerFactory.getLogger(CMDD43Z1.class);
 
@@ -53,42 +48,6 @@ public class CMDD43Z1 extends Command {
                 null,
                 List.of(ADMIN_D43Z1_INPUT)
         );
-    }
-
-    @Override
-    public void execute(List<String> args, CommandEvent commandEvent) {
-        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
-        if(translationPackage == null){
-            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
-            return;
-        }
-        // check required args
-        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
-        if(!cmdArgs.verify()){
-            // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
-            return;
-        }
-        if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
-            // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
-            return;
-        }
-        if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
-            // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage,false)).queue();
-            return;
-        }
-        // everything alright
-        onExecution(cmdArgs, commandEvent, translationPackage);
-    }
-
-    @Override
-    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
-                .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this")
-                .build();
     }
 
     @Override

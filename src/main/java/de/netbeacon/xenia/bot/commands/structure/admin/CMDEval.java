@@ -16,12 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.structure.admin;
 
-import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -39,7 +36,6 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -51,41 +47,13 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.CodeBlo
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.JavaClass;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
-public class CMDEval extends Command {
+public class CMDEval extends AdminCommand {
 
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     private final Logger logger = LoggerFactory.getLogger(CMDEval.class);
 
     public CMDEval(){
         super("eval", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
-    }
-
-    @Override
-    public void execute(List<String> args, CommandEvent commandEvent) {
-        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
-        if(translationPackage == null){
-            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
-            return;
-        }
-        // check required args
-        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
-        if(!cmdArgs.verify()){
-            // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue(s->{s.delete().queueAfter(10, TimeUnit.SECONDS);}, e->{});
-            return;
-        }
-        if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
-            // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue(s->{},e->{});
-            return;
-        }
-        if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
-            // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue(s->{},e->{});
-            return;
-        }
-        // everything alright
-        onExecution(cmdArgs, commandEvent, translationPackage);
     }
 
     @Override
@@ -206,14 +174,6 @@ public class CMDEval extends Command {
         }finally {
             logger.info("! EVAL FINISHED ! Engine: Java");
         }
-    }
-
-    @Override
-    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
-                .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this")
-                .build();
     }
 
     private MessageEmbed getRequestEmbed(String engine, String code){
