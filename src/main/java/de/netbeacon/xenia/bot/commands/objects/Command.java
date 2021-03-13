@@ -36,6 +36,8 @@ import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.List;
@@ -54,6 +56,7 @@ public abstract class Command {
     private final List<CmdArgDef> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
     private boolean isHybrid = false;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * Creates a new instance of the command as command
@@ -277,6 +280,7 @@ public abstract class Command {
             try{
                 onExecution(cmdArgs, commandEvent, translationPackage);
             }catch (Exception e){
+                logger.error("Unhandled exception: ", e);
                 commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
             }
         }else{
