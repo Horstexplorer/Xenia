@@ -193,7 +193,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Stream notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Export a log of the encrypted cached messages for a given channel in the current guild",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Ask who is connected to the backends secondary socket",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "Ask who is connected to the backends secondary socket",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Can be used to evaluate code",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Displays stats of all instances connected to the secondary socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Displays some statistics about this bot",
@@ -397,7 +397,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Wequested stweam notifications",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Expowt a wog of the encwypted cached messages fow a given channew in the cuwwent guiwd",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Awsk who iws connected tuwu the backends secondawy socket",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "Awsk who iws connected tuwu the backends secondawy socket",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Cawn be used tuwu evawuate code",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Dispways stats of aww instances connected tuwu the secondawy socket of the backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Dispways sowme statistics abouwt thiws bot",
@@ -601,7 +601,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Angeforderte Stream-Benachrichtigungen",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportiert ein Protokoll der verschlüsselten zwischengespeicherten Nachrichten für einen bestimmten Kanal in der aktuellen Gilde",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Kann zur Auswertung von Code verwendet werden",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Zeigt die Statistiken aller Instanzen an, die mit dem sekundären Socket des Backends verbunden sind",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Zeigt einige Statistiken über diesen Bot an",
@@ -805,7 +805,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notifications de flux demandées",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exporter un journal des messages cryptés mis en cache pour un canal donné dans la guilde actuelle",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Demandez qui est connecté à la prise secondaire des backends",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "Demandez qui est connecté à la prise secondaire des backends",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Peut être utilisé pour évaluer le code",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Affiche les statistiques de toutes les instances connectées à la prise secondaire du backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Affiche quelques statistiques sur ce bot",
@@ -1009,7 +1009,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "Notificaciones de transmisión solicitadas",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "Exportar un registro de los mensajes en caché cifrados para un canal determinado en el gremio actual",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "Pregunte quién está conectado al conector secundario de backends",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "Pregunte quién está conectado al conector secundario de backends",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "Puede usarse para evaluar código",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "Muestra estadísticas de todas las instancias conectadas al socket secundario del backend",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "Muestra algunas estadísticas sobre este bot",
@@ -1213,7 +1213,7 @@
       "de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch.response.success.title": "ストリーム通知",
 
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDChatlog.description": "現在のギルドにある特定のチャンネルの暗号化されたキャッシュされたメッセージのログをエクスポートする",
-      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentity.description": "バックエンドのセカンダリソケットに誰が接続されているかを聞く",
+      "de.netbeacon.xenia.bot.commands.structure.admin.CMDClientIdentify.description": "バックエンドのセカンダリソケットに誰が接続されているかを聞く",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDEval.description": "コードの評価に使用できる",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDGlobalInfo.description": "バックエンドのセカンダリソケットに接続されている全てのインスタンスの統計情報を表示します。",
       "de.netbeacon.xenia.bot.commands.structure.admin.CMDInfo.description": "このボットに関する統計情報を表示します。",
