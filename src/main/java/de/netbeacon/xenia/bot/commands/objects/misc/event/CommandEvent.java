@@ -19,6 +19,7 @@ package de.netbeacon.xenia.bot.commands.objects.misc.event;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -30,17 +31,19 @@ public class CommandEvent {
     private final BackendDataPack backendDataPack;
     private final XeniaBackendClient backendClient;
     private final EventWaiter eventWaiter;
+    private final PaginatorManager paginatorManager;
 
     /**
      * Creates a new instance of this class
      *
      * @param event GuildMessageReceivedEvent
      */
-    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter){
+    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager){
         this.event = event;
         this.backendDataPack = backendDataPack;
         this.backendClient = backendClient;
         this.eventWaiter = eventWaiter;
+        this.paginatorManager = paginatorManager;
     }
 
     /**
@@ -77,6 +80,10 @@ public class CommandEvent {
      */
     public EventWaiter getEventWaiter() {
         return eventWaiter;
+    }
+
+    public PaginatorManager getPaginatorManager() {
+        return paginatorManager;
     }
 
     public static class BackendDataPack{

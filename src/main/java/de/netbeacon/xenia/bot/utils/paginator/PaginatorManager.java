@@ -72,8 +72,10 @@ public class PaginatorManager implements IShutdown {
             }
             // remove existing
             Paginator old = getPaginatorByUser(user.getIdLong());
-            paginatorConcurrentHashMap.remove(old.getMessageId());
-            userPaginatorConcurrentHashMap.remove(old.getUserId());
+            if(old != null){
+                paginatorConcurrentHashMap.remove(old.getMessageId());
+                userPaginatorConcurrentHashMap.remove(old.getUserId());
+            }
             // create new
             Paginator paginator = new Paginator(textChannel.getIdLong(), user.getIdLong(), pages);
             paginator.drawCurrent(textChannel, user, null, (user_, message_) -> {
@@ -86,7 +88,10 @@ public class PaginatorManager implements IShutdown {
                 synchronized (waiter_){ waiter_.notify(); }
             });
         } catch (InterruptedException | TimeoutException ignore) {
-        } finally {
+            ignore.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }finally {
             reentrantLock.unlock();
         }
     }
@@ -99,6 +104,7 @@ public class PaginatorManager implements IShutdown {
 
     public Paginator getPaginatorByUser(long userId){
         var messageId = userPaginatorConcurrentHashMap.get(userId);
+        if(messageId == null) return null;
         return getPaginatorByMessage(messageId);
     }
 

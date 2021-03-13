@@ -101,8 +101,8 @@ public class Paginator {
             textChannel.sendMessage(getPage().getAsMessageEmbed()).queue(message -> {
                 link(message.getIdLong());
                 if(pages.size() > 1){
-                    message.addReaction(PaginatorManager.NEXT).queue();
                     message.addReaction(PaginatorManager.PREVIOUS).queue();
+                    message.addReaction(PaginatorManager.NEXT).queue();
                     message.addReaction(PaginatorManager.CLOSE).queue();
                 }
                 if(then != null){

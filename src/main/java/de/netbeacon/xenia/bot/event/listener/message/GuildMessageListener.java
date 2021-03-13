@@ -30,6 +30,7 @@ import de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag;
 import de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch;
 import de.netbeacon.xenia.bot.event.handler.command.MessageHandler;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -45,7 +46,7 @@ public class GuildMessageListener extends ListenerAdapter {
     private final EventWaiter eventWaiter;
     private final MessageHandler commandHandler;
 
-    public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter){
+    public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager){
         this.eventWaiter = eventWaiter;
 
         HashMap<String, Command> commandMap = new HashMap<>();
@@ -65,7 +66,7 @@ public class GuildMessageListener extends ListenerAdapter {
 
         register.accept(new CMDInfo());
 
-        commandHandler = new MessageHandler(commandMap, eventWaiter, backendClient);
+        commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient);
     }
 
     @Override

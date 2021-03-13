@@ -127,7 +127,7 @@ public class XeniaCore {
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(xeniaBackendClient, eventWaiter),
+                        new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager),
                         new GuildReactionListener(eventWaiter),
                         paginatorManager.getListener()
                 );
