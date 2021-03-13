@@ -18,60 +18,25 @@ package de.netbeacon.xenia.bot.commands.structure.admin;
 
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
-import de.netbeacon.xenia.bot.commands.objects.Command;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArg;
-import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgFactory;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.core.XeniaCore;
-import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.hastebin.HastebinUtil;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_CHANNEL;
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_LIMIT;
 
-public class CMDChatlog extends Command {
+public class CMDChatlog extends AdminCommand {
 
     public CMDChatlog() {
         super("chatlog", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
-    }
-
-    @Override
-    public void execute(List<String> args, CommandEvent commandEvent) {
-        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
-        if(translationPackage == null){
-            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
-            return;
-        }
-        // check required args
-        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
-        if(!cmdArgs.verify()){
-            // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
-            return;
-        }
-        if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
-            // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
-            return;
-        }
-        if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
-            // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue();
-            return;
-        }
-        // everything alright
-        onExecution(cmdArgs, commandEvent, translationPackage);
     }
 
     @Override
@@ -94,7 +59,7 @@ public class CMDChatlog extends Command {
                 .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
                 .put("channelId", bChannel.getChannelId())
                 .put("messages", jsonArray);
-        messages.stream().forEach(message -> {
+        messages.forEach(message -> {
             var json = message.asJSON();
             json.remove("channelId");
             json.remove("guildId");
@@ -108,13 +73,5 @@ public class CMDChatlog extends Command {
         }catch (Exception e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: "+jsonString.length()+")")).queue();
         }
-    }
-
-    @Override
-    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
-                .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this")
-                .build();
     }
 }
