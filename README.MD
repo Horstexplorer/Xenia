@@ -70,6 +70,22 @@ Xenia is able to log messages to find out if something has been edited or delete
 ## Role Settings
 It is possible to create and assign virtual roles to a member to use the virtual permission system of Xenia.  
 This feature hasnt been implemented yet
+## Chatbot
+### General
+Will setup the chatbot in the mentioned channel or create a new one. If an existing setup already exists this will turn the feature off again
+```~chatbot setup #optional_channel_mention```
+### Modes & Learning
+You are able to customize the chat experience by swapping out or extending the existing datasets with your own chats
+```~chatbot learning mode MODE```
+Available modes are
+```
+MASTER_ONLY - only use the existing datasets in chat
+MIX - extend the existing datasets with your own chats
+SELF_LEARNING_ONLY - only use your datasets
+```
+To let Xenia know where to fetch your chats from use (will default to the current channel)
+```~chatbot learning channel_link true/false #optional_channel_mention```
+Updates made to either of these settings above might take a while to take effect
 ___
 Some features might not work properly at the moment or have not yet been implemented
 

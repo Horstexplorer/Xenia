@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.objects.misc.event;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
+import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -32,18 +33,20 @@ public class CommandEvent {
     private final XeniaBackendClient backendClient;
     private final EventWaiter eventWaiter;
     private final PaginatorManager paginatorManager;
+    private final D43Z1ContextPoolManager poolManager;
 
     /**
      * Creates a new instance of this class
      *
      * @param event GuildMessageReceivedEvent
      */
-    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager){
+    public CommandEvent(GuildMessageReceivedEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager poolManager){
         this.event = event;
         this.backendDataPack = backendDataPack;
         this.backendClient = backendClient;
         this.eventWaiter = eventWaiter;
         this.paginatorManager = paginatorManager;
+        this.poolManager = poolManager;
     }
 
     /**
@@ -84,6 +87,10 @@ public class CommandEvent {
 
     public PaginatorManager getPaginatorManager() {
         return paginatorManager;
+    }
+
+    public D43Z1ContextPoolManager getPoolManager() {
+        return poolManager;
     }
 
     public static class BackendDataPack{

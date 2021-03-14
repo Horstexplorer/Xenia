@@ -53,6 +53,7 @@ public class CMDInfo extends Command {
                 EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
                         .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getD43Z1Settings().getBits().toArray()), false)
                         .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), channel.getMetaChannelName()+"("+channel.getChannelId()+")",false)
+                        .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), Arrays.toString(commandEvent.getBackendDataPack().getbGuild().getD43Z1Mode().getBits().toArray()), false)
                         .build()
         ).queue();
     }
