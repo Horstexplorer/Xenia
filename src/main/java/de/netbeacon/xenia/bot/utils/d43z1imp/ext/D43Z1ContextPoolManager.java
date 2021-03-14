@@ -70,6 +70,9 @@ public class D43Z1ContextPoolManager {
                 contextPools.add(d43Z1Imp.getContextPoolMaster());
             }else if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.SELF_LEARNING_ONLY)){
                 contextPools.add(new ContextPool("channel_pool_"+guild.getId(), getContextFor(guild.getChannelCache().getDataMap().values())));
+            }else{
+                // for when something gone big bad
+                contextPools.add(d43Z1Imp.getContextPoolMaster());
             }
             CombinedContextPool combinedContextPool = new CombinedContextPool("guild_pool_"+guild.getId(), contextPools);
             guildPoolConcurrentHashMap.put(guild.getId(), new Pair<>(combinedContextPool, System.currentTimeMillis()));
