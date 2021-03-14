@@ -31,6 +31,7 @@ import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
+import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.misc.listener.GuildLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
@@ -111,8 +112,6 @@ public class XeniaCore {
         paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
-        xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance()))); // insert notification listener on its own
-        xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
         // d43z1
         logger.info("Preparing D43Z1...");
         D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
@@ -121,7 +120,11 @@ public class XeniaCore {
                 .map(ContentContext::getContentShards)
                 .forEach(contentShards -> contentShards.forEach(contentShard -> atomicLong.addAndGet(contentShard.getOrderedContent().size())));
         shutdownHook.addShutdownAble(d43z1);
+        D43Z1ContextPoolManager contextPoolManager = new D43Z1ContextPoolManager(d43z1);
         logger.info("D43Z1 loaded with "+atomicLong.get()+" lines on master");
+        // drop in event listeners
+        xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance())), contextPoolManager.getListener()); // insert notification listener on its own
+        xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
         // set up event manager
         logger.info("Preparing Event Manager (Provider)...");
         EventManagerProvider eventManagerProvider = new EventManagerProvider()
@@ -137,7 +140,7 @@ public class XeniaCore {
                 .addEventListeners(
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager),
+                        new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
                         new GuildReactionListener(eventWaiter),
                         paginatorManager.getListener()
                 );

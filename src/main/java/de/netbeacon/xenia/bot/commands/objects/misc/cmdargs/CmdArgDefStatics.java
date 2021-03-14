@@ -93,6 +93,19 @@ public class CmdArgDefStatics {
             .addPredicateDescription("guild prefix, 1-4 chars, optional")
             .buildAllMatch()
             .setOptional(true);
+    // Chatbot settings
+    public static final CmdArgDef<Mention> CB_CHANNEL_ENABLE = new CmdArgDef.Builder<>("enable", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
+            .addPredicateDescription("true or false")
+            .buildAllMatch();
+    public static final CmdArgDef<Mention> CB_CHANNEL_ID_OPTIONAL = new CmdArgDef.Builder<>("channel*", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
+            .addPredicateDescription("channel mention, optional")
+            .buildAllMatch()
+            .setOptional(true);
+    public static final CmdArgDef<Mention> CB_CHATBOT_MODE = new CmdArgDef.Builder<>("mode", Mention.class)
+            .addPredicateDescription("mode "+ Arrays.toString(Guild.D43Z1Mode.Modes.values()))
+            .buildAllMatch();
     // CHANNEL SETTINGS
     public static final CmdArgDef<Mention> CHANNEL_ID_OPTIONAL = new CmdArgDef.Builder<>("channel*", Mention.class)
             .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)

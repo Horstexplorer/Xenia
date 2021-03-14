@@ -29,6 +29,7 @@ import de.netbeacon.xenia.bot.commands.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
+import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
@@ -56,12 +57,14 @@ public class MessageHandler {
     private final XeniaBackendClient backendClient;
     private final PaginatorManager paginatorManager;
     private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
+    private final D43Z1ContextPoolManager contextPoolManager;
 
-    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient){
+    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
         this.commandMap = commandMap;
         this.eventWaiter = eventWaiter;
         this.paginatorManager = paginatorManager;
         this.backendClient = backendClient;
+        this.contextPoolManager = contextPoolManager;
     }
 
     public void processNew(GuildMessageReceivedEvent event){
@@ -82,7 +85,7 @@ public class MessageHandler {
                 try{
                     D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
                     ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-                    IContextPool contextPool = d43Z1Imp.getContextPoolMaster();
+                    IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
                     EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
                             evalResult -> {
                                 if(evalResult.ok()){

@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.structure.chatbot;
+package de.netbeacon.xenia.bot.commands.structure.chatbot.learning;
 
 import de.netbeacon.xenia.bot.commands.objects.CommandGroup;
-import de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning;
 
-public class GROUPChatbot extends CommandGroup {
+public class GROUPLearning extends CommandGroup {
 
-    public GROUPChatbot() {
-        super(null, "chatbot");
-        addChildCommand(new CMDInfo());
-        addChildCommand(new CMDSetup());
-        addChildCommand(new GROUPLearning(this));
+    public GROUPLearning(CommandGroup parent) {
+        super(parent, "learning");
+        addChildCommand(new CMDMode());
+        addChildCommand(new CMDChannelLink());
     }
 }
