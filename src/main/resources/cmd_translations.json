@@ -123,6 +123,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channel has been set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows general information about the chatbot setup",
 
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "Contains commands to control the data used",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "Defines the mode of which the datasets will be used",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "Mode changed successfully! It may take a few minutes for the changes to take effect.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "Failed to change mode.\nAvailable options are: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "Link a channel to be used as data pool for the chatbot",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "Channel linked successfully! It may take a few minutes for the changes to take effect.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "Failed to link channel. Has the maximum number of links been reached or does the channel not exist?",
+
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands to manage chatbot settings for a channel",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.CMDSettings.description": "Update the settings for this guild",
@@ -328,6 +338,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channew has bewn set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows genewaw infowmation abouwt the chatbot setup",
 
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "Contains commands tuwu contwow the data used",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "Defines the mode of which the datasets wiww be used",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "Mode changed successfuwwy! iwt may take a few minutes fow the changes tuwu take effect.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "Faiwed tuwu change mode.\nAvaiwabwe options awe: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "Wink a channew tuwu be used as data poow fow the chatbot",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "Channew winked successfuwwy! iwt may take a few minutes fow the changes tuwu take effect.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "Faiwed tuwu wink channew. Has the maximum numbew of winks bewn weached ow does the channew nowt exist?",
+
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contains commands tuwu manage chatbot settings fow a channew",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.CMDSettings.description": "Update the settings fow thiws guiwd",
@@ -519,6 +539,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot Informationen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Es wurde kein Kanal eingerichtet",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "Enthält Befehle zur Steuerung der verwendeten Daten",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "Definiert den Modus, in dem die Datensätze verwendet werden",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "Modus erfolgreich geändert! Es kann ein paar Minuten dauern, bis die Änderungen wirksam werden.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "Moduswechsel fehlgeschlagen.\nVerfügbare Optionen sind: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "Verknüpfen Sie einen Kanal, der als Datenpool für den Chatbot verwendet werden soll",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "Kanal erfolgreich verlinkt! Es kann ein paar Minuten dauern, bis die Änderungen wirksam werden.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "Der Kanal konnte nicht verknüpft werden. Wurde die maximale Anzahl von Links erreicht oder existiert der Kanal nicht?",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Enthält Befehle zum Verwalten von Chatbot-Einstellungen für einen Kanal",
 
@@ -738,6 +768,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Aucun canal n'a été mis en place",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Affiche des informations générales sur la mise en place du chatbot",
 
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "Contient des commandes permettant de contrôler les données utilisées",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "Définit le mode d'utilisation des jeux de données.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "Le mode a été modifié avec succès ! Les changements peuvent prendre quelques minutes pour prendre effet.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "Échec du changement de mode.\nLes options disponibles sont : %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "Liez un canal qui sera utilisé comme pool de données pour le chatbot.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "La chaîne s'est connectée avec succès ! Les changements peuvent prendre quelques minutes pour être pris en compte.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "Échec de la liaison du canal. Le nombre maximum de liens a-t-il été atteint ou le canal n'existe-t-il pas ?",
+
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contient des commandes pour gérer les paramètres de chatbot d'un canal",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.CMDSettings.description": "Mettre à jour les paramètres de cette guilde",
@@ -943,6 +983,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No se ha establecido ningún canal",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Muestra la configuración general del chatbot",
 
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "Contiene comandos para controlar los datos utilizados",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "Define el modo en que se utilizarán los conjuntos de datos",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "El modo ha cambiado con éxito. Los cambios pueden tardar unos minutos en surtir efecto.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "Fallo en el cambio de modo.\nLas opciones disponibles son: %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "Vincular un canal que se utilizará como reserva de datos para el chatbot",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "¡Canal vinculado con éxito! Los cambios pueden tardar unos minutos en surtir efecto.",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "No se ha podido enlazar el canal. ¿Se ha alcanzado el número máximo de enlaces o el canal no existe?",
+
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "Contiene comandos para gestionar la configuración del chatbot de un canal",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.CMDSettings.description": "Actualiza la configuración de este gremio.",
@@ -1147,6 +1197,16 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "チャットボット情報",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "チャンネルが設定されていない",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "チャットボットの設定に関する一般的な情報を表示します。",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.GROUPLearning.description": "使用するデータを制御するコマンドが含まれている",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.description": "データセットを使用するモードを定義します。",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.success.msg": "モード変更に成功しました。変更が反映されるまでに数分かかることがあります。",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDMode.error.invalid.arg.msg": "モードの変更に失敗しました。\n利用可能なオプションは %0%",
+
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.description": "チャットボットのデータプールとして使用するチャンネルのリンク",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.success.msg": "チャンネルのリンクに成功しました 変更が反映されるまでに数分かかることがあります。",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.learning.CMDChannelLink.error.invalid.arg.msg": "チャネルのリンクに失敗しました。リンク数が上限に達しているのか、チャンネルが存在しないのか。",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot.description": "チャンネルのチャットボット設定を管理するコマンドが含まれています。",
 

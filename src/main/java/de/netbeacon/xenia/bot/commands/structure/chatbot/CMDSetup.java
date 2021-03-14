@@ -31,7 +31,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import java.util.HashSet;
 import java.util.List;
 
-import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ID_OPTIONAL;
+import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CB_CHANNEL_ID_OPTIONAL;
 
 public class CMDSetup extends Command {
 
@@ -40,7 +40,7 @@ public class CMDSetup extends Command {
                 new HashSet<>(List.of(Permission.MANAGE_CHANNEL)),
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CHANNEL_ID_OPTIONAL)
+                List.of(CB_CHANNEL_ID_OPTIONAL)
         );
     }
 
@@ -92,7 +92,7 @@ public class CMDSetup extends Command {
                 // activate for the given channel
                 TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMention.getValue().getId());
                 if(textChannel == null){
-                    throw new RuntimeException();
+                    throw new IllegalArgumentException();
                 }
                 if(textChannel.isNSFW()){
                     try{
