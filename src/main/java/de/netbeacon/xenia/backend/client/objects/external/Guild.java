@@ -41,7 +41,7 @@ public class Guild extends APIDataObject {
     private long creationTimestamp;
     private String preferredLanguage;
     private GuildSettings settings = new GuildSettings(0);
-    private D43Z1Mode d43Z1Mode = new D43Z1Mode(0);
+    private D43Z1Mode d43Z1Mode = new D43Z1Mode(1);
     private String prefix;
     // meta data - initialize with values
     private String metaGuildName = "unknown_name";

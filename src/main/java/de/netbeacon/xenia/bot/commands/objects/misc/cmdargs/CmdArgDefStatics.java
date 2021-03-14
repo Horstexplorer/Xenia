@@ -94,8 +94,7 @@ public class CmdArgDefStatics {
             .buildAllMatch()
             .setOptional(true);
     // Chatbot settings
-    public static final CmdArgDef<Mention> CB_CHANNEL_ENABLE = new CmdArgDef.Builder<>("enable", Mention.class)
-            .predicateAddCompare(Mention::getMentionType, Message.MentionType.CHANNEL, 0)
+    public static final CmdArgDef<Boolean> CB_CHANNEL_ENABLE = new CmdArgDef.Builder<>("enable", Boolean.class)
             .addPredicateDescription("true or false")
             .buildAllMatch();
     public static final CmdArgDef<Mention> CB_CHANNEL_ID_OPTIONAL = new CmdArgDef.Builder<>("channel*", Mention.class)
@@ -103,7 +102,7 @@ public class CmdArgDefStatics {
             .addPredicateDescription("channel mention, optional")
             .buildAllMatch()
             .setOptional(true);
-    public static final CmdArgDef<Mention> CB_CHATBOT_MODE = new CmdArgDef.Builder<>("mode", Mention.class)
+    public static final CmdArgDef<String> CB_CHATBOT_MODE = new CmdArgDef.Builder<>("mode", String.class)
             .addPredicateDescription("mode "+ Arrays.toString(Guild.D43Z1Mode.Modes.values()))
             .buildAllMatch();
     // CHANNEL SETTINGS

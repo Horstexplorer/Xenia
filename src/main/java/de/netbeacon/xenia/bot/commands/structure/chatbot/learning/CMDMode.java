@@ -47,7 +47,7 @@ public class CMDMode extends Command {
     public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
         try{
             CmdArg<String> modeStringArg = args.getByIndex(0);
-            Guild.D43Z1Mode.Modes modeSelect = Guild.D43Z1Mode.Modes.valueOf(modeStringArg.getValue());
+            Guild.D43Z1Mode.Modes modeSelect = Guild.D43Z1Mode.Modes.valueOf(modeStringArg.getValue().toUpperCase());
             Guild g = commandEvent.getBackendDataPack().getbGuild();
             Guild.D43Z1Mode mode = new Guild.D43Z1Mode(0);
             mode.set(modeSelect);
