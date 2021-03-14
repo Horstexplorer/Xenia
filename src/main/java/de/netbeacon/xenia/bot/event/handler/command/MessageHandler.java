@@ -82,10 +82,7 @@ public class MessageHandler {
                 try{
                     D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
                     ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-                    IContextPool contextPool = d43Z1Imp.getContextPoolByUUID(bChannel.getD43Z1CustomContextPoolUUID());
-                    if(contextPool == null){
-                        contextPool = d43Z1Imp.getContextPoolMaster();
-                    }
+                    IContextPool contextPool = d43Z1Imp.getContextPoolMaster();
                     EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
                             evalResult -> {
                                 if(evalResult.ok()){

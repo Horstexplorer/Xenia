@@ -65,6 +65,7 @@ public class HYBRIDGuild extends HybridCommand {
                         .addField(translationPackage.getTranslation(getClass(), "response.field.8.title"), String.valueOf(license.getPerk_MISC_NOTIFICATIONS_C()), true)
                         .addField(translationPackage.getTranslation(getClass(), "response.field.9.title"), String.valueOf(license.getPerk_MISC_TWITCHNOTIFICATIONS_C()), true)
                         .addField(translationPackage.getTranslation(getClass(), "response.field.10.title"), String.valueOf(license.getPerk_CHANNEL_LOGGING_C()), true)
+                        .addField(translationPackage.getTranslation(getClass(), "response.field.11.title"), String.valueOf(license.getPerk_CHANNEL_D43Z1_SELFLEARNING_C()), true)
                         .build()
         ).queue();
     }
