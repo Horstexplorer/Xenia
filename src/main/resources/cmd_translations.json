@@ -118,8 +118,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Allows to set up a channel to chat with Xenia",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "General settings",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Custom context pool uuid",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot information",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channel has been set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows general information about the chatbot setup",
@@ -154,6 +153,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "max notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "max twitch notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "max message logging",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "max self learning channels",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contains commands to manage v roles and v perms",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Roles",
@@ -323,8 +323,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Awwows tuwu set up a channew tuwu chat with xenia",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Genewaw settings",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Custom context poow uuid",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channew id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channew id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot infowmation",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channew has bewn set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows genewaw infowmation abouwt the chatbot setup",
@@ -359,6 +358,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "max notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "max twitch notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "max message wogging",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "max sewf weawning channews",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contains commands tuwu manage v wowes awnd v pewms",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Wowes",
@@ -515,8 +515,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Ermöglicht das Einrichten eines Kanals zum Chatten mit Xenia",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Allgemeine Einstellungen",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Benutzerdefinierter Kontext-Pool uuid",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Kanal id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Kanal id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot Informationen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Es wurde kein Kanal eingerichtet",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an",
@@ -564,6 +563,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "max Benachrichtigungen",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "max Twitch Benachrichtigungen",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "max Nachrichtenprotokollierung",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "max selbstlernende Kanäle",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Enthält Befehle zur Verwaltung von v-Rollen und v-Perms",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Rollen",
@@ -733,8 +733,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Permet de mettre en place un canal pour discuter avec Xenia",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Paramètres généraux",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Pool de contexte personnalisé uuid",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Statistiques sur les chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Aucun canal n'a été mis en place",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Affiche des informations générales sur la mise en place du chatbot",
@@ -769,6 +768,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "max notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "max twitch notifications",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "max message logging",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "canaux d'auto-apprentissage maximum",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contient des commandes pour gérer les v rôles et les v perms",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Rôles",
@@ -938,8 +938,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Permite establecer un canal para chatear con Xenia",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Configuración",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Pool de contextos personalizados uuid",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Channel id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel id",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Configuración general del chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No se ha establecido ningún canal",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Muestra la configuración general del chatbot",
@@ -974,6 +973,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "notificaciones máximas",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "mnotificaciones máxima de twitch",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "registro máximo de mensajes",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "canales de autoaprendizaje máximo",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "Contiene comandos para administrar v roles y v perms",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "Roles",
@@ -1143,8 +1143,7 @@
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDSetup.description": "Xeniaとチャットするためのチャンネルを設定することができます。",
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "一般的な設定",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "カスタムコンテキストプールUUID",
-      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "チャンネル",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "チャンネル",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "チャットボット情報",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "チャンネルが設定されていない",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "チャットボットの設定に関する一般的な情報を表示します。",
@@ -1179,6 +1178,7 @@
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.8.title": "最大通知数",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.9.title": "最大twitchの通知",
       "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.10.title": "最大メッセージロギング",
+      "de.netbeacon.xenia.bot.commands.structure.settings.guild.HYBRIDGuild.response.field.11.title": "マックスセルフラーニングチャンネル",
 
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.description": "v ロールと v パームを管理するコマンドが含まれています。",
       "de.netbeacon.xenia.bot.commands.structure.settings.roles.HYBRIDRoles.response.title": "役割",
