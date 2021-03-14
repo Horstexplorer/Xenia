@@ -18,7 +18,6 @@ package de.netbeacon.xenia.bot.utils.misc.listener;
 
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataEventListener;
-import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataObject;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -30,7 +29,7 @@ import net.dv8tion.jda.api.entities.User;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener {
+public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener<Notification> {
 
     private final TaskManager taskManager;
 
@@ -48,15 +47,14 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
 
     @Override
     public void onRemoval(Long oldKey) {
-        // cancel scheduling (if it hasnt been executed already)
+        // cancel scheduling (if it hasn't been executed already)
         taskManager.cancel(oldKey);
     }
 
     @Override
-    public void onUpdate(APIDataObject apiDataObject) {
-        Notification notification = ((Notification) apiDataObject);
+    public void onUpdate(Notification apiDataObject) {
         // update scheduling
-        taskManager.update(notification.getId(), getRunnable(notification), Math.min(notification.getNotificationTarget()-System.currentTimeMillis(),1));
+        taskManager.update(apiDataObject.getId(), getRunnable(apiDataObject), Math.min(apiDataObject.getNotificationTarget()-System.currentTimeMillis(),1));
     }
 
     private Runnable getRunnable(Notification notification) {
@@ -89,9 +87,9 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
     }
 
     @Override
-    public void onDeletion(APIDataObject apiDataObject) {
+    public void onDeletion(Notification apiDataObject) {
         apiDataObject.removeEventListeners(); // remove listeners from this object if deleted
         // proof check - cancel the task
-        onRemoval(((Notification) apiDataObject).getId());
+        onRemoval((apiDataObject).getId());
     }
 }
