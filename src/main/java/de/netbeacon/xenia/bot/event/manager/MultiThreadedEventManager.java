@@ -24,6 +24,8 @@ import net.dv8tion.jda.api.events.message.guild.GenericGuildMessageEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import net.dv8tion.jda.internal.JDAImpl;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -42,6 +44,8 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
     private final SlidingTimeframeCounter fiveMinutes = new SlidingTimeframeCounter(TimeUnit.MINUTES, 5, 5);
     private final SlidingTimeframeCounter fifteenMinutes = new SlidingTimeframeCounter(TimeUnit.MINUTES, 15, 15);
     private final SlidingTimeframeCounter oneHour = new SlidingTimeframeCounter(TimeUnit.HOURS, 1, 60);
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public MultiThreadedEventManager(){
         this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
@@ -86,15 +90,19 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
 
     @Override
     public void handle(@NotNull GenericEvent event) {
-        lastEvent = System.currentTimeMillis();
-        incrementStats();
-        if(halt.get()) {
-            return;
-        }
-        if(event instanceof GenericGuildMessageEvent) {
-            primaryScalingExecutor.execute(() -> eventConsumer(event));
-        }else{
-            secondaryScalingExecutor.execute(() -> eventConsumer(event));
+        try{
+            lastEvent = System.currentTimeMillis();
+            incrementStats();
+            if(halt.get()) {
+                return;
+            }
+            if(event instanceof GenericGuildMessageEvent) {
+                primaryScalingExecutor.execute(() -> eventConsumer(event));
+            }else{
+                secondaryScalingExecutor.execute(() -> eventConsumer(event));
+            }
+        }catch (Exception e){
+            logger.error("Something rly bad happened while handling an event", e);
         }
     }
 
