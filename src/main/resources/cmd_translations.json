@@ -119,6 +119,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "General settings",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Mode",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot information",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channel has been set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows general information about the chatbot setup",
@@ -334,6 +335,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Genewaw settings",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channew id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Mwode",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot infowmation",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No channew has bewn set up",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Shows genewaw infowmation abouwt the chatbot setup",
@@ -536,6 +538,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Allgemeine Einstellungen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Kanal id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Modus",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Chatbot Informationen",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Es wurde kein Kanal eingerichtet",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an",
@@ -764,6 +767,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Paramètres généraux",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Mode",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Statistiques sur les chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "Aucun canal n'a été mis en place",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Affiche des informations générales sur la mise en place du chatbot",
@@ -979,6 +983,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "Configuración",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "Channel id",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "Modo",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "Configuración general del chatbot",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "No se ha establecido ningún canal",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "Muestra la configuración general del chatbot",
@@ -1194,6 +1199,7 @@
 
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.1.title": "一般的な設定",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.2.title": "チャンネル",
+      "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.field.3.title": "モード",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.success.title": "チャットボット情報",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.response.error.notfound": "チャンネルが設定されていない",
       "de.netbeacon.xenia.bot.commands.structure.chatbot.CMDInfo.description": "チャットボットの設定に関する一般的な情報を表示します。",

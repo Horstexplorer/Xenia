@@ -49,7 +49,9 @@ public class ChannelContext extends ContentContext {
     }
 
     protected void insertRaw(String string){
-        insert(new Content(string));
+        Content content = new Content(string);
+        content.setWeight(1.1F);
+        insert(content);
     }
 
     protected void insert(Content content){
@@ -107,11 +109,6 @@ public class ChannelContext extends ContentContext {
         @Override
         public void onInsertion(Long newKey, Message newObject) {
             channelContext.insertRaw(newObject.getMessageContent(newObject.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()));
-        }
-
-        @Override
-        public void onRemoval(Long oldKey) {
-            // not needed as they get flushed out when the limit is reached on their own
         }
     }
 }

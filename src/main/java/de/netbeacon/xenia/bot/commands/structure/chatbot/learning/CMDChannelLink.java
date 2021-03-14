@@ -30,7 +30,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CB_CHANNEL_ENABLE;
 import static de.netbeacon.xenia.bot.commands.objects.misc.cmdargs.CmdArgDefStatics.CB_CHANNEL_ID_OPTIONAL;
@@ -58,22 +57,23 @@ public class CMDChannelLink extends Command {
                 if(textChannel == null){
                     throw new IllegalArgumentException();
                 }
-                channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(channel.getChannelId(), false);
+                channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong(), false);
             }
+            var v = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
             if(modeArg.getValue()
-                    && commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream().filter(channel1 -> channel1.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).collect(Collectors.toList()).size()
+                    && v
                     >= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
             ){
                 throw new IllegalArgumentException();
             }
-            Channel.D43Z1Settings d43Z1ChannelSettings = channel.getD43Z1Settings();
-            Channel.D43Z1Settings newD43Z1ChannelSettings = new Channel.D43Z1Settings(d43Z1ChannelSettings.getValue());
+            Channel.D43Z1Settings newD43Z1ChannelSettings = new Channel.D43Z1Settings(channel.getD43Z1Settings().getValue());
             if(modeArg.getValue()){
                 newD43Z1ChannelSettings.set(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
             }else{
                 newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
             }
             channel.setD43Z1Settings(newD43Z1ChannelSettings);
+            commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
         }catch (IllegalArgumentException e){
             commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "error.invalid.arg.msg"))).queue();

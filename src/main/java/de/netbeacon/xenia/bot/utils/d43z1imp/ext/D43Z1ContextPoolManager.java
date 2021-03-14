@@ -54,10 +54,14 @@ public class D43Z1ContextPoolManager {
     }
 
     public IContextPool getPoolFor(Guild guild){
+        return getPoolFor(guild, false);
+    }
+
+    public IContextPool getPoolFor(Guild guild, boolean overrideCache){
         try{
             longIdBasedLockHolder.getLock(guild.getId()).lock();
             // fetch from cache
-            if(guildPoolConcurrentHashMap.containsKey(guild.getId()) && (guildPoolConcurrentHashMap.get(guild.getId()).getValue2() +  REFRESH_TIME) > System.currentTimeMillis()){
+            if(guildPoolConcurrentHashMap.containsKey(guild.getId()) && (guildPoolConcurrentHashMap.get(guild.getId()).getValue2() +  REFRESH_TIME) > System.currentTimeMillis() && !overrideCache){
                 return guildPoolConcurrentHashMap.get(guild.getId()).getValue1();
             }
             // add to cache / hard refresh
@@ -101,7 +105,7 @@ public class D43Z1ContextPoolManager {
         return channelContexts;
     }
 
-    private void removePoolFor(Guild guild){
+    protected void removePoolFor(Guild guild){
         try {
             longIdBasedLockHolder.getLock(guild.getId()).lock();
             guildPoolConcurrentHashMap.remove(guild.getId());
@@ -109,6 +113,10 @@ public class D43Z1ContextPoolManager {
         }finally {
             longIdBasedLockHolder.getLock(guild.getId()).unlock();
         }
+    }
+
+    protected void removeContextFor(Channel channel){
+        channelContextHashMap.remove(channel.getChannelId());
     }
 
     public static class Listener implements CacheEventListener<Long, Guild>, APIDataEventListener<Guild> {
@@ -123,11 +131,31 @@ public class D43Z1ContextPoolManager {
         public void onInsertion(Long newKey, Guild newObject) {
             // inject this in the guild object
             newObject.addEventListener(this);
+            newObject.getChannelCache().addEventListeners(new CacheEventListener<>() {
+                @Override
+                public void onInsertion(Long newKey, Channel newObject) {
+                    if (!newObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)) {
+                        return;
+                    }
+                    d43Z1ContextPoolManager.getPoolFor(newObject.getGuild(), true); // force a reload
+                }
+
+                @Override
+                public void onRemoval(Long oldKey, Channel oldObject) {
+                    if (!oldObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)) {
+                        return;
+                    }
+                    d43Z1ContextPoolManager.removeContextFor(oldObject);
+                    // update
+                    d43Z1ContextPoolManager.getPoolFor(oldObject.getGuild(), true); // force a reload
+                }
+            });
         }
 
         @Override
-        public void onRemoval(Long oldKey) {
-            // cant do anything
+        public void onRemoval(Long oldKey, Guild oldObject) {
+            // welcome
+            d43Z1ContextPoolManager.removePoolFor(oldObject);
         }
 
         @Override

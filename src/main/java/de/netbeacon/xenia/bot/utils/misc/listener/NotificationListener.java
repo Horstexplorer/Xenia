@@ -46,7 +46,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
     }
 
     @Override
-    public void onRemoval(Long oldKey) {
+    public void onRemoval(Long oldKey, Notification oldObject) {
         // cancel scheduling (if it hasn't been executed already)
         taskManager.cancel(oldKey);
     }
@@ -90,6 +90,6 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
     public void onDeletion(Notification apiDataObject) {
         apiDataObject.removeEventListeners(); // remove listeners from this object if deleted
         // proof check - cancel the task
-        onRemoval((apiDataObject).getId());
+        onRemoval((apiDataObject).getId(), apiDataObject);
     }
 }

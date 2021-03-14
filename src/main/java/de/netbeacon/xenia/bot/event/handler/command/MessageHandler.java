@@ -140,7 +140,7 @@ public class MessageHandler {
         }
         args.remove(0);
         // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager));
+        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager));
     }
 
     public void processUpdate(GuildMessageUpdateEvent event){
