@@ -127,6 +127,7 @@ public class MultiThreadedEventManager implements IExtendedEventManager {
 
     @Override
     public void onShutdown() throws Exception {
+        halt(true);
         primaryScalingExecutor.shutdown();
         secondaryScalingExecutor.shutdown();
     }
