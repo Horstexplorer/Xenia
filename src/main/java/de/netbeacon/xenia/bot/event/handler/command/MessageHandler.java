@@ -67,7 +67,7 @@ public class MessageHandler {
         this.contextPoolManager = contextPoolManager;
     }
 
-    public void processNew(GuildMessageReceivedEvent event){
+    public void processNew(GuildMessageReceivedEvent event){ // ! note ! events from the bot itself get passed through
         // get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
         Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
         User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
@@ -81,7 +81,7 @@ public class MessageHandler {
         // get the message & check prefix
         String msg = event.getMessage().getContentRaw();
         if(!msg.startsWith(bGuild.getPrefix())){
-            if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW()){
+            if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW() && !event.getAuthor().isBot()){ // bot messages should be logged in some cases but we do not want to process em
                 try{
                     D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
                     ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
@@ -97,10 +97,18 @@ public class MessageHandler {
                     logger.warn("An exception occurred while handing message over to D43Z1 ", e);
                 }
             }else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
+                // bot messages should be logged in some cases
+                if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING))){
+                    // will return when it is from the bot but either the chatbot or selflearning is not active
+                    return;
+                }
+                // log the message
                 bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw(), true);
             }
             return;
         }
+        // ! note ! events from the bot itself get passed through | we filter em out here again
+        if(event.getAuthor().isBot()) return;
         // check if xenia is not active or inactive in which case we dont do anything
         if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE) || bChannel.getAccessMode().has(Channel.AccessMode.Mode.INACTIVE)) return;
         // check cooldown
