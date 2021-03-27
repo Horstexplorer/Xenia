@@ -116,10 +116,9 @@ public class ContentMatchBuffer implements IIdentifiable {
             }
         }
 
-        public float getAvgOutputMatchCoefficient(){
-            return contentMatchBuffer.getLastMatches().stream().map(ContentMatch::getAdjustedCoefficient).reduce(0F, Float::sum) / (float) contentMatchBuffer.size();
+        public synchronized float getAvgOutputMatchCoefficient(){
+            return new LinkedList<>(contentMatchBuffer.getLastMatches()).stream().map(ContentMatch::getAdjustedCoefficient).reduce(0F, Float::sum) / (float) contentMatchBuffer.size();
         }
-
         public enum MatchTendency {
             GOOD,
             NEUTRAL,
