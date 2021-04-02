@@ -23,7 +23,7 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
