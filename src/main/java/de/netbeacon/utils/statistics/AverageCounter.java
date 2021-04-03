@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.slash.objects;
+package de.netbeacon.utils.statistics;
 
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
+public class AverageCounter {
 
+    private float avg;
+    private int counter;
 
-public abstract class CommandGroup extends Command{
+    public synchronized void add(float value){
+        if(counter+1 == Integer.MAX_VALUE) counter--;
+        avg = ((avg*counter++)+value)/counter;
+    }
 
-    @Override
-    public CommandUpdateAction.CommandData getCommandData() {
-        throw new UnsupportedOperationException();
+    public double getAvg() {
+        return avg;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 }
