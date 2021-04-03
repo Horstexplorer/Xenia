@@ -23,51 +23,39 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class SlashCommandHandler {
 
-    private final HashMap<String, Command> commandMap;
+    private final HashMap<String, Command> globalCommandMap;
+    private final ConcurrentHashMap<String, Command> guildCommandMap;
     private final EventWaiter eventWaiter;
     private final XeniaBackendClient backendClient;
     private final PaginatorManager paginatorManager;
     private final D43Z1ContextPoolManager contextPoolManager;
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public SlashCommandHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
-        this.commandMap = commandMap;
+    public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
+        this.globalCommandMap = globalCommandMap;
+        this.guildCommandMap = new ConcurrentHashMap<>(guildCommandMap);
         this.eventWaiter = eventWaiter;
         this.paginatorManager = paginatorManager;
         this.backendClient = backendClient;
         this.contextPoolManager = contextPoolManager;
     }
 
-    public void updateCommands(JDA jda){
-        CommandUpdateAction commandUpdateAction = jda.updateCommands();
-        commandUpdateAction.addCommands(commandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList()));
-        commandUpdateAction.queue(s -> logger.debug("Updated Commands"), f -> logger.error("Failed To Update Commands", f));
+    public List<CommandUpdateAction.CommandData> getGlobalCommandData(){
+        return globalCommandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList());
     }
 
-    private static List<CommandUpdateAction.CommandData> getCommandData(Command cmd){
-        if(cmd.isCommandGroup()){
-            List<CommandUpdateAction.CommandData> commandData = new ArrayList<>();
-            cmd.getChildCommands().forEach(cc -> {
-                commandData.addAll(getCommandData(cc));
-            });
-            return commandData;
-        }else{
-            return Collections.singletonList(cmd.getCommandData());
-        }
+    public List<CommandUpdateAction.CommandData> getGuildCommandData(long guildId){ // currently unused
+        return guildCommandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList());
     }
 
     public void handle(SlashCommandEvent event){
@@ -96,8 +84,11 @@ public class SlashCommandHandler {
         // update processing time
         commandEvent.addProcessingTime(System.currentTimeMillis()-start);
         // execute command
-        Command command = commandMap.get(args.get(0));
-        if(command == null) return;
+        Command command = globalCommandMap.get(args.get(0));
+        if(command == null) {
+            command = guildCommandMap.get(args.get(0));
+            if(command == null) return;
+        }
         args.remove(0);
         command.execute(args, commandEvent);
     }

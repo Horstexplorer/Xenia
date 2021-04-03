@@ -61,7 +61,7 @@ public abstract class Command {
      * @param description
      * @param options
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, boolean takesLong, CommandUpdateAction.OptionData...options){
+    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, CommandUpdateAction.OptionData...options){
         this.alias = alias;
         this.commandData = new CommandUpdateAction.CommandData(alias, description);
         this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
@@ -77,6 +77,7 @@ public abstract class Command {
             this.memberSecondaryPermissions.addAll(memberSecondaryPermission);
         }
         for(CommandUpdateAction.OptionData optionData : options){
+            if(optionData == null) continue;
             commandData.addOption(optionData);
             subcommandData.addOption(optionData);
         }
@@ -94,6 +95,7 @@ public abstract class Command {
         this.subcommandData = null;
         this.subcommandGroupData = new CommandUpdateAction.SubcommandGroupData(alias, description);
         for(Command command : subCommands){
+            if(command == null) continue;
             subcommandGroupData.addSubcommand(command.getSubCommandData());
             childCommands.put(command.getAlias(), command);
         }
@@ -111,6 +113,7 @@ public abstract class Command {
         this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
         this.subcommandGroupData = null;
         for(Command command : subCommands){
+            if(command == null) continue;
             if(areGroups){
                 commandData.addSubcommandGroup(command.getSubcommandGroupData());
             } else {
@@ -173,7 +176,7 @@ public abstract class Command {
         if(!isCommandGroup()){
             TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
             if(translationPackage == null){
-                commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+                commandEvent.getEvent().reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
                 return;
             }
             long guildId = commandEvent.getEvent().getGuild().getIdLong(); // should not throw as we check for this before in the listener
@@ -182,7 +185,7 @@ public abstract class Command {
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), Permission.MESSAGE_WRITE)){
-                    commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
+                    commandEvent.getEvent().reply(onMissingBotPerms(translationPackage)).queue();
                 }
                 return;
             }
@@ -202,14 +205,14 @@ public abstract class Command {
                             )
             ){
                 // invalid permission
-                commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
+                commandEvent.getEvent().reply(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
                 return;
             }
             if(commandCooldown != null){
                 // process cd
                 if(!commandCooldown.allow(guildId, authorId)){
                     // cd running
-                    commandEvent.getEvent().getChannel().sendMessage(onCooldownActive(translationPackage)).queue();
+                    commandEvent.getEvent().reply(onCooldownActive(translationPackage)).queue();
                     return;
                 }
                 // activate cd
@@ -223,7 +226,7 @@ public abstract class Command {
                 onExecution(commandEvent, translationPackage, ackRequired);
             }catch (Exception e){
                 logger.error("Unhandled exception: ", e);
-                commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+                commandEvent.getEvent().reply(onUnhandledException(translationPackage, e)).queue();
             }finally {
                 processingAvgCounter.add(System.currentTimeMillis()-startTime);
             }

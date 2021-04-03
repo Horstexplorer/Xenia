@@ -18,14 +18,18 @@ package de.netbeacon.xenia.bot.event.listener.command;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.structure.ROOTCMDTest;
 import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.function.Consumer;
@@ -34,23 +38,54 @@ public class SlashCommandListener extends ListenerAdapter {
 
     private final EventWaiter eventWaiter;
     private final SlashCommandHandler slashCommandHandler;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
         this.eventWaiter = eventWaiter;
 
-        HashMap<String, Command> commandMap = new HashMap<>();
-        Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
+        HashMap<String, Command> globalCommandMap = new HashMap<>();
+        Consumer<Command> register = command -> globalCommandMap.put(command.getAlias(), command);
+        // register up to 100 commands available for all guilds (global pool) here
+        register.accept(new ROOTCMDTest());
 
-        // register commands here
 
-        this.slashCommandHandler = new SlashCommandHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
+        HashMap<String, Command> guildCommandMap = new HashMap<>();
+        register = command -> guildCommandMap.put(command.getAlias(), command);
+        // register up to 100 commands which can be guild specifically toggled
+
+
+        // // // // // // // // // //
+        this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
     }
 
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        slashCommandHandler.updateCommands(event.getJDA());
+        if(event.getJDA().getShardInfo().getShardId() != 0){
+            return;
+        }
+        // update commands global for everything if we are on shard 0
+        event.getJDA()
+                .updateCommands()
+                .addCommands(slashCommandHandler.getGlobalCommandData())
+                .queue(s -> {
+                    logger.info("Updated Global Commands");
+                }, f -> {
+                    logger.warn("Failed To Update Global Commands", f);
+                });
     }
 
+    @Override
+    public void onGuildReady(@NotNull GuildReadyEvent event) {
+        // update guild specific commands
+        event.getGuild()
+                .updateCommands()
+                .addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
+                .queue(s -> {
+                    logger.debug("Updated Guild Commands For Guild "+event.getGuild().getIdLong());
+                }, f -> {
+                    logger.warn("Failed To Update Commands For Guild "+event.getGuild().getIdLong(), f);
+                });
+    }
 
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {
