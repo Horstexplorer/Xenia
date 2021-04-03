@@ -57,7 +57,7 @@ public class SlashCommandListener extends ListenerAdapter {
         if(eventWaiter.waitingOnThis(event)){
             return;
         }
-        if(event.getGuild() == null){ // listen for events from guilds only
+        if(event.getGuild() == null || event.getUser().isBot()){ // listen for events from guilds only
             return;
         }
         slashCommandHandler.handle(event);

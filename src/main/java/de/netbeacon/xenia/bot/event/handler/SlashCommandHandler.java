@@ -17,14 +17,15 @@
 package de.netbeacon.xenia.bot.event.handler;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
-import net.dv8tion.jda.api.sharding.ShardManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SlashCommandHandler {
 
@@ -50,13 +52,9 @@ public class SlashCommandHandler {
         this.contextPoolManager = contextPoolManager;
     }
 
-    public void updateCommands(ShardManager shardManager){
-        shardManager.getShards().forEach(this::updateCommands);
-    }
-
     public void updateCommands(JDA jda){
         CommandUpdateAction commandUpdateAction = jda.updateCommands();
-        commandMap.forEach((k, v) -> commandUpdateAction.addCommands(getCommandData(v)));
+        commandUpdateAction.addCommands(commandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList()));
         commandUpdateAction.queue(s -> logger.debug("Updated Commands"), f -> logger.error("Failed To Update Commands", f));
     }
 
@@ -73,6 +71,34 @@ public class SlashCommandHandler {
     }
 
     public void handle(SlashCommandEvent event){
-
+        long start = System.currentTimeMillis();
+        // get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
+        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+        User bUser = backendClient.getUserCache().get(event.getUser().getIdLong());
+        Member bMember = bGuild.getMemberCache().get(event.getUser().getIdLong());
+        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+        License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+        // wrap in single object
+        CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
+        CommandEvent commandEvent = new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager);
+        // check if xenia is active in this channel
+        if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)) return;
+        // split to list
+        ArrayList<String> args = new ArrayList<>();
+        args.add(event.getName());
+        if(event.getSubcommandGroup() != null){
+            args.add(event.getSubcommandGroup());
+        }
+        if(event.getSubcommandName() != null){
+            args.add(event.getSubcommandName());
+        }
+        if(args.isEmpty()) return;
+        // update processing time
+        commandEvent.addProcessingTime(System.currentTimeMillis()-start);
+        // execute command
+        Command command = commandMap.get(args.get(0));
+        if(command == null) return;
+        args.remove(0);
+        command.execute(args, commandEvent);
     }
 }
