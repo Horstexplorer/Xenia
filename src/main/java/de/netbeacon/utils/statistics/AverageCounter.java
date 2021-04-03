@@ -26,7 +26,7 @@ public class AverageCounter {
         avg = ((avg*counter++)+value)/counter;
     }
 
-    public double getAvg() {
+    public float getAvg() {
         return avg;
     }
 
