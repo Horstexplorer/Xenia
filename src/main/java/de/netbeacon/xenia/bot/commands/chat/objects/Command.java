@@ -156,6 +156,10 @@ public abstract class Command {
         return requiredArgs;
     }
 
+    /**
+     * Returns the command cooldown
+     * @return CommandCooldown
+     */
     public CommandCooldown getCommandCooldown(){
         return commandCooldown;
     }
@@ -252,7 +256,7 @@ public abstract class Command {
             Member bMember = commandEvent.getBackendDataPack().getbMember();
             net.dv8tion.jda.api.entities.Member member = commandEvent.getEvent().getMember();
             if(
-                    !(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == commandEvent.getEvent().getAuthor().getIdLong())
+                    !(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == authorId)
                     &&
                     (
                             (bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE) && (member == null || bMember.getRoles().stream()//e

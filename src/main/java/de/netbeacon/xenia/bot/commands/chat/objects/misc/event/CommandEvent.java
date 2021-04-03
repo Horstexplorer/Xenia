@@ -24,7 +24,7 @@ import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
- * Wraps GuildMessageReceivedEvents with aditional data
+ * Wraps GuildMessageReceivedEvents with additional data
  */
 public class CommandEvent {
 
