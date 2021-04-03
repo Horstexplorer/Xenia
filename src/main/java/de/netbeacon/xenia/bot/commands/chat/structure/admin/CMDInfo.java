@@ -23,10 +23,8 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldow
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.core.XeniaCore;
-import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
@@ -76,21 +74,5 @@ public class CMDInfo extends AdminCommand {
                 .addField("Messages", String.valueOf(bInfo.getMessageCount()), true)
                 .addField("Channels", bInfo.getChannelCount()+"("+(bInfo.getChannelCount()-bInfo.getForbiddenChannels())+")", true);
         event.getChannel().sendMessage(embedBuilder2.build()).queue();
-        StringBuilder eventManagerStats = new StringBuilder();
-        for(JDA jda : event.getJDA().getShardManager().getShards()){
-            eventManagerStats.append(jda.getShardInfo().getShardString()).append(" | ");
-            if(jda.getEventManager() instanceof MultiThreadedEventManager){
-                var stats = ((MultiThreadedEventManager) jda.getEventManager()).getStats();
-                eventManagerStats
-                        .append(stats.getValue1()).append(" (1) ")
-                        .append(stats.getValue2()).append(" (5) ")
-                        .append(stats.getValue3()).append(" (15) ")
-                        .append(stats.getValue4()).append(" (60) ");
-            }
-            eventManagerStats.append("\n");
-        }
-        EmbedBuilder embedBuilder3 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
-                .setDescription(eventManagerStats);
-        event.getChannel().sendMessage(embedBuilder3.build()).queue();
     }
 }
