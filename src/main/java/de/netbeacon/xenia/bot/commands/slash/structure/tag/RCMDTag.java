@@ -24,6 +24,9 @@ import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataExcepti
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
@@ -37,19 +40,21 @@ public class RCMDTag extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "name", "Tag name").setRequired(true)
+                List.of(
+                        new CmdArgDef.Builder<>("name", "Tag name", "", String.class).build()
+                )
         );
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        String name = commandEvent.getEvent().getOption("name").getAsString();
+        CmdArg<String> nameArg = cmdArgs.getByName("name");
         try{
-            Tag tag = tagCache.get(name);
+            Tag tag = tagCache.get(nameArg.getValue());
             commandEvent.getEvent().reply(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername())).queue();
         }catch (DataException | CacheException e){
-            commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", name))).queue();
+            commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
         }
     }
 }

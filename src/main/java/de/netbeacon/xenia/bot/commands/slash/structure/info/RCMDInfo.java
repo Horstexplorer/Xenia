@@ -21,6 +21,7 @@ import de.netbeacon.xenia.backend.client.objects.external.system.Info;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -32,7 +33,7 @@ public class RCMDInfo extends Command {
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
         EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getUser())
                 .addField("Xenia", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Xenia-Backend", XeniaCore.getInstance().getBackendClient().getInfo(Info.Mode.Public).getVersion(), true)

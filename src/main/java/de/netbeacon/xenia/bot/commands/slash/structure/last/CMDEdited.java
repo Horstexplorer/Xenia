@@ -23,6 +23,7 @@ import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.Permission;
@@ -42,7 +43,7 @@ public class CMDEdited extends Command {
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
         Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
         MessageCache messageCache = bChannel.getMessageCache();
         Message bMessage = bChannel.getMessageCache().getLast("edited");

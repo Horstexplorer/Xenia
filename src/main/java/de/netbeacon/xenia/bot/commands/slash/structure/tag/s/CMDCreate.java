@@ -22,6 +22,9 @@ import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheExcept
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
@@ -35,19 +38,21 @@ public class CMDCreate extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "name", "Tag name").setRequired(true),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "content", "Tag content").setRequired(true)
+                List.of(
+                        new CmdArgDef.Builder<>("name", "Tag name", "", String.class).build(),
+                        new CmdArgDef.Builder<>("content", "Tag content", "", String.class).build()
+                )
         );
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
         TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        String name = commandEvent.getEvent().getOption("name").getAsString();
-        String content = commandEvent.getEvent().getOption("content").getAsString();
+        CmdArg<String> nameArg = cmdArgs.getByName("name");
+        CmdArg<String> contentArg = cmdArgs.getByName("content");
         try{
-            tagCache.createNew(name, commandEvent.getEvent().getUser().getIdLong(), content);
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", name))).queue();
+            tagCache.createNew(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
+            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
         }catch (CacheException e){
             if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
                 commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();

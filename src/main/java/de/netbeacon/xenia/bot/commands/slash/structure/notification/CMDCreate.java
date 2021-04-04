@@ -21,9 +21,13 @@ import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
@@ -38,17 +42,21 @@ public class CMDCreate extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "duration", "Duration till the notification is due").setRequired(true),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "message", "Notification message").setRequired(true)
+                List.of(
+                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "", HumanTime.class).build(),
+                        new CmdArgDef.Builder<>("message", "Notification message", "", String.class).build()
+                )
         );
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
         NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+        CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
+        CmdArg<String> messageArg = cmdArgs.getByName("message");
         try{
-            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getAuthor().getAsTag()))).queue();
+            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
+            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
         }catch (DataException | CacheException ex){
             if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
                 commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();

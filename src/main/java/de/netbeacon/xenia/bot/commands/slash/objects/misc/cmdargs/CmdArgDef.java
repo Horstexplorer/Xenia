@@ -229,6 +229,10 @@ public class CmdArgDef<T> {
             return this;
         }
 
+        public CmdArgDef<T> build(){
+            return build(false);
+        }
+
         public CmdArgDef<T> build(boolean anyMatch){
             // prepare option data
             Command.OptionType optionType = getOptionTypeFor(tClass);

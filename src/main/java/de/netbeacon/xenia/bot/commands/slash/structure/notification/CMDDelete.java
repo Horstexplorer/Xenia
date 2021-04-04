@@ -20,9 +20,13 @@ import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
@@ -36,15 +40,17 @@ public class CMDDelete extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.INTEGER, "id", "Notification id").setRequired(true)
+                List.of(
+                        new CmdArgDef.Builder<>("id", "Notification id", "", Long.class).build()
+                )
         );
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        long id = commandEvent.getEvent().getOption("id").getAsLong();
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+        CmdArg<Long> idArg = cmdArgs.getByName("id");
         try{
-            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(id);
+            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(idArg.getValue());
             if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
                 throw new RuntimeException("User Does Not Own This Notification");
             }

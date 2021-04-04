@@ -20,9 +20,13 @@ import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
@@ -37,21 +41,26 @@ public class CMDModify extends Command {
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.INTEGER, "id", "Notification id").setRequired(true),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "duration", "Duration till the notification is due").setRequired(true),
-                new CommandUpdateAction.OptionData(net.dv8tion.jda.api.entities.Command.OptionType.STRING, "message", "Notification message").setRequired(true)
+                List.of(
+                        new CmdArgDef.Builder<>("id", "Notification id", "", Long.class).build(),
+                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "", HumanTime.class).build(),
+                        new CmdArgDef.Builder<>("message", "Notification message", "", String.class).build()
+                )
         );
     }
 
     @Override
-    public void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
+        CmdArg<Long> idArg = cmdArgs.getByName("id");
+        CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
+        CmdArg<String> messageArg = cmdArgs.getByName("message");
         try{
-            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
-            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
+            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(idArg.getValue());
+            if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong()){
                 throw new RuntimeException("User Does Not Own This Notification");
             }
-            notification.lSetNotificationTarget(localDateTimeCmdArg.getValue().toInstant(ZoneOffset.UTC).toEpochMilli());
-            notification.lSetNotificationMessage(stringCmdArg.getValue());
+            notification.lSetNotificationTarget(durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli());
+            notification.lSetNotificationMessage(messageArg.getValue());
             notification.update();
 
             commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))+" (ID: "+notification.getId()+")").queue();
