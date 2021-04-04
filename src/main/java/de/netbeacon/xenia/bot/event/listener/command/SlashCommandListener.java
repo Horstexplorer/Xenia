@@ -18,7 +18,11 @@ package de.netbeacon.xenia.bot.event.listener.command;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
-import de.netbeacon.xenia.bot.commands.slash.structure.ROOTCMDTest;
+import de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo;
+import de.netbeacon.xenia.bot.commands.slash.structure.last.RCMDGLast;
+import de.netbeacon.xenia.bot.commands.slash.structure.notification.RCMDGNotification;
+import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
+import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
 import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -46,7 +50,11 @@ public class SlashCommandListener extends ListenerAdapter {
         HashMap<String, Command> globalCommandMap = new HashMap<>();
         Consumer<Command> register = command -> globalCommandMap.put(command.getAlias(), command);
         // register up to 100 commands available for all guilds (global pool) here
-        register.accept(new ROOTCMDTest());
+        register.accept(new RCMDInfo());
+        register.accept(new RCMDTag());
+        register.accept(new RCMDGTags());
+        register.accept(new RCMDGLast());
+        register.accept(new RCMDGNotification());
 
 
         HashMap<String, Command> guildCommandMap = new HashMap<>();
@@ -89,6 +97,7 @@ public class SlashCommandListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {
+        var v = event.getOptions().get(0);
         if(eventWaiter.waitingOnThis(event)){
             return;
         }
