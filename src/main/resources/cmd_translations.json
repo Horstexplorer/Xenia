@@ -212,7 +212,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "Can be used to evaluate the current D43Z1 performance",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "Can be used to display some information about the running D43Z1 instance",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contains commands only available to the developer"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contains commands only available to the developer",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "Current Shard",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "Instance",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "Location",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[Visit Website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "Data Processing",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[Visit Website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "Report Content",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[Visit Website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "Contact",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[Visit Website](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "No message found to restore",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "Restored deleted message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Author",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Old Message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No message found to restore",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Restored edited message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Author",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification created (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Failed to create notification! Perhaps the cache is full?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "Notification (ID: %0%) deleted",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "View existing notifications",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "Notifications",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Update an existing notification",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification edited",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"
     }
   },
   {
@@ -428,7 +470,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "Cawn be used tuwu evawuate the cuwwent D43Z1 pewfowmance",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "Cawn be used tuwu dispway sowme infowmation abouwt the wunning d43z1 instance",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contains commands onwy avaiwabwe tuwu the devewopew"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contains commands onwy avaiwabwe tuwu the devewopew",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "Cuwwent shawd",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "Instance",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "Wocation",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[Visit website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "Data pwocessing",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[Visit website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "Wepowt content",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[Visit website](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "Contact",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[Visit website](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "No message found tuwu westowe",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "Westowed deweted message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Authow",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Owd message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No message found tuwu westowe",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Westowed edited message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Authow",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Owd message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification cweated (id: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "Notification (id: %0%) deweted",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "Faiwed tuwu dewete notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "View existing notifications",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "Notifications",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Update an existing notification",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification edited",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"
     }
   },
   {
@@ -644,7 +728,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "Kann verwendet werden, um die aktuelle D43Z1 Leistung zu überprüfen",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "Kann verwendet werden, um einige Informationen über die laufende D43Z1-Instanz anzuzeigen",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Enthält Befehle, die nur dem Entwickler zur Verfügung stehen"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Enthält Befehle, die nur dem Entwickler zur Verfügung stehen",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "Info",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "Aktueller Scherben",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "Instanz",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "Standort",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "Website",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "Datenverarbeitung",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "Bericht Inhalt",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[Website besuchen](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "Kontakt",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[Website besuchen](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "Gelöschte Nachricht wiederhergestellt",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Nachrichten Id",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Alte Nachricht",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Bearbeitete Nachricht wiederhergestellt",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Nachrichten Id",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Alte Nachricht",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Benachrichtigung erstellt (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Benachrichtigung konnte nicht erstellt werden! Vielleicht ist der Cache voll?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "Benachrichtigung (ID: %0%) gelöscht",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "Benachrichtigung konnte nicht gelöscht werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "Vorhandene Benachrichtigungen anzeigen",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "Benachrichtigungen",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Aktualisieren einer vorhandenen Benachrichtigung",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Benachrichtigung bearbeitet",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"
     }
   },
   {
@@ -860,7 +986,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "Peut être utilisé pour évaluer la performance actuelle du D43Z1",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "Peut être utilisé pour afficher certaines informations sur l'instance D43Z1 en cours d'exécution.",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contient des commandes uniquement disponibles pour le développeur"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contient des commandes uniquement disponibles pour le développeur",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "Information",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "Shard actuel",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "Instance",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "Localisation",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "Site web",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[Visitez le site web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "Traitement des données",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[Visitez le site web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "Contenu du rapport",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[Visitez le site web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "Contact",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[Visitez le site web](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "Aucun message trouvé à restaurer",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "Restauration d'un message supprimé",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Id du message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Auteur",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Ancien message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "Aucun message trouvé à restaurer",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Restauration d'un message supprimé",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Id du message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Auteur",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Ancien message",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification créée (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "La notification n'a pas été créée ! Le cache est peut-être plein ?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "Notification (ID : %0%) supprimée",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "Échec de la suppression de la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "Afficher les notifications existantes",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "Notifications",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Mettre à jour une notification existante",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification éditée",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Impossible de modifier la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"
     }
   },
   {
@@ -1076,7 +1244,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "Puede utilizarse para evaluar el rendimiento actual del D43Z1",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "Se puede utilizar para mostrar alguna información sobre la instancia D43Z1 en ejecución",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contiene comandos solo disponibles para el desarrollador"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "Contiene comandos solo disponibles para el desarrollador",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "Información",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "Fragmento actual",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "Instancia",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "Ubicación",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "Página web",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[Visitar el sitio web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "Procesamiento de datos",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[Visitar el sitio web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "Contenido del informe",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[Visitar el sitio web](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "Contacte con",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[Visitar el sitio web](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "No se ha encontrado ningún mensaje para restaurar",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "Mensaje borrado restaurado",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Id. del mensaje",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Mensaje antiguo",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No se ha encontrado ningún mensaje para restaurar",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Mensaje borrado restaurado",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Id. del mensaje",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Autor",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Mensaje antiguo",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notificación creada  (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "No se ha podido crear la notificación. ¿Quizá la caché está llena?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "Notificación (ID: %0%) borrada",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "No se ha podido eliminar la notificación. ¿Tal vez esto fue creado por otra persona o no existe?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "Ver las notificaciones existentes",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "Notificaciones",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Actualizar una notificación existente",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notificación editada",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "No se ha podido modificar la notificación. ¿Quizás esto fue creado por alguien más o no existe?"
     }
   },
   {
@@ -1292,7 +1502,49 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1.description": "現在のD43Z1の性能評価に使用可能",
       "de.netbeacon.xenia.bot.commands.chat.structure.admin.CMDD43Z1Stats.description": "実行中のD43Z1インスタンスに関するいくつかの情報を表示するために使用できます。",
 
-      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "開発者のみが利用できるコマンドを含む"
+      "de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin.description": "開発者のみが利用できるコマンドを含む",
+
+
+
+
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.title": "情報",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.3.title": "現在のシャード",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.4.title": "インスタンス",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.5.title": "所在地",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.title": "ウェブサイト",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.6.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.title": "データ処理",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.7.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.title": "レポート内容",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.8.link_text": "[ウェブサイトを見る](%0%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.title": "連絡先",
+      "de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo.response.field.9.link_text": "[ウェブサイトを見る](%0%)",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.error.msg": "復元するメッセージが見つからない",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.title": "削除されたメッセージの復元",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "メッセージID",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "著者",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "古いメッセージ",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "復元するメッセージが見つからない",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "編集したメッセージの復元",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "メッセージID",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "著者",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "古いメッセージ",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "通知の作成 (ID: %0% | %1%)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "通知の作成に失敗しました。キャッシュがいっぱいになっているのでは？",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.success.msg": "通知(ID: %0%)の削除",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDDelete.response.error.msg": "通知の削除に失敗しました。これは誰かが作ったものか、存在しないものなのでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notificationn.CMDList.description": "既存の通知の表示",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDList.response.title": "お知らせ",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "既存の通知の更新",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "通知の編集",
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "通知の変更に失敗しました。これは他の人が作成したものか、存在しないものなのでしょうか？"
     }
   }
 ]
