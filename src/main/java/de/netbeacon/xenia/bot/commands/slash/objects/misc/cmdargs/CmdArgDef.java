@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -99,6 +100,130 @@ public class CmdArgDef<T> {
             this.tClass = tClass;
         }
 
+        public Builder<T> predicateAddEquals(T object){
+            predicates.add(t->{
+                if(object instanceof Comparable && t instanceof Comparable){
+                    return ((Comparable<T>) object).compareTo(t) == 0;
+                }else{
+                    return object.equals(t);
+                }
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddMinValue(T object){
+            predicates.add(t->{
+                if(object instanceof Comparable && t instanceof Comparable){
+                    return ((Comparable<T>) object).compareTo(t) <= 0;
+                }
+                return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddMaxValue(T object){
+            predicates.add(t->{
+                if(object instanceof Comparable && t instanceof Comparable){
+                    return ((Comparable<T>) object).compareTo(t) >= 0;
+                }
+                return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddValueRange(T min, T max){
+            predicates.add(t->{
+                if(min instanceof Comparable && max instanceof Comparable && t instanceof Comparable){
+                    return ((Comparable<T>) max).compareTo(t) >= 0 && ((Comparable<T>) min).compareTo(t) <= 0;
+                }
+                return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddEqualsAnyOf(T...objects){
+            predicates.add(t->{
+                for(T object : objects){
+                    if(object instanceof Comparable && t instanceof Comparable){
+                        if(((Comparable<T>) object).compareTo(t) == 0){
+                            return true;
+                        }
+                    }else{
+                        if(object.equals(t)){
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            });
+            choises.addAll(Arrays.asList(objects));
+            return this;
+        }
+
+        public Builder<T> predicateAddStringMinLength(int length){
+            predicates.add(t->{
+                if(t instanceof String){
+                    return ((String) t).length() >= length;
+                }
+                return true; // its not a string so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddStringMaxLength(int length){
+            predicates.add(t->{
+                if(t instanceof String){
+                    return ((String) t).length() <= length;
+                }
+                return true; // its not a string so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddStringLengthRange(int min, int max){
+            predicates.add(t->{
+                if(t instanceof String){
+                    return ((String) t).length() >= min && ((String) t).length() <= max;
+                }
+                return true; // its not a string so we dont know - assume true (this is not great but should do for us)
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddStringEqualsAnyOf(String...strings){
+            predicates.add(t->{
+                for(String string : strings){
+                    if(string != null && t instanceof String){
+                        if(string.equalsIgnoreCase((String) t)){
+                            return true;
+                        }
+                    }else{
+                        return false;
+                    }
+                }
+                return false;
+            });
+            choises.addAll(Arrays.asList((T[])strings));
+            return this;
+        }
+        
+        public <Q> Builder<T> predicateAddCompare(Function<T,Q> gen, Q compareTo, int result){
+            predicates.add(t->{
+                Q res = gen.apply(t);
+                if(res instanceof Comparable && compareTo instanceof Comparable){
+                    return ((Comparable<Q>) compareTo).compareTo(res) == result;
+                }else{
+                    return compareTo.equals(res);
+                }
+            });
+            return this;
+        }
+
+        public Builder<T> predicateAddPredicate(Predicate<T> predicate){
+            predicates.add(predicate);
+            return this;
+        }
+        
         public Builder<T> setOptional(boolean value){
             isOptional = value;
             return this;
