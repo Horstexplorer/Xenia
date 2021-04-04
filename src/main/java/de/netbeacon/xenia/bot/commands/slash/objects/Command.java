@@ -26,6 +26,9 @@ import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataExcepti
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgFactory;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -47,11 +50,11 @@ public abstract class Command {
     private final CommandUpdateAction.CommandData commandData;
     private final CommandUpdateAction.SubcommandData subcommandData;
     private final CommandUpdateAction.SubcommandGroupData subcommandGroupData;
+    private final List<CmdArgDef> options = new ArrayList<>();
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
-
     private final AverageCounter processingAvgCounter = new AverageCounter();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -59,9 +62,13 @@ public abstract class Command {
      * Basic command with options
      * @param alias
      * @param description
+     * @param commandCooldown
+     * @param botPermissions
+     * @param memberPrimaryPermissions
+     * @param memberSecondaryPermission
      * @param options
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, CommandUpdateAction.OptionData...options){
+    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> options){
         this.alias = alias;
         this.commandData = new CommandUpdateAction.CommandData(alias, description);
         this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
@@ -76,10 +83,10 @@ public abstract class Command {
         if(memberSecondaryPermission != null){
             this.memberSecondaryPermissions.addAll(memberSecondaryPermission);
         }
-        for(CommandUpdateAction.OptionData optionData : options){
-            if(optionData == null) continue;
-            commandData.addOption(optionData);
-            subcommandData.addOption(optionData);
+        for(CmdArgDef option : options){
+            if(option == null) continue;
+            commandData.addOption(option.getOptionData());
+            subcommandData.addOption(option.getOptionData());
         }
     }
 
@@ -167,6 +174,8 @@ public abstract class Command {
 
     public CommandUpdateAction.SubcommandGroupData getSubcommandGroupData(){ return subcommandGroupData; }
 
+    public List<CmdArgDef> getOptions() { return options; }
+
     /**
      * Used to execute the command
      * @param args remaining arguments
@@ -208,6 +217,7 @@ public abstract class Command {
                 commandEvent.getEvent().reply(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
                 return;
             }
+            // check cooldown
             if(commandCooldown != null){
                 // process cd
                 if(!commandCooldown.allow(guildId, authorId)){
@@ -218,12 +228,20 @@ public abstract class Command {
                 // activate cd
                 commandCooldown.deny(guildId, authorId);
             }
+            // check arguments
+            CmdArgs cmdArgs;
+            try{
+                cmdArgs = CmdArgFactory.getArgs((s) -> commandEvent.getEvent().getOption(s), options);
+            }catch (CmdArgFactory.Exception e){
+                commandEvent.getEvent().reply(onBadOptions(translationPackage)).queue();
+                return;
+            }
             // everything alright
             long startTime = System.currentTimeMillis();
             try{
                 commandEvent.addProcessingTime(processingAvgCounter.getAvg());
                 boolean ackRequired = commandEvent.getEstimatedProcessingTime() > 2.5; // we should ack if it takes longer than 3 seconds, we plan in some buffer
-                onExecution(commandEvent, translationPackage, ackRequired);
+                onExecution(cmdArgs, commandEvent, translationPackage, ackRequired);
             }catch (Exception e){
                 logger.error("Unhandled exception: ", e);
                 commandEvent.getEvent().reply(onUnhandledException(translationPackage, e)).queue();
@@ -283,6 +301,27 @@ public abstract class Command {
     }
 
     /**
+     * Returns an message embed if the execution of the command is missing an options or invalid data has been provided
+     *
+     * @return MessageEmbed
+     */
+    public MessageEmbed onBadOptions(TranslationPackage translationPackage){
+        StringBuilder usage = new StringBuilder().append("<> ").append(alias).append(" ");
+        for(CmdArgDef s : options){
+            usage.append("<").append(s.getName()).append(">").append(" ");
+        }
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                .setColor(Color.RED)
+                .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
+                .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false);
+        for(CmdArgDef s : options){
+            embedBuilder.addField("<"+s.getName()+">", s.getExtendedDescription(), false);
+        }
+
+        return embedBuilder.build();
+    };
+
+    /**
      * Returns an message embed which can be used to tell that something is wrong
      *
      * @param message the message which should be displayed
@@ -338,5 +377,5 @@ public abstract class Command {
      * @param commandEvent CommandEvent
      * @param translationPackage translation package which should be used
      */
-    public abstract void onExecution(CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception;
+    public abstract void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception;
 }
