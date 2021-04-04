@@ -20,7 +20,6 @@ import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
-import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
@@ -28,7 +27,6 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
 import java.util.HashSet;
 import java.util.List;
@@ -41,7 +39,7 @@ public class CMDDelete extends Command {
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
                 List.of(
-                        new CmdArgDef.Builder<>("id", "Notification id", "", Long.class).build()
+                        new CmdArgDef.Builder<>("id", "Notification id", "Notification id", Long.class).build()
                 )
         );
     }

@@ -29,7 +29,6 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
 import java.time.ZoneOffset;
 import java.util.HashSet;
@@ -43,8 +42,8 @@ public class CMDCreate extends Command {
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
                 List.of(
-                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "", HumanTime.class).build(),
-                        new CmdArgDef.Builder<>("message", "Notification message", "", String.class).build()
+                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "\"#h #m #s\" or \"60\" (in minutes) or \"yyyy-MM-dd hh:mm:ss\"", HumanTime.class).build(),
+                        new CmdArgDef.Builder<>("message", "Notification message", "Notification message", String.class).build()
                 )
         );
     }

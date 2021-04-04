@@ -28,10 +28,11 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
 
 import java.util.HashSet;
 import java.util.List;
+
+import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
 public class CMDModify extends Command {
 
@@ -41,8 +42,8 @@ public class CMDModify extends Command {
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
                 List.of(
-                        new CmdArgDef.Builder<>("name", "Tag name", "", String.class).build(),
-                        new CmdArgDef.Builder<>("content", "Tag content", "", String.class).build()
+                        new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t-> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t-> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build(),
+                        new CmdArgDef.Builder<>("content", "Tag content", "Tag content, 1 to 1500 chars", String.class).predicateAddStringLengthRange(1, 1500).build()
                 )
         );
     }
