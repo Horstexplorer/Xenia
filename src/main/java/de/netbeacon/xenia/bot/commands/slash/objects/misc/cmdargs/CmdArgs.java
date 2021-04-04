@@ -18,78 +18,39 @@ package de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CmdArgs {
 
     private final HashMap<String, CmdArg> cmdArgs = new HashMap<>();
 
-    /**
-     * Creates a new instance of this class
-     */
     public CmdArgs(){}
 
-    /**
-     * Creates a new instance of this class
-     *
-     * @param args predefined arguements
-     */
+    public CmdArgs(List<CmdArg> args){
+        for(CmdArg arg : args){
+            cmdArgs.put(arg.getName(), arg);
+        }
+    }
+
     public CmdArgs(CmdArg...args){
         for(CmdArg arg : args){
             cmdArgs.put(arg.getName(), arg);
         }
     }
 
-    /**
-     * Adds arguments to this container
-     *
-     * @param args cmd args
-     */
     public void add(CmdArg...args){
         for(CmdArg arg : args){
             cmdArgs.put(arg.getName(), arg);
         }
     }
 
-    /**
-     * Removes arguments from this container
-     *
-     * @param args cmd args
-     */
     public void remove(CmdArg...args){
         for(CmdArg arg : args){
             cmdArgs.remove(arg.getName());
         }
     }
 
-    /**
-     * Returns the argument by a given index
-     *
-     * @param name name
-     * @param <T> return type
-     * @return CmdArg
-     */
     public <T extends CmdArg> T getByName(String name){
         return (T) cmdArgs.get(name);
-    }
-
-    /**
-     * Verifies that all argument definitions within this container are fulfilled.
-     * @return true on success
-     */
-    public boolean verify(){
-        for(CmdArg arg : cmdArgs.values()){
-            if(!arg.verify()){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Returns the number of elements within this container
-     * @return size
-     */
-    public int size(){
-        return cmdArgs.size();
     }
 }

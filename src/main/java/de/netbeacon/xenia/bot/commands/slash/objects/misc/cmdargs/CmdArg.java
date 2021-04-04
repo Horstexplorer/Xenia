@@ -18,9 +18,19 @@ package de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs;
 
 public class CmdArg<T> {
 
-    public String getName(){ return null; }
+    private final T data;
+    private final CmdArgDef<T> def;
 
-    public T getValue(){ return null; }
+    public CmdArg(T data, CmdArgDef<T> def){
+        this.data = data;
+        this.def = def;
+    }
 
-    public boolean verify(){ return false; }
+    public String getName(){ return def.getName(); }
+
+    public T getValue(){ return data; }
+
+    public CmdArgDef<T> getDef() {
+        return def;
+    }
 }
