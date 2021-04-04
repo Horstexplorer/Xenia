@@ -83,10 +83,12 @@ public abstract class Command {
         if(memberSecondaryPermission != null){
             this.memberSecondaryPermissions.addAll(memberSecondaryPermission);
         }
-        for(CmdArgDef option : options){
-            if(option == null) continue;
-            commandData.addOption(option.getOptionData());
-            subcommandData.addOption(option.getOptionData());
+        if(options != null){
+            for(CmdArgDef option : options){
+                this.options.add(option);
+                commandData.addOption(option.getOptionData());
+                subcommandData.addOption(option.getOptionData());
+            }
         }
     }
 
