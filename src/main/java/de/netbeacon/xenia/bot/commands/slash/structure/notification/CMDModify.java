@@ -62,10 +62,10 @@ public class CMDModify extends Command {
             notification.lSetNotificationMessage(messageArg.getValue());
             notification.update();
 
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))+" (ID: "+notification.getId()+")").queue();
+            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))+" (ID: "+notification.getId()+")").queue();
         }catch (DataException | CacheException ex){
             if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
             }else{
                 throw ex;
             }

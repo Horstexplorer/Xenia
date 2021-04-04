@@ -97,7 +97,6 @@ public class SlashCommandListener extends ListenerAdapter {
 
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {
-        var v = event.getOptions().get(0);
         if(eventWaiter.waitingOnThis(event)){
             return;
         }
