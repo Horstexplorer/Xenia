@@ -319,7 +319,6 @@ public abstract class Command {
         for(CmdArgDef s : options){
             embedBuilder.addField("<"+s.getName()+">", s.getExtendedDescription(), false);
         }
-
         return embedBuilder.build();
     };
 
