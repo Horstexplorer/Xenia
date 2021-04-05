@@ -28,6 +28,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.utils.mentionremover.MentionRemover;
 
 import java.util.HashSet;
 import java.util.List;
@@ -53,7 +54,7 @@ public class RCMDTag extends Command {
         CmdArg<String> nameArg = cmdArgs.getByName("name");
         try{
             Tag tag = tagCache.get(nameArg.getValue());
-            commandEvent.getEvent().reply(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername())).queue();
+            commandEvent.getEvent().reply(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
         }catch (DataException | CacheException e){
             commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
         }
