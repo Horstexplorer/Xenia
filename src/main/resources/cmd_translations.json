@@ -254,7 +254,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Update an existing notification",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification edited",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "Tag %0% created",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "Failed to create tag",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "Tag %0% deleted",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "Failed to delete tag. Are you the owner and does the tag exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "Tag %0% updated",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "Failed to update tag. Are you the owner and does the tag exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*Tag created by %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "Tag %0% not found"
     }
   },
   {
@@ -512,7 +524,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Update an existing notification",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification edited",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "Tag %0% cweated",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "Faiwed tuwu cweate tag",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "Tag %0% deweted",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "Faiwed tuwu dewete tag. Awe uwu the ownew awnd does the tag exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "Tag %0% updated",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "Faiwed tuwu update tag. Awe uwu the ownew awnd does the tag exist?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*Tag cweated by %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "Tag %0% nowt found"
     }
   },
   {
@@ -770,7 +794,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Aktualisieren einer vorhandenen Benachrichtigung",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Benachrichtigung bearbeitet",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "Tag %0% erstellt",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "Tag kann nicht erstellt werden",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "Tag %0% gelöscht",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "Tag konnte nicht gelöscht werden. Sind Sie der Besitzer und existiert das Tag?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "Tag %0% aktualisiert",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "Tag konnte nicht aktualisiert werden. Sind Sie der Besitzer und existiert das Tag?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*Tag erstellt von %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "Tag %0% nicht gefunden"
     }
   },
   {
@@ -1028,7 +1064,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Mettre à jour une notification existante",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notification éditée",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Impossible de modifier la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "Impossible de modifier la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "Étiquette %0% créée",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "Échec de la création du tag",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "Étiquette %0% supprimé",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "Échec de la suppression du tag. Êtes-vous le propriétaire et le tag existe-t-il ?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "Étiquette %0% actualisé",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "Échec de la mise à jour du tag. Êtes-vous le propriétaire et la balise existe-t-elle ?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*Tag créé par %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "Tag %0% non trouvé"
     }
   },
   {
@@ -1286,7 +1334,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "Actualizar una notificación existente",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "Notificación editada",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "No se ha podido modificar la notificación. ¿Quizás esto fue creado por alguien más o no existe?"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "No se ha podido modificar la notificación. ¿Quizás esto fue creado por alguien más o no existe?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "Etiqueta %0% creada",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "Fallo al crear la etiqueta",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "Etiqueta %0% borrada",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "No se ha podido eliminar la etiqueta. ¿Es usted el propietario y existe la etiqueta?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "Etiqueta %0% actualizada",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "No se ha podido actualizar la etiqueta. ¿Es usted el propietario y existe la etiqueta?",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*Etiqueta creada por %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "Etiqueta %0% no encontrada"
     }
   },
   {
@@ -1544,7 +1604,19 @@
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.description": "既存の通知の更新",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.success.msg": "通知の編集",
-      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "通知の変更に失敗しました。これは他の人が作成したものか、存在しないものなのでしょうか？"
+      "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDModify.response.error.msg": "通知の変更に失敗しました。これは他の人が作成したものか、存在しないものなのでしょうか？",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.success.msg": "タグ %0% 作成された",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate.response.error.msg": "タグの作成に失敗しました",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.success.msg": "タグ %0% 削除",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete.response.error.msg": "タグの削除に失敗しました。あなたがオーナーで、そのタグは存在していますか？",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.success.msg": "タグ %0% の更新",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify.response.error.msg": "タグの更新に失敗しました。あなたがオーナーで、そのタグは存在していますか？",
+
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.success.msg": "%0%\n\n*タグの作成 %1%*",
+      "de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag.response.error.msg": "タグ %0% が見つかりません。"
     }
   }
 ]
