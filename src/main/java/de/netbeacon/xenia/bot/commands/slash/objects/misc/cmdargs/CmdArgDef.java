@@ -315,7 +315,7 @@ public class CmdArgDef<T> {
                     case USER:
                         if(toFav.equals(Member.class)){
                             return new Pair<>(Member.class, (o) -> o.getAsMember());
-                        }else{
+                        }else if(toFav.equals(User.class)){
                             return new Pair<>(User.class, (o) -> o.getAsUser());
                         }
                     case CHANNEL:
@@ -323,10 +323,6 @@ public class CmdArgDef<T> {
                             return new Pair<>(GuildChannel.class, (o) -> o.getAsGuildChannel());
                         }else if(toFav.equals(MessageChannel.class)){
                             return new Pair<>(MessageChannel.class, (o) -> o.getAsMessageChannel());
-                        }else if(toFav.equals(PrivateChannel.class)){
-                            return new Pair<>(PrivateChannel.class, (o) -> o.getAsPrivateChannel());
-                        }else{
-                            return new Pair<>(AbstractChannel.class, (o) -> o.getAsChannel());
                         }
                     case ROLE:
                         return new Pair<>(Role.class, (o) -> o.getAsRole());
