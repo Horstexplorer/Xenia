@@ -28,7 +28,6 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldow
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.mentionremover.MentionRemover;
-import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +38,7 @@ public class HYBRIDTag extends HybridCommand {
 
     public HYBRIDTag() {
         super(null,"tag", new CommandCooldown(CommandCooldown.Type.User, 1000),
-                new HashSet<>(List.of(Permission.MESSAGE_EMBED_LINKS)),
+               null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
                 List.of(TAG_NAME_DEF)

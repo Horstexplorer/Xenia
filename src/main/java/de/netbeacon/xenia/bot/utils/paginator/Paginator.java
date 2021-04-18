@@ -118,9 +118,9 @@ public class Paginator {
             textChannel.editMessageById(messageId, getPage().getAsMessageEmbed()).queue(message -> {
                 if(reactionEmote != null && user != null){
                     if(reactionEmote.isEmoji()){
-                        message.removeReaction(reactionEmote.getEmoji(), user).queue();
+                        message.removeReaction(reactionEmote.getEmoji(), user).queue(s -> {}, f -> {});
                     }else if(reactionEmote.isEmote()){
-                        message.removeReaction(reactionEmote.getEmote(), user).queue();
+                        message.removeReaction(reactionEmote.getEmote(), user).queue(s -> {}, f -> {});
                     }
                 }
                 if(then != null){

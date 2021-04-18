@@ -34,7 +34,7 @@ public class RCMDInfo extends Command {
 
     @Override
     public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"))
                 .addField("Xenia", AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), true)
                 .addField("Xenia-Backend", XeniaCore.getInstance().getBackendClient().getInfo(Info.Mode.Public).getVersion(), true)
                 .addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), String.valueOf(commandEvent.getEvent().getJDA().getShardInfo().getShardId()) , true)

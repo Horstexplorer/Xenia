@@ -25,7 +25,6 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
@@ -61,7 +60,7 @@ public class CMDD43Z1 extends AdminCommand {
                         if(evalResult.ok()){
                             ContentMatchBuffer.Statistics statistics = d43Z1Imp.getContentMatchBufferFor(commandEvent.getEvent().getAuthor().getIdLong()).getStatistics();
                             commandEvent.getEvent().getChannel().sendMessage(
-                                    EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                                    EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response")
                                             .addField("Input", evalResult.getContentMatch().getInput().getContent(), false)
                                             .addField("Est Input", evalResult.getContentMatch().getEstimatedInput().getContent(), false)
                                             .addField("Est Output", evalResult.getContentMatch().getEstimatedOutput().getContent(), false)
@@ -74,7 +73,7 @@ public class CMDD43Z1 extends AdminCommand {
                             ).queue();
                         }else{
                             commandEvent.getEvent().getChannel().sendMessage(
-                                    EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+                                    EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response")
                                             .setDescription(ExceptionUtils.getStackTrace(evalResult.getException()))
                                             .build()
                             ).queue();

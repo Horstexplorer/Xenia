@@ -42,7 +42,7 @@ public abstract class AdminCommand extends Command {
 
     @Override
     public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
                 .setColor(Color.RED)
                 .appendDescription("You are not allowed to do this")
                 .build();

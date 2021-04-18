@@ -54,7 +54,7 @@ public abstract class Command {
     private CommandCooldown commandCooldown;
     private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
     private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
-    private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
+    private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_EMBED_LINKS));
     private final AverageCounter processingAvgCounter = new AverageCounter();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -196,11 +196,15 @@ public abstract class Command {
             if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), Permission.MESSAGE_WRITE)){
-                    commandEvent.getEvent().reply(onMissingBotPerms(translationPackage)).queue();
+                    if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), Permission.MESSAGE_EMBED_LINKS)){
+                        commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
+                    }else{
+                        commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslation("default.onMissingBotPerms.description")+"\n"+translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn")+" "+Arrays.toString(botPermissions.toArray())).queue();
+                    }
                 }
                 return;
             }
-
+            // check user permissions
             Guild bGuild = commandEvent.getBackendDataPack().getbGuild();
             Member bMember = commandEvent.getBackendDataPack().getbMember();
             net.dv8tion.jda.api.entities.Member member = commandEvent.getEvent().getMember();
@@ -265,7 +269,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onCooldownActive(TranslationPackage translationPackage){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onCooldownActive.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onCooldownActive.title"))
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onCooldownActive.description"))
                 .build();
@@ -277,7 +281,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onMissingBotPerms(TranslationPackage translationPackage){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"))
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingBotPerms.description"))
                 .addField(translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn"), Arrays.toString(botPermissions.toArray()), false)
@@ -291,7 +295,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean vPerms){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingMemberPerms.description"));
         if(vPerms){
@@ -312,7 +316,7 @@ public abstract class Command {
         for(CmdArgDef s : options){
             usage.append("<").append(s.getName()).append(">").append(" ");
         }
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingArgs.title"))
                 .setColor(Color.RED)
                 .appendDescription(translationPackage.getTranslation("default.onMissingArgs.description"))
                 .addField(translationPackage.getTranslation("default.onMissingArgs.usage.fn"), usage.toString(), false);
@@ -329,7 +333,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onError(TranslationPackage translationPackage, String message){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onError.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onError.title"))
                 .setColor(Color.RED)
                 .setDescription(message)
                 .build();
@@ -342,7 +346,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onSuccess(TranslationPackage translationPackage, String message){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onSuccess.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onSuccess.title"))
                 .setColor(Color.GREEN)
                 .setDescription(message)
                 .build();
@@ -355,7 +359,7 @@ public abstract class Command {
      * @return MessageEmbed
      */
     public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"), XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser());
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"));
         if(e instanceof DataException){
             if(((DataException) e).getType().equals(DataException.Type.HTTP)){
                 embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()+" ("+((DataException) e).getCode()+")"));

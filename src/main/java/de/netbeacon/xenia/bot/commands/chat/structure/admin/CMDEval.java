@@ -184,7 +184,7 @@ public class CMDEval extends AdminCommand {
         if(code == null || code.isBlank()){
             code = "Unknown";
         }
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval")
                 .setColor(Color.ORANGE)
                 .addField("Engine:", engine, true)
                 .addField("Status:", status, true)
@@ -205,7 +205,7 @@ public class CMDEval extends AdminCommand {
         if(engine == null || engine.isBlank()){
             engine = "Unknown";
         }
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Eval")
                 .setColor(color)
                 .addField("Engine:", engine, true)
                 .addField("Status:", status, true)

@@ -25,7 +25,6 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
@@ -72,7 +71,7 @@ public class CMDGlobalInfo extends AdminCommand {
     }
 
     private MessageEmbed getRequestEmbed(){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest")
                 .setColor(Color.ORANGE)
                 .addField("Status:", "Running", true)
                 .addField("Timeout:", 5000+"ms", true)
@@ -81,7 +80,7 @@ public class CMDGlobalInfo extends AdminCommand {
     }
 
     private MessageEmbed getResultEmbed(){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest")
                 .setColor(Color.RED)
                 .addField("Status:", "Failure", true);
         return embedBuilder.build();

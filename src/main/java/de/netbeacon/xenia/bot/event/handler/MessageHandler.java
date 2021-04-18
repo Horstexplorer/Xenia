@@ -170,7 +170,7 @@ public class MessageHandler {
             bChannel.setTmpLoggingChannelId(-1);
             return;
         }
-        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!", event.getJDA().getSelfUser())
+        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
                 .addField("MessageID", event.getMessageId(), true)
                 .addField("Author", event.getAuthor().getAsTag(), true)
                 .addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
@@ -197,7 +197,7 @@ public class MessageHandler {
             bChannel.setTmpLoggingChannelId(-1);
             return;
         }
-        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!", event.getJDA().getSelfUser())
+        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
                 .addField("MessageID", event.getMessageId(), true)
                 .addField("AuthorID", String.valueOf(message.getUserId()), true)
                 .addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)

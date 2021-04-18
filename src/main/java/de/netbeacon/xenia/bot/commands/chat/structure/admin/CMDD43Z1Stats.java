@@ -22,7 +22,6 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.paginator.Page;
@@ -57,7 +56,7 @@ public class CMDD43Z1Stats extends AdminCommand {
         float getAVGEvalTime = eval.getEvalTimeAVGNs()/(float)1000000;
 
         ArrayList<Page> pages = new ArrayList<>();
-        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 1", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 1")
                 .addField("ContextPoolMaster", master.getUUID().toString(), false)
                 .addField("Contexts in master", String.valueOf(contexts.size()), true)
                 .addField("Shards in master", String.valueOf(shards.size()), true)
@@ -68,7 +67,7 @@ public class CMDD43Z1Stats extends AdminCommand {
                 .addField("AVG Queue Duration", getAVGQueueDuration+"ms", true)
                 .addField("AVG Eval Duration", getAVGEvalTime+"ms", true)
                 .build()));
-        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 2", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 2")
                 .addField("CONTENT_SHARD_SIZE", String.valueOf(CONTENT_SHARD_SIZE), true)
                 .addField("BUFFER_MAX_SIZE", String.valueOf(BUFFER_MAX_SIZE), true)
                 .addField("EVAL_ENABLE_BUFFER_BONUS_POLICY", String.valueOf(EVAL_ENABLE_BUFFER_BONUS_POLICY), true)

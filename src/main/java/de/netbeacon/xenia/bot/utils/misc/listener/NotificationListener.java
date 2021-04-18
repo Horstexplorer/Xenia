@@ -75,7 +75,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
     private MessageEmbed getNotificationMessage(long author, String message){
         User requester = XeniaCore.getInstance().getShardManager().retrieveUserById(author).complete();
         if(requester == null){
-            return EmbedBuilderFactory.getDefaultEmbed("Notification", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser())
+            return EmbedBuilderFactory.getDefaultEmbed("Notification")
                     .setDescription(message)
                     .setFooter("Requested By "+requester)
                     .build();

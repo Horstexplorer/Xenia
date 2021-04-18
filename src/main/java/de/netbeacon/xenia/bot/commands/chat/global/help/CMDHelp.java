@@ -25,11 +25,14 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.Translatio
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.paginator.Page;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.commons.collections4.ListUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Global help command
@@ -40,7 +43,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", null,null, null, null, null);
+        super("help", null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null, null, null);
         this.parent = parent;
     }
 
@@ -50,7 +53,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", null, null, null,null, null);
+        super("help", null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null,null, null);
         this.commandMap = commandMap;
     }
 

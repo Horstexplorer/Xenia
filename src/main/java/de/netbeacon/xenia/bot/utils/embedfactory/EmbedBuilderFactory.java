@@ -31,8 +31,8 @@ public class EmbedBuilderFactory {
      */
     public static EmbedBuilder getDefaultEmbed(String title){
         return new EmbedBuilder()
-                .setColor(Color.CYAN)
-                .setAuthor(title);
+                .setTitle(title)
+                .setColor(Color.CYAN);
     }
 
     /**
@@ -45,7 +45,7 @@ public class EmbedBuilderFactory {
     public static EmbedBuilder getDefaultEmbed(String title, User requester){
         return new EmbedBuilder()
                 .setColor(Color.CYAN)
-                .setAuthor(title)
+                .setTitle(title)
                 .setFooter("Requested By "+requester.getAsTag(), requester.getAvatarUrl());
     }
 
