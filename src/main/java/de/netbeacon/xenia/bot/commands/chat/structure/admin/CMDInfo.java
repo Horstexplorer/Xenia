@@ -48,7 +48,7 @@ public class CMDInfo extends AdminCommand {
         long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
         Info bInfo = commandEvent.getBackendClient().getInfo(Info.Mode.Private);
         bInfo.get();
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getAuthor())
                 .addField("Xenia","Version: "+AppInfo.get("buildVersion")+"_"+ AppInfo.get("buildNumber"), false)
                 .addField("Gateway Ping:", shardManager.getAverageGatewayPing()+"ms", true)
                 .addField("Shards:", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)
@@ -63,7 +63,7 @@ public class CMDInfo extends AdminCommand {
                 .addField("Threads:", String.valueOf(Thread.activeCount()), true)
                 .addField("Memory Usage:", (runtime.totalMemory()-runtime.freeMemory())/(1048576)+"Mb/"+runtime.totalMemory()/(1048576)+"Mb", true);
         event.getChannel().sendMessage(embedBuilder.build()).queue();
-        EmbedBuilder embedBuilder2 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        EmbedBuilder embedBuilder2 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getAuthor())
                 .addField("Xenia-Backend","Version: "+bInfo.getVersion(), false)
                 .addField("Request Ping:", bInfo.getPing()+"ms", false)
                 .addField("Guilds", String.valueOf(bInfo.getGuildCount()), true)

@@ -39,7 +39,7 @@ public class CMDPing extends AdminCommand {
         Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
         info.get();
 
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getAuthor())
                 .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
                 .addField("Gateway Ping:", gatewayPing+"ms", true)
                 .addField("Rest Ping", restPing+"ms", true)

@@ -80,7 +80,7 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
                     .setFooter("Requested By "+requester)
                     .build();
         }else{
-            return EmbedBuilderFactory.getDefaultEmbed("Notification", XeniaCore.getInstance().getShardManager().getShards().get(0).getSelfUser(), requester)
+            return EmbedBuilderFactory.getDefaultEmbed("Notification", requester)
                     .setDescription(message)
                     .build();
         }

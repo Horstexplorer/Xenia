@@ -53,7 +53,7 @@ public class HYBRIDGuild extends HybridCommand {
         Guild guild = commandEvent.getBackendDataPack().getbGuild();
         License license = commandEvent.getBackendDataPack().getbLicense();
         commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(),commandEvent.getEvent().getAuthor())
+                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
                         .addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), guild.getPreferredLanguage(), true)
                         .addField(translationPackage.getTranslation(getClass(), "response.field.2.title"), guild.getPrefix(), true)
                         .addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), Arrays.toString(guild.getSettings().getBits().toArray()), true)

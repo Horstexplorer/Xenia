@@ -72,7 +72,7 @@ public class CMDHelp extends Command {
         ArrayList<Page> pages = new ArrayList<>();
         for(var subList : subLists){
             EmbedBuilder embedBuilder = EmbedBuilderFactory
-                    .getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor());
+                    .getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getAuthor());
             for(var cmdEntry : subList){
                 Command c = cmdEntry.getValue();
                 StringBuilder commandCallBuilder = new StringBuilder()

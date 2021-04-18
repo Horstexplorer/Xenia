@@ -57,7 +57,7 @@ public class CMDList extends Command {
             }catch (Exception ignore){}
             stringBuilder.append(notification.getId()).append(" - ").append((user != null) ? user.getMetaUsername() : notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
         }
-        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getJDA().getSelfUser(), commandEvent.getEvent().getAuthor())
+        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
                 .setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();
         commandEvent.getEvent().getChannel().sendMessage(messageEmbed).queue();
     }
