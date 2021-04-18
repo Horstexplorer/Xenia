@@ -42,6 +42,7 @@ Some settings for the guild in general are available
 ```~settings guild settings OPTION true/false```  
 Options:
 ```
+DISABLE_COMMAND_AUTO_CORRECT_MESSAGE - Disables the typo response
 COMMAND_AUTO_CORRECT - Disables the typo response and executes the command it thinks is correct on typos
 ENFORCE_LANGUAGE - Enforce the set language as response language
 VPERM_ENABLE - Use the virtuale role/permission system provided by Xenia to check member/(role) permissions instead of the Discord one

@@ -128,13 +128,10 @@ public class MessageHandler {
         // get the command
         Command command = commandMap.get(args.get(0));
         if(command == null){
-            if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)){
-                return;
-            }
+            if(bGuild.getSettings().has(Guild.GuildSettings.Settings.DISABLE_COMMAND_AUTO_CORRECT_MESSAGE)) return;
+            if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)) return;
             List<Command> estimatedCommands = Command.getBestMatch(args.get(0), commandMap);
-            if(estimatedCommands.isEmpty()){
-                return;
-            }
+            if(estimatedCommands.isEmpty()) return;
             TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(bGuild, bMember);
             if(translationPackage == null){
                 event.getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
