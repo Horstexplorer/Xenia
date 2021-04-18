@@ -29,6 +29,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.mentionremover.MentionRemover;
+import net.dv8tion.jda.api.Permission;
 
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +40,7 @@ public class RCMDTag extends Command {
 
     public RCMDTag() {
         super("tag", "Displays a tag", new CommandCooldown(CommandCooldown.Type.User, 1000),
-                null,
+                new HashSet<>(List.of(Permission.MESSAGE_EMBED_LINKS)),
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
                 List.of(
