@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDMode extends Command {
 
     public CMDMode() {
-        super("mode", new CommandCooldown(CommandCooldown.Type.Guild, 2500),
+        super("mode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2500),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

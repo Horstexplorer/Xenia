@@ -37,7 +37,7 @@ import java.util.List;
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Create a new notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("create", "Create a new notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),

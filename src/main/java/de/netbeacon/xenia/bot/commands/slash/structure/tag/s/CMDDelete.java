@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PAT
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Deletes an existing tag",new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", "Deletes an existing tag", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),

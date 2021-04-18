@@ -34,7 +34,7 @@ import java.util.List;
 public class CMDDeleted extends Command {
 
     public CMDDeleted() {
-        super("deleted", "Restores the last message which has been deleted in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super("deleted", "Restores the last message which has been deleted in this channel", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),

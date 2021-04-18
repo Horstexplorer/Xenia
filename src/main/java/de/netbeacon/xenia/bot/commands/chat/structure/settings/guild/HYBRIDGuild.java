@@ -36,7 +36,7 @@ import java.util.List;
 public class HYBRIDGuild extends HybridCommand {
 
     public HYBRIDGuild(CommandGroup parent) {
-        super(parent, "guild", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(parent,"guild", false, new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

@@ -37,7 +37,7 @@ import java.util.List;
 public class CMDList extends Command {
 
     public CMDList() {
-        super("list", new CommandCooldown(CommandCooldown.Type.User, 2500),
+        super("list", false, new CommandCooldown(CommandCooldown.Type.User, 2500),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),

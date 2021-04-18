@@ -33,7 +33,7 @@ import java.util.List;
 public class HYBRIDTwitch extends HybridCommand {
 
     public HYBRIDTwitch() {
-        super(null, "twitch", new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super(null, "twitch", false, new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),

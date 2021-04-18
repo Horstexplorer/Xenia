@@ -24,7 +24,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 public class GROUPAdmin extends CommandGroup {
 
     public GROUPAdmin() {
-        super(null, "admin");
+        super(null,"admin", false);
         addChildCommand(new CMDEval());
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDPing());

@@ -38,7 +38,7 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PAT
 public class RCMDTag extends Command {
 
     public RCMDTag() {
-        super("tag", "Displays a tag", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super("tag", "Displays a tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),

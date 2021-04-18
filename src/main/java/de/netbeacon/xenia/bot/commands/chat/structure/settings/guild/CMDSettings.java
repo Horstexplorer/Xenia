@@ -36,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDSettings extends Command {
 
     public CMDSettings() {
-        super("settings", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+        super("settings", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

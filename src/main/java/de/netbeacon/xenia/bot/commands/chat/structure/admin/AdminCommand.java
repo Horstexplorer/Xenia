@@ -37,7 +37,7 @@ import java.util.List;
 public abstract class AdminCommand extends Command {
 
     public AdminCommand(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
-        super(alias, commandCooldown, botPermissions, memberPrimaryPermissions, memberSecondaryPermission, commandArgs);
+        super(alias, false, commandCooldown, botPermissions, memberPrimaryPermissions, memberSecondaryPermission, commandArgs);
     }
 
     @Override

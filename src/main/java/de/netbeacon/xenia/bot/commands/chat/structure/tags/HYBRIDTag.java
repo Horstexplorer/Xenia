@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class HYBRIDTag extends HybridCommand {
 
     public HYBRIDTag() {
-        super(null,"tag", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super(null,"tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
                null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),

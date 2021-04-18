@@ -56,22 +56,25 @@ public abstract class Command {
     private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
     private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_EMBED_LINKS));
     private final AverageCounter processingAvgCounter = new AverageCounter();
+    private final boolean isNSFW;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * Basic command with options
      * @param alias
      * @param description
+     * @param isNSFW
      * @param commandCooldown
      * @param botPermissions
      * @param memberPrimaryPermissions
      * @param memberSecondaryPermission
      * @param options
      */
-    public Command(String alias, String description, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> options){
+    public Command(String alias, String description, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> options){
         this.alias = alias;
         this.commandData = new CommandUpdateAction.CommandData(alias, description);
         this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
+        this.isNSFW = isNSFW;
         this.subcommandGroupData = null;
         this.commandCooldown = commandCooldown;
         if(botPermissions != null){
@@ -95,14 +98,16 @@ public abstract class Command {
     /**
      * Command Group
      * @param alias
+     * @param isNSFW
      * @param description
      * @param subCommands
      */
-    public Command(String alias, String description, Command...subCommands){
+    public Command(String alias, String description, boolean isNSFW, Command...subCommands){
         this.alias = alias;
         this.commandData = new CommandUpdateAction.CommandData(alias, description);
         this.subcommandData = null;
         this.subcommandGroupData = new CommandUpdateAction.SubcommandGroupData(alias, description);
+        this.isNSFW = isNSFW;
         for(Command command : subCommands){
             if(command == null) continue;
             subcommandGroupData.addSubcommand(command.getSubCommandData());
@@ -113,13 +118,15 @@ public abstract class Command {
     /**
      * Command RootGroup
      * @param alias
+     * @param isNSFW
      * @param description
      * @param subCommands
      */
-    public Command(String alias, String description, boolean areGroups, Command...subCommands){
+    public Command(String alias, String description, boolean isNSFW, boolean areGroups, Command...subCommands){
         this.alias = alias;
         this.commandData = new CommandUpdateAction.CommandData(alias, description);
         this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
+        this.isNSFW = isNSFW;
         this.subcommandGroupData = null;
         for(Command command : subCommands){
             if(command == null) continue;
@@ -133,6 +140,8 @@ public abstract class Command {
     }
 
     public String getAlias(){ return alias; }
+
+    public boolean isNSFW(){ return isNSFW; }
 
     public boolean isCommandGroup(){ return !childCommands.isEmpty(); }
 
@@ -242,6 +251,11 @@ public abstract class Command {
                 commandEvent.getEvent().reply(onBadOptions(translationPackage)).queue();
                 return;
             }
+            // check nsfw
+            if(commandEvent.getEvent().getTextChannel().isNSFW() && isNSFW()){
+                commandEvent.getEvent().reply(onMissingNSFW(translationPackage)).queue();
+                return;
+            }
             // everything alright
             long startTime = System.currentTimeMillis();
             try{
@@ -324,7 +338,19 @@ public abstract class Command {
             embedBuilder.addField("<"+s.getName()+">", s.getExtendedDescription(), false);
         }
         return embedBuilder.build();
-    };
+    }
+
+    /**
+     * Returns an message embed if the execution of the command requires nsfw but the channel isnt properly set up
+
+     * @return MessageEmbed
+     */
+    public MessageEmbed onMissingNSFW(TranslationPackage translationPackage){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingNSFW.title"))
+                .setColor(Color.RED)
+                .setDescription(translationPackage.getTranslation("default.onMissingNSFW.description"))
+                .build();
+    }
 
     /**
      * Returns an message embed which can be used to tell that something is wrong

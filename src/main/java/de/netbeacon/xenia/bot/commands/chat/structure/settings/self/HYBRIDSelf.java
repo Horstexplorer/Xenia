@@ -29,7 +29,7 @@ import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 public class HYBRIDSelf extends HybridCommand {
 
     public HYBRIDSelf(CommandGroup parent) {
-        super(parent, "self", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+        super(parent, "self", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 null,
                 null,

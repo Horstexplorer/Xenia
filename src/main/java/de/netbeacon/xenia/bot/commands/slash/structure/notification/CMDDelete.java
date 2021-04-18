@@ -34,7 +34,7 @@ import java.util.List;
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", "Delete an existing notification", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", "Delete an existing notification", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),

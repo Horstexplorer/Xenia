@@ -43,7 +43,7 @@ public class CMDHelp extends Command {
     private HashMap<String, Command> commandMap;
 
     public CMDHelp(CommandGroup parent){
-        super("help", null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null, null, null);
+        super("help", false, null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null, null, null);
         this.parent = parent;
     }
 
@@ -53,7 +53,7 @@ public class CMDHelp extends Command {
      * @param commandMap containing all commands
      */
     public CMDHelp(HashMap<String, Command> commandMap){
-        super("help", null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null,null, null);
+        super("help", false, null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null,null, null);
         this.commandMap = commandMap;
     }
 
@@ -73,11 +73,16 @@ public class CMDHelp extends Command {
         var cmdPerPage = 5;
         var subLists = ListUtils.partition(new ArrayList<>(commandEntries), cmdPerPage);
         ArrayList<Page> pages = new ArrayList<>();
+        boolean nsfw_hidden_flag = false;
         for(var subList : subLists){
             EmbedBuilder embedBuilder = EmbedBuilderFactory
                     .getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getAuthor());
             for(var cmdEntry : subList){
                 Command c = cmdEntry.getValue();
+                if(c.isNSFW() && !commandEvent.getEvent().getChannel().isNSFW()) {
+                    nsfw_hidden_flag = true;
+                    continue;
+                }
                 StringBuilder commandCallBuilder = new StringBuilder()
                         .append(commandPath).append(" ")
                         .append(c.getAlias()).append(" ");
@@ -89,6 +94,9 @@ public class CMDHelp extends Command {
                     }
                 }
                 embedBuilder.addField(commandCallBuilder.toString(), c.getDescription(translationPackage), false);
+            }
+            if(nsfw_hidden_flag){
+                embedBuilder.setDescription(translationPackage.getTranslation("default.onMissingNSFW.hidden"));
             }
             pages.add(new Page(embedBuilder.build()));
         }

@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDLicense extends Command {
 
     public CMDLicense() {
-        super("upgradelicense", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+        super("upgradelicense", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

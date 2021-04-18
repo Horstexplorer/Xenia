@@ -34,7 +34,7 @@ import java.util.List;
 public class CMDDeleted extends Command {
 
     public CMDDeleted() {
-        super("deleted", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super("deleted", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),

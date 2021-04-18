@@ -34,7 +34,7 @@ import java.util.List;
 public class CMDEdited extends Command {
 
     public CMDEdited() {
-        super("edited", "Restores the last message which has been edited in this channel", new CommandCooldown(CommandCooldown.Type.User, 1000),
+        super("edited", "Restores the last message which has been edited in this channel", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
                 null,
                 new HashSet<>(java.util.List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),

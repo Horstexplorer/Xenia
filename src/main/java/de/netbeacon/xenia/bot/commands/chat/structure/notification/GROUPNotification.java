@@ -21,7 +21,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 public class GROUPNotification extends CommandGroup {
 
     public GROUPNotification() {
-        super(null, "notification");
+        super(null, "notification", false);
         addChildCommand(new CMDCreate());
         addChildCommand(new CMDModify());
         addChildCommand(new CMDDelete());

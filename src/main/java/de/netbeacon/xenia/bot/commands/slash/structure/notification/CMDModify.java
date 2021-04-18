@@ -36,7 +36,7 @@ import java.util.List;
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Update an existing notification", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("modify", "Update an existing notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),

@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDDelete extends Command {
 
     public CMDDelete() {
-        super("delete", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("delete", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),

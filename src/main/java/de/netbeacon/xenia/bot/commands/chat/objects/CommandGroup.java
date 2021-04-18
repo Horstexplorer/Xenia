@@ -40,9 +40,10 @@ public abstract class CommandGroup extends Command{
      *
      * @param parent if this group is located inside of another group this should be set accordingly, else null
      * @param alias of the command group
+     * @param isNSFW if the command is an nsfw command
      */
-    public CommandGroup(CommandGroup parent, String alias){
-        super(alias);
+    public CommandGroup(CommandGroup parent, String alias, boolean isNSFW){
+        super(alias, isNSFW);
         this.parent = parent;
         addChildCommand(new CMDHelp(this));
     }
@@ -52,14 +53,15 @@ public abstract class CommandGroup extends Command{
      *
      * @param parent if this group is located inside of another group this should be set accordingly, else null
      * @param alias of the command group / command
+     * @param isNSFW if the command is an nsfw command
      * @param commandCooldown cooldown of the command on execution in command mode
      * @param botPermissions required for the user on execution in command mode
      * @param memberPrimaryPermission required for the member on execution in command mode
      * @param memberSecondaryPermission required for the member on execution in command mode
      * @param commandArgs for the command on execution in command mode
      */
-    protected CommandGroup(CommandGroup parent, String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
-        super(alias, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
+    protected CommandGroup(CommandGroup parent, String alias, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+        super(alias, isNSFW, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
         this.parent = parent;
         activateHybridMode();
         addChildCommand(new CMDHelp(this));

@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDChannelLink extends Command {
 
     public CMDChannelLink() {
-        super("channel_link", new CommandCooldown(CommandCooldown.Type.Guild, 10000),
+        super("channel_link", false, new CommandCooldown(CommandCooldown.Type.Guild, 10000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

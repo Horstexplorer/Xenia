@@ -36,7 +36,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDSetup extends Command {
 
     public CMDSetup() {
-        super("setup", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+        super("setup", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 new HashSet<>(List.of(Permission.MANAGE_CHANNEL)),
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

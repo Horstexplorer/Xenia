@@ -56,22 +56,25 @@ public abstract class Command {
     private final List<CmdArgDef> requiredArgs = new ArrayList<>();
     private final HashMap<String, Command> children = new HashMap<>();
     private boolean isHybrid = false;
+    private final boolean isNSFW;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
      * Creates a new instance of the command as command
      *
      * @param alias of the command
+     * @param isNSFW if the command is an nsfw command
      * @param commandCooldown cooldown of the command
      * @param botPermissions required for the user
      * @param memberPrimaryPermissions required for the member using discord perms
      * @param memberSecondaryPermission required for the member using v perms
      * @param commandArgs for the command
      */
-    public Command(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+    public Command(String alias, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
         this.alias = alias;
         this.aliasBitArray = LiamusJaccard.hashString(alias, 1);
         this.commandCooldown = commandCooldown;
+        this.isNSFW = isNSFW;
         if(botPermissions != null){
             this.botPermissions.addAll(botPermissions);
         }
@@ -90,10 +93,12 @@ public abstract class Command {
     /**
      * Creates a new instance of the command as command handler
      *
+     * @param isNSFW if the command is an nsfw command
      * @param alias of the command handler
      */
-    public Command(String alias){
+    public Command(String alias, boolean isNSFW){
         this.alias = alias;
+        this.isNSFW = isNSFW;
         this.aliasBitArray = LiamusJaccard.hashString(alias, 1);
         this.isCommandHandler = true;
     }
@@ -114,6 +119,15 @@ public abstract class Command {
      */
     public String getDescription(TranslationPackage translationPackage) {
         return translationPackage.getTranslation(getClass().getName()+".description");
+    }
+
+    /**
+     * Returns whether or not this command is an nsfw command
+     *
+     * @return true if it is
+     */
+    public boolean isNSFW(){
+        return isNSFW;
     }
 
     /**
@@ -284,6 +298,11 @@ public abstract class Command {
                 // activate cd
                 commandCooldown.deny(guildId, authorId);
             }
+            // check nsfw
+            if(commandEvent.getEvent().getChannel().isNSFW() && isNSFW()){
+                commandEvent.getEvent().getChannel().sendMessage(onMissingNSFW(translationPackage)).queue();
+                return;
+            }
             // everything alright
             try{
                 onExecution(cmdArgs, commandEvent, translationPackage);
@@ -403,7 +422,19 @@ public abstract class Command {
         }
 
         return embedBuilder.build();
-    };
+    }
+
+    /**
+     * Returns an message embed if the execution of the command requires nsfw but the channel isnt properly set up
+
+     * @return MessageEmbed
+     */
+    public MessageEmbed onMissingNSFW(TranslationPackage translationPackage){
+        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingNSFW.title"))
+                .setColor(Color.RED)
+                .setDescription(translationPackage.getTranslation("default.onMissingNSFW.description"))
+                .build();
+    }
 
     /**
      * Returns an message embed which can be used to tell that something is wrong

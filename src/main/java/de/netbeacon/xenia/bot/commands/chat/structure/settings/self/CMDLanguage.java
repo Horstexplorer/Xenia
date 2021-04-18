@@ -32,7 +32,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDLanguage extends Command {
 
     public CMDLanguage() {
-        super("language",  new CommandCooldown(CommandCooldown.Type.User, 2000),
+        super("language",false, new CommandCooldown(CommandCooldown.Type.User, 2000),
                 null,
                 null,
                 null,

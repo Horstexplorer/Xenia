@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDAccessMode extends Command {
 
     public CMDAccessMode() {
-        super("accessmode", new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+        super("accessmode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
                 null,
                 new HashSet<>(List.of(Permission.MANAGE_SERVER)),
                 new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),

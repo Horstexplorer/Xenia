@@ -38,7 +38,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDUpdate extends Command {
 
     public CMDUpdate() {
-        super("update", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("update", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
                 new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),

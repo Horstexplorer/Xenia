@@ -24,6 +24,9 @@
       "default.onUnhandledException.backendexception.msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us",
       "default.onUnhandledException.exception.msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us",
       "default.estimatedCommand.msg": "The command you typed `%0%` doesnt seem to exist. Maybe you wanted to use `%1%` instead?",
+      "default.onMissingNSFW.title": "Failed: Command requires NSFW channel",
+      "default.onMissingNSFW.description": "NSFW commands cannot be used in non NSFW channels",
+      "default.onMissingNSFW.hidden": "Some NSFW commands were hidden due to execution in a non NSFW channel",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Displays a list of commands",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Help / Commands**",
@@ -294,6 +297,9 @@
       "default.onUnhandledException.backendexception.msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.onUnhandledException.exception.msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us",
       "default.estimatedCommand.msg": "The command u typed `%0%` doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU",
+      "default.onMissingNSFW.title": "Faiwed: command wequiwes nsfw channew",
+      "default.onMissingNSFW.description": "Nsfw commands cannot be used in non nsfw channews",
+      "default.onMissingNSFW.hidden": "Some nsfw commands wewe hidden due to execution in a non nsfw channew",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Dispways a wist of commands",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Hewp / Commands**",
@@ -556,7 +562,7 @@
       "default.onMissingBotPerms.title": "Fehlgeschlagen: Dem Bot fehlen die Berechtigungen",
       "default.onMissingBotPerms.description": "Ich kann den Befehl aufgrund fehlender Berechtigungen nicht ausführen!",
       "default.onMissingBotPerms.requiredPerms.fn": "Erforderliche Berechtigungen:",
-      "default.onCooldownActive.title": "Gescheitert: Abklingzeit aktiv",
+      "default.onCooldownActive.title": "Fehlgeschlagen: Abklingzeit aktiv",
       "default.onCooldownActive.description": "Bitte warten etwas, bevor du diesen Befehl erneut versuchst",
       "default.onUnhandledException.title": "Oh je",
       "default.onUnhandledException.dataexception.msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte",
@@ -564,6 +570,9 @@
       "default.onUnhandledException.backendexception.msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
       "default.onUnhandledException.exception.msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte",
       "default.estimatedCommand.msg": "Der eingegebene Befehl `%0%` scheint nicht zu existieren. Vielleicht wolltest du stattdessen `%1%` verwenden?",
+      "default.onMissingNSFW.title": "Fehlgeschlagen: Befehl erfordert NSFW-Kanal",
+      "default.onMissingNSFW.description": "NSFW-Befehle können nicht in nicht NSFW-Kanälen verwendet werden",
+      "default.onMissingNSFW.hidden": "Einige NSFW-Befehle wurden aufgrund der Ausführung in einem nicht NSFW-Kanal ausgeblendet",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Zeigt eine Liste von Befehlen an",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Hilfe / Befehle**",
@@ -834,6 +843,9 @@
       "default.onUnhandledException.backendexception.msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
       "default.onUnhandledException.exception.msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter",
       "default.estimatedCommand.msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?",
+      "default.onMissingNSFW.title": "Échec : La commande nécessite un canal NSFW",
+      "default.onMissingNSFW.description": "Les commandes NSFW ne peuvent pas être utilisées dans les canaux non NSFW.",
+      "default.onMissingNSFW.hidden": "Certaines commandes NSFW ont été cachées en raison de leur exécution dans un canal non NSFW.",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Affiche une liste de commandes",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Aide / Commandes**",
@@ -1104,6 +1116,9 @@
       "default.onUnhandledException.backendexception.msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
       "default.onUnhandledException.exception.msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros",
       "default.estimatedCommand.msg": "El comando que escribiste `%0%` no parece existir. ¿Quizás querías usar `%1%` en su lugar?",
+      "default.onMissingNSFW.title": "Fallido: El comando requiere un canal NSFW",
+      "default.onMissingNSFW.description": "Los comandos NSFW no pueden utilizarse en canales no NSFW",
+      "default.onMissingNSFW.hidden": "Algunos comandos NSFW fueron ocultados debido a la ejecución en un canal no NSFW",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Muestra una lista de comandos",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Ayuda / Comandos**",
@@ -1374,6 +1389,9 @@
       "default.onUnhandledException.backendexception.msg": "なぜかバックエンドとの通信に失敗しました(%0%)。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
       "default.onUnhandledException.exception.msg": "何か悪いことが起きて、それが何なのかよくわかりません。少し待ってから再度お試しください。それでもエラーが続く場合は、お問い合わせください。",
       "default.estimatedCommand.msg": "あなたが入力した `%0%` というコマンドは存在しないようです。代わりに `%1%` を使いたかったのでしょうか？",
+      "default.onMissingNSFW.title": "失敗しました。コマンドにNSFWチャンネルが必要",
+      "default.onMissingNSFW.description": "NSFWのコマンドはNSFWでないチャンネルでは使用できません。",
+      "default.onMissingNSFW.hidden": "NSFWではないチャンネルで実行されたため、NSFWコマンドの一部が非表示になりました。",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "コマンドの一覧を表示します。",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**ヘルプ / コマンド**",

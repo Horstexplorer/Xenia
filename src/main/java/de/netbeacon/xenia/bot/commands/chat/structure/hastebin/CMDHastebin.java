@@ -44,7 +44,7 @@ public class CMDHastebin extends Command {
     private static final Tika TIKA = new Tika();
 
     public CMDHastebin() {
-        super("hastebin", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("hastebin", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.HASTEBIN_UPLOAD_USE)),

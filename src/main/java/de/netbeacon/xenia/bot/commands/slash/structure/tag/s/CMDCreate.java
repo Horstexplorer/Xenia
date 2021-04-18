@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PAT
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("create", "Creates a new tag with a given tag name and content", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),

@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PAT
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", new CommandCooldown(CommandCooldown.Type.User, 5000),
+        super("modify", "Modifies a given tag with the new content", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),

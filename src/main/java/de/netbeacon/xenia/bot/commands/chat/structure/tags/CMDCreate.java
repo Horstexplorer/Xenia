@@ -35,7 +35,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDCreate extends Command {
 
     public CMDCreate() {
-        super("create", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("create", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),

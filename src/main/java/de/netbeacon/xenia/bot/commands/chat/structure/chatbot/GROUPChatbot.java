@@ -22,7 +22,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.chatbot.learning.GROUPLear
 public class GROUPChatbot extends CommandGroup {
 
     public GROUPChatbot() {
-        super(null, "chatbot");
+        super(null,"chatbot", false);
         addChildCommand(new CMDInfo());
         addChildCommand(new CMDSetup());
         addChildCommand(new GROUPLearning(this));

@@ -21,7 +21,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 public class GROUPLearning extends CommandGroup {
 
     public GROUPLearning(CommandGroup parent) {
-        super(parent, "learning");
+        super(parent, "learning", false);
         addChildCommand(new CMDMode());
         addChildCommand(new CMDChannelLink());
     }

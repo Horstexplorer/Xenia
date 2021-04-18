@@ -37,7 +37,7 @@ import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDe
 public class CMDModify extends Command {
 
     public CMDModify() {
-        super("update", new CommandCooldown(CommandCooldown.Type.User, 10000),
+        super("update", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
                 null,
                 null,
                 new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
