@@ -244,7 +244,7 @@ public abstract class Command {
                 return;
             }
             // check bot permissions
-            if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(),getBotPermissions())){
+            if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), getBotPermissions())){
                 // bot does not have the required permissions
                 if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getChannel(), Permission.MESSAGE_WRITE)){
                     commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
