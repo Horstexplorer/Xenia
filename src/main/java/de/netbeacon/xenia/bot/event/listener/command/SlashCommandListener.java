@@ -58,7 +58,7 @@ public class SlashCommandListener extends ListenerAdapter {
         register.accept(new RCMDGNotification());
         register.accept(new RCMDGAnime());
 
-
+        // // // // // // // // // //
         HashMap<String, Command> guildCommandMap = new HashMap<>();
         register = command -> guildCommandMap.put(command.getAlias(), command);
         // register up to 100 commands which can be guild specifically toggled

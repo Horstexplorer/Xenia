@@ -24,7 +24,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 public class RCMDGLast extends Command {
 
     public RCMDGLast() {
-        super("last", "Restore deleted or edited messages", false,
+        super("last", "Restore deleted or edited messages", false, false,
                 new CMDDeleted(), new CMDEdited()
         );
     }

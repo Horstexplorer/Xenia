@@ -58,10 +58,10 @@ public abstract class AnimeImageCommand extends Command {
                         // pick correct response
                         CmdArg<User> cmdArg = cmdArgs.getByName("user");
                         String additionalUserTag = null;
-                        if(cmdArg.getValue() != null){
+                        if(cmdArg != null && cmdArg.getValue() != null){
                             additionalUserTag = cmdArg.getValue().getAsTag();
                         }
-                        String message  = translationPackage.getTranslationWithPlaceholders("response.msg."+(additionalUserTag != null ? 1 : 0), commandEvent.getEvent().getUser().getAsTag(), (additionalUserTag != null ? additionalUserTag : "unknown#unknown"));
+                        String message  = translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg."+(additionalUserTag != null ? 1 : 0), commandEvent.getEvent().getUser().getAsTag(), (additionalUserTag != null ? additionalUserTag : "unknown#unknown"));
                         // get image
                         PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
                                 url -> {
@@ -70,16 +70,16 @@ public abstract class AnimeImageCommand extends Command {
                                     ).queue();
                                 },
                                 error -> {
-                                    ack.editOriginal(onError(translationPackage, "response.error.img.msg")).queue(s -> {}, e -> {});
+                                    ack.editOriginal(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.img.msg"))).queue(s -> {}, e -> {});
                                 }
                         );
                     },
                     err -> {
-                        commandEvent.getEvent().reply(onError(translationPackage, "response.error.msg")).queue(s -> {}, e -> {});
+                        commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue(s -> {}, e -> {});
                     }
             );
         }catch (Exception e){
-            commandEvent.getEvent().reply(onError(translationPackage, "response.error.msg")).queue(s -> {}, ex -> {});
+            commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue(s -> {}, ex -> {});
         }
     }
 }
