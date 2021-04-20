@@ -22,6 +22,6 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
 public class CMDEevee extends AnimeImageCommand {
     public CMDEevee() {
-        super("eevee", true, false, ImageType.SFW.EEVEE, ContentType.GIF);
+        super("eevee", false, false, ImageType.SFW.EEVEE, ContentType.GIF);
     }
 }

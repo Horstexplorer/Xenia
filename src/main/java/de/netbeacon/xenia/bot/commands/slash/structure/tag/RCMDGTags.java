@@ -27,7 +27,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify;
 public class RCMDGTags extends Command {
 
     public RCMDGTags() {
-        super("tags", "Manage tags for this guild", false,
+        super("tags", "Manage tags for this guild", false, false,
                 new CMDCreate(), new CMDModify(), new CMDDelete()
         );
     }

@@ -61,7 +61,7 @@ public abstract class AnimeImageCommand extends Command {
                         if(cmdArg.getValue() != null){
                             additionalUserTag = cmdArg.getValue().getAsTag();
                         }
-                        String message  = translationPackage.getTranslationWithPlaceholders("response.msg."+(additionalUserTag != null ? 1 : 0), (additionalUserTag != null ? List.of(commandEvent.getEvent().getUser().getAsTag(), additionalUserTag) : List.of(commandEvent.getEvent().getUser().getAsTag())));
+                        String message  = translationPackage.getTranslationWithPlaceholders("response.msg."+(additionalUserTag != null ? 1 : 0), commandEvent.getEvent().getUser().getAsTag(), (additionalUserTag != null ? additionalUserTag : "unknown#unknown"));
                         // get image
                         PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
                                 url -> {

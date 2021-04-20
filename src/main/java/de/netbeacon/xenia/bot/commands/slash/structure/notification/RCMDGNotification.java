@@ -24,7 +24,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 public class RCMDGNotification extends Command {
 
     public RCMDGNotification() {
-        super("notification", "Manage notifications for this guild", false,
+        super("notification", "Manage notifications for this guild", false, false,
                 new CMDCreate(), new CMDDelete(), new CMDList(), new CMDModify()
         );
     }

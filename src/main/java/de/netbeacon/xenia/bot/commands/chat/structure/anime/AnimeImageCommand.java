@@ -67,7 +67,7 @@ public abstract class AnimeImageCommand extends Command {
                 }
             }
             // get message
-            String message = translationPackage.getTranslationWithPlaceholders("response.msg."+(additionalUserTag != null ? 1 : 0), (additionalUserTag != null ? List.of(commandEvent.getEvent().getAuthor().getAsTag(), additionalUserTag) : List.of(commandEvent.getEvent().getAuthor().getAsTag())));
+            String message = translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.msg."+(additionalUserTag != null ? 1 : 0), commandEvent.getEvent().getAuthor().getAsTag(), (additionalUserTag != null ? additionalUserTag : "unknown#unknown"));
             // get image
             PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
                     url -> {
@@ -76,11 +76,11 @@ public abstract class AnimeImageCommand extends Command {
                         ).queue();
                     },
                     error -> {
-                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "response.error.img.msg")).queue(s -> {}, e -> {});
+                        commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.img.msg"))).queue(s -> {}, e -> {});
                     }
             );
         }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "response.error.msg")).queue(s -> {}, ex -> {});
+            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue(s -> {}, ex -> {});
         }
     }
 }
