@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDFuck extends AnimeImageCommand {
     public CMDFuck() {
-        super("fuck", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.FUCK, ContentType.GIF);
+        super("fuck", "-NSFW content-", false, true, ImageType.NSFW.FUCK, ContentType.GIF);
     }
 }

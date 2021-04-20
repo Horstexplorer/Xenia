@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDPat extends AnimeImageCommand {
     public CMDPat() {
-        super("pat", "Pat someone", List.of(
-            "%0% gets patted",
-            "%0% pats %1%"
-        ), false, ImageType.SFW.PAT, ContentType.GIF);
+        super("pat", "Pat someone", true, false, ImageType.SFW.PAT, ContentType.GIF);
     }
 }

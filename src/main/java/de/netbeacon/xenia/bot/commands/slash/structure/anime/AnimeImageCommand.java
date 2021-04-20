@@ -37,18 +37,16 @@ public abstract class AnimeImageCommand extends Command {
 
     private final ImageType imageType;
     private final ContentType contentType;
-    private final List<String> actionsWithPlaceholders;
 
-    public AnimeImageCommand(String alias, String description, List<String> actionsWithPlaceholders, boolean isNSFW, ImageType imageType, ContentType contentType) {
+    public AnimeImageCommand(String alias, String description, boolean optionalUser, boolean isNSFW, ImageType imageType, ContentType contentType) {
         super(alias, description, isNSFW, new CommandCooldown(CommandCooldown.Type.User, 2500),
                 null,
                 null,
                 new HashSet<>(List.of(isNSFW ? Role.Permissions.Bit.ANIME_NSFW_USE : Role.Permissions.Bit.ANIME_SFW_USE)),
-                (actionsWithPlaceholders.size() > 1) ? List.of(new CmdArgDef.Builder<>("user", "user", "user", User.class).setOptional(true).build()) : null
+                (optionalUser) ? List.of(new CmdArgDef.Builder<>("user", "user", "user", User.class).setOptional(true).build()) : null
         );
         this.imageType = imageType;
         this.contentType = contentType;
-        this.actionsWithPlaceholders = actionsWithPlaceholders;
     }
 
     @Override

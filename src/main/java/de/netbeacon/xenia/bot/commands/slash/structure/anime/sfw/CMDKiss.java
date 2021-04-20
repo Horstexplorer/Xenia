@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDKiss extends AnimeImageCommand {
     public CMDKiss() {
-        super("kiss", "Kiss someone", List.of(
-            "%0% gets kissed",
-            "%0% kisses %1%"
-        ), false, ImageType.SFW.KISS, ContentType.GIF);
+        super("kiss", "Kiss someone", true, false, ImageType.SFW.KISS, ContentType.GIF);
     }
 }

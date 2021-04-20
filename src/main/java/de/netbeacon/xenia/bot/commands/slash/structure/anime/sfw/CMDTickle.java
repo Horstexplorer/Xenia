@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDTickle extends AnimeImageCommand {
     public CMDTickle() {
-        super("tickle", "Tickle someone", List.of(
-                "%0% gets tickled",
-                "%0% tickles %1%"
-        ), false, ImageType.SFW.TICKLE, ContentType.GIF);
+        super("tickle", "Tickle someone", true, false, ImageType.SFW.TICKLE, ContentType.GIF);
     }
 }

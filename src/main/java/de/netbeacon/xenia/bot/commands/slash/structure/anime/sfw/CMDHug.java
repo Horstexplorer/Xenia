@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDHug extends AnimeImageCommand {
     public CMDHug() {
-        super("hug", "Hug someone", List.of(
-            "%0% gets hugged",
-            "%0% hugs %1%"
-        ), false, ImageType.SFW.HUG, ContentType.GIF);
+        super("hug", "Hug someone", true, false, ImageType.SFW.HUG, ContentType.GIF);
     }
 }

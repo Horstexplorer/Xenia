@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDYuri extends AnimeImageCommand {
     public CMDYuri() {
-        super("yuri", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.YURI, ContentType.GIF);
+        super("yuri", "-NSFW content-", false, true, ImageType.NSFW.YURI, ContentType.GIF);
     }
 }

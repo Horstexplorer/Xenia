@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDPoke extends AnimeImageCommand {
     public CMDPoke() {
-        super("poke", "Poke someone", List.of(
-            "%0% gets poked",
-            "%0% pokes %1%"
-        ), false, ImageType.SFW.POKE, ContentType.GIF);
+        super("poke", "Poke someone", true, false, ImageType.SFW.POKE, ContentType.GIF);
     }
 }

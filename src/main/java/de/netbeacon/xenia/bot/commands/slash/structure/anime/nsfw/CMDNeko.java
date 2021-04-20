@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDNeko extends AnimeImageCommand {
     public CMDNeko() {
-        super("neko", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.NEKO, ContentType.GIF);
+        super("neko", "-NSFW content-", false, true, ImageType.NSFW.NEKO, ContentType.GIF);
     }
 }

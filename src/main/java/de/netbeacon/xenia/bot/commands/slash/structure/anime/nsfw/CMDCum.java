@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDCum extends AnimeImageCommand {
     public CMDCum() {
-        super("cum", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.CUM, ContentType.GIF);
+        super("cum", "-NSFW content-", false, true, ImageType.NSFW.CUM, ContentType.GIF);
     }
 }

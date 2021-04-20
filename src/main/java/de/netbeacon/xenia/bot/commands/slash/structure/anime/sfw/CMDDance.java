@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDDance extends AnimeImageCommand {
     public CMDDance() {
-        super("dance", "dance with someone", List.of(
-            "%0% dances",
-            "%0% dances with %1%"
-        ), false, ImageType.SFW.DANCE, ContentType.GIF);
+        super("dance", "dance with someone", false, false, ImageType.SFW.DANCE, ContentType.GIF);
     }
 }

@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDBlowjob extends AnimeImageCommand {
     public CMDBlowjob() {
-        super("blowjob", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.BLOWJOB, ContentType.GIF);
+        super("blowjob", "-NSFW content-", false, true, ImageType.NSFW.BLOWJOB, ContentType.GIF);
     }
 }

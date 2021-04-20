@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDFeed extends AnimeImageCommand {
     public CMDFeed() {
-        super("feed", "Feed someone", List.of(
-            "%0% receives food",
-            "%0% feeds %1%"
-        ), false, ImageType.SFW.FEED, ContentType.GIF);
+        super("feed", "Feed someone", true, false, ImageType.SFW.FEED, ContentType.GIF);
     }
 }

@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDSlap extends AnimeImageCommand {
     public CMDSlap() {
-        super("slap", "Slap someone", List.of(
-                "%0% got slapped",
-                "%0% slaps %1%"
-        ), false, ImageType.SFW.SLAP, ContentType.GIF);
+        super("slap", "Slap someone", true, false, ImageType.SFW.SLAP, ContentType.GIF);
     }
 }

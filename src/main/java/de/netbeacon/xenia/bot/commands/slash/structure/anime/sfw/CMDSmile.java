@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDSmile extends AnimeImageCommand {
     public CMDSmile() {
-        super("smile", "Smile at someone", List.of(
-            "%0% smiles",
-            "%0% smiles at %1%"
-        ), false, ImageType.SFW.SMILE, ContentType.GIF);
+        super("smile", "Smile at someone", true, false, ImageType.SFW.SMILE, ContentType.GIF);
     }
 }

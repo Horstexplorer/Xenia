@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDSolo extends AnimeImageCommand {
     public CMDSolo() {
-        super("solo", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.SOLO, ContentType.GIF);
+        super("solo", "-NSFW content-", false, true, ImageType.NSFW.SOLO, ContentType.GIF);
     }
 }

@@ -20,13 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDBlush extends AnimeImageCommand {
     public CMDBlush() {
-        super("blush", "Blushes because of somebody", List.of(
-            "%0% blushes",
-            "%1% made %0% blush"
-        ), false, ImageType.SFW.BLUSH, ContentType.GIF);
+        super("blush", "Blushes because of somebody", true, false, ImageType.SFW.BLUSH, ContentType.GIF);
     }
 }

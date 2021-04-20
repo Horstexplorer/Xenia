@@ -20,12 +20,8 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-import java.util.List;
-
 public class CMDPussylick extends AnimeImageCommand {
     public CMDPussylick() {
-        super("pussylick", "-NSFW content-", List.of(
-            ""
-        ), true, ImageType.NSFW.PUSSYLICK, ContentType.GIF);
+        super("pussylick", "-NSFW content-", false, true, ImageType.NSFW.PUSSYLICK, ContentType.GIF);
     }
 }
