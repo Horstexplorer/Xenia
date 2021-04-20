@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.event.listener.command;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.structure.anime.RCMDGAnime;
 import de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo;
 import de.netbeacon.xenia.bot.commands.slash.structure.last.RCMDGLast;
 import de.netbeacon.xenia.bot.commands.slash.structure.notification.RCMDGNotification;
@@ -55,6 +56,7 @@ public class SlashCommandListener extends ListenerAdapter {
         register.accept(new RCMDGTags());
         register.accept(new RCMDGLast());
         register.accept(new RCMDGNotification());
+        register.accept(new RCMDGAnime());
 
 
         HashMap<String, Command> guildCommandMap = new HashMap<>();

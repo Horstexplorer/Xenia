@@ -136,4 +136,11 @@ public class CmdArgDefStatics {
     public static final CmdArgDef<String> ADMIN_D43Z1_INPUT = new CmdArgDef.Builder<>("input", String.class)
             .addPredicateDescription("text")
             .buildAllMatch();
+
+    // ANIME
+    public static final CmdArgDef<Mention> ANIME_OPTIONAL_USER = new CmdArgDef.Builder<>("user*", Mention.class)
+            .predicateAddCompare(Mention::getMentionType, Message.MentionType.USER, 0)
+            .addPredicateDescription("user mention, optional")
+            .buildAllMatch()
+            .setOptional(true);
 }

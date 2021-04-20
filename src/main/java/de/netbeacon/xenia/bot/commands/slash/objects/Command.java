@@ -252,7 +252,7 @@ public abstract class Command {
                 return;
             }
             // check nsfw
-            if(commandEvent.getEvent().getTextChannel().isNSFW() && isNSFW()){
+            if(!commandEvent.getEvent().getTextChannel().isNSFW() && isNSFW()){
                 commandEvent.getEvent().reply(onMissingNSFW(translationPackage)).queue();
                 return;
             }

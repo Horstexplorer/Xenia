@@ -299,7 +299,7 @@ public abstract class Command {
                 commandCooldown.deny(guildId, authorId);
             }
             // check nsfw
-            if(commandEvent.getEvent().getChannel().isNSFW() && isNSFW()){
+            if(!commandEvent.getEvent().getChannel().isNSFW() && isNSFW()){
                 commandEvent.getEvent().getChannel().sendMessage(onMissingNSFW(translationPackage)).queue();
                 return;
             }

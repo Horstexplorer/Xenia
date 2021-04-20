@@ -40,6 +40,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
@@ -113,6 +114,7 @@ public class XeniaCore {
         paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
+        PurrBotAPIWrapper.getInstance(true);
         // d43z1
         logger.info("Preparing D43Z1...");
         D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);

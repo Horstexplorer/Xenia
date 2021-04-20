@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Global help command
@@ -70,19 +71,16 @@ public class CMDHelp extends Command {
         String commandPath = commandPathBuilder.toString().trim();
         // calculate number of pages
         var commandEntries = ((parent != null) ? parent.getChildCommands().entrySet() : commandMap.entrySet());
+        var filtered = commandEntries.stream().filter(e -> !e.getValue().isNSFW() || commandEvent.getEvent().getChannel().isNSFW()).collect(Collectors.toList());
+        var nsfw_hidden_flag = commandEntries.size() != filtered.size();
         var cmdPerPage = 5;
-        var subLists = ListUtils.partition(new ArrayList<>(commandEntries), cmdPerPage);
+        var subLists = ListUtils.partition(new ArrayList<>(filtered), cmdPerPage);
         ArrayList<Page> pages = new ArrayList<>();
-        boolean nsfw_hidden_flag = false;
         for(var subList : subLists){
             EmbedBuilder embedBuilder = EmbedBuilderFactory
                     .getDefaultEmbed("Help"+((parent != null)?(" <"+parent.getAlias()+">"):""), commandEvent.getEvent().getAuthor());
             for(var cmdEntry : subList){
                 Command c = cmdEntry.getValue();
-                if(c.isNSFW() && !commandEvent.getEvent().getChannel().isNSFW()) {
-                    nsfw_hidden_flag = true;
-                    continue;
-                }
                 StringBuilder commandCallBuilder = new StringBuilder()
                         .append(commandPath).append(" ")
                         .append(c.getAlias()).append(" ");

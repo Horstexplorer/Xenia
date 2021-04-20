@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs;
 
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,4 +54,6 @@ public class CmdArgs {
     public <T extends CmdArg> T getByName(String name){
         return (T) cmdArgs.get(name);
     }
+
+    public Collection<CmdArg> getAll(){ return cmdArgs.values(); }
 }

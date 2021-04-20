@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CmdArgs {
 
@@ -83,6 +84,8 @@ public class CmdArgs {
         }
         return true;
     }
+
+    public List<CmdArg> getAll(){ return cmdArgs; }
 
     /**
      * Returns the number of elements within this container
