@@ -29,10 +29,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.apache.commons.collections4.ListUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,6 +39,7 @@ public class CMDHelp extends Command {
 
     private CommandGroup parent;
     private HashMap<String, Command> commandMap;
+    private static final int COMMANDS_PER_PAGE = 8;
 
     public CMDHelp(CommandGroup parent){
         super("help", false, null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null, null, null);
@@ -71,10 +69,9 @@ public class CMDHelp extends Command {
         String commandPath = commandPathBuilder.toString().trim();
         // calculate number of pages
         var commandEntries = ((parent != null) ? parent.getChildCommands().entrySet() : commandMap.entrySet());
-        var filtered = commandEntries.stream().filter(e -> !e.getValue().isNSFW() || commandEvent.getEvent().getChannel().isNSFW()).collect(Collectors.toList());
+        var filtered = commandEntries.stream().filter(e -> !e.getValue().isNSFW() || commandEvent.getEvent().getChannel().isNSFW()).sorted(Map.Entry.comparingByKey()).collect(Collectors.toList());
         var nsfw_hidden_flag = commandEntries.size() != filtered.size();
-        var cmdPerPage = 5;
-        var subLists = ListUtils.partition(new ArrayList<>(filtered), cmdPerPage);
+        var subLists = ListUtils.partition(new ArrayList<>(filtered), COMMANDS_PER_PAGE);
         ArrayList<Page> pages = new ArrayList<>();
         for(var subList : subLists){
             EmbedBuilder embedBuilder = EmbedBuilderFactory
