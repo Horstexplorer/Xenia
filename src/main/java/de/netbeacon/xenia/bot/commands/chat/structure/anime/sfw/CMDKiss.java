@@ -22,6 +22,6 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
 public class CMDKiss extends AnimeImageCommand {
     public CMDKiss() {
-        super("hug", true, false, ImageType.SFW.HUG, ContentType.GIF);
+        super("kiss", true, false, ImageType.SFW.KISS, ContentType.GIF);
     }
 }
