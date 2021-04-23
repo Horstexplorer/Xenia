@@ -25,8 +25,8 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.*;
 public class RCMDGAnime extends Command {
     public RCMDGAnime() {
         super("anime", "Contains various anime themed commands", false, false,
-            new CMDBite(), new CMDBlush(), new CMDCry(), new CMDCuddle(), new CMDDance(), new CMDFeed(), new CMDHug(), new CMDKiss(), new CMDPat(), new CMDPoke(), new CMDSlap(), new CMDSmile(), new CMDTickle(), new CMDNeko()
-          //  , new CMDAnal(), new CMDBlowjob(), new CMDCum(), new CMDFuck(), new CMDNeko(), new CMDPussylick(), new CMDSolo(), new CMDYaoi(), new CMDYuri()
+            new CMDBite(), new CMDBlush(), new CMDCry(), new CMDCuddle(), new CMDDance(), new CMDFeed(), new CMDHug(), new CMDKiss(), new CMDPat(), new CMDPoke(), new CMDSlap(), new CMDSmile(), new CMDTickle(), new CMDNeko(), new CMDRandom()
+          //  , new CMDAnal(), new CMDBlowjob(), new CMDCum(), new CMDFuck(), new CMDNeko(), new CMDPussylick(), new CMDSolo(), new CMDYaoi(), new CMDYuri(), new CMDRandom()
         );
     }
 

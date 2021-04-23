@@ -28,6 +28,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
+import net.dv8tion.jda.api.commands.CommandHook;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.HashSet;
@@ -63,16 +64,7 @@ public abstract class AnimeImageCommand extends Command {
                         }
                         String message  = translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg."+(additionalUserTag != null ? 1 : 0), commandEvent.getEvent().getUser().getAsTag(), (additionalUserTag != null ? additionalUserTag : "unknown#unknown"));
                         // get image
-                        PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
-                                url -> {
-                                    ack.editOriginal(
-                                            EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
-                                    ).queue();
-                                },
-                                error -> {
-                                    ack.editOriginal(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.img.msg"))).queue(s -> {}, e -> {});
-                                }
-                        );
+                        getImage(ack, translationPackage, message, 0);
                     },
                     err -> {
                         commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue(s -> {}, e -> {});
@@ -81,5 +73,23 @@ public abstract class AnimeImageCommand extends Command {
         }catch (Exception e){
             commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.msg"))).queue(s -> {}, ex -> {});
         }
+    }
+
+    private void getImage(CommandHook ack, TranslationPackage translationPackage,String message, int retries){
+        PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
+                url -> {
+                    ack.editOriginal(
+                            EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
+                    ).queue();
+                },
+                error -> {
+                    if(imageType.equals(ImageType.SFW.RANDOM) || imageType.equals(ImageType.NSFW.RANDOM) && retries < 5){
+                        // retry
+                        getImage(ack, translationPackage, message, retries + 1);
+                    }else{
+                        ack.editOriginal(onError(translationPackage, translationPackage.getTranslation(getClass(),"response.error.img.msg"))).queue(s -> {}, e -> {});
+                    }
+                }
+        );
     }
 }

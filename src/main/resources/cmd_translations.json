@@ -320,6 +320,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% tickles someone",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% gets tickled by %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "Random image",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-NSFW content-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "Something went wrong",
@@ -369,6 +373,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "Something went wrong",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "-NSFW content-",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)",
 
 
 
@@ -483,6 +491,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% tickles someone",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% gets tickled by %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "Here you go",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "Something went wrong",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
@@ -510,7 +521,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "Something went wrong",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)"
     }
   },
   {
@@ -834,6 +848,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% tickwes someone",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% gets tickwed by %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "Random image",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "Something went wwong",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-NSFW content-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "Something went wwong",
@@ -883,6 +901,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "Something went wwong",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "Random image",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "Something went wwong",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "UwU",
 
 
 
@@ -995,6 +1017,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% tickwes someone",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% gets tickwed by %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "Something went wwong",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
@@ -1022,7 +1047,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "Something went wwong",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "Something went wrong",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sorry, I was unable to get the image you wanted :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)"
     }
   },
   {
@@ -1346,6 +1374,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% kitzelt jemanden",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% wird gekitzelt von %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "Zufälliges Bild",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "Etwas ist schief gelaufen",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-NSFW Inhalt-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "Etwas ist schief gelaufen",
@@ -1395,6 +1427,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "Etwas ist schief gelaufen",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "-NSFW Inhalt-",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "Etwas ist schief gelaufen",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)",
 
 
 
@@ -1509,6 +1545,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% kitzelt jemanden",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% wird gekitzelt von %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "Etwas ist schief gelaufen",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "Etwas ist schief gelaufen",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
@@ -1536,7 +1575,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "Etwas ist schief gelaufen",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "Etwas ist schief gelaufen",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)"
     }
   },
   {
@@ -1860,6 +1902,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% chatouille quelqu'un",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% est chatouillé par %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "Image aléatoire",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "Quelque chose a mal tourné",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-Contenu NSFW-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "Quelque chose a mal tourné",
@@ -1909,6 +1955,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "Quelque chose a mal tourné",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "-Contenu NSFW-",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "Quelque chose a mal tourné",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)",
 
 
 
@@ -2023,6 +2073,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% chatouille quelqu'un",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% est chatouillé par %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "Quelque chose a mal tourné",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "Quelque chose a mal tourné",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
@@ -2050,7 +2103,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "Quelque chose a mal tourné",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "Quelque chose a mal tourné",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)"
     }
   },
   {
@@ -2374,6 +2430,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% le hace cosquillas a alguien",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% se hace cosquillas con %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "Imagen aleatoria",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "Algo salió mal",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-Contenido NSFW-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "Algo salió mal",
@@ -2423,6 +2483,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "Algo salió mal",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "-Contenido NSFW-",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "Algo salió mal",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "UwU",
 
 
 
@@ -2538,6 +2602,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% le hace cosquillas a alguien",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% se hace cosquillas con %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "Algo salió mal",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "Algo salió mal",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
@@ -2565,7 +2632,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "Algo salió mal",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "Algo salió mal",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "Lo siento, no he podido conseguir la imagen que querías :c",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "UwU"
     }
   },
   {
@@ -2889,6 +2959,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% くすぐったい",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% にくすぐられる %0%",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.description": "ランダム画像",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.msg": "何かが間違っていた",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.description": "-NSFWコンテンツ-",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDAnal.response.error.msg": "何かが間違っていた",
@@ -2938,6 +3012,10 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.msg": "何かが間違っていた",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
       "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.description": "ランダム画像",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.msg": "何かが間違っていた",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
+      "de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom.response.success.msg.0": "(¬‿¬)",
 
 
 
@@ -3054,6 +3132,9 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.0": "%0% くすぐったい",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDTickle.response.success.msg.1": "%1% にくすぐられる %0%",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.msg": "何かが間違っていた",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.CMDRandom.response.success.msg.0": "UwU",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.msg": "何かが間違っていた",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDAnal.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
@@ -3081,7 +3162,10 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYaoi.response.success.msg.0": "(¬‿¬)",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.msg": "何かが間違っていた",
       "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
-      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)"
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDYuri.response.success.msg.0": "(¬‿¬)",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.msg": "何かが間違っていた",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.error.img.msg": "申し訳ありませんが、ご希望の画像を取得することができませんでした。",
+      "de.netbeacon.xenia.bot.commands.slash.structure.anime.nsfw.CMDRandom.response.success.msg.0": "UwU"
     }
   }
 ]

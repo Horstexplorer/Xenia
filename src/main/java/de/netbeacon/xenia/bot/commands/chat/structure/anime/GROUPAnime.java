@@ -19,6 +19,7 @@ package de.netbeacon.xenia.bot.commands.chat.structure.anime;
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.*;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDNeko;
+import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.*;
 
 public class GROUPAnime extends CommandGroup {
@@ -47,6 +48,7 @@ public class GROUPAnime extends CommandGroup {
         addChildCommand(new CMDSmile());
         addChildCommand(new CMDTail());
         addChildCommand(new CMDTickle());
+        addChildCommand(new CMDRandom());
         // NSFW
         addChildCommand(new CMDAnal());
         addChildCommand(new CMDBlowjob());
@@ -60,5 +62,6 @@ public class GROUPAnime extends CommandGroup {
         addChildCommand(new CMDThreesome_MMF());
         addChildCommand(new CMDYaoi());
         addChildCommand(new CMDYuri());
+        addChildCommand(new de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom());
     }
 }
