@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.netbeacon.d43z.one.objects.settings.StaticSettings.*;
+import static de.netbeacon.d43z.one.settings.StaticSettings.*;
 
 public class CMDD43Z1Stats extends AdminCommand{
 

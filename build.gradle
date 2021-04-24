@@ -67,6 +67,7 @@ dependencies {
 
     // clients
     implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.3' // purrbot api wrapper
+    implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.0' // d43z1
 }
 
 processResources {
