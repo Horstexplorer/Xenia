@@ -17,18 +17,19 @@
 package de.netbeacon.xenia.bot.event.listener.message;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.commands.global.help.CMDHelp;
-import de.netbeacon.xenia.bot.commands.objects.Command;
-import de.netbeacon.xenia.bot.commands.structure.admin.GROUPAdmin;
-import de.netbeacon.xenia.bot.commands.structure.chatbot.GROUPChatbot;
-import de.netbeacon.xenia.bot.commands.structure.hastebin.CMDHastebin;
-import de.netbeacon.xenia.bot.commands.structure.info.CMDInfo;
-import de.netbeacon.xenia.bot.commands.structure.last.GROUPLast;
-import de.netbeacon.xenia.bot.commands.structure.notification.GROUPNotification;
-import de.netbeacon.xenia.bot.commands.structure.settings.GROUPSettings;
-import de.netbeacon.xenia.bot.commands.structure.tags.HYBRIDTag;
-import de.netbeacon.xenia.bot.commands.structure.twitch.HYBRIDTwitch;
-import de.netbeacon.xenia.bot.event.handler.command.MessageHandler;
+import de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp;
+import de.netbeacon.xenia.bot.commands.chat.objects.Command;
+import de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin;
+import de.netbeacon.xenia.bot.commands.chat.structure.anime.GROUPAnime;
+import de.netbeacon.xenia.bot.commands.chat.structure.chatbot.GROUPChatbot;
+import de.netbeacon.xenia.bot.commands.chat.structure.hastebin.CMDHastebin;
+import de.netbeacon.xenia.bot.commands.chat.structure.info.CMDInfo;
+import de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast;
+import de.netbeacon.xenia.bot.commands.chat.structure.notification.GROUPNotification;
+import de.netbeacon.xenia.bot.commands.chat.structure.settings.GROUPSettings;
+import de.netbeacon.xenia.bot.commands.chat.structure.tags.HYBRIDTag;
+import de.netbeacon.xenia.bot.commands.chat.structure.twitch.HYBRIDTwitch;
+import de.netbeacon.xenia.bot.event.handler.MessageHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
@@ -56,15 +57,16 @@ public class GuildMessageListener extends ListenerAdapter {
         register.accept(new CMDHelp(commandMap));
 
         register.accept(new GROUPAdmin());
-
         register.accept(new GROUPLast());
-        register.accept(new HYBRIDTag());
         register.accept(new GROUPNotification());
         register.accept(new GROUPSettings());
-        register.accept(new CMDHastebin());
-        register.accept(new HYBRIDTwitch());
         register.accept(new GROUPChatbot());
+        register.accept(new GROUPAnime());
 
+        register.accept(new HYBRIDTwitch());
+        register.accept(new HYBRIDTag());
+
+        register.accept(new CMDHastebin());
         register.accept(new CMDInfo());
 
         commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);

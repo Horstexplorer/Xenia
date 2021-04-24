@@ -1,30 +1,39 @@
 plugins {
     id'java'
     id'application'
-    id'com.github.johnrengelman.shadow' version '6.0.0'
+    id'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'de.netbeacon'
 
 mainClassName = 'de.netbeacon.xenia.bot.core.Init'
 
-sourceCompatibility = 13
+sourceCompatibility = 11
 
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
+    mavenCentral()
+    maven {
+        name 'hypercdn-maven2'
+        url 'https://nexus.hypercdn.de/repository/hypercdn-maven'
+    }
     maven {
         name 'm2-dv8tion'
         url 'https://m2.dv8tion.net/releases'
     }
-    mavenCentral()
+    maven {
+        name 'Jitpack.io'
+        url 'https://jitpack.io'
+    }
 }
 
 dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.1_253' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    //implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.1_253' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'com.github.DV8FromTheWorld', name: 'JDA', version: '7c2a506'
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.6' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
 
     // JSON
@@ -56,6 +65,8 @@ dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.8.0' // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'org.apache.tika', name: 'tika-core', version: '1.26' // https://mvnrepository.com/artifact/org.apache.tika/tika-core
 
+    // clients
+    implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.3' // purrbot api wrapper
 }
 
 processResources {
