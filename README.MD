@@ -14,6 +14,8 @@ Xenia provides various tools to improve the experience in your guild:
   ```~tag create "smallcat" "https://www.youtube.com/watch?v=W86cTIoMv2U"```
 - Lets chat somewhere!*
   ```~chatbot setup```
+- Give me some anime!
+  ```~anime <type> <mention*>// various types available``` 
   And more
 
 Not sure how the current command group works? just add `help` to the end
@@ -42,6 +44,7 @@ Some settings for the guild in general are available
 ```~settings guild settings OPTION true/false```  
 Options:
 ```
+DISABLE_COMMAND_AUTO_CORRECT_MESSAGE - Disables the typo response
 COMMAND_AUTO_CORRECT - Disables the typo response and executes the command it thinks is correct on typos
 ENFORCE_LANGUAGE - Enforce the set language as response language
 VPERM_ENABLE - Use the virtuale role/permission system provided by Xenia to check member/(role) permissions instead of the Discord one
@@ -89,4 +92,5 @@ Updates made to either of these settings above might take a while to take effect
 ___
 Some features might not work properly at the moment or have not yet been implemented
 
-*This feature is only available in English and is intended for entertainment purposes only. Responses are generated from unverified messages - Some answers may seem inappropriate in certain contexts. Learn more about the origin of the root datasets [here](href="https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index)
+*This feature is only available in English and is intended for entertainment purposes only. Responses are generated from unverified messages - Some answers may seem inappropriate in certain contexts. Learn more about the origin of the root datasets [here](href="https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index)  
+**NSFW commands are disabled in non nsfw channels and might be hidden aswell where this is possible

@@ -18,8 +18,8 @@ package de.netbeacon.xenia.bot.utils.misc.listener;
 
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationPackage;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

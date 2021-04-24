@@ -117,11 +117,13 @@ public class Paginator {
             needsRedraw = false;
             textChannel.editMessageById(messageId, getPage().getAsMessageEmbed()).queue(message -> {
                 if(reactionEmote != null && user != null){
-                    if(reactionEmote.isEmoji()){
-                        message.removeReaction(reactionEmote.getEmoji(), user).queue();
-                    }else if(reactionEmote.isEmote()){
-                        message.removeReaction(reactionEmote.getEmote(), user).queue();
-                    }
+                    try{
+                        if(reactionEmote.isEmoji()){
+                            message.removeReaction(reactionEmote.getEmoji(), user).queue(s -> {}, f -> {});
+                        }else if(reactionEmote.isEmote()){
+                            message.removeReaction(reactionEmote.getEmote(), user).queue(s -> {}, f -> {});
+                        }
+                    }catch (Exception ignore){}
                 }
                 if(then != null){
                     then.accept(user, message);

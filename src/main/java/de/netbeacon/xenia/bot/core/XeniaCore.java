@@ -23,8 +23,9 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
-import de.netbeacon.xenia.bot.commands.objects.misc.translations.TranslationManager;
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
+import de.netbeacon.xenia.bot.event.listener.command.SlashCommandListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
@@ -39,6 +40,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
 import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
@@ -112,6 +114,7 @@ public class XeniaCore {
         paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
         SharedOkHttpClient.getInstance(true);
         TranslationManager translationManager = TranslationManager.getInstance(true);
+        PurrBotAPIWrapper.getInstance(true);
         // d43z1
         logger.info("Preparing D43Z1...");
         D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
@@ -130,7 +133,6 @@ public class XeniaCore {
         EventManagerProvider eventManagerProvider = new EventManagerProvider()
                 .setFactory(obj -> new MultiThreadedEventManager());
         shutdownHook.addShutdownAble(eventManagerProvider);
-
         // setup shard builder
         logger.info("Setting Up Shard Builder...");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
@@ -141,6 +143,7 @@ public class XeniaCore {
                         new StatusListener(),
                         new GuildAccessListener(xeniaBackendClient),
                         new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
+                        new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
                         new GuildReactionListener(eventWaiter),
                         paginatorManager.getListener()
                 );
@@ -173,7 +176,6 @@ public class XeniaCore {
         XeniaWatchdog xeniaWatchdog = new XeniaWatchdog();
         shutdownHook.addShutdownAble(xeniaWatchdog);
         // add wd tasks here
-
     }
 
     public static XeniaCore getInstance(){
