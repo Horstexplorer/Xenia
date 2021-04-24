@@ -27,64 +27,64 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class CombinedContextPool implements IContextPool {
+public class CombinedContextPool implements IContextPool{
 
-    private final UUID uuid;
-    private final String description;
-    private final List<IContextPool> iContextPools;
+	private final UUID uuid;
+	private final String description;
+	private final List<IContextPool> iContextPools;
 
-    public CombinedContextPool(String description, List<IContextPool> iContextPools){
-        this.uuid = UUID.randomUUID();
-        this.description = description;
-        this.iContextPools = iContextPools;
-    }
+	public CombinedContextPool(String description, List<IContextPool> iContextPools){
+		this.uuid = UUID.randomUUID();
+		this.description = description;
+		this.iContextPools = iContextPools;
+	}
 
-    public CombinedContextPool(JSONObject jsonObject, List<IContextPool> iContextPools){
-        this.uuid = UUID.fromString(jsonObject.getString("combinedContextPoolId"));
-        this.description = jsonObject.getString("description");
-        JSONArray jsonArray = jsonObject.getJSONArray("extending");
-        this.iContextPools = new LinkedList<>();
-        for(int i = 0; i < jsonArray.length(); i++){
-            String extending = jsonArray.getString(i);
-            Optional<IContextPool> optional = iContextPools.stream().filter(iContextPool -> iContextPool.getUUID().toString().equals(extending)).findFirst();
-            if(optional.isEmpty()){
-                throw new RuntimeException("List Does Not Contain Correct Context Pools");
-            }
-            this.iContextPools.add(optional.get());
-        }
-    }
+	public CombinedContextPool(JSONObject jsonObject, List<IContextPool> iContextPools){
+		this.uuid = UUID.fromString(jsonObject.getString("combinedContextPoolId"));
+		this.description = jsonObject.getString("description");
+		JSONArray jsonArray = jsonObject.getJSONArray("extending");
+		this.iContextPools = new LinkedList<>();
+		for(int i = 0; i < jsonArray.length(); i++){
+			String extending = jsonArray.getString(i);
+			Optional<IContextPool> optional = iContextPools.stream().filter(iContextPool -> iContextPool.getUUID().toString().equals(extending)).findFirst();
+			if(optional.isEmpty()){
+				throw new RuntimeException("List Does Not Contain Correct Context Pools");
+			}
+			this.iContextPools.add(optional.get());
+		}
+	}
 
-    @Override
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getDescription(){
+		return description;
+	}
 
-    @Override
-    public List<ContentContext> getContentContexts() {
-        List<ContentContext> contentContexts = new LinkedList<>();
-        iContextPools.forEach(iContextPool -> contentContexts.addAll(iContextPool.getContentContexts()));
-        return contentContexts;
-    }
+	@Override
+	public List<ContentContext> getContentContexts(){
+		List<ContentContext> contentContexts = new LinkedList<>();
+		iContextPools.forEach(iContextPool -> contentContexts.addAll(iContextPool.getContentContexts()));
+		return contentContexts;
+	}
 
-    @Override
-    public UUID getUUID() {
-        return uuid;
-    }
+	@Override
+	public UUID getUUID(){
+		return uuid;
+	}
 
-    @Override
-    public JSONObject asJSON() throws JSONSerializationException {
-        JSONArray jsonArray = new JSONArray();
-        iContextPools.forEach(iContextPool -> jsonArray.put(iContextPool.getUUID().toString()));
-        return new JSONObject()
-                .put("combinedContextPoolId", uuid.toString())
-                .put("description", description)
-                .put("extending", jsonArray);
-    }
+	@Override
+	public JSONObject asJSON() throws JSONSerializationException{
+		JSONArray jsonArray = new JSONArray();
+		iContextPools.forEach(iContextPool -> jsonArray.put(iContextPool.getUUID().toString()));
+		return new JSONObject()
+			.put("combinedContextPoolId", uuid.toString())
+			.put("description", description)
+			.put("extending", jsonArray);
+	}
 
 
+	@Override
+	public void fromJSON(JSONObject jsonObject) throws JSONSerializationException{
+		throw new JSONSerializationException("Bad Method. Use Correct Constructor Instead");
+	}
 
-    @Override
-    public void fromJSON(JSONObject jsonObject) throws JSONSerializationException {
-        throw new JSONSerializationException("Bad Method. Use Correct Constructor Instead");
-    }
 }

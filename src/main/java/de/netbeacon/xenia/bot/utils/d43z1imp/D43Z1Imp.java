@@ -40,100 +40,102 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class D43Z1Imp implements IShutdown {
+public class D43Z1Imp implements IShutdown{
 
-    private static D43Z1Imp instance;
+	private static D43Z1Imp instance;
 
-    private final IContextPool contextPoolMaster;
-    private final List<IContextPool> contextPools = new LinkedList<>();
+	private final IContextPool contextPoolMaster;
+	private final List<IContextPool> contextPools = new LinkedList<>();
 
-    private final ConcurrentHashMap<Long, ContentMatchBuffer> contentMatchBuffers = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<ContentMatchBuffer, Long> invertedContentMatchBuffers = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<ContentMatchBuffer, Long> contentMatchBufferAccessTimestamp = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, ContentMatchBuffer> contentMatchBuffers = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<ContentMatchBuffer, Long> invertedContentMatchBuffers = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<ContentMatchBuffer, Long> contentMatchBufferAccessTimestamp = new ConcurrentHashMap<>();
 
-    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
-    private final Eval eval;
+	private final Eval eval;
 
-    public static D43Z1Imp getInstance() throws IOException{
-        return getInstance(false);
-    }
+	public static D43Z1Imp getInstance() throws IOException{
+		return getInstance(false);
+	}
 
-    public static D43Z1Imp getInstance(boolean initializeIfNeeded) throws IOException{
-        if(instance == null && initializeIfNeeded){
-            instance = new D43Z1Imp();
-        }
-        return instance;
-    }
+	public static D43Z1Imp getInstance(boolean initializeIfNeeded) throws IOException{
+		if(instance == null && initializeIfNeeded){
+			instance = new D43Z1Imp();
+		}
+		return instance;
+	}
 
-    private D43Z1Imp() throws IOException {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("d43z1.index.json");
-        if (inputStream == null){
-            throw new RuntimeException("Missing D43Z1 Index");
-        }
-        JSONObject indexJSON = new JSONObject(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
-        JSONArray base = indexJSON.getJSONArray("base");
-        for(int i = 0; i < base.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+base.getString(i)+".cp.json");
-            if(fileInput == null){
-                throw new RuntimeException("Invalid Entry In D43Z1 Base Index "+base.getString(i));
-            }
-            JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
-            ContextPool contextPool = new ContextPool();
-            contextPool.fromJSON(contextPoolJSON);
-            contextPools.add(contextPool);
-        }
-        JSONArray extended = indexJSON.getJSONArray("extended");
-        for(int i = 0; i < extended.length(); i++){
-            InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/"+extended.getString(i)+".ccp.json");
-            if(fileInput == null){
-                throw new RuntimeException("Invalid Entry In D43Z1 Extended Index "+extended.getString(i));
-            }
-            JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
-            CombinedContextPool combinedContextPool = new CombinedContextPool(contextPoolJSON, contextPools);
-            contextPools.add(combinedContextPool);
-        }
-        this.contextPoolMaster = contextPools.stream().filter(contextPool -> contextPool.getUUID().toString().equals(indexJSON.getString("master"))).findFirst().orElseThrow();
-        this.eval = new Eval();
-        scheduledExecutorService.scheduleAtFixedRate(()->{
-            for(Map.Entry<ContentMatchBuffer, Long> entry : contentMatchBufferAccessTimestamp.entrySet()){
-                if(entry.getValue() + 600000 < System.currentTimeMillis()){
-                    contentMatchBuffers.remove(invertedContentMatchBuffers.remove(entry.getKey()));
-                    contentMatchBufferAccessTimestamp.remove(entry.getKey());
-                }
-            }
-        }, 1, 1, TimeUnit.MINUTES);
-    }
+	private D43Z1Imp() throws IOException{
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("d43z1.index.json");
+		if(inputStream == null){
+			throw new RuntimeException("Missing D43Z1 Index");
+		}
+		JSONObject indexJSON = new JSONObject(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
+		JSONArray base = indexJSON.getJSONArray("base");
+		for(int i = 0; i < base.length(); i++){
+			InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/" + base.getString(i) + ".cp.json");
+			if(fileInput == null){
+				throw new RuntimeException("Invalid Entry In D43Z1 Base Index " + base.getString(i));
+			}
+			JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
+			ContextPool contextPool = new ContextPool();
+			contextPool.fromJSON(contextPoolJSON);
+			contextPools.add(contextPool);
+		}
+		JSONArray extended = indexJSON.getJSONArray("extended");
+		for(int i = 0; i < extended.length(); i++){
+			InputStream fileInput = getClass().getClassLoader().getResourceAsStream("d43z1/" + extended.getString(i) + ".ccp.json");
+			if(fileInput == null){
+				throw new RuntimeException("Invalid Entry In D43Z1 Extended Index " + extended.getString(i));
+			}
+			JSONObject contextPoolJSON = new JSONObject(IOUtils.toString(fileInput, StandardCharsets.UTF_8));
+			CombinedContextPool combinedContextPool = new CombinedContextPool(contextPoolJSON, contextPools);
+			contextPools.add(combinedContextPool);
+		}
+		this.contextPoolMaster = contextPools.stream().filter(contextPool -> contextPool.getUUID().toString().equals(indexJSON.getString("master"))).findFirst().orElseThrow();
+		this.eval = new Eval();
+		scheduledExecutorService.scheduleAtFixedRate(() -> {
+			for(Map.Entry<ContentMatchBuffer, Long> entry : contentMatchBufferAccessTimestamp.entrySet()){
+				if(entry.getValue() + 600000 < System.currentTimeMillis()){
+					contentMatchBuffers.remove(invertedContentMatchBuffers.remove(entry.getKey()));
+					contentMatchBufferAccessTimestamp.remove(entry.getKey());
+				}
+			}
+		}, 1, 1, TimeUnit.MINUTES);
+	}
 
-    public Eval getEval() {
-        return eval;
-    }
+	public Eval getEval(){
+		return eval;
+	}
 
-    public IContextPool getContextPoolMaster() {
-        return contextPoolMaster;
-    }
+	public IContextPool getContextPoolMaster(){
+		return contextPoolMaster;
+	}
 
-    public IContextPool getContextPoolByUUID(UUID uuid){
-        return contextPools.stream().filter(iContextPool -> iContextPool.getUUID().equals(uuid)).findFirst().orElse(null);
-    }
+	public IContextPool getContextPoolByUUID(UUID uuid){
+		return contextPools.stream().filter(iContextPool -> iContextPool.getUUID().equals(uuid)).findFirst().orElse(null);
+	}
 
-    private final Lock lock = new ReentrantLock();
+	private final Lock lock = new ReentrantLock();
 
-    public ContentMatchBuffer getContentMatchBufferFor(long userId){
-        try{
-            lock.lock();
-            contentMatchBuffers.putIfAbsent(userId, new ContentMatchBuffer());
-            invertedContentMatchBuffers.putIfAbsent(contentMatchBuffers.get(userId), userId);
-            contentMatchBufferAccessTimestamp.put(contentMatchBuffers.get(userId), System.currentTimeMillis());
-            return contentMatchBuffers.get(userId);
-        }finally {
-            lock.unlock();
-        }
-    }
+	public ContentMatchBuffer getContentMatchBufferFor(long userId){
+		try{
+			lock.lock();
+			contentMatchBuffers.putIfAbsent(userId, new ContentMatchBuffer());
+			invertedContentMatchBuffers.putIfAbsent(contentMatchBuffers.get(userId), userId);
+			contentMatchBufferAccessTimestamp.put(contentMatchBuffers.get(userId), System.currentTimeMillis());
+			return contentMatchBuffers.get(userId);
+		}
+		finally{
+			lock.unlock();
+		}
+	}
 
-    @Override
-    public void onShutdown() throws Exception {
-        eval.onShutdown();
-        scheduledExecutorService.shutdownNow();
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		eval.onShutdown();
+		scheduledExecutorService.shutdownNow();
+	}
+
 }

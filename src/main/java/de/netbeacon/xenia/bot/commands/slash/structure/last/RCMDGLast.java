@@ -21,14 +21,15 @@ import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 
-public class RCMDGLast extends Command {
+public class RCMDGLast extends Command{
 
-    public RCMDGLast() {
-        super("last", "Restore deleted or edited messages", false, false,
-                new CMDDeleted(), new CMDEdited()
-        );
-    }
+	public RCMDGLast(){
+		super("last", "Restore deleted or edited messages", false, false,
+			new CMDDeleted(), new CMDEdited()
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {}
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{}
+
 }

@@ -26,29 +26,30 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.Translatio
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 
 
-public class HYBRIDSelf extends HybridCommand {
+public class HYBRIDSelf extends HybridCommand{
 
-    public HYBRIDSelf(CommandGroup parent) {
-        super(parent, "self", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                null,
-                null,
-                null
-        );
-        addChildCommand(new CMDLanguage());
-    }
+	public HYBRIDSelf(CommandGroup parent){
+		super(parent, "self", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			null,
+			null,
+			null
+		);
+		addChildCommand(new CMDLanguage());
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        User user = commandEvent.getBackendDataPack().getbUser();
-        commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
-                        .addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), user.getMetaUsername(),false)
-                        .addField(translationPackage.getTranslation(getClass(), "response.field.2.title"), String.valueOf(user.getId()),false)
-                        .addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), user.getInternalRole(),false)
-                        .addField(translationPackage.getTranslation(getClass(), "response.field.4.title"), user.getPreferredLanguage(),false)
-                        .addField(translationPackage.getTranslation(getClass(), "response.field.5.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.5.content", user.getMetaIconUrl()), false)
-                        .build()
-        ).queue();
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		User user = commandEvent.getBackendDataPack().getbUser();
+		commandEvent.getEvent().getChannel().sendMessage(
+			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
+				.addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), user.getMetaUsername(), false)
+				.addField(translationPackage.getTranslation(getClass(), "response.field.2.title"), String.valueOf(user.getId()), false)
+				.addField(translationPackage.getTranslation(getClass(), "response.field.3.title"), user.getInternalRole(), false)
+				.addField(translationPackage.getTranslation(getClass(), "response.field.4.title"), user.getPreferredLanguage(), false)
+				.addField(translationPackage.getTranslation(getClass(), "response.field.5.title"), translationPackage.getTranslationWithPlaceholders(getClass(), "response.field.5.content", user.getMetaIconUrl()), false)
+				.build()
+		).queue();
+	}
+
 }

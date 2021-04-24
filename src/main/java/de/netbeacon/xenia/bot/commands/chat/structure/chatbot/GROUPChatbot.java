@@ -19,12 +19,13 @@ package de.netbeacon.xenia.bot.commands.chat.structure.chatbot;
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.chat.structure.chatbot.learning.GROUPLearning;
 
-public class GROUPChatbot extends CommandGroup {
+public class GROUPChatbot extends CommandGroup{
 
-    public GROUPChatbot() {
-        super(null,"chatbot", false);
-        addChildCommand(new CMDInfo());
-        addChildCommand(new CMDSetup());
-        addChildCommand(new GROUPLearning(this));
-    }
+	public GROUPChatbot(){
+		super(null, "chatbot", false);
+		addChildCommand(new CMDInfo());
+		addChildCommand(new CMDSetup());
+		addChildCommand(new GROUPLearning(this));
+	}
+
 }

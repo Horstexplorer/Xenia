@@ -18,8 +18,8 @@ package de.netbeacon.d43z.one.objects.bp;
 
 import de.netbeacon.d43z.one.algo.LiamusJaccard;
 
-public interface ILJEvaluable {
+public interface ILJEvaluable{
 
-    public LiamusJaccard.BitArray64 getContentHash();
+	public LiamusJaccard.BitArray64 getContentHash();
 
 }

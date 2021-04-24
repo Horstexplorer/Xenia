@@ -34,35 +34,37 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ID_OPTIONAL;
 
-public class CMDInfo extends Command {
+public class CMDInfo extends Command{
 
-    public CMDInfo() {
-        super("info", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CHANNEL_ID_OPTIONAL)
-        );
-    }
+	public CMDInfo(){
+		super("info", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(CHANNEL_ID_OPTIONAL)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<Mention> mentionCmdArg = args.getByIndex(0);
-            Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
-            if(channel == null){
-                throw new IllegalArgumentException();
-            }
-            commandEvent.getEvent().getChannel().sendMessage(
-                    EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
-                            .addField(translationPackage.getTranslation(getClass(), "response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
-                            .build()
-            ).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<Mention> mentionCmdArg = args.getByIndex(0);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			if(channel == null){
+				throw new IllegalArgumentException();
+			}
+			commandEvent.getEvent().getChannel().sendMessage(
+				EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
+					.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
+					.addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)
+					.addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), String.valueOf(channel.tmpLoggingIsActive()), false)
+					.addField(translationPackage.getTranslation(getClass(), "response.success.field.4.title"), String.valueOf(channel.getTmpLoggingChannelId()), false)
+					.build()
+			).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+		}
+	}
+
 }

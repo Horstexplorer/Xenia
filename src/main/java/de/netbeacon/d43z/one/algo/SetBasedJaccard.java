@@ -19,26 +19,27 @@ package de.netbeacon.d43z.one.algo;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SetBasedJaccard {
+public class SetBasedJaccard{
 
-    public static float similarityCoefficient(String a, String b, int sliceSize){
-        if(a.equals(b)){
-            return 1F;
-        }
-        Set<String> setA = sliceString(a, sliceSize);
-        Set<String> setB = sliceString(b, sliceSize);
-        Set<String> merge = new HashSet<>();
-        merge.addAll(setA);
-        merge.addAll(setB);
-        int dif = (setA.size()+setB.size())-merge.size();
-        return (dif/(float)merge.size());
-    }
+	public static float similarityCoefficient(String a, String b, int sliceSize){
+		if(a.equals(b)){
+			return 1F;
+		}
+		Set<String> setA = sliceString(a, sliceSize);
+		Set<String> setB = sliceString(b, sliceSize);
+		Set<String> merge = new HashSet<>();
+		merge.addAll(setA);
+		merge.addAll(setB);
+		int dif = (setA.size() + setB.size()) - merge.size();
+		return (dif / (float) merge.size());
+	}
 
-    private static Set<String> sliceString(String a, int sliceSize){
-        Set<String> slices = new HashSet<>();
-        for(int i = 0; i < a.length()-(sliceSize-1); i++){
-            slices.add(a.substring(i, i+sliceSize));
-        }
-        return slices;
-    }
+	private static Set<String> sliceString(String a, int sliceSize){
+		Set<String> slices = new HashSet<>();
+		for(int i = 0; i < a.length() - (sliceSize - 1); i++){
+			slices.add(a.substring(i, i + sliceSize));
+		}
+		return slices;
+	}
+
 }

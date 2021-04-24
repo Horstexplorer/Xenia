@@ -35,32 +35,35 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.TWITCH_NOTIFICATION_CUSTOM_MESSAGE;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.TWITCH_NOTIFICATION_ID;
 
-public class CMDUpdate extends Command {
+public class CMDUpdate extends Command{
 
-    public CMDUpdate() {
-        super("update", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
-                null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
-                new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
-                List.of(TWITCH_NOTIFICATION_ID, TWITCH_NOTIFICATION_CUSTOM_MESSAGE)
-        );
-    }
+	public CMDUpdate(){
+		super("update", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
+			null,
+			new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+			new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
+			List.of(TWITCH_NOTIFICATION_ID, TWITCH_NOTIFICATION_CUSTOM_MESSAGE)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<Long> notificationid = args.getByIndex(0);
-            CmdArg<String> customMessage = args.getByIndex(1);
-            TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
-            TwitchNotification notification = notificationCache.get(notificationid.getValue());
-            notification.setNotificationMessage(customMessage.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (DataException | CacheException e){
-            if(e instanceof DataException && ((DataException) e).getCode() == 404){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw e;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<Long> notificationid = args.getByIndex(0);
+			CmdArg<String> customMessage = args.getByIndex(1);
+			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
+			TwitchNotification notification = notificationCache.get(notificationid.getValue());
+			notification.setNotificationMessage(customMessage.getValue());
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+		}
+		catch(DataException | CacheException e){
+			if(e instanceof DataException && ((DataException) e).getCode() == 404){
+				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw e;
+			}
+		}
+	}
+
 }

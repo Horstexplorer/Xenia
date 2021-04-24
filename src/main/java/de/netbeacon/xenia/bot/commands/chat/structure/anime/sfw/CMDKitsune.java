@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDKitsune extends AnimeImageCommand {
-    public CMDKitsune() {
-        super("kitsune", false, false, ImageType.SFW.KITSUNE, ContentType.IMAGE);
-    }
+public class CMDKitsune extends AnimeImageCommand{
+
+	public CMDKitsune(){
+		super("kitsune", false, false, ImageType.SFW.KITSUNE, ContentType.IMAGE);
+	}
+
 }

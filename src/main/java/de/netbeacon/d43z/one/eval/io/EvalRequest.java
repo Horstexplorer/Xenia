@@ -23,45 +23,46 @@ import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
 
-public class EvalRequest {
+public class EvalRequest{
 
-    private final IContextPool contextPool;
-    private final ContentMatchBuffer contentMatchBuffer;
-    private final Content content;
-    private final Consumer<EvalResult> evalResultConsumer;
-    private final ExecutorService evalResultConsumerExecutor;
-    private final long requestTimestamp;
+	private final IContextPool contextPool;
+	private final ContentMatchBuffer contentMatchBuffer;
+	private final Content content;
+	private final Consumer<EvalResult> evalResultConsumer;
+	private final ExecutorService evalResultConsumerExecutor;
+	private final long requestTimestamp;
 
-    public EvalRequest(IContextPool contextPool, ContentMatchBuffer contentMatchBuffer, Content content, Consumer<EvalResult> evalResultConsumer, ExecutorService evalResultConsumerExecutor){
-        this.contextPool = contextPool;
-        this.contentMatchBuffer = contentMatchBuffer;
-        this.content = content;
-        this.evalResultConsumer = evalResultConsumer;
-        this.evalResultConsumerExecutor = evalResultConsumerExecutor;
-        this.requestTimestamp = System.currentTimeMillis();
-    }
+	public EvalRequest(IContextPool contextPool, ContentMatchBuffer contentMatchBuffer, Content content, Consumer<EvalResult> evalResultConsumer, ExecutorService evalResultConsumerExecutor){
+		this.contextPool = contextPool;
+		this.contentMatchBuffer = contentMatchBuffer;
+		this.content = content;
+		this.evalResultConsumer = evalResultConsumer;
+		this.evalResultConsumerExecutor = evalResultConsumerExecutor;
+		this.requestTimestamp = System.currentTimeMillis();
+	}
 
-    public IContextPool getContextPool() {
-        return contextPool;
-    }
+	public IContextPool getContextPool(){
+		return contextPool;
+	}
 
-    public ContentMatchBuffer getContentMatchBuffer() {
-        return contentMatchBuffer;
-    }
+	public ContentMatchBuffer getContentMatchBuffer(){
+		return contentMatchBuffer;
+	}
 
-    public Content getContent() {
-        return content;
-    }
+	public Content getContent(){
+		return content;
+	}
 
-    public Consumer<EvalResult> getCallback() {
-        return evalResultConsumer;
-    }
+	public Consumer<EvalResult> getCallback(){
+		return evalResultConsumer;
+	}
 
-    public ExecutorService getCallbackExecutor() {
-        return evalResultConsumerExecutor;
-    }
+	public ExecutorService getCallbackExecutor(){
+		return evalResultConsumerExecutor;
+	}
 
-    public long getRequestTimestamp() {
-        return requestTimestamp;
-    }
+	public long getRequestTimestamp(){
+		return requestTimestamp;
+	}
+
 }

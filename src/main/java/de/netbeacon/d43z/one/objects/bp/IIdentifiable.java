@@ -18,8 +18,8 @@ package de.netbeacon.d43z.one.objects.bp;
 
 import java.util.UUID;
 
-public interface IIdentifiable {
+public interface IIdentifiable{
 
-    UUID getUUID();
+	UUID getUUID();
 
 }

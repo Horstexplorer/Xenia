@@ -23,64 +23,67 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class SharedExecutor implements IShutdown {
+public class SharedExecutor implements IShutdown{
 
-    private static SharedExecutor instance;
-    private ScalingExecutor scalingExecutor;
-    private ScheduledExecutorService scheduledExecutorService;
+	private static SharedExecutor instance;
+	private ScalingExecutor scalingExecutor;
+	private ScheduledExecutorService scheduledExecutorService;
 
-    /**
-     * Creates a new instance of this class
-     */
-    private SharedExecutor(){
-        scalingExecutor = new ScalingExecutor(2, 24, -1, 30, TimeUnit.SECONDS);
-        scheduledExecutorService = Executors.newScheduledThreadPool(16);
-    }
+	/**
+	 * Creates a new instance of this class
+	 */
+	private SharedExecutor(){
+		scalingExecutor = new ScalingExecutor(2, 24, -1, 30, TimeUnit.SECONDS);
+		scheduledExecutorService = Executors.newScheduledThreadPool(16);
+	}
 
-    /**
-     * Returns the instance of this class
-     *
-     * @param initIfNeeded initializes an instance of this class if no other exists
-     * @return this
-     */
-    public static synchronized SharedExecutor getInstance(boolean initIfNeeded){
-        if(instance == null && initIfNeeded){
-            instance = new SharedExecutor();
-        }
-        return instance;
-    }
+	/**
+	 * Returns the instance of this class
+	 *
+	 * @param initIfNeeded initializes an instance of this class if no other exists
+	 *
+	 * @return this
+	 */
+	public static synchronized SharedExecutor getInstance(boolean initIfNeeded){
+		if(instance == null && initIfNeeded){
+			instance = new SharedExecutor();
+		}
+		return instance;
+	}
 
-    /**
-     * Returns the instance of this class
-     * @return this
-     */
-    public static SharedExecutor getInstance(){
-        return getInstance(false);
-    }
+	/**
+	 * Returns the instance of this class
+	 *
+	 * @return this
+	 */
+	public static SharedExecutor getInstance(){
+		return getInstance(false);
+	}
 
-    /**
-     * Returns the scaling executor
-     *
-     * @return scaling executor
-     */
-    public ScalingExecutor getScalingExecutor(){
-        return scalingExecutor;
-    }
+	/**
+	 * Returns the scaling executor
+	 *
+	 * @return scaling executor
+	 */
+	public ScalingExecutor getScalingExecutor(){
+		return scalingExecutor;
+	}
 
-    /**
-     * Returns the schedules executor
-     *
-     * @return scheduled executor
-     */
-    public ScheduledExecutorService getScheduledExecutor() { return scheduledExecutorService; }
+	/**
+	 * Returns the schedules executor
+	 *
+	 * @return scheduled executor
+	 */
+	public ScheduledExecutorService getScheduledExecutor(){ return scheduledExecutorService; }
 
-    @Override
-    public void onShutdown() throws Exception {
-        scalingExecutor.shutdown();
-        scalingExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
-        scalingExecutor = null;
-        scheduledExecutorService.shutdown();
-        scheduledExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
-        scheduledExecutorService = null;
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		scalingExecutor.shutdown();
+		scalingExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+		scalingExecutor = null;
+		scheduledExecutorService.shutdown();
+		scheduledExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+		scheduledExecutorService = null;
+	}
+
 }

@@ -32,31 +32,34 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.TAG_CONTENT_DEF;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
 
-public class CMDCreate extends Command {
+public class CMDCreate extends Command{
 
-    public CMDCreate() {
-        super("create", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                List.of(TAG_NAME_DEF, TAG_CONTENT_DEF)
-        );
-    }
+	public CMDCreate(){
+		super("create", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+			List.of(TAG_NAME_DEF, TAG_CONTENT_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> tag = cmdArgs.getByIndex(0);
-        CmdArg<String> content = cmdArgs.getByIndex(1);
-        try{
-            tagCache.createNew(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong(), content.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getValue()))).queue();
-        }catch (CacheException e){
-            if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw e;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> tag = cmdArgs.getByIndex(0);
+		CmdArg<String> content = cmdArgs.getByIndex(1);
+		try{
+			tagCache.createNew(tag.getValue(), commandEvent.getEvent().getAuthor().getIdLong(), content.getValue());
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getValue()))).queue();
+		}
+		catch(CacheException e){
+			if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
+				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw e;
+			}
+		}
+	}
+
 }

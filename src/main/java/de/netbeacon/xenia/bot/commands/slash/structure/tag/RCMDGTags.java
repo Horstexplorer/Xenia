@@ -24,14 +24,15 @@ import de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDCreate;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDDelete;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.s.CMDModify;
 
-public class RCMDGTags extends Command {
+public class RCMDGTags extends Command{
 
-    public RCMDGTags() {
-        super("tags", "Manage tags for this guild", false, false,
-                new CMDCreate(), new CMDModify(), new CMDDelete()
-        );
-    }
+	public RCMDGTags(){
+		super("tags", "Manage tags for this guild", false, false,
+			new CMDCreate(), new CMDModify(), new CMDDelete()
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {}
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{}
+
 }

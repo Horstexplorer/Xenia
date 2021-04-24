@@ -21,10 +21,10 @@ import de.netbeacon.utils.json.serial.IJSONSerializable;
 
 import java.util.List;
 
-public interface IContextPool extends IIdentifiable, IJSONSerializable {
+public interface IContextPool extends IIdentifiable, IJSONSerializable{
 
-    String getDescription();
+	String getDescription();
 
-    List<ContentContext> getContentContexts();
+	List<ContentContext> getContentContexts();
 
 }

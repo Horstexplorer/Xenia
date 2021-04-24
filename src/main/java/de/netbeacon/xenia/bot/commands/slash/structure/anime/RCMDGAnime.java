@@ -22,14 +22,16 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.sfw.*;
 
-public class RCMDGAnime extends Command {
-    public RCMDGAnime() {
-        super("anime", "Contains various anime themed commands", false, false,
-            new CMDBite(), new CMDBlush(), new CMDCry(), new CMDCuddle(), new CMDDance(), new CMDFeed(), new CMDHug(), new CMDKiss(), new CMDPat(), new CMDPoke(), new CMDSlap(), new CMDSmile(), new CMDTickle(), new CMDNeko(), new CMDRandom()
-          //  , new CMDAnal(), new CMDBlowjob(), new CMDCum(), new CMDFuck(), new CMDNeko(), new CMDPussylick(), new CMDSolo(), new CMDYaoi(), new CMDYuri(), new CMDRandom()
-        );
-    }
+public class RCMDGAnime extends Command{
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {}
+	public RCMDGAnime(){
+		super("anime", "Contains various anime themed commands", false, false,
+			new CMDBite(), new CMDBlush(), new CMDCry(), new CMDCuddle(), new CMDDance(), new CMDFeed(), new CMDHug(), new CMDKiss(), new CMDPat(), new CMDPoke(), new CMDSlap(), new CMDSmile(), new CMDTickle(), new CMDNeko(), new CMDRandom()
+			//  , new CMDAnal(), new CMDBlowjob(), new CMDCum(), new CMDFuck(), new CMDNeko(), new CMDPussylick(), new CMDSolo(), new CMDYaoi(), new CMDYuri(), new CMDRandom()
+		);
+	}
+
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{}
+
 }

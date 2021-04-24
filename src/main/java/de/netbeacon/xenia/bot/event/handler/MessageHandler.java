@@ -49,160 +49,174 @@ import java.util.regex.Matcher;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPattern;
 
-public class MessageHandler {
+public class MessageHandler{
 
-    private final HashMap<String, Command> commandMap;
-    private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
-    private final EventWaiter eventWaiter;
-    private final XeniaBackendClient backendClient;
-    private final PaginatorManager paginatorManager;
-    private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
-    private final D43Z1ContextPoolManager contextPoolManager;
+	private final HashMap<String, Command> commandMap;
+	private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
+	private final EventWaiter eventWaiter;
+	private final XeniaBackendClient backendClient;
+	private final PaginatorManager paginatorManager;
+	private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
+	private final D43Z1ContextPoolManager contextPoolManager;
 
-    public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
-        this.commandMap = commandMap;
-        this.eventWaiter = eventWaiter;
-        this.paginatorManager = paginatorManager;
-        this.backendClient = backendClient;
-        this.contextPoolManager = contextPoolManager;
-    }
+	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
+		this.commandMap = commandMap;
+		this.eventWaiter = eventWaiter;
+		this.paginatorManager = paginatorManager;
+		this.backendClient = backendClient;
+		this.contextPoolManager = contextPoolManager;
+	}
 
-    public void processNew(GuildMessageReceivedEvent event){ // ! note ! events from the bot itself get passed through
-        // get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
-        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
-        Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
-        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-        License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
-        // wrap in single object
-        CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
-        // check if xenia has been disabled in which case we dont do anything
-        if(bChannel.getAccessMode().has(Channel.AccessMode.Mode.DISABLED)) return;
-        // get the message & check prefix
-        String msg = event.getMessage().getContentRaw();
-        if(!msg.startsWith(bGuild.getPrefix())){
-            if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW() && !event.getAuthor().isBot()){ // bot messages should be logged in some cases but we do not want to process em
-                try{
-                    D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
-                    ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-                    IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
-                    EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
-                            evalResult -> {
-                                if(evalResult.ok()){
-                                    event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
-                                }
-                            }, SharedExecutor.getInstance().getScheduledExecutor());
-                    d43Z1Imp.getEval().enqueue(evalRequest);
-                }catch (Exception e){
-                    logger.warn("An exception occurred while handing message over to D43Z1 ", e);
-                }
-            }else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
-                // bot messages should be logged in some cases
-                if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING))){
-                    // will return when it is from the bot but either the chatbot or selflearning is not active
-                    return;
-                }
-                // log the message
-                bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw(), true);
-            }
-            return;
-        }
-        // ! note ! events from the bot itself get passed through | we filter em out here again
-        if(event.getAuthor().isBot()) return;
-        // check if xenia is not active or inactive in which case we dont do anything
-        if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE) || bChannel.getAccessMode().has(Channel.AccessMode.Mode.INACTIVE)) return;
-        // check cooldown
-        if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
-            return;
-        }
-        commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
-        // split to list
-        List<String> args = new ArrayList<>();
-        Matcher matcher = ArgPattern.matcher(msg.substring(bGuild.getPrefix().length()));
-        while(matcher.find()){
-            args.add((matcher.group(2) != null)?matcher.group(2):matcher.group());
-        }
-        if(args.isEmpty()){
-            return;
-        }
-        // get the command
-        Command command = commandMap.get(args.get(0));
-        if(command == null){
-            if(bGuild.getSettings().has(Guild.GuildSettings.Settings.DISABLE_COMMAND_AUTO_CORRECT_MESSAGE)) return;
-            if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)) return;
-            List<Command> estimatedCommands = Command.getBestMatch(args.get(0), commandMap);
-            if(estimatedCommands.isEmpty()) return;
-            TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(bGuild, bMember);
-            if(translationPackage == null){
-                event.getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
-                return;
-            }
-            if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
-                event.getChannel().sendMessage(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
-                return;
-            }
-            command = estimatedCommands.get(0);
-        }
-        args.remove(0);
-        // start the madness
-        command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager));
-    }
+	public void processNew(GuildMessageReceivedEvent event){ // ! note ! events from the bot itself get passed through
+		// get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
+		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+		User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
+		Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
+		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+		// wrap in single object
+		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
+		// check if xenia has been disabled in which case we dont do anything
+		if(bChannel.getAccessMode().has(Channel.AccessMode.Mode.DISABLED)){
+			return;
+		}
+		// get the message & check prefix
+		String msg = event.getMessage().getContentRaw();
+		if(!msg.startsWith(bGuild.getPrefix())){
+			if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW() && !event.getAuthor().isBot()){ // bot messages should be logged in some cases but we do not want to process em
+				try{
+					D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
+					ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
+					IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+					EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
+						evalResult -> {
+							if(evalResult.ok()){
+								event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
+							}
+						}, SharedExecutor.getInstance().getScheduledExecutor());
+					d43Z1Imp.getEval().enqueue(evalRequest);
+				}
+				catch(Exception e){
+					logger.warn("An exception occurred while handing message over to D43Z1 ", e);
+				}
+			}
+			else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
+				// bot messages should be logged in some cases
+				if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING))){
+					// will return when it is from the bot but either the chatbot or selflearning is not active
+					return;
+				}
+				// log the message
+				bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw(), true);
+			}
+			return;
+		}
+		// ! note ! events from the bot itself get passed through | we filter em out here again
+		if(event.getAuthor().isBot()){
+			return;
+		}
+		// check if xenia is not active or inactive in which case we dont do anything
+		if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE) || bChannel.getAccessMode().has(Channel.AccessMode.Mode.INACTIVE)){
+			return;
+		}
+		// check cooldown
+		if(!commandCooldown.allow(event.getGuild().getIdLong(), event.getAuthor().getIdLong())){
+			return;
+		}
+		commandCooldown.deny(event.getGuild().getIdLong(), event.getAuthor().getIdLong());
+		// split to list
+		List<String> args = new ArrayList<>();
+		Matcher matcher = ArgPattern.matcher(msg.substring(bGuild.getPrefix().length()));
+		while(matcher.find()){
+			args.add((matcher.group(2) != null) ? matcher.group(2) : matcher.group());
+		}
+		if(args.isEmpty()){
+			return;
+		}
+		// get the command
+		Command command = commandMap.get(args.get(0));
+		if(command == null){
+			if(bGuild.getSettings().has(Guild.GuildSettings.Settings.DISABLE_COMMAND_AUTO_CORRECT_MESSAGE)){
+				return;
+			}
+			if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)){
+				return;
+			}
+			List<Command> estimatedCommands = Command.getBestMatch(args.get(0), commandMap);
+			if(estimatedCommands.isEmpty()){
+				return;
+			}
+			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(bGuild, bMember);
+			if(translationPackage == null){
+				event.getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+				return;
+			}
+			if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
+				event.getChannel().sendMessage(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
+				return;
+			}
+			command = estimatedCommands.get(0);
+		}
+		args.remove(0);
+		// start the madness
+		command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager));
+	}
 
-    public void processUpdate(GuildMessageUpdateEvent event){
-        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-        MessageCache messageCache = bChannel.getMessageCache();
-        Message message = messageCache.get(event.getMessageIdLong());
-        if(message == null){
-            return;
-        }
-        // update message content
-        message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
-        message.updateAsync(true);
-        // update thingy
-        messageCache.setLast("edited", message.getId());
-        // check if notification is active
-        if(bChannel.getTmpLoggingChannelId() == -1){
-            return;
-        }
-        TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-        if(channel == null){
-            bChannel.setTmpLoggingChannelId(-1);
-            return;
-        }
-        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
-                .addField("MessageID", event.getMessageId(), true)
-                .addField("Author", event.getAuthor().getAsTag(), true)
-                .addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-                .build()
-        ).queue(s->{}, e->{});
-    }
+	public void processUpdate(GuildMessageUpdateEvent event){
+		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+		MessageCache messageCache = bChannel.getMessageCache();
+		Message message = messageCache.get(event.getMessageIdLong());
+		if(message == null){
+			return;
+		}
+		// update message content
+		message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
+		message.updateAsync(true);
+		// update thingy
+		messageCache.setLast("edited", message.getId());
+		// check if notification is active
+		if(bChannel.getTmpLoggingChannelId() == -1){
+			return;
+		}
+		TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
+		if(channel == null){
+			bChannel.setTmpLoggingChannelId(-1);
+			return;
+		}
+		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
+			.addField("MessageID", event.getMessageId(), true)
+			.addField("Author", event.getAuthor().getAsTag(), true)
+			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+			.build()
+		).queue(s -> {}, e -> {});
+	}
 
-    public void processDelete(GuildMessageDeleteEvent event){
-        Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-        Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-        MessageCache messageCache = bChannel.getMessageCache();
-        Message message = messageCache.get(event.getMessageIdLong());
-        if(message == null){
-            return;
-        }
-        // update thingy
-        messageCache.setLast("deleted", event.getMessageIdLong());
-        // try sending the message there
-        if(bChannel.getTmpLoggingChannelId() == -1){
-            return;
-        }
-        TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-        if(channel == null){
-            bChannel.setTmpLoggingChannelId(-1);
-            return;
-        }
-        channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
-                .addField("MessageID", event.getMessageId(), true)
-                .addField("AuthorID", String.valueOf(message.getUserId()), true)
-                .addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-                .build()
-        ).queue(s->{}, e->{});
-    }
+	public void processDelete(GuildMessageDeleteEvent event){
+		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+		MessageCache messageCache = bChannel.getMessageCache();
+		Message message = messageCache.get(event.getMessageIdLong());
+		if(message == null){
+			return;
+		}
+		// update thingy
+		messageCache.setLast("deleted", event.getMessageIdLong());
+		// try sending the message there
+		if(bChannel.getTmpLoggingChannelId() == -1){
+			return;
+		}
+		TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
+		if(channel == null){
+			bChannel.setTmpLoggingChannelId(-1);
+			return;
+		}
+		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
+			.addField("MessageID", event.getMessageId(), true)
+			.addField("AuthorID", String.valueOf(message.getUserId()), true)
+			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+			.build()
+		).queue(s -> {}, e -> {});
+	}
 
 }

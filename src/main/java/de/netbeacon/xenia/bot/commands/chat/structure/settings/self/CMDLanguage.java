@@ -29,30 +29,32 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.SELF_LANGUAGE_ID_DEF;
 
-public class CMDLanguage extends Command {
+public class CMDLanguage extends Command{
 
-    public CMDLanguage() {
-        super("language",false, new CommandCooldown(CommandCooldown.Type.User, 2000),
-                null,
-                null,
-                null,
-                List.of(SELF_LANGUAGE_ID_DEF)
-        );
-    }
+	public CMDLanguage(){
+		super("language", false, new CommandCooldown(CommandCooldown.Type.User, 2000),
+			null,
+			null,
+			null,
+			List.of(SELF_LANGUAGE_ID_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        CmdArg<String> langIdA = args.getByIndex(0);
-        String languageId = langIdA.getValue();
-        TranslationPackage translationPackage1 = TranslationManager.getInstance().getTranslationPackage(languageId);
-        try{
-            if(translationPackage1 == null){
-                throw new IllegalArgumentException();
-            }
-            commandEvent.getBackendDataPack().getbUser().setPreferredLanguage(translationPackage1.getLanguageId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		CmdArg<String> langIdA = args.getByIndex(0);
+		String languageId = langIdA.getValue();
+		TranslationPackage translationPackage1 = TranslationManager.getInstance().getTranslationPackage(languageId);
+		try{
+			if(translationPackage1 == null){
+				throw new IllegalArgumentException();
+			}
+			commandEvent.getBackendDataPack().getbUser().setPreferredLanguage(translationPackage1.getLanguageId());
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
+		}
+	}
+
 }

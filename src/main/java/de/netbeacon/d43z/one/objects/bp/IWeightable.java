@@ -16,17 +16,18 @@
 
 package de.netbeacon.d43z.one.objects.bp;
 
-public interface IWeightable {
+public interface IWeightable{
 
-    default void increaseBy(float f){
-        setWeight(Math.max(getWeight()+f, 0));
-    }
+	default void increaseBy(float f){
+		setWeight(Math.max(getWeight() + f, 0));
+	}
 
-    default void decreaseBy(float f){
-        setWeight(Math.max(getWeight()-f, 0));
-    }
+	default void decreaseBy(float f){
+		setWeight(Math.max(getWeight() - f, 0));
+	}
 
-    float getWeight();
+	float getWeight();
 
-    void setWeight(float f);
+	void setWeight(float f);
+
 }

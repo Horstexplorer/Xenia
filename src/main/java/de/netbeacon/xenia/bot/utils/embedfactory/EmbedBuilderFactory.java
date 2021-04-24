@@ -21,32 +21,34 @@ import net.dv8tion.jda.api.entities.User;
 
 import java.awt.*;
 
-public class EmbedBuilderFactory {
+public class EmbedBuilderFactory{
 
-    /**
-     * Returns an embed with a given title and the self user as author
-     *
-     * @param title title
-     * @return embed builder
-     */
-    public static EmbedBuilder getDefaultEmbed(String title){
-        return new EmbedBuilder()
-                .setTitle(title)
-                .setColor(Color.CYAN);
-    }
+	/**
+	 * Returns an embed with a given title and the self user as author
+	 *
+	 * @param title title
+	 *
+	 * @return embed builder
+	 */
+	public static EmbedBuilder getDefaultEmbed(String title){
+		return new EmbedBuilder()
+			.setTitle(title)
+			.setColor(Color.CYAN);
+	}
 
-    /**
-     * Returns an embed with a given title and the self user as author and a user as requester
-     *
-     * @param title title
-     * @param requester requester
-     * @return embed builder
-     */
-    public static EmbedBuilder getDefaultEmbed(String title, User requester){
-        return new EmbedBuilder()
-                .setColor(Color.CYAN)
-                .setTitle(title)
-                .setFooter("Requested By "+requester.getAsTag(), requester.getAvatarUrl());
-    }
+	/**
+	 * Returns an embed with a given title and the self user as author and a user as requester
+	 *
+	 * @param title     title
+	 * @param requester requester
+	 *
+	 * @return embed builder
+	 */
+	public static EmbedBuilder getDefaultEmbed(String title, User requester){
+		return new EmbedBuilder()
+			.setColor(Color.CYAN)
+			.setTitle(title)
+			.setFooter("Requested By " + requester.getAsTag(), requester.getAvatarUrl());
+	}
 
 }

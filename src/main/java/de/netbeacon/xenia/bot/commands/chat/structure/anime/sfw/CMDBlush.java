@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDBlush extends AnimeImageCommand {
-    public CMDBlush() {
-        super("blush", true, false, ImageType.SFW.BLUSH, ContentType.GIF);
-    }
+public class CMDBlush extends AnimeImageCommand{
+
+	public CMDBlush(){
+		super("blush", true, false, ImageType.SFW.BLUSH, ContentType.GIF);
+	}
+
 }

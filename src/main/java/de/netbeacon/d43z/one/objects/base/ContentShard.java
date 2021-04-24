@@ -22,37 +22,38 @@ import de.netbeacon.d43z.one.objects.eval.ContentMatch;
 
 import java.util.List;
 
-public class ContentShard implements IMatchable {
+public class ContentShard implements IMatchable{
 
-    private final ContentContext parent;
-    private final List<Content> orderedContent;
+	private final ContentContext parent;
+	private final List<Content> orderedContent;
 
-    public ContentShard(ContentContext parent, List<Content> orderedContent){
-        this.parent = parent;
-        this.orderedContent = orderedContent;
-    }
+	public ContentShard(ContentContext parent, List<Content> orderedContent){
+		this.parent = parent;
+		this.orderedContent = orderedContent;
+	}
 
-    public ContentContext getParent() {
-        return parent;
-    }
+	public ContentContext getParent(){
+		return parent;
+	}
 
-    public List<Content> getOrderedContent() {
-        return orderedContent;
-    }
+	public List<Content> getOrderedContent(){
+		return orderedContent;
+	}
 
-    @Override
-    public ContentMatch getMatchFor(ISimilarity.Algorithm algorithm, Content content) {
-        float bestF = 0;
-        Content bestI = null;
-        Content bestO = null;
-        for(int i = 0; i < orderedContent.size()-1; i++){
-            float current = orderedContent.get(i).eval(algorithm, content);
-            if(bestF < current){
-                bestF = current;
-                bestI = orderedContent.get(i);
-                bestO = orderedContent.get(i+1);
-            }
-        }
-        return new ContentMatch(content, bestI, bestO, this, bestF);
-    }
+	@Override
+	public ContentMatch getMatchFor(ISimilarity.Algorithm algorithm, Content content){
+		float bestF = 0;
+		Content bestI = null;
+		Content bestO = null;
+		for(int i = 0; i < orderedContent.size() - 1; i++){
+			float current = orderedContent.get(i).eval(algorithm, content);
+			if(bestF < current){
+				bestF = current;
+				bestI = orderedContent.get(i);
+				bestO = orderedContent.get(i + 1);
+			}
+		}
+		return new ContentMatch(content, bestI, bestO, this, bestF);
+	}
+
 }

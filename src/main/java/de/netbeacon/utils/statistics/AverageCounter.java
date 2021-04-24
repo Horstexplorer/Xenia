@@ -16,21 +16,24 @@
 
 package de.netbeacon.utils.statistics;
 
-public class AverageCounter {
+public class AverageCounter{
 
-    private float avg;
-    private int counter;
+	private float avg;
+	private int counter;
 
-    public synchronized void add(float value){
-        if(counter+1 == Integer.MAX_VALUE) counter--;
-        avg = ((avg*counter++)+value)/counter;
-    }
+	public synchronized void add(float value){
+		if(counter + 1 == Integer.MAX_VALUE){
+			counter--;
+		}
+		avg = ((avg * counter++) + value) / counter;
+	}
 
-    public float getAvg() {
-        return avg;
-    }
+	public float getAvg(){
+		return avg;
+	}
 
-    public int getCounter() {
-        return counter;
-    }
+	public int getCounter(){
+		return counter;
+	}
+
 }

@@ -16,8 +16,8 @@
 
 package de.netbeacon.d43z.two.io.bp;
 
-public interface IOutputProvider<T> {
+public interface IOutputProvider<T>{
 
-    T getOutput(float[] inputs);
+	T getOutput(float[] inputs);
 
 }

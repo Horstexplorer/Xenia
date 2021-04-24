@@ -39,73 +39,73 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-public class SlashCommandListener extends ListenerAdapter {
+public class SlashCommandListener extends ListenerAdapter{
 
-    private final EventWaiter eventWaiter;
-    private final SlashCommandHandler slashCommandHandler;
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+	private final EventWaiter eventWaiter;
+	private final SlashCommandHandler slashCommandHandler;
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
-        this.eventWaiter = eventWaiter;
+	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
+		this.eventWaiter = eventWaiter;
 
-        HashMap<String, Command> globalCommandMap = new HashMap<>();
-        Consumer<Command> register = command -> globalCommandMap.put(command.getAlias(), command);
-        // register up to 100 commands available for all guilds (global pool) here
-        register.accept(new RCMDInfo());
-        register.accept(new RCMDTag());
-        register.accept(new RCMDGTags());
-        register.accept(new RCMDGLast());
-        register.accept(new RCMDGNotification());
-        register.accept(new RCMDGAnime());
+		HashMap<String, Command> globalCommandMap = new HashMap<>();
+		Consumer<Command> register = command -> globalCommandMap.put(command.getAlias(), command);
+		// register up to 100 commands available for all guilds (global pool) here
+		register.accept(new RCMDInfo());
+		register.accept(new RCMDTag());
+		register.accept(new RCMDGTags());
+		register.accept(new RCMDGLast());
+		register.accept(new RCMDGNotification());
+		register.accept(new RCMDGAnime());
 
-        // // // // // // // // // //
-        HashMap<String, Command> guildCommandMap = new HashMap<>();
-        register = command -> guildCommandMap.put(command.getAlias(), command);
-        // register up to 100 commands which can be guild specifically toggled
+		// // // // // // // // // //
+		HashMap<String, Command> guildCommandMap = new HashMap<>();
+		register = command -> guildCommandMap.put(command.getAlias(), command);
+		// register up to 100 commands which can be guild specifically toggled
 
 
-        // // // // // // // // // //
-        this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
-    }
+		// // // // // // // // // //
+		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
+	}
 
-    @Override
-    public void onReady(@NotNull ReadyEvent event) {
-        if(event.getJDA().getShardInfo().getShardId() != 0){
-            return;
-        }
-        // update commands global for everything if we are on shard 0
-        event.getJDA()
-                .updateCommands()
-                .addCommands(slashCommandHandler.getGlobalCommandData())
-                .queue(s -> {
-                    logger.info("Updated Global Commands");
-                }, f -> {
-                    logger.warn("Failed To Update Global Commands", f);
-                });
-    }
+	@Override
+	public void onReady(@NotNull ReadyEvent event){
+		if(event.getJDA().getShardInfo().getShardId() != 0){
+			return;
+		}
+		// update commands global for everything if we are on shard 0
+		event.getJDA()
+			.updateCommands()
+			.addCommands(slashCommandHandler.getGlobalCommandData())
+			.queue(s -> {
+				logger.info("Updated Global Commands");
+			}, f -> {
+				logger.warn("Failed To Update Global Commands", f);
+			});
+	}
 
-    @Override
-    public void onGuildReady(@NotNull GuildReadyEvent event) {
-        // update guild specific commands
-        event.getGuild()
-                .updateCommands()
-                .addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
-                .queue(s -> {
-                    logger.debug("Updated Guild Commands For Guild "+event.getGuild().getIdLong());
-                }, f -> {
-                    logger.warn("Failed To Update Commands For Guild "+event.getGuild().getIdLong(), f);
-                });
-    }
+	@Override
+	public void onGuildReady(@NotNull GuildReadyEvent event){
+		// update guild specific commands
+		event.getGuild()
+			.updateCommands()
+			.addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
+			.queue(s -> {
+				logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong());
+			}, f -> {
+				logger.warn("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
+			});
+	}
 
-    @Override
-    public void onSlashCommand(@NotNull SlashCommandEvent event) {
-        if(eventWaiter.waitingOnThis(event)){
-            return;
-        }
-        if(event.getGuild() == null || event.getUser().isBot()){ // listen for events from guilds only
-            return;
-        }
-        slashCommandHandler.handle(event);
-    }
+	@Override
+	public void onSlashCommand(@NotNull SlashCommandEvent event){
+		if(eventWaiter.waitingOnThis(event)){
+			return;
+		}
+		if(event.getGuild() == null || event.getUser().isBot()){ // listen for events from guilds only
+			return;
+		}
+		slashCommandHandler.handle(event);
+	}
 
 }

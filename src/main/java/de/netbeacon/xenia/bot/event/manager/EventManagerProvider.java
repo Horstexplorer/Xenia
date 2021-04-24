@@ -22,53 +22,54 @@ import net.dv8tion.jda.api.hooks.IEventManager;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-public class EventManagerProvider implements IShutdown {
+public class EventManagerProvider implements IShutdown{
 
-    private Function<Object, IEventManager> eventManagerFactory = null;
-    private final ConcurrentHashMap<Long, IEventManager> eventManagers = new ConcurrentHashMap<>();
+	private Function<Object, IEventManager> eventManagerFactory = null;
+	private final ConcurrentHashMap<Long, IEventManager> eventManagers = new ConcurrentHashMap<>();
 
-    public EventManagerProvider register(long id, IEventManager eventManager){
-        eventManagers.put(id, eventManager);
-        return this;
-    }
+	public EventManagerProvider register(long id, IEventManager eventManager){
+		eventManagers.put(id, eventManager);
+		return this;
+	}
 
-    public EventManagerProvider unregister(long id){
-        eventManagers.remove(id);
-        return this;
-    }
+	public EventManagerProvider unregister(long id){
+		eventManagers.remove(id);
+		return this;
+	}
 
-    public EventManagerProvider setFactory(Function<Object, IEventManager> factory){
-        eventManagerFactory = factory;
-        return this;
-    }
+	public EventManagerProvider setFactory(Function<Object, IEventManager> factory){
+		eventManagerFactory = factory;
+		return this;
+	}
 
-    public IEventManager provide(long id){
-        return eventManagers.get(id);
-    }
+	public IEventManager provide(long id){
+		return eventManagers.get(id);
+	}
 
-    public IEventManager provideOrCreate(long id){
-        return provideOrCreate(id, id);
-    }
+	public IEventManager provideOrCreate(long id){
+		return provideOrCreate(id, id);
+	}
 
-    public IEventManager provideOrCreate(long id, Object object){
-        IEventManager iEventManager = eventManagers.get(id);
-        if(iEventManager != null){
-            return iEventManager;
-        }
-        if(eventManagerFactory == null){
-            return null;
-        }
-        iEventManager = eventManagerFactory.apply(object);
-        eventManagers.put(id, iEventManager);
-        return iEventManager;
-    }
+	public IEventManager provideOrCreate(long id, Object object){
+		IEventManager iEventManager = eventManagers.get(id);
+		if(iEventManager != null){
+			return iEventManager;
+		}
+		if(eventManagerFactory == null){
+			return null;
+		}
+		iEventManager = eventManagerFactory.apply(object);
+		eventManagers.put(id, iEventManager);
+		return iEventManager;
+	}
 
-    @Override
-    public void onShutdown() throws Exception {
-        for(var manager : eventManagers.values()){
-            if(manager instanceof IExtendedEventManager){
-                ((IExtendedEventManager) manager).onShutdown();
-            }
-        }
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		for(var manager : eventManagers.values()){
+			if(manager instanceof IExtendedEventManager){
+				((IExtendedEventManager) manager).onShutdown();
+			}
+		}
+	}
+
 }

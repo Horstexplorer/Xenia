@@ -34,30 +34,33 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 
-public class CMDList extends Command {
+public class CMDList extends Command{
 
-    public CMDList() {
-        super("list", "View existing notifications", false, new CommandCooldown(CommandCooldown.Type.User, 2500),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                null
-        );
-    }
+	public CMDList(){
+		super("list", "View existing notifications", false, new CommandCooldown(CommandCooldown.Type.User, 2500),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
+			null
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Notification notification : notificationCache.getAllAsList()){
-            User user = null;
-            try{
-                user = commandEvent.getBackendClient().getUserCache().get(notification.getUserId());
-            }catch (Exception ignore){}
-            stringBuilder.append(notification.getId()).append(" - ").append((user != null) ? user.getMetaUsername() : notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
-        }
-        MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"))
-                .setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();
-        commandEvent.getEvent().reply(messageEmbed).queue();
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+		StringBuilder stringBuilder = new StringBuilder();
+		for(Notification notification : notificationCache.getAllAsList()){
+			User user = null;
+			try{
+				user = commandEvent.getBackendClient().getUserCache().get(notification.getUserId());
+			}
+			catch(Exception ignore){
+			}
+			stringBuilder.append(notification.getId()).append(" - ").append((user != null) ? user.getMetaUsername() : notification.getUserId()).append("@").append(notification.getChannelId()).append(" - ").append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(Instant.ofEpochMilli(notification.getNotificationTarget()).atZone(ZoneId.systemDefault()).toLocalDateTime())).append("\n");
+		}
+		MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"))
+			.setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();
+		commandEvent.getEvent().reply(messageEmbed).queue();
+	}
+
 }

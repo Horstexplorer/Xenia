@@ -26,42 +26,43 @@ import java.util.concurrent.TimeUnit;
  *
  * @author horstexplorer
  */
-public class TimeoutExecutor {
+public class TimeoutExecutor{
 
-    private static final ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-    private ScheduledFuture<?> timeoutTask;
-    private final Runnable runnable;
+	private static final ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+	private ScheduledFuture<?> timeoutTask;
+	private final Runnable runnable;
 
-    /**
-     * Creates a new instance of this class
-     *
-     * @param runnable the runnable which will be executed when the time is up
-     */
-    public TimeoutExecutor(Runnable runnable){
-        this.runnable = runnable;
-    }
+	/**
+	 * Creates a new instance of this class
+	 *
+	 * @param runnable the runnable which will be executed when the time is up
+	 */
+	public TimeoutExecutor(Runnable runnable){
+		this.runnable = runnable;
+	}
 
-    /**
-     * Used to start a timeout for the connection
-     *
-     * This will close the connection after a given time if not stopped </br>
-     * If the task is already running it will be canceled and restarted </br>
-     *
-     * @param timeout timeout in ms
-     */
-    public void start(long timeout){
-        if(timeoutTask != null){
-            timeoutTask.cancel(true);
-        }
-        timeoutTask = ses.schedule(runnable, timeout, TimeUnit.MILLISECONDS);
-    }
+	/**
+	 * Used to start a timeout for the connection
+	 * <p>
+	 * This will close the connection after a given time if not stopped </br>
+	 * If the task is already running it will be canceled and restarted </br>
+	 *
+	 * @param timeout timeout in ms
+	 */
+	public void start(long timeout){
+		if(timeoutTask != null){
+			timeoutTask.cancel(true);
+		}
+		timeoutTask = ses.schedule(runnable, timeout, TimeUnit.MILLISECONDS);
+	}
 
-    /**
-     * Used to stop the timeout task
-     */
-    public void stop(){
-        if(timeoutTask != null){
-            timeoutTask.cancel(true);
-        }
-    }
+	/**
+	 * Used to stop the timeout task
+	 */
+	public void stop(){
+		if(timeoutTask != null){
+			timeoutTask.cancel(true);
+		}
+	}
+
 }

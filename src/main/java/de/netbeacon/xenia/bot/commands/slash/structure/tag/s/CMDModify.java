@@ -34,38 +34,42 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
-public class CMDModify extends Command {
+public class CMDModify extends Command{
 
-    public CMDModify() {
-        super("modify", "Modifies a given tag with the new content", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                List.of(
-                        new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t-> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t-> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build(),
-                        new CmdArgDef.Builder<>("content", "Tag content", "Tag content, 1 to 1500 chars", String.class).predicateAddStringLengthRange(1, 1500).build()
-                )
-        );
-    }
+	public CMDModify(){
+		super("modify", "Modifies a given tag with the new content", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+			List.of(
+				new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t -> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t -> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build(),
+				new CmdArgDef.Builder<>("content", "Tag content", "Tag content, 1 to 1500 chars", String.class).predicateAddStringLengthRange(1, 1500).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> nameArg = cmdArgs.getByName("name");
-        CmdArg<String> contentArg = cmdArgs.getByName("content");
-        try{
-            Tag tag = tagCache.get(nameArg.getValue());
-            if(commandEvent.getEvent().getUser().getIdLong() != tag.getUserId()){
-                throw new RuntimeException("User Does Not Own This Tag");
-            }
-            tag.setTagContent(contentArg.getValue());
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();;
-        }catch (DataException | CacheException e){
-            if(e instanceof DataException && ((DataException) e).getCode() == 404){
-                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw e;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> nameArg = cmdArgs.getByName("name");
+		CmdArg<String> contentArg = cmdArgs.getByName("content");
+		try{
+			Tag tag = tagCache.get(nameArg.getValue());
+			if(commandEvent.getEvent().getUser().getIdLong() != tag.getUserId()){
+				throw new RuntimeException("User Does Not Own This Tag");
+			}
+			tag.setTagContent(contentArg.getValue());
+			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
+			;
+		}
+		catch(DataException | CacheException e){
+			if(e instanceof DataException && ((DataException) e).getCode() == 404){
+				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw e;
+			}
+		}
+	}
+
 }

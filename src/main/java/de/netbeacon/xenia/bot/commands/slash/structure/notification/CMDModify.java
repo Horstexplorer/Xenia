@@ -33,42 +33,45 @@ import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.List;
 
-public class CMDModify extends Command {
+public class CMDModify extends Command{
 
-    public CMDModify() {
-        super("modify", "Update an existing notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(
-                        new CmdArgDef.Builder<>("id", "Notification id", "Notification id", Long.class).build(),
-                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "\"#h #m #s\" or \"60\" (in minutes) or \"yyyy-MM-dd hh:mm:ss\"", HumanTime.class).build(),
-                        new CmdArgDef.Builder<>("message", "Notification message", "Notification message", String.class).build()
-                )
-        );
-    }
+	public CMDModify(){
+		super("modify", "Update an existing notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
+			List.of(
+				new CmdArgDef.Builder<>("id", "Notification id", "Notification id", Long.class).build(),
+				new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "\"#h #m #s\" or \"60\" (in minutes) or \"yyyy-MM-dd hh:mm:ss\"", HumanTime.class).build(),
+				new CmdArgDef.Builder<>("message", "Notification message", "Notification message", String.class).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        CmdArg<Long> idArg = cmdArgs.getByName("id");
-        CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
-        CmdArg<String> messageArg = cmdArgs.getByName("message");
-        try{
-            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(idArg.getValue());
-            if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong()){
-                throw new RuntimeException("User Does Not Own This Notification");
-            }
-            notification.lSetNotificationTarget(durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli());
-            notification.lSetNotificationMessage(messageArg.getValue());
-            notification.update();
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		CmdArg<Long> idArg = cmdArgs.getByName("id");
+		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
+		CmdArg<String> messageArg = cmdArgs.getByName("message");
+		try{
+			Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(idArg.getValue());
+			if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong()){
+				throw new RuntimeException("User Does Not Own This Notification");
+			}
+			notification.lSetNotificationTarget(durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli());
+			notification.lSetNotificationMessage(messageArg.getValue());
+			notification.update();
 
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))+" (ID: "+notification.getId()+")").queue();
-        }catch (DataException | CacheException ex){
-            if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw ex;
-            }
-        }
-    }
+			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg")) + " (ID: " + notification.getId() + ")").queue();
+		}
+		catch(DataException | CacheException ex){
+			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
+				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw ex;
+			}
+		}
+	}
+
 }

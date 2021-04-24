@@ -19,13 +19,13 @@ package de.netbeacon.xenia.bot.utils.mentionremover;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 
-public class MentionRemover {
+public class MentionRemover{
 
-    public static Message process(String input){
-        MessageBuilder messageBuilder = new MessageBuilder();
-        messageBuilder.denyMentions(Message.MentionType.EVERYONE, Message.MentionType.HERE);
-        messageBuilder.append(input);
-        return messageBuilder.build();
-    }
+	public static Message process(String input){
+		MessageBuilder messageBuilder = new MessageBuilder();
+		messageBuilder.denyMentions(Message.MentionType.EVERYONE, Message.MentionType.HERE);
+		messageBuilder.append(input);
+		return messageBuilder.build();
+	}
 
 }

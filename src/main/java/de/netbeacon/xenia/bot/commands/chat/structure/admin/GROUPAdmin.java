@@ -21,18 +21,18 @@ import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 /**
  * Contains all commands providing some admin features to the developer
  */
-public class GROUPAdmin extends CommandGroup {
+public class GROUPAdmin extends CommandGroup{
 
-    public GROUPAdmin() {
-        super(null,"admin", false);
-        addChildCommand(new CMDEval());
-        addChildCommand(new CMDInfo());
-        addChildCommand(new CMDPing());
-        addChildCommand(new CMDClientIdentify());
-        addChildCommand(new CMDGlobalInfo());
-        addChildCommand(new CMDChatlog());
-        addChildCommand(new CMDD43Z1());
-        addChildCommand(new CMDD43Z1Stats());
-    }
+	public GROUPAdmin(){
+		super(null, "admin", false);
+		addChildCommand(new CMDEval());
+		addChildCommand(new CMDInfo());
+		addChildCommand(new CMDPing());
+		addChildCommand(new CMDClientIdentify());
+		addChildCommand(new CMDGlobalInfo());
+		addChildCommand(new CMDChatlog());
+		addChildCommand(new CMDD43Z1());
+		addChildCommand(new CMDD43Z1Stats());
+	}
 
 }

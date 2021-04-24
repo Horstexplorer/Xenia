@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDCry extends AnimeImageCommand {
-    public CMDCry() {
-        super("cry", "Cry about someone",true, false, ImageType.SFW.CRY, ContentType.GIF);
-    }
+public class CMDCry extends AnimeImageCommand{
+
+	public CMDCry(){
+		super("cry", "Cry about someone", true, false, ImageType.SFW.CRY, ContentType.GIF);
+	}
+
 }

@@ -19,20 +19,20 @@ package de.netbeacon.d43z.one.objects.bp;
 import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.base.ContentShard;
 
-public interface IMatch {
+public interface IMatch{
 
-    Content getInput();
+	Content getInput();
 
-    Content getEstimatedInput();
+	Content getEstimatedInput();
 
-    Content getEstimatedOutput();
+	Content getEstimatedOutput();
 
-    ContentShard getOrigin();
+	ContentShard getOrigin();
 
-    float getCoefficient();
+	float getCoefficient();
 
-    void setCoefficientAdjustment(float value);
+	void setCoefficientAdjustment(float value);
 
-    float getAdjustedCoefficient();
+	float getAdjustedCoefficient();
 
 }

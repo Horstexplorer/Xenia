@@ -21,24 +21,25 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.util.function.Supplier;
 
-public class Page {
+public class Page{
 
-    private final Supplier<MessageEmbed> messageEmbedSupplier;
+	private final Supplier<MessageEmbed> messageEmbedSupplier;
 
-    public Page(MessageEmbed messageEmbed){
-        this.messageEmbedSupplier = () -> messageEmbed;
-    }
+	public Page(MessageEmbed messageEmbed){
+		this.messageEmbedSupplier = () -> messageEmbed;
+	}
 
-    public Page(EmbedBuilder embedBuilder){
-        MessageEmbed messageEmbed = embedBuilder.build();
-        this.messageEmbedSupplier = () -> messageEmbed;
-    }
+	public Page(EmbedBuilder embedBuilder){
+		MessageEmbed messageEmbed = embedBuilder.build();
+		this.messageEmbedSupplier = () -> messageEmbed;
+	}
 
-    public Page(Supplier<MessageEmbed> messageEmbedSupplier){
-        this.messageEmbedSupplier = messageEmbedSupplier;
-    }
+	public Page(Supplier<MessageEmbed> messageEmbedSupplier){
+		this.messageEmbedSupplier = messageEmbedSupplier;
+	}
 
-    public MessageEmbed getAsMessageEmbed(){
-        return messageEmbedSupplier.get();
-    }
+	public MessageEmbed getAsMessageEmbed(){
+		return messageEmbedSupplier.get();
+	}
+
 }

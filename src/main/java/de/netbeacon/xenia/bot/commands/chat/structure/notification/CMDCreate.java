@@ -36,32 +36,35 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_MESSAGE_DEF;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_TARGET_TIME_DEF;
 
-public class CMDCreate extends Command {
+public class CMDCreate extends Command{
 
-    public CMDCreate() {
-        super("create", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF)
-        );
-    }
+	public CMDCreate(){
+		super("create", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
+			List.of(NOTIFICATION_TARGET_TIME_DEF, NOTIFICATION_MESSAGE_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        CmdArg<HumanTime> localDateTimeCmdArg = cmdArgs.getByIndex(0);
-        CmdArg<String> stringCmdArg = cmdArgs.getByIndex(1);
-        // create a new notification
-        NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
-        try{
-            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getAuthor().getAsTag()))).queue();
-        }catch (DataException | CacheException ex){
-            if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw ex;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		CmdArg<HumanTime> localDateTimeCmdArg = cmdArgs.getByIndex(0);
+		CmdArg<String> stringCmdArg = cmdArgs.getByIndex(1);
+		// create a new notification
+		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+		try{
+			Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getAuthor().getAsTag()))).queue();
+		}
+		catch(DataException | CacheException ex){
+			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
+				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw ex;
+			}
+		}
+	}
+
 }

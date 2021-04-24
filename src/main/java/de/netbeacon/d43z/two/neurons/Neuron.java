@@ -18,52 +18,52 @@ package de.netbeacon.d43z.two.neurons;
 
 import java.util.function.UnaryOperator;
 
-public class Neuron {
+public class Neuron{
 
-    private float[] weights;
-    private final UnaryOperator<Float> function;
+	private float[] weights;
+	private final UnaryOperator<Float> function;
 
-    private float[] lastInputs;
-    private float lastActivationValue;
+	private float[] lastInputs;
+	private float lastActivationValue;
 
-    public Neuron(UnaryOperator<Float> function, float ... weights){
-        this.function = function;
-        this.weights = weights;
-    }
+	public Neuron(UnaryOperator<Float> function, float... weights){
+		this.function = function;
+		this.weights = weights;
+	}
 
-    public void activate(float ... inputs){
-        if(inputs.length != weights.length){
-            throw new IllegalArgumentException("Input Weight Size Does Not Match Number Of Weights Stored");
-        }
-        float sum = 0;
-        for(int i = 0; i < inputs.length; i++){
-            sum += inputs[i]*weights[i];
-        }
-        lastActivationValue = function.apply(sum);
-        lastInputs = inputs;
-    }
+	public void activate(float... inputs){
+		if(inputs.length != weights.length){
+			throw new IllegalArgumentException("Input Weight Size Does Not Match Number Of Weights Stored");
+		}
+		float sum = 0;
+		for(int i = 0; i < inputs.length; i++){
+			sum += inputs[i] * weights[i];
+		}
+		lastActivationValue = function.apply(sum);
+		lastInputs = inputs;
+	}
 
-    public float getLastActivationValue() {
-        return lastActivationValue;
-    }
+	public float getLastActivationValue(){
+		return lastActivationValue;
+	}
 
-    public float[] getLastInputs() {
-        return lastInputs;
-    }
+	public float[] getLastInputs(){
+		return lastInputs;
+	}
 
-    public float[] getWeights() {
-        return weights;
-    }
+	public float[] getWeights(){
+		return weights;
+	}
 
-    public float[] calculateAndApplyOutputBackProp(float outputError){
-        float[] inputError = new float[weights.length];
-        for(int i = 0; i < weights.length; i++){
-            float iip = (((lastInputs[i]*weights[i])/(lastInputs[i]+weights[i])*lastInputs[i])/lastActivationValue);
-            float wip = (((lastInputs[i]*weights[i])/(lastInputs[i]+weights[i])*weights[i])/lastActivationValue);
-            inputError[i] = iip*outputError;
-            weights[i] = weights[i]*(1-wip*outputError);
-        }
-        return inputError;
-    }
+	public float[] calculateAndApplyOutputBackProp(float outputError){
+		float[] inputError = new float[weights.length];
+		for(int i = 0; i < weights.length; i++){
+			float iip = (((lastInputs[i] * weights[i]) / (lastInputs[i] + weights[i]) * lastInputs[i]) / lastActivationValue);
+			float wip = (((lastInputs[i] * weights[i]) / (lastInputs[i] + weights[i]) * weights[i]) / lastActivationValue);
+			inputError[i] = iip * outputError;
+			weights[i] = weights[i] * (1 - wip * outputError);
+		}
+		return inputError;
+	}
 
 }

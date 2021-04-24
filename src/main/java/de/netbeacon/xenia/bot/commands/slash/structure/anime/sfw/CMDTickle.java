@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDTickle extends AnimeImageCommand {
-    public CMDTickle() {
-        super("tickle", "Tickle someone", true, false, ImageType.SFW.TICKLE, ContentType.GIF);
-    }
+public class CMDTickle extends AnimeImageCommand{
+
+	public CMDTickle(){
+		super("tickle", "Tickle someone", true, false, ImageType.SFW.TICKLE, ContentType.GIF);
+	}
+
 }

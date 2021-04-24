@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDAnal extends AnimeImageCommand {
-    public CMDAnal() {
-        super("anal", false, true, ImageType.NSFW.ANAL, ContentType.GIF);
-    }
+public class CMDAnal extends AnimeImageCommand{
+
+	public CMDAnal(){
+		super("anal", false, true, ImageType.NSFW.ANAL, ContentType.GIF);
+	}
+
 }

@@ -16,52 +16,54 @@
 
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs;
 
-public class CmdArg<T> {
+public class CmdArg<T>{
 
-    private final CmdArgDef<T> argDef;
-    private final T value;
+	private final CmdArgDef<T> argDef;
+	private final T value;
 
-    /**
-     * Creates a new instance of this class
-     *
-     * @param def definition of this argument
-     * @param value of this argument
-     */
-    protected CmdArg(CmdArgDef<T> def, T value){
-        this.argDef = def;
-        this.value = value;
-    }
+	/**
+	 * Creates a new instance of this class
+	 *
+	 * @param def   definition of this argument
+	 * @param value of this argument
+	 */
+	protected CmdArg(CmdArgDef<T> def, T value){
+		this.argDef = def;
+		this.value = value;
+	}
 
-    /**
-     * Checks if the value matches the definition
-     *
-     * Will return true if it either matches or doesnt exist while being optional
-     *
-     * @return true if it does match
-     */
-    public boolean verify(){
-        if(value == null){
-            return argDef.isOptional();
-        }else{
-            return argDef.test(value);
-        }
-    }
+	/**
+	 * Checks if the value matches the definition
+	 * <p>
+	 * Will return true if it either matches or doesnt exist while being optional
+	 *
+	 * @return true if it does match
+	 */
+	public boolean verify(){
+		if(value == null){
+			return argDef.isOptional();
+		}
+		else{
+			return argDef.test(value);
+		}
+	}
 
-    /**
-     * Returns the definition of this argument
-     *
-     * @return CmdArgDef
-     */
-    public CmdArgDef<?> getArgDef() {
-        return argDef;
-    }
+	/**
+	 * Returns the definition of this argument
+	 *
+	 * @return CmdArgDef
+	 */
+	public CmdArgDef<?> getArgDef(){
+		return argDef;
+	}
 
-    /**
-     * Returns the value of the argument
-     *
-     * @return value
-     */
-    public T getValue() {
-        return value;
-    }
+	/**
+	 * Returns the value of the argument
+	 *
+	 * @return value
+	 */
+	public T getValue(){
+		return value;
+	}
+
 }

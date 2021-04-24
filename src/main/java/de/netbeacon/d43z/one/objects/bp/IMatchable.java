@@ -18,8 +18,8 @@ package de.netbeacon.d43z.one.objects.bp;
 
 import de.netbeacon.d43z.one.objects.base.Content;
 
-public interface IMatchable {
+public interface IMatchable{
 
-    IMatch getMatchFor(ISimilarity.Algorithm algorithm, Content content);
+	IMatch getMatchFor(ISimilarity.Algorithm algorithm, Content content);
 
 }

@@ -20,56 +20,57 @@ import de.netbeacon.utils.shutdownhook.IShutdown;
 
 import java.util.concurrent.*;
 
-public class TaskManager implements IShutdown {
+public class TaskManager implements IShutdown{
 
-    private static TaskManager instance;
-    private final ConcurrentHashMap<Long, ScheduledFuture<?>> taskMap = new ConcurrentHashMap<>();
-    private final ScheduledExecutorService scheduledExecutorService;
+	private static TaskManager instance;
+	private final ConcurrentHashMap<Long, ScheduledFuture<?>> taskMap = new ConcurrentHashMap<>();
+	private final ScheduledExecutorService scheduledExecutorService;
 
-    private TaskManager(){
-        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-    }
+	private TaskManager(){
+		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+	}
 
-    public static synchronized TaskManager getInstance(boolean initializeIfPossible){
-        if(instance == null && initializeIfPossible){
-            instance = new TaskManager();
-        }
-        return instance;
-    }
+	public static synchronized TaskManager getInstance(boolean initializeIfPossible){
+		if(instance == null && initializeIfPossible){
+			instance = new TaskManager();
+		}
+		return instance;
+	}
 
-    public static TaskManager getInstance(){
-        return instance;
-    }
+	public static TaskManager getInstance(){
+		return instance;
+	}
 
-    public boolean schedule(long taskId, Runnable runnable, long delay){
-        if(scheduledExecutorService.isShutdown() || taskMap.containsKey(taskId)){
-            return false;
-        }
-        ScheduledFuture<?> future = scheduledExecutorService.schedule(runnable, delay, TimeUnit.MILLISECONDS);
-        taskMap.put(taskId, future);
-        return true;
-    }
+	public boolean schedule(long taskId, Runnable runnable, long delay){
+		if(scheduledExecutorService.isShutdown() || taskMap.containsKey(taskId)){
+			return false;
+		}
+		ScheduledFuture<?> future = scheduledExecutorService.schedule(runnable, delay, TimeUnit.MILLISECONDS);
+		taskMap.put(taskId, future);
+		return true;
+	}
 
-    public boolean update(long taskId, Runnable runnable, long delay){
-        if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
-            return false;
-        }
-        cancel(taskId);
-        return schedule(taskId, runnable, delay);
-    }
+	public boolean update(long taskId, Runnable runnable, long delay){
+		if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
+			return false;
+		}
+		cancel(taskId);
+		return schedule(taskId, runnable, delay);
+	}
 
-    public boolean cancel(long taskId){
-        if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
-            return false;
-        }
-        taskMap.get(taskId).cancel(true);
-        taskMap.remove(taskId);
-        return true;
-    }
+	public boolean cancel(long taskId){
+		if(scheduledExecutorService.isShutdown() || !taskMap.containsKey(taskId)){
+			return false;
+		}
+		taskMap.get(taskId).cancel(true);
+		taskMap.remove(taskId);
+		return true;
+	}
 
-    @Override
-    public void onShutdown() throws Exception {
-        scheduledExecutorService.shutdownNow();
-        instance = null;
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		scheduledExecutorService.shutdownNow();
+		instance = null;
+	}
+
 }

@@ -19,17 +19,17 @@ package de.netbeacon.xenia.bot.utils.misc.listener;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 
-public class NotificationListenerInserter implements CacheEventListener<Long, Guild> {
+public class NotificationListenerInserter implements CacheEventListener<Long, Guild>{
 
-    private final NotificationListener notificationListener;
+	private final NotificationListener notificationListener;
 
-    public NotificationListenerInserter(NotificationListener notificationListener){
-        this.notificationListener = notificationListener;
-    }
+	public NotificationListenerInserter(NotificationListener notificationListener){
+		this.notificationListener = notificationListener;
+	}
 
-    @Override
-    public void onInsertion(Long newKey, Guild newObject) {
-        newObject.getMiscCaches().getNotificationCache().addEventListeners(notificationListener);
-    }
+	@Override
+	public void onInsertion(Long newKey, Guild newObject){
+		newObject.getMiscCaches().getNotificationCache().addEventListeners(notificationListener);
+	}
 
 }

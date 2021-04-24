@@ -31,60 +31,62 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public class TranslationManager {
+public class TranslationManager{
 
-    private static TranslationManager instance;
-    private static final Logger logger = LoggerFactory.getLogger(TranslationManager.class);
+	private static TranslationManager instance;
+	private static final Logger logger = LoggerFactory.getLogger(TranslationManager.class);
 
-    private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
 
-    private TranslationManager() throws IOException {
-        String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("cmd_translations.json")), StandardCharsets.UTF_8);
-        JSONArray jsonArray = new JSONArray(fileContent);
-        for(int i = 0; i < jsonArray.length(); i++){
-            TranslationPackage translationPackage = new TranslationPackage(jsonArray.getJSONObject(i));
-            translationPackages.put(translationPackage.getLanguageId(), translationPackage);
-        }
-        logger.info("Loaded Languages: "+ Arrays.toString(translationPackages.values().stream().map(TranslationPackage::getLanguageId).toArray()));
-    }
+	private TranslationManager() throws IOException{
+		String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("cmd_translations.json")), StandardCharsets.UTF_8);
+		JSONArray jsonArray = new JSONArray(fileContent);
+		for(int i = 0; i < jsonArray.length(); i++){
+			TranslationPackage translationPackage = new TranslationPackage(jsonArray.getJSONObject(i));
+			translationPackages.put(translationPackage.getLanguageId(), translationPackage);
+		}
+		logger.info("Loaded Languages: " + Arrays.toString(translationPackages.values().stream().map(TranslationPackage::getLanguageId).toArray()));
+	}
 
-    public static synchronized TranslationManager getInstance(boolean initIfNeeded){
-        if(instance == null && initIfNeeded){
-            try{
-                instance = new TranslationManager();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return instance;
-    }
+	public static synchronized TranslationManager getInstance(boolean initIfNeeded){
+		if(instance == null && initIfNeeded){
+			try{
+				instance = new TranslationManager();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return instance;
+	}
 
-    public static TranslationManager getInstance(){
-        return instance;
-    }
+	public static TranslationManager getInstance(){
+		return instance;
+	}
 
-    public boolean containsLanguage(String languageId){
-        return translationPackages.containsKey(languageId.toLowerCase());
-    }
+	public boolean containsLanguage(String languageId){
+		return translationPackages.containsKey(languageId.toLowerCase());
+	}
 
-    public TranslationPackage getDefaultTranslationPackage(){
-        return translationPackages.values().stream().filter(TranslationPackage::isDefault).findFirst().orElse(null);
-    }
+	public TranslationPackage getDefaultTranslationPackage(){
+		return translationPackages.values().stream().filter(TranslationPackage::isDefault).findFirst().orElse(null);
+	}
 
-    public TranslationPackage getTranslationPackage(String languageId){
-        return translationPackages.get(languageId.toLowerCase());
-    }
+	public TranslationPackage getTranslationPackage(String languageId){
+		return translationPackages.get(languageId.toLowerCase());
+	}
 
-    public TranslationPackage getTranslationPackage(Guild guild, Member member){
-        if(guild.getSettings().has(Guild.GuildSettings.Settings.ENFORCE_LANGUAGE)){
-            return getTranslationPackage(guild.getPreferredLanguage());
-        }else{
-            return getTranslationPackage(member.getUser().getPreferredLanguage());
-        }
-    }
+	public TranslationPackage getTranslationPackage(Guild guild, Member member){
+		if(guild.getSettings().has(Guild.GuildSettings.Settings.ENFORCE_LANGUAGE)){
+			return getTranslationPackage(guild.getPreferredLanguage());
+		}
+		else{
+			return getTranslationPackage(member.getUser().getPreferredLanguage());
+		}
+	}
 
-    public List<String> getLanguageIds(){
-        return translationPackages.values().stream().map(TranslationPackage::getLanguageId).collect(Collectors.toList());
-    }
+	public List<String> getLanguageIds(){
+		return translationPackages.values().stream().map(TranslationPackage::getLanguageId).collect(Collectors.toList());
+	}
 
 }

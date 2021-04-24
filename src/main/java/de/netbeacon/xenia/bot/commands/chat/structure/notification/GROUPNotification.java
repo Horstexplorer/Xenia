@@ -18,14 +18,14 @@ package de.netbeacon.xenia.bot.commands.chat.structure.notification;
 
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 
-public class GROUPNotification extends CommandGroup {
+public class GROUPNotification extends CommandGroup{
 
-    public GROUPNotification() {
-        super(null, "notification", false);
-        addChildCommand(new CMDCreate());
-        addChildCommand(new CMDModify());
-        addChildCommand(new CMDDelete());
-        addChildCommand(new CMDList());
-    }
+	public GROUPNotification(){
+		super(null, "notification", false);
+		addChildCommand(new CMDCreate());
+		addChildCommand(new CMDModify());
+		addChildCommand(new CMDDelete());
+		addChildCommand(new CMDList());
+	}
 
 }

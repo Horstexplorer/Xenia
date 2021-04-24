@@ -18,30 +18,31 @@ package de.netbeacon.d43z.one.objects.settings;
 
 import org.json.JSONObject;
 
-public class Settings {
+public class Settings{
 
-    private static JSONObject data;
+	private static JSONObject data;
 
-    private Settings(){}
+	private Settings(){}
 
-    static {
-        try{
-            data = new JSONObject(new String(Settings.class.getClassLoader().getResourceAsStream("d34z.settings").readAllBytes()));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+	static{
+		try{
+			data = new JSONObject(new String(Settings.class.getClassLoader().getResourceAsStream("d34z.settings").readAllBytes()));
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
-    public static JSONObject get(){
-        return new JSONObject(data);
-    }
+	public static JSONObject get(){
+		return new JSONObject(data);
+	}
 
-    public static <E> E get(String property){
-        property = property.toLowerCase();
-        if(data.has(property)){
-            return (E) data.get(property);
-        }
-        return null;
-    }
+	public static <E> E get(String property){
+		property = property.toLowerCase();
+		if(data.has(property)){
+			return (E) data.get(property);
+		}
+		return null;
+	}
 
 }

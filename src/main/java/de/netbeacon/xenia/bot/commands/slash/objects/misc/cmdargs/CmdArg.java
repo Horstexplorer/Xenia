@@ -16,21 +16,22 @@
 
 package de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs;
 
-public class CmdArg<T> {
+public class CmdArg<T>{
 
-    private final T data;
-    private final CmdArgDef<T> def;
+	private final T data;
+	private final CmdArgDef<T> def;
 
-    public CmdArg(T data, CmdArgDef<T> def){
-        this.data = data;
-        this.def = def;
-    }
+	public CmdArg(T data, CmdArgDef<T> def){
+		this.data = data;
+		this.def = def;
+	}
 
-    public String getName(){ return def.getName(); }
+	public String getName(){ return def.getName(); }
 
-    public T getValue(){ return data; }
+	public T getValue(){ return data; }
 
-    public CmdArgDef<T> getDef() {
-        return def;
-    }
+	public CmdArgDef<T> getDef(){
+		return def;
+	}
+
 }

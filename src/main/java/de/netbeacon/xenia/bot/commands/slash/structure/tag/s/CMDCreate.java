@@ -32,34 +32,37 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
-public class CMDCreate extends Command {
+public class CMDCreate extends Command{
 
-    public CMDCreate() {
-        super("create", "Creates a new tag with a given tag name and content", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                List.of(
-                        new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t-> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t-> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build(),
-                        new CmdArgDef.Builder<>("content", "Tag content", "Tag content, 1 to 1500 chars", String.class).predicateAddStringLengthRange(1, 1500).build()
-                )
-        );
-    }
+	public CMDCreate(){
+		super("create", "Creates a new tag with a given tag name and content", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+			List.of(
+				new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t -> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t -> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build(),
+				new CmdArgDef.Builder<>("content", "Tag content", "Tag content, 1 to 1500 chars", String.class).predicateAddStringLengthRange(1, 1500).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> nameArg = cmdArgs.getByName("name");
-        CmdArg<String> contentArg = cmdArgs.getByName("content");
-        try{
-            tagCache.createNew(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
-        }catch (CacheException e){
-            if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
-                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw e;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> nameArg = cmdArgs.getByName("name");
+		CmdArg<String> contentArg = cmdArgs.getByName("content");
+		try{
+			tagCache.createNew(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
+			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
+		}
+		catch(CacheException e){
+			if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
+				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw e;
+			}
+		}
+	}
+
 }

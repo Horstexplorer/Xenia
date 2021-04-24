@@ -19,16 +19,18 @@ package de.netbeacon.xenia.bot.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Init {
+public class Init{
 
-    private static final Logger logger = LoggerFactory.getLogger(Init.class);
+	private static final Logger logger = LoggerFactory.getLogger(Init.class);
 
-    public static void main(String...args){
-        try{
-            logger.info("! Starting Xenia !");
-            XeniaCore.getInstance(true);
-        }catch (Exception e){
-            logger.error(" ! Failed To Start Xenia !", e);
-        }
-    }
+	public static void main(String... args){
+		try{
+			logger.info("! Starting Xenia !");
+			XeniaCore.getInstance(true);
+		}
+		catch(Exception e){
+			logger.error(" ! Failed To Start Xenia !", e);
+		}
+	}
+
 }

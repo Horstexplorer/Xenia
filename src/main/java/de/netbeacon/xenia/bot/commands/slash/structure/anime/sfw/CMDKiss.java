@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDKiss extends AnimeImageCommand {
-    public CMDKiss() {
-        super("kiss", "Kiss someone", true, false, ImageType.SFW.KISS, ContentType.GIF);
-    }
+public class CMDKiss extends AnimeImageCommand{
+
+	public CMDKiss(){
+		super("kiss", "Kiss someone", true, false, ImageType.SFW.KISS, ContentType.GIF);
+	}
+
 }

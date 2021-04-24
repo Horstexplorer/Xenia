@@ -16,8 +16,8 @@
 
 package de.netbeacon.d43z.one.objects.bp;
 
-public interface IContentprovider {
+public interface IContentprovider{
 
-    String getContent();
+	String getContent();
 
 }

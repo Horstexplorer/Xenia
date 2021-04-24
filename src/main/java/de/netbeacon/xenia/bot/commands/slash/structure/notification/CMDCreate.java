@@ -34,34 +34,37 @@ import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.List;
 
-public class CMDCreate extends Command {
+public class CMDCreate extends Command{
 
-    public CMDCreate() {
-        super("create", "Create a new notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(
-                        new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "\"#h #m #s\" or \"60\" (in minutes) or \"yyyy-MM-dd hh:mm:ss\"", HumanTime.class).build(),
-                        new CmdArgDef.Builder<>("message", "Notification message", "Notification message", String.class).build()
-                )
-        );
-    }
+	public CMDCreate(){
+		super("create", "Create a new notification", false, new CommandCooldown(CommandCooldown.Type.User, 10000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
+			List.of(
+				new CmdArgDef.Builder<>("duration", "Duration till the notification is due", "\"#h #m #s\" or \"60\" (in minutes) or \"yyyy-MM-dd hh:mm:ss\"", HumanTime.class).build(),
+				new CmdArgDef.Builder<>("message", "Notification message", "Notification message", String.class).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
-        CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
-        CmdArg<String> messageArg = cmdArgs.getByName("message");
-        try{
-            Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
-        }catch (DataException | CacheException ex){
-            if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw ex;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
+		CmdArg<String> messageArg = cmdArgs.getByName("message");
+		try{
+			Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
+			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
+		}
+		catch(DataException | CacheException ex){
+			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
+				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw ex;
+			}
+		}
+	}
+
 }

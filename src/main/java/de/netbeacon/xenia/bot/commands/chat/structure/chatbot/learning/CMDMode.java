@@ -32,30 +32,32 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CB_CHATBOT_MODE;
 
-public class CMDMode extends Command {
+public class CMDMode extends Command{
 
-    public CMDMode() {
-        super("mode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2500),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CB_CHATBOT_MODE)
-        );
-    }
+	public CMDMode(){
+		super("mode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2500),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(CB_CHATBOT_MODE)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<String> modeStringArg = args.getByIndex(0);
-            Guild.D43Z1Mode.Modes modeSelect = Guild.D43Z1Mode.Modes.valueOf(modeStringArg.getValue().toUpperCase());
-            Guild g = commandEvent.getBackendDataPack().getbGuild();
-            Guild.D43Z1Mode mode = new Guild.D43Z1Mode(0);
-            mode.set(modeSelect);
-            g.setD43Z1Mode(mode);
-            commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<String> modeStringArg = args.getByIndex(0);
+			Guild.D43Z1Mode.Modes modeSelect = Guild.D43Z1Mode.Modes.valueOf(modeStringArg.getValue().toUpperCase());
+			Guild g = commandEvent.getBackendDataPack().getbGuild();
+			Guild.D43Z1Mode mode = new Guild.D43Z1Mode(0);
+			mode.set(modeSelect);
+			g.setD43Z1Mode(mode);
+			commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
+		}
+	}
+
 }

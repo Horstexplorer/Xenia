@@ -25,26 +25,27 @@ import de.netbeacon.xenia.bot.core.XeniaCore;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-public class CMDPing extends AdminCommand {
+public class CMDPing extends AdminCommand{
 
-    public CMDPing() {
-        super("ping", new CommandCooldown(CommandCooldown.Type.User, 1000),null, null, null, null);
-    }
+	public CMDPing(){
+		super("ping", new CommandCooldown(CommandCooldown.Type.User, 1000), null, null, null, null);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
-        double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
-        double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
-        Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
-        info.get();
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage){
+		double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
+		double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
+		double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
+		Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
+		info.get();
 
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getAuthor())
-                .addField("AVG Gateway Ping:", avgGatewayPing+"ms", true)
-                .addField("Gateway Ping:", gatewayPing+"ms", true)
-                .addField("Rest Ping", restPing+"ms", true)
-                .addField("Backend Ping", info.getPing()+"ms", true);
+		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getAuthor())
+			.addField("AVG Gateway Ping:", avgGatewayPing + "ms", true)
+			.addField("Gateway Ping:", gatewayPing + "ms", true)
+			.addField("Rest Ping", restPing + "ms", true)
+			.addField("Backend Ping", info.getPing() + "ms", true);
 
-        commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue();
-    }
+		commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue();
+	}
+
 }

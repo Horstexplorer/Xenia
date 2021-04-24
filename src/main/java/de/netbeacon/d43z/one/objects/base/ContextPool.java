@@ -25,55 +25,56 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-public class ContextPool implements IContextPool {
+public class ContextPool implements IContextPool{
 
-    private UUID uuid;
-    private String description;
-    private List<ContentContext> contentContexts;
+	private UUID uuid;
+	private String description;
+	private List<ContentContext> contentContexts;
 
-    public ContextPool(){}
+	public ContextPool(){}
 
-    public ContextPool(String description, List<ContentContext> contentContexts){
-        this.uuid = UUID.randomUUID();
-        this.description = description;
-        this.contentContexts = contentContexts;
-    }
+	public ContextPool(String description, List<ContentContext> contentContexts){
+		this.uuid = UUID.randomUUID();
+		this.description = description;
+		this.contentContexts = contentContexts;
+	}
 
-    @Override
-    public UUID getUUID() {
-        return uuid;
-    }
+	@Override
+	public UUID getUUID(){
+		return uuid;
+	}
 
-    @Override
-    public String getDescription() {
-        return description;
-    }
+	@Override
+	public String getDescription(){
+		return description;
+	}
 
-    @Override
-    public List<ContentContext> getContentContexts() {
-        return contentContexts;
-    }
+	@Override
+	public List<ContentContext> getContentContexts(){
+		return contentContexts;
+	}
 
-    @Override
-    public JSONObject asJSON() throws JSONSerializationException {
-        JSONArray jsonArray = new JSONArray();
-        contentContexts.forEach(contentContext -> jsonArray.put(contentContext.asJSON()));
-        return new JSONObject()
-                .put("contextPoolId", uuid.toString())
-                .put("description", description)
-                .put("contexts", jsonArray);
-    }
+	@Override
+	public JSONObject asJSON() throws JSONSerializationException{
+		JSONArray jsonArray = new JSONArray();
+		contentContexts.forEach(contentContext -> jsonArray.put(contentContext.asJSON()));
+		return new JSONObject()
+			.put("contextPoolId", uuid.toString())
+			.put("description", description)
+			.put("contexts", jsonArray);
+	}
 
-    @Override
-    public void fromJSON(JSONObject jsonObject) throws JSONSerializationException {
-        this.uuid = UUID.fromString(jsonObject.getString("contextPoolId"));
-        this.description = jsonObject.getString("description");
-        JSONArray jsonArray = jsonObject.getJSONArray("contexts");
-        contentContexts = new LinkedList<>();
-        for(int i = 0; i < jsonArray.length(); i++){
-            ContentContext contentContext = new ContentContext();
-            contentContext.fromJSON(jsonArray.getJSONObject(i));
-            contentContexts.add(contentContext);
-        }
-    }
+	@Override
+	public void fromJSON(JSONObject jsonObject) throws JSONSerializationException{
+		this.uuid = UUID.fromString(jsonObject.getString("contextPoolId"));
+		this.description = jsonObject.getString("description");
+		JSONArray jsonArray = jsonObject.getJSONArray("contexts");
+		contentContexts = new LinkedList<>();
+		for(int i = 0; i < jsonArray.length(); i++){
+			ContentContext contentContext = new ContentContext();
+			contentContext.fromJSON(jsonArray.getJSONObject(i));
+			contentContexts.add(contentContext);
+		}
+	}
+
 }

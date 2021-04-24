@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDSmile extends AnimeImageCommand {
-    public CMDSmile() {
-        super("smile", true, false, ImageType.SFW.SMILE, ContentType.GIF);
-    }
+public class CMDSmile extends AnimeImageCommand{
+
+	public CMDSmile(){
+		super("smile", true, false, ImageType.SFW.SMILE, ContentType.GIF);
+	}
+
 }

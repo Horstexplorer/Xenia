@@ -31,33 +31,35 @@ import net.dv8tion.jda.api.Permission;
 import java.util.HashSet;
 import java.util.List;
 
-public class CMDDeleted extends Command {
+public class CMDDeleted extends Command{
 
-    public CMDDeleted() {
-        super("deleted", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
-                null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
-                new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
-                null
-        );
-    }
+	public CMDDeleted(){
+		super("deleted", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
+			null,
+			new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+			new HashSet<>(List.of(Role.Permissions.Bit.MESSAGE_RESTORE_USE)),
+			null
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
-        MessageCache messageCache = bChannel.getMessageCache();
-        Message bMessage = messageCache.getLast("deleted");
-        if(bMessage == null){
-            commandEvent.getEvent().getChannel().sendMessage(
-                    onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))
-            ).queue();
-        }else{
-            commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
-                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
-                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getMember().getUser().getMetaUsername(), true)
-                    .addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-                    .build()
-            ).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+		MessageCache messageCache = bChannel.getMessageCache();
+		Message bMessage = messageCache.getLast("deleted");
+		if(bMessage == null){
+			commandEvent.getEvent().getChannel().sendMessage(
+				onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))
+			).queue();
+		}
+		else{
+			commandEvent.getEvent().getChannel().sendMessage(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getJDA().getSelfUser())
+				.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
+				.addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getMember().getUser().getMetaUsername(), true)
+				.addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+				.build()
+			).queue();
+		}
+	}
+
 }

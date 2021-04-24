@@ -32,33 +32,36 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.NOTIFICATION_ID_DEF;
 
-public class CMDDelete extends Command {
+public class CMDDelete extends Command{
 
-    public CMDDelete() {
-        super("delete", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
-                List.of(NOTIFICATION_ID_DEF)
-        );
-    }
+	public CMDDelete(){
+		super("delete", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.NOTIFICATION_USE)),
+			List.of(NOTIFICATION_ID_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
-        try{
-            Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
-            if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
-                throw new RuntimeException("User Does Not Own This Notification");
-            }
-            commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
-        }catch (DataException | CacheException ex){
-            if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-                commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw ex;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
+		try{
+			Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
+			if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
+				throw new RuntimeException("User Does Not Own This Notification");
+			}
+			commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
+		}
+		catch(DataException | CacheException ex){
+			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
+				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw ex;
+			}
+		}
+	}
+
 }

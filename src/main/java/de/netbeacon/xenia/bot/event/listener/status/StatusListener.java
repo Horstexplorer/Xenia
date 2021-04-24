@@ -23,36 +23,38 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StatusListener extends ListenerAdapter {
+public class StatusListener extends ListenerAdapter{
 
-    private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
+	private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
 
-    @Override
-    public void onResumed(@NotNull ResumedEvent event) {
-        logger.debug("Shard Resumed: "+event.getJDA().getShardInfo().getShardString());
-    }
+	@Override
+	public void onResumed(@NotNull ResumedEvent event){
+		logger.debug("Shard Resumed: " + event.getJDA().getShardInfo().getShardString());
+	}
 
-    @Override
-    public void onReconnected(@NotNull ReconnectedEvent event) {
-        logger.debug("Shard Reconnected: "+event.getJDA().getShardInfo().getShardString());
-    }
+	@Override
+	public void onReconnected(@NotNull ReconnectedEvent event){
+		logger.debug("Shard Reconnected: " + event.getJDA().getShardInfo().getShardString());
+	}
 
-    @Override
-    public void onDisconnect(@NotNull DisconnectEvent event) {
-        if(event.getCloseCode() != null && !event.getCloseCode().equals(CloseCode.RECONNECT)){
-            logger.warn("Connection Got Closed With Code "+ event.getCloseCode().toString());
-        }else{
-            logger.debug("Shard Disconnected: "+event.getJDA().getShardInfo().getShardString());
-        }
-    }
+	@Override
+	public void onDisconnect(@NotNull DisconnectEvent event){
+		if(event.getCloseCode() != null && !event.getCloseCode().equals(CloseCode.RECONNECT)){
+			logger.warn("Connection Got Closed With Code " + event.getCloseCode().toString());
+		}
+		else{
+			logger.debug("Shard Disconnected: " + event.getJDA().getShardInfo().getShardString());
+		}
+	}
 
-    @Override
-    public void onShutdown(@NotNull ShutdownEvent event) {
-        logger.warn("Shard Shutting Down: "+event.getJDA().getShardInfo().getShardString());
-    }
+	@Override
+	public void onShutdown(@NotNull ShutdownEvent event){
+		logger.warn("Shard Shutting Down: " + event.getJDA().getShardInfo().getShardString());
+	}
 
-    @Override
-    public void onException(@NotNull ExceptionEvent event) {
-        logger.warn("Exception On "+event.getJDA().getShardInfo()+": Message: "+event.getCause().getMessage(), event.getCause());
-    }
+	@Override
+	public void onException(@NotNull ExceptionEvent event){
+		logger.warn("Exception On " + event.getJDA().getShardInfo() + ": Message: " + event.getCause().getMessage(), event.getCause());
+	}
+
 }

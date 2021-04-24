@@ -29,158 +29,172 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class PaginatorManager implements IShutdown {
+public class PaginatorManager implements IShutdown{
 
-    private final Listener listener = new Listener(this);
+	private final Listener listener = new Listener(this);
 
-    protected static final String PREVIOUS = "\u2B05\uFE0F"; // arrow:left
-    protected static final String NEXT = "\u27A1\uFE0F"; // arrow:right
-    protected static final String CLOSE = "\u2716\uFE0F"; // heavy:multiplication:x
+	protected static final String PREVIOUS = "\u2B05\uFE0F"; // arrow:left
+	protected static final String NEXT = "\u27A1\uFE0F"; // arrow:right
+	protected static final String CLOSE = "\u2716\uFE0F"; // heavy:multiplication:x
 
-    private final ConcurrentHashMap<Long, Triplet<Paginator, Long, Long>> paginatorConcurrentHashMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Long, Long> userPaginatorConcurrentHashMap = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, Triplet<Paginator, Long, Long>> paginatorConcurrentHashMap = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, Long> userPaginatorConcurrentHashMap = new ConcurrentHashMap<>();
 
-    private final ConcurrentHashMap<Long, Boolean> creationRunning = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Long, Boolean> creationRunning = new ConcurrentHashMap<>();
 
-    private static final long EST_LIFETIME = 1000 * 30;
+	private static final long EST_LIFETIME = 1000 * 30;
 
-    private final ScheduledFuture<?> cleaner;
-    private static final long CLEAN_INTERVAL = 1000;
+	private final ScheduledFuture<?> cleaner;
+	private static final long CLEAN_INTERVAL = 1000;
 
-    private final ReentrantLock reentrantLock = new ReentrantLock();
-    private static final long WAIT_TIME = 1000;
+	private final ReentrantLock reentrantLock = new ReentrantLock();
+	private static final long WAIT_TIME = 1000;
 
-    public PaginatorManager(ScheduledExecutorService scheduledExecutorService){
-        cleaner = scheduledExecutorService.scheduleAtFixedRate(()->{
-           try{
-               paginatorConcurrentHashMap.values().stream().filter(tri -> tri.getValue3() < System.currentTimeMillis()).forEach(tri -> removePaginator(tri.getValue1().getMessageId()));
-           }catch (Exception ignore){}
-        }, CLEAN_INTERVAL, CLEAN_INTERVAL, TimeUnit.MILLISECONDS);
-    }
+	public PaginatorManager(ScheduledExecutorService scheduledExecutorService){
+		cleaner = scheduledExecutorService.scheduleAtFixedRate(() -> {
+			try{
+				paginatorConcurrentHashMap.values().stream().filter(tri -> tri.getValue3() < System.currentTimeMillis()).forEach(tri -> removePaginator(tri.getValue1().getMessageId()));
+			}
+			catch(Exception ignore){
+			}
+		}, CLEAN_INTERVAL, CLEAN_INTERVAL, TimeUnit.MILLISECONDS);
+	}
 
-    public void createPaginator(TextChannel textChannel, User user, List<Page> pages){
-        try{
-            reentrantLock.lock();
-            // check that we arent waiting for a result for this user already
-            if(creationRunning.containsKey(user.getIdLong())){
-                var waiter = creationRunning.get(user.getIdLong());
-                long preWaitTime = System.currentTimeMillis();
-                synchronized (waiter) { waiter.wait(WAIT_TIME); }
-                if(preWaitTime + WAIT_TIME - 1 <= System.currentTimeMillis()){
-                    throw new TimeoutException();
-                }
-            }
-            creationRunning.put(user.getIdLong(), false);
-            // remove existing
-            Paginator old = getPaginatorByUser(user.getIdLong());
-            if(old != null){
-                paginatorConcurrentHashMap.remove(old.getMessageId());
-                userPaginatorConcurrentHashMap.remove(old.getUserId());
-            }
-            // create new
-            Paginator paginator = new Paginator(textChannel.getIdLong(), user.getIdLong(), pages);
-            paginator.drawCurrent(textChannel, user, null, (user_, message_) -> {
-                paginatorConcurrentHashMap.put(message_.getIdLong(), new Triplet<>(paginator, user_.getIdLong(), System.currentTimeMillis() + EST_LIFETIME));
-                userPaginatorConcurrentHashMap.put(user_.getIdLong(), message_.getIdLong());
-                var waiter_ = creationRunning.remove(user_.getIdLong());
-                synchronized (waiter_){ waiter_.notify(); }
-            }, (user_, throwable_) -> {
-                var waiter_ = creationRunning.remove(user_.getIdLong());
-                synchronized (waiter_){ waiter_.notify(); }
-            });
-        } catch (InterruptedException | TimeoutException ignore) {
-        }finally {
-            reentrantLock.unlock();
-        }
-    }
+	public void createPaginator(TextChannel textChannel, User user, List<Page> pages){
+		try{
+			reentrantLock.lock();
+			// check that we arent waiting for a result for this user already
+			if(creationRunning.containsKey(user.getIdLong())){
+				var waiter = creationRunning.get(user.getIdLong());
+				long preWaitTime = System.currentTimeMillis();
+				synchronized(waiter){
+					waiter.wait(WAIT_TIME);
+				}
+				if(preWaitTime + WAIT_TIME - 1 <= System.currentTimeMillis()){
+					throw new TimeoutException();
+				}
+			}
+			creationRunning.put(user.getIdLong(), false);
+			// remove existing
+			Paginator old = getPaginatorByUser(user.getIdLong());
+			if(old != null){
+				paginatorConcurrentHashMap.remove(old.getMessageId());
+				userPaginatorConcurrentHashMap.remove(old.getUserId());
+			}
+			// create new
+			Paginator paginator = new Paginator(textChannel.getIdLong(), user.getIdLong(), pages);
+			paginator.drawCurrent(textChannel, user, null, (user_, message_) -> {
+				paginatorConcurrentHashMap.put(message_.getIdLong(), new Triplet<>(paginator, user_.getIdLong(), System.currentTimeMillis() + EST_LIFETIME));
+				userPaginatorConcurrentHashMap.put(user_.getIdLong(), message_.getIdLong());
+				var waiter_ = creationRunning.remove(user_.getIdLong());
+				synchronized(waiter_){
+					waiter_.notify();
+				}
+			}, (user_, throwable_) -> {
+				var waiter_ = creationRunning.remove(user_.getIdLong());
+				synchronized(waiter_){
+					waiter_.notify();
+				}
+			});
+		}
+		catch(InterruptedException | TimeoutException ignore){
+		}
+		finally{
+			reentrantLock.unlock();
+		}
+	}
 
-    public void usePaginator(Paginator paginator){
-        try {
-            reentrantLock.lock();
-            var paginatorTriplet = paginatorConcurrentHashMap.get(paginator.getMessageId());
-            if(paginatorTriplet == null){
-                return;
-            }
-            paginatorConcurrentHashMap.put(paginator.getMessageId(), new Triplet<>(paginatorTriplet.getValue1(), paginatorTriplet.getValue2(), paginatorTriplet.getValue3() + EST_LIFETIME));
-        }finally {
-            reentrantLock.unlock();
-        }
-    }
+	public void usePaginator(Paginator paginator){
+		try{
+			reentrantLock.lock();
+			var paginatorTriplet = paginatorConcurrentHashMap.get(paginator.getMessageId());
+			if(paginatorTriplet == null){
+				return;
+			}
+			paginatorConcurrentHashMap.put(paginator.getMessageId(), new Triplet<>(paginatorTriplet.getValue1(), paginatorTriplet.getValue2(), paginatorTriplet.getValue3() + EST_LIFETIME));
+		}
+		finally{
+			reentrantLock.unlock();
+		}
+	}
 
-    public Paginator getPaginatorByMessage(long messageId){
-        var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
-        if(paginatorTriplet == null){
-            return null;
-        }
-        return paginatorTriplet.getValue1();
-    }
+	public Paginator getPaginatorByMessage(long messageId){
+		var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
+		if(paginatorTriplet == null){
+			return null;
+		}
+		return paginatorTriplet.getValue1();
+	}
 
-    public Paginator getPaginatorByUser(long userId){
-        var messageId = userPaginatorConcurrentHashMap.get(userId);
-        if(messageId == null){
-            return null;
-        }
-        return getPaginatorByMessage(messageId);
-    }
+	public Paginator getPaginatorByUser(long userId){
+		var messageId = userPaginatorConcurrentHashMap.get(userId);
+		if(messageId == null){
+			return null;
+		}
+		return getPaginatorByMessage(messageId);
+	}
 
-    public void removePaginator(long messageId){
-        try{
-            reentrantLock.lock();
-            var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
-            if(paginatorTriplet == null){
-                return;
-            }
-            paginatorConcurrentHashMap.remove(messageId);
-            userPaginatorConcurrentHashMap.remove(paginatorTriplet.getValue2());
-        }finally {
-            reentrantLock.unlock();
-        }
-    }
+	public void removePaginator(long messageId){
+		try{
+			reentrantLock.lock();
+			var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
+			if(paginatorTriplet == null){
+				return;
+			}
+			paginatorConcurrentHashMap.remove(messageId);
+			userPaginatorConcurrentHashMap.remove(paginatorTriplet.getValue2());
+		}
+		finally{
+			reentrantLock.unlock();
+		}
+	}
 
-    public Listener getListener() {
-        return listener;
-    }
+	public Listener getListener(){
+		return listener;
+	}
 
-    @Override
-    public void onShutdown() throws Exception {
-        cleaner.cancel(true);
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		cleaner.cancel(true);
+	}
 
-    public static class Listener extends ListenerAdapter{
+	public static class Listener extends ListenerAdapter{
 
-        private final PaginatorManager paginatorManager;
+		private final PaginatorManager paginatorManager;
 
-        protected Listener(PaginatorManager paginatorManager){
-            this.paginatorManager = paginatorManager;
-        }
+		protected Listener(PaginatorManager paginatorManager){
+			this.paginatorManager = paginatorManager;
+		}
 
-        @Override
-        public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
-            paginatorManager.removePaginator(event.getMessageIdLong());
-        }
+		@Override
+		public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event){
+			paginatorManager.removePaginator(event.getMessageIdLong());
+		}
 
-        @Override
-        public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
-            Paginator paginator = paginatorManager.getPaginatorByMessage(event.getMessageIdLong());
-            if(paginator == null || paginator.getUserId() != event.getUserIdLong() || !event.getReactionEmote().isEmoji()){
-                return;
-            }
-            paginatorManager.usePaginator(paginator);
-            switch (event.getReactionEmote().getEmoji()){
-                case NEXT: {
-                    paginator.movePosition(Paginator.Move.NEXT);
-                    paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
-                    break;
-                }
-                case PREVIOUS: {
-                    paginator.movePosition(Paginator.Move.PREVIOUS);
-                    paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
-                    break;
-                }
-                case CLOSE:{
-                    paginatorManager.removePaginator(event.getMessageIdLong());
-                }
-            }
-        }
-    }
+		@Override
+		public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event){
+			Paginator paginator = paginatorManager.getPaginatorByMessage(event.getMessageIdLong());
+			if(paginator == null || paginator.getUserId() != event.getUserIdLong() || !event.getReactionEmote().isEmoji()){
+				return;
+			}
+			paginatorManager.usePaginator(paginator);
+			switch(event.getReactionEmote().getEmoji()){
+				case NEXT:{
+					paginator.movePosition(Paginator.Move.NEXT);
+					paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
+					break;
+				}
+				case PREVIOUS:{
+					paginator.movePosition(Paginator.Move.PREVIOUS);
+					paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
+					break;
+				}
+				case CLOSE:{
+					paginatorManager.removePaginator(event.getMessageIdLong());
+				}
+			}
+		}
+
+	}
+
 }

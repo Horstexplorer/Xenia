@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDYuri extends AnimeImageCommand {
-    public CMDYuri() {
-        super("yuri", false, true, ImageType.NSFW.YURI, ContentType.GIF);
-    }
+public class CMDYuri extends AnimeImageCommand{
+
+	public CMDYuri(){
+		super("yuri", false, true, ImageType.NSFW.YURI, ContentType.GIF);
+	}
+
 }

@@ -16,8 +16,8 @@
 
 package de.netbeacon.d43z.two.io.bp;
 
-public interface IInputProvider<T> {
+public interface IInputProvider<T>{
 
-    float[] getInput(T input);
+	float[] getInput(T input);
 
 }

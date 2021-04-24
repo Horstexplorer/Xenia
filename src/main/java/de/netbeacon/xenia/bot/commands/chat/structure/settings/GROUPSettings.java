@@ -22,13 +22,14 @@ import de.netbeacon.xenia.bot.commands.chat.structure.settings.guild.HYBRIDGuild
 import de.netbeacon.xenia.bot.commands.chat.structure.settings.roles.HYBRIDRoles;
 import de.netbeacon.xenia.bot.commands.chat.structure.settings.self.HYBRIDSelf;
 
-public class GROUPSettings extends CommandGroup {
+public class GROUPSettings extends CommandGroup{
 
-    public GROUPSettings() {
-        super(null, "settings", false);
-        addChildCommand(new HYBRIDSelf(this));
-        addChildCommand(new HYBRIDGuild(this));
-        addChildCommand(new GROUPChannel(this));
-        addChildCommand(new HYBRIDRoles(this));
-    }
+	public GROUPSettings(){
+		super(null, "settings", false);
+		addChildCommand(new HYBRIDSelf(this));
+		addChildCommand(new HYBRIDGuild(this));
+		addChildCommand(new GROUPChannel(this));
+		addChildCommand(new HYBRIDRoles(this));
+	}
+
 }

@@ -19,62 +19,62 @@ package de.netbeacon.d43z.two.neurons;
 import java.util.Arrays;
 import java.util.function.UnaryOperator;
 
-public class NeuronGroup {
+public class NeuronGroup{
 
-    private final int inputs;
-    private final int outputs;
-    private final Neuron[] neurons;
+	private final int inputs;
+	private final int outputs;
+	private final Neuron[] neurons;
 
-    public NeuronGroup(UnaryOperator<Float> function, int inputs, int outputs, float ... weights){
-        this.inputs = inputs;
-        this.outputs = outputs;
-        if(inputs*outputs != weights.length){
-            throw new IllegalArgumentException("Input Weight Size Does Not Match Number Of Weights Stored");
-        }
-        this.neurons = new Neuron[outputs];
-        for(int i = 0; i < neurons.length; i++){
-            neurons[i] = new Neuron(function, Arrays.copyOfRange(weights, inputs*i, inputs*(i+1)));
-        }
-    }
+	public NeuronGroup(UnaryOperator<Float> function, int inputs, int outputs, float... weights){
+		this.inputs = inputs;
+		this.outputs = outputs;
+		if(inputs * outputs != weights.length){
+			throw new IllegalArgumentException("Input Weight Size Does Not Match Number Of Weights Stored");
+		}
+		this.neurons = new Neuron[outputs];
+		for(int i = 0; i < neurons.length; i++){
+			neurons[i] = new Neuron(function, Arrays.copyOfRange(weights, inputs * i, inputs * (i + 1)));
+		}
+	}
 
-    public int getInputs() {
-        return inputs;
-    }
+	public int getInputs(){
+		return inputs;
+	}
 
-    public int getOutputs() {
-        return outputs;
-    }
+	public int getOutputs(){
+		return outputs;
+	}
 
-    public Neuron[] getNeurons() {
-        return neurons;
-    }
+	public Neuron[] getNeurons(){
+		return neurons;
+	}
 
-    public void activate(float ... inputs){
-        for (Neuron neuron : neurons) {
-            neuron.activate(inputs);
-        }
-    }
+	public void activate(float... inputs){
+		for(Neuron neuron : neurons){
+			neuron.activate(inputs);
+		}
+	}
 
-    public float[] getActivationValue(){
-        float[] result = new float[outputs];
-        for(int i = 0; i < neurons.length; i++){
-            result[i] = neurons[i].getLastActivationValue();
-        }
-        return result;
-    }
+	public float[] getActivationValue(){
+		float[] result = new float[outputs];
+		for(int i = 0; i < neurons.length; i++){
+			result[i] = neurons[i].getLastActivationValue();
+		}
+		return result;
+	}
 
-    public float[] calculateAndApplyOutputBackProp(float[] outputError){
-        if(outputError.length != outputs){
-            throw new IllegalArgumentException("Output Error Size Does Not Match Number Of Outputs");
-        }
-        float[] inputError = new float[inputs];
-        for(int i = 0; i < neurons.length; i++){
-            var neuronInputError = neurons[i].calculateAndApplyOutputBackProp(outputError[i]);
-            for(int ii = 0; ii < inputs; ii++){
-                inputError[ii] += neuronInputError[ii];
-            }
-        }
-        return inputError;
-    }
+	public float[] calculateAndApplyOutputBackProp(float[] outputError){
+		if(outputError.length != outputs){
+			throw new IllegalArgumentException("Output Error Size Does Not Match Number Of Outputs");
+		}
+		float[] inputError = new float[inputs];
+		for(int i = 0; i < neurons.length; i++){
+			var neuronInputError = neurons[i].calculateAndApplyOutputBackProp(outputError[i]);
+			for(int ii = 0; ii < inputs; ii++){
+				inputError[ii] += neuronInputError[ii];
+			}
+		}
+		return inputError;
+	}
 
 }

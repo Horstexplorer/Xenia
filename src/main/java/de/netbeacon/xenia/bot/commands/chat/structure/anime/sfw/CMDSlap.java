@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDSlap extends AnimeImageCommand {
-    public CMDSlap() {
-        super("slap", true, false, ImageType.SFW.SLAP, ContentType.GIF);
-    }
+public class CMDSlap extends AnimeImageCommand{
+
+	public CMDSlap(){
+		super("slap", true, false, ImageType.SFW.SLAP, ContentType.GIF);
+	}
+
 }

@@ -20,55 +20,56 @@ import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.base.ContentShard;
 import de.netbeacon.d43z.one.objects.bp.IMatch;
 
-public class ContentMatch implements IMatch {
+public class ContentMatch implements IMatch{
 
-    public final Content input;
-    public final Content estimatedInput;
-    public final Content estimatedOutput;
-    public final ContentShard origin;
-    public final float coefficient;
-    public float adjustment;
+	public final Content input;
+	public final Content estimatedInput;
+	public final Content estimatedOutput;
+	public final ContentShard origin;
+	public final float coefficient;
+	public float adjustment;
 
-    public ContentMatch(Content input, Content estimatedInput, Content estimatedOutput, ContentShard origin, float coefficient){
-        this.input = input;
-        this.estimatedInput = estimatedInput;
-        this.estimatedOutput = estimatedOutput;
-        this.origin = origin;
-        this.coefficient = coefficient;
-    }
+	public ContentMatch(Content input, Content estimatedInput, Content estimatedOutput, ContentShard origin, float coefficient){
+		this.input = input;
+		this.estimatedInput = estimatedInput;
+		this.estimatedOutput = estimatedOutput;
+		this.origin = origin;
+		this.coefficient = coefficient;
+	}
 
-    @Override
-    public Content getInput() {
-        return input;
-    }
+	@Override
+	public Content getInput(){
+		return input;
+	}
 
-    @Override
-    public Content getEstimatedInput() {
-        return estimatedInput;
-    }
+	@Override
+	public Content getEstimatedInput(){
+		return estimatedInput;
+	}
 
-    @Override
-    public Content getEstimatedOutput() {
-        return estimatedOutput;
-    }
+	@Override
+	public Content getEstimatedOutput(){
+		return estimatedOutput;
+	}
 
-    @Override
-    public ContentShard getOrigin() {
-        return origin;
-    }
+	@Override
+	public ContentShard getOrigin(){
+		return origin;
+	}
 
-    @Override
-    public float getCoefficient() {
-        return coefficient;
-    }
+	@Override
+	public float getCoefficient(){
+		return coefficient;
+	}
 
-    @Override
-    public void setCoefficientAdjustment(float value) {
-        adjustment = value;
-    }
+	@Override
+	public void setCoefficientAdjustment(float value){
+		adjustment = value;
+	}
 
-    @Override
-    public float getAdjustedCoefficient() {
-        return coefficient+adjustment;
-    }
+	@Override
+	public float getAdjustedCoefficient(){
+		return coefficient + adjustment;
+	}
+
 }

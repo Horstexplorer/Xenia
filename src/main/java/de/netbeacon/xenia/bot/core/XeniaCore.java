@@ -59,166 +59,173 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class XeniaCore {
+public class XeniaCore{
 
-    private static XeniaCore instance;
+	private static XeniaCore instance;
 
-    private final Config config;
-    private final XeniaBackendClient xeniaBackendClient;
-    private final ShardManager shardManager;
-    private final EventWaiter eventWaiter;
+	private final Config config;
+	private final XeniaBackendClient xeniaBackendClient;
+	private final ShardManager shardManager;
+	private final EventWaiter eventWaiter;
 
-    private final PaginatorManager paginatorManager;
+	private final PaginatorManager paginatorManager;
 
-    private final long ownerId;
-    
-    private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
+	private final long ownerId;
 
-    private XeniaCore() throws LoginException, IOException {
-        // shutdown hook
-        ShutdownHook shutdownHook = new ShutdownHook();
-        // system exit helper
-        class SEH implements IShutdown {
-            @Override
-            public void onShutdown() throws Exception {
-                TimeUnit.MILLISECONDS.sleep(2);
-                System.exit(0);
-            }
-        }
-        shutdownHook.addShutdownAble(new SEH());
-        // load config
-        logger.info("Loading Config...");
-        config = new Config(new File("./xenia/config/sys.config"));
+	private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
 
-        // load backend
-        logger.info("Loading Backend...");
-        BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"), config.getString("messageCryptKey"));
-        xeniaBackendClient = new XeniaBackendClient(backendSettings, this::getShardManager);
-        shutdownHook.addShutdownAble(xeniaBackendClient);
+	private XeniaCore() throws LoginException, IOException{
+		// shutdown hook
+		ShutdownHook shutdownHook = new ShutdownHook();
+		// system exit helper
+		class SEH implements IShutdown{
 
-        // setup data
-        logger.info("Retrieving Setup Data...");
-        SetupData setupData = xeniaBackendClient.getSetupData();
-        logger.info("Retrieved Setup Data:"+"\n"+
-                    "ClientName: "+setupData.getClientName()+"\n"+
-                    "ClientDescription: "+setupData.getClientDescription()+"\n"+
-                    "Total Shards: "+setupData.getTotalShards()+"\n"+
-                    "Shards To Use: "+Arrays.toString(setupData.getShards())+"\n"
-                );
+			@Override
+			public void onShutdown() throws Exception{
+				TimeUnit.MILLISECONDS.sleep(2);
+				System.exit(0);
+			}
 
-        // setup other things
-        logger.info("Preparing Other Things...");
-        shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
-        shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
-        eventWaiter = new EventWaiter(SharedExecutor.getInstance().getScheduledExecutor(), SharedExecutor.getInstance().getScheduledExecutor()); // Event Waiter
-        paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
-        SharedOkHttpClient.getInstance(true);
-        TranslationManager translationManager = TranslationManager.getInstance(true);
-        PurrBotAPIWrapper.getInstance(true);
-        // d43z1
-        logger.info("Preparing D43Z1...");
-        D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
-        AtomicLong atomicLong = new AtomicLong(0);
-        d43z1.getContextPoolMaster().getContentContexts().stream()
-                .map(ContentContext::getContentShards)
-                .forEach(contentShards -> contentShards.forEach(contentShard -> atomicLong.addAndGet(contentShard.getOrderedContent().size())));
-        shutdownHook.addShutdownAble(d43z1);
-        D43Z1ContextPoolManager contextPoolManager = new D43Z1ContextPoolManager(d43z1);
-        logger.info("D43Z1 loaded with "+atomicLong.get()+" lines on master");
-        // drop in event listeners
-        xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance())), contextPoolManager.getListener()); // insert notification listener on its own
-        xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
-        // set up event manager
-        logger.info("Preparing Event Manager (Provider)...");
-        EventManagerProvider eventManagerProvider = new EventManagerProvider()
-                .setFactory(obj -> new MultiThreadedEventManager());
-        shutdownHook.addShutdownAble(eventManagerProvider);
-        // setup shard builder
-        logger.info("Setting Up Shard Builder...");
-        DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
-                .createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
-                .setEventManagerProvider(eventManagerProvider::provideOrCreate)
-                .setActivity(Activity.playing(config.getString("activity")))
-                .addEventListeners(
-                        new StatusListener(),
-                        new GuildAccessListener(xeniaBackendClient),
-                        new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
-                        new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
-                        new GuildReactionListener(eventWaiter),
-                        paginatorManager.getListener()
-                );
-        if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
-            builder
-                    .setShardsTotal(setupData.getTotalShards())
-                    .setShards(setupData.getShards());
-        }
-        // prepare helper class
-        class SMH implements IShutdown {
-            private final ShardManager shardManager;
-            SMH(ShardManager shardManager){
-                this.shardManager = shardManager;
-            }
-            @Override
-            public void onShutdown() throws Exception {
-                shardManager.shutdown();
-            }
-        }
-        // create shards
-        logger.info("Building Shards...");
-        shardManager = builder.build();
-        shutdownHook.addShutdownAble(new SMH(shardManager));
-        // application info
-        logger.info("Getting Application Info...");
-        ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();
-        ownerId = applicationInfo.getOwner().getIdLong();
-        // watchdog
-        logger.info("Starting Watchdog...");
-        XeniaWatchdog xeniaWatchdog = new XeniaWatchdog();
-        shutdownHook.addShutdownAble(xeniaWatchdog);
-        // add wd tasks here
-    }
+		}
+		shutdownHook.addShutdownAble(new SEH());
+		// load config
+		logger.info("Loading Config...");
+		config = new Config(new File("./xenia/config/sys.config"));
 
-    public static XeniaCore getInstance(){
-        return instance;
-    }
+		// load backend
+		logger.info("Loading Backend...");
+		BackendSettings backendSettings = new BackendSettings(config.getString("backendScheme"), config.getString("backendHost"), config.getInt("backendPort"), config.getLong("backendClientId"), config.getString("backendPassword"), config.getString("messageCryptKey"));
+		xeniaBackendClient = new XeniaBackendClient(backendSettings, this::getShardManager);
+		shutdownHook.addShutdownAble(xeniaBackendClient);
 
-    public static XeniaCore getInstance(boolean initializeIfPossible) throws LoginException, IOException {
-        if(instance == null && initializeIfPossible){
-            instance = new XeniaCore();
-        }
-        return instance;
-    }
+		// setup data
+		logger.info("Retrieving Setup Data...");
+		SetupData setupData = xeniaBackendClient.getSetupData();
+		logger.info("Retrieved Setup Data:" + "\n" +
+			"ClientName: " + setupData.getClientName() + "\n" +
+			"ClientDescription: " + setupData.getClientDescription() + "\n" +
+			"Total Shards: " + setupData.getTotalShards() + "\n" +
+			"Shards To Use: " + Arrays.toString(setupData.getShards()) + "\n"
+		);
 
-    public XeniaBackendClient getBackendClient() {
-        return xeniaBackendClient;
-    }
+		// setup other things
+		logger.info("Preparing Other Things...");
+		shutdownHook.addShutdownAble(SharedExecutor.getInstance(true)); // Shared executor
+		shutdownHook.addShutdownAble(TaskManager.getInstance(true)); // Task manager
+		eventWaiter = new EventWaiter(SharedExecutor.getInstance().getScheduledExecutor(), SharedExecutor.getInstance().getScheduledExecutor()); // Event Waiter
+		paginatorManager = new PaginatorManager(SharedExecutor.getInstance().getScheduledExecutor()); // paginator manager
+		SharedOkHttpClient.getInstance(true);
+		TranslationManager translationManager = TranslationManager.getInstance(true);
+		PurrBotAPIWrapper.getInstance(true);
+		// d43z1
+		logger.info("Preparing D43Z1...");
+		D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
+		AtomicLong atomicLong = new AtomicLong(0);
+		d43z1.getContextPoolMaster().getContentContexts().stream()
+			.map(ContentContext::getContentShards)
+			.forEach(contentShards -> contentShards.forEach(contentShard -> atomicLong.addAndGet(contentShard.getOrderedContent().size())));
+		shutdownHook.addShutdownAble(d43z1);
+		D43Z1ContextPoolManager contextPoolManager = new D43Z1ContextPoolManager(d43z1);
+		logger.info("D43Z1 loaded with " + atomicLong.get() + " lines on master");
+		// drop in event listeners
+		xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance())), contextPoolManager.getListener()); // insert notification listener on its own
+		xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
+		// set up event manager
+		logger.info("Preparing Event Manager (Provider)...");
+		EventManagerProvider eventManagerProvider = new EventManagerProvider()
+			.setFactory(obj -> new MultiThreadedEventManager());
+		shutdownHook.addShutdownAble(eventManagerProvider);
+		// setup shard builder
+		logger.info("Setting Up Shard Builder...");
+		DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
+			.createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
+			.setEventManagerProvider(eventManagerProvider::provideOrCreate)
+			.setActivity(Activity.playing(config.getString("activity")))
+			.addEventListeners(
+				new StatusListener(),
+				new GuildAccessListener(xeniaBackendClient),
+				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
+				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
+				new GuildReactionListener(eventWaiter),
+				paginatorManager.getListener()
+			);
+		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
+			builder
+				.setShardsTotal(setupData.getTotalShards())
+				.setShards(setupData.getShards());
+		}
+		// prepare helper class
+		class SMH implements IShutdown{
 
-    public ShardManager getShardManager(){
-        return shardManager;
-    }
+			private final ShardManager shardManager;
 
-    public Config getConfig(){
-        return config;
-    }
+			SMH(ShardManager shardManager){
+				this.shardManager = shardManager;
+			}
 
-    public EventWaiter getEventWaiter(){
-        return eventWaiter;
-    }
+			@Override
+			public void onShutdown() throws Exception{
+				shardManager.shutdown();
+			}
 
-    public PaginatorManager getPaginatorManager(){
-        return paginatorManager;
-    }
+		}
+		// create shards
+		logger.info("Building Shards...");
+		shardManager = builder.build();
+		shutdownHook.addShutdownAble(new SMH(shardManager));
+		// application info
+		logger.info("Getting Application Info...");
+		ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();
+		ownerId = applicationInfo.getOwner().getIdLong();
+		// watchdog
+		logger.info("Starting Watchdog...");
+		XeniaWatchdog xeniaWatchdog = new XeniaWatchdog();
+		shutdownHook.addShutdownAble(xeniaWatchdog);
+		// add wd tasks here
+	}
 
-    public JDA getShardByGuildId(long guildId){
-        for(JDA jda : shardManager.getShards()){
-            if(jda.getGuildCache().getElementById(guildId) != null){
-                return jda;
-            }
-        }
-        return null;
-    }
+	public static XeniaCore getInstance(){
+		return instance;
+	}
 
-    public long getOwnerID(){
-        return ownerId;
-    }
+	public static XeniaCore getInstance(boolean initializeIfPossible) throws LoginException, IOException{
+		if(instance == null && initializeIfPossible){
+			instance = new XeniaCore();
+		}
+		return instance;
+	}
+
+	public XeniaBackendClient getBackendClient(){
+		return xeniaBackendClient;
+	}
+
+	public ShardManager getShardManager(){
+		return shardManager;
+	}
+
+	public Config getConfig(){
+		return config;
+	}
+
+	public EventWaiter getEventWaiter(){
+		return eventWaiter;
+	}
+
+	public PaginatorManager getPaginatorManager(){
+		return paginatorManager;
+	}
+
+	public JDA getShardByGuildId(long guildId){
+		for(JDA jda : shardManager.getShards()){
+			if(jda.getGuildCache().getElementById(guildId) != null){
+				return jda;
+			}
+		}
+		return null;
+	}
+
+	public long getOwnerID(){
+		return ownerId;
+	}
+
 }
