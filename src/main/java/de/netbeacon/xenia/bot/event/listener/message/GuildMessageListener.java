@@ -43,63 +43,64 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-public class GuildMessageListener extends ListenerAdapter {
+public class GuildMessageListener extends ListenerAdapter{
 
-    private final EventWaiter eventWaiter;
-    private final MessageHandler commandHandler;
+	private final EventWaiter eventWaiter;
+	private final MessageHandler commandHandler;
 
-    public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
-        this.eventWaiter = eventWaiter;
+	public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
+		this.eventWaiter = eventWaiter;
 
-        HashMap<String, Command> commandMap = new HashMap<>();
-        Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
+		HashMap<String, Command> commandMap = new HashMap<>();
+		Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
 
-        register.accept(new CMDHelp(commandMap));
+		register.accept(new CMDHelp(commandMap));
 
-        register.accept(new GROUPAdmin());
-        register.accept(new GROUPLast());
-        register.accept(new GROUPNotification());
-        register.accept(new GROUPSettings());
-        register.accept(new GROUPChatbot());
-        register.accept(new GROUPAnime());
+		register.accept(new GROUPAdmin());
+		register.accept(new GROUPLast());
+		register.accept(new GROUPNotification());
+		register.accept(new GROUPSettings());
+		register.accept(new GROUPChatbot());
+		register.accept(new GROUPAnime());
 
-        register.accept(new HYBRIDTwitch());
-        register.accept(new HYBRIDTag());
+		register.accept(new HYBRIDTwitch());
+		register.accept(new HYBRIDTag());
 
-        register.accept(new CMDHastebin());
-        register.accept(new CMDInfo());
+		register.accept(new CMDHastebin());
+		register.accept(new CMDInfo());
 
-        commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
-    }
+		commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
+	}
 
-    @Override
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
-        if(event.isWebhookMessage() || (event.getAuthor().isBot() && !event.getGuild().getSelfMember().equals(event.getMember()))){
-            return;
-        }
-        if(eventWaiter.waitingOnThis(event)){
-           return;
-        }
-        commandHandler.processNew(event); // ! note ! events from the bot itself get passed through
-    }
+	@Override
+	public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
+		if(event.isWebhookMessage() || (event.getAuthor().isBot() && !event.getGuild().getSelfMember().equals(event.getMember()))){
+			return;
+		}
+		if(eventWaiter.waitingOnThis(event)){
+			return;
+		}
+		commandHandler.processNew(event); // ! note ! events from the bot itself get passed through
+	}
 
-    @Override
-    public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event) {
-        if(event.getAuthor().isBot()){
-            return;
-        }
-        eventWaiter.waitingOnThis(event);
-        commandHandler.processUpdate(event);
-    }
+	@Override
+	public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event){
+		if(event.getAuthor().isBot()){
+			return;
+		}
+		eventWaiter.waitingOnThis(event);
+		commandHandler.processUpdate(event);
+	}
 
-    @Override
-    public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event) {
-        eventWaiter.waitingOnThis(event);
-        commandHandler.processDelete(event);
-    }
+	@Override
+	public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event){
+		eventWaiter.waitingOnThis(event);
+		commandHandler.processDelete(event);
+	}
 
-    @Override
-    public void onGuildMessageEmbed(@NotNull GuildMessageEmbedEvent event) {
-        eventWaiter.waitingOnThis(event);
-    }
+	@Override
+	public void onGuildMessageEmbed(@NotNull GuildMessageEmbedEvent event){
+		eventWaiter.waitingOnThis(event);
+	}
+
 }

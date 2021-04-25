@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDThreesome_FFM extends AnimeImageCommand {
-    public CMDThreesome_FFM() {
-        super("threesome_ffm", false, true, ImageType.NSFW.THREESOME_FFM, ContentType.GIF);
-    }
+public class CMDThreesome_FFM extends AnimeImageCommand{
+
+	public CMDThreesome_FFM(){
+		super("threesome_ffm", false, true, ImageType.NSFW.THREESOME_FFM, ContentType.GIF);
+	}
+
 }

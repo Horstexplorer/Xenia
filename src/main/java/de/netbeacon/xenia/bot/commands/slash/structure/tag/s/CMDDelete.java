@@ -34,36 +34,39 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
-public class CMDDelete extends Command {
+public class CMDDelete extends Command{
 
-    public CMDDelete() {
-        super("delete", "Deletes an existing tag", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
-                List.of(
-                        new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t-> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t-> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build()
-                )
-        );
-    }
+	public CMDDelete(){
+		super("delete", "Deletes an existing tag", false, new CommandCooldown(CommandCooldown.Type.User, 5000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_CREATE)),
+			List.of(
+				new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t -> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t -> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> nameArg = cmdArgs.getByName("name");
-        try{
-            Tag tag = tagCache.get(nameArg.getValue());
-            if(tag.getUserId() != commandEvent.getEvent().getUser().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
-                throw new RuntimeException("User Does Not Own This Tag");
-            }
-            tagCache.delete(tag.getId());
-            commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
-        }catch (DataException | CacheException e){
-            if(e instanceof DataException && ((DataException) e).getCode() == 404){
-                commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-            }else{
-                throw e;
-            }
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> nameArg = cmdArgs.getByName("name");
+		try{
+			Tag tag = tagCache.get(nameArg.getValue());
+			if(tag.getUserId() != commandEvent.getEvent().getUser().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
+				throw new RuntimeException("User Does Not Own This Tag");
+			}
+			tagCache.delete(tag.getId());
+			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
+		}
+		catch(DataException | CacheException e){
+			if(e instanceof DataException && ((DataException) e).getCode() == 404){
+				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			}
+			else{
+				throw e;
+			}
+		}
+	}
+
 }

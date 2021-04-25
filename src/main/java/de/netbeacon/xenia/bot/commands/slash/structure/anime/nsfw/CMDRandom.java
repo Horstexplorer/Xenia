@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDRandom extends AnimeImageCommand {
-    public CMDRandom() {
-        super("randomx", "-NSFW content-", false, true, ImageType.NSFW.RANDOM, ContentType.AVAILABLE);
-    }
+public class CMDRandom extends AnimeImageCommand{
+
+	public CMDRandom(){
+		super("randomx", "-NSFW content-", false, true, ImageType.NSFW.RANDOM, ContentType.AVAILABLE);
+	}
+
 }

@@ -29,67 +29,73 @@ import net.dv8tion.jda.api.entities.User;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener<Notification> {
+public class NotificationListener implements CacheEventListener<Long, Notification>, APIDataEventListener<Notification>{
 
-    private final TaskManager taskManager;
+	private final TaskManager taskManager;
 
-    public NotificationListener(TaskManager taskManager){
-        this.taskManager = taskManager;
-    }
+	public NotificationListener(TaskManager taskManager){
+		this.taskManager = taskManager;
+	}
 
-    @Override
-    public void onInsertion(Long newKey, Notification notification) {
-        // new object has been inserted, add event listener
-        notification.addEventListener(this);
-        // and schedule
-        taskManager.schedule(notification.getId(), getRunnable(notification), Math.max(notification.getNotificationTarget()-LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli(),1));
-    }
+	@Override
+	public void onInsertion(Long newKey, Notification notification){
+		// new object has been inserted, add event listener
+		notification.addEventListener(this);
+		// and schedule
+		taskManager.schedule(notification.getId(), getRunnable(notification), Math.max(notification.getNotificationTarget() - LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli(), 1));
+	}
 
-    @Override
-    public void onRemoval(Long oldKey, Notification oldObject) {
-        // cancel scheduling (if it hasn't been executed already)
-        taskManager.cancel(oldKey);
-    }
+	@Override
+	public void onRemoval(Long oldKey, Notification oldObject){
+		// cancel scheduling (if it hasn't been executed already)
+		taskManager.cancel(oldKey);
+	}
 
-    @Override
-    public void onUpdate(Notification apiDataObject) {
-        // update scheduling
-        taskManager.update(apiDataObject.getId(), getRunnable(apiDataObject), Math.min(apiDataObject.getNotificationTarget()-System.currentTimeMillis(),1));
-    }
+	@Override
+	public void onUpdate(Notification apiDataObject){
+		// update scheduling
+		taskManager.update(apiDataObject.getId(), getRunnable(apiDataObject), Math.min(apiDataObject.getNotificationTarget() - System.currentTimeMillis(), 1));
+	}
 
-    private Runnable getRunnable(Notification notification) {
-        return () -> {
-            try{
-                TextChannel textChannel = XeniaCore.getInstance().getShardByGuildId(notification.getGuildId()).getTextChannelById(notification.getChannelId());
-                if(textChannel == null){
-                    return;
-                }
-                textChannel.sendMessage("<@!"+notification.getUserId()+">").embed(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s->{}, f->{});
-            }catch (Exception ignore){}
-            try{
-                XeniaCore.getInstance().getBackendClient().getGuildCache().get(notification.getGuildId()).getMiscCaches().getNotificationCache().delete(notification.getId());
-            }catch (Exception ignore){}
-        };
-    }
+	private Runnable getRunnable(Notification notification){
+		return () -> {
+			try{
+				TextChannel textChannel = XeniaCore.getInstance().getShardByGuildId(notification.getGuildId()).getTextChannelById(notification.getChannelId());
+				if(textChannel == null){
+					return;
+				}
+				textChannel.sendMessage("<@!" + notification.getUserId() + ">").embed(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s -> {}, f -> {});
+			}
+			catch(Exception ignore){
+			}
+			try{
+				XeniaCore.getInstance().getBackendClient().getGuildCache().get(notification.getGuildId()).getMiscCaches().getNotificationCache().delete(notification.getId());
+			}
+			catch(Exception ignore){
+			}
+		};
+	}
 
-    private MessageEmbed getNotificationMessage(long author, String message){
-        User requester = XeniaCore.getInstance().getShardManager().retrieveUserById(author).complete();
-        if(requester == null){
-            return EmbedBuilderFactory.getDefaultEmbed("Notification")
-                    .setDescription(message)
-                    .setFooter("Requested By "+requester)
-                    .build();
-        }else{
-            return EmbedBuilderFactory.getDefaultEmbed("Notification", requester)
-                    .setDescription(message)
-                    .build();
-        }
-    }
+	private MessageEmbed getNotificationMessage(long author, String message){
+		User requester = XeniaCore.getInstance().getShardManager().retrieveUserById(author).complete();
+		if(requester == null){
+			return EmbedBuilderFactory.getDefaultEmbed("Notification")
+				.setDescription(message)
+				.setFooter("Requested By " + requester)
+				.build();
+		}
+		else{
+			return EmbedBuilderFactory.getDefaultEmbed("Notification", requester)
+				.setDescription(message)
+				.build();
+		}
+	}
 
-    @Override
-    public void onDeletion(Notification apiDataObject) {
-        apiDataObject.removeEventListeners(); // remove listeners from this object if deleted
-        // proof check - cancel the task
-        onRemoval((apiDataObject).getId(), apiDataObject);
-    }
+	@Override
+	public void onDeletion(Notification apiDataObject){
+		apiDataObject.removeEventListeners(); // remove listeners from this object if deleted
+		// proof check - cancel the task
+		onRemoval((apiDataObject).getId(), apiDataObject);
+	}
+
 }

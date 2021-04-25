@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDSolo extends AnimeImageCommand {
-    public CMDSolo() {
-        super("solo", false, true, ImageType.NSFW.SOLO, ContentType.GIF);
-    }
+public class CMDSolo extends AnimeImageCommand{
+
+	public CMDSolo(){
+		super("solo", false, true, ImageType.NSFW.SOLO, ContentType.GIF);
+	}
+
 }

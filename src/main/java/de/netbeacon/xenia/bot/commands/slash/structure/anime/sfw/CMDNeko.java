@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDNeko extends AnimeImageCommand {
-    public CMDNeko() {
-        super("neko", ":3", false, false, ImageType.SFW.NEKO, ContentType.GIF);
-    }
+public class CMDNeko extends AnimeImageCommand{
+
+	public CMDNeko(){
+		super("neko", ":3", false, false, ImageType.SFW.NEKO, ContentType.GIF);
+	}
+
 }

@@ -34,33 +34,35 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ACCESS_MODE;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CHANNEL_ID_OPTIONAL;
 
-public class CMDAccessMode extends Command {
+public class CMDAccessMode extends Command{
 
-    public CMDAccessMode() {
-        super("accessmode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CHANNEL_ACCESS_MODE, CHANNEL_ID_OPTIONAL)
-        );
-    }
+	public CMDAccessMode(){
+		super("accessmode", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(CHANNEL_ACCESS_MODE, CHANNEL_ID_OPTIONAL)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<String> channelAccessModeArg = args.getByIndex(0);
-            CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
-            Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
-            if(channel == null){
-                throw new IllegalArgumentException();
-            }
-            Channel.AccessMode.Mode accessModeMode = Channel.AccessMode.Mode.valueOf(channelAccessModeArg.getValue().toUpperCase());
-            Channel.AccessMode accessMode = new Channel.AccessMode(0);
-            accessMode.set(accessModeMode);
-            channel.setAccessMode(accessMode);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<String> channelAccessModeArg = args.getByIndex(0);
+			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			if(channel == null){
+				throw new IllegalArgumentException();
+			}
+			Channel.AccessMode.Mode accessModeMode = Channel.AccessMode.Mode.valueOf(channelAccessModeArg.getValue().toUpperCase());
+			Channel.AccessMode accessMode = new Channel.AccessMode(0);
+			accessMode.set(accessModeMode);
+			channel.setAccessMode(accessMode);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
+		}
+	}
+
 }

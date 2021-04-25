@@ -34,62 +34,65 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CMDClientIdentify extends AdminCommand {
+public class CMDClientIdentify extends AdminCommand{
 
-    public CMDClientIdentify() {
-        super("client_identify", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, null);
-    }
+	public CMDClientIdentify(){
+		super("client_identify", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, null);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        Message m = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed()).complete();
-        try{
-            // get secondary websocket
-            SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getBackendClient().getSecondaryWebsocketListener();
-            // create request
-            WSRequest wsRequest = new WSRequest.Builder()
-                    .action("identify")
-                    .mode(WSRequest.Mode.BROADCAST)
-                    .exitOn(WSRequest.ExitOn.TIMEOUT)
-                    .build();
-            // send request
-            List<WSResponse> wsResponses = secondaryWebsocketListener.getWsProcessorCore().process(wsRequest);
-            // send result
-            m.editMessage(getResultEmbed(true, commandEvent.getBackendClient().getSetupData(), wsResponses)).queue();
-        }catch (Exception e){
-            m.editMessage(getResultEmbed(false, commandEvent.getBackendClient().getSetupData(), new ArrayList<>())).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage){
+		Message m = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed()).complete();
+		try{
+			// get secondary websocket
+			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getBackendClient().getSecondaryWebsocketListener();
+			// create request
+			WSRequest wsRequest = new WSRequest.Builder()
+				.action("identify")
+				.mode(WSRequest.Mode.BROADCAST)
+				.exitOn(WSRequest.ExitOn.TIMEOUT)
+				.build();
+			// send request
+			List<WSResponse> wsResponses = secondaryWebsocketListener.getWsProcessorCore().process(wsRequest);
+			// send result
+			m.editMessage(getResultEmbed(true, commandEvent.getBackendClient().getSetupData(), wsResponses)).queue();
+		}
+		catch(Exception e){
+			m.editMessage(getResultEmbed(false, commandEvent.getBackendClient().getSetupData(), new ArrayList<>())).queue();
+		}
+	}
 
-    private MessageEmbed getRequestEmbed(){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest")
-                .setColor(Color.ORANGE)
-                .addField("Status:", "Running", true)
-                .addField("Timeout:", 5000+"ms", true)
-                .addField("Action:", "identify", true);
-        return embedBuilder.build();
-    }
+	private MessageEmbed getRequestEmbed(){
+		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest")
+			.setColor(Color.ORANGE)
+			.addField("Status:", "Running", true)
+			.addField("Timeout:", 5000 + "ms", true)
+			.addField("Action:", "identify", true);
+		return embedBuilder.build();
+	}
 
-    private MessageEmbed getResultEmbed(boolean success, SetupData setupData, List<WSResponse> responses){
-        EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest");
-        if(success){
-            embedBuilder
-                    .addField("Status:", "Success", true)
-                    .setColor(Color.GREEN);
-        }else{
-            embedBuilder
-                    .addField("Status:", "Failure", true)
-                    .setColor(Color.RED);
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(">").append(setupData.getClientId()).append(" - ").append(setupData.getClientName()).append("\n");
-        for(WSResponse wsResponse : responses){
-            JSONObject jsonObject = wsResponse.getPayload();
-            if(jsonObject != null){
-                stringBuilder.append(jsonObject.getLong("id")).append(" - ").append(jsonObject.getString("name")).append("\n");
-            }
-        }
-        embedBuilder.addField("Return:", stringBuilder.toString(), false);
-        return embedBuilder.build();
-    }
+	private MessageEmbed getResultEmbed(boolean success, SetupData setupData, List<WSResponse> responses){
+		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("DataRequest");
+		if(success){
+			embedBuilder
+				.addField("Status:", "Success", true)
+				.setColor(Color.GREEN);
+		}
+		else{
+			embedBuilder
+				.addField("Status:", "Failure", true)
+				.setColor(Color.RED);
+		}
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(">").append(setupData.getClientId()).append(" - ").append(setupData.getClientName()).append("\n");
+		for(WSResponse wsResponse : responses){
+			JSONObject jsonObject = wsResponse.getPayload();
+			if(jsonObject != null){
+				stringBuilder.append(jsonObject.getLong("id")).append(" - ").append(jsonObject.getString("name")).append("\n");
+			}
+		}
+		embedBuilder.addField("Return:", stringBuilder.toString(), false);
+		return embedBuilder.build();
+	}
+
 }

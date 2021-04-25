@@ -31,32 +31,33 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class HYBRIDRoles extends HybridCommand {
+public class HYBRIDRoles extends HybridCommand{
 
-    public HYBRIDRoles(CommandGroup parent) {
-        super(parent, "roles", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                null
-        );
-    }
+	public HYBRIDRoles(CommandGroup parent){
+		super(parent, "roles", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			null
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        Guild guild = commandEvent.getBackendDataPack().getbGuild();
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Role role : guild.getRoleCache().getAllAsList()){
-            stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(Arrays.toString(role.getPermissions().getBits().toArray()));
-        }
-        String roleS = stringBuilder.toString();
-        if(roleS.isEmpty()){
-            roleS = translationPackage.getTranslation(getClass().getName()+".response.is_empty");
-        }
-        commandEvent.getEvent().getChannel().sendMessage(
-                EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
-                .setDescription(roleS)
-                .build()
-        ).queue();
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		Guild guild = commandEvent.getBackendDataPack().getbGuild();
+		StringBuilder stringBuilder = new StringBuilder();
+		for(Role role : guild.getRoleCache().getAllAsList()){
+			stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(Arrays.toString(role.getPermissions().getBits().toArray()));
+		}
+		String roleS = stringBuilder.toString();
+		if(roleS.isEmpty()){
+			roleS = translationPackage.getTranslation(getClass().getName() + ".response.is_empty");
+		}
+		commandEvent.getEvent().getChannel().sendMessage(
+			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
+				.setDescription(roleS)
+				.build()
+		).queue();
+	}
+
 }

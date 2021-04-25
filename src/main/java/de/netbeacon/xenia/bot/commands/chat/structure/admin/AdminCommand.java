@@ -34,49 +34,55 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 
-public abstract class AdminCommand extends Command {
+public abstract class AdminCommand extends Command{
 
-    public AdminCommand(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
-        super(alias, false, commandCooldown, botPermissions, memberPrimaryPermissions, memberSecondaryPermission, commandArgs);
-    }
+	public AdminCommand(String alias, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+		super(alias, false, commandCooldown, botPermissions, memberPrimaryPermissions, memberSecondaryPermission, commandArgs);
+	}
 
-    @Override
-    public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
-        return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
-                .setColor(Color.RED)
-                .appendDescription("You are not allowed to do this")
-                .build();
-    }
+	@Override
+	public MessageEmbed onMissingMemberPerms(CommandEvent commandEvent, TranslationPackage translationPackage, boolean v){
+		return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
+			.setColor(Color.RED)
+			.appendDescription("You are not allowed to do this")
+			.build();
+	}
 
-    @Override
-    public void execute(List<String> args, CommandEvent commandEvent) {
-        TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
-        if(translationPackage == null){
-            commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
-            return;
-        }
-        // check required args
-        CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
-        if(!cmdArgs.verify()){
-            // missing args
-            commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
-            return;
-        }
-        if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
-            // bot does not have the required permissions
-            commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
-            return;
-        }
-        if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
-            // invalid permission
-            commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage,false)).queue();
-            return;
-        }
-        // everything alright
-        try{
-            onExecution(cmdArgs, commandEvent, translationPackage);
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
-        }
-    }
+	@Override
+	public void execute(List<String> args, CommandEvent commandEvent){
+		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
+		var member = commandEvent.getEvent().getMember();
+		var textChannel = commandEvent.getEvent().getChannel();
+
+		TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+		if(translationPackage == null){
+			textChannel.sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+			return;
+		}
+		// check required args
+		CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
+		if(!cmdArgs.verify()){
+			// missing args
+			textChannel.sendMessage(onMissingArgs(translationPackage)).queue();
+			return;
+		}
+		if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
+			// invalid permission
+			textChannel.sendMessage(onMissingMemberPerms(commandEvent, translationPackage, false)).queue();
+			return;
+		}
+		if(!selfMember.hasPermission(getBotPermissions())){
+			// bot does not have the required permissions
+			textChannel.sendMessage(onMissingBotPerms(commandEvent, translationPackage)).queue();
+			return;
+		}
+		// everything alright
+		try{
+			onExecution(cmdArgs, commandEvent, translationPackage);
+		}
+		catch(Exception e){
+			textChannel.sendMessage(onUnhandledException(translationPackage, e)).queue();
+		}
+	}
+
 }

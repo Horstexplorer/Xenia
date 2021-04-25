@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDTail extends AnimeImageCommand {
-    public CMDTail() {
-        super("tail", false, false, ImageType.SFW.TAIL, ContentType.GIF);
-    }
+public class CMDTail extends AnimeImageCommand{
+
+	public CMDTail(){
+		super("tail", false, false, ImageType.SFW.TAIL, ContentType.GIF);
+	}
+
 }

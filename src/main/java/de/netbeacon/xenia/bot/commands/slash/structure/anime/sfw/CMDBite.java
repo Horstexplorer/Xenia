@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDBite extends AnimeImageCommand {
-    public CMDBite() {
-        super("bite", "Bite someone", true, false, ImageType.SFW.BITE, ContentType.GIF);
-    }
+public class CMDBite extends AnimeImageCommand{
+
+	public CMDBite(){
+		super("bite", "Bite someone", true, false, ImageType.SFW.BITE, ContentType.GIF);
+	}
+
 }

@@ -18,18 +18,19 @@ package de.netbeacon.xenia.bot.utils.purrito;
 
 import de.netbeacon.purrito.qol.Purrito;
 
-public class PurrBotAPIWrapper {
+public class PurrBotAPIWrapper{
 
-    private static Purrito instance;
+	private static Purrito instance;
 
-    public static synchronized Purrito getInstance(){
-        return instance;
-    }
+	public static synchronized Purrito getInstance(){
+		return instance;
+	}
 
-    public static synchronized Purrito getInstance(boolean initIfNeeded){
-        if(instance == null && initIfNeeded){
-            instance = new Purrito();
-        }
-        return instance;
-    }
+	public static synchronized Purrito getInstance(boolean initIfNeeded){
+		if(instance == null && initIfNeeded){
+			instance = new Purrito();
+		}
+		return instance;
+	}
+
 }

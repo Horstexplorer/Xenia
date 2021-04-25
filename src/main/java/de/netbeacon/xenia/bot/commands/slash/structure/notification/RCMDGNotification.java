@@ -21,14 +21,15 @@ import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 
-public class RCMDGNotification extends Command {
+public class RCMDGNotification extends Command{
 
-    public RCMDGNotification() {
-        super("notification", "Manage notifications for this guild", false, false,
-                new CMDCreate(), new CMDDelete(), new CMDList(), new CMDModify()
-        );
-    }
+	public RCMDGNotification(){
+		super("notification", "Manage notifications for this guild", false, false,
+			new CMDCreate(), new CMDDelete(), new CMDList(), new CMDModify()
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {}
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{}
+
 }

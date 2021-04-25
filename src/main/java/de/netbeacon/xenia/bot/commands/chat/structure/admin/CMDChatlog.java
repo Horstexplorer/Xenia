@@ -33,45 +33,47 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_CHANNEL;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.ADMIN_CHATLOG_LIMIT;
 
-public class CMDChatlog extends AdminCommand {
+public class CMDChatlog extends AdminCommand{
 
-    public CMDChatlog() {
-        super("chatlog", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
-    }
+	public CMDChatlog(){
+		super("chatlog", new CommandCooldown(CommandCooldown.Type.User, 6000), null, null, null, List.of(ADMIN_CHATLOG_CHANNEL, ADMIN_CHATLOG_LIMIT));
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) {
-        CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
-        CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage){
+		CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
+		CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
-        Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+		Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
 
-        if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
-            long cId = channelArg.getValue().getId();
-            if(commandEvent.getBackendDataPack().getbGuild().getChannelCache().contains(cId)){
-                bChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(cId);
-            }
-        }
+		if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
+			long cId = channelArg.getValue().getId();
+			if(commandEvent.getBackendDataPack().getbGuild().getChannelCache().contains(cId)){
+				bChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(cId);
+			}
+		}
 
-        List<Message> messages = bChannel.getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject()
-                .put("guildId", commandEvent.getEvent().getGuild().getIdLong())
-                .put("channelId", bChannel.getChannelId())
-                .put("messages", jsonArray);
-        messages.forEach(message -> {
-            var json = message.asJSON();
-            json.remove("channelId");
-            json.remove("guildId");
-            jsonArray.put(json);
-        });
-        // upload to hastebin
-        String jsonString = jsonObject.toString(3);
-        try{
-            String url = HastebinUtil.uploadToHastebin(jsonString);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, "Here is the [chatlog]("+url+") ["+jsonArray.length()+" messages]")).queue();
-        }catch (Exception e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: "+jsonString.length()+")")).queue();
-        }
-    }
+		List<Message> messages = bChannel.getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
+		JSONArray jsonArray = new JSONArray();
+		JSONObject jsonObject = new JSONObject()
+			.put("guildId", commandEvent.getEvent().getGuild().getIdLong())
+			.put("channelId", bChannel.getChannelId())
+			.put("messages", jsonArray);
+		messages.forEach(message -> {
+			var json = message.asJSON();
+			json.remove("channelId");
+			json.remove("guildId");
+			jsonArray.put(json);
+		});
+		// upload to hastebin
+		String jsonString = jsonObject.toString(3);
+		try{
+			String url = HastebinUtil.uploadToHastebin(jsonString);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, "Here is the [chatlog](" + url + ") [" + jsonArray.length() + " messages]")).queue();
+		}
+		catch(Exception e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: " + jsonString.length() + ")")).queue();
+		}
+	}
+
 }

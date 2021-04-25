@@ -16,5 +16,5 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.twitch;
 
-public class RCMDTwitch {
+public class RCMDTwitch{
 }

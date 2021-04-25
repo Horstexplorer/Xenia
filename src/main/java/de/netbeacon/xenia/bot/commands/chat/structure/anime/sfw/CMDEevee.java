@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDEevee extends AnimeImageCommand {
-    public CMDEevee() {
-        super("eevee", false, false, ImageType.SFW.EEVEE, ContentType.GIF);
-    }
+public class CMDEevee extends AnimeImageCommand{
+
+	public CMDEevee(){
+		super("eevee", false, false, ImageType.SFW.EEVEE, ContentType.GIF);
+	}
+
 }

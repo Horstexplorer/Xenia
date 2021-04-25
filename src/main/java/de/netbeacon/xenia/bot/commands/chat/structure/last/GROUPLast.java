@@ -18,11 +18,12 @@ package de.netbeacon.xenia.bot.commands.chat.structure.last;
 
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 
-public class GROUPLast extends CommandGroup {
+public class GROUPLast extends CommandGroup{
 
-    public GROUPLast() {
-        super(null,"last", false);
-        addChildCommand(new CMDDeleted());
-        addChildCommand(new CMDEdited());
-    }
+	public GROUPLast(){
+		super(null, "last", false);
+		addChildCommand(new CMDDeleted());
+		addChildCommand(new CMDEdited());
+	}
+
 }

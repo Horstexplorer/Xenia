@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDSenko extends AnimeImageCommand {
-    public CMDSenko() {
-        super("senko", false, false, ImageType.SFW.SENKO, ContentType.IMAGE);
-    }
+public class CMDSenko extends AnimeImageCommand{
+
+	public CMDSenko(){
+		super("senko", false, false, ImageType.SFW.SENKO, ContentType.IMAGE);
+	}
+
 }

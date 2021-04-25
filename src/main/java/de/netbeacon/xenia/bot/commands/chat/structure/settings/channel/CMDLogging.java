@@ -32,35 +32,37 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.*;
 
-public class CMDLogging extends Command {
+public class CMDLogging extends Command{
 
-    public CMDLogging() {
-        super("logging", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CHANNEL_LOGGING_ENABLE, CHANNEL_ID_OPTIONAL, CHANNEL_ID_TMPLOGGING_OPTIONAL)
-        );
-    }
+	public CMDLogging(){
+		super("logging", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(CHANNEL_LOGGING_ENABLE, CHANNEL_ID_OPTIONAL, CHANNEL_ID_TMPLOGGING_OPTIONAL)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
-            CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
-            CmdArg<Mention> mention2CmdArg = args.getByIndex(2);
-            Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
-            if(channel == null){
-                throw new IllegalArgumentException();
-            }
-            channel.lSetTmpLoggingActive(channelLoggingArg.getValue());
-            if(mention2CmdArg.getValue() != null){
-                channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
-            }
-            channel.update();
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
+			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
+			CmdArg<Mention> mention2CmdArg = args.getByIndex(2);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			if(channel == null){
+				throw new IllegalArgumentException();
+			}
+			channel.lSetTmpLoggingActive(channelLoggingArg.getValue());
+			if(mention2CmdArg.getValue() != null){
+				channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
+			}
+			channel.update();
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+		}
+	}
+
 }

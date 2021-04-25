@@ -35,28 +35,30 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.KEY_PATTERN;
 
-public class RCMDTag extends Command {
+public class RCMDTag extends Command{
 
-    public RCMDTag() {
-        super("tag", "Displays a tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
-                null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
-                List.of(
-                        new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t-> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t-> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build()
-                )
-        );
-    }
+	public RCMDTag(){
+		super("tag", "Displays a tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
+			List.of(
+				new CmdArgDef.Builder<>("name", "Tag name", "Tag name, 3 to 32 chars, only alphanumeric", String.class).predicateAddStringLengthRange(3, 32).predicateAddPredicate(t -> KEY_PATTERN.matcher(t).matches()).predicateAddPredicate(t -> !(t.equalsIgnoreCase("create") || t.equalsIgnoreCase("modify") || t.equalsIgnoreCase("delete"))).build()
+			)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> nameArg = cmdArgs.getByName("name");
-        try{
-            Tag tag = tagCache.get(nameArg.getValue());
-            commandEvent.getEvent().reply(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
-        }catch (DataException | CacheException e){
-            commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> nameArg = cmdArgs.getByName("name");
+		try{
+			Tag tag = tagCache.get(nameArg.getValue());
+			commandEvent.getEvent().reply(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
+		}
+		catch(DataException | CacheException e){
+			commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
+		}
+	}
+
 }

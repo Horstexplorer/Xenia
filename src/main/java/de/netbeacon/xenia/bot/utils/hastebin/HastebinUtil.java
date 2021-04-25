@@ -23,23 +23,24 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.json.JSONObject;
 
-public class HastebinUtil {
+public class HastebinUtil{
 
-    private static final String DEFAULT_HASTEBIN_URL = "https://haste.hypercdn.de";
+	private static final String DEFAULT_HASTEBIN_URL = "https://haste.hypercdn.de";
 
-    public static String uploadToHastebin(String content) throws Exception {
-        return uploadToHastebin(DEFAULT_HASTEBIN_URL, content);
-    }
+	public static String uploadToHastebin(String content) throws Exception{
+		return uploadToHastebin(DEFAULT_HASTEBIN_URL, content);
+	}
 
-    public static String uploadToHastebin(String host, String content) throws Exception {
-        RequestBody requestBody = RequestBody.create(content, MediaType.parse("text/html; charset=utf-8"));
-        Request request = new Request.Builder().post(requestBody).url(host+"/documents").build();
-        try(Response response = SharedOkHttpClient.getInstance().newCall(request).execute()){
-            if(response.code() != 200){
-                throw new Exception("Error Executing Request: "+response.code()+" "+request.toString());
-            }
-            JSONObject jsonObject = new JSONObject(response.body().string());
-            return host+"/"+jsonObject.getString("key");
-        }
-    }
+	public static String uploadToHastebin(String host, String content) throws Exception{
+		RequestBody requestBody = RequestBody.create(content, MediaType.parse("text/html; charset=utf-8"));
+		Request request = new Request.Builder().post(requestBody).url(host + "/documents").build();
+		try(Response response = SharedOkHttpClient.getInstance().newCall(request).execute()){
+			if(response.code() != 200){
+				throw new Exception("Error Executing Request: " + response.code() + " " + request.toString());
+			}
+			JSONObject jsonObject = new JSONObject(response.body().string());
+			return host + "/" + jsonObject.getString("key");
+		}
+	}
+
 }

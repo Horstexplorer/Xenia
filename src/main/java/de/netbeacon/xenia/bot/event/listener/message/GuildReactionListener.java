@@ -24,31 +24,32 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemove
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class GuildReactionListener extends ListenerAdapter {
+public class GuildReactionListener extends ListenerAdapter{
 
-    private final EventWaiter eventWaiter;
+	private final EventWaiter eventWaiter;
 
-    public GuildReactionListener(EventWaiter eventWaiter){
-        this.eventWaiter = eventWaiter;
-    }
+	public GuildReactionListener(EventWaiter eventWaiter){
+		this.eventWaiter = eventWaiter;
+	}
 
-    @Override
-    public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
-        eventWaiter.waitingOnThis(event);
-    }
+	@Override
+	public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event){
+		eventWaiter.waitingOnThis(event);
+	}
 
-    @Override
-    public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent event) {
-        eventWaiter.waitingOnThis(event);
-    }
+	@Override
+	public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent event){
+		eventWaiter.waitingOnThis(event);
+	}
 
-    @Override
-    public void onGuildMessageReactionRemoveAll(@NotNull GuildMessageReactionRemoveAllEvent event) {
-        eventWaiter.waitingOnThis(event);
-    }
+	@Override
+	public void onGuildMessageReactionRemoveAll(@NotNull GuildMessageReactionRemoveAllEvent event){
+		eventWaiter.waitingOnThis(event);
+	}
 
-    @Override
-    public void onGuildMessageReactionRemoveEmote(@NotNull GuildMessageReactionRemoveEmoteEvent event) {
-        eventWaiter.waitingOnThis(event);
-    }
+	@Override
+	public void onGuildMessageReactionRemoveEmote(@NotNull GuildMessageReactionRemoveEmoteEvent event){
+		eventWaiter.waitingOnThis(event);
+	}
+
 }

@@ -22,42 +22,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-public class CmdArgFactory {
+public class CmdArgFactory{
 
-    public static CmdArgs getArgs(Function<String, SlashCommandEvent.OptionData> optionProvider, List<CmdArgDef> cmdArgDefs) throws Exception {
-        List<CmdArg> cmdArgs = new ArrayList<>();
-        for(CmdArgDef cmdArgDef : cmdArgDefs){
-            var option = optionProvider.apply(cmdArgDef.getName());
-            // if not found check if it might be optional
-            if(option == null){
-                if(cmdArgDef.getOptionData().isRequired()){
-                    throw new Exception("Required Option "+cmdArgDef.getName()+" is missing");
-                }
-                // data is optional so null is valid
-                cmdArgs.add(new CmdArg(null, cmdArgDef));
-                continue;
-            }
-            // if found we need to parse it
-            Object data;
-            try{
-                data = cmdArgDef.getParser().parse(option);
-            }catch (CmdArgDef.Parser.Exception e){
-                throw new Exception("Option "+cmdArgDef.getName()+" does not seem to be parsable to the right type "+cmdArgDef.getTClass().getSimpleName());
-            }
-            // check if it meets the requirements
-            if(!cmdArgDef.getPredicate().test(data)){
-                throw new Exception("Option "+cmdArgDef.getName()+" does not seem to fulfill the required input ("+cmdArgDef.getExtendedDescription()+")");
-            }
-            // data is correct and in the right format
-            cmdArgs.add(new CmdArg(data, cmdArgDef));
-        }
-        return new CmdArgs(cmdArgs);
-    }
+	public static CmdArgs getArgs(Function<String, SlashCommandEvent.OptionData> optionProvider, List<CmdArgDef> cmdArgDefs) throws Exception{
+		List<CmdArg> cmdArgs = new ArrayList<>();
+		for(CmdArgDef cmdArgDef : cmdArgDefs){
+			var option = optionProvider.apply(cmdArgDef.getName());
+			// if not found check if it might be optional
+			if(option == null){
+				if(cmdArgDef.getOptionData().isRequired()){
+					throw new Exception("Required Option " + cmdArgDef.getName() + " is missing");
+				}
+				// data is optional so null is valid
+				cmdArgs.add(new CmdArg(null, cmdArgDef));
+				continue;
+			}
+			// if found we need to parse it
+			Object data;
+			try{
+				data = cmdArgDef.getParser().parse(option);
+			}
+			catch(CmdArgDef.Parser.Exception e){
+				throw new Exception("Option " + cmdArgDef.getName() + " does not seem to be parsable to the right type " + cmdArgDef.getTClass().getSimpleName());
+			}
+			// check if it meets the requirements
+			if(!cmdArgDef.getPredicate().test(data)){
+				throw new Exception("Option " + cmdArgDef.getName() + " does not seem to fulfill the required input (" + cmdArgDef.getExtendedDescription() + ")");
+			}
+			// data is correct and in the right format
+			cmdArgs.add(new CmdArg(data, cmdArgDef));
+		}
+		return new CmdArgs(cmdArgs);
+	}
 
-    public static class Exception extends java.lang.Exception {
-        public Exception(String message){
-            super(message);
-        }
-    }
+	public static class Exception extends java.lang.Exception{
+
+		public Exception(String message){
+			super(message);
+		}
+
+	}
 
 }

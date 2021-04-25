@@ -16,5 +16,5 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.admin;
 
-public class CMDOokami {
+public class CMDOokami{
 }

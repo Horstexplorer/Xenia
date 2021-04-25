@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDRandom extends AnimeImageCommand {
-    public CMDRandom() {
-        super("random", "Random image", false, false, ImageType.SFW.RANDOM, ContentType.AVAILABLE);
-    }
+public class CMDRandom extends AnimeImageCommand{
+
+	public CMDRandom(){
+		super("random", "Random image", false, false, ImageType.SFW.RANDOM, ContentType.AVAILABLE);
+	}
+
 }

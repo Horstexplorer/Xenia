@@ -21,39 +21,40 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class CmdArgs {
+public class CmdArgs{
 
-    private final HashMap<String, CmdArg> cmdArgs = new HashMap<>();
+	private final HashMap<String, CmdArg> cmdArgs = new HashMap<>();
 
-    public CmdArgs(){}
+	public CmdArgs(){}
 
-    public CmdArgs(List<CmdArg> args){
-        for(CmdArg arg : args){
-            cmdArgs.put(arg.getName(), arg);
-        }
-    }
+	public CmdArgs(List<CmdArg> args){
+		for(CmdArg arg : args){
+			cmdArgs.put(arg.getName(), arg);
+		}
+	}
 
-    public CmdArgs(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.put(arg.getName(), arg);
-        }
-    }
+	public CmdArgs(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.put(arg.getName(), arg);
+		}
+	}
 
-    public void add(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.put(arg.getName(), arg);
-        }
-    }
+	public void add(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.put(arg.getName(), arg);
+		}
+	}
 
-    public void remove(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.remove(arg.getName());
-        }
-    }
+	public void remove(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.remove(arg.getName());
+		}
+	}
 
-    public <T extends CmdArg> T getByName(String name){
-        return (T) cmdArgs.get(name);
-    }
+	public <T extends CmdArg> T getByName(String name){
+		return (T) cmdArgs.get(name);
+	}
 
-    public Collection<CmdArg> getAll(){ return cmdArgs.values(); }
+	public Collection<CmdArg> getAll(){ return cmdArgs.values(); }
+
 }

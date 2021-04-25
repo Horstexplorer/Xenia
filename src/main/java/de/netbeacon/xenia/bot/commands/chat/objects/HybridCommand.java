@@ -29,28 +29,30 @@ import java.util.List;
 
 public abstract class HybridCommand extends CommandGroup{
 
-    /**
-     * Creates a new instance of this class which acts both as a command and as a command group
-     *
-     * @param parent if this group is located inside of another group this should be set accordingly, else null
-     * @param alias of the command group / command
-     * @param isNSFW if the command is an nsfw command
-     * @param commandCooldown cooldown of the command on execution in command mode
-     * @param botPermissions required for the user on execution in command mode
-     * @param memberPrimaryPermission required for the member on execution in command mode
-     * @param memberSecondaryPermission required for the member on execution in command mode
-     * @param commandArgs for the command on execution in command mode
-     */
-    public HybridCommand(CommandGroup parent, String alias, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs) {
-        super(parent, alias, isNSFW, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
-    }
+	/**
+	 * Creates a new instance of this class which acts both as a command and as a command group
+	 *
+	 * @param parent                    if this group is located inside of another group this should be set accordingly, else null
+	 * @param alias                     of the command group / command
+	 * @param isNSFW                    if the command is an nsfw command
+	 * @param commandCooldown           cooldown of the command on execution in command mode
+	 * @param botPermissions            required for the user on execution in command mode
+	 * @param memberPrimaryPermission   required for the member on execution in command mode
+	 * @param memberSecondaryPermission required for the member on execution in command mode
+	 * @param commandArgs               for the command on execution in command mode
+	 */
+	public HybridCommand(CommandGroup parent, String alias, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermission, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> commandArgs){
+		super(parent, alias, isNSFW, commandCooldown, botPermissions, memberPrimaryPermission, memberSecondaryPermission, commandArgs);
+	}
 
-    /**
-     * Called on execution of the command
-     *  @param args remaining arguments of the message
-     * @param commandEvent CommandEvent
-     * @param translationPackage translation package
-     */
-    @Override
-    public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception;
+	/**
+	 * Called on execution of the command
+	 *
+	 * @param args               remaining arguments of the message
+	 * @param commandEvent       CommandEvent
+	 * @param translationPackage translation package
+	 */
+	@Override
+	public abstract void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception;
+
 }

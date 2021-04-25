@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 
-public class CMDFluff extends AnimeImageCommand {
-    public CMDFluff() {
-        super("fluff", false, false, ImageType.SFW.FLUFF, ContentType.GIF);
-    }
+public class CMDFluff extends AnimeImageCommand{
+
+	public CMDFluff(){
+		super("fluff", false, false, ImageType.SFW.FLUFF, ContentType.GIF);
+	}
+
 }

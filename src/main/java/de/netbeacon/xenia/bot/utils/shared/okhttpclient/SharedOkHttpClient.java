@@ -18,29 +18,31 @@ package de.netbeacon.xenia.bot.utils.shared.okhttpclient;
 
 import okhttp3.OkHttpClient;
 
-public class SharedOkHttpClient {
+public class SharedOkHttpClient{
 
-    private static OkHttpClient okHttpClient;
+	private static OkHttpClient okHttpClient;
 
-    /**
-     * Returns the instance of this class
-     *
-     * @param initIfNeeded initializes an instance of this class if no other exists
-     * @return this
-     */
-    public static synchronized OkHttpClient getInstance(boolean initIfNeeded){
-        if(okHttpClient == null && initIfNeeded){
-            okHttpClient = new OkHttpClient.Builder().build();
-        }
-        return okHttpClient;
-    }
+	/**
+	 * Returns the instance of this class
+	 *
+	 * @param initIfNeeded initializes an instance of this class if no other exists
+	 *
+	 * @return this
+	 */
+	public static synchronized OkHttpClient getInstance(boolean initIfNeeded){
+		if(okHttpClient == null && initIfNeeded){
+			okHttpClient = new OkHttpClient.Builder().build();
+		}
+		return okHttpClient;
+	}
 
-    /**
-     * Returns the instance of this class
-     * @return this
-     */
-    public static OkHttpClient getInstance(){
-        return getInstance(false);
-    }
+	/**
+	 * Returns the instance of this class
+	 *
+	 * @return this
+	 */
+	public static OkHttpClient getInstance(){
+		return getInstance(false);
+	}
 
 }

@@ -18,12 +18,13 @@ package de.netbeacon.xenia.bot.commands.chat.structure.settings.channel;
 
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 
-public class GROUPChannel extends CommandGroup {
+public class GROUPChannel extends CommandGroup{
 
-    public GROUPChannel(CommandGroup parent) {
-        super(parent,"channel", false);
-        addChildCommand(new CMDInfo());
-        addChildCommand(new CMDAccessMode());
-        addChildCommand(new CMDLogging());
-    }
+	public GROUPChannel(CommandGroup parent){
+		super(parent, "channel", false);
+		addChildCommand(new CMDInfo());
+		addChildCommand(new CMDAccessMode());
+		addChildCommand(new CMDLogging());
+	}
+
 }

@@ -34,49 +34,52 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CB_CHANNEL_ENABLE;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.CB_CHANNEL_ID_OPTIONAL;
 
-public class CMDChannelLink extends Command {
+public class CMDChannelLink extends Command{
 
-    public CMDChannelLink() {
-        super("channel_link", false, new CommandCooldown(CommandCooldown.Type.Guild, 10000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(CB_CHANNEL_ENABLE, CB_CHANNEL_ID_OPTIONAL)
-        );
-    }
+	public CMDChannelLink(){
+		super("channel_link", false, new CommandCooldown(CommandCooldown.Type.Guild, 10000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(CB_CHANNEL_ENABLE, CB_CHANNEL_ID_OPTIONAL)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        try{
-            CmdArg<Boolean> modeArg = args.getByIndex(0);
-            CmdArg<Mention> channelMentionArg = args.getByIndex(1);
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		try{
+			CmdArg<Boolean> modeArg = args.getByIndex(0);
+			CmdArg<Mention> channelMentionArg = args.getByIndex(1);
 
-            Channel channel = commandEvent.getBackendDataPack().getbChannel();
-            if(channelMentionArg.getValue() != null){
-                TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMentionArg.getValue().getId());
-                if(textChannel == null){
-                    throw new IllegalArgumentException();
-                }
-                channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong(), false);
-            }
-            var v = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
-            if(modeArg.getValue()
-                    && v
-                    >= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
-            ){
-                throw new IllegalArgumentException();
-            }
-            Channel.D43Z1Settings newD43Z1ChannelSettings = new Channel.D43Z1Settings(channel.getD43Z1Settings().getValue());
-            if(modeArg.getValue()){
-                newD43Z1ChannelSettings.set(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
-            }else{
-                newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
-            }
-            channel.setD43Z1Settings(newD43Z1ChannelSettings);
-            commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "error.invalid.arg.msg"))).queue();
-        }
-    }
+			Channel channel = commandEvent.getBackendDataPack().getbChannel();
+			if(channelMentionArg.getValue() != null){
+				TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMentionArg.getValue().getId());
+				if(textChannel == null){
+					throw new IllegalArgumentException();
+				}
+				channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong(), false);
+			}
+			var v = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
+			if(modeArg.getValue()
+				&& v
+				>= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
+			){
+				throw new IllegalArgumentException();
+			}
+			Channel.D43Z1Settings newD43Z1ChannelSettings = new Channel.D43Z1Settings(channel.getD43Z1Settings().getValue());
+			if(modeArg.getValue()){
+				newD43Z1ChannelSettings.set(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
+			}
+			else{
+				newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
+			}
+			channel.setD43Z1Settings(newD43Z1ChannelSettings);
+			commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "error.invalid.arg.msg"))).queue();
+		}
+	}
+
 }

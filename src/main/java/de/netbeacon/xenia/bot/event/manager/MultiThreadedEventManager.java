@@ -30,91 +30,95 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MultiThreadedEventManager implements IExtendedEventManager {
+public class MultiThreadedEventManager implements IExtendedEventManager{
 
-    private long lastEvent;
-    private final ScalingExecutor primaryScalingExecutor;
-    private final ScalingExecutor secondaryScalingExecutor;
-    private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
-    private final AtomicBoolean halt = new AtomicBoolean(false);
+	private long lastEvent;
+	private final ScalingExecutor primaryScalingExecutor;
+	private final ScalingExecutor secondaryScalingExecutor;
+	private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
+	private final AtomicBoolean halt = new AtomicBoolean(false);
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public MultiThreadedEventManager(){
-        this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
-        this.secondaryScalingExecutor = new ScalingExecutor(2, 16, -1 , 10, TimeUnit.SECONDS);
-    }
+	public MultiThreadedEventManager(){
+		this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
+		this.secondaryScalingExecutor = new ScalingExecutor(2, 16, -1, 10, TimeUnit.SECONDS);
+	}
 
-    @Override
-    public void register(@NotNull Object listener) {
-        if(!(listener instanceof EventListener)){
-            throw new IllegalArgumentException("Listener must implement EventListener");
-        }
-        listeners.add((EventListener) listener);
-    }
+	@Override
+	public void register(@NotNull Object listener){
+		if(!(listener instanceof EventListener)){
+			throw new IllegalArgumentException("Listener must implement EventListener");
+		}
+		listeners.add((EventListener) listener);
+	}
 
-    @Override
-    public void unregister(@NotNull Object listener) {
-        if(!(listener instanceof EventListener)){
-            throw new IllegalArgumentException("Listener must implement EventListener");
-        }
-        listeners.remove(listener);
-    }
+	@Override
+	public void unregister(@NotNull Object listener){
+		if(!(listener instanceof EventListener)){
+			throw new IllegalArgumentException("Listener must implement EventListener");
+		}
+		listeners.remove(listener);
+	}
 
-    public void halt(boolean value){
-        halt.set(value);
-    }
+	public void halt(boolean value){
+		halt.set(value);
+	}
 
-    @Override
-    public void handle(@NotNull GenericEvent event) {
-        try{
-            lastEvent = System.currentTimeMillis();
-            if(halt.get()) {
-                return;
-            }
-            if(event instanceof GenericGuildMessageEvent) {
-                primaryScalingExecutor.execute(() -> eventConsumer(event));
-            }else{
-                secondaryScalingExecutor.execute(() -> eventConsumer(event));
-            }
-        }catch (Exception e){
-            logger.error("Something rly bad happened while handling an event", e);
-        }
-    }
+	@Override
+	public void handle(@NotNull GenericEvent event){
+		try{
+			lastEvent = System.currentTimeMillis();
+			if(halt.get()){
+				return;
+			}
+			if(event instanceof GenericGuildMessageEvent){
+				primaryScalingExecutor.execute(() -> eventConsumer(event));
+			}
+			else{
+				secondaryScalingExecutor.execute(() -> eventConsumer(event));
+			}
+		}
+		catch(Exception e){
+			logger.error("Something rly bad happened while handling an event", e);
+		}
+	}
 
-    private void eventConsumer(GenericEvent event){
-        for(EventListener listener : listeners){
-            try {
-                listener.onEvent(event);
-            }catch (Throwable t){
-                JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-                if (t instanceof Error) {
-                    throw t;
-                }
-            }
-        }
-    }
+	private void eventConsumer(GenericEvent event){
+		for(EventListener listener : listeners){
+			try{
+				listener.onEvent(event);
+			}
+			catch(Throwable t){
+				JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
+				if(t instanceof Error){
+					throw t;
+				}
+			}
+		}
+	}
 
-    @NotNull
-    @Override
-    public List<Object> getRegisteredListeners() {
-        return List.copyOf(listeners);
-    }
+	@NotNull
+	@Override
+	public List<Object> getRegisteredListeners(){
+		return List.copyOf(listeners);
+	}
 
-    @Override
-    public void onShutdown() throws Exception {
-        halt(true);
-        primaryScalingExecutor.shutdown();
-        secondaryScalingExecutor.shutdown();
-    }
+	@Override
+	public void onShutdown() throws Exception{
+		halt(true);
+		primaryScalingExecutor.shutdown();
+		secondaryScalingExecutor.shutdown();
+	}
 
-    @Override
-    public long getLastEventTimestamp() {
-        return lastEvent;
-    }
+	@Override
+	public long getLastEventTimestamp(){
+		return lastEvent;
+	}
 
-    @Override
-    public long getLastEventTimeDif() {
-        return System.currentTimeMillis()-lastEvent;
-    }
+	@Override
+	public long getLastEventTimeDif(){
+		return System.currentTimeMillis() - lastEvent;
+	}
+
 }

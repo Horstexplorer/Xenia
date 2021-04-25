@@ -20,8 +20,10 @@ import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 
-public class CMDYaoi extends AnimeImageCommand {
-    public CMDYaoi() {
-        super("yaoi", "-NSFW content-",false, true, ImageType.NSFW.YAOI, ContentType.GIF);
-    }
+public class CMDYaoi extends AnimeImageCommand{
+
+	public CMDYaoi(){
+		super("yaoi", "-NSFW content-", false, true, ImageType.NSFW.YAOI, ContentType.GIF);
+	}
+
 }

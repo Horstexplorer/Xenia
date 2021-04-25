@@ -22,46 +22,48 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDNeko;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.CMDRandom;
 import de.netbeacon.xenia.bot.commands.chat.structure.anime.sfw.*;
 
-public class GROUPAnime extends CommandGroup {
-    public GROUPAnime() {
-        super(null, "anime", false);
-        // SFW
-        addChildCommand(new CMDBite());
-        addChildCommand(new CMDBlush());
-        addChildCommand(new CMDCry());
-        addChildCommand(new CMDCuddle());
-        addChildCommand(new CMDDance());
-        addChildCommand(new CMDEevee());
-        addChildCommand(new CMDFeed());
-        addChildCommand(new CMDFluff());
-        addChildCommand(new CMDHolo());
-        addChildCommand(new CMDHug());
-        addChildCommand(new CMDKiss());
-        addChildCommand(new CMDKitsune());
-        addChildCommand(new CMDLick());
-        addChildCommand(new CMDNeko());
-        addChildCommand(new CMDOokami());
-        addChildCommand(new CMDPat());
-        addChildCommand(new CMDPoke());
-        addChildCommand(new CMDSenko());
-        addChildCommand(new CMDSlap());
-        addChildCommand(new CMDSmile());
-        addChildCommand(new CMDTail());
-        addChildCommand(new CMDTickle());
-        addChildCommand(new CMDRandom());
-        // NSFW
-        addChildCommand(new CMDAnal());
-        addChildCommand(new CMDBlowjob());
-        addChildCommand(new CMDCum());
-        addChildCommand(new CMDFuck());
-        addChildCommand(new de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDNeko());
-        addChildCommand(new CMDPussylick());
-        addChildCommand(new CMDSolo());
-        addChildCommand(new CMDThreesome_FFF());
-        addChildCommand(new CMDThreesome_FFM());
-        addChildCommand(new CMDThreesome_MMF());
-        addChildCommand(new CMDYaoi());
-        addChildCommand(new CMDYuri());
-        addChildCommand(new de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom());
-    }
+public class GROUPAnime extends CommandGroup{
+
+	public GROUPAnime(){
+		super(null, "anime", false);
+		// SFW
+		addChildCommand(new CMDBite());
+		addChildCommand(new CMDBlush());
+		addChildCommand(new CMDCry());
+		addChildCommand(new CMDCuddle());
+		addChildCommand(new CMDDance());
+		addChildCommand(new CMDEevee());
+		addChildCommand(new CMDFeed());
+		addChildCommand(new CMDFluff());
+		addChildCommand(new CMDHolo());
+		addChildCommand(new CMDHug());
+		addChildCommand(new CMDKiss());
+		addChildCommand(new CMDKitsune());
+		addChildCommand(new CMDLick());
+		addChildCommand(new CMDNeko());
+		addChildCommand(new CMDOokami());
+		addChildCommand(new CMDPat());
+		addChildCommand(new CMDPoke());
+		addChildCommand(new CMDSenko());
+		addChildCommand(new CMDSlap());
+		addChildCommand(new CMDSmile());
+		addChildCommand(new CMDTail());
+		addChildCommand(new CMDTickle());
+		addChildCommand(new CMDRandom());
+		// NSFW
+		addChildCommand(new CMDAnal());
+		addChildCommand(new CMDBlowjob());
+		addChildCommand(new CMDCum());
+		addChildCommand(new CMDFuck());
+		addChildCommand(new de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDNeko());
+		addChildCommand(new CMDPussylick());
+		addChildCommand(new CMDSolo());
+		addChildCommand(new CMDThreesome_FFF());
+		addChildCommand(new CMDThreesome_FFM());
+		addChildCommand(new CMDThreesome_MMF());
+		addChildCommand(new CMDYaoi());
+		addChildCommand(new CMDYuri());
+		addChildCommand(new de.netbeacon.xenia.bot.commands.chat.structure.anime.nsfw.CMDRandom());
+	}
+
 }

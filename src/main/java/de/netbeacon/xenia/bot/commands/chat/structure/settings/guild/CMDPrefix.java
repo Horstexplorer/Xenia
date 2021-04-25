@@ -32,27 +32,29 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.GUILD_PREFIX_DEF;
 
-public class CMDPrefix extends Command {
+public class CMDPrefix extends Command{
 
-    public CMDPrefix() {
-        super("prefix", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(GUILD_PREFIX_DEF)
-        );
-    }
+	public CMDPrefix(){
+		super("prefix", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(GUILD_PREFIX_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        CmdArg<String> newPrefix = args.getByIndex(0);
-        String prefix = (newPrefix.getValue() != null) ? newPrefix.getValue() : "~";
-        Guild guild = commandEvent.getBackendDataPack().getbGuild();
-        try{
-            guild.setPrefix(prefix);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", guild.getPrefix()))).queue();
-        }catch (DataException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		CmdArg<String> newPrefix = args.getByIndex(0);
+		String prefix = (newPrefix.getValue() != null) ? newPrefix.getValue() : "~";
+		Guild guild = commandEvent.getBackendDataPack().getbGuild();
+		try{
+			guild.setPrefix(prefix);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", guild.getPrefix()))).queue();
+		}
+		catch(DataException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+		}
+	}
+
 }

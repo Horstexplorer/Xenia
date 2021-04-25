@@ -30,63 +30,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.netbeacon.d43z.one.objects.settings.StaticSettings.*;
+import static de.netbeacon.d43z.one.settings.StaticSettings.*;
 
-public class CMDD43Z1Stats extends AdminCommand {
+public class CMDD43Z1Stats extends AdminCommand{
 
-    public CMDD43Z1Stats() {
-        super("d43z1_stats", new CommandCooldown(CommandCooldown.Type.User, 2000),
-                null,
-                null,
-                null,
-                null
-        );
-    }
+	public CMDD43Z1Stats(){
+		super("d43z1_stats", new CommandCooldown(CommandCooldown.Type.User, 2000),
+			null,
+			null,
+			null,
+			null
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        var eval = D43Z1Imp.getInstance().getEval();
-        var master = D43Z1Imp.getInstance().getContextPoolMaster();
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		var eval = D43Z1Imp.getInstance().getEval();
+		var master = D43Z1Imp.getInstance().getContextPoolMaster();
 
-        var contexts = master.getContentContexts();
-        var shards = contexts.stream().map(ContentContext::getContentShards).flatMap(List::stream).collect(Collectors.toList());
-        var contents = shards.stream().map(ContentShard::getOrderedContent).flatMap(List::stream).collect(Collectors.toList());
-        long queueLength = eval.getQueueLength();
-        long getAVGQueueDuration = eval.getQueueTimeAVGMs();
-        float getAVGEvalTime = eval.getEvalTimeAVGNs()/(float)1000000;
+		var contexts = master.getContentContexts();
+		var shards = contexts.stream().map(ContentContext::getContentShards).flatMap(List::stream).collect(Collectors.toList());
+		var contents = shards.stream().map(ContentShard::getOrderedContent).flatMap(List::stream).collect(Collectors.toList());
+		long queueLength = eval.getQueueLength();
+		long getAVGQueueDuration = eval.getQueueTimeAVGMs();
+		float getAVGEvalTime = eval.getEvalTimeAVGNs() / (float) 1000000;
 
-        ArrayList<Page> pages = new ArrayList<>();
-        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 1")
-                .addField("ContextPoolMaster", master.getUUID().toString(), false)
-                .addField("Contexts in master", String.valueOf(contexts.size()), true)
-                .addField("Shards in master", String.valueOf(shards.size()), true)
-                .addField("Contents in master", String.valueOf(contents.size()), true)
-                .addField("Expected shard size", String.valueOf(CONTENT_SHARD_SIZE), true)
-                .addField("Actual shard size avg", String.valueOf(contents.size()/shards.size()), true)
-                .addField("Current Queue Size", String.valueOf(queueLength), true)
-                .addField("AVG Queue Duration", getAVGQueueDuration+"ms", true)
-                .addField("AVG Eval Duration", getAVGEvalTime+"ms", true)
-                .build()));
-        pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 2")
-                .addField("CONTENT_SHARD_SIZE", String.valueOf(CONTENT_SHARD_SIZE), true)
-                .addField("BUFFER_MAX_SIZE", String.valueOf(BUFFER_MAX_SIZE), true)
-                .addField("EVAL_ENABLE_BUFFER_BONUS_POLICY", String.valueOf(EVAL_ENABLE_BUFFER_BONUS_POLICY), true)
-                .addField("BUFFER_BONUS", String.valueOf(BUFFER_BONUS), true)
-                .addField("BUFFER_BONUS_SUBTRACTION", String.valueOf(BUFFER_BONUS_SUBTRACTION), true)
-                .addField("EVAL_ENABLE_TAG_POLICY", String.valueOf(EVAL_ENABLE_TAG_POLICY), true)
-                .addField("EVAL_TAG_BONUS_PER_MATCH", String.valueOf(EVAL_TAG_BONUS_PER_MATCH), true)
-                .addField("EVAL_TAG_POLICY_OVERRIDE_THRESHOLD", String.valueOf(EVAL_TAG_POLICY_OVERRIDE_THRESHOLD), true)
-                .addField("EVAL_LIAMUS_JACCARD_NGRAM", String.valueOf(EVAL_LIAMUS_JACCARD_NGRAM), true)
-                .addField("EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH", String.valueOf(EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH), true)
-                .addField("EVAL_RANDOM_DIF", String.valueOf(EVAL_RANDOM_DIF), true)
-                .addField("EVAL_MAX_PROCESSING_THREADS", String.valueOf(EVAL_MAX_PROCESSING_THREADS), true)
-                .addField("EVAL_MAX_THREADS_PER_REQUEST", String.valueOf(EVAL_MAX_THREADS_PER_REQUEST), true)
-                .addField("EVAL_MAX_CONCURRENT_TASKS", String.valueOf(EVAL_MAX_CONCURRENT_TASKS), true)
-                .addField("EVAL_ALGORITHM", String.valueOf(EVAL_ALGORITHM), true)
-                .addField("EVAL_AVG_BASE", String.valueOf(EVAL_AVG_BASE), true)
-                .addField("EVAL_MAX_PROCESSING_TIME", String.valueOf(EVAL_MAX_PROCESSING_TIME), true)
-                .addField("EVAL_MIN_PROCESSING_TIME", String.valueOf(EVAL_MIN_PROCESSING_TIME), true)
-                .build()));
-        commandEvent.getPaginatorManager().createPaginator(commandEvent.getEvent().getChannel(), commandEvent.getEvent().getAuthor(), pages);
-    }
+		ArrayList<Page> pages = new ArrayList<>();
+		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 1")
+			.addField("ContextPoolMaster", master.getUUID().toString(), false)
+			.addField("Contexts in master", String.valueOf(contexts.size()), true)
+			.addField("Shards in master", String.valueOf(shards.size()), true)
+			.addField("Contents in master", String.valueOf(contents.size()), true)
+			.addField("Expected shard size", String.valueOf(CONTENT_SHARD_SIZE), true)
+			.addField("Actual shard size avg", String.valueOf(contents.size() / shards.size()), true)
+			.addField("Current Queue Size", String.valueOf(queueLength), true)
+			.addField("AVG Queue Duration", getAVGQueueDuration + "ms", true)
+			.addField("AVG Eval Duration", getAVGEvalTime + "ms", true)
+			.build()));
+		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 2")
+			.addField("CONTENT_SHARD_SIZE", String.valueOf(CONTENT_SHARD_SIZE), true)
+			.addField("BUFFER_MAX_SIZE", String.valueOf(BUFFER_MAX_SIZE), true)
+			.addField("EVAL_ENABLE_BUFFER_BONUS_POLICY", String.valueOf(EVAL_ENABLE_BUFFER_BONUS_POLICY), true)
+			.addField("BUFFER_BONUS", String.valueOf(BUFFER_BONUS), true)
+			.addField("BUFFER_BONUS_SUBTRACTION", String.valueOf(BUFFER_BONUS_SUBTRACTION), true)
+			.addField("EVAL_ENABLE_TAG_POLICY", String.valueOf(EVAL_ENABLE_TAG_POLICY), true)
+			.addField("EVAL_TAG_BONUS_PER_MATCH", String.valueOf(EVAL_TAG_BONUS_PER_MATCH), true)
+			.addField("EVAL_TAG_POLICY_OVERRIDE_THRESHOLD", String.valueOf(EVAL_TAG_POLICY_OVERRIDE_THRESHOLD), true)
+			.addField("EVAL_LIAMUS_JACCARD_NGRAM", String.valueOf(EVAL_LIAMUS_JACCARD_NGRAM), true)
+			.addField("EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH", String.valueOf(EVAL_LIAMUS_JACCARD_LOWERCASE_MATCH), true)
+			.addField("EVAL_RANDOM_DIF", String.valueOf(EVAL_RANDOM_DIF), true)
+			.addField("EVAL_MAX_PROCESSING_THREADS", String.valueOf(EVAL_MAX_PROCESSING_THREADS), true)
+			.addField("EVAL_MAX_THREADS_PER_REQUEST", String.valueOf(EVAL_MAX_THREADS_PER_REQUEST), true)
+			.addField("EVAL_MAX_CONCURRENT_TASKS", String.valueOf(EVAL_MAX_CONCURRENT_TASKS), true)
+			.addField("EVAL_ALGORITHM", String.valueOf(EVAL_ALGORITHM), true)
+			.addField("EVAL_AVG_BASE", String.valueOf(EVAL_AVG_BASE), true)
+			.addField("EVAL_MAX_PROCESSING_TIME", String.valueOf(EVAL_MAX_PROCESSING_TIME), true)
+			.addField("EVAL_MIN_PROCESSING_TIME", String.valueOf(EVAL_MIN_PROCESSING_TIME), true)
+			.build()));
+		commandEvent.getPaginatorManager().createPaginator(commandEvent.getEvent().getChannel(), commandEvent.getEvent().getAuthor(), pages);
+	}
+
 }

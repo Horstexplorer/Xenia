@@ -30,33 +30,34 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import java.util.HashSet;
 import java.util.List;
 
-public class HYBRIDTwitch extends HybridCommand {
+public class HYBRIDTwitch extends HybridCommand{
 
-    public HYBRIDTwitch() {
-        super(null, "twitch", false, new CommandCooldown(CommandCooldown.Type.User, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
-                new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
-                null
-        );
-        addChildCommand(new CMDCreate());
-        addChildCommand(new CMDUpdate());
-        addChildCommand(new CMDDelete());
-    }
+	public HYBRIDTwitch(){
+		super(null, "twitch", false, new CommandCooldown(CommandCooldown.Type.User, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MESSAGE_MANAGE)),
+			new HashSet<>(List.of(Role.Permissions.Bit.TWITCH_NOTIFICATIONS_MANAGE)),
+			null
+		);
+		addChildCommand(new CMDCreate());
+		addChildCommand(new CMDUpdate());
+		addChildCommand(new CMDDelete());
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        // get all stream notifications
-        List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
-        StringBuilder stringBuilder = new StringBuilder();
-        for(TwitchNotification twitchNotification : twitchNotifications){
-            stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
-        }
-        // send message
-        MessageEmbed result = EmbedBuilderFactory
-                .getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.success.title"), commandEvent.getEvent().getAuthor())
-                .setDescription(stringBuilder)
-                .build();
-        commandEvent.getEvent().getChannel().sendMessage(result).queue();
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		// get all stream notifications
+		List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
+		StringBuilder stringBuilder = new StringBuilder();
+		for(TwitchNotification twitchNotification : twitchNotifications){
+			stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");
+		}
+		// send message
+		MessageEmbed result = EmbedBuilderFactory
+			.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
+			.setDescription(stringBuilder)
+			.build();
+		commandEvent.getEvent().getChannel().sendMessage(result).queue();
+	}
+
 }

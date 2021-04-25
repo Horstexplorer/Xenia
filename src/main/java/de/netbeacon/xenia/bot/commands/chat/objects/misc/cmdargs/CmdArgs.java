@@ -19,79 +19,83 @@ package de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CmdArgs {
+public class CmdArgs{
 
-    private final ArrayList<CmdArg> cmdArgs = new ArrayList<>();
+	private final ArrayList<CmdArg> cmdArgs = new ArrayList<>();
 
-    /**
-     * Creates a new instance of this class
-     */
-    public CmdArgs(){}
+	/**
+	 * Creates a new instance of this class
+	 */
+	public CmdArgs(){}
 
-    /**
-     * Creates a new instance of this class
-     *
-     * @param args predefined arguements
-     */
-    public CmdArgs(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.add(arg);
-        }
-    }
+	/**
+	 * Creates a new instance of this class
+	 *
+	 * @param args predefined arguements
+	 */
+	public CmdArgs(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.add(arg);
+		}
+	}
 
-    /**
-     * Adds arguments to this container
-     *
-     * @param args cmd args
-     */
-    public void add(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.add(arg);
-        }
-    }
+	/**
+	 * Adds arguments to this container
+	 *
+	 * @param args cmd args
+	 */
+	public void add(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.add(arg);
+		}
+	}
 
-    /**
-     * Removes arguments from this container
-     *
-     * @param args cmd args
-     */
-    public void remove(CmdArg...args){
-        for(CmdArg arg : args){
-            cmdArgs.remove(arg);
-        }
-    }
+	/**
+	 * Removes arguments from this container
+	 *
+	 * @param args cmd args
+	 */
+	public void remove(CmdArg... args){
+		for(CmdArg arg : args){
+			cmdArgs.remove(arg);
+		}
+	}
 
-    /**
-     * Returns the argument by a given index
-     *
-     * @param index index
-     * @param <T> return type
-     * @return CmdArg
-     */
-    public <T extends CmdArg> T getByIndex(int index){
-        return (T) cmdArgs.get(index);
-    }
+	/**
+	 * Returns the argument by a given index
+	 *
+	 * @param index index
+	 * @param <T>   return type
+	 *
+	 * @return CmdArg
+	 */
+	public <T extends CmdArg> T getByIndex(int index){
+		return (T) cmdArgs.get(index);
+	}
 
-    /**
-     * Verifies that all argument definitions within this container are fulfilled.
-     * @return true on success
-     */
-    public boolean verify(){
-        for(CmdArg arg : cmdArgs){
-            if(!arg.verify()){
-                return false;
-            }
-        }
-        return true;
-    }
+	/**
+	 * Verifies that all argument definitions within this container are fulfilled.
+	 *
+	 * @return true on success
+	 */
+	public boolean verify(){
+		for(CmdArg arg : cmdArgs){
+			if(!arg.verify()){
+				return false;
+			}
+		}
+		return true;
+	}
 
-    public List<CmdArg> getAll(){ return cmdArgs; }
+	public List<CmdArg> getAll(){ return cmdArgs; }
 
-    /**
-     * Returns the number of elements within this container
-     * @return size
-     */
-    public int size(){
-        return cmdArgs.size();
-    }
+	/**
+	 * Returns the number of elements within this container
+	 *
+	 * @return size
+	 */
+	public int size(){
+		return cmdArgs.size();
+	}
+
 }

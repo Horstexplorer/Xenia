@@ -34,29 +34,31 @@ import java.util.List;
 
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.TAG_NAME_DEF;
 
-public class HYBRIDTag extends HybridCommand {
+public class HYBRIDTag extends HybridCommand{
 
-    public HYBRIDTag() {
-        super(null,"tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
-               null,
-                null,
-                new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
-                List.of(TAG_NAME_DEF)
-        );
-        addChildCommand(new CMDCreate());
-        addChildCommand(new CMDModify());
-        addChildCommand(new CMDDelete());
-    }
+	public HYBRIDTag(){
+		super(null, "tag", false, new CommandCooldown(CommandCooldown.Type.User, 1000),
+			null,
+			null,
+			new HashSet<>(List.of(Role.Permissions.Bit.TAG_USE)),
+			List.of(TAG_NAME_DEF)
+		);
+		addChildCommand(new CMDCreate());
+		addChildCommand(new CMDModify());
+		addChildCommand(new CMDDelete());
+	}
 
-    @Override
-    public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
-        CmdArg<String> tagA = cmdArgs.getByIndex(0);
-        try{
-            Tag tag = tagCache.get(tagA.getValue());
-            commandEvent.getEvent().getChannel().sendMessage(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
-        }catch (DataException | CacheException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		CmdArg<String> tagA = cmdArgs.getByIndex(0);
+		try{
+			Tag tag = tagCache.get(tagA.getValue());
+			commandEvent.getEvent().getChannel().sendMessage(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
+		}
+		catch(DataException | CacheException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
+		}
+	}
+
 }

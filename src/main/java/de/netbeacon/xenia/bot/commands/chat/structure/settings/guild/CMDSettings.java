@@ -33,33 +33,36 @@ import java.util.List;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.GUILD_SETTINGS_SETTING_DEF;
 import static de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDefStatics.GUILD_SETTINGS_SETTING_MODE_DEF;
 
-public class CMDSettings extends Command {
+public class CMDSettings extends Command{
 
-    public CMDSettings() {
-        super("settings", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
-                null,
-                new HashSet<>(List.of(Permission.MANAGE_SERVER)),
-                new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
-                List.of(GUILD_SETTINGS_SETTING_DEF, GUILD_SETTINGS_SETTING_MODE_DEF)
-        );
-    }
+	public CMDSettings(){
+		super("settings", false, new CommandCooldown(CommandCooldown.Type.Guild, 2000),
+			null,
+			new HashSet<>(List.of(Permission.MANAGE_SERVER)),
+			new HashSet<>(List.of(Role.Permissions.Bit.GUILD_SETTINGS_OVERRIDE)),
+			List.of(GUILD_SETTINGS_SETTING_DEF, GUILD_SETTINGS_SETTING_MODE_DEF)
+		);
+	}
 
-    @Override
-    public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception {
-        CmdArg<String> settingA = args.getByIndex(0);
-        CmdArg<Boolean> mode = args.getByIndex(1);
-        try{
-            Guild.GuildSettings.Settings setting = Guild.GuildSettings.Settings.valueOf(settingA.getValue().toUpperCase());
-            Guild.GuildSettings guildSettings = new Guild.GuildSettings(commandEvent.getBackendDataPack().getbGuild().getSettings().getValue());
-            if(mode.getValue()){
-                guildSettings.set(setting);
-            }else{
-                guildSettings.unset(setting);
-            }
-            commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
-            commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
-        }catch (IllegalArgumentException e){
-            commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
-        }
-    }
+	@Override
+	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
+		CmdArg<String> settingA = args.getByIndex(0);
+		CmdArg<Boolean> mode = args.getByIndex(1);
+		try{
+			Guild.GuildSettings.Settings setting = Guild.GuildSettings.Settings.valueOf(settingA.getValue().toUpperCase());
+			Guild.GuildSettings guildSettings = new Guild.GuildSettings(commandEvent.getBackendDataPack().getbGuild().getSettings().getValue());
+			if(mode.getValue()){
+				guildSettings.set(setting);
+			}
+			else{
+				guildSettings.unset(setting);
+			}
+			commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
+			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+		}
+		catch(IllegalArgumentException e){
+			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Guild.GuildSettings.Settings.values())))).queue();
+		}
+	}
+
 }
