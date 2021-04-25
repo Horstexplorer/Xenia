@@ -259,6 +259,7 @@ public class Guild extends APIDataObject{
 
 		public enum Settings implements IntBit{
 
+			BOT_IGNORE_ADMIN_PERMS(4),
 			DISABLE_COMMAND_AUTO_CORRECT_MESSAGE(3),
 			COMMAND_AUTO_CORRECT(2),
 			ENFORCE_LANGUAGE(1),

@@ -41,7 +41,7 @@ public abstract class AdminCommand extends Command{
 	}
 
 	@Override
-	public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean v){
+	public MessageEmbed onMissingMemberPerms(CommandEvent commandEvent, TranslationPackage translationPackage, boolean v){
 		return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
 			.setColor(Color.RED)
 			.appendDescription("You are not allowed to do this")
@@ -50,26 +50,30 @@ public abstract class AdminCommand extends Command{
 
 	@Override
 	public void execute(List<String> args, CommandEvent commandEvent){
+		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
+		var member = commandEvent.getEvent().getMember();
+		var textChannel = commandEvent.getEvent().getChannel();
+
 		TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
 		if(translationPackage == null){
-			commandEvent.getEvent().getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+			textChannel.sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
 			return;
 		}
 		// check required args
 		CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
 		if(!cmdArgs.verify()){
 			// missing args
-			commandEvent.getEvent().getChannel().sendMessage(onMissingArgs(translationPackage)).queue();
-			return;
-		}
-		if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(getBotPermissions())){
-			// bot does not have the required permissions
-			commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
+			textChannel.sendMessage(onMissingArgs(translationPackage)).queue();
 			return;
 		}
 		if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
 			// invalid permission
-			commandEvent.getEvent().getChannel().sendMessage(onMissingMemberPerms(translationPackage, false)).queue();
+			textChannel.sendMessage(onMissingMemberPerms(commandEvent, translationPackage, false)).queue();
+			return;
+		}
+		if(!selfMember.hasPermission(getBotPermissions())){
+			// bot does not have the required permissions
+			textChannel.sendMessage(onMissingBotPerms(commandEvent, translationPackage)).queue();
 			return;
 		}
 		// everything alright
@@ -77,7 +81,7 @@ public abstract class AdminCommand extends Command{
 			onExecution(cmdArgs, commandEvent, translationPackage);
 		}
 		catch(Exception e){
-			commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+			textChannel.sendMessage(onUnhandledException(translationPackage, e)).queue();
 		}
 	}
 

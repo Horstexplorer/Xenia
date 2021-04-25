@@ -27,6 +27,8 @@
       "default.onMissingNSFW.title": "Failed: Command requires NSFW channel",
       "default.onMissingNSFW.description": "NSFW commands cannot be used in non NSFW channels",
       "default.onMissingNSFW.hidden": "Some NSFW commands were hidden due to execution in a non NSFW channel",
+      "default.onAdminPerms.title": "Warning: Bot has administrator permissions",
+      "default.onAdminPerms.description": "I seem to have administrator privileges. This is strongly discouraged due to it being a security risk. Please only assign me the permissions necessary to do my work.\n\nIf the permission has been assigned by accident please remove it from me / the roles assigned to me.\nIf this intentional disable this message by changing my BOT_IGNORE_ADMIN_PERMS setting.",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Displays a list of commands",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Help / Commands**",
@@ -555,6 +557,8 @@
       "default.onMissingNSFW.title": "Faiwed: command wequiwes nsfw channew",
       "default.onMissingNSFW.description": "Nsfw commands cannot be used in non nsfw channews",
       "default.onMissingNSFW.hidden": "Some nsfw commands wewe hidden due to execution in a non nsfw channew",
+      "default.onAdminPerms.title": "Wawning: bot has administwatow pewmissions",
+      "default.onAdminPerms.description": "I seem to have administwatow pwiviweges. This is stwongwy discouwaged due to it being a secuwity wisk. Pwease onwy assign me the pewmissions necessawy to do my wowk.\n \nIf the pewmission has been assigned by accident pwease wemove it fwom me / the wowes assigned to me.\nIf this intentionaw disabwe this message by changing my BOT_IGNORE_ADMIN_PERMS setting.",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Dispways a wist of commands",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Hewp / Commands**",
@@ -1081,6 +1085,8 @@
       "default.onMissingNSFW.title": "Fehlgeschlagen: Befehl erfordert NSFW-Kanal",
       "default.onMissingNSFW.description": "NSFW-Befehle können nicht in nicht NSFW-Kanälen verwendet werden",
       "default.onMissingNSFW.hidden": "Einige NSFW-Befehle wurden aufgrund der Ausführung in einem nicht NSFW-Kanal ausgeblendet",
+      "default.onAdminPerms.title": "Warnung: Bot hat Administrator-Rechte",
+      "default.onAdminPerms.description": "Ich scheine Administratorrechte zu haben. Hiervon wird dringend abgeraten, da es ein Sicherheitsrisiko darstellt. Bitte weisen Sie mir nur die Berechtigungen zu, die für meine Arbeit notwendig sind.\n\nWenn die Berechtigung versehentlich zugewiesen wurde, entfernen Sie sie bitte von mir / den mir zugewiesenen Rollen.\nWenn dies beabsichtigt ist, deaktivieren Sie diese Meldung, indem Sie meine BOT_IGNORE_ADMIN_PERMS Einstellung ändern.\n\n",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Zeigt eine Liste von Befehlen an",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Hilfe / Befehle**",
@@ -1609,6 +1615,8 @@
       "default.onMissingNSFW.title": "Échec : La commande nécessite un canal NSFW",
       "default.onMissingNSFW.description": "Les commandes NSFW ne peuvent pas être utilisées dans les canaux non NSFW.",
       "default.onMissingNSFW.hidden": "Certaines commandes NSFW ont été cachées en raison de leur exécution dans un canal non NSFW.",
+      "default.onAdminPerms.title": "Avertissement : Le robot a des droits d'administrateur",
+      "default.onAdminPerms.description": "Il semble que j'aie des privilèges d'administrateur. Ceci est fortement déconseillé car il s'agit d'un risque pour la sécurité. Veuillez ne m'attribuer que les autorisations nécessaires pour faire mon travail.\n\nSi l'autorisation a été attribuée par accident, veuillez la retirer à moi / aux rôles qui me sont attribués.\nSi cela est intentionnel, désactivez ce message en modifiant mon paramètre BOT_IGNORE_ADMIN_PERMS.",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Affiche une liste de commandes",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Aide / Commandes**",
@@ -2137,6 +2145,8 @@
       "default.onMissingNSFW.title": "Fallido: El comando requiere un canal NSFW",
       "default.onMissingNSFW.description": "Los comandos NSFW no pueden utilizarse en canales no NSFW",
       "default.onMissingNSFW.hidden": "Algunos comandos NSFW fueron ocultados debido a la ejecución en un canal no NSFW",
+      "default.onAdminPerms.title": "Advertencia: El bot tiene permisos de administrador",
+      "default.onAdminPerms.description": "Parece que tengo privilegios de administrador. Se desaconseja encarecidamente esto por ser un riesgo para la seguridad. Por favor, asignadme sólo los permisos necesarios para realizar mi trabajo.\n\nSi el permiso ha sido asignado por accidente por favor elimínelo de mí / los roles asignados a mí.\nSi esto es intencional desactive este mensaje cambiando mi configuración BOT_IGNORE_ADMIN_PERMS.",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "Muestra una lista de comandos",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**Ayuda / Comandos**",
@@ -2666,6 +2676,8 @@
       "default.onMissingNSFW.title": "失敗しました。コマンドにNSFWチャンネルが必要",
       "default.onMissingNSFW.description": "NSFWのコマンドはNSFWでないチャンネルでは使用できません。",
       "default.onMissingNSFW.hidden": "NSFWではないチャンネルで実行されたため、NSFWコマンドの一部が非表示になりました。",
+      "default.onAdminPerms.title": "警告 ボットが管理者権限を持っている",
+      "default.onAdminPerms.description": "私は管理者権限を持っているようです。これはセキュリティ上のリスクがあるため、強くお勧めできません。私の仕事に必要な権限のみを割り当ててください。\n\n誤ってパーミッションが割り当てられた場合は、私や私に割り当てられたロールからパーミッションを削除してください。\nこのような意図がある場合は、私のBOT_IGNORE_ADMIN_PERMSの設定を変更して、このメッセージを無効にしてください。",
 
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.description": "コマンドの一覧を表示します。",
       "de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp.response.title": "**ヘルプ / コマンド**",

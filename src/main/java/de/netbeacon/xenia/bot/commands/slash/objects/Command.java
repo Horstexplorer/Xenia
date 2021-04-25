@@ -18,7 +18,6 @@ package de.netbeacon.xenia.bot.commands.slash.objects;
 
 import de.netbeacon.utils.statistics.AverageCounter;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
@@ -42,6 +41,7 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class Command{
 
@@ -203,33 +203,39 @@ public abstract class Command{
 	 * @param commandEvent CommandEvent
 	 */
 	public void execute(List<String> args, CommandEvent commandEvent){
+		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
+		var author = commandEvent.getEvent().getUser();
+		var member = commandEvent.getEvent().getMember();
+		var bMember = commandEvent.getBackendDataPack().getbMember();
+		var textChannel = commandEvent.getEvent().getTextChannel();
+		var guild = commandEvent.getEvent().getGuild();
+		var bGuild = commandEvent.getBackendDataPack().getbGuild();
+
 		if(!isCommandGroup()){
 			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
 			if(translationPackage == null){
 				commandEvent.getEvent().reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
 				return;
 			}
-			long guildId = commandEvent.getEvent().getGuild().getIdLong(); // should not throw as we check for this before in the listener
-			long authorId = commandEvent.getEvent().getUser().getIdLong();
 			// check bot permissions
-			if(!commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), getBotPermissions())){
+			if(!selfMember.hasPermission(commandEvent.getEvent().getTextChannel(), getBotPermissions())){
 				// bot does not have the required permissions
-				if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), Permission.MESSAGE_WRITE)){
-					if(commandEvent.getEvent().getGuild().getSelfMember().hasPermission(commandEvent.getEvent().getTextChannel(), Permission.MESSAGE_EMBED_LINKS)){
-						commandEvent.getEvent().getChannel().sendMessage(onMissingBotPerms(translationPackage)).queue();
+				if(selfMember.hasPermission(textChannel, Permission.MESSAGE_WRITE)){
+					if(selfMember.hasPermission(textChannel, Permission.MESSAGE_EMBED_LINKS)){
+						commandEvent.getEvent().reply(onMissingBotPerms(commandEvent, translationPackage)).queue();
 					}
 					else{
-						commandEvent.getEvent().getChannel().sendMessage(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray())).queue();
+						commandEvent.getEvent().reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray())).queue();
 					}
 				}
 				return;
 			}
+			if(selfMember.hasPermission(Permission.ADMINISTRATOR) && !bGuild.getSettings().has(Guild.GuildSettings.Settings.BOT_IGNORE_ADMIN_PERMS)){
+				commandEvent.getEvent().getTextChannel().sendMessage(onAdminPerms(translationPackage)).mentionRepliedUser(false).queue(); // cant use reply here
+			}
 			// check user permissions
-			Guild bGuild = commandEvent.getBackendDataPack().getbGuild();
-			Member bMember = commandEvent.getBackendDataPack().getbMember();
-			net.dv8tion.jda.api.entities.Member member = commandEvent.getEvent().getMember();
 			if(
-				!(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == authorId)
+				!(bMember.metaIsOwner() || XeniaCore.getInstance().getOwnerID() == author.getIdLong())
 					&&
 					(
 						(bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE) && (member == null || bMember.getRoles().stream()//e
@@ -240,19 +246,19 @@ public abstract class Command{
 					)
 			){
 				// invalid permission
-				commandEvent.getEvent().reply(onMissingMemberPerms(translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
+				commandEvent.getEvent().reply(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
 				return;
 			}
 			// check cooldown
 			if(commandCooldown != null){
 				// process cd
-				if(!commandCooldown.allow(guildId, authorId)){
+				if(!commandCooldown.allow(guild.getIdLong(), author.getIdLong())){
 					// cd running
 					commandEvent.getEvent().reply(onCooldownActive(translationPackage)).queue();
 					return;
 				}
 				// activate cd
-				commandCooldown.deny(guildId, authorId);
+				commandCooldown.deny(guild.getIdLong(), author.getIdLong());
 			}
 			// check arguments
 			CmdArgs cmdArgs;
@@ -264,7 +270,7 @@ public abstract class Command{
 				return;
 			}
 			// check nsfw
-			if(!commandEvent.getEvent().getTextChannel().isNSFW() && isNSFW()){
+			if(!textChannel.isNSFW() && isNSFW()){
 				commandEvent.getEvent().reply(onMissingNSFW(translationPackage)).queue();
 				return;
 			}
@@ -309,11 +315,30 @@ public abstract class Command{
 	 *
 	 * @return MessageEmbed
 	 */
-	public MessageEmbed onMissingBotPerms(TranslationPackage translationPackage){
-		return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"))
+	public MessageEmbed onMissingBotPerms(CommandEvent commandEvent, TranslationPackage translationPackage){
+		var selfMember = commandEvent.getEvent().getGuild().getSelfMember(); // should not throw as we do not handle events out of a guild
+		var textChannel = commandEvent.getEvent().getTextChannel();
+
+		StringBuilder stringBuilder = new StringBuilder();
+		for(Permission permission : botPermissions.stream().sorted(Comparator.comparingInt(Permission::getOffset)).collect(Collectors.toList())){
+			stringBuilder.append(selfMember.hasPermission(textChannel, permission) ? "\uD83D\uDFE2" : "\uD83D\uDD34").append(" ").append(permission).append("\n");
+		}
+		var embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingBotPerms.title"))
 			.setColor(Color.RED)
 			.appendDescription(translationPackage.getTranslation("default.onMissingBotPerms.description"))
-			.addField(translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn"), Arrays.toString(botPermissions.toArray()), false)
+			.addField(translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn"), stringBuilder.toString(), false);
+		return embedBuilder.build();
+	}
+
+	/**
+	 * Returns an message embed if the bot notices itself having admin perms
+	 *
+	 * @return MessageEmbed
+	 */
+	public MessageEmbed onAdminPerms(TranslationPackage translationPackage){
+		return EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onAdminPerms.title"))
+			.setColor(Color.ORANGE)
+			.appendDescription(translationPackage.getTranslation("default.onAdminPerms.description"))
 			.build();
 	}
 
@@ -324,15 +349,26 @@ public abstract class Command{
 	 *
 	 * @return MessageEmbed
 	 */
-	public MessageEmbed onMissingMemberPerms(TranslationPackage translationPackage, boolean vPerms){
+	public MessageEmbed onMissingMemberPerms(CommandEvent commandEvent, TranslationPackage translationPackage, boolean vPerms){
+		var member = commandEvent.getEvent().getMember();
+		var gMember = commandEvent.getBackendDataPack().getbMember();
+		var textChannel = commandEvent.getEvent().getTextChannel();
+
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))
 			.setColor(Color.RED)
 			.appendDescription(translationPackage.getTranslation("default.onMissingMemberPerms.description"));
+		StringBuilder stringBuilder = new StringBuilder();
 		if(vPerms){
-			embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberSecondaryPermissions.toArray()), false);
+			for(var permission : memberSecondaryPermissions.stream().sorted(Comparator.comparingInt(Role.Permissions.Bit::getPos)).collect(Collectors.toList())){
+				stringBuilder.append(gMember.hasPermission(permission) ? "\uD83D\uDFE2" : "\uD83D\uDD34").append(" ").append(permission).append("\n");
+			}
+			embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), stringBuilder.toString(), false);
 		}
 		else{
-			embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), Arrays.toString(memberPrimaryPermissions.toArray()), false);
+			for(Permission permission : memberPrimaryPermissions.stream().sorted(Comparator.comparingInt(Permission::getOffset)).collect(Collectors.toList())){
+				stringBuilder.append(member == null ? "\uD83D\uDFE1" : member.hasPermission(textChannel, permission) ? "\uD83D\uDFE2" : "\uD83D\uDD34").append(" ").append(permission).append("\n");
+			}
+			embedBuilder.addField(translationPackage.getTranslation("default.onMissingMemberPerms.requiredPerms.fn"), stringBuilder.toString(), false);
 		}
 		return embedBuilder.build();
 	}

@@ -117,6 +117,16 @@ public class Member extends APIDataObject{
 		return roles;
 	}
 
+	public boolean hasPermission(Role.Permissions.Bit... bits){
+		boolean hasAll = false;
+		for(Role role : getRoles()){
+			if(role.getPermissions().hasAllPermission(bits)){
+				hasAll = true;
+			}
+		}
+		return hasAll;
+	}
+
 	@Override
 	public JSONObject asJSON() throws JSONSerializationException{
 		return new JSONObject()
