@@ -87,14 +87,18 @@ public class SlashCommandListener extends ListenerAdapter{
 	@Override
 	public void onGuildReady(@NotNull GuildReadyEvent event){
 		// update guild specific commands
-		event.getGuild()
-			.updateCommands()
-			.addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
-			.queue(s -> {
-				logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong());
-			}, f -> {
-				logger.warn("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
-			});
+		try{
+			event.getGuild()
+				.updateCommands()
+				.addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
+				.queue(s -> {
+					logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong());
+				}, f -> {
+					logger.warn("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
+				});
+		}catch(Exception ignore){
+
+		}
 	}
 
 	@Override
