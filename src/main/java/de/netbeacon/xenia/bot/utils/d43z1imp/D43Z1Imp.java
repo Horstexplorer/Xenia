@@ -19,9 +19,16 @@ package de.netbeacon.xenia.bot.utils.d43z1imp;
 import de.netbeacon.d43z.one.eval.Eval;
 import de.netbeacon.d43z.one.objects.base.CombinedContextPool;
 import de.netbeacon.d43z.one.objects.base.ContextPool;
+import de.netbeacon.d43z.one.objects.bp.IContentprovider;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
+import de.netbeacon.d43z.one.taskmaster.TaskMaster;
 import de.netbeacon.utils.shutdownhook.IShutdown;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.Anime_Blush;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.Anime_Cry;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.Anime_Hug;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.Anime_Kiss;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,6 +50,9 @@ import java.util.concurrent.locks.ReentrantLock;
 public class D43Z1Imp implements IShutdown{
 
 	private static D43Z1Imp instance;
+
+	private final TaskMaster<IContentprovider> contentTaskMaster = new TaskMaster<>("Content TaskManager");
+	private final DefaultEvalTask defaultEvalTask = new DefaultEvalTask();
 
 	private final IContextPool contextPoolMaster;
 	private final List<IContextPool> contextPools = new LinkedList<>();
@@ -67,6 +77,9 @@ public class D43Z1Imp implements IShutdown{
 	}
 
 	private D43Z1Imp() throws IOException{
+		/*
+			SETUP EVAL
+		 */
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("d43z1.index.json");
 		if(inputStream == null){
 			throw new RuntimeException("Missing D43Z1 Index");
@@ -103,6 +116,24 @@ public class D43Z1Imp implements IShutdown{
 				}
 			}
 		}, 1, 1, TimeUnit.MINUTES);
+		/*
+		SETUP TASKS
+		 */
+		contentTaskMaster.addTasks(
+			// ANIME
+			new Anime_Blush(1000),
+			new Anime_Hug(1001),
+			new Anime_Kiss(1002),
+			new Anime_Cry(1003)
+		);
+	}
+
+	public TaskMaster<IContentprovider> getTaskMaster(){
+		return contentTaskMaster;
+	}
+
+	public DefaultEvalTask getDefaultEvalTask(){
+		return defaultEvalTask;
 	}
 
 	public Eval getEval(){

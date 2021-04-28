@@ -1,15 +1,12 @@
 plugins {
     id'java'
     id'application'
-    id'com.github.johnrengelman.shadow' version '6.1.0'
+    id'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 group 'de.netbeacon'
-
 mainClassName = 'de.netbeacon.xenia.bot.core.Init'
-
-sourceCompatibility = 11
-
+sourceCompatibility = 16
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
@@ -67,7 +64,7 @@ dependencies {
 
     // clients
     implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.3' // purrbot api wrapper
-    implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.0' // d43z1
+    implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.2' // d43z1
 }
 
 processResources {

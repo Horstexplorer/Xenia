@@ -20,6 +20,7 @@ import de.netbeacon.d43z.one.eval.io.EvalRequest;
 import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
+import de.netbeacon.utils.tuples.Pair;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.*;
@@ -30,6 +31,8 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.Translatio
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
+import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
@@ -85,16 +88,7 @@ public class MessageHandler{
 		if(!msg.startsWith(bGuild.getPrefix())){
 			if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW() && !event.getAuthor().isBot()){ // bot messages should be logged in some cases but we do not want to process em
 				try{
-					D43Z1Imp d43Z1Imp = D43Z1Imp.getInstance();
-					ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-					IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
-					EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
-						evalResult -> {
-							if(evalResult.ok()){
-								event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
-							}
-						}, SharedExecutor.getInstance().getScheduledExecutor());
-					d43Z1Imp.getEval().enqueue(evalRequest);
+					D43Z1_EXECUTE(event, backendDataPack);
 				}
 				catch(Exception e){
 					logger.warn("An exception occurred while handing message over to D43Z1 ", e);
@@ -217,6 +211,42 @@ public class MessageHandler{
 			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
 			.build()
 		).queue(s -> {}, e -> {});
+	}
+
+	public void D43Z1_EXECUTE(GuildMessageReceivedEvent event, CommandEvent.BackendDataPack backendDataPack) throws Exception{
+		var bGuild = backendDataPack.getbGuild();
+		var d43Z1Imp = D43Z1Imp.getInstance();
+
+		var taskMaster = d43Z1Imp.getTaskMaster();
+		var content = new Content(event.getMessage().getContentRaw());
+		var taskResult = taskMaster.getTaskOrDefault(content, 0.7F, d43Z1Imp.getDefaultEvalTask());
+
+		if(taskResult.getValue1() instanceof DefaultEvalTask){
+			ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
+			IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
+				evalResult -> {
+					if(evalResult.ok()){
+						event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
+					}
+				}, SharedExecutor.getInstance().getScheduledExecutor());
+			((DefaultEvalTask) taskResult.getValue1()).execute(content, new Pair<>(d43Z1Imp.getEval(), evalRequest));
+		}
+		else if(taskResult.getValue1() instanceof AnimeTask){
+			((AnimeTask) taskResult.getValue1()).execute(content, new Pair<>(event.getMember(), event.getChannel()));
+		}
+		else{
+			// ??? -> Fallback for when bad things happen
+			ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
+			IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
+				evalResult -> {
+					if(evalResult.ok()){
+						event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
+					}
+				}, SharedExecutor.getInstance().getScheduledExecutor());
+			d43Z1Imp.getEval().enqueue(evalRequest);
+		}
 	}
 
 }
