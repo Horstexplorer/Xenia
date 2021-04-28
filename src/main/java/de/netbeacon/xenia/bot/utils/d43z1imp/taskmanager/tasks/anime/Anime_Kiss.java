@@ -16,6 +16,8 @@
 
 package de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime;
 
+import de.netbeacon.d43z.one.algo.LiamusPattern;
+import de.netbeacon.d43z.one.objects.imp.trigger.LPTrigger;
 import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -27,7 +29,8 @@ public class Anime_Kiss extends AnimeTask{
 
 	public Anime_Kiss(int pos){
 		super(pos, "send when xenia is supposed to kiss", List.of(
-
+				new LPTrigger("kiss_me", LiamusPattern.compile("\0 kiss me \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("<3", LiamusPattern.compile("\0 <3 \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();

@@ -16,6 +16,8 @@
 
 package de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime;
 
+import de.netbeacon.d43z.one.algo.LiamusPattern;
+import de.netbeacon.d43z.one.objects.imp.trigger.LPTrigger;
 import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
@@ -27,7 +29,9 @@ public class Anime_Hug extends AnimeTask{
 
 	public Anime_Hug(int pos){
 		super(pos, "send when xenia is supposed to hug", List.of(
-
+				new LPTrigger("please_hug", LiamusPattern.compile("\0 please \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("give_hug", LiamusPattern.compile("\0 give \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("need_hug", LiamusPattern.compile("\0 need \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();
