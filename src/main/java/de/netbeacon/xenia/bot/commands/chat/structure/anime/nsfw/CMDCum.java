@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDCum extends AnimeImageCommand{
 
 	public CMDCum(){
-		super("cum", false, true, ImageType.NSFW.CUM, ContentType.GIF);
+		super("cum", false, true, ImageType.NSFW.CUM, ContentType.RANDOM);
 	}
 
 }

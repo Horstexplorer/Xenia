@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDBlush extends AnimeImageCommand{
 
 	public CMDBlush(){
-		super("blush", "Blushes because of somebody", true, false, ImageType.SFW.BLUSH, ContentType.GIF);
+		super("blush", "Blushes because of somebody", true, false, ImageType.SFW.BLUSH, ContentType.RANDOM);
 	}
 
 }

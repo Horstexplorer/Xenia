@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDRandom extends AnimeImageCommand{
 
 	public CMDRandom(){
-		super("randomx", false, true, ImageType.NSFW.RANDOM, ContentType.AVAILABLE);
+		super("randomx", false, true, ImageType.NSFW.RANDOM, ContentType.RANDOM);
 	}
 
 }

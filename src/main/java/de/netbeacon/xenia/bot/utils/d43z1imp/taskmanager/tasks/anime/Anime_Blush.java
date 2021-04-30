@@ -35,7 +35,7 @@ public class Anime_Blush extends AnimeTask{
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
-				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.BLUSH, ContentType.GIF)
+				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.BLUSH, ContentType.RANDOM)
 					.async(url -> {
 						textChannel.sendMessage(
 							EmbedBuilderFactory.getDefaultEmbed("Xenia blushes").setImage(url).build()

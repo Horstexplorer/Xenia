@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDDance extends AnimeImageCommand{
 
 	public CMDDance(){
-		super("dance", false, false, ImageType.SFW.DANCE, ContentType.GIF);
+		super("dance", false, false, ImageType.SFW.DANCE, ContentType.RANDOM);
 	}
 
 }

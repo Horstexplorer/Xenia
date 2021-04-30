@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDKitsune extends AnimeImageCommand{
 
 	public CMDKitsune(){
-		super("kitsune", false, false, ImageType.SFW.KITSUNE, ContentType.IMAGE);
+		super("kitsune", false, false, ImageType.SFW.KITSUNE, ContentType.RANDOM);
 	}
 
 }

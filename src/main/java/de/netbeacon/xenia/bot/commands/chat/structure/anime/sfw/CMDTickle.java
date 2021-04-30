@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDTickle extends AnimeImageCommand{
 
 	public CMDTickle(){
-		super("tickle", true, false, ImageType.SFW.TICKLE, ContentType.GIF);
+		super("tickle", true, false, ImageType.SFW.TICKLE, ContentType.RANDOM);
 	}
 
 }

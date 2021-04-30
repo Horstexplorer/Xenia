@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDPussylick extends AnimeImageCommand{
 
 	public CMDPussylick(){
-		super("pussylick", "-NSFW content-", false, true, ImageType.NSFW.PUSSYLICK, ContentType.GIF);
+		super("pussylick", "-NSFW content-", false, true, ImageType.NSFW.PUSSYLICK, ContentType.RANDOM);
 	}
 
 }

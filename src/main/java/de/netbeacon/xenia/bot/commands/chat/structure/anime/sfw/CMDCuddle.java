@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDCuddle extends AnimeImageCommand{
 
 	public CMDCuddle(){
-		super("cuddle", true, false, ImageType.SFW.CUDDLE, ContentType.GIF);
+		super("cuddle", true, false, ImageType.SFW.CUDDLE, ContentType.RANDOM);
 	}
 
 }

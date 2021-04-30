@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDSmile extends AnimeImageCommand{
 
 	public CMDSmile(){
-		super("smile", "Smile at someone", true, false, ImageType.SFW.SMILE, ContentType.GIF);
+		super("smile", "Smile at someone", true, false, ImageType.SFW.SMILE, ContentType.RANDOM);
 	}
 
 }

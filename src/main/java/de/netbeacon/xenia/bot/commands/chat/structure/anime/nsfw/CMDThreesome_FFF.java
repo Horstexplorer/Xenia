@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDThreesome_FFF extends AnimeImageCommand{
 
 	public CMDThreesome_FFF(){
-		super("threesome_fff", false, true, ImageType.NSFW.THREESOME_FFF, ContentType.GIF);
+		super("threesome_fff", false, true, ImageType.NSFW.THREESOME_FFF, ContentType.RANDOM);
 	}
 
 }

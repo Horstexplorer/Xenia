@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDBite extends AnimeImageCommand{
 
 	public CMDBite(){
-		super("bite", true, false, ImageType.SFW.BITE, ContentType.GIF);
+		super("bite", true, false, ImageType.SFW.BITE, ContentType.RANDOM);
 	}
 
 }

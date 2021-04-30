@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDYuri extends AnimeImageCommand{
 
 	public CMDYuri(){
-		super("yuri", false, true, ImageType.NSFW.YURI, ContentType.GIF);
+		super("yuri", false, true, ImageType.NSFW.YURI, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDHolo extends AnimeImageCommand{
 
 	public CMDHolo(){
-		super("holo", false, false, ImageType.SFW.HOLO, ContentType.IMAGE);
+		super("holo", false, false, ImageType.SFW.HOLO, ContentType.RANDOM);
 	}
 
 }

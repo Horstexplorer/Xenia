@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDFuck extends AnimeImageCommand{
 
 	public CMDFuck(){
-		super("fuck", false, true, ImageType.NSFW.FUCK, ContentType.GIF);
+		super("fuck", false, true, ImageType.NSFW.FUCK, ContentType.RANDOM);
 	}
 
 }

@@ -36,7 +36,7 @@ public class Anime_Hug extends AnimeTask{
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
-				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.HUG, ContentType.GIF)
+				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.HUG, ContentType.RANDOM)
 					.async(url -> {
 						textChannel.sendMessage(
 							EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()

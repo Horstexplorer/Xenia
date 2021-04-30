@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDSenko extends AnimeImageCommand{
 
 	public CMDSenko(){
-		super("senko", false, false, ImageType.SFW.SENKO, ContentType.IMAGE);
+		super("senko", false, false, ImageType.SFW.SENKO, ContentType.RANDOM);
 	}
 
 }

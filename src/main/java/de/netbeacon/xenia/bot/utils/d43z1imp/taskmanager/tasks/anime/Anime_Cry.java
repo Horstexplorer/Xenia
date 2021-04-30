@@ -36,7 +36,7 @@ public class Anime_Cry extends AnimeTask{
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
-				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.CRY, ContentType.GIF)
+				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.CRY, ContentType.RANDOM)
 					.async(url -> {
 						textChannel.sendMessage(
 							EmbedBuilderFactory.getDefaultEmbed(":c").setImage(url).build()

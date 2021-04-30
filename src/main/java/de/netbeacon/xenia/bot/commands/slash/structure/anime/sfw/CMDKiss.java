@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDKiss extends AnimeImageCommand{
 
 	public CMDKiss(){
-		super("kiss", "Kiss someone", true, false, ImageType.SFW.KISS, ContentType.GIF);
+		super("kiss", "Kiss someone", true, false, ImageType.SFW.KISS, ContentType.RANDOM);
 	}
 
 }

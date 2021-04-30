@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDYuri extends AnimeImageCommand{
 
 	public CMDYuri(){
-		super("yuri", "-NSFW content-", false, true, ImageType.NSFW.YURI, ContentType.GIF);
+		super("yuri", "-NSFW content-", false, true, ImageType.NSFW.YURI, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDNeko extends AnimeImageCommand{
 
 	public CMDNeko(){
-		super("nekox", false, true, ImageType.NSFW.NEKO, ContentType.GIF);
+		super("nekox", false, true, ImageType.NSFW.NEKO, ContentType.RANDOM);
 	}
 
 }

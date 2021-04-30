@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDFluff extends AnimeImageCommand{
 
 	public CMDFluff(){
-		super("fluff", false, false, ImageType.SFW.FLUFF, ContentType.GIF);
+		super("fluff", false, false, ImageType.SFW.FLUFF, ContentType.RANDOM);
 	}
 
 }

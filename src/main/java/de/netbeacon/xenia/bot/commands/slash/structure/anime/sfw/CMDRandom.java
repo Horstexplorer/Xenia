@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDRandom extends AnimeImageCommand{
 
 	public CMDRandom(){
-		super("random", "Random image", false, false, ImageType.SFW.RANDOM, ContentType.AVAILABLE);
+		super("random", "Random image", false, false, ImageType.SFW.RANDOM, ContentType.RANDOM);
 	}
 
 }

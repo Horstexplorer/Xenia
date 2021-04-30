@@ -35,7 +35,7 @@ public class Anime_Kiss extends AnimeTask{
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
-				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.KISS, ContentType.GIF)
+				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.KISS, ContentType.RANDOM)
 					.async(url -> {
 						textChannel.sendMessage(
 							EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
