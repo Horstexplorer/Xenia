@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDPoke extends AnimeImageCommand{
 
 	public CMDPoke(){
-		super("poke", true, false, ImageType.SFW.POKE, ContentType.GIF);
+		super("poke", true, false, ImageType.SFW.POKE, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDFeed extends AnimeImageCommand{
 
 	public CMDFeed(){
-		super("feed", true, false, ImageType.SFW.FEED, ContentType.GIF);
+		super("feed", true, false, ImageType.SFW.FEED, ContentType.RANDOM);
 	}
 
 }

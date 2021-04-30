@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDNeko extends AnimeImageCommand{
 
 	public CMDNeko(){
-		super("neko", "-NSFW content-", false, true, ImageType.NSFW.NEKO, ContentType.GIF);
+		super("neko", "-NSFW content-", false, true, ImageType.NSFW.NEKO, ContentType.RANDOM);
 	}
 
 }

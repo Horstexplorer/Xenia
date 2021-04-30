@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDSlap extends AnimeImageCommand{
 
 	public CMDSlap(){
-		super("slap", true, false, ImageType.SFW.SLAP, ContentType.GIF);
+		super("slap", true, false, ImageType.SFW.SLAP, ContentType.RANDOM);
 	}
 
 }

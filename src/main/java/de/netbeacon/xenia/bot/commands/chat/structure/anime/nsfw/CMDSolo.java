@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDSolo extends AnimeImageCommand{
 
 	public CMDSolo(){
-		super("solo", false, true, ImageType.NSFW.SOLO, ContentType.GIF);
+		super("solo", false, true, ImageType.NSFW.SOLO, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDYaoi extends AnimeImageCommand{
 
 	public CMDYaoi(){
-		super("yaoi", false, true, ImageType.NSFW.YAOI, ContentType.GIF);
+		super("yaoi", false, true, ImageType.NSFW.YAOI, ContentType.RANDOM);
 	}
 
 }

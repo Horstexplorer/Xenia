@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDFeed extends AnimeImageCommand{
 
 	public CMDFeed(){
-		super("feed", "Feed someone", true, false, ImageType.SFW.FEED, ContentType.GIF);
+		super("feed", "Feed someone", true, false, ImageType.SFW.FEED, ContentType.RANDOM);
 	}
 
 }

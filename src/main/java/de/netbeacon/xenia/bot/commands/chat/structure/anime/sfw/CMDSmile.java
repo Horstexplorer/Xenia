@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDSmile extends AnimeImageCommand{
 
 	public CMDSmile(){
-		super("smile", true, false, ImageType.SFW.SMILE, ContentType.GIF);
+		super("smile", true, false, ImageType.SFW.SMILE, ContentType.RANDOM);
 	}
 
 }

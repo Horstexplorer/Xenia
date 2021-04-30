@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDYaoi extends AnimeImageCommand{
 
 	public CMDYaoi(){
-		super("yaoi", "-NSFW content-", false, true, ImageType.NSFW.YAOI, ContentType.GIF);
+		super("yaoi", "-NSFW content-", false, true, ImageType.NSFW.YAOI, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDBlowjob extends AnimeImageCommand{
 
 	public CMDBlowjob(){
-		super("blowjob", false, true, ImageType.NSFW.BLOWJOB, ContentType.GIF);
+		super("blowjob", false, true, ImageType.NSFW.BLOWJOB, ContentType.RANDOM);
 	}
 
 }

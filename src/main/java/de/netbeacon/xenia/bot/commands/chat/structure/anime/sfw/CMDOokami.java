@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDOokami extends AnimeImageCommand{
 
 	public CMDOokami(){
-		super("ookami", false, false, ImageType.SFW.OOKAMI, ContentType.IMAGE);
+		super("ookami", false, false, ImageType.SFW.OOKAMI, ContentType.RANDOM);
 	}
 
 }

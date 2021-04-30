@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDLick extends AnimeImageCommand{
 
 	public CMDLick(){
-		super("lick", true, false, ImageType.SFW.LICK, ContentType.GIF);
+		super("lick", true, false, ImageType.SFW.LICK, ContentType.RANDOM);
 	}
 
 }

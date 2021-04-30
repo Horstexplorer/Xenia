@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDAnal extends AnimeImageCommand{
 
 	public CMDAnal(){
-		super("anal", false, true, ImageType.NSFW.ANAL, ContentType.GIF);
+		super("anal", false, true, ImageType.NSFW.ANAL, ContentType.RANDOM);
 	}
 
 }

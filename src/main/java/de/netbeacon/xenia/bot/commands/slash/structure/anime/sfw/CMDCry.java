@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.anime.AnimeImageCommand;
 public class CMDCry extends AnimeImageCommand{
 
 	public CMDCry(){
-		super("cry", "Cry about someone", true, false, ImageType.SFW.CRY, ContentType.GIF);
+		super("cry", "Cry about someone", true, false, ImageType.SFW.CRY, ContentType.RANDOM);
 	}
 
 }

@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDTail extends AnimeImageCommand{
 
 	public CMDTail(){
-		super("tail", false, false, ImageType.SFW.TAIL, ContentType.GIF);
+		super("tail", false, false, ImageType.SFW.TAIL, ContentType.RANDOM);
 	}
 
 }

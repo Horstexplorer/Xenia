@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.anime.AnimeImageCommand;
 public class CMDHug extends AnimeImageCommand{
 
 	public CMDHug(){
-		super("hug", true, false, ImageType.SFW.HUG, ContentType.GIF);
+		super("hug", true, false, ImageType.SFW.HUG, ContentType.RANDOM);
 	}
 
 }
