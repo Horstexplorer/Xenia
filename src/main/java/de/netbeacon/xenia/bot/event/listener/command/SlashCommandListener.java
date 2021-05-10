@@ -94,19 +94,20 @@ public class SlashCommandListener extends ListenerAdapter{
 				.queue(s -> {
 					logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong());
 				}, f -> {
-					logger.warn("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
+					logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
 				});
 		}catch(Exception ignore){
-
+			logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong());
 		}
 	}
 
 	@Override
 	public void onSlashCommand(@NotNull SlashCommandEvent event){
-		if(eventWaiter.waitingOnThis(event)){
+		if(event.getUser().isBot() || eventWaiter.waitingOnThis(event)){
 			return;
 		}
-		if(event.getGuild() == null || event.getUser().isBot()){ // listen for events from guilds only
+		if(event.getGuild() == null){ // listen for events from guilds only
+			event.reply("\u274C").setEphemeral(true).queue();
 			return;
 		}
 		slashCommandHandler.handle(event);
