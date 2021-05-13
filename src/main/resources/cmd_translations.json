@@ -58,6 +58,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "Author",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "Old Message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "Restores the last message which has been edited in this channel",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "No message found to restore",
@@ -65,6 +66,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "Author",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "Restore deleted or edited messages",
 
@@ -402,12 +404,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Author",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Old Message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No message found to restore",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Restored edited message",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Author",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification created (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Failed to create notification! Perhaps the cache is full?",
@@ -588,6 +592,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "Authow",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "Owd message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "Westowes the wast message which has bewn edited in thiws channew",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "No message found tuwu westowe",
@@ -595,6 +600,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "Author",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "Old Message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "Westowe deweted ow edited messages",
 
@@ -931,12 +937,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Authow",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Owd message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "Attachments",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No message found tuwu westowe",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Westowed edited message",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Authow",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Owd message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "Attachment",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification cweated (id: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?",
@@ -1116,6 +1124,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "NachrichtenId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "Alte Nachricht",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "Anhänge",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "Stellt die letzte Nachricht wieder her, die in diesem Kanal bearbeitet wurde",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
@@ -1123,6 +1132,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "NachrichtenId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "Alte Nachricht",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "Anhänge",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "Gelöschte oder bearbeitete Nachrichten wiederherstellen",
 
@@ -1461,12 +1471,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Nachrichten Id",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Alte Nachricht",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "Anhänge",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "Keine Nachricht zum Wiederherstellen gefunden",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Bearbeitete Nachricht wiederhergestellt",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Nachrichten Id",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Alte Nachricht",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "Anhänge",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Benachrichtigung erstellt (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "Benachrichtigung konnte nicht erstellt werden! Vielleicht ist der Cache voll?",
@@ -1646,6 +1658,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "Auteur",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "Ancien message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "Annexes",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "Restaure le dernier message qui a été édité dans ce canal",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "Aucun message trouvé pour restaurer",
@@ -1653,6 +1666,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "MessageId",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "Auteur",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "Ancien message",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "Annexes",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "Restaurer les messages supprimés ou modifiés",
 
@@ -1991,12 +2005,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Id du message",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Auteur",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Ancien message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "Annexes",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "Aucun message trouvé à restaurer",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Restauration d'un message supprimé",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Id du message",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Auteur",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Ancien message",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "Annexes",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notification créée (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "La notification n'a pas été créée ! Le cache est peut-être plein ?",
@@ -2176,6 +2192,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "ID de mensaje",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "Mensaje antiguo",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "Adjuntos",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "Restaura el último mensaje que se ha editado en este canal",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "No se encontró ningún mensaje para restaurar",
@@ -2183,6 +2200,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "ID de mensaje",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "Mensaje antiguo",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "Adjuntos",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "Restaurar mensajes eliminados o editados",
 
@@ -2522,12 +2540,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "Id. del mensaje",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "Mensaje antiguo",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "Old Message",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "No se ha encontrado ningún mensaje para restaurar",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "Mensaje borrado restaurado",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "Id. del mensaje",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "Autor",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "Mensaje antiguo",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "Old Message",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "Notificación creada  (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "No se ha podido crear la notificación. ¿Quizá la caché está llena?",
@@ -2707,6 +2727,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.1.title": "メッセージID",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.2.title": "著者",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.3.title": "古いメッセージ",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDDeleted.response.success.field.4.title": "アタッチメント",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.description": "このチャンネルで編集された最後のメッセージを復元します。",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.error.msg": "復元するためのメッセージが見つかりませんでした。",
@@ -2714,6 +2735,7 @@
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.1.title": "メッセージID",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.2.title": "著者",
       "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.3.title": "古いメッセージ",
+      "de.netbeacon.xenia.bot.commands.chat.structure.last.CMDEdited.response.success.field.4.title": "アタッチメント",
 
       "de.netbeacon.xenia.bot.commands.chat.structure.last.GROUPLast.description": "削除または編集されたメッセージを復元する",
 
@@ -3053,12 +3075,14 @@
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.1.title": "メッセージID",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.2.title": "著者",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.3.title": "古いメッセージ",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDDeleted.response.success.field.4.title": "アタッチメント",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.error.msg": "復元するメッセージが見つからない",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.title": "編集したメッセージの復元",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.1.title": "メッセージID",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.2.title": "著者",
       "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.3.title": "古いメッセージ",
+      "de.netbeacon.xenia.bot.commands.slash.structure.last.CMDEdited.response.success.field.4.title": "アタッチメント",
 
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.success.msg": "通知の作成 (ID: %0% | %1%)",
       "de.netbeacon.xenia.bot.commands.slash.structure.notification.CMDCreate.response.error.msg": "通知の作成に失敗しました。キャッシュがいっぱいになっているのでは？",

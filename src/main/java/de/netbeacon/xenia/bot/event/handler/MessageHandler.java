@@ -107,7 +107,7 @@ public class MessageHandler{
 					.create(
 						message.getIdLong(),
 						message.getTimeCreated().toInstant().toEpochMilli(),
-						message.getIdLong(),
+						message.getAuthor().getIdLong(),
 						message.getContentRaw(),
 						message.getAttachments().stream().map(net.dv8tion.jda.api.entities.Message.Attachment::getUrl).collect(Collectors.toList()),
 						true
