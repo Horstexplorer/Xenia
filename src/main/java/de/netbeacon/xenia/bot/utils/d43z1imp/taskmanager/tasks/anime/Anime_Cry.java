@@ -29,9 +29,9 @@ public class Anime_Cry extends AnimeTask{
 
 	public Anime_Cry(int pos){
 		super(pos, "send when xenia is supposed to cry", List.of(
-				new LPTrigger("i_hate_you", LiamusPattern.compile("\0 I \0 hate \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-				new LPTrigger("i_dont_like_you", LiamusPattern.compile("\0 I dont like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-				new LPTrigger("dont_be_sad", LiamusPattern.compile("\0 Dont be sad you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
+			new LPTrigger("i_hate_you", LiamusPattern.compile("\0 I \0 hate \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+			new LPTrigger("i_dont_like_you", LiamusPattern.compile("\0 I dont like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+			new LPTrigger("dont_be_sad", LiamusPattern.compile("\0 Dont be sad you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();

@@ -56,7 +56,7 @@ public class CMDDeleted extends Command{
 			StringBuilder attachments = new StringBuilder();
 			List<String> attachmentUrls = bMessage.getAttachmentUrls();
 			for(int i = 0; i < attachmentUrls.size(); i++){
-				attachments.append("[Attachment").append(i != 0 ? "_"+i : "").append("](").append(attachmentUrls.get(i)).append(")").append(" ");
+				attachments.append("[Attachment").append(i != 0 ? "_" + i : "").append("](").append(attachmentUrls.get(i)).append(")").append(" ");
 			}
 			commandEvent.getEvent().reply(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"))
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)

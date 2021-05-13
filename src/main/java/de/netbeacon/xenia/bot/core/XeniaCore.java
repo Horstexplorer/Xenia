@@ -34,10 +34,8 @@ import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.misc.listener.GuildLanguageListener;
-import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListener;
-import de.netbeacon.xenia.bot.utils.misc.listener.NotificationListenerInserter;
-import de.netbeacon.xenia.bot.utils.misc.listener.UserLanguageListener;
+import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
+import de.netbeacon.xenia.bot.utils.misc.listener.*;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
@@ -117,6 +115,7 @@ public class XeniaCore{
 		SharedOkHttpClient.getInstance(true);
 		TranslationManager translationManager = TranslationManager.getInstance(true);
 		PurrBotAPIWrapper.getInstance(true);
+		LevelPointManager levelPointManager = new LevelPointManager();
 		// d43z1
 		logger.info("Preparing D43Z1...");
 		D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
@@ -128,7 +127,13 @@ public class XeniaCore{
 		D43Z1ContextPoolManager contextPoolManager = new D43Z1ContextPoolManager(d43z1);
 		logger.info("D43Z1 loaded with " + atomicLong.get() + " lines on master");
 		// drop in event listeners
-		xeniaBackendClient.getGuildCache().addEventListeners(new GuildLanguageListener(translationManager), new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance())), contextPoolManager.getListener()); // insert notification listener on its own
+		xeniaBackendClient.getGuildCache()
+			.addEventListeners(
+				new GuildLanguageListener(translationManager),
+				new NotificationListenerInserter(new NotificationListener(TaskManager.getInstance())),
+				contextPoolManager.getListener(),
+				new LevelPointManagerListener(levelPointManager)
+			); // insert notification listener on its own
 		xeniaBackendClient.getUserCache().addEventListeners(new UserLanguageListener(translationManager));
 		// set up event manager
 		logger.info("Preparing Event Manager (Provider)...");
@@ -144,8 +149,8 @@ public class XeniaCore{
 			.addEventListeners(
 				new StatusListener(),
 				new GuildAccessListener(xeniaBackendClient),
-				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
-				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager),
+				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager, levelPointManager),
+				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager, levelPointManager),
 				new GuildReactionListener(eventWaiter),
 				paginatorManager.getListener()
 			);
