@@ -35,6 +35,7 @@ import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.Permission;
@@ -60,15 +61,17 @@ public class MessageHandler{
 	private final EventWaiter eventWaiter;
 	private final XeniaBackendClient backendClient;
 	private final PaginatorManager paginatorManager;
+	private final LevelPointManager levelPointManager;
 	private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 	private final D43Z1ContextPoolManager contextPoolManager;
 
-	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
+	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.commandMap = commandMap;
 		this.eventWaiter = eventWaiter;
 		this.paginatorManager = paginatorManager;
 		this.backendClient = backendClient;
 		this.contextPoolManager = contextPoolManager;
+		this.levelPointManager = levelPointManager;
 	}
 
 	public void processNew(GuildMessageReceivedEvent event){ // ! note ! events from the bot itself get passed through
@@ -84,6 +87,8 @@ public class MessageHandler{
 		if(bChannel.getAccessMode().has(Channel.AccessMode.Mode.DISABLED)){
 			return;
 		}
+		// feed for leveling
+		levelPointManager.feed(bMember);
 		// get the message & check prefix
 		String msg = event.getMessage().getContentRaw();
 		if(!msg.startsWith(bGuild.getPrefix())){

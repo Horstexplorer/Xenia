@@ -27,6 +27,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
 import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
@@ -45,7 +46,7 @@ public class SlashCommandListener extends ListenerAdapter{
 	private final SlashCommandHandler slashCommandHandler;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
+	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.eventWaiter = eventWaiter;
 
 		HashMap<String, Command> globalCommandMap = new HashMap<>();
@@ -65,7 +66,7 @@ public class SlashCommandListener extends ListenerAdapter{
 
 
 		// // // // // // // // // //
-		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
+		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager, levelPointManager);
 	}
 
 	@Override
@@ -96,7 +97,8 @@ public class SlashCommandListener extends ListenerAdapter{
 				}, f -> {
 					logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
 				});
-		}catch(Exception ignore){
+		}
+		catch(Exception ignore){
 			logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong());
 		}
 	}

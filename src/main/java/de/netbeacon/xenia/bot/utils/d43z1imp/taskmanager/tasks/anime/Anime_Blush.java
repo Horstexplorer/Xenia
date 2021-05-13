@@ -29,8 +29,8 @@ public class Anime_Blush extends AnimeTask{
 
 	public Anime_Blush(int pos){
 		super(pos, "send when xenia is supposed to blush", List.of(
-				new LPTrigger("I_like_you", LiamusPattern.compile("\0 I like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-				new LPTrigger("Like_you", LiamusPattern.compile("\0 like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
+			new LPTrigger("I_like_you", LiamusPattern.compile("\0 I like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+			new LPTrigger("Like_you", LiamusPattern.compile("\0 like \0 you \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();

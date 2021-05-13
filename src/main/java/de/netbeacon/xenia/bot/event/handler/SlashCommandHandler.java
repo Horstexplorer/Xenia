@@ -22,6 +22,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
@@ -40,14 +41,16 @@ public class SlashCommandHandler{
 	private final XeniaBackendClient backendClient;
 	private final PaginatorManager paginatorManager;
 	private final D43Z1ContextPoolManager contextPoolManager;
+	private final LevelPointManager levelPointManager;
 
-	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager){
+	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.globalCommandMap = globalCommandMap;
 		this.guildCommandMap = new ConcurrentHashMap<>(guildCommandMap);
 		this.eventWaiter = eventWaiter;
 		this.paginatorManager = paginatorManager;
 		this.backendClient = backendClient;
 		this.contextPoolManager = contextPoolManager;
+		this.levelPointManager = levelPointManager;
 	}
 
 	public List<CommandUpdateAction.CommandData> getGlobalCommandData(){
@@ -73,6 +76,8 @@ public class SlashCommandHandler{
 		if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)){
 			return;
 		}
+		// feed for leveling
+		levelPointManager.feed(bMember);
 		// split to list
 		ArrayList<String> args = new ArrayList<>();
 		args.add(event.getName());

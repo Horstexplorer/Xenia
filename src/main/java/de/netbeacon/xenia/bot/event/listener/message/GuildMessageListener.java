@@ -32,6 +32,7 @@ import de.netbeacon.xenia.bot.commands.chat.structure.twitch.HYBRIDTwitch;
 import de.netbeacon.xenia.bot.event.handler.MessageHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
@@ -48,7 +49,7 @@ public class GuildMessageListener extends ListenerAdapter{
 	private final EventWaiter eventWaiter;
 	private final MessageHandler commandHandler;
 
-	public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager){
+	public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.eventWaiter = eventWaiter;
 
 		HashMap<String, Command> commandMap = new HashMap<>();
@@ -69,7 +70,7 @@ public class GuildMessageListener extends ListenerAdapter{
 		register.accept(new CMDHastebin());
 		register.accept(new CMDInfo());
 
-		commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager);
+		commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager, levelPointManager);
 	}
 
 	@Override
