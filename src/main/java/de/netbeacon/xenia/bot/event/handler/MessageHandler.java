@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPattern;
 
@@ -101,7 +102,16 @@ public class MessageHandler{
 					return;
 				}
 				// log the message
-				bChannel.getMessageCache().create(event.getMessage().getIdLong(), event.getMessage().getTimeCreated().toInstant().toEpochMilli(), event.getAuthor().getIdLong(), event.getMessage().getContentRaw(), true);
+				var message = event.getMessage();
+				bChannel.getMessageCache()
+					.create(
+						message.getIdLong(),
+						message.getTimeCreated().toInstant().toEpochMilli(),
+						message.getIdLong(),
+						message.getContentRaw(),
+						message.getAttachments().stream().map(net.dv8tion.jda.api.entities.Message.Attachment::getUrl).collect(Collectors.toList()),
+						true
+					);
 			}
 			return;
 		}
