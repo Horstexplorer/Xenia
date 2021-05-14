@@ -22,11 +22,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 import java.util.Random;
 
-import static de.netbeacon.xenia.bot.utils.level.LevelPointManager.FONT;
-
 public class LevelPointCard{
+
+	private static Font FONT;
 
 	private static final int CARD_BORDER = 20;
 	private static final int CARD_WIDTH = 1440;
@@ -50,6 +51,14 @@ public class LevelPointCard{
 
 	private ByteArrayOutputStream baos;
 
+	static {
+		try{
+			FONT = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(LevelPointCard.class.getClassLoader().getResourceAsStream("fonts/ethnocentricrg.ttf")));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	public LevelPointCard(Member member){
 		String name = member.metaNickname();
 		long levelI = LevelPointManager.calculateLevel(member);
@@ -69,16 +78,16 @@ public class LevelPointCard{
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE, 25, name), new Color(210, 210, 210), name, CARD_BORDER, (int) FONT_SIZE + CARD_BORDER, Position.Left);
 			// draw ground
 			cardGraphics.setColor(new Color(20, 20, 20));
-			cardGraphics.fillRect(420, CARD_HEIGHT - 4 * CARD_BORDER,CARD_WIDTH - 420 - 2 * CARD_BORDER, 3 * CARD_BORDER);
+			cardGraphics.fillRoundRect(420, CARD_HEIGHT - 4 * CARD_BORDER,CARD_WIDTH - 420 - 2 * CARD_BORDER, 3 * CARD_BORDER, CARD_BORDER * 4, CARD_BORDER * 4);
 			// draw bar
 			int colorId = random.nextInt(COLORS.length);
-			drawProgressBar(cardGraphics, COLORS[colorId], min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 2 * CARD_BORDER, 3 * CARD_BORDER);
-			drawProgressBar(cardGraphics, COLORS[colorId].darker(), min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 5 * CARD_BORDER, 3 * CARD_BORDER);
-			drawProgressBar(cardGraphics, COLORS[colorId].darker().darker(), min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 15 * CARD_BORDER, 3 * CARD_BORDER);
+			drawProgressBar(cardGraphics, COLORS[colorId], min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 2 * CARD_BORDER, 3 * CARD_BORDER, CARD_BORDER * 4);
+			drawProgressBar(cardGraphics, COLORS[colorId].darker(), min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 5 * CARD_BORDER, 3 * CARD_BORDER, CARD_BORDER * 4);
+			drawProgressBar(cardGraphics, COLORS[colorId].darker().darker(), min, cur, max, 420, CARD_HEIGHT - 4 * CARD_BORDER, CARD_WIDTH - 420 - 15 * CARD_BORDER, 3 * CARD_BORDER, CARD_BORDER * 4);
 			// draw text on bar
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 3, 8, String.valueOf(min)), Color.GRAY, String.valueOf(min), 420, CARD_HEIGHT - 3 * CARD_BORDER - (int) FONT_SIZE / 2, Position.Left);
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2, 8, String.valueOf(cur)), Color.WHITE, String.valueOf(cur), CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - (int) FONT_SIZE / 3, Position.Center);
-			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2.5F, 8, level), Color.WHITE, level, CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - (int) FONT_SIZE / 1, Position.Center);
+			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2.5F, 8, level), Color.WHITE, level, CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - 7 * (int)FONT_SIZE / 6, Position.Center);
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 3, 8, String.valueOf(max)), Color.GRAY, String.valueOf(max), CARD_WIDTH - 2 * CARD_BORDER, CARD_HEIGHT - 3 * CARD_BORDER - (int) FONT_SIZE / 2, Position.Right);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -120,17 +129,17 @@ public class LevelPointCard{
 		}
 	}
 
-	private void drawProgressBar(Graphics2D graphics2D, Color bar, long min, long current, long max, int x, int y, int width, int height) {
+	private void drawProgressBar(Graphics2D graphics2D, Color bar, long min, long current, long max, int x, int y, int width, int height, int rad) {
 		int cwdth = (int) ((width / (float) (max - min)) * (float)(current - min));
 		graphics2D.setColor(bar);
-		graphics2D.fillRect(x, y + 0 * height / 8, cwdth - cwdth / 3, height / 8 + 1);
-		graphics2D.fillRect(x, y + 1 * height / 8, cwdth - cwdth / 7, height / 8 + 1);
-		graphics2D.fillRect(x, y + 2 * height / 8, cwdth - cwdth / 15, height / 8 + 1);
-		graphics2D.fillRect(x, y + 3 * height / 8, cwdth - cwdth / 5, height / 8 + 1);
-		graphics2D.fillRect(x, y + 4 * height / 8, cwdth - cwdth / 35, height / 8 + 1);
-		graphics2D.fillRect(x, y + 5 * height / 8, cwdth - 0, height / 8 + 1);
-		graphics2D.fillRect(x, y + 6 * height / 8, cwdth - cwdth / 5, height / 8 + 1);
-		graphics2D.fillRect(x, y + 7 * height / 8, cwdth - cwdth / 2, height / 8);
+		graphics2D.fillRect(x + rad/2, y + 0 * height / 8, cwdth - cwdth / 3 - rad/2, height / 8 + 1);
+		graphics2D.fillRect(x + rad/5, y + 1 * height / 8, cwdth - cwdth / 7 - rad/5, height / 8 + 1);
+		graphics2D.fillRect(x + rad/10, y + 2 * height / 8, cwdth - cwdth / 15 - rad/10, height / 8 + 1);
+		graphics2D.fillRect(x + rad/30, y + 3 * height / 8, cwdth - cwdth / 5 - rad/30, height / 8 + 1);
+		graphics2D.fillRect(x + rad/30, y + 4 * height / 8, cwdth - cwdth / 35 - rad/30, height / 8 + 1);
+		graphics2D.fillRect(x + rad/10, y + 5 * height / 8, cwdth - 0 - rad/10, height / 8 + 1);
+		graphics2D.fillRect(x + rad/5, y + 6 * height / 8, cwdth - cwdth / 5 - rad/5, height / 8 + 1);
+		graphics2D.fillRect(x + rad/2, y + 7 * height / 8, cwdth - cwdth / 2 - rad/2, height / 8);
 	}
 
 	public enum Position{
