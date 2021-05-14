@@ -62,8 +62,8 @@ public class LevelPointCard{
 	public LevelPointCard(Member member){
 		String name = member.metaNickname();
 		long levelI = LevelPointManager.calculateLevel(member);
-		long min = LevelPointManager.calculateLevelMax(levelI);
-		long max = LevelPointManager.calculateLevelMin(levelI);
+		long min = LevelPointManager.calculateLevelMin(levelI);
+		long max = LevelPointManager.calculateLevelMax(levelI);
 		long cur = member.getLevelPoints();
 		String level = "lvl "+levelI;
 		try{
