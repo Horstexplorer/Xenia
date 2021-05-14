@@ -21,6 +21,7 @@ import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.RCMDGAnime;
 import de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo;
 import de.netbeacon.xenia.bot.commands.slash.structure.last.RCMDGLast;
+import de.netbeacon.xenia.bot.commands.slash.structure.me.RCMDMe;
 import de.netbeacon.xenia.bot.commands.slash.structure.notification.RCMDGNotification;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
@@ -58,12 +59,12 @@ public class SlashCommandListener extends ListenerAdapter{
 		register.accept(new RCMDGLast());
 		register.accept(new RCMDGNotification());
 		register.accept(new RCMDGAnime());
+		register.accept(new RCMDMe());
 
 		// // // // // // // // // //
 		HashMap<String, Command> guildCommandMap = new HashMap<>();
 		register = command -> guildCommandMap.put(command.getAlias(), command);
 		// register up to 100 commands which can be guild specifically toggled
-
 
 		// // // // // // // // // //
 		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager, levelPointManager);

@@ -26,7 +26,8 @@ public class LevelPointManager{
 
 	private static final int POINTS_PER_MESSAGE = 1;
 	private static final int DELAY = 30000;
-	private static final Function<Long, Long> CALCULATE_LEVEL = ep -> (long) (ep / (float) (ep * 8) * Math.sqrt(ep));
+	private static final Function<Long, Long> CALCULATE_LEVEL = ep -> (long)(1/(float)(8) * Math.sqrt(ep));
+	private static final Function<Long, Long> CALCULATE_EP = level -> (long) 64 * (long) Math.pow(level, 2);
 
 	private final ConcurrentHashMap<Guild, ConcurrentHashMap<Member, Long>> accessMap = new ConcurrentHashMap<>();
 
@@ -91,6 +92,18 @@ public class LevelPointManager{
 
 	public static long calculateLevel(long levelPoints){
 		return CALCULATE_LEVEL.apply(levelPoints);
+	}
+
+	public static long calculateLevelMin(long level){
+		return CALCULATE_EP.apply(level-1);
+	}
+
+	public static long calculateLevelMax(long level){
+		return CALCULATE_EP.apply(level);
+	}
+
+	public static LevelPointCard getLevelPointCard(Member member){
+		return new LevelPointCard(member);
 	}
 
 }
