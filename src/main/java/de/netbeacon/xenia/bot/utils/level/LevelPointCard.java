@@ -20,8 +20,10 @@ import de.netbeacon.xenia.backend.client.objects.external.Member;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Random;
 
@@ -32,6 +34,7 @@ public class LevelPointCard{
 	private static final int CARD_BORDER = 20;
 	private static final int CARD_WIDTH = 1440;
 	private static final int CARD_HEIGHT = 360;
+	private static final int AVATAR_SIZE = 256;
 	private static final float FONT_SIZE = 60f;
 
 	public enum ColorSet {
@@ -44,7 +47,8 @@ public class LevelPointCard{
 		new Color(175,255, 20),
 		new Color(255, 20, 175),
 		new Color(20, 175, 225),
-		new Color(255, 127, 0)
+		new Color(255, 127, 0),
+		new Color(255, 20, 0)
 	};
 
 	static final Random random = new Random();
@@ -74,8 +78,10 @@ public class LevelPointCard{
 			cardGraphics.fillRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
 			// draw random background
 			drawBackground(cardGraphics, CARD_WIDTH, CARD_HEIGHT);
+			// draw avatar
+			drawAvatar(cardGraphics, member.getUser().getMetaIconUrl(), CARD_BORDER * 3, CARD_HEIGHT/2-AVATAR_SIZE/2, AVATAR_SIZE);
 			// draw name
-			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE, 25, name), new Color(210, 210, 210), name, CARD_BORDER, (int) FONT_SIZE + CARD_BORDER, Position.Left);
+			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE, 25, name), new Color(230, 230, 230), name, CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT/4+CARD_HEIGHT/8, Position.Center);
 			// draw ground
 			cardGraphics.setColor(new Color(20, 20, 20));
 			cardGraphics.fillRoundRect(420, CARD_HEIGHT - 4 * CARD_BORDER,CARD_WIDTH - 420 - 2 * CARD_BORDER, 3 * CARD_BORDER, CARD_BORDER * 4, CARD_BORDER * 4);
@@ -100,6 +106,34 @@ public class LevelPointCard{
 
 	public ByteArrayOutputStream getByteArrayOutputStream(){
 		return baos;
+	}
+
+	private void drawAvatar(Graphics2D graphics2D, String url,  int x, int y, int size){
+		try {
+			var avatar = ImageIO.read(new URL(url + "?size=" + size * 2));
+			var roundAvatar = new BufferedImage(size*2, size*2, BufferedImage.TYPE_INT_ARGB);
+			var roundAvatarG= roundAvatar.createGraphics();
+			roundAvatarG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			roundAvatarG.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			roundAvatarG.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+			roundAvatarG.fillArc(0, 0, size*2, size*2, 0, 360);
+			roundAvatarG.setClip(new Ellipse2D.Float(0, 0, size*2, size*2));
+			roundAvatarG.drawImage(avatar, 0,0, size*2, size*2, null);
+			roundAvatarG.dispose();
+			var downscaledAvatar = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+			var downscaledAvatarG = downscaledAvatar.createGraphics();
+			downscaledAvatarG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			downscaledAvatarG.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			downscaledAvatarG.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+			downscaledAvatarG.drawImage(roundAvatar, 0, 0, size, size, null);
+			downscaledAvatarG.dispose();
+			graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			graphics2D.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+			graphics2D.drawImage(downscaledAvatar, x, y, AVATAR_SIZE, AVATAR_SIZE, null);
+		}catch (Exception ignore){
+
+		}
 	}
 
 	private void drawBackground(Graphics2D graphics2D, int x2, int y2){
