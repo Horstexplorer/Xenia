@@ -50,7 +50,7 @@ public class LevelPointCard{
 
 	static {
 		try {
-			FONT = Font.createFont(Font.TRUETYPE_FONT, LevelPointCard.class.getResourceAsStream("/fonts/ethnocentric_rg.ttf"));
+			FONT = Font.createFont(Font.TRUETYPE_FONT, LevelPointCard.class.getClassLoader().getResourceAsStream("fonts/ethnocentric_rg.ttf"));
 		} catch (IOException | FontFormatException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +86,7 @@ public class LevelPointCard{
 			// draw text on bar
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 3, 8, String.valueOf(min)), Color.GRAY, String.valueOf(min), 420, CARD_HEIGHT - 3 * CARD_BORDER - (int) FONT_SIZE / 2, Position.Left);
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2, 8, String.valueOf(cur)), Color.WHITE, String.valueOf(cur), CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - (int) FONT_SIZE / 3, Position.Center);
-			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2.5F, 8, String.valueOf(level)), Color.WHITE, level, CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - (int) FONT_SIZE / 1, Position.Center);
+			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 2.5F, 8, level), Color.WHITE, level, CARD_WIDTH - 2 * CARD_BORDER - 490, CARD_HEIGHT - CARD_BORDER - (int) FONT_SIZE / 1, Position.Center);
 			drawText(cardGraphics, FONT, Font.BOLD, calculateFontSize(FONT_SIZE / 3, 8, String.valueOf(max)), Color.GRAY, String.valueOf(max), CARD_WIDTH - 2 * CARD_BORDER, CARD_HEIGHT - 3 * CARD_BORDER - (int) FONT_SIZE / 2, Position.Right);
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();

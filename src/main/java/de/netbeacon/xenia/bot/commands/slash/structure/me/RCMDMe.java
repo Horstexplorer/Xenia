@@ -38,8 +38,12 @@ public class RCMDMe extends Command{
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
 		commandEvent.getEvent().acknowledge(false).queue(
 			commandHook -> {
-				var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().getbMember()).getByteArrayOutputStream();
-				commandHook.editOriginal(baos.toByteArray(), "stats.png").queue();
+				try{
+					var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().getbMember()).getByteArrayOutputStream();
+					commandHook.editOriginal(baos.toByteArray(), "stats.png").queue();
+				}catch(Exception e){
+					commandHook.editOriginal("\u274C").queue();
+				}
 			}
 		);
 	}
