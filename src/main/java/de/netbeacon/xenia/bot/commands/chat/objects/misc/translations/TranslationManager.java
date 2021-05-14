@@ -39,7 +39,7 @@ public class TranslationManager{
 	private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
 
 	private TranslationManager() throws IOException{
-		String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("cmd_translations.json")), StandardCharsets.UTF_8);
+		String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translation/cmd_translations.json")), StandardCharsets.UTF_8);
 		JSONArray jsonArray = new JSONArray(fileContent);
 		for(int i = 0; i < jsonArray.length(); i++){
 			TranslationPackage translationPackage = new TranslationPackage(jsonArray.getJSONObject(i));
