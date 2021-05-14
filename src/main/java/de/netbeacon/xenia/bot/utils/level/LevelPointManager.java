@@ -19,6 +19,8 @@ package de.netbeacon.xenia.bot.utils.level;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 
+import java.awt.*;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
@@ -30,6 +32,17 @@ public class LevelPointManager{
 	private static final Function<Long, Long> CALCULATE_EP = level -> (long) 64 * (long) Math.pow(level, 2);
 
 	private final ConcurrentHashMap<Guild, ConcurrentHashMap<Member, Long>> accessMap = new ConcurrentHashMap<>();
+
+	public static Font FONT;
+
+	public LevelPointManager() {
+		try{
+			FONT = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("fonts/ethnocentric_rg.ttf")));
+		}catch(Exception e){
+			e.printStackTrace();
+			FONT = Font.getFont(Font.SERIF);
+		}
+	}
 
 	public void trackGuild(Guild guild){
 		accessMap.put(guild, new ConcurrentHashMap<>());

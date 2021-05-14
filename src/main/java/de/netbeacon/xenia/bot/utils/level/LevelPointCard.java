@@ -22,15 +22,15 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Random;
+
+import static de.netbeacon.xenia.bot.utils.level.LevelPointManager.FONT;
 
 public class LevelPointCard{
 
 	private static final int CARD_BORDER = 20;
 	private static final int CARD_WIDTH = 1440;
 	private static final int CARD_HEIGHT = 360;
-	static Font FONT;
 	private static final float FONT_SIZE = 60f;
 
 	public enum ColorSet {
@@ -47,14 +47,6 @@ public class LevelPointCard{
 	};
 
 	static final Random random = new Random();
-
-	static {
-		try {
-			FONT = Font.createFont(Font.TRUETYPE_FONT, LevelPointCard.class.getClassLoader().getResourceAsStream("fonts/ethnocentric_rg.ttf"));
-		} catch (IOException | FontFormatException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private ByteArrayOutputStream baos;
 
