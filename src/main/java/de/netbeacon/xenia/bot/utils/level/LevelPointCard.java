@@ -115,12 +115,13 @@ public class LevelPointCard{
 			graphics2D.setColor(COLORS[color].darker());
 			for(int ii = 0; ii < 2; ii++){
 				graphics2D.setColor(graphics2D.getColor().darker());
-				for(int iii = 0; iii < 10; iii++){
+				int width = 10;
+				for(int iii = 0; iii < width; iii++){
 					graphics2D.drawLine(
-						p ? 0 : xa+iii*ii,
-						p ? ya+iii*ii : 0,
-						q ? x2 : xb-iii*ii+1,
-						q ? yb-iii*ii+1 : y2
+						p ? 0 : xa+iii+width*ii,
+						p ? ya+iii+width+width*ii : 0,
+						q ? x2 : xb-iii+width*ii,
+						q ? yb-iii+width*ii : y2
 					);
 				}
 			}
