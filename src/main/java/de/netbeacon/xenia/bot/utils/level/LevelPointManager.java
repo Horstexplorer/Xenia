@@ -95,11 +95,11 @@ public class LevelPointManager{
 	}
 
 	public static long calculateLevelMin(long level){
-		return CALCULATE_EP.apply(level-1);
+		return CALCULATE_EP.apply(level);
 	}
 
 	public static long calculateLevelMax(long level){
-		return CALCULATE_EP.apply(level);
+		return CALCULATE_EP.apply(level + 1);
 	}
 
 	public static LevelPointCard getLevelPointCard(Member member){
