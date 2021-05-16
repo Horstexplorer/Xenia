@@ -56,7 +56,7 @@ public class CMDD43Z1Stats extends AdminCommand{
 		float getAVGEvalTime = eval.getEvalTimeAVGNs() / (float) 1000000;
 
 		ArrayList<Page> pages = new ArrayList<>();
-		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 1")
+		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats")
 			.addField("ContextPoolMaster", master.getUUID().toString(), false)
 			.addField("Contexts in master", String.valueOf(contexts.size()), true)
 			.addField("Shards in master", String.valueOf(shards.size()), true)
@@ -67,7 +67,7 @@ public class CMDD43Z1Stats extends AdminCommand{
 			.addField("AVG Queue Duration", getAVGQueueDuration + "ms", true)
 			.addField("AVG Eval Duration", getAVGEvalTime + "ms", true)
 			.build()));
-		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats 2")
+		pages.add(new Page(EmbedBuilderFactory.getDefaultEmbed("D43Z1 Stats")
 			.addField("CONTENT_SHARD_SIZE", String.valueOf(CONTENT_SHARD_SIZE.get()), true)
 			.addField("BUFFER_MAX_SIZE", String.valueOf(BUFFER_MAX_SIZE.get()), true)
 			.addField("EVAL_ENABLE_BUFFER_BONUS_POLICY", String.valueOf(EVAL_ENABLE_BUFFER_BONUS_POLICY.get()), true)
