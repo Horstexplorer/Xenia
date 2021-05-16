@@ -261,7 +261,7 @@ public class MessageHandler{
 			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
 				evalResult -> {
 					if(evalResult.ok()){
-						event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
+						event.getMessage().reply(evalResult.getContentMatch().getEstimatedOutput().getContent()).mentionRepliedUser(false).queue();
 					}
 				}, SharedExecutor.getInstance().getScheduledExecutor());
 			d43Z1Imp.getEval().enqueue(evalRequest);
