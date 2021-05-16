@@ -237,15 +237,19 @@ public class MessageHandler{
 		var taskResult = taskMaster.getTaskOrDefault(content, 0.7F, d43Z1Imp.getDefaultEvalTask());
 
 		if(taskResult.getValue1() instanceof DefaultEvalTask){
-			ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-			IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
-			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
-				evalResult -> {
-					if(evalResult.ok()){
-						event.getChannel().sendMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).queue();
-					}
-				}, SharedExecutor.getInstance().getScheduledExecutor());
-			((DefaultEvalTask) taskResult.getValue1()).execute(content, new Pair<>(d43Z1Imp.getEval(), evalRequest));
+			// send thinking...
+			event.getMessage().reply("thinking ...").mentionRepliedUser(false).queue( thinking -> {
+				// process
+				ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
+				IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+				EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
+					evalResult -> {
+						if(evalResult.ok()){
+							thinking.editMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).mentionRepliedUser(false).queue();
+						}
+					}, SharedExecutor.getInstance().getScheduledExecutor());
+				((DefaultEvalTask) taskResult.getValue1()).execute(content, new Pair<>(d43Z1Imp.getEval(), evalRequest));
+			});
 		}
 		else if(taskResult.getValue1() instanceof AnimeTask){
 			((AnimeTask) taskResult.getValue1()).execute(content, new Pair<>(event.getMember(), event.getChannel()));
