@@ -55,11 +55,11 @@ public class CMDCreate extends Command{
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{
 			Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
-			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
+			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
 		}
 		catch(DataException | CacheException ex){
 			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw ex;

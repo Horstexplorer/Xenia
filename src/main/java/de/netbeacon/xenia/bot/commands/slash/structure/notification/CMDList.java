@@ -60,7 +60,7 @@ public class CMDList extends Command{
 		}
 		MessageEmbed messageEmbed = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"))
 			.setDescription(stringBuilder.substring(0, Math.min(stringBuilder.toString().length(), 2000))).build();
-		commandEvent.getEvent().reply(messageEmbed).queue();
+		commandEvent.getEvent().replyEmbeds(messageEmbed).queue();
 	}
 
 }

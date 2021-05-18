@@ -59,12 +59,12 @@ public class CMDModify extends Command{
 				throw new RuntimeException("User Does Not Own This Tag");
 			}
 			tag.setTagContent(contentArg.getValue());
-			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
+			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
 			;
 		}
 		catch(DataException | CacheException e){
 			if(e instanceof DataException && ((DataException) e).getCode() == 404){
-				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw e;

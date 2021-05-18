@@ -25,7 +25,7 @@ import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,11 +53,11 @@ public class SlashCommandHandler{
 		this.levelPointManager = levelPointManager;
 	}
 
-	public List<CommandUpdateAction.CommandData> getGlobalCommandData(){
+	public List<CommandData> getGlobalCommandData(){
 		return globalCommandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList());
 	}
 
-	public List<CommandUpdateAction.CommandData> getGuildCommandData(long guildId){ // currently unused
+	public List<CommandData> getGuildCommandData(long guildId){ // currently unused
 		return guildCommandMap.values().stream().map(Command::getCommandData).collect(Collectors.toList());
 	}
 

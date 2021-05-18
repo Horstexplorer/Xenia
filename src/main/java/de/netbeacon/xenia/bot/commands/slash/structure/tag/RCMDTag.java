@@ -57,7 +57,7 @@ public class RCMDTag extends Command{
 			commandEvent.getEvent().reply(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
 		}
 		catch(DataException | CacheException e){
-			commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
+			commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", nameArg.getValue()))).queue();
 		}
 	}
 

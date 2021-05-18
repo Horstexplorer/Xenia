@@ -66,7 +66,7 @@ public class CMDModify extends Command{
 		}
 		catch(DataException | CacheException ex){
 			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw ex;

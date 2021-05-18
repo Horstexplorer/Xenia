@@ -53,11 +53,11 @@ public class CMDCreate extends Command{
 		CmdArg<String> contentArg = cmdArgs.getByName("content");
 		try{
 			tagCache.createNew(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
-			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
+			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
 		}
 		catch(CacheException e){
 			if(e.getType().equals(CacheException.Type.ALREADY_EXISTS)){
-				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw e;

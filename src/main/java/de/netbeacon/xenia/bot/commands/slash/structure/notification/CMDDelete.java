@@ -53,11 +53,11 @@ public class CMDDelete extends Command{
 				throw new RuntimeException("User Does Not Own This Notification");
 			}
 			commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
-			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
+			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
 		}
 		catch(DataException | CacheException ex){
 			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-				commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw ex;
