@@ -34,7 +34,9 @@ import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.requests.restaction.CommandUpdateAction;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandGroupData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +49,9 @@ public abstract class Command{
 
 	private final String alias;
 	private final HashMap<String, Command> childCommands = new HashMap<>();
-	private final CommandUpdateAction.CommandData commandData;
-	private final CommandUpdateAction.SubcommandData subcommandData;
-	private final CommandUpdateAction.SubcommandGroupData subcommandGroupData;
+	private final CommandData commandData;
+	private final SubcommandData subcommandData;
+	private final SubcommandGroupData subcommandGroupData;
 	private final List<CmdArgDef> options = new ArrayList<>();
 	private CommandCooldown commandCooldown;
 	private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
@@ -73,8 +75,8 @@ public abstract class Command{
 	 */
 	public Command(String alias, String description, boolean isNSFW, CommandCooldown commandCooldown, HashSet<Permission> botPermissions, HashSet<Permission> memberPrimaryPermissions, HashSet<Role.Permissions.Bit> memberSecondaryPermission, List<CmdArgDef> options){
 		this.alias = alias;
-		this.commandData = new CommandUpdateAction.CommandData(alias, description);
-		this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
+		this.commandData = new CommandData(alias, description);
+		this.subcommandData = new SubcommandData(alias, description);
 		this.isNSFW = isNSFW;
 		this.subcommandGroupData = null;
 		this.commandCooldown = commandCooldown;
@@ -106,9 +108,9 @@ public abstract class Command{
 	 */
 	public Command(String alias, String description, boolean isNSFW, Command... subCommands){
 		this.alias = alias;
-		this.commandData = new CommandUpdateAction.CommandData(alias, description);
+		this.commandData = new CommandData(alias, description);
 		this.subcommandData = null;
-		this.subcommandGroupData = new CommandUpdateAction.SubcommandGroupData(alias, description);
+		this.subcommandGroupData = new SubcommandGroupData(alias, description);
 		this.isNSFW = isNSFW;
 		for(Command command : subCommands){
 			if(command == null){
@@ -129,8 +131,8 @@ public abstract class Command{
 	 */
 	public Command(String alias, String description, boolean isNSFW, boolean areGroups, Command... subCommands){
 		this.alias = alias;
-		this.commandData = new CommandUpdateAction.CommandData(alias, description);
-		this.subcommandData = new CommandUpdateAction.SubcommandData(alias, description);
+		this.commandData = new CommandData(alias, description);
+		this.subcommandData = new SubcommandData(alias, description);
 		this.isNSFW = isNSFW;
 		this.subcommandGroupData = null;
 		for(Command command : subCommands){
@@ -188,11 +190,11 @@ public abstract class Command{
 
 	public Command getChildCommand(String alias){ return childCommands.get(alias); }
 
-	public CommandUpdateAction.CommandData getCommandData(){ return commandData; }
+	public CommandData getCommandData(){ return commandData; }
 
-	public CommandUpdateAction.SubcommandData getSubCommandData(){ return subcommandData; }
+	public SubcommandData getSubCommandData(){ return subcommandData; }
 
-	public CommandUpdateAction.SubcommandGroupData getSubcommandGroupData(){ return subcommandGroupData; }
+	public SubcommandGroupData getSubcommandGroupData(){ return subcommandGroupData; }
 
 	public List<CmdArgDef> getOptions(){ return options; }
 
@@ -222,7 +224,7 @@ public abstract class Command{
 				// bot does not have the required permissions
 				if(selfMember.hasPermission(textChannel, Permission.MESSAGE_WRITE)){
 					if(selfMember.hasPermission(textChannel, Permission.MESSAGE_EMBED_LINKS)){
-						commandEvent.getEvent().reply(onMissingBotPerms(commandEvent, translationPackage)).queue();
+						commandEvent.getEvent().replyEmbeds(onMissingBotPerms(commandEvent, translationPackage)).queue();
 					}
 					else{
 						commandEvent.getEvent().reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray())).queue();
@@ -246,7 +248,7 @@ public abstract class Command{
 					)
 			){
 				// invalid permission
-				commandEvent.getEvent().reply(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
+				commandEvent.getEvent().replyEmbeds(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
 				return;
 			}
 			// check cooldown
@@ -254,7 +256,7 @@ public abstract class Command{
 				// process cd
 				if(!commandCooldown.allow(guild.getIdLong(), author.getIdLong())){
 					// cd running
-					commandEvent.getEvent().reply(onCooldownActive(translationPackage)).queue();
+					commandEvent.getEvent().replyEmbeds(onCooldownActive(translationPackage)).queue();
 					return;
 				}
 				// activate cd
@@ -266,12 +268,12 @@ public abstract class Command{
 				cmdArgs = CmdArgFactory.getArgs((s) -> commandEvent.getEvent().getOption(s), options);
 			}
 			catch(CmdArgFactory.Exception e){
-				commandEvent.getEvent().reply(onBadOptions(translationPackage)).queue();
+				commandEvent.getEvent().replyEmbeds(onBadOptions(translationPackage)).queue();
 				return;
 			}
 			// check nsfw
 			if(!textChannel.isNSFW() && isNSFW()){
-				commandEvent.getEvent().reply(onMissingNSFW(translationPackage)).queue();
+				commandEvent.getEvent().replyEmbeds(onMissingNSFW(translationPackage)).queue();
 				return;
 			}
 			// everything alright
@@ -283,7 +285,7 @@ public abstract class Command{
 			}
 			catch(Exception e){
 				logger.error("Unhandled exception: ", e);
-				commandEvent.getEvent().reply(onUnhandledException(translationPackage, e)).queue();
+				commandEvent.getEvent().replyEmbeds(onUnhandledException(translationPackage, e)).queue();
 			}
 			finally{
 				processingAvgCounter.add(System.currentTimeMillis() - startTime);

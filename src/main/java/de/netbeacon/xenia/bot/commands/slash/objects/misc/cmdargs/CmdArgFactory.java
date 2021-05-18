@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs;
 
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 
 public class CmdArgFactory{
 
-	public static CmdArgs getArgs(Function<String, SlashCommandEvent.OptionData> optionProvider, List<CmdArgDef> cmdArgDefs) throws Exception{
+	public static CmdArgs getArgs(Function<String, OptionMapping> optionProvider, List<CmdArgDef> cmdArgDefs) throws Exception{
 		List<CmdArg> cmdArgs = new ArrayList<>();
 		for(CmdArgDef cmdArgDef : cmdArgDefs){
 			var option = optionProvider.apply(cmdArgDef.getName());

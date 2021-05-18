@@ -48,7 +48,7 @@ public class CMDEdited extends Command{
 		MessageCache messageCache = bChannel.getMessageCache();
 		Message bMessage = bChannel.getMessageCache().getLast("edited");
 		if(bMessage == null){
-			commandEvent.getEvent().reply(
+			commandEvent.getEvent().replyEmbeds(
 				onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))
 			).queue();
 		}
@@ -58,7 +58,7 @@ public class CMDEdited extends Command{
 			for(int i = 0; i < attachmentUrls.size(); i++){
 				attachments.append("[Attachment").append(i != 0 ? "_" + i : "").append("](").append(attachmentUrls.get(i)).append(")").append(" ");
 			}
-			commandEvent.getEvent().reply(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"))
+			commandEvent.getEvent().replyEmbeds(EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"))
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), String.valueOf(bMessage.getId()), true)
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), bMessage.getMember().getUser().getMetaUsername(), true)
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.3.title"), bMessage.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)

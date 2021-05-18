@@ -28,8 +28,8 @@ import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
-import net.dv8tion.jda.api.commands.CommandHook;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 
 import java.util.HashSet;
 import java.util.List;
@@ -54,7 +54,7 @@ public abstract class AnimeImageCommand extends Command{
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
 		try{
 			// ack
-			commandEvent.getEvent().acknowledge().queue(
+			commandEvent.getEvent().deferReply().queue(
 				ack -> {
 					// pick correct response
 					CmdArg<User> cmdArg = cmdArgs.getByName("user");
@@ -67,19 +67,19 @@ public abstract class AnimeImageCommand extends Command{
 					getImage(ack, translationPackage, message, 0);
 				},
 				err -> {
-					commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, e -> {});
+					commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, e -> {});
 				}
 			);
 		}
 		catch(Exception e){
-			commandEvent.getEvent().reply(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, ex -> {});
+			commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, ex -> {});
 		}
 	}
 
-	private void getImage(CommandHook ack, TranslationPackage translationPackage, String message, int retries){
+	private void getImage(InteractionHook ack, TranslationPackage translationPackage, String message, int retries){
 		PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
 			url -> {
-				ack.editOriginal(
+				ack.editOriginalEmbeds(
 					EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
 				).queue();
 			},
@@ -89,7 +89,7 @@ public abstract class AnimeImageCommand extends Command{
 					getImage(ack, translationPackage, message, retries + 1);
 				}
 				else{
-					ack.editOriginal(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.img.msg"))).queue(s -> {}, e -> {});
+					ack.editOriginalEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.img.msg"))).queue(s -> {}, e -> {});
 				}
 			}
 		);

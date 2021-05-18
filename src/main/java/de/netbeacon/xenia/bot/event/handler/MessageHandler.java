@@ -238,7 +238,7 @@ public class MessageHandler{
 
 		if(taskResult.getValue1() instanceof DefaultEvalTask){
 			// send thinking...
-			event.getMessage().reply("thinking ...").mentionRepliedUser(false).queue( thinking -> {
+			event.getMessage().reply("thinking ...").mentionRepliedUser(false).queue(thinking -> {
 				// process
 				ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
 				IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
