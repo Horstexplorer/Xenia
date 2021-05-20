@@ -358,7 +358,7 @@ public class CmdArgDef<T>{
 					return (o) -> (T) o;
 				}
 				else if(Boolean.class.equals(out)){ // shouldnt be needed
-					return (o) -> (T) Boolean.valueOf(String.valueOf(o));
+					return (o) -> (T) (Boolean) Boolean.valueOf(String.valueOf(o));
 				}
 				else if(Integer.class.equals(out)){
 					return (o) -> (T) (Integer) Integer.parseInt(String.valueOf(o));
