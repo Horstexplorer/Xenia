@@ -48,9 +48,10 @@ public class TranslationPackage{
 		Map<String, String> map = new HashMap<>();
 		if(o instanceof JSONObject){
 			for(String key : ((JSONObject) o).keySet()){
-				map.putAll(toSimpleAccessors( (prefix == null ? "" : prefix+".")+key, ((JSONObject) o).get(key)));
+				map.putAll(toSimpleAccessors((prefix == null ? "" : prefix + ".") + key, ((JSONObject) o).get(key)));
 			}
-		}else{
+		}
+		else{
 			map.put(prefix, o.toString());
 		}
 		return map;

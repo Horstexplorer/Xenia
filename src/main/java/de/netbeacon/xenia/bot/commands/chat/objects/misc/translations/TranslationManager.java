@@ -42,7 +42,7 @@ public class TranslationManager{
 	private TranslationManager() throws IOException{
 		JSONArray index = new JSONArray(IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translations.index.json")), StandardCharsets.UTF_8));
 		for(int i = 0; i < index.length(); i++){
-			JSONObject content = new JSONObject(IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translations/"+index.getString(i)+".json")), StandardCharsets.UTF_8));
+			JSONObject content = new JSONObject(IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translations/" + index.getString(i) + ".json")), StandardCharsets.UTF_8));
 			TranslationPackage translationPackage = new TranslationPackage(content);
 			translationPackages.put(translationPackage.getLanguageId(), translationPackage);
 		}
