@@ -274,7 +274,7 @@ public class CmdArgDef<T>{
 			if(tClass.equals(Boolean.class)){
 				return OptionType.BOOLEAN;
 			}
-			else if(tClass.equals(Short.class) || tClass.equals(Integer.class) || tClass.equals(Long.class)){
+			else if(tClass.equals(Short.class) || tClass.equals(Integer.class)){
 				return OptionType.INTEGER;
 			}
 			else if(tClass.equals(AbstractChannel.class) || tClass.equals(GuildChannel.class) || tClass.equals(MessageChannel.class) || tClass.equals(PrivateChannel.class)){
@@ -358,7 +358,7 @@ public class CmdArgDef<T>{
 					return (o) -> (T) o;
 				}
 				else if(Boolean.class.equals(out)){ // shouldnt be needed
-					return (o) -> (T) Boolean.valueOf(String.valueOf(o));
+					return (o) -> (T) (Boolean) Boolean.valueOf(String.valueOf(o));
 				}
 				else if(Integer.class.equals(out)){
 					return (o) -> (T) (Integer) Integer.parseInt(String.valueOf(o));

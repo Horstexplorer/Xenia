@@ -1,0 +1,1150 @@
+{
+    "isDefault": false,
+    "translations": {
+        "de": {"netbeacon": {"xenia": {"bot": {"commands": {
+            "chat": {
+                "global": {"help": {"CMDHelp": {
+                    "response": {
+                        "field": {"commands": "コマンド"},
+                        "title": "**ヘルプ/コマンド**"
+                    },
+                    "description": "コマンドの一覧を表示"
+                }}},
+                "structure": {
+                    "me": { "CMDMe": {
+                        "description": "自分についての統計情報を示す"
+                    }},
+                    "avatar": { "CMDAvatar": { "response": {
+                        "title": "アバター",
+                        "description": "誰かのアバターをゲット",
+                        "success": { "field": { "1": {
+                            "title": "リンク",
+                            "description": "[ダウンロード](%0%)"
+                        }}},
+                        "error": { "msg":  "ユーザーが見つかりません"}
+                    }}},
+                    "settings": {
+                        "guild": {
+                            "CMDLicense": {
+                                "response": {
+                                    "success": {"msg": "ライセンス更新"},
+                                    "error": {"msg": "ライセンスの更新に失敗しました。"}
+                                },
+                                "description": "ライセンスキーによるライセンスの更新"
+                            },
+                            "CMDSettings": {
+                                "response": {
+                                    "success": {"msg": "ギルド設定の更新"},
+                                    "error": {"msg": "ギルド設定の更新に失敗しました。\n利用可能なオプションは以下の通りです。%0%"}
+                                },
+                                "description": "このギルドの設定を更新する"
+                            },
+                            "HYBRIDGuild": {
+                                "response": {
+                                    "field": {
+                                        "11": {"title": "マックスセルフラーニングチャンネル"},
+                                        "1": {"title": "希望する言語"},
+                                        "2": {"title": "プレフィックス"},
+                                        "3": {"title": "設定"},
+                                        "4": {"title": "ライセンス名"},
+                                        "5": {"title": "ライセンス名"},
+                                        "6": {"title": "最大Vpermの役割"},
+                                        "7": {"title": "マックスタグ"},
+                                        "8": {"title": "最大通知数"},
+                                        "9": {"title": "最大Twitch通知数"},
+                                        "10": {"title": "最大メッセージログ"}
+                                    },
+                                    "title": "ギルドの一般的な設定"
+                                },
+                                "description": "ギルドの一般的な設定を含む"
+                            },
+                            "CMDPrefix": {
+                                "response": {
+                                    "success": {"msg": "プレフィックスを更新しました。 ```%0%```"},
+                                    "error": {"msg": "プレフィックスの更新に失敗しました。長すぎるのでは？"}
+                                },
+                                "description": "コマンドに使用するプレフィックスの更新"
+                            },
+                            "CMDLanguage": {
+                                "response": {
+                                    "success": {"msg": "応答言語の更新"},
+                                    "error": {"msg": "応答言語の更新に失敗しました。\n利用可能なオプションは %0%"}
+                                },
+                                "description": "Xeniaの応答言語の更新"
+                            }
+                        },
+                        "GROUPSettings": {"description": "ギルドのすべての設定を含む"},
+                        "roles": {"HYBRIDRoles": {
+                            "response": {
+                                "title": "役割",
+                                "is_empty": "ロールはまだ作成されていません"
+                            },
+                            "description": "VロールとVパーマを管理するコマンドが含まれています。"
+                        }},
+                        "channel": {
+                            "CMDAccessMode": {
+                                "response": {
+                                    "success": {"msg": "アクセスモードの更新"},
+                                    "error": {"msg": "アクセスモードの更新に失敗しました。\n利用可能なオプションは %0%"}
+                                },
+                                "description": "指定したチャネルのアクセスモードを更新する"
+                            },
+                            "CMDLogging": {
+                                "response": {
+                                    "success": {"msg": "ロギング設定の更新"},
+                                    "error": {"msg": "ロギングモードの更新に失敗しました。\n利用可能なオプションは [true, false]"}
+                                },
+                                "description": "指定したチャンネルのロギング設定を更新する"
+                            },
+                            "GROUPChannel": {"description": "チャンネルの設定を管理するコマンドが含まれている"},
+                            "CMDInfo": {
+                                "response": {
+                                    "success": {
+                                        "field": {
+                                            "1": {"title": "フラグ"},
+                                            "2": {"title": "アクセスモード"},
+                                            "3": {"title": "ロギング対応"},
+                                            "4": {"title": "ロギングの自動復元チャンネル"}
+                                        },
+                                        "title": "チャンネル設定"
+                                    },
+                                    "error": {"msg": "アクセスモードの更新に失敗しました。\n利用可能なオプションは"}
+                                },
+                                "description": "指定したチャンネルの情報を表示する"
+                            }
+                        },
+                        "self": {
+                            "HYBRIDSelf": {
+                                "response": {
+                                    "field": {
+                                        "1": {"title": "ユーザー名"},
+                                        "2": {"title": "Id"},
+                                        "3": {"title": "社内での役割"},
+                                        "4": {"title": "ご希望の言語"},
+                                        "5": {
+                                            "title": "アイコンURL",
+                                            "content": "[リンク](%0%)"
+                                        }
+                                    },
+                                    "title": "自己紹介"
+                                },
+                                "description": "自分の設定を管理するコマンドを搭載"
+                            },
+                            "CMDLanguage": {
+                                "response": {
+                                    "success": {"msg": "応答言語の更新"},
+                                    "error": {"msg": "応答言語の更新に失敗しました。\n利用可能なオプションは: %0%"}
+                                },
+                                "description": "Xeniaの応答言語の更新"
+                            }
+                        }
+                    },
+                    "chatbot": {
+                        "learning": {
+                            "CMDChannelLink": {
+                                "success": {"msg": "チャンネルリンクを更新しました 変更が反映されるまでに数分かかる場合があります。"},
+                                "description": "チャットボットのデータプールとして使用するチャンネルのリンク",
+                                "error": {"invalid": {"arg": {"msg": "チャネルのリンクに失敗しました。リンク数が上限に達しているのか、チャンネルが存在しないのか。"}}}
+                            },
+                            "CMDMode": {
+                                "success": {"msg": "モード変更に成功しました。変更が反映されるまでに数分かかることがあります。"},
+                                "description": "データセットを使用するモードを定義します。",
+                                "error": {"invalid": {"arg": {"msg": "モードの変更に失敗しました。\n利用可能なオプションは: %0%"}}}
+                            },
+                            "GROUPLearning": {"description": "使用するデータを制御するコマンドが含まれている"}
+                        },
+                        "CMDSetup": {
+                            "response": {
+                                "success": {
+                                    "msg": "チャットボット機能の準備が整いました。\nこの機能は英語でのみ利用可能であり、娯楽目的でのみ利用されます。\n回答は検証されていないメッセージから生成されています - 回答の中には、特定の文脈では不適切と思われるものもあります。\nルートデータセットの由来について詳しくはこちら [これ](%0%)",
+                                    "deactivated": "チャットボットが無効化されました"
+                                },
+                                "error": {"create": {"failed": "チャットボットの設定に必要なチャンネル設定の作成/更新に失敗しました。"}}
+                            },
+                            "chat": {"default": {"name": "Xenia"}},
+                            "description": "Xeniaとチャットするためのチャンネルを設定することができます。"
+                        },
+                        "GROUPChatbot": {"description": "チャンネルのチャットボット設定を管理するコマンドが含まれています。"},
+                        "CMDInfo": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "一般的な設定"},
+                                        "2": {"title": "チャンネル"},
+                                        "3": {"title": "モード"}
+                                    },
+                                    "title": "チャットボット情報"
+                                },
+                                "error": {"notfound": "チャンネルが設定されていない"}
+                            },
+                            "description": "チャットボットの設定に関する一般的な情報を表示します。"
+                        }
+                    },
+                    "notification": {
+                        "CMDList": {
+                            "response": {"title": "お知らせ"},
+                            "description": "既存の通知の表示"
+                        },
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "お知らせ (ID: %0%) deleted"},
+                                "error": {"msg": "通知の削除に失敗しました。これは誰かが作ったものか、存在しないものなのでしょうか？"}
+                            },
+                            "description": "既存の通知の削除"
+                        },
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "通知の作成 (ID: %0% | %1%)"},
+                                "error": {"msg": "通知の作成に失敗しました。キャッシュがいっぱいになっているのでは？"}
+                            },
+                            "description": "新しい通知の作成"
+                        },
+                        "GROUPNotification": {"description": "このギルドの通知を管理する"},
+                        "CMDModify": {
+                            "response": {
+                                "success": {"msg": "通知の編集"},
+                                "error": {"msg": "通知の変更に失敗しました。これは他の人が作成したものか、存在しないものなのでしょうか？"}
+                            },
+                            "description": "既存の通知の更新"
+                        }
+                    },
+                    "twitch": {
+                        "CMDUpdate": {
+                            "response": {
+                                "success": {"msg": "ストリーム通知の更新"},
+                                "error": {"msg": "ストリーム通知の更新に失敗しました。このIDの通知は存在しますか？"}
+                            },
+                            "description": "チャンネルのストリーム通知の更新"
+                        },
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "削除されたストリームの通知"},
+                                "error": {"msg": "ストリーム通知の削除に失敗しました。このIDの通知は存在しますか？"}
+                            },
+                            "description": "チャンネルのストリーム通知の削除"
+                        },
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "ストリームの通知を要求しました。評価後、これはオーバービューに表示されます"},
+                                "error": {"msg": "別のストリーム通知のリクエストに失敗しました。URLは有効ですか？すでにこのチャンネルの通知を受けていますか？それとも制限に達していますか？"}
+                            },
+                            "description": "チャンネルに対するストリーム通知の要求"
+                        },
+                        "HYBRIDTwitch": {
+                            "response": {"success": {"title": "ストリーム通知"}},
+                            "description": "ストリーム通知の作成・管理・一覧表示"
+                        }
+                    },
+                    "last": {
+                        "GROUPLast": {"description": "削除・編集したメッセージの復元"},
+                        "CMDEdited": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "メッセージID"},
+                                        "2": {"title": "著者r"},
+                                        "3": {"title": "古いメッセージ"},
+                                        "4": {"title": "アタッチメント"}
+                                    },
+                                    "title": "編集したメッセージの復元"
+                                },
+                                "error": {"msg": "復元するメッセージが見つからない"}
+                            },
+                            "description": "このチャンネルで最後に編集されたメッセージを復元する"
+                        },
+                        "CMDDeleted": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "メッセージID"},
+                                        "2": {"title": "著者r"},
+                                        "3": {"title": "古いメッセージ"},
+                                        "4": {"title": "アタッチメント"}
+                                    },
+                                    "title": "削除されたメッセージの復元"
+                                },
+                                "error": {"msg": "復元するメッセージが見つからない"}
+                            },
+                            "description": "このチャンネルで削除された最後のメッセージを復元することができます。"
+                        }
+                    },
+                    "admin": {
+                        "CMDEval": {"description": "コードの評価に利用できる"},
+                        "CMDPing": {"description": "discordや他のリンク先サービスへのPingを確認するために使用できる"},
+                        "CMDChatlog": {"description": "現在のギルドで指定されたチャンネルの暗号化されたキャッシュメッセージのログをエクスポートする"},
+                        "CMDClientIdentify": {"description": "バックエンドのセカンダリーソケットに誰が接続しているかを確認する"},
+                        "CMDD43Z1Stats": {"description": "実行中のD43Z1インスタンスに関するいくつかの情報を表示するために使用できます。"},
+                        "CMDGlobalInfo": {"description": "バックエンドのセカンダリーソケットに接続されているすべてのインスタンスの統計情報を表示します。"},
+                        "CMDD43Z1": {"description": "現在のD43Z1の性能評価に使用可能"},
+                        "CMDInfo": {"description": "このボットに関する統計情報を表示します。"},
+                        "GROUPAdmin": {"description": "開発者のみが使用できるコマンドを含む"}
+                    },
+                    "hastebin": {"CMDHastebin": {
+                        "response": {
+                            "success": {"msg": "ここにあなたのヘイストがあります。"},
+                            "error": {"msg": "ファイルが提供されない"}
+                        },
+                        "description": "添付ファイルをhaste.hypercdn.deにアップロードしてください。"
+                    }},
+                    "anime": {
+                        "sfw": {
+                            "CMDCry": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 泣く",
+                                        "1": "%1%は%0%を泣かせた"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "何かにつけて泣く"
+                            },
+                            "CMDKitsune": {
+                                "response": {
+                                    "success": {"msg": {"0": "お待たせしました。"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDHolo": {
+                                "response": {
+                                    "success": {"msg": {"0": "ホロのようなもの"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "ホロって言ったっけ？"
+                            },
+                            "CMDOokami": {
+                                "response": {
+                                    "success": {"msg": {"0": ":3"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDTail": {
+                                "response": {
+                                    "success": {"msg": {"0": "ふわふわの尻尾 :3"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDEevee": {
+                                "response": {
+                                    "success": {"msg": {"0": "イーブイ!"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "イーブイ?"
+                            },
+                            "CMDTickle": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% くすぐったい",
+                                        "1": "%1%が%0%にくすぐられる。"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かをくすぐる"
+                            },
+                            "CMDBlush": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% チーク",
+                                        "1": "%0% のために赤面する。%1%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かのせいで顔が赤くなる"
+                            },
+                            "CMDSlap": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 周回",
+                                        "1": "%1% に叩かれた。 %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かを叩く"
+                            },
+                            "CMDFluff": {
+                                "response": {
+                                    "success": {"msg": {"0": "とてもふわふわしている :3"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "フワフワ"
+                            },
+                            "CMDKiss": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% キスを配る",
+                                        "1": "%0% キス %1% OwO"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かにキスをする"
+                            },
+                            "CMDHug": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 抱きしめたい",
+                                        "1": "%0% ハグ %1%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かを抱きしめる"
+                            },
+                            "CMDSmile": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 笑わなきゃ :)",
+                                        "1": "%1% 作られた %0% スマイル :)"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かに微笑む"
+                            },
+                            "CMDBite": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 噛みつく",
+                                        "1": "%1% に噛まれる。 %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かを噛む(おやつかもしれない)"
+                            },
+                            "CMDLick": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 誰かをなめようとする",
+                                        "1": "%0% 舐める %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かをなめる"
+                            },
+                            "CMDPat": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 撫でる",
+                                        "1": "%1% のヘッドパットを受けています。 %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かの頭を撫でる"
+                            },
+                            "CMDPoke": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 覗いてみる",
+                                        "1": "%1% に突かれる。 %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かを突く"
+                            },
+                            "CMDCuddle": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 抱っこしたい",
+                                        "1": "%1% に抱かれる。 %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かを抱きしめる"
+                            },
+                            "CMDNeko": {
+                                "response": {
+                                    "success": {"msg": {"0": ":3"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDDance": {
+                                "response": {
+                                    "success": {"msg": {"0": "%0% dances"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "Dance!"
+                            },
+                            "CMDRandom": {
+                                "response": {
+                                    "success": {"msg": {"0": "UwU"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "ランダム画像"
+                            },
+                            "CMDFeed": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% 美味しいものを食べる",
+                                        "1": "%0% で食べ物を共有しています。 %1%"
+                                    }},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "誰かに食べさせる"
+                            },
+                            "CMDSenko": {
+                                "response": {
+                                    "success": {"msg": {"0": "_センコーの音_"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": ":3"
+                            }
+                        },
+                        "nsfw": {
+                            "CMDThreesome_FFM": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDYuri": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDPussylick": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDBlowjob": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDCum": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDYaoi": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDSolo": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDAnal": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDFuck": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDThreesome_FFF": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDThreesome_MMF": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDNeko": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            },
+                            "CMDRandom": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "何かが間違っていた",
+                                        "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                                    }
+                                },
+                                "description": "-NSFWコンテンツ-"
+                            }
+                        },
+                        "GROUPAnime": {"description": "アニメをテーマにした様々なコマンドを収録"}
+                    },
+                    "tags": {
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "タグ %0% 削除"},
+                                "error": {"msg": "タグの削除に失敗しました。あなたがオーナーで、そのタグは存在していますか？"}
+                            },
+                            "description": "既存のタグを削除する"
+                        },
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "タグ %0% 作成された"},
+                                "error": {"msg": "タグの作成に失敗しました"}
+                            },
+                            "description": "与えられたタグ名と内容で新しいタグを作成する"
+                        },
+                        "HYBRIDTag": {
+                            "response": {
+                                "success": {"msg": "%0%\n\n*タグの作成 %1%*"},
+                                "error": {"msg": "タグ %0% が見つかりません。"}
+                            },
+                            "description": "このギルドのタグの作成、管理、使用"
+                        },
+                        "CMDModify": {
+                            "response": {
+                                "success": {"msg": "タグ %0% 更新"},
+                                "error": {"msg": "タグの更新に失敗しました。あなたがオーナーで、そのタグは存在していますか？"}
+                            },
+                            "description": "与えられたタグを新しい内容で修正する"
+                        }
+                    },
+                    "info": {"CMDInfo": {
+                        "response": {
+                            "field": {
+                                "3": {"title": "現在のShard"},
+                                "4": {"title": "インスタンス"},
+                                "5": {"title": "所在地"},
+                                "6": {
+                                    "title": "ウェブサイト",
+                                    "link_text": "[ウェブサイトを見る](%0%)"
+                                },
+                                "7": {
+                                    "title": "データ処理",
+                                    "link_text": "[ウェブサイトを見る](%0%)"
+                                },
+                                "8": {
+                                    "title": "レポート内容",
+                                    "link_text": "[ウェブサイトを見る](%0%)"
+                                },
+                                "9": {
+                                    "title": "連絡先",
+                                    "link_text": "[ウェブサイトを見る](%0%)"
+                                }
+                            },
+                            "title": "情報"
+                        },
+                        "description": "私についての基本的な情報を表示します。"
+                    }}
+                }
+            },
+            "slash": {"structure": {
+                "avatar": {
+                    "RCMDAvatar": { "response": {
+                        "title": "アバター",
+                        "success": { "field": { "1": {
+                            "title": "リンク",
+                            "description": "[ダウンロード](%0%)"
+                        }}},
+                        "error": { "msg":  "ユーザーが見つかりません"}
+                    }}
+                },
+                "twitch": {
+                    "CMDUpdate": {
+                        "response": {
+                            "success": {"msg": "ストリーム通知の更新"},
+                            "error": {"msg": "ストリーム通知の更新に失敗しました。このIDの通知は存在しますか？"}
+                        }
+                    },
+                    "CMDDelete": {
+                        "response": {
+                            "success": {"msg": "削除されたストリームの通知"},
+                            "error": {"msg": "ストリーム通知の削除に失敗しました。このIDの通知は存在しますか？"}
+                        }
+                    },
+                    "CMDCreate": {
+                        "response": {
+                            "success": {"msg": "ストリームの通知を要求しました。評価後、これはオーバービューに表示されます"},
+                            "error": {"msg": "別のストリーム通知のリクエストに失敗しました。URLは有効ですか？すでにこのチャンネルの通知を受けていますか？それとも制限に達していますか？"}
+                        }
+                    },
+                    "CMDList": {
+                        "response": {"success": {"title": "ストリーム通知"}}
+                    }
+                },
+                "notification": {
+                    "CMDList": {"response": {"title": "お知らせ"}},
+                    "CMDCreate": {"response": {
+                        "success": {"msg": "通知の作成 (ID: %0% | %1%)"},
+                        "error": {"msg": "通知の作成に失敗しました。キャッシュがいっぱいになっているのでは？"}
+                    }},
+                    "CMDDelete": {"response": {
+                        "success": {"msg": "通知(ID: %0%)の削除"},
+                        "error": {"msg": "通知の削除に失敗しました。これは誰かが作ったものか、存在しないものなのでしょうか？"}
+                    }},
+                    "CMDModify": {
+                        "response": {
+                            "success": {"msg": "通知の編集"},
+                            "error": {"msg": "通知の変更に失敗しました。これは誰かが作ったものか、存在しないものなのでしょうか？"}
+                        },
+                        "description": "既存の通知の更新"
+                    }
+                },
+                "last": {
+                    "CMDEdited": {"response": {
+                        "success": {
+                            "field": {
+                                "1": {"title": "メッセージID"},
+                                "2": {"title": "著者"},
+                                "3": {"title": "古いメッセージ"},
+                                "4": {"title": "アタッチメント"}
+                            },
+                            "title": "編集したメッセージの復元"
+                        },
+                        "error": {"msg": "復元するメッセージが見つからない"}
+                    }},
+                    "CMDDeleted": {"response": {
+                        "success": {
+                            "field": {
+                                "1": {"title": "メッセージID"},
+                                "2": {"title": "著者"},
+                                "3": {"title": "古いメッセージ"},
+                                "4": {"title": "アタッチメント"}
+                            },
+                            "title": "削除されたメッセージの復元"
+                        },
+                        "error": {"msg": "復元するメッセージが見つからない"}
+                    }}
+                },
+                "notificationn": {"CMDList": {"description": "既存の通知の表示"}},
+                "tag": {
+                    "RCMDTag": {"response": {
+                        "success": {"msg": "%0%\n\n*タグの作成 %1%*"},
+                        "error": {"msg": "タグ %0% が見つかりません。"}
+                    }},
+                    "s": {
+                        "CMDDelete": {"response": {
+                            "success": {"msg": "タグ %0% 削除"},
+                            "error": {"msg": "タグの削除に失敗しました。あなたがオーナーで、そのタグは存在していますか？"}
+                        }},
+                        "CMDCreate": {"response": {
+                            "success": {"msg": "タグ %0% 作成された"},
+                            "error": {"msg": "タグの作成に失敗しました"}
+                        }},
+                        "CMDModify": {"response": {
+                            "success": {"msg": "タグ%0% 更新"},
+                            "error": {"msg": "タグの更新に失敗しました。あなたがオーナーで、そのタグは存在していますか？"}
+                        }}
+                    }
+                },
+                "anime": {
+                    "nsfw": {
+                        "CMDCum": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDYuri": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDYaoi": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDPussylick": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDSolo": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDAnal": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDFuck": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDBlowjob": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDNeko": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDRandom": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }}
+                    },
+                    "sfw": {
+                        "CMDCry": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 泣く",
+                                "1": "%1%は%0%を泣かせた"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDTickle": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% くすぐったい",
+                                "1": "%1% にくすぐられる。 %0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDBlush": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% チーク",
+                                "1": "%0% のために赤面する。 %1%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDSlap": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 叩きまくる",
+                                "1": "%1% に叩かれた。 %0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDKiss": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% キスを配る",
+                                "1": "%0% キス %1% OwO"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDHug": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 抱きしめたい",
+                                "1": "%0% ハグ %1%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDSmile": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 笑わなきゃ :)",
+                                "1": "%1% 作られた %0% スマイル :)"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDBite": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 噛みつく",
+                                "1": "%1% に噛まれる。%0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDLick": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 誰かをなめようとする",
+                                "1": "%0% 舐める %0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDPat": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 撫でる",
+                                "1": "%1% のヘッドパットを受けています。%0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDPoke": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 覗いてみる",
+                                "1": "%1% に突かれる。%0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDCuddle": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 抱っこしたい",
+                                "1": "%1% に抱かれる。%0%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDNeko": {"response": {
+                            "success": {"msg": {"0": ":3"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDDance": {"response": {
+                            "success": {"msg": {"0": "%0% ダンス"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDFeed": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% 美味しいものを食べる",
+                                "1": "%0% で食べ物を共有しています。%1%"
+                            }},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }},
+                        "CMDRandom": {"response": {
+                            "success": {"msg": {"0": "お待たせしました。"}},
+                            "error": {
+                                "msg": "何かが間違っていた",
+                                "img": {"msg": "申し訳ありませんが、ご希望の画像を取得できませんでした。"}
+                            }
+                        }}
+                    }
+                },
+                "info": {"RCMDInfo": {"response": {
+                    "field": {
+                        "3": {"title": "現在のShard"},
+                        "4": {"title": "インスタンス"},
+                        "5": {"title": "所在地"},
+                        "6": {
+                            "title": "ウェブサイト",
+                            "link_text": "[ウェブサイトを見る](%0%)"
+                        },
+                        "7": {
+                            "title": "データ処理",
+                            "link_text": "[ウェブサイトを見る](%0%)"
+                        },
+                        "8": {
+                            "title": "レポート内容",
+                            "link_text": "[ウェブサイトを見る](%0%)"
+                        },
+                        "9": {
+                            "title": "連絡先",
+                            "link_text": "[ウェブサイトを見る](%0%)"
+                        }
+                    },
+                    "title": "情報"
+                }}}
+            }}
+        }}}}},
+        "default": {
+            "onMissingBotPerms": {
+                "description": "パーミッションが不足しているため、コマンドを実行することができません。",
+                "title": "失敗しました。ボットにパーミッションがない",
+                "requiredPerms": {"fn": "必要なパーミッション:"}
+            },
+            "onMissingMemberPerms": {
+                "description": "こんなことをしてはいけない！」と思っています。",
+                "title": "失敗しました。十分なパーミッションがない",
+                "requiredPerms": {"fn": "必要なパーミッション:"}
+            },
+            "onError": {"title": "エラー"},
+            "onAdminPerms": {
+                "description": "私は管理者権限を持っているようです。これはセキュリティ上のリスクがあるため、強くお勧めできません。私の仕事に必要な権限のみを割り当ててください。\n\n誤ってパーミッションが割り当てられた場合は、私や私に割り当てられたロールからパーミッションを削除してください。\nこのような意図がある場合は、私のBOT_IGNORE_ADMIN_PERMSの設定を変更して、このメッセージを無効にしてください。",
+                "title": "警告 ボットが管理者権限を持っている"
+            },
+            "onUnhandledException": {
+                "exception": {"msg": "何か悪いことが起きたのか、それが何なのかはよくわかりません。少し時間をおいてから、再度お試しください。それでもエラーが発生する場合は、お問い合わせください。"},
+                "cacheexception": {"msg": "必要なデータを取得するためのキャッシュへのアクセスに何らかの理由で失敗しました(%0%)。少し時間をおいてから、再度お試しください。それでもエラーが発生する場合は、お問い合わせください。"},
+                "backendexception": {"msg": "バックエンドとの通信に失敗しました(%0%)。少し時間をおいてから、再度お試しください。それでもエラーが発生する場合は、お問い合わせください。"},
+                "dataexception": {"msg": "必要なデータへのアクセスに何らかの理由で失敗しました(%0%)。少し時間をおいてから、再度お試しください。それでもエラーが発生する場合は、お問い合わせください。"},
+                "title": "おっと"
+            },
+            "onMissingArgs": {
+                "usage": {"fn": "使用方法:"},
+                "description": "このコマンドは、より多くの/異なる引数を必要とする",
+                "title": "失敗しました。十分な議論ができない"
+            },
+            "onMissingNSFW": {
+                "hidden": "NSFWではないチャンネルで実行されたため、NSFWコマンドの一部が非表示になりました。",
+                "description": "NSFWのコマンドはNSFWでないチャンネルでは使用できません。",
+                "title": "失敗しました。コマンドにNSFWチャンネルが必要"
+            },
+            "onCooldownActive": {
+                "description": "少し時間をおいてから再度行ってください。",
+                "title": "失敗しました。クールダウン・アクティブ"
+            },
+            "onSuccess": {"title": "サクセス"},
+            "estimatedCommand": {"msg": "あなたが入力したコマンド `%0%` は存在しないようです。もしかしたら、代わりに `%1%` を使いたかったのでは？"}
+        }
+    },
+    "languageDescription": "The default Japanese language package",
+    "languageId": "ja_JP",
+    "languageName": "Japanese-Default"
+}

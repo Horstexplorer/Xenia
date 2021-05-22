@@ -17,7 +17,11 @@
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.translations;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TranslationPackage{
@@ -28,13 +32,28 @@ public class TranslationPackage{
 	private final boolean isDefault;
 	private final ConcurrentHashMap<String, String> translations = new ConcurrentHashMap<>();
 
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
 	public TranslationPackage(JSONObject jsonObject){
 		languageId = jsonObject.getString("languageId").toLowerCase();
 		languageName = jsonObject.getString("languageName");
 		languageDescription = jsonObject.getString("languageDescription");
 		isDefault = jsonObject.getBoolean("isDefault");
-		JSONObject transl = jsonObject.getJSONObject("translations");
-		transl.keySet().forEach(key -> translations.put(key, transl.getString(key)));
+		// build keys
+		var a = toSimpleAccessors(null, jsonObject.getJSONObject("translations"));
+		translations.putAll(a);
+	}
+
+	private Map<String, String> toSimpleAccessors(String prefix, Object o){
+		Map<String, String> map = new HashMap<>();
+		if(o instanceof JSONObject){
+			for(String key : ((JSONObject) o).keySet()){
+				map.putAll(toSimpleAccessors( (prefix == null ? "" : prefix+".")+key, ((JSONObject) o).get(key)));
+			}
+		}else{
+			map.put(prefix, o.toString());
+		}
+		return map;
 	}
 
 	public String getLanguageId(){
