@@ -44,7 +44,7 @@ public class CMDAvatar extends Command{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.title"), commandEvent.getEvent().getAuthor());
+		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor());
 		CmdArg<Mention> mentionCmdArg = args.getByIndex(0);
 
 		if(mentionCmdArg.getValue() != null){
@@ -54,8 +54,12 @@ public class CMDAvatar extends Command{
 						commandEvent.getEvent().getChannel().sendMessage(
 							embedBuilder
 								.setColor(Color.GREEN)
-								.setImage(user.getEffectiveAvatarUrl())
-								.addField(translationPackage.getTranslation(getClass(),"response.success.field.1.title"), translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.field.1.description", user.getEffectiveAvatarUrl()),true)
+								.setImage(user.getEffectiveAvatarUrl() + "?size=512")
+								.setDescription(
+									"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
+										"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
+										"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
+								)
 								.build()
 						).queue();
 					},
@@ -63,17 +67,22 @@ public class CMDAvatar extends Command{
 						commandEvent.getEvent().getChannel().sendMessage(
 							embedBuilder
 								.setColor(Color.RED)
-								.setDescription(translationPackage.getTranslation(getClass(),"error.msg"))
+								.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
 								.build()
 						).queue();
 					}
 				);
-		}else{
+		}
+		else{
 			commandEvent.getEvent().getChannel().sendMessage(
 				embedBuilder
 					.setColor(Color.GREEN)
-					.setImage(commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl())
-					.addField(translationPackage.getTranslation(getClass(),"response.success.field.1.title"), translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.field.1.description", commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl()),true)
+					.setImage(commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl() + "?size=512")
+					.setDescription(
+						"[256px](" + commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl() + "?size=256) " +
+							"[512px](" + commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl() + "?size=512) " +
+							"[1024px](" + commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl() + "?size=1024) "
+					)
 					.build()
 			).queue();
 		}

@@ -1,1148 +1,1874 @@
 {
-   "isDefault": false,
-   "translations": {
-      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
-         "chat": {
-            "global": {"help": {"CMDHelp": {
-               "response": {
-                  "field": {"commands": "Commandes"},
-                  "title": "**Aide / Commandes**"
-               },
-               "description": "Affiche une liste de commandes"
-            }}},
-            "structure": {
-               "me": { "CMDMe" :  {
-                   "description": "Montrez quelques statistiques sur vous-même"
-               }},
-               "avatar": { "RCMDAvatar": { "response": {
-                   "title": "Avatar",
-                   "description": "Obtenir l'avatar de quelqu'un",
-                   "success": { "field": { "1": {
-                       "title": "Lien",
-                       "description": "[Télécharger](%0%)"
-                   }}},
-                   "error": { "msg":  "Utilisateur non trouvé"}
-               }}},
-               "settings": {
-                  "guild": {
-                     "CMDLicense": {
-                        "response": {
-                           "success": {"msg": "Licence mise à jour"},
-                           "error": {"msg": "La mise à jour de la licence a échoué"}
-                        },
-                        "description": "Mettre à jour la licence en utilisant une clé de licence"
-                     },
-                     "CMDSettings": {
-                        "response": {
-                           "success": {"msg": "Mise à jour des paramètres de la guilde"},
-                           "error": {"msg": "Impossible de mettre à jour les paramètres de la guilde.\nLes options disponibles sont les suivantes: %0%"}
-                        },
-                        "description": "Mettre à jour les paramètres de cette guilde"
-                     },
-                     "HYBRIDGuild": {
-                        "response": {
-                           "field": {
-                              "11": {"title": "canaux d'auto-apprentissage maximum"},
-                              "1": {"title": "Langue préférée"},
-                              "2": {"title": "Préfixe"},
-                              "3": {"title": "Paramètres"},
-                              "4": {"title": "Nom de la licence"},
-                              "5": {"title": "Est valable jusqu'à"},
-                              "6": {"title": "rôles max vperm"},
-                              "7": {"title": "max tags"},
-                              "8": {"title": "max notifications"},
-                              "9": {"title": "max twitch notifications"},
-                              "10": {"title": "max message logging"}
-                           },
-                           "title": "Paramètres généraux de la guilde"
-                        },
-                        "description": "Contient les paramètres généraux de la guilde"
-                     },
-                     "CMDPrefix": {
-                        "response": {
-                           "success": {"msg": "Préfixe mis à jour en ```%0%```"},
-                           "error": {"msg": "La mise à jour du préfixe a échoué. Peut-être est-ce trop long?"}
-                        },
-                        "description": "Mettre à jour le préfixe utilisé pour les commandes"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "Mise à jour de la langue de réponse"},
-                           "error": {"msg": "N'a pas mis à jour la langue de réponse.\nLes options disponibles sont: %0%"}
-                        },
-                        "description": "Mettre à jour la langue de réponse de Xenia"
-                     }
-                  },
-                  "GROUPSettings": {"description": "Contient tous les paramètres de la guilde"},
-                  "roles": {"HYBRIDRoles": {
-                     "response": {
-                        "title": "Rôles",
-                        "is_empty": "Aucun rôle n'a encore été créé"
-                     },
-                     "description": "Contient des commandes pour gérer les v rôles et les v perms"
-                  }},
-                  "channel": {
-                     "CMDAccessMode": {
-                        "response": {
-                           "success": {"msg": "Mode d'accès mis à jour"},
-                           "error": {"msg": "Le mode d'accès n'a pas été mis à jour.\nLes options disponibles sont: %0%"}
-                        },
-                        "description": "Mettre à jour le mode d'accès pour le canal spécifié"
-                     },
-                     "CMDLogging": {
-                        "response": {
-                           "success": {"msg": "Mise à jour des paramètres d'enregistrement"},
-                           "error": {"msg": "�\u2030chec de la mise à jour du mode d'enregistrement.\nLes options disponibles sont: [true, false]"}
-                        },
-                        "description": "Mettre à jour les paramètres de journalisation pour le canal spécifié"
-                     },
-                     "GROUPChannel": {"description": "Contient des commandes pour gérer les paramètres des canaux"},
-                     "CMDInfo": {
-                        "response": {
-                           "success": {
-                              "field": {
-                                 "1": {"title": "Drapeaux"},
-                                 "2": {"title": "Mode d'accès"},
-                                 "3": {"title": "Logging activé"},
-                                 "4": {"title": "Enregistrement du canal de restauration automatique"}
-                              },
-                              "title": "Paramètres des canaux"
-                           },
-                           "error": {"msg": "Le mode d'accès n'a pas été mis à jour.\nLes options disponibles sont:"}
-                        },
-                        "description": "Affiche les informations pour le canal spécifié"
-                     }
-                  },
-                  "self": {
-                     "HYBRIDSelf": {
-                        "response": {
-                           "field": {
-                              "1": {"title": "Nom d'utilisateur"},
-                              "2": {"title": "Id"},
-                              "3": {"title": "Rôle interne"},
-                              "4": {"title": "Langue préférée"},
-                              "5": {
-                                 "title": "Icône URL",
-                                 "content": "[Lien](%0%)"
-                              }
-                           },
-                           "title": "Self Info"
-                        },
-                        "description": "Contient des commandes pour gérer ses propres paramètres"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "Mise à jour de la langue de réponse"},
-                           "error": {"msg": "N'a pas mis à jour la langue de réponse.\nLes options disponibles sont : %0%"}
-                        },
-                        "description": "Mettre à jour la langue de réponse de Xenia"
-                     }
-                  }
-               },
-               "chatbot": {
-                  "learning": {
-                     "CMDChannelLink": {
-                        "success": {"msg": "Lien de la chaîne mis à jour ! Les changements peuvent prendre quelques minutes pour être pris en compte."},
-                        "description": "Liez un canal qui sera utilisé comme pool de données pour le chatbot.",
-                        "error": {"invalid": {"arg": {"msg": "�\u2030chec de la liaison du canal. Le nombre maximum de liens a-t-il été atteint ou le canal n'existe-t-il pas ?"}}}
-                     },
-                     "CMDMode": {
-                        "success": {"msg": "Le mode a été modifié avec succès ! Les changements peuvent prendre quelques minutes pour prendre effet."},
-                        "description": "Définit le mode d'utilisation des jeux de données.",
-                        "error": {"invalid": {"arg": {"msg": "�\u2030chec du changement de mode.\nLes options disponibles sont : %0%"}}}
-                     },
-                     "GROUPLearning": {"description": "Contient des commandes permettant de contrôler les données utilisées"}
-                  },
-                  "CMDSetup": {
-                     "response": {
-                        "success": {
-                           "msg": "Les fonctionnalités de Chatbot sont maintenant prêtes.\nCette fonctionnalité n'est disponible qu'en anglais et est destinée à des fins de divertissement uniquement.\nLes réponses sont générées à partir de messages non vérifiés - Certaines réponses peuvent sembler inappropriées dans certains contextes.\nEn savoir plus sur l'origine des données racine [ici](%0%)",
-                           "deactivated": "le chatbot a été désactivé"
-                        },
-                        "error": {"create": {"failed": "Impossible de créer / mettre à jour les paramètres du canal nécessaires à la mise en place du chatbot"}}
-                     },
-                     "chat": {"default": {"name": "xenia"}},
-                     "description": "Permet de mettre en place un canal pour discuter avec Xenia"
-                  },
-                  "GROUPChatbot": {"description": "Contient des commandes pour gérer les paramètres de chatbot d'un canal"},
-                  "CMDInfo": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "Paramètres généraux"},
-                              "2": {"title": "Channel id"},
-                              "3": {"title": "Mode"}
-                           },
-                           "title": "Statistiques sur les chatbot"
-                        },
-                        "error": {"notfound": "Aucun canal n'a été mis en place"}
-                     },
-                     "description": "Affiche des informations générales sur la mise en place du chatbot"
-                  }
-               },
-               "notification": {
-                  "CMDList": {
-                     "response": {"title": "Notifications"},
-                     "description": "Consulter les notifications existantes"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Notification (ID: %0%) supprimé"},
-                        "error": {"msg": "N'a pas réussi à supprimer la notification. Peut-être que cela a été créé par quelqu'un d'autre ou n'existe pas ?"}
-                     },
-                     "description": "Supprimer une notification existante"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Notification créée (ID: %0% | %1%)"},
-                        "error": {"msg": "Echec de la création d'une notification! Peut-être que le cache est plein?"}
-                     },
-                     "description": "Créer une nouvelle notification"
-                  },
-                  "GROUPNotification": {"description": "Gérer les notifications pour cette guilde"},
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "Notification éditée"},
-                        "error": {"msg": "N'a pas modifié la notification. Peut-être que cela a été créé par quelqu'un d'autre ou n'existe pas?"}
-                     },
-                     "description": "Mettre à jour une notification existante"
-                  }
-               },
-               "twitch": {
-                  "CMDUpdate": {
-                     "response": {
-                        "success": {"msg": "Mise à jour de la notification des flux"},
-                        "error": {"msg": "N'a pas mis à jour la notification de flux. Une notification avec cet identifiant existe-t-elle ?"}
-                     },
-                     "description": "Mise à jour des notifications de flux pour un canal"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Notification de suppression de flux"},
-                        "error": {"msg": "N'a pas réussi à supprimer la notification de flux. Une notification avec cet identifiant existe-t-elle ?"}
-                     },
-                     "description": "Supprimer les notifications de flux pour un canal"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Notifications de flux demandées. Après évaluation, cela apparaîtra dans l'aperçu"},
-                        "error": {"msg": "N'a pas demandé une autre notification de flux. L'URL est-elle valide, un canal reçoit-il déjà des notifications pour ce canal ou avez-vous atteint la limite?"}
-                     },
-                     "description": "Demander des notifications de flux pour un canal"
-                  },
-                  "HYBRIDTwitch": {
-                     "response": {"success": {"title": "Notifications de flux demandées"}},
-                     "description": "Créer, gérer et répertorier les notifications de flux"
-                  }
-               },
-               "last": {
-                  "GROUPLast": {"description": "Restaurer les messages supprimés ou modifiés"},
-                  "CMDEdited": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "MessageId"},
-                              "2": {"title": "Auteur"},
-                              "3": {"title": "Ancien message"},
-                              "4": {"title": "Annexes"}
-                           },
-                           "title": "Message édité restauré"
-                        },
-                        "error": {"msg": "Aucun message trouvé pour restaurer"}
-                     },
-                     "description": "Restaure le dernier message qui a été édité dans ce canal"
-                  },
-                  "CMDDeleted": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "MessageId"},
-                              "2": {"title": "Auteur"},
-                              "3": {"title": "Ancien message"},
-                              "4": {"title": "Annexes"}
-                           },
-                           "title": "Message supprimé restauré"
-                        },
-                        "error": {"msg": "Aucun message trouvé pour restaurer"}
-                     },
-                     "description": "Restaure le dernier message qui a été supprimé dans ce canal"
-                  }
-               },
-               "admin": {
-                  "CMDEval": {"description": "Peut être utilisé pour évaluer le code"},
-                  "CMDPing": {"description": "Peut être utilisé pour vérifier le ping à la discorde et d'autres services liés"},
-                  "CMDChatlog": {"description": "Exporter un journal des messages cryptés mis en cache pour un canal donné dans la guilde actuelle"},
-                  "CMDClientIdentify": {"description": "Demandez qui est connecté à la prise secondaire des backends"},
-                  "CMDD43Z1Stats": {"description": "Peut être utilisé pour afficher certaines informations sur l'instance D43Z1 en cours d'exécution."},
-                  "CMDGlobalInfo": {"description": "Affiche les statistiques de toutes les instances connectées à la prise secondaire du backend"},
-                  "CMDD43Z1": {"description": "Peut être utilisé pour évaluer la performance actuelle du D43Z1"},
-                  "CMDInfo": {"description": "Affiche quelques statistiques sur ce bot"},
-                  "GROUPAdmin": {"description": "Contient des commandes uniquement disponibles pour le développeur"}
-               },
-               "hastebin": {"CMDHastebin": {
-                  "response": {
-                     "success": {"msg": "Voici votre hâte"},
-                     "error": {"msg": "Aucun fichier fourni"}
-                  },
-                  "description": "Téléchargez le fichier joint sur haste.hypercdn.de"
-               }},
-               "anime": {
-                  "sfw": {
-                     "CMDCry": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% pleure",
-                              "1": "%1% fait pleurer %0% des gens"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "urez sur quelque chose"
-                     },
-                     "CMDKitsune": {
-                        "response": {
-                           "success": {"msg": {"0": "Voilà"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDHolo": {
-                        "response": {
-                           "success": {"msg": {"0": "Quelque chose d'holo :"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Holo, avez-vous dit ?"
-                     },
-                     "CMDOokami": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDTail": {
-                        "response": {
-                           "success": {"msg": {"0": "Queue en peluche :3"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDEevee": {
-                        "response": {
-                           "success": {"msg": {"0": "Eevee!"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Eevee?"
-                     },
-                     "CMDTickle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% chatouille quelqu'un",
-                              "1": "%1% est chatouillé par %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Chatouillez quelqu'un"
-                     },
-                     "CMDBlush": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% fards à joues",
-                              "1": "%0% rougit à cause de %1%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Rougit à cause de quelqu'un"
-                     },
-                     "CMDSlap": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% gifle autour",
-                              "1": "%1% s'est fait gifler par %0%."
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Gifler quelqu'un"
-                     },
-                     "CMDFluff": {
-                        "response": {
-                           "success": {"msg": {"0": "Si moelleux :3"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Touffu"
-                     },
-                     "CMDKiss": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% distribue des baisers",
-                              "1": "%0% baisers %1% OwO"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Embrasser quelqu'un"
-                     },
-                     "CMDHug": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% veut faire un câlin",
-                              "1": "%0% câlins %1%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Embrassez quelqu'un"
-                     },
-                     "CMDSmile": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% doit sourire :)",
-                              "1": "%1% a fait %0% sourire :)"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Souriez à quelqu'un"
-                     },
-                     "CMDBite": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% mord quelqu'un",
-                              "1": "%1% se fait mordre par  %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Mordre quelqu'un (il peut s'agir d'un goûter)"
-                     },
-                     "CMDLick": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% a essayé de lécher quelqu'un",
-                              "1": "%0% lèche %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Lécher quelqu'un"
-                     },
-                     "CMDPat": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% caresse quelqu'un",
-                              "1": "%1% reçoit des tapes dans le dos de la part de %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Tapoter quelqu'un sur la tête"
-                     },
-                     "CMDPoke": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% fouille dans le coin",
-                              "1": "%1% se fait piquer par %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Poke quelqu'un"
-                     },
-                     "CMDCuddle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% veut faire des câlins",
-                              "1": "%1% se fait câliner par %0%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Faire un câlin à quelqu'un"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDDance": {
-                        "response": {
-                           "success": {"msg": {"0": "%0% danses"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Danse!"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": "UwU"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Image aléatoire"
-                     },
-                     "CMDFeed": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% nourriture est bonne",
-                              "1": "%0% partage la nourriture avec %1%"
-                           }},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "Nourrir quelqu'un"
-                     },
-                     "CMDSenko": {
-                        "response": {
-                           "success": {"msg": {"0": "_Senko noises_"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": ":3"
-                     }
-                  },
-                  "nsfw": {
-                     "CMDThreesome_FFM": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDYuri": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDPussylick": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDBlowjob": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDCum": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDYaoi": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDSolo": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDAnal": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDFuck": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDThreesome_FFF": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDThreesome_MMF": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Quelque chose a mal tourné",
-                              "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                           }
-                        },
-                        "description": "-Contenu NSFW-"
-                     }
-                  },
-                  "GROUPAnime": {"description": "Contains various anime themed commands"}
-               },
-               "tags": {
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Balise %0% supprimé"},
-                        "error": {"msg": "N'a pas réussi à supprimer la balise. Êtes-vous le propriétaire et la balise existe-t-elle ?"}
-                     },
-                     "description": "Supprime une balise existante"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Tag %0% créé"},
-                        "error": {"msg": "�\u2030chec de la création d'une balise"}
-                     },
-                     "description": "Crée une nouvelle balise avec un nom de balise et un contenu donnés"
-                  },
-                  "HYBRIDTag": {
-                     "response": {
-                        "success": {"msg": "%0%\n\n*Tag créé par %1%*"},
-                        "error": {"msg": "Balise %0% non trouvée"}
-                     },
-                     "description": "Créer, gérer et utiliser des balises pour cette guilde"
-                  },
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "Balise %0% actualisée"},
-                        "error": {"msg": "La mise à jour de la balise n'a pas été effectuée. Êtes-vous le propriétaire et la balise existe-t-elle ?"}
-                     },
-                     "description": "Modifie une balise donnée avec le nouveau contenu"
-                  }
-               },
-               "info": {"CMDInfo": {
-                  "response": {
-                     "field": {
-                        "3": {"title": "Tesson actuel"},
-                        "4": {"title": "Instance"},
-                        "5": {"title": "Lieu"},
-                        "6": {
-                           "title": "Site web",
-                           "link_text": "[Visitez le site web](%0%)"
-                        },
-                        "7": {
-                           "title": "Traitement des données",
-                           "link_text": "[Visitez le site web](%0%)"
-                        },
-                        "8": {
-                           "title": "Contenu du rapport",
-                           "link_text": "[Visitez le site web](%0%)"
-                        },
-                        "9": {
-                           "title": "Contactez",
-                           "link_text": "[Visitez le site web](%0%)"
+    "isDefault": false,
+    "translations": {
+        "de": {
+            "netbeacon": {
+                "xenia": {
+                    "bot": {
+                        "commands": {
+                            "chat": {
+                                "global": {
+                                    "help": {
+                                        "CMDHelp": {
+                                            "response": {
+                                                "field": {
+                                                    "commands": "Commandes"
+                                                },
+                                                "title": "**Aide / Commandes**"
+                                            },
+                                            "description": "Affiche une liste de commandes"
+                                        }
+                                    }
+                                },
+                                "structure": {
+                                    "me": {
+                                        "CMDMe": {
+                                            "description": "Montrez quelques statistiques sur vous-même"
+                                        }
+                                    },
+                                    "avatar": {
+                                        "RCMDAvatar": {
+                                            "response": {
+                                                "title": "Avatar",
+                                                "description": "Obtenir l'avatar de quelqu'un",
+                                                "error": {
+                                                    "msg": "Utilisateur non trouvé"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "settings": {
+                                        "guild": {
+                                            "CMDLicense": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Licence mise à jour"
+                                                    },
+                                                    "error": {
+                                                        "msg": "La mise à jour de la licence a échoué"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour la licence en utilisant une clé de licence"
+                                            },
+                                            "CMDSettings": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Mise à jour des paramètres de la guilde"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Impossible de mettre à jour les paramètres de la guilde.\nLes options disponibles sont les suivantes: %0%"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour les paramètres de cette guilde"
+                                            },
+                                            "HYBRIDGuild": {
+                                                "response": {
+                                                    "field": {
+                                                        "11": {
+                                                            "title": "canaux d'auto-apprentissage maximum"
+                                                        },
+                                                        "1": {
+                                                            "title": "Langue préférée"
+                                                        },
+                                                        "2": {
+                                                            "title": "Préfixe"
+                                                        },
+                                                        "3": {
+                                                            "title": "Paramètres"
+                                                        },
+                                                        "4": {
+                                                            "title": "Nom de la licence"
+                                                        },
+                                                        "5": {
+                                                            "title": "Est valable jusqu'à"
+                                                        },
+                                                        "6": {
+                                                            "title": "rôles max vperm"
+                                                        },
+                                                        "7": {
+                                                            "title": "max tags"
+                                                        },
+                                                        "8": {
+                                                            "title": "max notifications"
+                                                        },
+                                                        "9": {
+                                                            "title": "max twitch notifications"
+                                                        },
+                                                        "10": {
+                                                            "title": "max message logging"
+                                                        }
+                                                    },
+                                                    "title": "Paramètres généraux de la guilde"
+                                                },
+                                                "description": "Contient les paramètres généraux de la guilde"
+                                            },
+                                            "CMDPrefix": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Préfixe mis à jour en ```%0%```"
+                                                    },
+                                                    "error": {
+                                                        "msg": "La mise à jour du préfixe a échoué. Peut-être est-ce trop long?"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour le préfixe utilisé pour les commandes"
+                                            },
+                                            "CMDLanguage": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Mise à jour de la langue de réponse"
+                                                    },
+                                                    "error": {
+                                                        "msg": "N'a pas mis à jour la langue de réponse.\nLes options disponibles sont: %0%"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour la langue de réponse de Xenia"
+                                            }
+                                        },
+                                        "GROUPSettings": {
+                                            "description": "Contient tous les paramètres de la guilde"
+                                        },
+                                        "roles": {
+                                            "HYBRIDRoles": {
+                                                "response": {
+                                                    "title": "Rôles",
+                                                    "is_empty": "Aucun rôle n'a encore été créé"
+                                                },
+                                                "description": "Contient des commandes pour gérer les v rôles et les v perms"
+                                            }
+                                        },
+                                        "channel": {
+                                            "CMDAccessMode": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Mode d'accès mis à jour"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Le mode d'accès n'a pas été mis à jour.\nLes options disponibles sont: %0%"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour le mode d'accès pour le canal spécifié"
+                                            },
+                                            "CMDLogging": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Mise à jour des paramètres d'enregistrement"
+                                                    },
+                                                    "error": {
+                                                        "msg": "�\u2030chec de la mise à jour du mode d'enregistrement.\nLes options disponibles sont: [true, false]"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour les paramètres de journalisation pour le canal spécifié"
+                                            },
+                                            "GROUPChannel": {
+                                                "description": "Contient des commandes pour gérer les paramètres des canaux"
+                                            },
+                                            "CMDInfo": {
+                                                "response": {
+                                                    "success": {
+                                                        "field": {
+                                                            "1": {
+                                                                "title": "Drapeaux"
+                                                            },
+                                                            "2": {
+                                                                "title": "Mode d'accès"
+                                                            },
+                                                            "3": {
+                                                                "title": "Logging activé"
+                                                            },
+                                                            "4": {
+                                                                "title": "Enregistrement du canal de restauration automatique"
+                                                            }
+                                                        },
+                                                        "title": "Paramètres des canaux"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Le mode d'accès n'a pas été mis à jour.\nLes options disponibles sont:"
+                                                    }
+                                                },
+                                                "description": "Affiche les informations pour le canal spécifié"
+                                            }
+                                        },
+                                        "self": {
+                                            "HYBRIDSelf": {
+                                                "response": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "Nom d'utilisateur"
+                                                        },
+                                                        "2": {
+                                                            "title": "Id"
+                                                        },
+                                                        "3": {
+                                                            "title": "Rôle interne"
+                                                        },
+                                                        "4": {
+                                                            "title": "Langue préférée"
+                                                        },
+                                                        "5": {
+                                                            "title": "Icône URL",
+                                                            "content": "[Lien](%0%)"
+                                                        }
+                                                    },
+                                                    "title": "Self Info"
+                                                },
+                                                "description": "Contient des commandes pour gérer ses propres paramètres"
+                                            },
+                                            "CMDLanguage": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Mise à jour de la langue de réponse"
+                                                    },
+                                                    "error": {
+                                                        "msg": "N'a pas mis à jour la langue de réponse.\nLes options disponibles sont : %0%"
+                                                    }
+                                                },
+                                                "description": "Mettre à jour la langue de réponse de Xenia"
+                                            }
+                                        }
+                                    },
+                                    "chatbot": {
+                                        "learning": {
+                                            "CMDChannelLink": {
+                                                "success": {
+                                                    "msg": "Lien de la chaîne mis à jour ! Les changements peuvent prendre quelques minutes pour être pris en compte."
+                                                },
+                                                "description": "Liez un canal qui sera utilisé comme pool de données pour le chatbot.",
+                                                "error": {
+                                                    "invalid": {
+                                                        "arg": {
+                                                            "msg": "�\u2030chec de la liaison du canal. Le nombre maximum de liens a-t-il été atteint ou le canal n'existe-t-il pas ?"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDMode": {
+                                                "success": {
+                                                    "msg": "Le mode a été modifié avec succès ! Les changements peuvent prendre quelques minutes pour prendre effet."
+                                                },
+                                                "description": "Définit le mode d'utilisation des jeux de données.",
+                                                "error": {
+                                                    "invalid": {
+                                                        "arg": {
+                                                            "msg": "�\u2030chec du changement de mode.\nLes options disponibles sont : %0%"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "GROUPLearning": {
+                                                "description": "Contient des commandes permettant de contrôler les données utilisées"
+                                            }
+                                        },
+                                        "CMDSetup": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Les fonctionnalités de Chatbot sont maintenant prêtes.\nCette fonctionnalité n'est disponible qu'en anglais et est destinée à des fins de divertissement uniquement.\nLes réponses sont générées à partir de messages non vérifiés - Certaines réponses peuvent sembler inappropriées dans certains contextes.\nEn savoir plus sur l'origine des données racine [ici](%0%)",
+                                                    "deactivated": "le chatbot a été désactivé"
+                                                },
+                                                "error": {
+                                                    "create": {
+                                                        "failed": "Impossible de créer / mettre à jour les paramètres du canal nécessaires à la mise en place du chatbot"
+                                                    }
+                                                }
+                                            },
+                                            "chat": {
+                                                "default": {
+                                                    "name": "xenia"
+                                                }
+                                            },
+                                            "description": "Permet de mettre en place un canal pour discuter avec Xenia"
+                                        },
+                                        "GROUPChatbot": {
+                                            "description": "Contient des commandes pour gérer les paramètres de chatbot d'un canal"
+                                        },
+                                        "CMDInfo": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "Paramètres généraux"
+                                                        },
+                                                        "2": {
+                                                            "title": "Channel id"
+                                                        },
+                                                        "3": {
+                                                            "title": "Mode"
+                                                        }
+                                                    },
+                                                    "title": "Statistiques sur les chatbot"
+                                                },
+                                                "error": {
+                                                    "notfound": "Aucun canal n'a été mis en place"
+                                                }
+                                            },
+                                            "description": "Affiche des informations générales sur la mise en place du chatbot"
+                                        }
+                                    },
+                                    "notification": {
+                                        "CMDList": {
+                                            "response": {
+                                                "title": "Notifications"
+                                            },
+                                            "description": "Consulter les notifications existantes"
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification (ID: %0%) supprimé"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas réussi à supprimer la notification. Peut-être que cela a été créé par quelqu'un d'autre ou n'existe pas ?"
+                                                }
+                                            },
+                                            "description": "Supprimer une notification existante"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification créée (ID: %0% | %1%)"
+                                                },
+                                                "error": {
+                                                    "msg": "Echec de la création d'une notification! Peut-être que le cache est plein?"
+                                                }
+                                            },
+                                            "description": "Créer une nouvelle notification"
+                                        },
+                                        "GROUPNotification": {
+                                            "description": "Gérer les notifications pour cette guilde"
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification éditée"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas modifié la notification. Peut-être que cela a été créé par quelqu'un d'autre ou n'existe pas?"
+                                                }
+                                            },
+                                            "description": "Mettre à jour une notification existante"
+                                        }
+                                    },
+                                    "twitch": {
+                                        "CMDUpdate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Mise à jour de la notification des flux"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas mis à jour la notification de flux. Une notification avec cet identifiant existe-t-elle ?"
+                                                }
+                                            },
+                                            "description": "Mise à jour des notifications de flux pour un canal"
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification de suppression de flux"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas réussi à supprimer la notification de flux. Une notification avec cet identifiant existe-t-elle ?"
+                                                }
+                                            },
+                                            "description": "Supprimer les notifications de flux pour un canal"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notifications de flux demandées. Après évaluation, cela apparaîtra dans l'aperçu"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas demandé une autre notification de flux. L'URL est-elle valide, un canal reçoit-il déjà des notifications pour ce canal ou avez-vous atteint la limite?"
+                                                }
+                                            },
+                                            "description": "Demander des notifications de flux pour un canal"
+                                        },
+                                        "HYBRIDTwitch": {
+                                            "response": {
+                                                "success": {
+                                                    "title": "Notifications de flux demandées"
+                                                }
+                                            },
+                                            "description": "Créer, gérer et répertorier les notifications de flux"
+                                        }
+                                    },
+                                    "last": {
+                                        "GROUPLast": {
+                                            "description": "Restaurer les messages supprimés ou modifiés"
+                                        },
+                                        "CMDEdited": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Auteur"
+                                                        },
+                                                        "3": {
+                                                            "title": "Ancien message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Annexes"
+                                                        }
+                                                    },
+                                                    "title": "Message édité restauré"
+                                                },
+                                                "error": {
+                                                    "msg": "Aucun message trouvé pour restaurer"
+                                                }
+                                            },
+                                            "description": "Restaure le dernier message qui a été édité dans ce canal"
+                                        },
+                                        "CMDDeleted": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Auteur"
+                                                        },
+                                                        "3": {
+                                                            "title": "Ancien message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Annexes"
+                                                        }
+                                                    },
+                                                    "title": "Message supprimé restauré"
+                                                },
+                                                "error": {
+                                                    "msg": "Aucun message trouvé pour restaurer"
+                                                }
+                                            },
+                                            "description": "Restaure le dernier message qui a été supprimé dans ce canal"
+                                        }
+                                    },
+                                    "admin": {
+                                        "CMDEval": {
+                                            "description": "Peut être utilisé pour évaluer le code"
+                                        },
+                                        "CMDPing": {
+                                            "description": "Peut être utilisé pour vérifier le ping à la discorde et d'autres services liés"
+                                        },
+                                        "CMDChatlog": {
+                                            "description": "Exporter un journal des messages cryptés mis en cache pour un canal donné dans la guilde actuelle"
+                                        },
+                                        "CMDClientIdentify": {
+                                            "description": "Demandez qui est connecté à la prise secondaire des backends"
+                                        },
+                                        "CMDD43Z1Stats": {
+                                            "description": "Peut être utilisé pour afficher certaines informations sur l'instance D43Z1 en cours d'exécution."
+                                        },
+                                        "CMDGlobalInfo": {
+                                            "description": "Affiche les statistiques de toutes les instances connectées à la prise secondaire du backend"
+                                        },
+                                        "CMDD43Z1": {
+                                            "description": "Peut être utilisé pour évaluer la performance actuelle du D43Z1"
+                                        },
+                                        "CMDInfo": {
+                                            "description": "Affiche quelques statistiques sur ce bot"
+                                        },
+                                        "GROUPAdmin": {
+                                            "description": "Contient des commandes uniquement disponibles pour le développeur"
+                                        }
+                                    },
+                                    "hastebin": {
+                                        "CMDHastebin": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Voici votre hâte"
+                                                },
+                                                "error": {
+                                                    "msg": "Aucun fichier fourni"
+                                                }
+                                            },
+                                            "description": "Téléchargez le fichier joint sur haste.hypercdn.de"
+                                        }
+                                    },
+                                    "anime": {
+                                        "sfw": {
+                                            "CMDCry": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pleure",
+                                                            "1": "%1% fait pleurer %0% des gens"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "urez sur quelque chose"
+                                            },
+                                            "CMDKitsune": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Voilà"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDHolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Quelque chose d'holo :"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Holo, avez-vous dit ?"
+                                            },
+                                            "CMDOokami": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDTail": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Queue en peluche :3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDEevee": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Eevee!"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Eevee?"
+                                            },
+                                            "CMDTickle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% chatouille quelqu'un",
+                                                            "1": "%1% est chatouillé par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Chatouillez quelqu'un"
+                                            },
+                                            "CMDBlush": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% fards à joues",
+                                                            "1": "%0% rougit à cause de %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Rougit à cause de quelqu'un"
+                                            },
+                                            "CMDSlap": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% gifle autour",
+                                                            "1": "%1% s'est fait gifler par %0%."
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Gifler quelqu'un"
+                                            },
+                                            "CMDFluff": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Si moelleux :3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Touffu"
+                                            },
+                                            "CMDKiss": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% distribue des baisers",
+                                                            "1": "%0% baisers %1% OwO"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Embrasser quelqu'un"
+                                            },
+                                            "CMDHug": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% veut faire un câlin",
+                                                            "1": "%0% câlins %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Embrassez quelqu'un"
+                                            },
+                                            "CMDSmile": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% doit sourire :)",
+                                                            "1": "%1% a fait %0% sourire :)"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Souriez à quelqu'un"
+                                            },
+                                            "CMDBite": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% mord quelqu'un",
+                                                            "1": "%1% se fait mordre par  %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Mordre quelqu'un (il peut s'agir d'un goûter)"
+                                            },
+                                            "CMDLick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% a essayé de lécher quelqu'un",
+                                                            "1": "%0% lèche %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Lécher quelqu'un"
+                                            },
+                                            "CMDPat": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% caresse quelqu'un",
+                                                            "1": "%1% reçoit des tapes dans le dos de la part de %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Tapoter quelqu'un sur la tête"
+                                            },
+                                            "CMDPoke": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% fouille dans le coin",
+                                                            "1": "%1% se fait piquer par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Poke quelqu'un"
+                                            },
+                                            "CMDCuddle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% veut faire des câlins",
+                                                            "1": "%1% se fait câliner par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Faire un câlin à quelqu'un"
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDDance": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% danses"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Danse!"
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "UwU"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Image aléatoire"
+                                            },
+                                            "CMDFeed": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% nourriture est bonne",
+                                                            "1": "%0% partage la nourriture avec %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Nourrir quelqu'un"
+                                            },
+                                            "CMDSenko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "_Senko noises_"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            }
+                                        },
+                                        "nsfw": {
+                                            "CMDThreesome_FFM": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDYuri": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDPussylick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDBlowjob": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDCum": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDYaoi": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDSolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDAnal": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDFuck": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDThreesome_FFF": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDThreesome_MMF": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-Contenu NSFW-"
+                                            }
+                                        },
+                                        "GROUPAnime": {
+                                            "description": "Contains various anime themed commands"
+                                        }
+                                    },
+                                    "tags": {
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Balise %0% supprimé"
+                                                },
+                                                "error": {
+                                                    "msg": "N'a pas réussi à supprimer la balise. Êtes-vous le propriétaire et la balise existe-t-elle ?"
+                                                }
+                                            },
+                                            "description": "Supprime une balise existante"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Tag %0% créé"
+                                                },
+                                                "error": {
+                                                    "msg": "�\u2030chec de la création d'une balise"
+                                                }
+                                            },
+                                            "description": "Crée une nouvelle balise avec un nom de balise et un contenu donnés"
+                                        },
+                                        "HYBRIDTag": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "%0%\n\n*Tag créé par %1%*"
+                                                },
+                                                "error": {
+                                                    "msg": "Balise %0% non trouvée"
+                                                }
+                                            },
+                                            "description": "Créer, gérer et utiliser des balises pour cette guilde"
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Balise %0% actualisée"
+                                                },
+                                                "error": {
+                                                    "msg": "La mise à jour de la balise n'a pas été effectuée. Êtes-vous le propriétaire et la balise existe-t-elle ?"
+                                                }
+                                            },
+                                            "description": "Modifie une balise donnée avec le nouveau contenu"
+                                        }
+                                    },
+                                    "info": {
+                                        "CMDInfo": {
+                                            "response": {
+                                                "field": {
+                                                    "3": {
+                                                        "title": "Tesson actuel"
+                                                    },
+                                                    "4": {
+                                                        "title": "Instance"
+                                                    },
+                                                    "5": {
+                                                        "title": "Lieu"
+                                                    },
+                                                    "6": {
+                                                        "title": "Site web",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "7": {
+                                                        "title": "Traitement des données",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "8": {
+                                                        "title": "Contenu du rapport",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "9": {
+                                                        "title": "Contactez",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    }
+                                                },
+                                                "title": "Info"
+                                            },
+                                            "description": "Montre quelques informations de base sur moi"
+                                        }
+                                    }
+                                }
+                            },
+                            "slash": {
+                                "structure": {
+                                    "avatar": {
+                                        "RCMDAvatar": {
+                                            "response": {
+                                                "title": "Avatar",
+                                                "error": {
+                                                    "msg": "Utilisateur non trouvé"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "twitch": {
+                                        "CMDUpdate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Mise à jour de la notification des flux"
+                                                },
+                                                "error": {
+                                                    "msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"
+                                                }
+                                            }
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification des flux supprimés"
+                                                },
+                                                "error": {
+                                                    "msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"
+                                                }
+                                            }
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notifications de flux demandées. Après l'évaluation, cela apparaîtra dans l'aperçu"
+                                                },
+                                                "error": {
+                                                    "msg": "Échec de la demande de notification d'un autre flux. L'URL est-elle valide, un canal reçoit-il déjà des notifications pour ce canal ou avez-vous atteint la limite ?"
+                                                }
+                                            }
+                                        },
+                                        "CMDList": {
+                                            "response": {
+                                                "success": {
+                                                    "title": "Notifications de flux"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "notification": {
+                                        "CMDList": {
+                                            "response": {
+                                                "title": "Notifications"
+                                            }
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification créée (ID: %0% | %1%)"
+                                                },
+                                                "error": {
+                                                    "msg": "La notification n'a pas été créée ! Le cache est peut-être plein ?"
+                                                }
+                                            }
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification (ID : %0%) supprimée"
+                                                },
+                                                "error": {
+                                                    "msg": "�\u2030chec de la suppression de la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"
+                                                }
+                                            }
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification éditée"
+                                                },
+                                                "error": {
+                                                    "msg": "Impossible de modifier la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"
+                                                }
+                                            },
+                                            "description": "Mettre à jour une notification existante"
+                                        }
+                                    },
+                                    "last": {
+                                        "CMDEdited": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "Id du message"
+                                                        },
+                                                        "2": {
+                                                            "title": "Auteur"
+                                                        },
+                                                        "3": {
+                                                            "title": "Ancien message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Annexes"
+                                                        }
+                                                    },
+                                                    "title": "Restauration d'un message supprimé"
+                                                },
+                                                "error": {
+                                                    "msg": "Aucun message trouvé à restaurer"
+                                                }
+                                            }
+                                        },
+                                        "CMDDeleted": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "Id du message"
+                                                        },
+                                                        "2": {
+                                                            "title": "Auteur"
+                                                        },
+                                                        "3": {
+                                                            "title": "Ancien message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Annexes"
+                                                        }
+                                                    },
+                                                    "title": "Restauration d'un message supprimé"
+                                                },
+                                                "error": {
+                                                    "msg": "Aucun message trouvé à restaurer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "notificationn": {
+                                        "CMDList": {
+                                            "description": "Afficher les notifications existantes"
+                                        }
+                                    },
+                                    "tag": {
+                                        "RCMDTag": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "%0%\n\n*Tag créé par %1%*"
+                                                },
+                                                "error": {
+                                                    "msg": "Tag %0% non trouvé"
+                                                }
+                                            }
+                                        },
+                                        "s": {
+                                            "CMDDelete": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "�\u2030tiquette %0% supprimé"
+                                                    },
+                                                    "error": {
+                                                        "msg": "�\u2030chec de la suppression du tag. Êtes-vous le propriétaire et le tag existe-t-il ?"
+                                                    }
+                                                }
+                                            },
+                                            "CMDCreate": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "�\u2030tiquette %0% créée"
+                                                    },
+                                                    "error": {
+                                                        "msg": "�\u2030chec de la création du tag"
+                                                    }
+                                                }
+                                            },
+                                            "CMDModify": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "�\u2030tiquette %0% actualisé"
+                                                    },
+                                                    "error": {
+                                                        "msg": "�\u2030chec de la mise à jour du tag. Êtes-vous le propriétaire et la balise existe-t-elle ?"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "anime": {
+                                        "nsfw": {
+                                            "CMDCum": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDYuri": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDYaoi": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPussylick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDAnal": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDFuck": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBlowjob": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "sfw": {
+                                            "CMDCry": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pleure",
+                                                            "1": "%1% fait pleurer %0% des gens"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDTickle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% chatouille quelqu'un",
+                                                            "1": "%1% est chatouillé par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBlush": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% fards à joues",
+                                                            "1": "%0% rougit à cause de %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSlap": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% gifle autour",
+                                                            "1": "%1% s'est fait gifler par %0%."
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDKiss": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% distribue des baisers",
+                                                            "1": "%0% baisers %1% OwO"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDHug": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% veut faire un câlin",
+                                                            "1": "%0% câlins %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSmile": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% doit sourire :)",
+                                                            "1": "%1% a fait %0% sourire :)"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBite": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% mord quelqu'un",
+                                                            "1": "%1% se fait mordre par  %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDLick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% a essayé de lécher quelqu'un",
+                                                            "1": "%0% lèche %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPat": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% caresse quelqu'un",
+                                                            "1": "%1% reçoit des tapes dans le dos de la part de %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPoke": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% fouille dans le coin",
+                                                            "1": "%1% se fait piquer par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDCuddle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% veut faire des câlins",
+                                                            "1": "%1% se fait câliner par %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDDance": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% danses"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDFeed": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% nourriture est bonne",
+                                                            "1": "%0% partage la nourriture avec %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "UwU"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Quelque chose a mal tourné",
+                                                        "img": {
+                                                            "msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "info": {
+                                        "RCMDInfo": {
+                                            "response": {
+                                                "field": {
+                                                    "3": {
+                                                        "title": "Shard actuel"
+                                                    },
+                                                    "4": {
+                                                        "title": "Instance"
+                                                    },
+                                                    "5": {
+                                                        "title": "Localisation"
+                                                    },
+                                                    "6": {
+                                                        "title": "Site web",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "7": {
+                                                        "title": "Traitement des données",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "8": {
+                                                        "title": "Contenu du rapport",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    },
+                                                    "9": {
+                                                        "title": "Contact",
+                                                        "link_text": "[Visitez le site web](%0%)"
+                                                    }
+                                                },
+                                                "title": "Information"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                     },
-                     "title": "Info"
-                  },
-                  "description": "Montre quelques informations de base sur moi"
-               }}
+                    }
+                }
             }
-         },
-         "slash": {"structure": {
-             "avatar": { "RCMDAvatar": { "response": {
-                     "title": "Avatar",
-                     "success": { "field": { "1": {
-                         "title": "Lien",
-                         "description": "[Télécharger](%0%)"
-                     }}},
-                     "error": { "msg":  "Utilisateur non trouvé"}
-             }}},
-             "twitch": {
-                 "CMDUpdate": {
-                     "response": {
-                         "success": {"msg": "Mise à jour de la notification des flux"},
-                         "error": {"msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"}
-                     }
-                 },
-                 "CMDDelete": {
-                     "response": {
-                         "success": {"msg": "Notification des flux supprimés"},
-                         "error": {"msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"}
-                     }
-                 },
-                 "CMDCreate": {
-                     "response": {
-                         "success": {"msg": "Notifications de flux demandées. Après l'évaluation, cela apparaîtra dans l'aperçu"},
-                         "error": {"msg": "Échec de la demande de notification d'un autre flux. L'URL est-elle valide, un canal reçoit-il déjà des notifications pour ce canal ou avez-vous atteint la limite ?"}
-                     }
-                 },
-                 "CMDList": {
-                     "response": {"success": {"title": "Notifications de flux"}}
-                 }
-             },
-            "notification": {
-               "CMDList": {"response": {"title": "Notifications"}},
-               "CMDCreate": {"response": {
-                  "success": {"msg": "Notification créée (ID: %0% | %1%)"},
-                  "error": {"msg": "La notification n'a pas été créée ! Le cache est peut-être plein ?"}
-               }},
-               "CMDDelete": {"response": {
-                  "success": {"msg": "Notification (ID : %0%) supprimée"},
-                  "error": {"msg": "�\u2030chec de la suppression de la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"}
-               }},
-               "CMDModify": {
-                  "response": {
-                     "success": {"msg": "Notification éditée"},
-                     "error": {"msg": "Impossible de modifier la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"}
-                  },
-                  "description": "Mettre à jour une notification existante"
-               }
+        },
+        "default": {
+            "onMissingBotPerms": {
+                "description": "Je suis incapable d'exécuter la commande en raison de permissions manquantes !",
+                "title": "Echec : Bot manque de permis",
+                "requiredPerms": {
+                    "fn": "Autorisations requises:"
+                }
             },
-            "last": {
-               "CMDEdited": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "Id du message"},
-                        "2": {"title": "Auteur"},
-                        "3": {"title": "Ancien message"},
-                        "4": {"title": "Annexes"}
-                     },
-                     "title": "Restauration d'un message supprimé"
-                  },
-                  "error": {"msg": "Aucun message trouvé à restaurer"}
-               }},
-               "CMDDeleted": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "Id du message"},
-                        "2": {"title": "Auteur"},
-                        "3": {"title": "Ancien message"},
-                        "4": {"title": "Annexes"}
-                     },
-                     "title": "Restauration d'un message supprimé"
-                  },
-                  "error": {"msg": "Aucun message trouvé à restaurer"}
-               }}
+            "onMissingMemberPerms": {
+                "description": "Vous n'avez pas le droit de faire cela!",
+                "title": "Echec : Pas assez de permis",
+                "requiredPerms": {
+                    "fn": "Autorisations requises:"
+                }
             },
-            "notificationn": {"CMDList": {"description": "Afficher les notifications existantes"}},
-            "tag": {
-               "RCMDTag": {"response": {
-                  "success": {"msg": "%0%\n\n*Tag créé par %1%*"},
-                  "error": {"msg": "Tag %0% non trouvé"}
-               }},
-               "s": {
-                  "CMDDelete": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% supprimé"},
-                     "error": {"msg": "�\u2030chec de la suppression du tag. Êtes-vous le propriétaire et le tag existe-t-il ?"}
-                  }},
-                  "CMDCreate": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% créée"},
-                     "error": {"msg": "�\u2030chec de la création du tag"}
-                  }},
-                  "CMDModify": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% actualisé"},
-                     "error": {"msg": "�\u2030chec de la mise à jour du tag. Êtes-vous le propriétaire et la balise existe-t-elle ?"}
-                  }}
-               }
+            "onError": {
+                "title": "Erreur"
             },
-            "anime": {
-               "nsfw": {
-                  "CMDCum": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDYuri": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDSolo": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDAnal": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDFuck": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }}
-               },
-               "sfw": {
-                  "CMDCry": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% pleure",
-                        "1": "%1% fait pleurer %0% des gens"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDTickle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% chatouille quelqu'un",
-                        "1": "%1% est chatouillé par %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDBlush": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% fards à joues",
-                        "1": "%0% rougit à cause de %1%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDSlap": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% gifle autour",
-                        "1": "%1% s'est fait gifler par %0%."
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDKiss": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% distribue des baisers",
-                        "1": "%0% baisers %1% OwO"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDHug": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% veut faire un câlin",
-                        "1": "%0% câlins %1%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDSmile": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% doit sourire :)",
-                        "1": "%1% a fait %0% sourire :)"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDBite": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% mord quelqu'un",
-                        "1": "%1% se fait mordre par  %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDLick": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% a essayé de lécher quelqu'un",
-                        "1": "%0% lèche %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDPat": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% caresse quelqu'un",
-                        "1": "%1% reçoit des tapes dans le dos de la part de %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDPoke": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% fouille dans le coin",
-                        "1": "%1% se fait piquer par %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDCuddle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% veut faire des câlins",
-                        "1": "%1% se fait câliner par %0%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": ":3"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDDance": {"response": {
-                     "success": {"msg": {"0": "%0% danses"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDFeed": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% nourriture est bonne",
-                        "1": "%0% partage la nourriture avec %1%"
-                     }},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "UwU"}},
-                     "error": {
-                        "msg": "Quelque chose a mal tourné",
-                        "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
-                     }
-                  }}
-               }
+            "onAdminPerms": {
+                "description": "Il semble que j'aie des privilèges d'administrateur. Ceci est fortement déconseillé car il s'agit d'un risque pour la sécurité. Veuillez ne m'attribuer que les autorisations nécessaires pour faire mon travail.\n\nSi l'autorisation a été attribuée par accident, veuillez la retirer à moi / aux rôles qui me sont attribués.\nSi cela est intentionnel, désactivez ce message en modifiant mon paramètre BOT_IGNORE_ADMIN_PERMS.",
+                "title": "Avertissement : Le robot a des droits d'administrateur"
             },
-            "info": {"RCMDInfo": {"response": {
-               "field": {
-                  "3": {"title": "Shard actuel"},
-                  "4": {"title": "Instance"},
-                  "5": {"title": "Localisation"},
-                  "6": {
-                     "title": "Site web",
-                     "link_text": "[Visitez le site web](%0%)"
-                  },
-                  "7": {
-                     "title": "Traitement des données",
-                     "link_text": "[Visitez le site web](%0%)"
-                  },
-                  "8": {
-                     "title": "Contenu du rapport",
-                     "link_text": "[Visitez le site web](%0%)"
-                  },
-                  "9": {
-                     "title": "Contact",
-                     "link_text": "[Visitez le site web](%0%)"
-                  }
-               },
-               "title": "Information"
-            }}}
-         }}
-      }}}}},
-      "default": {
-         "onMissingBotPerms": {
-            "description": "Je suis incapable d'exécuter la commande en raison de permissions manquantes !",
-            "title": "Echec : Bot manque de permis",
-            "requiredPerms": {"fn": "Autorisations requises:"}
-         },
-         "onMissingMemberPerms": {
-            "description": "Vous n'avez pas le droit de faire cela!",
-            "title": "Echec : Pas assez de permis",
-            "requiredPerms": {"fn": "Autorisations requises:"}
-         },
-         "onError": {"title": "Erreur"},
-         "onAdminPerms": {
-            "description": "Il semble que j'aie des privilèges d'administrateur. Ceci est fortement déconseillé car il s'agit d'un risque pour la sécurité. Veuillez ne m'attribuer que les autorisations nécessaires pour faire mon travail.\n\nSi l'autorisation a été attribuée par accident, veuillez la retirer à moi / aux rôles qui me sont attribués.\nSi cela est intentionnel, désactivez ce message en modifiant mon paramètre BOT_IGNORE_ADMIN_PERMS.",
-            "title": "Avertissement : Le robot a des droits d'administrateur"
-         },
-         "onUnhandledException": {
-            "exception": {"msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"},
-            "cacheexception": {"msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"},
-            "backendexception": {"msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"},
-            "dataexception": {"msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"},
-            "title": "Oups"
-         },
-         "onMissingArgs": {
-            "usage": {"fn": "Utilisation:"},
-            "description": "Cette commande nécessite des arguments plus/différents",
-            "title": "Echec : Pas assez d'arguments"
-         },
-         "onMissingNSFW": {
-            "hidden": "Certaines commandes NSFW ont été cachées en raison de leur exécution dans un canal non NSFW.",
-            "description": "Les commandes NSFW ne peuvent pas être utilisées dans les canaux non NSFW.",
-            "title": "�\u2030chec : La commande nécessite un canal NSFW"
-         },
-         "onCooldownActive": {
-            "description": "Veuillez attendre un certain temps avant de recommencer",
-            "title": "Echec : Cooldown Active"
-         },
-         "onSuccess": {"title": "Succès"},
-         "estimatedCommand": {"msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?"}
-      }
-   },
-   "languageDescription": "The default French language package",
-   "languageId": "fr_FR",
-   "languageName": "French-Default"
+            "onUnhandledException": {
+                "exception": {
+                    "msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                },
+                "cacheexception": {
+                    "msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                },
+                "backendexception": {
+                    "msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                },
+                "dataexception": {
+                    "msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                },
+                "title": "Oups"
+            },
+            "onMissingArgs": {
+                "usage": {
+                    "fn": "Utilisation:"
+                },
+                "description": "Cette commande nécessite des arguments plus/différents",
+                "title": "Echec : Pas assez d'arguments"
+            },
+            "onMissingNSFW": {
+                "hidden": "Certaines commandes NSFW ont été cachées en raison de leur exécution dans un canal non NSFW.",
+                "description": "Les commandes NSFW ne peuvent pas être utilisées dans les canaux non NSFW.",
+                "title": "�\u2030chec : La commande nécessite un canal NSFW"
+            },
+            "onCooldownActive": {
+                "description": "Veuillez attendre un certain temps avant de recommencer",
+                "title": "Echec : Cooldown Active"
+            },
+            "onSuccess": {
+                "title": "Succès"
+            },
+            "estimatedCommand": {
+                "msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?"
+            }
+        }
+    },
+    "languageDescription": "The default French language package",
+    "languageId": "fr_FR",
+    "languageName": "French-Default"
 }

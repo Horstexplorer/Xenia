@@ -50,43 +50,57 @@ public class RCMDAvatar extends Command{
 		CmdArg<Long> userId = cmdArgs.getByName("user_id");
 		commandEvent.getEvent().deferReply().queue(
 			interactionHook -> {
-				EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(),"response.title"), commandEvent.getEvent().getUser());
+				EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getUser());
 				if(userCmdArg.getValue() != null){
 					interactionHook.editOriginalEmbeds(
-					embedBuilder
-						.setColor(Color.GREEN)
-						.setImage(userCmdArg.getValue().getEffectiveAvatarUrl())
-						.addField(translationPackage.getTranslation(getClass(),"response.success.field.1.title"), translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.field.1.description", userCmdArg.getValue().getEffectiveAvatarUrl()),true)
-						.build()
+						embedBuilder
+							.setColor(Color.GREEN)
+							.setImage(userCmdArg.getValue().getEffectiveAvatarUrl() + "?size=512")
+							.setDescription(
+								"[256px](" + userCmdArg.getValue().getEffectiveAvatarUrl() + "?size=256) " +
+									"[512px](" + userCmdArg.getValue().getEffectiveAvatarUrl() + "?size=512) " +
+									"[1024px](" + userCmdArg.getValue().getEffectiveAvatarUrl() + "?size=1024) "
+							)
+							.build()
 					).queue();
-				}else if(userId.getValue() != null){
+				}
+				else if(userId.getValue() != null){
 					commandEvent.getEvent().getJDA().retrieveUserById(userId.getValue())
 						.queue(
 							user -> {
 								interactionHook.editOriginalEmbeds(
-								embedBuilder
-									.setColor(Color.GREEN)
-									.setImage(user.getEffectiveAvatarUrl())
-									.addField(translationPackage.getTranslation(getClass(),"response.success.field.1.title"), translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.field.1.description", user.getEffectiveAvatarUrl()),true)
-									.build()
+									embedBuilder
+										.setColor(Color.GREEN)
+										.setImage(user.getEffectiveAvatarUrl() + "?size=512")
+										.setDescription(
+											"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
+												"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
+												"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
+										)
+										.build()
 								).queue();
 							},
 							error -> {
 								interactionHook.editOriginalEmbeds(
-								embedBuilder
-									.setColor(Color.RED)
-									.setDescription(translationPackage.getTranslation(getClass(),"error.msg"))
-									.build()
+									embedBuilder
+										.setColor(Color.RED)
+										.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
+										.build()
 								).queue();
 							}
 						);
-				}else{
+				}
+				else{
 					interactionHook.editOriginalEmbeds(
-					embedBuilder
-						.setColor(Color.GREEN)
-						.setImage(commandEvent.getEvent().getUser().getEffectiveAvatarUrl())
-						.addField(translationPackage.getTranslation(getClass(),"response.success.field.1.title"), translationPackage.getTranslationWithPlaceholders(getClass(),"response.success.field.1.description", commandEvent.getEvent().getUser().getEffectiveAvatarUrl()),true)
-						.build()
+						embedBuilder
+							.setColor(Color.GREEN)
+							.setImage(commandEvent.getEvent().getUser().getEffectiveAvatarUrl() + "?size=512")
+							.setDescription(
+								"[256px](" + commandEvent.getEvent().getUser().getEffectiveAvatarUrl() + "?size=256) " +
+									"[512px](" + commandEvent.getEvent().getUser().getEffectiveAvatarUrl() + "?size=512) " +
+									"[1024px](" + commandEvent.getEvent().getUser().getEffectiveAvatarUrl() + "?size=1024) "
+							)
+							.build()
 					).queue();
 				}
 			}

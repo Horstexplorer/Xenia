@@ -1,1149 +1,1874 @@
 {
-   "isDefault": true,
-   "translations": {
-      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
-         "chat": {
-            "global": {"help": {"CMDHelp": {
-               "response": {
-                  "field": {"commands": "Commands"},
-                  "title": "**Help / Commands**"
-               },
-               "description": "Displays a list of commands"
-            }}},
-            "structure": {
-               "me": { "CMDMe": {
-                   "description": "Show some stats about yourself"
-               }},
-               "avatar": { "CMDAvatar": { "response": {
-                   "title": "Avatar",
-                   "description": "Get the avatar of someone",
-                   "success": { "field": { "1": {
-                       "title": "Link",
-                       "description": "[Download](%0%)"
-                   }}},
-                   "error": { "msg":  "User not found"}
-               }}},
-               "settings": {
-                  "guild": {
-                     "CMDLicense": {
-                        "response": {
-                           "success": {"msg": "License updated"},
-                           "error": {"msg": "Updating license failed"}
-                        },
-                        "description": "Update the license using a license key"
-                     },
-                     "CMDSettings": {
-                        "response": {
-                           "success": {"msg": "Guild settings updated"},
-                           "error": {"msg": "Failed to update guild settings.\nAvailable options are: %0%"}
-                        },
-                        "description": "Update the settings for this guild"
-                     },
-                     "HYBRIDGuild": {
-                        "response": {
-                           "field": {
-                              "11": {"title": "max self learning channels"},
-                              "1": {"title": "Preferred language"},
-                              "2": {"title": "Prefix"},
-                              "3": {"title": "Settings"},
-                              "4": {"title": "License name"},
-                              "5": {"title": "Is valid until"},
-                              "6": {"title": "max vperm roles"},
-                              "7": {"title": "max tags"},
-                              "8": {"title": "max notifications"},
-                              "9": {"title": "max twitch notifications"},
-                              "10": {"title": "max message logging"}
-                           },
-                           "title": "General guild settings"
-                        },
-                        "description": "Contains general guild settings"
-                     },
-                     "CMDPrefix": {
-                        "response": {
-                           "success": {"msg": "Prefix updated to ```%0%```"},
-                           "error": {"msg": "Updating prefix failed. Maybe its too long?"}
-                        },
-                        "description": "Update the prefix used for commands"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "Response language updated"},
-                           "error": {"msg": "Failed to update response language.\nAvailable options are: %0%"}
-                        },
-                        "description": "Update the response language of Xenia"
-                     }
-                  },
-                  "GROUPSettings": {"description": "Contains all settings for the guild"},
-                  "roles": {"HYBRIDRoles": {
-                     "response": {
-                        "title": "Roles",
-                        "is_empty": "No role created yet"
-                     },
-                     "description": "Contains commands to manage v roles and v perms"
-                  }},
-                  "channel": {
-                     "CMDAccessMode": {
-                        "response": {
-                           "success": {"msg": "Access mode updated"},
-                           "error": {"msg": "Failed to update access mode.\nAvailable options are: %0%"}
-                        },
-                        "description": "Update the access mode for the specified channel"
-                     },
-                     "CMDLogging": {
-                        "response": {
-                           "success": {"msg": "Updated logging setting"},
-                           "error": {"msg": "Failed To Update Logging Mode.\nAvailable options are: [true, false]"}
-                        },
-                        "description": "Update the logging settings for the specified channel"
-                     },
-                     "GROUPChannel": {"description": "Contains commands to manage channel settings"},
-                     "CMDInfo": {
-                        "response": {
-                           "success": {
-                              "field": {
-                                 "1": {"title": "Flags"},
-                                 "2": {"title": "Access mode"},
-                                 "3": {"title": "Logging enabled"},
-                                 "4": {"title": "Logging auto restore channel"}
-                              },
-                              "title": "Channel settings"
-                           },
-                           "error": {"msg": "Failed to update access mode.\nAvailable options are:"}
-                        },
-                        "description": "Displays information for the specified channel"
-                     }
-                  },
-                  "self": {
-                     "HYBRIDSelf": {
-                        "response": {
-                           "field": {
-                              "1": {"title": "Username"},
-                              "2": {"title": "Id"},
-                              "3": {"title": "Internal Role"},
-                              "4": {"title": "Preferred Language"},
-                              "5": {
-                                 "title": "Icon URL",
-                                 "content": "[Link](%0%)"
-                              }
-                           },
-                           "title": "Self Info"
-                        },
-                        "description": "Contains commands to manage own settings"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "Response language updated"},
-                           "error": {"msg": "Failed to update response language.\nAvailable options are: %0%"}
-                        },
-                        "description": "Update the response language of Xenia"
-                     }
-                  }
-               },
-               "chatbot": {
-                  "learning": {
-                     "CMDChannelLink": {
-                        "success": {"msg": "Channel link updated! It may take a few minutes for the changes to take effect."},
-                        "description": "Link a channel to be used as data pool for the chatbot",
-                        "error": {"invalid": {"arg": {"msg": "Failed to link channel. Has the maximum number of links been reached or does the channel not exist?"}}}
-                     },
-                     "CMDMode": {
-                        "success": {"msg": "Mode changed successfully! It may take a few minutes for the changes to take effect."},
-                        "description": "Defines the mode of which the datasets will be used",
-                        "error": {"invalid": {"arg": {"msg": "Failed to change mode.\nAvailable options are: %0%"}}}
-                     },
-                     "GROUPLearning": {"description": "Contains commands to control the data used"}
-                  },
-                  "CMDSetup": {
-                     "response": {
-                        "success": {
-                           "msg": "Chatbot features are now ready.\nThis feature is only available in English and is intended for entertainment purposes only.\nResponses are generated from unverified messages - Some answers may seem inappropriate in certain contexts.\nLearn more about the origin of the root datasets [here](%0%)",
-                           "deactivated": "Chatbot has been deactivated"
-                        },
-                        "error": {"create": {"failed": "Failed to create / update the channel settings required to set up the chatbot"}}
-                     },
-                     "chat": {"default": {"name": "xenia"}},
-                     "description": "Allows to set up a channel to chat with Xenia"
-                  },
-                  "GROUPChatbot": {"description": "Contains commands to manage chatbot settings for a channel"},
-                  "CMDInfo": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "General settings"},
-                              "2": {"title": "Channel"},
-                              "3": {"title": "Mode"}
-                           },
-                           "title": "Chatbot information"
-                        },
-                        "error": {"notfound": "No channel has been set up"}
-                     },
-                     "description": "Shows general information about the chatbot setup"
-                  }
-               },
-               "notification": {
-                  "CMDList": {
-                     "response": {"title": "Notifications"},
-                     "description": "View existing notifications"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Notification (ID: %0%) deleted"},
-                        "error": {"msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?"}
-                     },
-                     "description": "Delete an existing notification"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Notification created (ID: %0% | %1%)"},
-                        "error": {"msg": "Failed to create notification! Perhaps the cache is full?"}
-                     },
-                     "description": "Create a new notification"
-                  },
-                  "GROUPNotification": {"description": "Manage notifications for this guild"},
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "Notification edited"},
-                        "error": {"msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"}
-                     },
-                     "description": "Update an existing notification"
-                  }
-               },
-               "twitch": {
-                  "CMDUpdate": {
-                     "response": {
-                        "success": {"msg": "Updated stream notification"},
-                        "error": {"msg": "Failed to update stream notification. Does a notification with this id exist?"}
-                     },
-                     "description": "Update stream notifications for a channel"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Deleted stream notification"},
-                        "error": {"msg": "Failed to delete stream notification. Does a notification with this id exist?"}
-                     },
-                     "description": "Remove stream notifications for a channel"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Requested stream notifications. After evaluation this will show up in the overview"},
-                        "error": {"msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?"}
-                     },
-                     "description": "Request stream notifications for a channel"
-                  },
-                  "HYBRIDTwitch": {
-                     "response": {"success": {"title": "Stream notifications"}},
-                     "description": "Create and manage and list stream notifications"
-                  }
-               },
-               "last": {
-                  "GROUPLast": {"description": "Restore deleted or edited messages"},
-                  "CMDEdited": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "MessageId"},
-                              "2": {"title": "Author"},
-                              "3": {"title": "Old Message"},
-                              "4": {"title": "Attachments"}
-                           },
-                           "title": "Restored edited message"
-                        },
-                        "error": {"msg": "No message found to restore"}
-                     },
-                     "description": "Restores the last message which has been edited in this channel"
-                  },
-                  "CMDDeleted": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "MessageId"},
-                              "2": {"title": "Author"},
-                              "3": {"title": "Old Message"},
-                              "4": {"title": "Attachments"}
-                           },
-                           "title": "Restored deleted message"
-                        },
-                        "error": {"msg": "No message found to restore"}
-                     },
-                     "description": "Restores the last message which has been deleted in this channel"
-                  }
-               },
-               "admin": {
-                  "CMDEval": {"description": "Can be used to evaluate code"},
-                  "CMDPing": {"description": "Can be used to check the ping to discord and other linked services"},
-                  "CMDChatlog": {"description": "Export a log of the encrypted cached messages for a given channel in the current guild"},
-                  "CMDClientIdentify": {"description": "Ask who is connected to the backends secondary socket"},
-                  "CMDD43Z1Stats": {"description": "Can be used to display some information about the running D43Z1 instance"},
-                  "CMDGlobalInfo": {"description": "Displays stats of all instances connected to the secondary socket of the backend"},
-                  "CMDD43Z1": {"description": "Can be used to evaluate the current D43Z1 performance"},
-                  "CMDInfo": {"description": "Displays some statistics about this bot"},
-                  "GROUPAdmin": {"description": "Contains commands only available to the developer"}
-               },
-               "hastebin": {"CMDHastebin": {
-                  "response": {
-                     "success": {"msg": "Here is your haste"},
-                     "error": {"msg": "No file provided"}
-                  },
-                  "description": "Upload the attached file to haste.hypercdn.de"
-               }},
-               "anime": {
-                  "sfw": {
-                     "CMDCry": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% cries",
-                              "1": "%1% made %0% cry"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Cry about something"
-                     },
-                     "CMDKitsune": {
-                        "response": {
-                           "success": {"msg": {"0": "Here you go"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDHolo": {
-                        "response": {
-                           "success": {"msg": {"0": "Something holo:"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Holo did you say?"
-                     },
-                     "CMDOokami": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDTail": {
-                        "response": {
-                           "success": {"msg": {"0": "Fluffy tail :3"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDEevee": {
-                        "response": {
-                           "success": {"msg": {"0": "Eevee!"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Eevee?"
-                     },
-                     "CMDTickle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% tickles someone",
-                              "1": "%1% gets tickled by %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Tickle someone"
-                     },
-                     "CMDBlush": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% blushes",
-                              "1": "%0% blushes because of %1%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Blushes because of somebody"
-                     },
-                     "CMDSlap": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% slaps around",
-                              "1": "%1% got slapped by %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Slap someone"
-                     },
-                     "CMDFluff": {
-                        "response": {
-                           "success": {"msg": {"0": "So fluffy :3"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Fluffy"
-                     },
-                     "CMDKiss": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% hands out kisses",
-                              "1": "%0% kisses %1% OwO"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Kiss someone"
-                     },
-                     "CMDHug": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% wants to hug",
-                              "1": "%0% hugs %1%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Hug someone"
-                     },
-                     "CMDSmile": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% has to smile :)",
-                              "1": "%1% made %0% smile :)"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Smile at someone"
-                     },
-                     "CMDBite": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% bites someone",
-                              "1": "%1% gets bitten by %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Bite someone (It might be a snack)"
-                     },
-                     "CMDLick": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% tried to lick someone",
-                              "1": "%0% licks %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Lick someone"
-                     },
-                     "CMDPat": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% pats someone",
-                              "1": "%1% receives some headpats from %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Pat someone on the head"
-                     },
-                     "CMDPoke": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% pokes around",
-                              "1": "%1% gets poked by %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Poke someone"
-                     },
-                     "CMDCuddle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% wants to cuddle",
-                              "1": "%1% gets cuddled by %0%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Cuddle someone"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDDance": {
-                        "response": {
-                           "success": {"msg": {"0": "%0% dances"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Dance!"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": "UwU"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Random image"
-                     },
-                     "CMDFeed": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% eats nice food",
-                              "1": "%0% shares food with %1%"
-                           }},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "Feed someone"
-                     },
-                     "CMDSenko": {
-                        "response": {
-                           "success": {"msg": {"0": "_Senko noises_"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": ":3"
-                     }
-                  },
-                  "nsfw": {
-                     "CMDThreesome_FFM": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDYuri": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDPussylick": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDBlowjob": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDCum": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDYaoi": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDSolo": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDAnal": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDFuck": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDThreesome_FFF": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDThreesome_MMF": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": ":C"}},
-                           "error": {
-                              "msg": "Something went wrong",
-                              "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                           }
-                        },
-                        "description": "-NSFW content-"
-                     }
-                  },
-                  "GROUPAnime": {"description": "Contains various anime themed commands"}
-               },
-               "tags": {
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "Tag %0% deleted"},
-                        "error": {"msg": "Failed to delete tag. Are you the owner and does the tag exist?"}
-                     },
-                     "description": "Deletes an existing tag"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "Tag %0% created"},
-                        "error": {"msg": "Failed to create tag"}
-                     },
-                     "description": "Creates a new tag with a given tag name and content"
-                  },
-                  "HYBRIDTag": {
-                     "response": {
-                        "success": {"msg": "%0%\n\n*Tag created by %1%*"},
-                        "error": {"msg": "Tag %0% not found"}
-                     },
-                     "description": "Create, manage and use tags for this guild"
-                  },
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "Tag %0% updated"},
-                        "error": {"msg": "Failed to update tag. Are you the owner and does the tag exist?"}
-                     },
-                     "description": "Modifies a given tag with the new content"
-                  }
-               },
-               "info": {"CMDInfo": {
-                  "response": {
-                     "field": {
-                        "3": {"title": "Current Shard"},
-                        "4": {"title": "Instance"},
-                        "5": {"title": "Location"},
-                        "6": {
-                           "title": "Website",
-                           "link_text": "[Visit Website](%0%)"
-                        },
-                        "7": {
-                           "title": "Data Processing",
-                           "link_text": "[Visit Website](%0%)"
-                        },
-                        "8": {
-                           "title": "Report Content",
-                           "link_text": "[Visit Website](%0%)"
-                        },
-                        "9": {
-                           "title": "Contact",
-                           "link_text": "[Visit Website](%0%)"
+    "isDefault": true,
+    "translations": {
+        "de": {
+            "netbeacon": {
+                "xenia": {
+                    "bot": {
+                        "commands": {
+                            "chat": {
+                                "global": {
+                                    "help": {
+                                        "CMDHelp": {
+                                            "response": {
+                                                "field": {
+                                                    "commands": "Commands"
+                                                },
+                                                "title": "**Help / Commands**"
+                                            },
+                                            "description": "Displays a list of commands"
+                                        }
+                                    }
+                                },
+                                "structure": {
+                                    "me": {
+                                        "CMDMe": {
+                                            "description": "Show some stats about yourself"
+                                        }
+                                    },
+                                    "avatar": {
+                                        "CMDAvatar": {
+                                            "response": {
+                                                "title": "Avatar",
+                                                "description": "Get the avatar of someone",
+                                                "error": {
+                                                    "msg": "User not found"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "settings": {
+                                        "guild": {
+                                            "CMDLicense": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "License updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Updating license failed"
+                                                    }
+                                                },
+                                                "description": "Update the license using a license key"
+                                            },
+                                            "CMDSettings": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Guild settings updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update guild settings.\nAvailable options are: %0%"
+                                                    }
+                                                },
+                                                "description": "Update the settings for this guild"
+                                            },
+                                            "HYBRIDGuild": {
+                                                "response": {
+                                                    "field": {
+                                                        "11": {
+                                                            "title": "max self learning channels"
+                                                        },
+                                                        "1": {
+                                                            "title": "Preferred language"
+                                                        },
+                                                        "2": {
+                                                            "title": "Prefix"
+                                                        },
+                                                        "3": {
+                                                            "title": "Settings"
+                                                        },
+                                                        "4": {
+                                                            "title": "License name"
+                                                        },
+                                                        "5": {
+                                                            "title": "Is valid until"
+                                                        },
+                                                        "6": {
+                                                            "title": "max vperm roles"
+                                                        },
+                                                        "7": {
+                                                            "title": "max tags"
+                                                        },
+                                                        "8": {
+                                                            "title": "max notifications"
+                                                        },
+                                                        "9": {
+                                                            "title": "max twitch notifications"
+                                                        },
+                                                        "10": {
+                                                            "title": "max message logging"
+                                                        }
+                                                    },
+                                                    "title": "General guild settings"
+                                                },
+                                                "description": "Contains general guild settings"
+                                            },
+                                            "CMDPrefix": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Prefix updated to ```%0%```"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Updating prefix failed. Maybe its too long?"
+                                                    }
+                                                },
+                                                "description": "Update the prefix used for commands"
+                                            },
+                                            "CMDLanguage": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Response language updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update response language.\nAvailable options are: %0%"
+                                                    }
+                                                },
+                                                "description": "Update the response language of Xenia"
+                                            }
+                                        },
+                                        "GROUPSettings": {
+                                            "description": "Contains all settings for the guild"
+                                        },
+                                        "roles": {
+                                            "HYBRIDRoles": {
+                                                "response": {
+                                                    "title": "Roles",
+                                                    "is_empty": "No role created yet"
+                                                },
+                                                "description": "Contains commands to manage v roles and v perms"
+                                            }
+                                        },
+                                        "channel": {
+                                            "CMDAccessMode": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Access mode updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update access mode.\nAvailable options are: %0%"
+                                                    }
+                                                },
+                                                "description": "Update the access mode for the specified channel"
+                                            },
+                                            "CMDLogging": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Updated logging setting"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed To Update Logging Mode.\nAvailable options are: [true, false]"
+                                                    }
+                                                },
+                                                "description": "Update the logging settings for the specified channel"
+                                            },
+                                            "GROUPChannel": {
+                                                "description": "Contains commands to manage channel settings"
+                                            },
+                                            "CMDInfo": {
+                                                "response": {
+                                                    "success": {
+                                                        "field": {
+                                                            "1": {
+                                                                "title": "Flags"
+                                                            },
+                                                            "2": {
+                                                                "title": "Access mode"
+                                                            },
+                                                            "3": {
+                                                                "title": "Logging enabled"
+                                                            },
+                                                            "4": {
+                                                                "title": "Logging auto restore channel"
+                                                            }
+                                                        },
+                                                        "title": "Channel settings"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update access mode.\nAvailable options are:"
+                                                    }
+                                                },
+                                                "description": "Displays information for the specified channel"
+                                            }
+                                        },
+                                        "self": {
+                                            "HYBRIDSelf": {
+                                                "response": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "Username"
+                                                        },
+                                                        "2": {
+                                                            "title": "Id"
+                                                        },
+                                                        "3": {
+                                                            "title": "Internal Role"
+                                                        },
+                                                        "4": {
+                                                            "title": "Preferred Language"
+                                                        },
+                                                        "5": {
+                                                            "title": "Icon URL",
+                                                            "content": "[Link](%0%)"
+                                                        }
+                                                    },
+                                                    "title": "Self Info"
+                                                },
+                                                "description": "Contains commands to manage own settings"
+                                            },
+                                            "CMDLanguage": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Response language updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update response language.\nAvailable options are: %0%"
+                                                    }
+                                                },
+                                                "description": "Update the response language of Xenia"
+                                            }
+                                        }
+                                    },
+                                    "chatbot": {
+                                        "learning": {
+                                            "CMDChannelLink": {
+                                                "success": {
+                                                    "msg": "Channel link updated! It may take a few minutes for the changes to take effect."
+                                                },
+                                                "description": "Link a channel to be used as data pool for the chatbot",
+                                                "error": {
+                                                    "invalid": {
+                                                        "arg": {
+                                                            "msg": "Failed to link channel. Has the maximum number of links been reached or does the channel not exist?"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDMode": {
+                                                "success": {
+                                                    "msg": "Mode changed successfully! It may take a few minutes for the changes to take effect."
+                                                },
+                                                "description": "Defines the mode of which the datasets will be used",
+                                                "error": {
+                                                    "invalid": {
+                                                        "arg": {
+                                                            "msg": "Failed to change mode.\nAvailable options are: %0%"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "GROUPLearning": {
+                                                "description": "Contains commands to control the data used"
+                                            }
+                                        },
+                                        "CMDSetup": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Chatbot features are now ready.\nThis feature is only available in English and is intended for entertainment purposes only.\nResponses are generated from unverified messages - Some answers may seem inappropriate in certain contexts.\nLearn more about the origin of the root datasets [here](%0%)",
+                                                    "deactivated": "Chatbot has been deactivated"
+                                                },
+                                                "error": {
+                                                    "create": {
+                                                        "failed": "Failed to create / update the channel settings required to set up the chatbot"
+                                                    }
+                                                }
+                                            },
+                                            "chat": {
+                                                "default": {
+                                                    "name": "xenia"
+                                                }
+                                            },
+                                            "description": "Allows to set up a channel to chat with Xenia"
+                                        },
+                                        "GROUPChatbot": {
+                                            "description": "Contains commands to manage chatbot settings for a channel"
+                                        },
+                                        "CMDInfo": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "General settings"
+                                                        },
+                                                        "2": {
+                                                            "title": "Channel"
+                                                        },
+                                                        "3": {
+                                                            "title": "Mode"
+                                                        }
+                                                    },
+                                                    "title": "Chatbot information"
+                                                },
+                                                "error": {
+                                                    "notfound": "No channel has been set up"
+                                                }
+                                            },
+                                            "description": "Shows general information about the chatbot setup"
+                                        }
+                                    },
+                                    "notification": {
+                                        "CMDList": {
+                                            "response": {
+                                                "title": "Notifications"
+                                            },
+                                            "description": "View existing notifications"
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification (ID: %0%) deleted"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?"
+                                                }
+                                            },
+                                            "description": "Delete an existing notification"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification created (ID: %0% | %1%)"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to create notification! Perhaps the cache is full?"
+                                                }
+                                            },
+                                            "description": "Create a new notification"
+                                        },
+                                        "GROUPNotification": {
+                                            "description": "Manage notifications for this guild"
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification edited"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"
+                                                }
+                                            },
+                                            "description": "Update an existing notification"
+                                        }
+                                    },
+                                    "twitch": {
+                                        "CMDUpdate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Updated stream notification"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to update stream notification. Does a notification with this id exist?"
+                                                }
+                                            },
+                                            "description": "Update stream notifications for a channel"
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Deleted stream notification"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to delete stream notification. Does a notification with this id exist?"
+                                                }
+                                            },
+                                            "description": "Remove stream notifications for a channel"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Requested stream notifications. After evaluation this will show up in the overview"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?"
+                                                }
+                                            },
+                                            "description": "Request stream notifications for a channel"
+                                        },
+                                        "HYBRIDTwitch": {
+                                            "response": {
+                                                "success": {
+                                                    "title": "Stream notifications"
+                                                }
+                                            },
+                                            "description": "Create and manage and list stream notifications"
+                                        }
+                                    },
+                                    "last": {
+                                        "GROUPLast": {
+                                            "description": "Restore deleted or edited messages"
+                                        },
+                                        "CMDEdited": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Author"
+                                                        },
+                                                        "3": {
+                                                            "title": "Old Message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Attachments"
+                                                        }
+                                                    },
+                                                    "title": "Restored edited message"
+                                                },
+                                                "error": {
+                                                    "msg": "No message found to restore"
+                                                }
+                                            },
+                                            "description": "Restores the last message which has been edited in this channel"
+                                        },
+                                        "CMDDeleted": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Author"
+                                                        },
+                                                        "3": {
+                                                            "title": "Old Message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Attachments"
+                                                        }
+                                                    },
+                                                    "title": "Restored deleted message"
+                                                },
+                                                "error": {
+                                                    "msg": "No message found to restore"
+                                                }
+                                            },
+                                            "description": "Restores the last message which has been deleted in this channel"
+                                        }
+                                    },
+                                    "admin": {
+                                        "CMDEval": {
+                                            "description": "Can be used to evaluate code"
+                                        },
+                                        "CMDPing": {
+                                            "description": "Can be used to check the ping to discord and other linked services"
+                                        },
+                                        "CMDChatlog": {
+                                            "description": "Export a log of the encrypted cached messages for a given channel in the current guild"
+                                        },
+                                        "CMDClientIdentify": {
+                                            "description": "Ask who is connected to the backends secondary socket"
+                                        },
+                                        "CMDD43Z1Stats": {
+                                            "description": "Can be used to display some information about the running D43Z1 instance"
+                                        },
+                                        "CMDGlobalInfo": {
+                                            "description": "Displays stats of all instances connected to the secondary socket of the backend"
+                                        },
+                                        "CMDD43Z1": {
+                                            "description": "Can be used to evaluate the current D43Z1 performance"
+                                        },
+                                        "CMDInfo": {
+                                            "description": "Displays some statistics about this bot"
+                                        },
+                                        "GROUPAdmin": {
+                                            "description": "Contains commands only available to the developer"
+                                        }
+                                    },
+                                    "hastebin": {
+                                        "CMDHastebin": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Here is your haste"
+                                                },
+                                                "error": {
+                                                    "msg": "No file provided"
+                                                }
+                                            },
+                                            "description": "Upload the attached file to haste.hypercdn.de"
+                                        }
+                                    },
+                                    "anime": {
+                                        "sfw": {
+                                            "CMDCry": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% cries",
+                                                            "1": "%1% made %0% cry"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Cry about something"
+                                            },
+                                            "CMDKitsune": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Here you go"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDHolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Something holo:"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Holo did you say?"
+                                            },
+                                            "CMDOokami": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDTail": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Fluffy tail :3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDEevee": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Eevee!"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Eevee?"
+                                            },
+                                            "CMDTickle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% tickles someone",
+                                                            "1": "%1% gets tickled by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Tickle someone"
+                                            },
+                                            "CMDBlush": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% blushes",
+                                                            "1": "%0% blushes because of %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Blushes because of somebody"
+                                            },
+                                            "CMDSlap": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% slaps around",
+                                                            "1": "%1% got slapped by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Slap someone"
+                                            },
+                                            "CMDFluff": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "So fluffy :3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Fluffy"
+                                            },
+                                            "CMDKiss": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% hands out kisses",
+                                                            "1": "%0% kisses %1% OwO"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Kiss someone"
+                                            },
+                                            "CMDHug": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% wants to hug",
+                                                            "1": "%0% hugs %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Hug someone"
+                                            },
+                                            "CMDSmile": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% has to smile :)",
+                                                            "1": "%1% made %0% smile :)"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Smile at someone"
+                                            },
+                                            "CMDBite": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% bites someone",
+                                                            "1": "%1% gets bitten by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Bite someone (It might be a snack)"
+                                            },
+                                            "CMDLick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% tried to lick someone",
+                                                            "1": "%0% licks %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Lick someone"
+                                            },
+                                            "CMDPat": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pats someone",
+                                                            "1": "%1% receives some headpats from %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Pat someone on the head"
+                                            },
+                                            "CMDPoke": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pokes around",
+                                                            "1": "%1% gets poked by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Poke someone"
+                                            },
+                                            "CMDCuddle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% wants to cuddle",
+                                                            "1": "%1% gets cuddled by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Cuddle someone"
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            },
+                                            "CMDDance": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% dances"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Dance!"
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "UwU"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Random image"
+                                            },
+                                            "CMDFeed": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% eats nice food",
+                                                            "1": "%0% shares food with %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "Feed someone"
+                                            },
+                                            "CMDSenko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "_Senko noises_"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": ":3"
+                                            }
+                                        },
+                                        "nsfw": {
+                                            "CMDThreesome_FFM": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDYuri": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDPussylick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDBlowjob": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDCum": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDYaoi": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDSolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDAnal": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDFuck": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDThreesome_FFF": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDThreesome_MMF": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                },
+                                                "description": "-NSFW content-"
+                                            }
+                                        },
+                                        "GROUPAnime": {
+                                            "description": "Contains various anime themed commands"
+                                        }
+                                    },
+                                    "tags": {
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Tag %0% deleted"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to delete tag. Are you the owner and does the tag exist?"
+                                                }
+                                            },
+                                            "description": "Deletes an existing tag"
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Tag %0% created"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to create tag"
+                                                }
+                                            },
+                                            "description": "Creates a new tag with a given tag name and content"
+                                        },
+                                        "HYBRIDTag": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "%0%\n\n*Tag created by %1%*"
+                                                },
+                                                "error": {
+                                                    "msg": "Tag %0% not found"
+                                                }
+                                            },
+                                            "description": "Create, manage and use tags for this guild"
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Tag %0% updated"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to update tag. Are you the owner and does the tag exist?"
+                                                }
+                                            },
+                                            "description": "Modifies a given tag with the new content"
+                                        }
+                                    },
+                                    "info": {
+                                        "CMDInfo": {
+                                            "response": {
+                                                "field": {
+                                                    "3": {
+                                                        "title": "Current Shard"
+                                                    },
+                                                    "4": {
+                                                        "title": "Instance"
+                                                    },
+                                                    "5": {
+                                                        "title": "Location"
+                                                    },
+                                                    "6": {
+                                                        "title": "Website",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "7": {
+                                                        "title": "Data Processing",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "8": {
+                                                        "title": "Report Content",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "9": {
+                                                        "title": "Contact",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    }
+                                                },
+                                                "title": "Info"
+                                            },
+                                            "description": "Shows some basic information about me"
+                                        }
+                                    }
+                                }
+                            },
+                            "slash": {
+                                "structure": {
+                                    "avatar": {
+                                        "RCMDAvatar": {
+                                            "response": {
+                                                "title": "Avatar",
+                                                "error": {
+                                                    "msg": "User not found"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "twitch": {
+                                        "CMDUpdate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Updated stream notification"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to update stream notification. Does a notification with this id exist?"
+                                                }
+                                            }
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Deleted stream notification"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to delete stream notification. Does a notification with this id exist?"
+                                                }
+                                            }
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Requested stream notifications. After evaluation this will show up in the overview"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?"
+                                                }
+                                            }
+                                        },
+                                        "CMDList": {
+                                            "response": {
+                                                "success": {
+                                                    "title": "Stream notifications"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "notification": {
+                                        "CMDList": {
+                                            "response": {
+                                                "title": "Notifications"
+                                            }
+                                        },
+                                        "CMDCreate": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification created (ID: %0% | %1%)"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to create notification! Perhaps the cache is full?"
+                                                }
+                                            }
+                                        },
+                                        "CMDDelete": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification (ID: %0%) deleted"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?"
+                                                }
+                                            }
+                                        },
+                                        "CMDModify": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "Notification edited"
+                                                },
+                                                "error": {
+                                                    "msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"
+                                                }
+                                            },
+                                            "description": "Update an existing notification"
+                                        }
+                                    },
+                                    "last": {
+                                        "CMDEdited": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Author"
+                                                        },
+                                                        "3": {
+                                                            "title": "Old Message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Attachments"
+                                                        }
+                                                    },
+                                                    "title": "Restored edited message"
+                                                },
+                                                "error": {
+                                                    "msg": "No message found to restore"
+                                                }
+                                            }
+                                        },
+                                        "CMDDeleted": {
+                                            "response": {
+                                                "success": {
+                                                    "field": {
+                                                        "1": {
+                                                            "title": "MessageId"
+                                                        },
+                                                        "2": {
+                                                            "title": "Author"
+                                                        },
+                                                        "3": {
+                                                            "title": "Old Message"
+                                                        },
+                                                        "4": {
+                                                            "title": "Attachments"
+                                                        }
+                                                    },
+                                                    "title": "Restored deleted message"
+                                                },
+                                                "error": {
+                                                    "msg": "No message found to restore"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "notificationn": {
+                                        "CMDList": {
+                                            "description": "View existing notifications"
+                                        }
+                                    },
+                                    "tag": {
+                                        "RCMDTag": {
+                                            "response": {
+                                                "success": {
+                                                    "msg": "%0%\n\n*Tag created by %1%*"
+                                                },
+                                                "error": {
+                                                    "msg": "Tag %0% not found"
+                                                }
+                                            }
+                                        },
+                                        "s": {
+                                            "CMDDelete": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Tag %0% deleted"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to delete tag. Are you the owner and does the tag exist?"
+                                                    }
+                                                }
+                                            },
+                                            "CMDCreate": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Tag %0% created"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to create tag"
+                                                    }
+                                                }
+                                            },
+                                            "CMDModify": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": "Tag %0% updated"
+                                                    },
+                                                    "error": {
+                                                        "msg": "Failed to update tag. Are you the owner and does the tag exist?"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "anime": {
+                                        "nsfw": {
+                                            "CMDCum": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDYuri": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDYaoi": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPussylick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSolo": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDAnal": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDFuck": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBlowjob": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":C"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "sfw": {
+                                            "CMDCry": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% cries",
+                                                            "1": "%1% made %0% cry"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDTickle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% tickles someone",
+                                                            "1": "%1% gets tickled by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBlush": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% blushes",
+                                                            "1": "%0% blushes because of %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSlap": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% slaps around",
+                                                            "1": "%1% got slapped by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDKiss": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% hands out kisses",
+                                                            "1": "%0% kisses %1% OwO"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDHug": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% wants to hug",
+                                                            "1": "%0% hugs %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDSmile": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% has to smile :)",
+                                                            "1": "%1% made %0% smile :)"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDBite": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% bites someone",
+                                                            "1": "%1% gets bitten by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDLick": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% tried to lick someone",
+                                                            "1": "%0% licks %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPat": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pats someone",
+                                                            "1": "%1% receives some headpats from %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDPoke": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% pokes around",
+                                                            "1": "%1% gets poked by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDCuddle": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% wants to cuddle",
+                                                            "1": "%1% gets cuddled by %0%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDNeko": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": ":3"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDDance": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% dances"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDFeed": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "%0% eats nice food",
+                                                            "1": "%0% shares food with %1%"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "CMDRandom": {
+                                                "response": {
+                                                    "success": {
+                                                        "msg": {
+                                                            "0": "Here you go"
+                                                        }
+                                                    },
+                                                    "error": {
+                                                        "msg": "Something went wrong",
+                                                        "img": {
+                                                            "msg": "Sorry, I was unable to get the image you wanted :c"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "info": {
+                                        "RCMDInfo": {
+                                            "response": {
+                                                "field": {
+                                                    "3": {
+                                                        "title": "Current Shard"
+                                                    },
+                                                    "4": {
+                                                        "title": "Instance"
+                                                    },
+                                                    "5": {
+                                                        "title": "Location"
+                                                    },
+                                                    "6": {
+                                                        "title": "Website",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "7": {
+                                                        "title": "Data Processing",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "8": {
+                                                        "title": "Report Content",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    },
+                                                    "9": {
+                                                        "title": "Contact",
+                                                        "link_text": "[Visit Website](%0%)"
+                                                    }
+                                                },
+                                                "title": "Info"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                     },
-                     "title": "Info"
-                  },
-                  "description": "Shows some basic information about me"
-               }}
+                    }
+                }
             }
-         },
-         "slash": {"structure": {
-             "avatar": { "RCMDAvatar": { "response": {
-                     "title": "Avatar",
-                     "success": { "field": { "1": {
-                         "title": "Link",
-                         "description": "[Download](%0%)"
-                     }}},
-                     "error": { "msg":  "User not found"}
-                 }}
-             },
-             "twitch": {
-                 "CMDUpdate": {
-                     "response": {
-                         "success": {"msg": "Updated stream notification"},
-                         "error": {"msg": "Failed to update stream notification. Does a notification with this id exist?"}
-                     }
-                 },
-                 "CMDDelete": {
-                     "response": {
-                         "success": {"msg": "Deleted stream notification"},
-                         "error": {"msg": "Failed to delete stream notification. Does a notification with this id exist?"}
-                     }
-                 },
-                 "CMDCreate": {
-                     "response": {
-                         "success": {"msg": "Requested stream notifications. After evaluation this will show up in the overview"},
-                         "error": {"msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?"}
-                     }
-                 },
-                 "CMDList": {
-                     "response": {"success": {"title": "Stream notifications"}}
-                 }
-             },
-            "notification": {
-               "CMDList": {"response": {"title": "Notifications"}},
-               "CMDCreate": {"response": {
-                  "success": {"msg": "Notification created (ID: %0% | %1%)"},
-                  "error": {"msg": "Failed to create notification! Perhaps the cache is full?"}
-               }},
-               "CMDDelete": {"response": {
-                  "success": {"msg": "Notification (ID: %0%) deleted"},
-                  "error": {"msg": "Failed to delete notification. Perhaps this got created by someone else or does not exist?"}
-               }},
-               "CMDModify": {
-                  "response": {
-                     "success": {"msg": "Notification edited"},
-                     "error": {"msg": "Failed to modify notification. Perhaps this got created by someone else or does not exist?"}
-                  },
-                  "description": "Update an existing notification"
-               }
+        },
+        "default": {
+            "onMissingBotPerms": {
+                "description": "I am unable to execute the command due to missing permissions!",
+                "title": "Failed: Bot Is Missing Permissions",
+                "requiredPerms": {
+                    "fn": "Required Permissions:"
+                }
             },
-            "last": {
-               "CMDEdited": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "MessageId"},
-                        "2": {"title": "Author"},
-                        "3": {"title": "Old Message"},
-                        "4": {"title": "Attachments"}
-                     },
-                     "title": "Restored edited message"
-                  },
-                  "error": {"msg": "No message found to restore"}
-               }},
-               "CMDDeleted": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "MessageId"},
-                        "2": {"title": "Author"},
-                        "3": {"title": "Old Message"},
-                        "4": {"title": "Attachments"}
-                     },
-                     "title": "Restored deleted message"
-                  },
-                  "error": {"msg": "No message found to restore"}
-               }}
+            "onMissingMemberPerms": {
+                "description": "You are not allowed to do this!",
+                "title": "Failed: Not Enough Permissions",
+                "requiredPerms": {
+                    "fn": "Required Permissions:"
+                }
             },
-            "notificationn": {"CMDList": {"description": "View existing notifications"}},
-            "tag": {
-               "RCMDTag": {"response": {
-                  "success": {"msg": "%0%\n\n*Tag created by %1%*"},
-                  "error": {"msg": "Tag %0% not found"}
-               }},
-               "s": {
-                  "CMDDelete": {"response": {
-                     "success": {"msg": "Tag %0% deleted"},
-                     "error": {"msg": "Failed to delete tag. Are you the owner and does the tag exist?"}
-                  }},
-                  "CMDCreate": {"response": {
-                     "success": {"msg": "Tag %0% created"},
-                     "error": {"msg": "Failed to create tag"}
-                  }},
-                  "CMDModify": {"response": {
-                     "success": {"msg": "Tag %0% updated"},
-                     "error": {"msg": "Failed to update tag. Are you the owner and does the tag exist?"}
-                  }}
-               }
+            "onError": {
+                "title": "Error"
             },
-            "anime": {
-               "nsfw": {
-                  "CMDCum": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDYuri": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDSolo": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDAnal": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDFuck": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": ":C"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }}
-               },
-               "sfw": {
-                  "CMDCry": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% cries",
-                        "1": "%1% made %0% cry"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDTickle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% tickles someone",
-                        "1": "%1% gets tickled by %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDBlush": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% blushes",
-                        "1": "%0% blushes because of %1%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDSlap": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% slaps around",
-                        "1": "%1% got slapped by %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDKiss": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% hands out kisses",
-                        "1": "%0% kisses %1% OwO"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDHug": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% wants to hug",
-                        "1": "%0% hugs %1%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDSmile": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% has to smile :)",
-                        "1": "%1% made %0% smile :)"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDBite": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% bites someone",
-                        "1": "%1% gets bitten by %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDLick": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% tried to lick someone",
-                        "1": "%0% licks %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDPat": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% pats someone",
-                        "1": "%1% receives some headpats from %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDPoke": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% pokes around",
-                        "1": "%1% gets poked by %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDCuddle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% wants to cuddle",
-                        "1": "%1% gets cuddled by %0%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": ":3"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDDance": {"response": {
-                     "success": {"msg": {"0": "%0% dances"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDFeed": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% eats nice food",
-                        "1": "%0% shares food with %1%"
-                     }},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "Here you go"}},
-                     "error": {
-                        "msg": "Something went wrong",
-                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
-                     }
-                  }}
-               }
+            "onAdminPerms": {
+                "description": "I seem to have administrator privileges. This is strongly discouraged due to it being a security risk. Please only assign me the permissions necessary to do my work.\n\nIf the permission has been assigned by accident please remove it from me / the roles assigned to me.\nIf this intentional disable this message by changing my BOT_IGNORE_ADMIN_PERMS setting.",
+                "title": "Warning: Bot has administrator permissions"
             },
-            "info": {"RCMDInfo": {"response": {
-               "field": {
-                  "3": {"title": "Current Shard"},
-                  "4": {"title": "Instance"},
-                  "5": {"title": "Location"},
-                  "6": {
-                     "title": "Website",
-                     "link_text": "[Visit Website](%0%)"
-                  },
-                  "7": {
-                     "title": "Data Processing",
-                     "link_text": "[Visit Website](%0%)"
-                  },
-                  "8": {
-                     "title": "Report Content",
-                     "link_text": "[Visit Website](%0%)"
-                  },
-                  "9": {
-                     "title": "Contact",
-                     "link_text": "[Visit Website](%0%)"
-                  }
-               },
-               "title": "Info"
-            }}}
-         }}
-      }}}}},
-      "default": {
-         "onMissingBotPerms": {
-            "description": "I am unable to execute the command due to missing permissions!",
-            "title": "Failed: Bot Is Missing Permissions",
-            "requiredPerms": {"fn": "Required Permissions:"}
-         },
-         "onMissingMemberPerms": {
-            "description": "You are not allowed to do this!",
-            "title": "Failed: Not Enough Permissions",
-            "requiredPerms": {"fn": "Required Permissions:"}
-         },
-         "onError": {"title": "Error"},
-         "onAdminPerms": {
-            "description": "I seem to have administrator privileges. This is strongly discouraged due to it being a security risk. Please only assign me the permissions necessary to do my work.\n\nIf the permission has been assigned by accident please remove it from me / the roles assigned to me.\nIf this intentional disable this message by changing my BOT_IGNORE_ADMIN_PERMS setting.",
-            "title": "Warning: Bot has administrator permissions"
-         },
-         "onUnhandledException": {
-            "exception": {"msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us"},
-            "cacheexception": {"msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"},
-            "backendexception": {"msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us"},
-            "dataexception": {"msg": "Accessing the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"},
-            "title": "Oops"
-         },
-         "onMissingArgs": {
-            "usage": {"fn": "Usage:"},
-            "description": "This command requires more/different arguments",
-            "title": "Failed: Not Enough Arguments"
-         },
-         "onMissingNSFW": {
-            "hidden": "Some NSFW commands were hidden due to execution in a non NSFW channel",
-            "description": "NSFW commands cannot be used in non NSFW channels",
-            "title": "Failed: Command requires NSFW channel"
-         },
-         "onCooldownActive": {
-            "description": "Please wait some time before doing that again",
-            "title": "Failed: Cooldown Active"
-         },
-         "onSuccess": {"title": "Success"},
-         "estimatedCommand": {"msg": "The command you typed `%0%` doesnt seem to exist. Maybe you wanted to use `%1%` instead?"}
-      }
-   },
-   "languageDescription": "The default English language package",
-   "languageId": "en_US",
-   "languageName": "English-Default"
+            "onUnhandledException": {
+                "exception": {
+                    "msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us"
+                },
+                "cacheexception": {
+                    "msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"
+                },
+                "backendexception": {
+                    "msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us"
+                },
+                "dataexception": {
+                    "msg": "Accessing the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"
+                },
+                "title": "Oops"
+            },
+            "onMissingArgs": {
+                "usage": {
+                    "fn": "Usage:"
+                },
+                "description": "This command requires more/different arguments",
+                "title": "Failed: Not Enough Arguments"
+            },
+            "onMissingNSFW": {
+                "hidden": "Some NSFW commands were hidden due to execution in a non NSFW channel",
+                "description": "NSFW commands cannot be used in non NSFW channels",
+                "title": "Failed: Command requires NSFW channel"
+            },
+            "onCooldownActive": {
+                "description": "Please wait some time before doing that again",
+                "title": "Failed: Cooldown Active"
+            },
+            "onSuccess": {
+                "title": "Success"
+            },
+            "estimatedCommand": {
+                "msg": "The command you typed `%0%` doesnt seem to exist. Maybe you wanted to use `%1%` instead?"
+            }
+        }
+    },
+    "languageDescription": "The default English language package",
+    "languageId": "en_US",
+    "languageName": "English-Default"
 }
