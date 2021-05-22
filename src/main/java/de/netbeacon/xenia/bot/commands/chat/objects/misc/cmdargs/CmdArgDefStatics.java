@@ -30,7 +30,12 @@ import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.TWITCH_
 
 public class CmdArgDefStatics{
 
-	// LAST
+	// AVATAR
+	public static final CmdArgDef<Mention> AVATAR_USER_MENTTION = new CmdArgDef.Builder<>("user*", Mention.class)
+		.predicateAddCompare(Mention::getMentionType, Message.MentionType.USER, 0)
+		.addPredicateDescription("user mention, optional")
+		.buildAllMatch()
+		.setOptional(true);
 
 	// NOTIFICATION CMD
 	public static final CmdArgDef<Long> NOTIFICATION_ID_DEF = new CmdArgDef.Builder<>("id", Long.class)

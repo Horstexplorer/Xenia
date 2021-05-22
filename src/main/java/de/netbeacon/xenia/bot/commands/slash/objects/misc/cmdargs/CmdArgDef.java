@@ -274,7 +274,7 @@ public class CmdArgDef<T>{
 			if(tClass.equals(Boolean.class)){
 				return OptionType.BOOLEAN;
 			}
-			else if(tClass.equals(Short.class) || tClass.equals(Integer.class) || tClass.equals(Long.class)){
+			else if(tClass.equals(Short.class) || tClass.equals(Integer.class)){
 				return OptionType.INTEGER;
 			}
 			else if(tClass.equals(AbstractChannel.class) || tClass.equals(GuildChannel.class) || tClass.equals(MessageChannel.class) || tClass.equals(PrivateChannel.class)){

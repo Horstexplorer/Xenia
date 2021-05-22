@@ -19,12 +19,14 @@ package de.netbeacon.xenia.bot.event.listener.command;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.RCMDGAnime;
+import de.netbeacon.xenia.bot.commands.slash.structure.avatar.RCMDAvatar;
 import de.netbeacon.xenia.bot.commands.slash.structure.info.RCMDInfo;
 import de.netbeacon.xenia.bot.commands.slash.structure.last.RCMDGLast;
 import de.netbeacon.xenia.bot.commands.slash.structure.me.RCMDMe;
 import de.netbeacon.xenia.bot.commands.slash.structure.notification.RCMDGNotification;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
+import de.netbeacon.xenia.bot.commands.slash.structure.twitch.RCMDGTwitch;
 import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -60,6 +62,8 @@ public class SlashCommandListener extends ListenerAdapter{
 		register.accept(new RCMDGNotification());
 		register.accept(new RCMDGAnime());
 		register.accept(new RCMDMe());
+		register.accept(new RCMDAvatar());
+		register.accept(new RCMDGTwitch());
 
 		// // // // // // // // // //
 		HashMap<String, Command> guildCommandMap = new HashMap<>();

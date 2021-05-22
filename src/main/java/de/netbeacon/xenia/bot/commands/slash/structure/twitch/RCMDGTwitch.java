@@ -16,5 +16,22 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.twitch;
 
-public class RCMDTwitch{
+import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
+import de.netbeacon.xenia.bot.commands.slash.objects.Command;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.cmdargs.CmdArgs;
+import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
+
+public class RCMDGTwitch extends Command{
+
+	public RCMDGTwitch(){
+		super("twitch", "Create and manage and list stream notifications", false, false,
+			new CMDCreate(), new CMDDelete(), new CMDUpdate(), new CMDList()
+		);
+	}
+
+	@Override
+	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
+
+	}
+
 }
