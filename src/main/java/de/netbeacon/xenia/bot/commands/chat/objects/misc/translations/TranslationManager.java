@@ -20,6 +20,7 @@ import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Member;
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,10 +40,10 @@ public class TranslationManager{
 	private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
 
 	private TranslationManager() throws IOException{
-		String fileContent = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translation/cmd_translations.json")), StandardCharsets.UTF_8);
-		JSONArray jsonArray = new JSONArray(fileContent);
-		for(int i = 0; i < jsonArray.length(); i++){
-			TranslationPackage translationPackage = new TranslationPackage(jsonArray.getJSONObject(i));
+		JSONArray index = new JSONArray(IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translations.index.json")), StandardCharsets.UTF_8));
+		for(int i = 0; i < index.length(); i++){
+			JSONObject content = new JSONObject(IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("translations/"+index.getString(i)+".json")), StandardCharsets.UTF_8));
+			TranslationPackage translationPackage = new TranslationPackage(content);
 			translationPackages.put(translationPackage.getLanguageId(), translationPackage);
 		}
 		logger.info("Loaded Languages: " + Arrays.toString(translationPackages.values().stream().map(TranslationPackage::getLanguageId).toArray()));

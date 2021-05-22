@@ -1,0 +1,1105 @@
+{
+   "isDefault": false,
+   "translations": {
+      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
+         "chat": {
+            "global": {"help": {"CMDHelp": {
+               "response": {
+                  "field": {"commands": "Comandos"},
+                  "title": "**Ayuda / Comandos**"
+               },
+               "description": "Muestra una lista de comandos"
+            }}},
+            "structure": {
+               "settings": {
+                  "guild": {
+                     "CMDLicense": {
+                        "response": {
+                           "success": {"msg": "Licencia actualizada"},
+                           "error": {"msg": "No se pudo actualizar la licencia"}
+                        },
+                        "description": "Actualice la licencia con una clave de licencia"
+                     },
+                     "CMDSettings": {
+                        "response": {
+                           "success": {"msg": "Se actualizó la configuración del gremio"},
+                           "error": {"msg": "No se pudo actualizar la configuración del gremio.\nLas opciones disponibles son: %0%"}
+                        },
+                        "description": "Actualiza la configuración de este gremio."
+                     },
+                     "HYBRIDGuild": {
+                        "response": {
+                           "field": {
+                              "11": {"title": "canales de autoaprendizaje máximo"},
+                              "1": {"title": "Idioma preferido"},
+                              "2": {"title": "Prefijo"},
+                              "3": {"title": "Configuraciones"},
+                              "4": {"title": "Nombre de la licencia"},
+                              "5": {"title": "Es válido hasta"},
+                              "6": {"title": "roles máximos de vperm"},
+                              "7": {"title": "etiquetas máximas"},
+                              "8": {"title": "notificaciones máximas"},
+                              "9": {"title": "mnotificaciones máxima de twitch"},
+                              "10": {"title": "registro máximo de mensajes"}
+                           },
+                           "title": "Configuración general del gremio"
+                        },
+                        "description": "Contiene configuraciones generales del gremio"
+                     },
+                     "CMDPrefix": {
+                        "response": {
+                           "success": {"msg": "Prefijo actualizado a ```%0%```"},
+                           "error": {"msg": "Error al actualizar el prefijo. ¿Quizás es demasiado largo?"}
+                        },
+                        "description": "Actualice el prefijo utilizado para los comandos"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Idioma de respuesta actualizado"},
+                           "error": {"msg": "No se pudo actualizar el idioma de respuesta.\nLas opciones disponibles son: %0%"}
+                        },
+                        "description": "Actualizar el idioma de respuesta de Xenia"
+                     }
+                  },
+                  "GROUPSettings": {"description": "Contiene todos los ajustes del gremio."},
+                  "roles": {"HYBRIDRoles": {
+                     "response": {
+                        "title": "Roles",
+                        "is_empty": "Aún no se ha creado ningún rol"
+                     },
+                     "description": "Contiene comandos para administrar v roles y v perms"
+                  }},
+                  "channel": {
+                     "CMDAccessMode": {
+                        "response": {
+                           "success": {"msg": "Modo de acceso actualizado"},
+                           "error": {"msg": "No se pudo actualizar el modo de acceso.\nLas opciones disponibles son: %0%"}
+                        },
+                        "description": "Actualiza el modo de acceso para el canal especificado"
+                     },
+                     "CMDLogging": {
+                        "response": {
+                           "success": {"msg": "Configuración de registro actualizada"},
+                           "error": {"msg": "Error al actualizar el modo de registro.\nLas opciones disponibles son: [true, false]"}
+                        },
+                        "description": "Actualizar la configuración de registro para el canal especificado"
+                     },
+                     "GROUPChannel": {"description": "Contiene comandos para administrar la configuración del canal"},
+                     "CMDInfo": {
+                        "response": {
+                           "success": {
+                              "field": {
+                                 "1": {"title": "Banderas"},
+                                 "2": {"title": "Modo de acceso"},
+                                 "3": {"title": "Registro habilitado"},
+                                 "4": {"title": "Registro de canal de restauración automática"}
+                              },
+                              "title": "Configuración de canal"
+                           },
+                           "error": {"msg": "No se pudo actualizar el modo de acceso.\nLas opciones disponibles son:"}
+                        },
+                        "description": "Muestra información para el canal especificado"
+                     }
+                  },
+                  "self": {
+                     "HYBRIDSelf": {
+                        "response": {
+                           "field": {
+                              "1": {"title": "Nombre de usuario"},
+                              "2": {"title": "Id"},
+                              "3": {"title": "Función interna"},
+                              "4": {"title": "Lengua preferida"},
+                              "5": {
+                                 "title": "Icono URL",
+                                 "content": "[Enlace](%0%)"
+                              }
+                           },
+                           "title": "Información personal"
+                        },
+                        "description": "Contiene comandos para gestionar la configuración propia"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Actualización de la lengua de respuesta"},
+                           "error": {"msg": "No se ha podido actualizar el idioma de la respuesta.\nLas opciones disponibles son: %0%"}
+                        },
+                        "description": "Actualizar el lenguaje de respuesta de Xenia"
+                     }
+                  }
+               },
+               "chatbot": {
+                  "learning": {
+                     "CMDChannelLink": {
+                        "success": {"msg": "¡¡Enlace del canal actualizado! Los cambios pueden tardar unos minutos en surtir efecto."},
+                        "description": "Vincular un canal que se utilizará como reserva de datos para el chatbot",
+                        "error": {"invalid": {"arg": {"msg": "No se ha podido enlazar el canal. ¿Se ha alcanzado el número máximo de enlaces o el canal no existe?"}}}
+                     },
+                     "CMDMode": {
+                        "success": {"msg": "El modo ha cambiado con éxito. Los cambios pueden tardar unos minutos en surtir efecto."},
+                        "description": "Define el modo en que se utilizarán los conjuntos de datos",
+                        "error": {"invalid": {"arg": {"msg": "Fallo en el cambio de modo.\nLas opciones disponibles son: %0%"}}}
+                     },
+                     "GROUPLearning": {"description": "Contiene comandos para controlar los datos utilizados"}
+                  },
+                  "CMDSetup": {
+                     "response": {
+                        "success": {
+                           "msg": "Las funciones de Chatbot ya están listas.\nEsta función sólo está disponible en inglés y está pensada únicamente para fines de entretenimiento.\nLas respuestas se generan a partir de mensajes no verificados - Algunas respuestas pueden parecer inapropiadas en determinados contextos.\nMás información sobre el origen de los conjuntos de datos raíz [aquí](%0%)",
+                           "deactivated": "El chatbot ha sido desactivado"
+                        },
+                        "error": {"create": {"failed": "No se ha podido crear/actualizar la configuración del canal necesaria para configurar el chatbot"}}
+                     },
+                     "chat": {"default": {"name": "xenia"}},
+                     "description": "Permite establecer un canal para chatear con Xenia"
+                  },
+                  "GROUPChatbot": {"description": "Contiene comandos para gestionar la configuración del chatbot de un canal"},
+                  "CMDInfo": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "Configuración"},
+                              "2": {"title": "Channel id"},
+                              "3": {"title": "Modo"}
+                           },
+                           "title": "Configuración general del chatbot"
+                        },
+                        "error": {"notfound": "No se ha establecido ningún canal"}
+                     },
+                     "description": "Muestra la configuración general del chatbot"
+                  }
+               },
+               "notification": {
+                  "CMDList": {
+                     "response": {"title": "Notificaciones"},
+                     "description": "Ver notificaciones existentes"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Notificación (ID: %0%) eliminada"},
+                        "error": {"msg": "No se pudo borrar la notificación. ¿Quizás esto fue creado por otra persona o no existe?"}
+                     },
+                     "description": "Eliminar una notificación existente"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Notificación creada (ID: %0% | %1%)"},
+                        "error": {"msg": "¡No se pudo crear la notificación! ¿Quizás el caché está lleno?"}
+                     },
+                     "description": "Crea una nueva notificación"
+                  },
+                  "GROUPNotification": {"description": "Administrar notificaciones para este gremio"},
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Notificación editada"},
+                        "error": {"msg": "No se pudo modificar la notificación. ¿Quizás esto fue creado por otra persona o no existe?"}
+                     },
+                     "description": "Actualizar una notificación existente"
+                  }
+               },
+               "twitch": {
+                  "CMDUpdate": {
+                     "response": {
+                        "success": {"msg": "Notificación de transmisión actualizada"},
+                        "error": {"msg": "No se ha podido actualizar la notificación del flujo. ¿Existe una notificación con este id?"}
+                     },
+                     "description": "Actualizar las notificaciones de transmisión de un canal"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Notificación de transmisión eliminada"},
+                        "error": {"msg": "No se ha podido eliminar la notificación del flujo. ¿Existe una notificación con este id?"}
+                     },
+                     "description": "Eliminar notificaciones de transmisión de un canal"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Notificaciones de transmisión solicitadas. Después de la evaluación, esto se mostrará en la descripción general."},
+                        "error": {"msg": "No se pudo solicitar otra notificación de transmisión. ¿La URL es válida, un canal ya recibe notificaciones de este canal o has alcanzado el límite?"}
+                     },
+                     "description": "Solicitar notificaciones de transmisión para un canal"
+                  },
+                  "HYBRIDTwitch": {
+                     "response": {"success": {"title": "Notificaciones de transmisión solicitadas"}},
+                     "description": "Crear, administrar y enumerar notificaciones de transmisión"
+                  }
+               },
+               "last": {
+                  "GROUPLast": {"description": "Restaurar mensajes eliminados o editados"},
+                  "CMDEdited": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "ID de mensaje"},
+                              "2": {"title": "Autor"},
+                              "3": {"title": "Mensaje antiguo"},
+                              "4": {"title": "Adjuntos"}
+                           },
+                           "title": "Mensaje eliminado restaurado"
+                        },
+                        "error": {"msg": "No se encontró ningún mensaje para restaurar"}
+                     },
+                     "description": "Restaura el último mensaje que se ha editado en este canal"
+                  },
+                  "CMDDeleted": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "ID de mensaje"},
+                              "2": {"title": "Autor"},
+                              "3": {"title": "Mensaje antiguo"},
+                              "4": {"title": "Adjuntos"}
+                           },
+                           "title": "Mensaje eliminado restaurado"
+                        },
+                        "error": {"msg": "No se encontró ningún mensaje para restaurar"}
+                     },
+                     "description": "Restaura el último mensaje que se ha eliminado en este canal"
+                  }
+               },
+               "admin": {
+                  "CMDEval": {"description": "Puede usarse para evaluar código"},
+                  "CMDPing": {"description": "Se puede usar para verificar el ping a la discordia y otros servicios vinculados"},
+                  "CMDChatlog": {"description": "Exportar un registro de los mensajes en caché cifrados para un canal determinado en el gremio actual"},
+                  "CMDClientIdentify": {"description": "Pregunte quién está conectado al conector secundario de backends"},
+                  "CMDD43Z1Stats": {"description": "Se puede utilizar para mostrar alguna información sobre la instancia D43Z1 en ejecución"},
+                  "CMDGlobalInfo": {"description": "Muestra estadísticas de todas las instancias conectadas al socket secundario del backend"},
+                  "CMDD43Z1": {"description": "Puede utilizarse para evaluar el rendimiento actual del D43Z1"},
+                  "CMDInfo": {"description": "Muestra algunas estadísticas sobre este bot"},
+                  "GROUPAdmin": {"description": "Contiene comandos solo disponibles para el desarrollador"}
+               },
+               "hastebin": {"CMDHastebin": {
+                  "response": {
+                     "success": {"msg": "Aquí está tu prisa"},
+                     "error": {"msg": "No se proporcionó archivo"}
+                  },
+                  "description": "Sube el archivo adjunto a haste.hypercdn.de"
+               }},
+               "anime": {
+                  "sfw": {
+                     "CMDCry": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% llora",
+                              "1": "%1% hizo llorar al %0%."
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Llorar por algo"
+                     },
+                     "CMDKitsune": {
+                        "response": {
+                           "success": {"msg": {"0": "Aquí tienes"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDHolo": {
+                        "response": {
+                           "success": {"msg": {"0": "Algo holográfico:"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "¿Holo has dicho?"
+                     },
+                     "CMDOokami": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDTail": {
+                        "response": {
+                           "success": {"msg": {"0": "Cola esponjosa :3"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDEevee": {
+                        "response": {
+                           "success": {"msg": {"0": "Eevee!"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Eevee?"
+                     },
+                     "CMDTickle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% le hace cosquillas a alguien",
+                              "1": "%1% se hace cosquillas con %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Hazle cosquillas a alguien"
+                     },
+                     "CMDBlush": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% se sonroja",
+                              "1": "%0% se sonroja por %1%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Se sonroja por alguien"
+                     },
+                     "CMDSlap": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% bofetadas alrededor",
+                              "1": "%1% fue abofeteado por %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Abofetear a alguien"
+                     },
+                     "CMDFluff": {
+                        "response": {
+                           "success": {"msg": {"0": "Tan esponjoso :3"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Fluffy"
+                     },
+                     "CMDKiss": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% reparte besos",
+                              "1": "%0% besos %1% OwO"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Besar a alguien"
+                     },
+                     "CMDHug": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% quiere abrazar",
+                              "1": "%0% abrazos %1%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Abrazar a alguien"
+                     },
+                     "CMDSmile": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% tiene que sonreír :)",
+                              "1": "%1% hizo sonreír al %0%. :)"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Sonríe a alguien"
+                     },
+                     "CMDBite": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% muerde a alguien",
+                              "1": "%1% es mordido por %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Morder a alguien (Puede ser un bocadillo)"
+                     },
+                     "CMDLick": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% trató de lamer a alguien",
+                              "1": "%0% lame %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Lame a alguien"
+                     },
+                     "CMDPat": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% palmea a alguien",
+                              "1": "%1% recibe algunas felicitaciones de %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Dar una palmadita en la cabeza a alguien"
+                     },
+                     "CMDPoke": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% se asoma por ahí",
+                              "1": "%1% es pinchado por %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Pinchar a alguien"
+                     },
+                     "CMDCuddle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% quiere abrazar",
+                              "1": "%1% se deja abrazar por %0%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Abrazar a alguien"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDDance": {
+                        "response": {
+                           "success": {"msg": {"0": "%0% baila"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Danza!"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "UwU"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Imagen aleatoria"
+                     },
+                     "CMDFeed": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% come bien",
+                              "1": "%0% comparte la comida con %1%"
+                           }},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "Alimentar a alguien"
+                     },
+                     "CMDSenko": {
+                        "response": {
+                           "success": {"msg": {"0": "_Senko noises_"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": ":3"
+                     }
+                  },
+                  "nsfw": {
+                     "CMDThreesome_FFM": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDYuri": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDPussylick": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDBlowjob": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDCum": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDYaoi": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDSolo": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDAnal": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDFuck": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDThreesome_FFF": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDThreesome_MMF": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "UwU"}},
+                           "error": {
+                              "msg": "Algo salió mal",
+                              "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                           }
+                        },
+                        "description": "-Contenido NSFW-"
+                     }
+                  },
+                  "GROUPAnime": {"description": "Contains various anime themed commands"}
+               },
+               "tags": {
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Etiqueta %0% eliminada"},
+                        "error": {"msg": "No se ha podido eliminar la etiqueta. ¿Es usted el propietario y existe la etiqueta?"}
+                     },
+                     "description": "Elimina una etiqueta existente"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Etiqueta %0% creada"},
+                        "error": {"msg": "No se pudo crear la etiqueta"}
+                     },
+                     "description": "Crea una nueva etiqueta con un nombre y contenido de etiqueta determinados"
+                  },
+                  "HYBRIDTag": {
+                     "response": {
+                        "success": {"msg": "%0%\n\n*Etiqueta creada por %1%*"},
+                        "error": {"msg": "Etiqueta % 0% no encontrada"}
+                     },
+                     "description": "Crea, administra y usa etiquetas para este gremio."
+                  },
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Etiqueta % 0% actualizada"},
+                        "error": {"msg": "No se ha podido actualizar la etiqueta. ¿Es usted el propietario y existe la etiqueta?"}
+                     },
+                     "description": "Modifica una etiqueta determinada con el nuevo contenido."
+                  }
+               },
+               "info": {"CMDInfo": {
+                  "response": {
+                     "field": {
+                        "3": {"title": "Fragmento actual"},
+                        "4": {"title": "Ejemplo"},
+                        "5": {"title": "Posición"},
+                        "6": {
+                           "title": "Sitio web",
+                           "link_text": "[Visita el sitio web](%0%)"
+                        },
+                        "7": {
+                           "title": "Procesamiento de datos",
+                           "link_text": "[Visita el sitio web](%0%)"
+                        },
+                        "8": {
+                           "title": "Reportar contenido",
+                           "link_text": "[Visita el sitio web](%0%)"
+                        },
+                        "9": {
+                           "title": "Contacto",
+                           "link_text": "[Visita el sitio web](%0%)"
+                        }
+                     },
+                     "title": "Info"
+                  },
+                  "description": "Muestra información básica sobre mí"
+               }}
+            }
+         },
+         "slash": {"structure": {
+            "notification": {
+               "CMDList": {"response": {"title": "Notificaciones"}},
+               "CMDCreate": {"response": {
+                  "success": {"msg": "Notificación creada  (ID: %0% | %1%)"},
+                  "error": {"msg": "No se ha podido crear la notificación. ¿Quizá la caché está llena?"}
+               }},
+               "CMDDelete": {"response": {
+                  "success": {"msg": "Notificación (ID: %0%) borrada"},
+                  "error": {"msg": "No se ha podido eliminar la notificación. ¿Tal vez esto fue creado por otra persona o no existe?"}
+               }},
+               "CMDModify": {
+                  "response": {
+                     "success": {"msg": "Notificación editada"},
+                     "error": {"msg": "No se ha podido modificar la notificación. ¿Quizás esto fue creado por alguien más o no existe?"}
+                  },
+                  "description": "Actualizar una notificación existente"
+               }
+            },
+            "last": {
+               "CMDEdited": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "Id. del mensaje"},
+                        "2": {"title": "Autor"},
+                        "3": {"title": "Mensaje antiguo"},
+                        "4": {"title": "Old Message"}
+                     },
+                     "title": "Mensaje borrado restaurado"
+                  },
+                  "error": {"msg": "No se ha encontrado ningún mensaje para restaurar"}
+               }},
+               "CMDDeleted": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "Id. del mensaje"},
+                        "2": {"title": "Autor"},
+                        "3": {"title": "Mensaje antiguo"},
+                        "4": {"title": "Old Message"}
+                     },
+                     "title": "Mensaje borrado restaurado"
+                  },
+                  "error": {"msg": "No se ha encontrado ningún mensaje para restaurar"}
+               }}
+            },
+            "notificationn": {"CMDList": {"description": "Ver las notificaciones existentes"}},
+            "tag": {
+               "RCMDTag": {"response": {
+                  "success": {"msg": "%0%\n\n*Etiqueta creada por %1%*"},
+                  "error": {"msg": "Etiqueta %0% no encontrada"}
+               }},
+               "s": {
+                  "CMDDelete": {"response": {
+                     "success": {"msg": "Etiqueta %0% borrada"},
+                     "error": {"msg": "No se ha podido eliminar la etiqueta. ¿Es usted el propietario y existe la etiqueta?"}
+                  }},
+                  "CMDCreate": {"response": {
+                     "success": {"msg": "Etiqueta %0% creada"},
+                     "error": {"msg": "Fallo al crear la etiqueta"}
+                  }},
+                  "CMDModify": {"response": {
+                     "success": {"msg": "Etiqueta %0% actualizada"},
+                     "error": {"msg": "No se ha podido actualizar la etiqueta. ¿Es usted el propietario y existe la etiqueta?"}
+                  }}
+               }
+            },
+            "anime": {
+               "nsfw": {
+                  "CMDCum": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDYuri": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDYaoi": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDPussylick": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDSolo": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDAnal": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDFuck": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDBlowjob": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "UwU"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }}
+               },
+               "sfw": {
+                  "CMDCry": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% llora",
+                        "1": "%1% hizo llorar al %0%."
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDTickle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% le hace cosquillas a alguien",
+                        "1": "%1% se hace cosquillas con %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDBlush": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% se sonroja",
+                        "1": "%0% se sonroja por %1%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDSlap": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% bofetadas alrededor",
+                        "1": "%1% fue abofeteado por %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDKiss": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% reparte besos",
+                        "1": "%0% besos %1% OwO"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDHug": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% quiere abrazar",
+                        "1": "%0% abrazos %1%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDSmile": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% tiene que sonreír :)",
+                        "1": "%1% hizo sonreír al %0%. :)"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDBite": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% muerde a alguien",
+                        "1": "%1% es mordido por %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDLick": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% trató de lamer a alguien",
+                        "1": "%0% lame %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDPat": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% palmea a alguien",
+                        "1": "%1% recibe algunas felicitaciones de %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDPoke": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% se asoma por ahí",
+                        "1": "%1% es pinchado por %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDCuddle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% quiere abrazar",
+                        "1": "%1% se deja abrazar por %0%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": ":3"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDDance": {"response": {
+                     "success": {"msg": {"0": "%0% baila"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDFeed": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% come bien",
+                        "1": "%0% comparte la comida con %1%"
+                     }},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "UwU"}},
+                     "error": {
+                        "msg": "Algo salió mal",
+                        "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
+                     }
+                  }}
+               }
+            },
+            "info": {"RCMDInfo": {"response": {
+               "field": {
+                  "3": {"title": "Fragmento actual"},
+                  "4": {"title": "Instancia"},
+                  "5": {"title": "Ubicación"},
+                  "6": {
+                     "title": "Página web",
+                     "link_text": "[Visitar el sitio web](%0%)"
+                  },
+                  "7": {
+                     "title": "Procesamiento de datos",
+                     "link_text": "[Visitar el sitio web](%0%)"
+                  },
+                  "8": {
+                     "title": "Contenido del informe",
+                     "link_text": "[Visitar el sitio web](%0%)"
+                  },
+                  "9": {
+                     "title": "Contacte con",
+                     "link_text": "[Visitar el sitio web](%0%)"
+                  }
+               },
+               "title": "Información"
+            }}}
+         }}
+      }}}}},
+      "default": {
+         "onMissingBotPerms": {
+            "description": "¡No puedo ejecutar el comando debido a que faltan permisos!",
+            "title": "Fallido: al bot le faltan permisos",
+            "requiredPerms": {"fn": "Permisos requeridos:"}
+         },
+         "onMissingMemberPerms": {
+            "description": "¡No tienes permitido hacer esto!",
+            "title": "Fallido: no hay suficientes permisos",
+            "requiredPerms": {"fn": "Permisos requeridos:"}
+         },
+         "onError": {"title": "Error"},
+         "onAdminPerms": {
+            "description": "Parece que tengo privilegios de administrador. Se desaconseja encarecidamente esto por ser un riesgo para la seguridad. Por favor, asignadme sólo los permisos necesarios para realizar mi trabajo.\n\nSi el permiso ha sido asignado por accidente por favor elimínelo de mí / los roles asignados a mí.\nSi esto es intencional desactive este mensaje cambiando mi configuración BOT_IGNORE_ADMIN_PERMS.",
+            "title": "Advertencia: El bot tiene permisos de administrador"
+         },
+         "onUnhandledException": {
+            "exception": {"msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"},
+            "cacheexception": {"msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"},
+            "backendexception": {"msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"},
+            "dataexception": {"msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"},
+            "title": "Oops"
+         },
+         "onMissingArgs": {
+            "usage": {"fn": "Uso:"},
+            "description": "Este comando requiere más / diferentes argumentos",
+            "title": "Fallido: no hay suficientes argumentos"
+         },
+         "onMissingNSFW": {
+            "hidden": "Algunos comandos NSFW fueron ocultados debido a la ejecución en un canal no NSFW",
+            "description": "Los comandos NSFW no pueden utilizarse en canales no NSFW",
+            "title": "Fallido: El comando requiere un canal NSFW"
+         },
+         "onCooldownActive": {
+            "description": "Espere un tiempo antes de volver a hacerlo",
+            "title": "Fallido: enfriamiento activo"
+         },
+         "onSuccess": {"title": "�\u2030xito"},
+         "estimatedCommand": {"msg": "El comando que escribiste `%0%` no parece existir. ¿Quizás querías usar `%1%` en su lugar?"}
+      }
+   },
+   "languageDescription": "The default Spanish language package",
+   "languageId": "es_ES",
+   "languageName": "Spanish-Default"
+}

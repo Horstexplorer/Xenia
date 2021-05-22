@@ -1,0 +1,1105 @@
+{
+   "isDefault": false,
+   "translations": {
+      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
+         "chat": {
+            "global": {"help": {"CMDHelp": {
+               "response": {
+                  "field": {"commands": "Befehle"},
+                  "title": "**Hilfe / Befehle**"
+               },
+               "description": "Zeigt eine Liste von Befehlen an"
+            }}},
+            "structure": {
+               "settings": {
+                  "guild": {
+                     "CMDLicense": {
+                        "response": {
+                           "success": {"msg": "Lizenz aktualisiert"},
+                           "error": {"msg": "Lizenzaktualisierung fehlgeschlagen"}
+                        },
+                        "description": "Aktualisieren der Lizenz mit einem Lizenzschlüssel"
+                     },
+                     "CMDSettings": {
+                        "response": {
+                           "success": {"msg": "Gildeneinstellungen aktualisiert"},
+                           "error": {"msg": "Die Gildeneinstellungen konnten nicht aktualisiert werden.\nVerfügbare Optionen sind: %0%"}
+                        },
+                        "description": "Aktualisieren Sie die Einstellungen für diese Gilde"
+                     },
+                     "HYBRIDGuild": {
+                        "response": {
+                           "field": {
+                              "11": {"title": "max selbstlernende Kanäle"},
+                              "1": {"title": "Bevorzugte Sprache"},
+                              "2": {"title": "Präfix"},
+                              "3": {"title": "Einstellungen"},
+                              "4": {"title": "Lizenzname"},
+                              "5": {"title": "Ist gültig bis"},
+                              "6": {"title": "max vperm-Rollen"},
+                              "7": {"title": "max Tags"},
+                              "8": {"title": "max Benachrichtigungen"},
+                              "9": {"title": "max Twitch Benachrichtigungen"},
+                              "10": {"title": "max Nachrichtenprotokollierung"}
+                           },
+                           "title": "Allgemeine Gildeneinstellungen"
+                        },
+                        "description": "Enthält allgemeine Gildeneinstellungen"
+                     },
+                     "CMDPrefix": {
+                        "response": {
+                           "success": {"msg": "Präfix aktualisiert auf ```%0%```"},
+                           "error": {"msg": "Die Aktualisierung des Präfixes ist fehlgeschlagen. Vielleicht ist es zu lang?"}
+                        },
+                        "description": "Aktualisieren Sie das für Befehle verwendete Präfix"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Sprache aktualisiert"},
+                           "error": {"msg": "Die Sprache konnte nicht geändert werden.\nVerfügbare Optionen sind: %0%"}
+                        },
+                        "description": "Wechselt die Sprache von Xenia"
+                     }
+                  },
+                  "GROUPSettings": {"description": "Enthält alle Einstellungen für die Gilde"},
+                  "roles": {"HYBRIDRoles": {
+                     "response": {
+                        "title": "Rollen",
+                        "is_empty": "Noch keine Rolle angelegt"
+                     },
+                     "description": "Enthält Befehle zur Verwaltung von v-Rollen und v-Perms"
+                  }},
+                  "channel": {
+                     "CMDAccessMode": {
+                        "response": {
+                           "success": {"msg": "Zugriffsmodus aktualisiert"},
+                           "error": {"msg": "Aktualisierung des Zugriffsmodus fehlgeschlagen.\nVerfügbare Optionen sind: %0%"}
+                        },
+                        "description": "Aktualisieren Sie den Zugriffsmodus für den angegebenen Kanal"
+                     },
+                     "CMDLogging": {
+                        "response": {
+                           "success": {"msg": "Protokollierungseinstellungen aktualisiert"},
+                           "error": {"msg": "Die Protokollierungeinstellungen konnten nicht aktualisiert werden.\nVerfügbare Optionen sind: [true, false]"}
+                        },
+                        "description": "Aktualisieren der Protokollierungseinstellungen für den angegebenen Kanal"
+                     },
+                     "GROUPChannel": {"description": "Enthält Befehle zur Verwaltung der Kanaleinstellungen"},
+                     "CMDInfo": {
+                        "response": {
+                           "success": {
+                              "field": {
+                                 "1": {"title": "Flags"},
+                                 "2": {"title": "Zugriffsmodus"},
+                                 "3": {"title": "Protokollierung aktiviert"},
+                                 "4": {"title": "Kanal für die automatische Protokollwiederherstellung"}
+                              },
+                              "title": "Kanaleinstellungen"
+                           },
+                           "error": {"msg": "Aktualisierung des Zugriffsmodus fehlgeschlagen.\nVerfügbare Optionen sind:"}
+                        },
+                        "description": "Zeigt Informationen für den angegebenen Kanal an"
+                     }
+                  },
+                  "self": {
+                     "HYBRIDSelf": {
+                        "response": {
+                           "field": {
+                              "1": {"title": "Benutzername"},
+                              "2": {"title": "Id"},
+                              "3": {"title": "Interne Rolle"},
+                              "4": {"title": "Bevorzugte Sprache"},
+                              "5": {
+                                 "title": "Icon URL",
+                                 "content": "[Link](%0%)"
+                              }
+                           },
+                           "title": "Selbstauskunft"
+                        },
+                        "description": "Enthält Befehle zur Verwaltung eigener Einstellungen"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Sprache aktualisiert"},
+                           "error": {"msg": "Die Sprache konnte nicht geändert werden.\nVerfügbare Optionen sind: %0%"}
+                        },
+                        "description": "Wechselt die Sprache von Xenia."
+                     }
+                  }
+               },
+               "chatbot": {
+                  "learning": {
+                     "CMDChannelLink": {
+                        "success": {"msg": "Kanal-Link aktualisiert! Es kann ein paar Minuten dauern, bis die �\u201enderungen wirksam werden."},
+                        "description": "Verknüpfen Sie einen Kanal, der als Datenpool für den Chatbot verwendet werden soll",
+                        "error": {"invalid": {"arg": {"msg": "Der Kanal konnte nicht verknüpft werden. Wurde die maximale Anzahl von Links erreicht oder existiert der Kanal nicht?"}}}
+                     },
+                     "CMDMode": {
+                        "success": {"msg": "Modus erfolgreich geändert! Es kann ein paar Minuten dauern, bis die �\u201enderungen wirksam werden."},
+                        "description": "Definiert den Modus, in dem die Datensätze verwendet werden",
+                        "error": {"invalid": {"arg": {"msg": "Moduswechsel fehlgeschlagen.\nVerfügbare Optionen sind: %0%"}}}
+                     },
+                     "GROUPLearning": {"description": "Enthält Befehle zur Steuerung der verwendeten Daten"}
+                  },
+                  "CMDSetup": {
+                     "response": {
+                        "success": {
+                           "msg": "Chatbot-Funktionen sind jetzt bereit.\nDiese Funktion ist nur auf Englisch verfügbar und dient nur der Unterhaltung.\nAntworten werden aus ungeprüften Nachrichten generiert - Einige Antworten können in bestimmten Kontexten unangemessen erscheinen.\nErfahre mehr über die Herkunft der Stammdatensätze [hier](%0%)",
+                           "deactivated": "Der Chatbot wurde deaktiviert"
+                        },
+                        "error": {"create": {"failed": "nicht in der Lage, die für die Einrichtung des Chatbots erforderlichen Kanaleinstellungen zu erstellen / zu aktualisieren"}}
+                     },
+                     "chat": {"default": {"name": "xenia"}},
+                     "description": "Ermöglicht das Einrichten eines Kanals zum Chatten mit Xenia"
+                  },
+                  "GROUPChatbot": {"description": "Enthält Befehle zum Verwalten von Chatbot-Einstellungen für einen Kanal"},
+                  "CMDInfo": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "Allgemeine Einstellungen"},
+                              "2": {"title": "Kanal id"},
+                              "3": {"title": "Modus"}
+                           },
+                           "title": "Chatbot Informationen"
+                        },
+                        "error": {"notfound": "Es wurde kein Kanal eingerichtet"}
+                     },
+                     "description": "Zeigt allgemeine Informationen über die Chatbot-Einrichtung an"
+                  }
+               },
+               "notification": {
+                  "CMDList": {
+                     "response": {"title": "Benachrichtigungen"},
+                     "description": "Vorhandene Benachrichtigungen anzeigen"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Benachrichtigung (ID: %0%) gelöscht"},
+                        "error": {"msg": "Benachrichtigung konnte nicht gelöscht werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"}
+                     },
+                     "description": "Löschen einer vorhandenen Benachrichtigung"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Benachrichtigung erstellt (ID: %0% | %1%)"},
+                        "error": {"msg": "Benachrichtigung konnte nicht erstellt werden! Vielleicht ist der Cache voll?"}
+                     },
+                     "description": "Eine neue Benachrichtigung erstellen"
+                  },
+                  "GROUPNotification": {"description": "Verwalten von Benachrichtigungen für diese Gilde"},
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Benachrichtigung bearbeitet"},
+                        "error": {"msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"}
+                     },
+                     "description": "Aktualisieren einer vorhandenen Benachrichtigung"
+                  }
+               },
+               "twitch": {
+                  "CMDUpdate": {
+                     "response": {
+                        "success": {"msg": "Stream-Benachrichtigung aktualisiert"},
+                        "error": {"msg": "Aktualisierung der Stream-Benachrichtigung fehlgeschlagen. Existiert eine Benachrichtigung mit dieser ID?"}
+                     },
+                     "description": "Stream-Benachrichtigungen für einen Kanal aktualisieren"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Benachrichtigung über gelöschte Streams"},
+                        "error": {"msg": "Stream-Benachrichtigung konnte nicht gelöscht werden. Existiert eine Benachrichtigung mit dieser ID?"}
+                     },
+                     "description": "Stream-Benachrichtigungen für einen Kanal entfernen"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Stream-Benachrichtigungen angefordert. Nach der Auswertung wird dies in der Übersicht angezeigt"},
+                        "error": {"msg": "Eine weitere Stream-Benachrichtigung konnte nicht angefordert werden. Ist die URL gültig, erhält ein Kanal bereits Benachrichtigungen für diesen Kanal oder haben Sie das Limit erreicht?"}
+                     },
+                     "description": "Stream-Benachrichtigungen für einen Kanal anfordern"
+                  },
+                  "HYBRIDTwitch": {
+                     "response": {"success": {"title": "Angeforderte Stream-Benachrichtigungen"}},
+                     "description": "Erstellen und Verwalten von Stream-Benachrichtigungen und Listen"
+                  }
+               },
+               "last": {
+                  "GROUPLast": {"description": "Gelöschte oder bearbeitete Nachrichten wiederherstellen"},
+                  "CMDEdited": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "NachrichtenId"},
+                              "2": {"title": "Autor"},
+                              "3": {"title": "Alte Nachricht"},
+                              "4": {"title": "Anhänge"}
+                           },
+                           "title": "Bearbeitete Nachricht wiederhergestellt"
+                        },
+                        "error": {"msg": "Keine Nachricht zum Wiederherstellen gefunden"}
+                     },
+                     "description": "Stellt die letzte Nachricht wieder her, die in diesem Kanal bearbeitet wurde"
+                  },
+                  "CMDDeleted": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "NachrichtenId"},
+                              "2": {"title": "Autor"},
+                              "3": {"title": "Alte Nachricht"},
+                              "4": {"title": "Anhänge"}
+                           },
+                           "title": "Gelöschte Nachricht wiederhergestellt"
+                        },
+                        "error": {"msg": "Keine Nachricht zum Wiederherstellen gefunden"}
+                     },
+                     "description": "Stellt die letzte Nachricht die in diesem Kanal gelöscht wurde wieder her"
+                  }
+               },
+               "admin": {
+                  "CMDEval": {"description": "Kann zur Auswertung von Code verwendet werden"},
+                  "CMDPing": {"description": "Kann verwendet werden, um den Ping zu Discord und anderen verknüpften Diensten zu prüfen"},
+                  "CMDChatlog": {"description": "Exportiert ein Protokoll der verschlüsselten zwischengespeicherten Nachrichten für einen bestimmten Kanal in der aktuellen Gilde"},
+                  "CMDClientIdentify": {"description": "Überprüft wer mit dem sekundären Socket des Backends verbunden ist"},
+                  "CMDD43Z1Stats": {"description": "Kann verwendet werden, um einige Informationen über die laufende D43Z1-Instanz anzuzeigen"},
+                  "CMDGlobalInfo": {"description": "Zeigt die Statistiken aller Instanzen an, die mit dem sekundären Socket des Backends verbunden sind"},
+                  "CMDD43Z1": {"description": "Kann verwendet werden, um die aktuelle D43Z1 Leistung zu überprüfen"},
+                  "CMDInfo": {"description": "Zeigt einige Statistiken über diesen Bot an"},
+                  "GROUPAdmin": {"description": "Enthält Befehle, die nur dem Entwickler zur Verfügung stehen"}
+               },
+               "hastebin": {"CMDHastebin": {
+                  "response": {
+                     "success": {"msg": "Hier ist deine Datei"},
+                     "error": {"msg": "Keine Datei vorhanden"}
+                  },
+                  "description": "Laden Sie die angehängte Datei auf haste.hypercdn.de hoch"
+               }},
+               "anime": {
+                  "sfw": {
+                     "CMDCry": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% weint",
+                              "1": "%1% brachte %0% zum Weinen"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Über etwas weinen"
+                     },
+                     "CMDKitsune": {
+                        "response": {
+                           "success": {"msg": {"0": "Bitte sehr"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDHolo": {
+                        "response": {
+                           "success": {"msg": {"0": "Etwas Holo:"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Holo sagtest du?"
+                     },
+                     "CMDOokami": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDTail": {
+                        "response": {
+                           "success": {"msg": {"0": "Flauschiger Schwanz :3"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDEevee": {
+                        "response": {
+                           "success": {"msg": {"0": "Eevee!"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Eevee?"
+                     },
+                     "CMDTickle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% kitzelt jemanden",
+                              "1": "%1% wird gekitzelt von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden kitzeln"
+                     },
+                     "CMDBlush": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% errötet",
+                              "1": "%0% errötet wegen %1%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Errötet wegen jemandem"
+                     },
+                     "CMDSlap": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% schlägt herum",
+                              "1": "%1% wurde geohrfeigt von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemandem eine Ohrfeige geben"
+                     },
+                     "CMDFluff": {
+                        "response": {
+                           "success": {"msg": {"0": "So flauschig :3"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Flauschig"
+                     },
+                     "CMDKiss": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% verteilt Küsse",
+                              "1": "%0% küsst %1% OwO"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden küssen"
+                     },
+                     "CMDHug": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% will umarmen",
+                              "1": "%0% umarmt %1%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden umarmen"
+                     },
+                     "CMDSmile": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% muss lächeln :)",
+                              "1": "%1% brachte %0% zum Lächeln :)"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden anlächeln"
+                     },
+                     "CMDBite": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% beißt jemanden",
+                              "1": "%1% wird gebissen von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden beißen (es könnte ein Snack sein)"
+                     },
+                     "CMDLick": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% versucht hat, jemanden zu schlecken",
+                              "1": "%0% schleckt %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden ablecken"
+                     },
+                     "CMDPat": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% tätschelt jemanden",
+                              "1": "%1% erhält einige Streicheleinheiten von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemandem auf den Kopf tätscheln"
+                     },
+                     "CMDPoke": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% stöbert herum",
+                              "1": "%1% wird angestupst von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden anstupsen"
+                     },
+                     "CMDCuddle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% will kuscheln",
+                              "1": "%1% wird geknuddelt von %0%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden knuddeln"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDDance": {
+                        "response": {
+                           "success": {"msg": {"0": "%0% tanzt"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Tanzen!"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "UwU"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Zufälliges Bild"
+                     },
+                     "CMDFeed": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% isst gutes Essen",
+                              "1": "%0% teilt Essen mit %1%"
+                           }},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "Jemanden füttern"
+                     },
+                     "CMDSenko": {
+                        "response": {
+                           "success": {"msg": {"0": "_Senko noises_"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": ":3"
+                     }
+                  },
+                  "nsfw": {
+                     "CMDThreesome_FFM": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDYuri": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDPussylick": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDBlowjob": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDCum": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDYaoi": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDSolo": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDAnal": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDFuck": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDThreesome_FFF": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDThreesome_MMF": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "error": {
+                              "msg": "Etwas ist schief gelaufen",
+                              "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                           }
+                        },
+                        "description": "-NSFW Inhalt-"
+                     }
+                  },
+                  "GROUPAnime": {"description": "Enthält verschiedene Befehle mit Anime-Themen"}
+               },
+               "tags": {
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Tag %0% gelöscht"},
+                        "error": {"msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer und existiert das Tag?"}
+                     },
+                     "description": "Löschen ein vorhandenes Tag"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Tag %0% erstellt"},
+                        "error": {"msg": "Tag kann nicht erstellt werden. Wurde das limit erreicht, oder existiert der Tag bereits?"}
+                     },
+                     "description": "Erzeugt einen neuen Tag mit einem gegebenen Tag-Namen und Inhalt"
+                  },
+                  "HYBRIDTag": {
+                     "response": {
+                        "success": {"msg": "%0%\n\n*Tag erstellt von %1%*"},
+                        "error": {"msg": "Tag %0% nicht gefunden"}
+                     },
+                     "description": "Tags für diese Gilde erstellen, verwalten und verwenden"
+                  },
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Tag %0% updated"},
+                        "error": {"msg": "Tag konnte nicht gelöscht werden. Bist du der Besitzer und existiert das Tag?"}
+                     },
+                     "description": "�\u201endert ein gegebenes Tag mit dem neuen Inhalt"
+                  }
+               },
+               "info": {"CMDInfo": {
+                  "response": {
+                     "field": {
+                        "3": {"title": "Aktuelle Scherbe"},
+                        "4": {"title": "Instanz"},
+                        "5": {"title": "Standort"},
+                        "6": {
+                           "title": "Website",
+                           "link_text": "[Website besuchen](%0%)"
+                        },
+                        "7": {
+                           "title": "Datenverarbeitung",
+                           "link_text": "[Website besuchen](%0%)"
+                        },
+                        "8": {
+                           "title": "Bericht Inhalt",
+                           "link_text": "[Website besuchen](%0%)"
+                        },
+                        "9": {
+                           "title": "Kontakt",
+                           "link_text": "[Website besuchen](%0%)"
+                        }
+                     },
+                     "title": "Info"
+                  },
+                  "description": "Zeigt einige grundlegende Informationen über mich an"
+               }}
+            }
+         },
+         "slash": {"structure": {
+            "notification": {
+               "CMDList": {"response": {"title": "Benachrichtigungen"}},
+               "CMDCreate": {"response": {
+                  "success": {"msg": "Benachrichtigung erstellt (ID: %0% | %1%)"},
+                  "error": {"msg": "Benachrichtigung konnte nicht erstellt werden! Vielleicht ist der Cache voll?"}
+               }},
+               "CMDDelete": {"response": {
+                  "success": {"msg": "Benachrichtigung (ID: %0%) gelöscht"},
+                  "error": {"msg": "Benachrichtigung konnte nicht gelöscht werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"}
+               }},
+               "CMDModify": {
+                  "response": {
+                     "success": {"msg": "Benachrichtigung bearbeitet"},
+                     "error": {"msg": "Die Benachrichtigung konnte nicht geändert werden. Vielleicht wurde diese von jemand anderem erstellt oder existiert nicht?"}
+                  },
+                  "description": "Aktualisieren einer vorhandenen Benachrichtigung"
+               }
+            },
+            "last": {
+               "CMDEdited": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "Nachrichten Id"},
+                        "2": {"title": "Autor"},
+                        "3": {"title": "Alte Nachricht"},
+                        "4": {"title": "Anhänge"}
+                     },
+                     "title": "Bearbeitete Nachricht wiederhergestellt"
+                  },
+                  "error": {"msg": "Keine Nachricht zum Wiederherstellen gefunden"}
+               }},
+               "CMDDeleted": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "Nachrichten Id"},
+                        "2": {"title": "Autor"},
+                        "3": {"title": "Alte Nachricht"},
+                        "4": {"title": "Anhänge"}
+                     },
+                     "title": "Gelöschte Nachricht wiederhergestellt"
+                  },
+                  "error": {"msg": "Keine Nachricht zum Wiederherstellen gefunden"}
+               }}
+            },
+            "notificationn": {"CMDList": {"description": "Vorhandene Benachrichtigungen anzeigen"}},
+            "tag": {
+               "RCMDTag": {"response": {
+                  "success": {"msg": "%0%\n\n*Tag erstellt von %1%*"},
+                  "error": {"msg": "Tag %0% nicht gefunden"}
+               }},
+               "s": {
+                  "CMDDelete": {"response": {
+                     "success": {"msg": "Tag %0% gelöscht"},
+                     "error": {"msg": "Tag konnte nicht gelöscht werden. Sind Sie der Besitzer und existiert das Tag?"}
+                  }},
+                  "CMDCreate": {"response": {
+                     "success": {"msg": "Tag %0% erstellt"},
+                     "error": {"msg": "Tag kann nicht erstellt werden"}
+                  }},
+                  "CMDModify": {"response": {
+                     "success": {"msg": "Tag %0% aktualisiert"},
+                     "error": {"msg": "Tag konnte nicht aktualisiert werden. Sind Sie der Besitzer und existiert das Tag?"}
+                  }}
+               }
+            },
+            "anime": {
+               "nsfw": {
+                  "CMDCum": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDYuri": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDYaoi": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDPussylick": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDSolo": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDAnal": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDFuck": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDBlowjob": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }}
+               },
+               "sfw": {
+                  "CMDCry": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% weint",
+                        "1": "%1% brachte %0% zum Weinen"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDTickle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% kitzelt jemanden",
+                        "1": "%1% wird gekitzelt von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDBlush": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% errötet",
+                        "1": "%0% errötet wegen %1%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDSlap": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% schlägt herum",
+                        "1": "%1% wurde geohrfeigt von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDKiss": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% verteilt Küsse",
+                        "1": "%0% küsst %1% OwO"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDHug": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% will umarmen",
+                        "1": "%0% umarmt %1%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDSmile": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% muss lächeln :)",
+                        "1": "%1% brachte %0% zum Lächeln :)"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDBite": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% beißt jemanden",
+                        "1": "%1% wird gebissen von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDLick": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% versucht hat, jemanden zu schlecken",
+                        "1": "%0% schleckt %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDPat": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% tätschelt jemanden",
+                        "1": "%1% erhält einige Streicheleinheiten von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDPoke": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% stöbert herum",
+                        "1": "%1% wird angestupst von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDCuddle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% will kuscheln",
+                        "1": "%1% wird geknuddelt von %0%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": ":3"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDDance": {"response": {
+                     "success": {"msg": {"0": "%0% tanzt"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDFeed": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% isst gutes Essen",
+                        "1": "%0% teilt Essen mit %1%"
+                     }},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "UwU"}},
+                     "error": {
+                        "msg": "Etwas ist schief gelaufen",
+                        "img": {"msg": "Sorry, ich konnte das gewünschte Bild nicht finden :c"}
+                     }
+                  }}
+               }
+            },
+            "info": {"RCMDInfo": {"response": {
+               "field": {
+                  "3": {"title": "Aktuelle Scherbe"},
+                  "4": {"title": "Instanz"},
+                  "5": {"title": "Standort"},
+                  "6": {
+                     "title": "Website",
+                     "link_text": "[Website besuchen](%0%)"
+                  },
+                  "7": {
+                     "title": "Datenverarbeitung",
+                     "link_text": "[Website besuchen](%0%)"
+                  },
+                  "8": {
+                     "title": "Bericht Inhalt",
+                     "link_text": "[Website besuchen](%0%)"
+                  },
+                  "9": {
+                     "title": "Kontakt",
+                     "link_text": "[Website besuchen](%0%)"
+                  }
+               },
+               "title": "Info"
+            }}}
+         }}
+      }}}}},
+      "default": {
+         "onMissingBotPerms": {
+            "description": "Ich kann den Befehl aufgrund fehlender Berechtigungen nicht ausführen!",
+            "title": "Fehlgeschlagen: Dem Bot fehlen die Berechtigungen",
+            "requiredPerms": {"fn": "Erforderliche Berechtigungen:"}
+         },
+         "onMissingMemberPerms": {
+            "description": "Du darfst das nicht tun!",
+            "title": "Fehlgeschlagen: Nicht genügend Berechtigungen",
+            "requiredPerms": {"fn": "Erforderliche Berechtigungen:"}
+         },
+         "onError": {"title": "Fehler"},
+         "onAdminPerms": {
+            "description": "Ich scheine Administratorrechte zu haben. Hiervon wird dringend abgeraten, da es ein Sicherheitsrisiko darstellt. Bitte weisen Sie mir nur die Berechtigungen zu, die für meine Arbeit notwendig sind.\n\nWenn die Berechtigung versehentlich zugewiesen wurde, entfernen Sie sie bitte von mir / den mir zugewiesenen Rollen.\nWenn dies beabsichtigt ist, deaktivieren Sie diese Meldung, indem Sie meine BOT_IGNORE_ADMIN_PERMS Einstellung ändern.\n\n",
+            "title": "Warnung: Bot hat Administrator-Rechte"
+         },
+         "onUnhandledException": {
+            "exception": {"msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte"},
+            "cacheexception": {"msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte"},
+            "backendexception": {"msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte"},
+            "dataexception": {"msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte"},
+            "title": "Oh je"
+         },
+         "onMissingArgs": {
+            "usage": {"fn": "Verwendung:"},
+            "description": "Dieser Befehl erfordert mehrere/unterschiedliche Argumente",
+            "title": "Gescheitert: Nicht genug Argumente"
+         },
+         "onMissingNSFW": {
+            "hidden": "Einige NSFW-Befehle wurden aufgrund der Ausführung in einem nicht NSFW-Kanal ausgeblendet",
+            "description": "NSFW-Befehle können nicht in nicht NSFW-Kanälen verwendet werden",
+            "title": "Fehlgeschlagen: Befehl erfordert NSFW-Kanal"
+         },
+         "onCooldownActive": {
+            "description": "Bitte warten etwas, bevor du diesen Befehl erneut versuchst",
+            "title": "Fehlgeschlagen: Abklingzeit aktiv"
+         },
+         "onSuccess": {"title": "Erfolg"},
+         "estimatedCommand": {"msg": "Der eingegebene Befehl `%0%` scheint nicht zu existieren. Vielleicht wolltest du stattdessen `%1%` verwenden?"}
+      }
+   },
+   "languageDescription": "The default German language package",
+   "languageId": "de_DE",
+   "languageName": "German-Default"
+}

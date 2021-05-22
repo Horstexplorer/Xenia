@@ -1,0 +1,1105 @@
+{
+   "isDefault": false,
+   "translations": {
+      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
+         "chat": {
+            "global": {"help": {"CMDHelp": {
+               "response": {
+                  "field": {"commands": "Commands"},
+                  "title": "**Hewp / Commands**"
+               },
+               "description": "Dispways a wist of commands"
+            }}},
+            "structure": {
+               "settings": {
+                  "guild": {
+                     "CMDLicense": {
+                        "response": {
+                           "success": {"msg": "Wicense updated"},
+                           "error": {"msg": "Updating wicense faiwed"}
+                        },
+                        "description": "Update the wicense using a wicense key"
+                     },
+                     "CMDSettings": {
+                        "response": {
+                           "success": {"msg": "Guiwd settings updated"},
+                           "error": {"msg": "Faiwed tuwu update guiwd settings.\nAvaiwabwe options awe: %0%"}
+                        },
+                        "description": "Update the settings fow thiws guiwd"
+                     },
+                     "HYBRIDGuild": {
+                        "response": {
+                           "field": {
+                              "11": {"title": "max sewf weawning channews"},
+                              "1": {"title": "Pwefewwed wanguage"},
+                              "2": {"title": "Pwefix"},
+                              "3": {"title": "Settings"},
+                              "4": {"title": "Wicense nawme"},
+                              "5": {"title": "Iws vawid untiw"},
+                              "6": {"title": "max vpewm wowes"},
+                              "7": {"title": "max tags"},
+                              "8": {"title": "max notifications"},
+                              "9": {"title": "max twitch notifications"},
+                              "10": {"title": "max message wogging"}
+                           },
+                           "title": "Genewaw guiwd settings"
+                        },
+                        "description": "Contains genewaw guiwd settings"
+                     },
+                     "CMDPrefix": {
+                        "response": {
+                           "success": {"msg": "Pwefix updated tuwu ```%0%```"},
+                           "error": {"msg": "Updating pwefix faiwed. Maybe its too wong?"}
+                        },
+                        "description": "Update the pwefix used fow commands"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Wesponse wanguage updated"},
+                           "error": {"msg": "Faiwed tuwu update wesponse wanguage.\nAvaiwabwe options awe: %0%"}
+                        },
+                        "description": "Update the wesponse wanguage of xenia"
+                     }
+                  },
+                  "GROUPSettings": {"description": "Contains aww settings fow the guiwd"},
+                  "roles": {"HYBRIDRoles": {
+                     "response": {
+                        "title": "Wowes",
+                        "is_empty": "No wowes cweated yet"
+                     },
+                     "description": "Contains commands tuwu manage v wowes awnd v pewms"
+                  }},
+                  "channel": {
+                     "CMDAccessMode": {
+                        "response": {
+                           "success": {"msg": "Access mode updated"},
+                           "error": {"msg": "Faiwed tuwu update access mode.\nAvaiwabwe options awe: %0%"}
+                        },
+                        "description": "Update the access mode fow the specified channew"
+                     },
+                     "CMDLogging": {
+                        "response": {
+                           "success": {"msg": "Updated wogging setting"},
+                           "error": {"msg": "Faiwed tuwu update wogging mode.\nAvaiwabwe options awe: [true, false],"}
+                        },
+                        "description": "Update the wogging settings fow the specified channew"
+                     },
+                     "GROUPChannel": {"description": "Contains commands tuwu manage channew settings"},
+                     "CMDInfo": {
+                        "response": {
+                           "success": {
+                              "field": {
+                                 "1": {"title": "Fwags"},
+                                 "2": {"title": "Access mode"},
+                                 "3": {"title": "Wogging enabwed"},
+                                 "4": {"title": "Wogging auto westowe channew"}
+                              },
+                              "title": "Channew settings"
+                           },
+                           "error": {"msg": "Faiwed tuwu update access mode.\nAvaiwabwe options awe:"}
+                        },
+                        "description": "Dispways infowmation fow the specified channew"
+                     }
+                  },
+                  "self": {
+                     "HYBRIDSelf": {
+                        "response": {
+                           "field": {
+                              "1": {"title": "Usewname"},
+                              "2": {"title": "Id"},
+                              "3": {"title": "Intewnaw wowe"},
+                              "4": {"title": "Pwefewwed wanguage"},
+                              "5": {
+                                 "title": "Icon uww",
+                                 "content": "[Wink](%0%)"
+                              }
+                           },
+                           "title": "Sewf info"
+                        },
+                        "description": "Contains commands tuwu manage own settings"
+                     },
+                     "CMDLanguage": {
+                        "response": {
+                           "success": {"msg": "Wesponse wanguage updated"},
+                           "error": {"msg": "Faiwed tuwu update wesponse wanguage.\nAvaiwabwe options awe: %0%"}
+                        },
+                        "description": "Update the wesponse wanguage of xenia"
+                     }
+                  }
+               },
+               "chatbot": {
+                  "learning": {
+                     "CMDChannelLink": {
+                        "success": {"msg": "Channew wink updated! iwt may take a few minutes fow the changes tuwu take effect."},
+                        "description": "Wink a channew tuwu be used as data poow fow the chatbot",
+                        "error": {"invalid": {"arg": {"msg": "Faiwed tuwu wink channew. Has the maximum numbew of winks bewn weached ow does the channew nowt exist?"}}}
+                     },
+                     "CMDMode": {
+                        "success": {"msg": "Mode changed successfuwwy! iwt may take a few minutes fow the changes tuwu take effect."},
+                        "description": "Defines the mode of which the datasets wiww be used",
+                        "error": {"invalid": {"arg": {"msg": "Faiwed tuwu change mode.\nAvaiwabwe options awe: %0%"}}}
+                     },
+                     "GROUPLearning": {"description": "Contains commands tuwu contwow the data used"}
+                  },
+                  "CMDSetup": {
+                     "response": {
+                        "success": {
+                           "msg": "Chatbot featuwes awe now weady.\nThiws featuwe iws onwy avaiwabwe in engwish awnd iws intended fow entewtainment puwposes onwy.\nWesponses awe genewated fwom unvewified messages - Sowme answews may seem inappwopwiate in cewtain contexts.\nWeawn mowe abouwt the owigin of the woot datasets [hewe](%0%)",
+                           "deactivated": "Chatbot has bewn deactivated"
+                        },
+                        "error": {"create": {"failed": "Faiwed tuwu cweate / update the channew settings wequiwed tuwu set up the chatbot"}}
+                     },
+                     "chat": {"default": {"name": "xenia"}},
+                     "description": "Awwows tuwu set up a channew tuwu chat with xenia"
+                  },
+                  "GROUPChatbot": {"description": "Contains commands tuwu manage chatbot settings fow a channew"},
+                  "CMDInfo": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "Genewaw settings"},
+                              "2": {"title": "Channew id"},
+                              "3": {"title": "Mwode"}
+                           },
+                           "title": "Chatbot infowmation"
+                        },
+                        "error": {"notfound": "No channew has bewn set up"}
+                     },
+                     "description": "Shows genewaw infowmation abouwt the chatbot setup"
+                  }
+               },
+               "notification": {
+                  "CMDList": {
+                     "response": {"title": "Notifications"},
+                     "description": "View existing notifications"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Notification (ID: %0%) deweted"},
+                        "error": {"msg": "Faiwed tuwu dewete notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"}
+                     },
+                     "description": "Dewete an existing notification"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Notification cweated (ID: %0% | %1%)"},
+                        "error": {"msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?"}
+                     },
+                     "description": "Cweate a new notification"
+                  },
+                  "GROUPNotification": {"description": "Manage notifications fow thiws guiwd"},
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Notification edited"},
+                        "error": {"msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"}
+                     },
+                     "description": "Update an existing notification"
+                  }
+               },
+               "twitch": {
+                  "CMDUpdate": {
+                     "response": {
+                        "success": {"msg": "Updated stweam notification"},
+                        "error": {"msg": "Faiwed tuwu update stweam notification. Does a notification with thiws id exist?"}
+                     },
+                     "description": "Update stweam notifications fow a channew"
+                  },
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Deweted stweam notification"},
+                        "error": {"msg": "Faiwed tuwu dewete stweam notification. Does a notification with thiws id exist?"}
+                     },
+                     "description": "Wemove stweam notifications fow a channew"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview."},
+                        "error": {"msg": "Faiwed tuwu wequest anothew stweam notification. Iws the uww vawid, does a channew awweady weceive notifications fow thiws channew ow duwu u hit the wimit?"}
+                     },
+                     "description": "Wequest stweam notifications fow a channew"
+                  },
+                  "HYBRIDTwitch": {
+                     "response": {"success": {"title": "Wequested stweam notifications"}},
+                     "description": "Cweate awnd manage awnd wist stweam notifications"
+                  }
+               },
+               "last": {
+                  "GROUPLast": {"description": "Westowe deweted ow edited messages"},
+                  "CMDEdited": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "MessageId"},
+                              "2": {"title": "Author"},
+                              "3": {"title": "Old Message"},
+                              "4": {"title": "Attachments"}
+                           },
+                           "title": "Westowed edited message"
+                        },
+                        "error": {"msg": "No message found tuwu westowe"}
+                     },
+                     "description": "Westowes the wast message which has bewn edited in thiws channew"
+                  },
+                  "CMDDeleted": {
+                     "response": {
+                        "success": {
+                           "field": {
+                              "1": {"title": "MessageId"},
+                              "2": {"title": "Authow"},
+                              "3": {"title": "Owd message"},
+                              "4": {"title": "Attachments"}
+                           },
+                           "title": "Westowed deweted message"
+                        },
+                        "error": {"msg": "No message found tuwu westowe"}
+                     },
+                     "description": "Westowes the wast message which has bewn deweted in thiws channew"
+                  }
+               },
+               "admin": {
+                  "CMDEval": {"description": "Cawn be used tuwu evawuate code"},
+                  "CMDPing": {"description": "Cawn be used tuwu check the ping tuwu discowd awnd othew winked sewvices"},
+                  "CMDChatlog": {"description": "Expowt a wog of the encwypted cached messages fow a given channew in the cuwwent guiwd"},
+                  "CMDClientIdentify": {"description": "Awsk who iws connected tuwu the backends secondawy socket"},
+                  "CMDD43Z1Stats": {"description": "Cawn be used tuwu dispway sowme infowmation abouwt the wunning d43z1 instance"},
+                  "CMDGlobalInfo": {"description": "Dispways stats of aww instances connected tuwu the secondawy socket of the backend"},
+                  "CMDD43Z1": {"description": "Cawn be used tuwu evawuate the cuwwent D43Z1 pewfowmance"},
+                  "CMDInfo": {"description": "Dispways sowme statistics abouwt thiws bot"},
+                  "GROUPAdmin": {"description": "Contains commands onwy avaiwabwe tuwu the devewopew"}
+               },
+               "hastebin": {"CMDHastebin": {
+                  "response": {
+                     "success": {"msg": "Hewe iws youw haste"},
+                     "error": {"msg": "No fiwe pwovided"}
+                  },
+                  "description": "Upwoad the attached fiwe tuwu haste.hypercdn.de"
+               }},
+               "anime": {
+                  "sfw": {
+                     "CMDCry": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% cwies",
+                              "1": "%1% mwade %0% cwies"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Cwy abouwt something"
+                     },
+                     "CMDKitsune": {
+                        "response": {
+                           "success": {"msg": {"0": "Hewe uwu gow"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDHolo": {
+                        "response": {
+                           "success": {"msg": {"0": "Something howo:"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Howo did uwu say?"
+                     },
+                     "CMDOokami": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDTail": {
+                        "response": {
+                           "success": {"msg": {"0": "Fwuffy taiw :3"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDEevee": {
+                        "response": {
+                           "success": {"msg": {"0": "Eevee!"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Eevee?"
+                     },
+                     "CMDTickle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% tickwes someone",
+                              "1": "%1% gets tickwed by %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Tickwe someone"
+                     },
+                     "CMDBlush": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% bwushes",
+                              "1": "%0% bwushes because of %1%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Bwushes because of somebody"
+                     },
+                     "CMDSlap": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% swaps awound",
+                              "1": "%1% got swapped by %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Swap someone"
+                     },
+                     "CMDFluff": {
+                        "response": {
+                           "success": {"msg": {"0": "So fwuffy :3"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Fwuffy"
+                     },
+                     "CMDKiss": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% hands out kisses",
+                              "1": "%0% kisses %1% OwO"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Kiss someone"
+                     },
+                     "CMDHug": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% wants tuwu hug",
+                              "1": "%0% hugs %1%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Hug someone"
+                     },
+                     "CMDSmile": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% has tuwu smiwe :)",
+                              "1": "%1% made %0% smiwe :)"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Smiwe at someone"
+                     },
+                     "CMDBite": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% bites someone",
+                              "1": "%1% gets bitten by %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Bite someone (It might be a snack)"
+                     },
+                     "CMDLick": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% twied tuwu wick someone",
+                              "1": "%0% wicks %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Wick someone"
+                     },
+                     "CMDPat": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% pats someone",
+                              "1": "%1% weceives sowme headpats fwom %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Pat someone own the head"
+                     },
+                     "CMDPoke": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% pokes awound",
+                              "1": "%1% gets poked by %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Poke someone"
+                     },
+                     "CMDCuddle": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% wants tuwu cuddwe",
+                              "1": "%1% gets cuddwed by %0%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Cuddwe someone"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": ":3"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": ":3"
+                     },
+                     "CMDDance": {
+                        "response": {
+                           "success": {"msg": {"0": "%0% dances"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Dance!"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "UwU"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Random image"
+                     },
+                     "CMDFeed": {
+                        "response": {
+                           "success": {"msg": {
+                              "0": "%0% eats nice food",
+                              "1": "%0% shawes food with %1%"
+                           }},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Feed someone"
+                     },
+                     "CMDSenko": {
+                        "response": {
+                           "success": {"msg": {"0": "_Senko noises_"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": ":3"
+                     }
+                  },
+                  "nsfw": {
+                     "CMDThreesome_FFM": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDYuri": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDPussylick": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDBlowjob": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDCum": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDYaoi": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDSolo": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDAnal": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDFuck": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDThreesome_FFF": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDThreesome_MMF": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDNeko": {
+                        "response": {
+                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "-NSFW content-"
+                     },
+                     "CMDRandom": {
+                        "response": {
+                           "success": {"msg": {"0": "UwU"}},
+                           "error": {
+                              "msg": "Something went wwong",
+                              "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                           }
+                        },
+                        "description": "Random image"
+                     }
+                  },
+                  "GROUPAnime": {"description": "Contains vawious anime themed commands"}
+               },
+               "tags": {
+                  "CMDDelete": {
+                     "response": {
+                        "success": {"msg": "Tag %0% deweted"},
+                        "error": {"msg": "Faiwed tuwu dewete tag. Awe uwu the ownew awnd does the tag exist?"}
+                     },
+                     "description": "Dewetes an existing tag"
+                  },
+                  "CMDCreate": {
+                     "response": {
+                        "success": {"msg": "Tag %0% cweated"},
+                        "error": {"msg": "Faiwed tuwu cweate tag"}
+                     },
+                     "description": "Cweates a new tag with a given tag nawme awnd content"
+                  },
+                  "HYBRIDTag": {
+                     "response": {
+                        "success": {"msg": "%0%\n\n*Tag cweated by %1%*"},
+                        "error": {"msg": "Tag %0% nowt found"}
+                     },
+                     "description": "Cweate, manage awnd use tags fow thiws guiwd"
+                  },
+                  "CMDModify": {
+                     "response": {
+                        "success": {"msg": "Tag %0% updated"},
+                        "error": {"msg": "Faiwed tuwu update tag. Awe uwu the ownew awnd does the tag exist?"}
+                     },
+                     "description": "Modifies a given tag with the new content"
+                  }
+               },
+               "info": {"CMDInfo": {
+                  "response": {
+                     "field": {
+                        "3": {"title": "Cuwwent shawd"},
+                        "4": {"title": "Instance"},
+                        "5": {"title": "Wocation"},
+                        "6": {
+                           "title": "Website",
+                           "link_text": "[Visit Website](%0%)"
+                        },
+                        "7": {
+                           "title": "Data pwocessing",
+                           "link_text": "[Visit Website](%0%)"
+                        },
+                        "8": {
+                           "title": "Wepowt content",
+                           "link_text": "[Visit Website](%0%)"
+                        },
+                        "9": {
+                           "title": "Contact",
+                           "link_text": "[Visit Website](%0%)"
+                        }
+                     },
+                     "title": "Info"
+                  },
+                  "description": "Shows sowme basic infowmation abouwt me"
+               }}
+            }
+         },
+         "slash": {"structure": {
+            "notification": {
+               "CMDList": {"response": {"title": "Notifications"}},
+               "CMDCreate": {"response": {
+                  "success": {"msg": "Notification cweated (id: %0% | %1%)"},
+                  "error": {"msg": "Faiwed tuwu cweate notification! pewhaps the cache iws fuww?"}
+               }},
+               "CMDDelete": {"response": {
+                  "success": {"msg": "Notification (id: %0%) deweted"},
+                  "error": {"msg": "Faiwed tuwu dewete notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"}
+               }},
+               "CMDModify": {
+                  "response": {
+                     "success": {"msg": "Notification edited"},
+                     "error": {"msg": "Faiwed tuwu modify notification. Pewhaps thiws got cweated by someone ewse ow does nowt exist?"}
+                  },
+                  "description": "Update an existing notification"
+               }
+            },
+            "last": {
+               "CMDEdited": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "MessageId"},
+                        "2": {"title": "Authow"},
+                        "3": {"title": "Owd message"},
+                        "4": {"title": "Attachment"}
+                     },
+                     "title": "Westowed edited message"
+                  },
+                  "error": {"msg": "No message found tuwu westowe"}
+               }},
+               "CMDDeleted": {"response": {
+                  "success": {
+                     "field": {
+                        "1": {"title": "MessageId"},
+                        "2": {"title": "Authow"},
+                        "3": {"title": "Owd message"},
+                        "4": {"title": "Attachments"}
+                     },
+                     "title": "Westowed deweted message"
+                  },
+                  "error": {"msg": "No message found tuwu westowe"}
+               }}
+            },
+            "notificationn": {"CMDList": {"description": "View existing notifications"}},
+            "tag": {
+               "RCMDTag": {"response": {
+                  "success": {"msg": "%0%\n\n*Tag cweated by %1%*"},
+                  "error": {"msg": "Tag %0% nowt found"}
+               }},
+               "s": {
+                  "CMDDelete": {"response": {
+                     "success": {"msg": "Tag %0% deweted"},
+                     "error": {"msg": "Faiwed tuwu dewete tag. Awe uwu the ownew awnd does the tag exist?"}
+                  }},
+                  "CMDCreate": {"response": {
+                     "success": {"msg": "Tag %0% cweated"},
+                     "error": {"msg": "Faiwed tuwu cweate tag"}
+                  }},
+                  "CMDModify": {"response": {
+                     "success": {"msg": "Tag %0% updated"},
+                     "error": {"msg": "Faiwed tuwu update tag. Awe uwu the ownew awnd does the tag exist?"}
+                  }}
+               }
+            },
+            "anime": {
+               "nsfw": {
+                  "CMDCum": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDYuri": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDYaoi": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDPussylick": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDSolo": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDAnal": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDFuck": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDBlowjob": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "error": {
+                        "msg": "Something went wrong",
+                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
+                     }
+                  }}
+               },
+               "sfw": {
+                  "CMDCry": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% cwies",
+                        "1": "%1% mwade %0% cwies"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDTickle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% tickwes someone",
+                        "1": "%1% gets tickwed by %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDBlush": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% bwushes",
+                        "1": "%0% bwushes because of %1%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDSlap": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% swaps awound",
+                        "1": "%1% got swapped by %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDKiss": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% hands out kisses",
+                        "1": "%0% kisses %1% OwO"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDHug": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% wants tuwu hug",
+                        "1": "%0% hugs %1%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDSmile": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% has tuwu smiwe :)",
+                        "1": "%1% made %0% smiwe :)"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDBite": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% bites someone",
+                        "1": "%1% gets bitten by %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDLick": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% twied tuwu wick someone",
+                        "1": "%0% wicks %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDPat": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% pats someone",
+                        "1": "%1% weceives sowme headpats fwom %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDPoke": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% pokes awound",
+                        "1": "%1% gets poked by %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDCuddle": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% wants tuwu cuddwe",
+                        "1": "%1% gets cuddwed by %0%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDNeko": {"response": {
+                     "success": {"msg": {"0": ":3"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDDance": {"response": {
+                     "success": {"msg": {"0": "%0% dances"}},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDFeed": {"response": {
+                     "success": {"msg": {
+                        "0": "%0% eats nice food",
+                        "1": "%0% shawes food with %1%"
+                     }},
+                     "error": {
+                        "msg": "Something went wwong",
+                        "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
+                     }
+                  }},
+                  "CMDRandom": {"response": {
+                     "success": {"msg": {"0": "UwU"}},
+                     "error": {
+                        "msg": "Something went wrong",
+                        "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
+                     }
+                  }}
+               }
+            },
+            "info": {"RCMDInfo": {"response": {
+               "field": {
+                  "3": {"title": "Cuwwent shawd"},
+                  "4": {"title": "Instance"},
+                  "5": {"title": "Wocation"},
+                  "6": {
+                     "title": "Website",
+                     "link_text": "[Visit website](%0%)"
+                  },
+                  "7": {
+                     "title": "Data pwocessing",
+                     "link_text": "[Visit website](%0%)"
+                  },
+                  "8": {
+                     "title": "Wepowt content",
+                     "link_text": "[Visit website](%0%)"
+                  },
+                  "9": {
+                     "title": "Contact",
+                     "link_text": "[Visit website](%0%)"
+                  }
+               },
+               "title": "Info"
+            }}}
+         }}
+      }}}}},
+      "default": {
+         "onMissingBotPerms": {
+            "description": "I am unabwe tuwu execute the command due tuwu missing pewmissions!",
+            "title": "Faiwed: bot iws missing pewmissions",
+            "requiredPerms": {"fn": "RWequiwed pewmissions:"}
+         },
+         "onMissingMemberPerms": {
+            "description": "Uwu awe nowt awwowed tuwu duwu thiws!",
+            "title": "Faiwed: nowt enough pewmissions",
+            "requiredPerms": {"fn": "Wequiwed pewmissions:"}
+         },
+         "onError": {"title": "Ewwow"},
+         "onAdminPerms": {
+            "description": "I seem to have administwatow pwiviweges. This is stwongwy discouwaged due to it being a secuwity wisk. Pwease onwy assign me the pewmissions necessawy to do my wowk.\n \nIf the pewmission has been assigned by accident pwease wemove it fwom me / the wowes assigned to me.\nIf this intentionaw disabwe this message by changing my BOT_IGNORE_ADMIN_PERMS setting.",
+            "title": "Wawning: bot has administwatow pewmissions"
+         },
+         "onUnhandledException": {
+            "exception": {"msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"},
+            "cacheexception": {"msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"},
+            "backendexception": {"msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"},
+            "dataexception": {"msg": "Accessing the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"},
+            "title": "Oops"
+         },
+         "onMissingArgs": {
+            "usage": {"fn": "Usage:"},
+            "description": "Thiws command wequiwes mowe/diffewent awguments",
+            "title": "Faiwed: nowt enough awguments"
+         },
+         "onMissingNSFW": {
+            "hidden": "Some nsfw commands wewe hidden due to execution in a non nsfw channew",
+            "description": "Nsfw commands cannot be used in non nsfw channews",
+            "title": "Faiwed: command wequiwes nsfw channew"
+         },
+         "onCooldownActive": {
+            "description": "Pwease wait sowme time befowe doing thawt again",
+            "title": "Faiwed: Coowdown active"
+         },
+         "onSuccess": {"title": "Success"},
+         "estimatedCommand": {"msg": "The command u typed `%0%` doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU"}
+      }
+   },
+   "languageDescription": "A more UwU version of the default English language package",
+   "languageId": "en_UWU",
+   "languageName": "English-UwU"
+}
