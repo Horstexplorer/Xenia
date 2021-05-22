@@ -11,6 +11,18 @@
                "description": "Dispways a wist of commands"
             }}},
             "structure": {
+               "me": { "CMDMe": {
+                   "description": "Show sowme stats abouwt youwsewf"
+               }},
+               "avatar": { "RCMDAvatar": { "response": {
+                   "title": "Avataw",
+                   "description": "Get the avataw of someone",
+                   "success": { "field": { "1": {
+                       "title": "Wink",
+                       "description": "[Downwoad](%0%)"
+                   }}},
+                   "error": { "msg":  "Usew nowt found"}
+               }}},
                "settings": {
                   "guild": {
                      "CMDLicense": {
@@ -549,7 +561,7 @@
                   "nsfw": {
                      "CMDThreesome_FFM": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -559,7 +571,7 @@
                      },
                      "CMDYuri": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -569,7 +581,7 @@
                      },
                      "CMDPussylick": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -579,7 +591,7 @@
                      },
                      "CMDBlowjob": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -589,7 +601,7 @@
                      },
                      "CMDCum": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -599,7 +611,7 @@
                      },
                      "CMDYaoi": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -609,7 +621,7 @@
                      },
                      "CMDSolo": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -619,7 +631,7 @@
                      },
                      "CMDAnal": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -629,7 +641,7 @@
                      },
                      "CMDFuck": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -639,7 +651,7 @@
                      },
                      "CMDThreesome_FFF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -649,7 +661,7 @@
                      },
                      "CMDThreesome_MMF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -659,7 +671,7 @@
                      },
                      "CMDNeko": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wwong",
                               "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
@@ -740,6 +752,38 @@
             }
          },
          "slash": {"structure": {
+             "avatar": { "RCMDAvatar": { "response": {
+                     "title": "Avataw",
+                     "success": { "field": { "1": {
+                         "title": "Wink",
+                         "description": "[Downwoad](%0%)"
+                     }}},
+                     "error": { "msg":  "Usew nowt found"}
+                 }}
+             },
+             "twitch": {
+                 "CMDUpdate": {
+                     "response": {
+                         "success": {"msg": "Updated stweam notification"},
+                         "error": {"msg": "Faiwed tuwu update stweam notification. Does a notification with thiws id exist?"}
+                     }
+                 },
+                 "CMDDelete": {
+                     "response": {
+                         "success": {"msg": "Deweted stweam notification"},
+                         "error": {"msg": "Faiwed tuwu update stweam notification. Does a notification with thiws id exist?"}
+                     }
+                 },
+                 "CMDCreate": {
+                     "response": {
+                         "success": {"msg": "Wequested stweam notifications. Aftew evawuation thiws wiww show up in the ovewview"},
+                         "error": {"msg": "Faiwed tuwu wequest anothew stweam notification. Iws the uww vawid, does a channew awweady weceive notifications fow thiws channew ow duwu u hit the wimit?"}
+                     }
+                 },
+                 "CMDList": {
+                     "response": {"success": {"title": "Stweam notifications"}}
+                 }
+             },
             "notification": {
                "CMDList": {"response": {"title": "Notifications"}},
                "CMDCreate": {"response": {
@@ -808,70 +852,70 @@
             "anime": {
                "nsfw": {
                   "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wwong",
                         "img": {"msg": "Sowwy, i was unabwe tuwu get the image uwu wanted :c"}
                      }
                   }},
                   "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}

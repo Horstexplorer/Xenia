@@ -11,6 +11,18 @@
                "description": "Displays a list of commands"
             }}},
             "structure": {
+               "me": { "CMDMe": {
+                   "description": "Show some stats about yourself"
+               }},
+               "avatar": { "CMDAvatar": { "response": {
+                   "title": "Avatar",
+                   "description": "Get the avatar of someone",
+                   "success": { "field": { "1": {
+                       "title": "Link",
+                       "description": "[Download](%0%)"
+                   }}},
+                   "error": { "msg":  "User not found"}
+               }}},
                "settings": {
                   "guild": {
                      "CMDLicense": {
@@ -549,7 +561,7 @@
                   "nsfw": {
                      "CMDThreesome_FFM": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -559,7 +571,7 @@
                      },
                      "CMDYuri": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -569,7 +581,7 @@
                      },
                      "CMDPussylick": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -579,7 +591,7 @@
                      },
                      "CMDBlowjob": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -589,7 +601,7 @@
                      },
                      "CMDCum": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -599,7 +611,7 @@
                      },
                      "CMDYaoi": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -609,7 +621,7 @@
                      },
                      "CMDSolo": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -619,7 +631,7 @@
                      },
                      "CMDAnal": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -629,7 +641,7 @@
                      },
                      "CMDFuck": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -639,7 +651,7 @@
                      },
                      "CMDThreesome_FFF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -649,7 +661,7 @@
                      },
                      "CMDThreesome_MMF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -659,7 +671,7 @@
                      },
                      "CMDNeko": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -669,7 +681,7 @@
                      },
                      "CMDRandom": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Something went wrong",
                               "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
@@ -740,6 +752,38 @@
             }
          },
          "slash": {"structure": {
+             "avatar": { "RCMDAvatar": { "response": {
+                     "title": "Avatar",
+                     "success": { "field": { "1": {
+                         "title": "Link",
+                         "description": "[Download](%0%)"
+                     }}},
+                     "error": { "msg":  "User not found"}
+                 }}
+             },
+             "twitch": {
+                 "CMDUpdate": {
+                     "response": {
+                         "success": {"msg": "Updated stream notification"},
+                         "error": {"msg": "Failed to update stream notification. Does a notification with this id exist?"}
+                     }
+                 },
+                 "CMDDelete": {
+                     "response": {
+                         "success": {"msg": "Deleted stream notification"},
+                         "error": {"msg": "Failed to delete stream notification. Does a notification with this id exist?"}
+                     }
+                 },
+                 "CMDCreate": {
+                     "response": {
+                         "success": {"msg": "Requested stream notifications. After evaluation this will show up in the overview"},
+                         "error": {"msg": "Failed to request another stream notification. Is the URL valid, does a channel already receive notifications for this channel or do u hit the limit?"}
+                     }
+                 },
+                 "CMDList": {
+                     "response": {"success": {"title": "Stream notifications"}}
+                 }
+             },
             "notification": {
                "CMDList": {"response": {"title": "Notifications"}},
                "CMDCreate": {"response": {
@@ -808,70 +852,70 @@
             "anime": {
                "nsfw": {
                   "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}
                      }
                   }},
                   "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Something went wrong",
                         "img": {"msg": "Sorry, I was unable to get the image you wanted :c"}

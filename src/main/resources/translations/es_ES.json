@@ -11,6 +11,18 @@
                "description": "Muestra una lista de comandos"
             }}},
             "structure": {
+               "me": { "CMDMe" : {
+                   "description": "Muestra algunas estadísticas sobre ti mismo"
+               }},
+               "avatar": { "RCMDAvatar": { "response": {
+                   "title": "Avatar",
+                   "description": "Obtener el avatar de alguien",
+                   "success": { "field": { "1": {
+                       "title": "Enlace",
+                       "description": "[Descargar](%0%)"
+                   }}},
+                   "error": { "msg":  "Usuario no encontrado"}
+               }}},
                "settings": {
                   "guild": {
                      "CMDLicense": {
@@ -549,7 +561,7 @@
                   "nsfw": {
                      "CMDThreesome_FFM": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -559,7 +571,7 @@
                      },
                      "CMDYuri": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -569,7 +581,7 @@
                      },
                      "CMDPussylick": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -579,7 +591,7 @@
                      },
                      "CMDBlowjob": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -589,7 +601,7 @@
                      },
                      "CMDCum": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -599,7 +611,7 @@
                      },
                      "CMDYaoi": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -609,7 +621,7 @@
                      },
                      "CMDSolo": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -619,7 +631,7 @@
                      },
                      "CMDAnal": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -629,7 +641,7 @@
                      },
                      "CMDFuck": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -639,7 +651,7 @@
                      },
                      "CMDThreesome_FFF": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -649,7 +661,7 @@
                      },
                      "CMDThreesome_MMF": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -659,7 +671,7 @@
                      },
                      "CMDNeko": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Algo salió mal",
                               "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -740,6 +752,38 @@
             }
          },
          "slash": {"structure": {
+             "avatar": { "RCMDAvatar": { "response": {
+                     "title": "Avatar",
+                     "success": { "field": { "1": {
+                         "title": "Enlace",
+                         "description": "[Descargar](%0%)"
+                     }}},
+                     "error": { "msg":  "Usuario no encontrado"}
+                 }}
+             },
+             "twitch": {
+                 "CMDUpdate": {
+                     "response": {
+                         "success": {"msg": "Notificación de flujo actualizada"},
+                         "error": {"msg": "No se ha podido actualizar la notificación del flujo. ¿Existe una notificación con este id?"}
+                     }
+                 },
+                 "CMDDelete": {
+                     "response": {
+                         "success": {"msg": "Notificación de flujo borrado"},
+                         "error": {"msg": "No se ha podido eliminar la notificación del flujo. ¿Existe una notificación con este id?"}
+                     }
+                 },
+                 "CMDCreate": {
+                     "response": {
+                         "success": {"msg": "Notificaciones de flujo solicitadas. Después de la evaluación, esto se mostrará en la visión general"},
+                         "error": {"msg": "No se ha podido solicitar otra notificación de flujo. ¿Es válida la URL, hay un canal que ya recibe notificaciones para este canal o se ha alcanzado el límite?"}
+                     }
+                 },
+                 "CMDList": {
+                     "response": {"success": {"title": "Notificaciones de flujo"}}
+                 }
+             },
             "notification": {
                "CMDList": {"response": {"title": "Notificaciones"}},
                "CMDCreate": {"response": {
@@ -808,63 +852,63 @@
             "anime": {
                "nsfw": {
                   "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
                      }
                   }},
                   "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Algo salió mal",
                         "img": {"msg": "Lo siento, no he podido conseguir la imagen que querías :c"}
@@ -1095,7 +1139,7 @@
             "description": "Espere un tiempo antes de volver a hacerlo",
             "title": "Fallido: enfriamiento activo"
          },
-         "onSuccess": {"title": "�\u2030xito"},
+         "onSuccess": {"title": "�\u2030xito"},
          "estimatedCommand": {"msg": "El comando que escribiste `%0%` no parece existir. ¿Quizás querías usar `%1%` en su lugar?"}
       }
    },

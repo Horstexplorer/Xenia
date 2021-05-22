@@ -40,14 +40,15 @@ public class TranslationPackage{
 		languageDescription = jsonObject.getString("languageDescription");
 		isDefault = jsonObject.getBoolean("isDefault");
 		// build keys
-		translations.putAll(toSimpleAccessors(null, jsonObject.getJSONObject("translations")));
+		var a = toSimpleAccessors(null, jsonObject.getJSONObject("translations"));
+		translations.putAll(a);
 	}
 
 	private Map<String, String> toSimpleAccessors(String prefix, Object o){
 		Map<String, String> map = new HashMap<>();
 		if(o instanceof JSONObject){
 			for(String key : ((JSONObject) o).keySet()){
-				map.putAll(toSimpleAccessors( prefix == null ? "" : prefix+"."+key, ((JSONObject) o).get(key)));
+				map.putAll(toSimpleAccessors( (prefix == null ? "" : prefix+".")+key, ((JSONObject) o).get(key)));
 			}
 		}else{
 			map.put(prefix, o.toString());

@@ -11,6 +11,18 @@
                "description": "Affiche une liste de commandes"
             }}},
             "structure": {
+               "me": { "CMDMe" :  {
+                   "description": "Montrez quelques statistiques sur vous-même"
+               }},
+               "avatar": { "RCMDAvatar": { "response": {
+                   "title": "Avatar",
+                   "description": "Obtenir l'avatar de quelqu'un",
+                   "success": { "field": { "1": {
+                       "title": "Lien",
+                       "description": "[Télécharger](%0%)"
+                   }}},
+                   "error": { "msg":  "Utilisateur non trouvé"}
+               }}},
                "settings": {
                   "guild": {
                      "CMDLicense": {
@@ -80,7 +92,7 @@
                      "CMDLogging": {
                         "response": {
                            "success": {"msg": "Mise à jour des paramètres d'enregistrement"},
-                           "error": {"msg": "�\u2030chec de la mise à jour du mode d'enregistrement.\nLes options disponibles sont: [true, false]"}
+                           "error": {"msg": "�\u2030chec de la mise à jour du mode d'enregistrement.\nLes options disponibles sont: [true, false]"}
                         },
                         "description": "Mettre à jour les paramètres de journalisation pour le canal spécifié"
                      },
@@ -132,12 +144,12 @@
                      "CMDChannelLink": {
                         "success": {"msg": "Lien de la chaîne mis à jour ! Les changements peuvent prendre quelques minutes pour être pris en compte."},
                         "description": "Liez un canal qui sera utilisé comme pool de données pour le chatbot.",
-                        "error": {"invalid": {"arg": {"msg": "�\u2030chec de la liaison du canal. Le nombre maximum de liens a-t-il été atteint ou le canal n'existe-t-il pas ?"}}}
+                        "error": {"invalid": {"arg": {"msg": "�\u2030chec de la liaison du canal. Le nombre maximum de liens a-t-il été atteint ou le canal n'existe-t-il pas ?"}}}
                      },
                      "CMDMode": {
                         "success": {"msg": "Le mode a été modifié avec succès ! Les changements peuvent prendre quelques minutes pour prendre effet."},
                         "description": "Définit le mode d'utilisation des jeux de données.",
-                        "error": {"invalid": {"arg": {"msg": "�\u2030chec du changement de mode.\nLes options disponibles sont : %0%"}}}
+                        "error": {"invalid": {"arg": {"msg": "�\u2030chec du changement de mode.\nLes options disponibles sont : %0%"}}}
                      },
                      "GROUPLearning": {"description": "Contient des commandes permettant de contrôler les données utilisées"}
                   },
@@ -549,7 +561,7 @@
                   "nsfw": {
                      "CMDThreesome_FFM": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -559,7 +571,7 @@
                      },
                      "CMDYuri": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -569,7 +581,7 @@
                      },
                      "CMDPussylick": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -579,7 +591,7 @@
                      },
                      "CMDBlowjob": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -589,7 +601,7 @@
                      },
                      "CMDCum": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -599,7 +611,7 @@
                      },
                      "CMDYaoi": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -609,7 +621,7 @@
                      },
                      "CMDSolo": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -619,7 +631,7 @@
                      },
                      "CMDAnal": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -629,7 +641,7 @@
                      },
                      "CMDFuck": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -639,7 +651,7 @@
                      },
                      "CMDThreesome_FFF": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -649,7 +661,7 @@
                      },
                      "CMDThreesome_MMF": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -659,7 +671,7 @@
                      },
                      "CMDNeko": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -669,7 +681,7 @@
                      },
                      "CMDRandom": {
                         "response": {
-                           "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Quelque chose a mal tourné",
                               "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -691,7 +703,7 @@
                   "CMDCreate": {
                      "response": {
                         "success": {"msg": "Tag %0% créé"},
-                        "error": {"msg": "�\u2030chec de la création d'une balise"}
+                        "error": {"msg": "�\u2030chec de la création d'une balise"}
                      },
                      "description": "Crée une nouvelle balise avec un nom de balise et un contenu donnés"
                   },
@@ -740,6 +752,37 @@
             }
          },
          "slash": {"structure": {
+             "avatar": { "RCMDAvatar": { "response": {
+                     "title": "Avatar",
+                     "success": { "field": { "1": {
+                         "title": "Lien",
+                         "description": "[Télécharger](%0%)"
+                     }}},
+                     "error": { "msg":  "Utilisateur non trouvé"}
+             }}},
+             "twitch": {
+                 "CMDUpdate": {
+                     "response": {
+                         "success": {"msg": "Mise à jour de la notification des flux"},
+                         "error": {"msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"}
+                     }
+                 },
+                 "CMDDelete": {
+                     "response": {
+                         "success": {"msg": "Notification des flux supprimés"},
+                         "error": {"msg": "Échec de la mise à jour de la notification du flux. Une notification avec cet identifiant existe-t-elle ?"}
+                     }
+                 },
+                 "CMDCreate": {
+                     "response": {
+                         "success": {"msg": "Notifications de flux demandées. Après l'évaluation, cela apparaîtra dans l'aperçu"},
+                         "error": {"msg": "Échec de la demande de notification d'un autre flux. L'URL est-elle valide, un canal reçoit-il déjà des notifications pour ce canal ou avez-vous atteint la limite ?"}
+                     }
+                 },
+                 "CMDList": {
+                     "response": {"success": {"title": "Notifications de flux"}}
+                 }
+             },
             "notification": {
                "CMDList": {"response": {"title": "Notifications"}},
                "CMDCreate": {"response": {
@@ -748,7 +791,7 @@
                }},
                "CMDDelete": {"response": {
                   "success": {"msg": "Notification (ID : %0%) supprimée"},
-                  "error": {"msg": "�\u2030chec de la suppression de la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"}
+                  "error": {"msg": "�\u2030chec de la suppression de la notification. Peut-être cette notification a-t-elle été créée par quelqu'un d'autre ou n'existe-t-elle pas ?"}
                }},
                "CMDModify": {
                   "response": {
@@ -792,86 +835,86 @@
                }},
                "s": {
                   "CMDDelete": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% supprimé"},
-                     "error": {"msg": "�\u2030chec de la suppression du tag. Êtes-vous le propriétaire et le tag existe-t-il ?"}
+                     "success": {"msg": "�\u2030tiquette %0% supprimé"},
+                     "error": {"msg": "�\u2030chec de la suppression du tag. Êtes-vous le propriétaire et le tag existe-t-il ?"}
                   }},
                   "CMDCreate": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% créée"},
-                     "error": {"msg": "�\u2030chec de la création du tag"}
+                     "success": {"msg": "�\u2030tiquette %0% créée"},
+                     "error": {"msg": "�\u2030chec de la création du tag"}
                   }},
                   "CMDModify": {"response": {
-                     "success": {"msg": "�\u2030tiquette %0% actualisé"},
-                     "error": {"msg": "�\u2030chec de la mise à jour du tag. Êtes-vous le propriétaire et la balise existe-t-elle ?"}
+                     "success": {"msg": "�\u2030tiquette %0% actualisé"},
+                     "error": {"msg": "�\u2030chec de la mise à jour du tag. Êtes-vous le propriétaire et la balise existe-t-elle ?"}
                   }}
                }
             },
             "anime": {
                "nsfw": {
                   "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
                      }
                   }},
                   "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "(¬�\u20ac�¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Quelque chose a mal tourné",
                         "img": {"msg": "Désolé, je n'ai pas réussi à obtenir l'image que vous vouliez :c"}
@@ -1089,7 +1132,7 @@
          "onMissingNSFW": {
             "hidden": "Certaines commandes NSFW ont été cachées en raison de leur exécution dans un canal non NSFW.",
             "description": "Les commandes NSFW ne peuvent pas être utilisées dans les canaux non NSFW.",
-            "title": "�\u2030chec : La commande nécessite un canal NSFW"
+            "title": "�\u2030chec : La commande nécessite un canal NSFW"
          },
          "onCooldownActive": {
             "description": "Veuillez attendre un certain temps avant de recommencer",

@@ -11,6 +11,18 @@
                "description": "Zeigt eine Liste von Befehlen an"
             }}},
             "structure": {
+               "me": { "CMDMe": {
+                   "description": "Zeigen Sie einige Statistiken Ã¼ber sich selbst"
+               }},
+               "avatar": { "CMDAvatar": { "response": {
+                   "title": "Avatar",
+                   "description": "Holen Sie sich den Avatar von jemandem",
+                   "success": { "field": { "1": {
+                       "title": "Link",
+                       "description": "[Download](%0%)"
+                   }}},
+                   "error": { "msg":  "Nicht gefunden"}
+               }}},
                "settings": {
                   "guild": {
                      "CMDLicense": {
@@ -130,12 +142,12 @@
                "chatbot": {
                   "learning": {
                      "CMDChannelLink": {
-                        "success": {"msg": "Kanal-Link aktualisiert! Es kann ein paar Minuten dauern, bis die Ã\u201enderungen wirksam werden."},
+                        "success": {"msg": "Kanal-Link aktualisiert! Es kann ein paar Minuten dauern, bis die ï¿½\u201enderungen wirksam werden."},
                         "description": "VerknÃ¼pfen Sie einen Kanal, der als Datenpool fÃ¼r den Chatbot verwendet werden soll",
                         "error": {"invalid": {"arg": {"msg": "Der Kanal konnte nicht verknÃ¼pft werden. Wurde die maximale Anzahl von Links erreicht oder existiert der Kanal nicht?"}}}
                      },
                      "CMDMode": {
-                        "success": {"msg": "Modus erfolgreich geÃ¤ndert! Es kann ein paar Minuten dauern, bis die Ã\u201enderungen wirksam werden."},
+                        "success": {"msg": "Modus erfolgreich geÃ¤ndert! Es kann ein paar Minuten dauern, bis die ï¿½\u201enderungen wirksam werden."},
                         "description": "Definiert den Modus, in dem die DatensÃ¤tze verwendet werden",
                         "error": {"invalid": {"arg": {"msg": "Moduswechsel fehlgeschlagen.\nVerfÃ¼gbare Optionen sind: %0%"}}}
                      },
@@ -549,7 +561,7 @@
                   "nsfw": {
                      "CMDThreesome_FFM": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -559,7 +571,7 @@
                      },
                      "CMDYuri": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -569,7 +581,7 @@
                      },
                      "CMDPussylick": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -579,7 +591,7 @@
                      },
                      "CMDBlowjob": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -589,7 +601,7 @@
                      },
                      "CMDCum": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -599,7 +611,7 @@
                      },
                      "CMDYaoi": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -609,7 +621,7 @@
                      },
                      "CMDSolo": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -619,7 +631,7 @@
                      },
                      "CMDAnal": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -629,7 +641,7 @@
                      },
                      "CMDFuck": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -639,7 +651,7 @@
                      },
                      "CMDThreesome_FFF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -649,7 +661,7 @@
                      },
                      "CMDThreesome_MMF": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -659,7 +671,7 @@
                      },
                      "CMDNeko": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -669,7 +681,7 @@
                      },
                      "CMDRandom": {
                         "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                           "success": {"msg": {"0": ":C"}},
                            "error": {
                               "msg": "Etwas ist schief gelaufen",
                               "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
@@ -707,7 +719,7 @@
                         "success": {"msg": "Tag %0% updated"},
                         "error": {"msg": "Tag konnte nicht gelÃ¶scht werden. Bist du der Besitzer und existiert das Tag?"}
                      },
-                     "description": "Ã\u201endert ein gegebenes Tag mit dem neuen Inhalt"
+                     "description": "ï¿½\u201endert ein gegebenes Tag mit dem neuen Inhalt"
                   }
                },
                "info": {"CMDInfo": {
@@ -740,6 +752,38 @@
             }
          },
          "slash": {"structure": {
+             "avatar": { "RCMDAvatar": { "response": {
+                     "title": "Avatar",
+                     "success": { "field": { "1": {
+                         "title": "Link",
+                         "description": "[Download](%0%)"
+                     }}},
+                     "error": { "msg":  "Nicht gefunden"}
+                 }}
+             },
+             "twitch": {
+                 "CMDUpdate": {
+                     "response": {
+                         "success": {"msg": "Benachrichtigung aktualisiert"},
+                         "error": {"msg": "Die Stream-Benachrichtigung konnte nicht aktualisiert werden. Existiert eine Benachrichtigung mit dieser ID?"}
+                     }
+                 },
+                 "CMDDelete": {
+                     "response": {
+                         "success": {"msg": "Deleted stream notification"},
+                         "error": {"msg": "Die Stream-Benachrichtigung konnte nicht aktualisiert werden. Existiert eine Benachrichtigung mit dieser ID?"}
+                     }
+                 },
+                 "CMDCreate": {
+                     "response": {
+                         "success": {"msg": "Stream-Benachrichtigung angefordert. Nach der Auswertung wird dies in der Ãœbersicht angezeigt"},
+                         "error": {"msg": "Eine weitere Stream-Benachrichtigung konnte nicht angefordert werden. Ist die URL gÃ¼ltig, erhÃ¤lt ein Kanal bereits Benachrichtigungen fÃ¼r diesen Kanal oder haben Sie das Limit erreicht?"}
+                     }
+                 },
+                 "CMDList": {
+                     "response": {"success": {"title": "Stream-Benachrichtigungen"}}
+                 }
+             },
             "notification": {
                "CMDList": {"response": {"title": "Benachrichtigungen"}},
                "CMDCreate": {"response": {
@@ -808,70 +852,70 @@
             "anime": {
                "nsfw": {
                   "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}
                      }
                   }},
                   "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
+                     "success": {"msg": {"0": ":C"}},
                      "error": {
                         "msg": "Etwas ist schief gelaufen",
                         "img": {"msg": "Sorry, ich konnte das gewÃ¼nschte Bild nicht finden :c"}

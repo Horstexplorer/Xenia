@@ -1,1105 +1,1150 @@
 {
-   "isDefault": false,
-   "translations": {
-      "de": {"netbeacon": {"xenia": {"bot": {"commands": {
-         "chat": {
-            "global": {"help": {"CMDHelp": {
-               "response": {
-                  "field": {"commands": "ã\u201a³ãƒãƒ³ãƒ\u2030"},
-                  "title": "**ãƒ˜ãƒ«ãƒ\u2014 / ã\u201a³ãƒãƒ³ãƒ\u2030**"
-               },
-               "description": "ã\u201a³ãƒãƒ³ãƒ\u2030ã?®ä¸\u20acè¦§ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"
-            }}},
-            "structure": {
-               "settings": {
-                  "guild": {
-                     "CMDLicense": {
-                        "response": {
-                           "success": {"msg": "ãƒ©ã\u201a¤ã\u201a»ãƒ³ã\u201a¹æ\u203a´æ\u2013°"},
-                           "error": {"msg": "ãƒ©ã\u201a¤ã\u201a»ãƒ³ã\u201a¹ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿ"}
+    "isDefault": false,
+    "translations": {
+        "de": {"netbeacon": {"xenia": {"bot": {"commands": {
+            "chat": {
+                "global": {"help": {"CMDHelp": {
+                    "response": {
+                        "field": {"commands": "ã‚³ãƒãƒ³ãƒ‰"},
+                        "title": "**ãƒ˜ãƒ«ãƒ—/ã‚³ãƒãƒ³ãƒ‰**"
+                    },
+                    "description": "ã‚³ãƒãƒ³ãƒ‰ã®ä¸€è¦§ã‚’è¡¨ç¤º"
+                }}},
+                "structure": {
+                    "me": { "CMDMe": {
+                        "description": "è‡ªåˆ†ã«ã¤ã„ã¦ã®çµ±è¨ˆæƒ…å ±ã‚’ç¤ºã™"
+                    }},
+                    "avatar": { "CMDAvatar": { "response": {
+                        "title": "ã‚¢ãƒã‚¿ãƒ¼",
+                        "description": "èª°ã‹ã®ã‚¢ãƒã‚¿ãƒ¼ã‚’ã‚²ãƒƒãƒˆ",
+                        "success": { "field": { "1": {
+                            "title": "ãƒªãƒ³ã‚¯",
+                            "description": "[ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰](%0%)"
+                        }}},
+                        "error": { "msg":  "ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“"}
+                    }}},
+                    "settings": {
+                        "guild": {
+                            "CMDLicense": {
+                                "response": {
+                                    "success": {"msg": "ãƒ©ã‚¤ã‚»ãƒ³ã‚¹æ›´æ–°"},
+                                    "error": {"msg": "ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚"}
+                                },
+                                "description": "ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã‚­ãƒ¼ã«ã‚ˆã‚‹ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã®æ›´æ–°"
+                            },
+                            "CMDSettings": {
+                                "response": {
+                                    "success": {"msg": "ã‚®ãƒ«ãƒ‰è¨­å®šã®æ›´æ–°"},
+                                    "error": {"msg": "ã‚®ãƒ«ãƒ‰è¨­å®šã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯ä»¥ä¸‹ã®é€šã‚Šã§ã™ã€‚%0%"}
+                                },
+                                "description": "ã“ã®ã‚®ãƒ«ãƒ‰ã®è¨­å®šã‚’æ›´æ–°ã™ã‚‹"
+                            },
+                            "HYBRIDGuild": {
+                                "response": {
+                                    "field": {
+                                        "11": {"title": "ãƒãƒƒã‚¯ã‚¹ã‚»ãƒ«ãƒ•ãƒ©ãƒ¼ãƒ‹ãƒ³ã‚°ãƒãƒ£ãƒ³ãƒãƒ«"},
+                                        "1": {"title": "å¸Œæœ›ã™ã‚‹è¨€èª"},
+                                        "2": {"title": "ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"},
+                                        "3": {"title": "è¨­å®š"},
+                                        "4": {"title": "ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å"},
+                                        "5": {"title": "ãƒ©ã‚¤ã‚»ãƒ³ã‚¹å"},
+                                        "6": {"title": "æœ€å¤§Vpermã®å½¹å‰²"},
+                                        "7": {"title": "ãƒãƒƒã‚¯ã‚¹ã‚¿ã‚°"},
+                                        "8": {"title": "æœ€å¤§é€šçŸ¥æ•°"},
+                                        "9": {"title": "æœ€å¤§Twitché€šçŸ¥æ•°"},
+                                        "10": {"title": "æœ€å¤§ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ­ã‚°"}
+                                    },
+                                    "title": "ã‚®ãƒ«ãƒ‰ã®ä¸€èˆ¬çš„ãªè¨­å®š"
+                                },
+                                "description": "ã‚®ãƒ«ãƒ‰ã®ä¸€èˆ¬çš„ãªè¨­å®šã‚’å«ã‚€"
+                            },
+                            "CMDPrefix": {
+                                "response": {
+                                    "success": {"msg": "ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã‚’æ›´æ–°ã—ã¾ã—ãŸã€‚ ```%0%```"},
+                                    "error": {"msg": "ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚é•·ã™ãã‚‹ã®ã§ã¯ï¼Ÿ"}
+                                },
+                                "description": "ã‚³ãƒãƒ³ãƒ‰ã«ä½¿ç”¨ã™ã‚‹ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã®æ›´æ–°"
+                            },
+                            "CMDLanguage": {
+                                "response": {
+                                    "success": {"msg": "å¿œç­”è¨€èªã®æ›´æ–°"},
+                                    "error": {"msg": "å¿œç­”è¨€èªã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯ %0%"}
+                                },
+                                "description": "Xeniaã®å¿œç­”è¨€èªã®æ›´æ–°"
+                            }
                         },
-                        "description": "ãƒ©ã\u201a¤ã\u201a»ãƒ³ã\u201a¹ã\u201a­ãƒ¼ã\u201a\u2019ä½¿ç\u201d¨ã?\u2014ã?¦ãƒ©ã\u201a¤ã\u201a»ãƒ³ã\u201a¹ã\u201a\u2019æ\u203a´æ\u2013°ã?™ã\u201a\u2039"
-                     },
-                     "CMDSettings": {
-                        "response": {
-                           "success": {"msg": "ã\u201a®ãƒ«ãƒ\u2030ã?®è¨­å®šã\u201a\u2019æ\u203a´æ\u2013°"},
-                           "error": {"msg": "ã\u201a®ãƒ«ãƒ\u2030è¨­å®šã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ä»¥ä¸\u2039ã?®é\u20acšã\u201aŠã?§ã?™ã\u20ac\u201a%0%"}
+                        "GROUPSettings": {"description": "ã‚®ãƒ«ãƒ‰ã®ã™ã¹ã¦ã®è¨­å®šã‚’å«ã‚€"},
+                        "roles": {"HYBRIDRoles": {
+                            "response": {
+                                "title": "å½¹å‰²",
+                                "is_empty": "ãƒ­ãƒ¼ãƒ«ã¯ã¾ã ä½œæˆã•ã‚Œã¦ã„ã¾ã›ã‚“"
+                            },
+                            "description": "Vãƒ­ãƒ¼ãƒ«ã¨Vãƒ‘ãƒ¼ãƒã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚"
+                        }},
+                        "channel": {
+                            "CMDAccessMode": {
+                                "response": {
+                                    "success": {"msg": "ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã®æ›´æ–°"},
+                                    "error": {"msg": "ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯ %0%"}
+                                },
+                                "description": "æŒ‡å®šã—ãŸãƒãƒ£ãƒãƒ«ã®ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã‚’æ›´æ–°ã™ã‚‹"
+                            },
+                            "CMDLogging": {
+                                "response": {
+                                    "success": {"msg": "ãƒ­ã‚®ãƒ³ã‚°è¨­å®šã®æ›´æ–°"},
+                                    "error": {"msg": "ãƒ­ã‚®ãƒ³ã‚°ãƒ¢ãƒ¼ãƒ‰ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯ [true, false]"}
+                                },
+                                "description": "æŒ‡å®šã—ãŸãƒãƒ£ãƒ³ãƒãƒ«ã®ãƒ­ã‚®ãƒ³ã‚°è¨­å®šã‚’æ›´æ–°ã™ã‚‹"
+                            },
+                            "GROUPChannel": {"description": "ãƒãƒ£ãƒ³ãƒãƒ«ã®è¨­å®šã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹"},
+                            "CMDInfo": {
+                                "response": {
+                                    "success": {
+                                        "field": {
+                                            "1": {"title": "ãƒ•ãƒ©ã‚°"},
+                                            "2": {"title": "ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰"},
+                                            "3": {"title": "ãƒ­ã‚®ãƒ³ã‚°å¯¾å¿œ"},
+                                            "4": {"title": "ãƒ­ã‚®ãƒ³ã‚°ã®è‡ªå‹•å¾©å…ƒãƒãƒ£ãƒ³ãƒãƒ«"}
+                                        },
+                                        "title": "ãƒãƒ£ãƒ³ãƒãƒ«è¨­å®š"
+                                    },
+                                    "error": {"msg": "ã‚¢ã‚¯ã‚»ã‚¹ãƒ¢ãƒ¼ãƒ‰ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯"}
+                                },
+                                "description": "æŒ‡å®šã—ãŸãƒãƒ£ãƒ³ãƒãƒ«ã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹"
+                            }
                         },
-                        "description": "ã?\u201cã?®ã\u201a®ãƒ«ãƒ\u2030ã?®è¨­å®šã\u201a\u2019æ\u203a´æ\u2013°"
-                     },
-                     "HYBRIDGuild": {
-                        "response": {
-                           "field": {
-                              "11": {"title": "ãƒãƒƒã\u201a¯ã\u201a¹ã\u201a»ãƒ«ãƒ\u2022ãƒ©ãƒ¼ãƒ\u2039ãƒ³ã\u201a°ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«"},
-                              "1": {"title": "å¥½ã?¾ã?\u2014ã?\u201eè¨\u20acèª"},
-                              "2": {"title": "æ¥é ­è¾"},
-                              "3": {"title": "è¨­å®š"},
-                              "4": {"title": "ãƒ©ã\u201a¤ã\u201a»ãƒ³ã\u201a¹å??"},
-                              "5": {"title": "ã?¾ã?§æœ\u2030åŠ¹ã?§ã?™ã\u20ac\u201a"},
-                              "6": {"title": "æœ\u20acå¤§æ¨©é™?å½¹å\u2030²"},
-                              "7": {"title": "æœ\u20acå¤§ã\u201a¿ã\u201a°"},
-                              "8": {"title": "æœ\u20acå¤§é\u20acšçŸ¥æ\u2022°"},
-                              "9": {"title": "æœ\u20acå¤§twitchã?®é\u20acšçŸ¥"},
-                              "10": {"title": "æœ\u20acå¤§ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ãƒ­ã\u201a®ãƒ³ã\u201a°"}
-                           },
-                           "title": "ä¸\u20acèˆ¬çš\u201eã?ªã\u201a®ãƒ«ãƒ\u2030è¨­å®š"
+                        "self": {
+                            "HYBRIDSelf": {
+                                "response": {
+                                    "field": {
+                                        "1": {"title": "ãƒ¦ãƒ¼ã‚¶ãƒ¼å"},
+                                        "2": {"title": "Id"},
+                                        "3": {"title": "ç¤¾å†…ã§ã®å½¹å‰²"},
+                                        "4": {"title": "ã”å¸Œæœ›ã®è¨€èª"},
+                                        "5": {
+                                            "title": "ã‚¢ã‚¤ã‚³ãƒ³URL",
+                                            "content": "[ãƒªãƒ³ã‚¯](%0%)"
+                                        }
+                                    },
+                                    "title": "è‡ªå·±ç´¹ä»‹"
+                                },
+                                "description": "è‡ªåˆ†ã®è¨­å®šã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ã‚’æ­è¼‰"
+                            },
+                            "CMDLanguage": {
+                                "response": {
+                                    "success": {"msg": "å¿œç­”è¨€èªã®æ›´æ–°"},
+                                    "error": {"msg": "å¿œç­”è¨€èªã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯: %0%"}
+                                },
+                                "description": "Xeniaã®å¿œç­”è¨€èªã®æ›´æ–°"
+                            }
+                        }
+                    },
+                    "chatbot": {
+                        "learning": {
+                            "CMDChannelLink": {
+                                "success": {"msg": "ãƒãƒ£ãƒ³ãƒãƒ«ãƒªãƒ³ã‚¯ã‚’æ›´æ–°ã—ã¾ã—ãŸ å¤‰æ›´ãŒåæ˜ ã•ã‚Œã‚‹ã¾ã§ã«æ•°åˆ†ã‹ã‹ã‚‹å ´åˆãŒã‚ã‚Šã¾ã™ã€‚"},
+                                "description": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã®ãƒ‡ãƒ¼ã‚¿ãƒ—ãƒ¼ãƒ«ã¨ã—ã¦ä½¿ç”¨ã™ã‚‹ãƒãƒ£ãƒ³ãƒãƒ«ã®ãƒªãƒ³ã‚¯",
+                                "error": {"invalid": {"arg": {"msg": "ãƒãƒ£ãƒãƒ«ã®ãƒªãƒ³ã‚¯ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ãƒªãƒ³ã‚¯æ•°ãŒä¸Šé™ã«é”ã—ã¦ã„ã‚‹ã®ã‹ã€ãƒãƒ£ãƒ³ãƒãƒ«ãŒå­˜åœ¨ã—ãªã„ã®ã‹ã€‚"}}}
+                            },
+                            "CMDMode": {
+                                "success": {"msg": "ãƒ¢ãƒ¼ãƒ‰å¤‰æ›´ã«æˆåŠŸã—ã¾ã—ãŸã€‚å¤‰æ›´ãŒåæ˜ ã•ã‚Œã‚‹ã¾ã§ã«æ•°åˆ†ã‹ã‹ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚"},
+                                "description": "ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆã‚’ä½¿ç”¨ã™ã‚‹ãƒ¢ãƒ¼ãƒ‰ã‚’å®šç¾©ã—ã¾ã™ã€‚",
+                                "error": {"invalid": {"arg": {"msg": "ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´ã«å¤±æ•—ã—ã¾ã—ãŸã€‚\nåˆ©ç”¨å¯èƒ½ãªã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯: %0%"}}}
+                            },
+                            "GROUPLearning": {"description": "ä½¿ç”¨ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’åˆ¶å¾¡ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ãŒå«ã¾ã‚Œã¦ã„ã‚‹"}
                         },
-                        "description": "ä¸\u20acèˆ¬çš\u201eã?ªã\u201a®ãƒ«ãƒ\u2030è¨­å®šã\u201a\u2019å?«ã\u201a\u20ac"
-                     },
-                     "CMDPrefix": {
-                        "response": {
-                           "success": {"msg": "æ¥é ­è¾ã\u201a\u2019 `%0%` ã?«æ\u203a´æ\u2013°ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a"},
-                           "error": {"msg": "ãƒ\u2014ãƒ¬ãƒ\u2022ã\u201a£ãƒƒã\u201a¯ã\u201a¹ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aé\u2022·ã?™ã?ã\u201a\u2039ã?®ã?§ã?¯ï¼Ÿ"}
+                        "CMDSetup": {
+                            "response": {
+                                "success": {
+                                    "msg": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆæ©Ÿèƒ½ã®æº–å‚™ãŒæ•´ã„ã¾ã—ãŸã€‚\nã“ã®æ©Ÿèƒ½ã¯è‹±èªã§ã®ã¿åˆ©ç”¨å¯èƒ½ã§ã‚ã‚Šã€å¨¯æ¥½ç›®çš„ã§ã®ã¿åˆ©ç”¨ã•ã‚Œã¾ã™ã€‚\nå›ç­”ã¯æ¤œè¨¼ã•ã‚Œã¦ã„ãªã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‹ã‚‰ç”Ÿæˆã•ã‚Œã¦ã„ã¾ã™ - å›ç­”ã®ä¸­ã«ã¯ã€ç‰¹å®šã®æ–‡è„ˆã§ã¯ä¸é©åˆ‡ã¨æ€ã‚ã‚Œã‚‹ã‚‚ã®ã‚‚ã‚ã‚Šã¾ã™ã€‚\nãƒ«ãƒ¼ãƒˆãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆã®ç”±æ¥ã«ã¤ã„ã¦è©³ã—ãã¯ã“ã¡ã‚‰ [ã“ã‚Œ](%0%)",
+                                    "deactivated": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆãŒç„¡åŠ¹åŒ–ã•ã‚Œã¾ã—ãŸ"
+                                },
+                                "error": {"create": {"failed": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã®è¨­å®šã«å¿…è¦ãªãƒãƒ£ãƒ³ãƒãƒ«è¨­å®šã®ä½œæˆ/æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚"}}
+                            },
+                            "chat": {"default": {"name": "Xenia"}},
+                            "description": "Xeniaã¨ãƒãƒ£ãƒƒãƒˆã™ã‚‹ãŸã‚ã®ãƒãƒ£ãƒ³ãƒãƒ«ã‚’è¨­å®šã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚"
                         },
-                        "description": "ã\u201a³ãƒãƒ³ãƒ\u2030ã?«ä½¿ç\u201d¨ã?™ã\u201a\u2039ãƒ\u2014ãƒ¬ãƒ\u2022ã\u201a£ãƒƒã\u201a¯ã\u201a¹ã\u201a\u2019æ\u203a´æ\u2013°"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "å¯¾å¿œè¨\u20acèªã?®æ\u203a´æ\u2013°"},
-                           "error": {"msg": "å¿œç­\u201dè¨\u20acèªã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ä»¥ä¸\u2039ã?®ã?¨ã?Šã\u201aŠã?§ã?™ã\u20ac\u201a%0%"}
+                        "GROUPChatbot": {"description": "ãƒãƒ£ãƒ³ãƒãƒ«ã®ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆè¨­å®šã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ãŒå«ã¾ã‚Œã¦ã„ã¾ã™ã€‚"},
+                        "CMDInfo": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "ä¸€èˆ¬çš„ãªè¨­å®š"},
+                                        "2": {"title": "ãƒãƒ£ãƒ³ãƒãƒ«"},
+                                        "3": {"title": "ãƒ¢ãƒ¼ãƒ‰"}
+                                    },
+                                    "title": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆæƒ…å ±"
+                                },
+                                "error": {"notfound": "ãƒãƒ£ãƒ³ãƒãƒ«ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„"}
+                            },
+                            "description": "ãƒãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã®è¨­å®šã«é–¢ã™ã‚‹ä¸€èˆ¬çš„ãªæƒ…å ±ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚"
+                        }
+                    },
+                    "notification": {
+                        "CMDList": {
+                            "response": {"title": "ãŠçŸ¥ã‚‰ã›"},
+                            "description": "æ—¢å­˜ã®é€šçŸ¥ã®è¡¨ç¤º"
                         },
-                        "description": "ã\u201a¼ãƒ\u2039ã\u201a¢ã?®å¯¾å¿œè¨\u20acèªã\u201a\u2019æ\u203a´æ\u2013°"
-                     }
-                  },
-                  "GROUPSettings": {"description": "ã\u201a®ãƒ«ãƒ\u2030ã?®ã?™ã?¹ã?¦ã?®è¨­å®šã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a"},
-                  "roles": {"HYBRIDRoles": {
-                     "response": {
-                        "title": "å½¹å\u2030²",
-                        "is_empty": "ã?¾ã? ä½œæˆ?ã?\u2022ã\u201aŒã?Ÿãƒ­ãƒ¼ãƒ«ã?¯ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201c"
-                     },
-                     "description": "v ãƒ­ãƒ¼ãƒ«ã?¨ v ãƒ\u2018ãƒ¼ãƒ ã\u201a\u2019ç®¡ç?\u2020ã?™ã\u201a\u2039ã\u201a³ãƒãƒ³ãƒ\u2030ã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a"
-                  }},
-                  "channel": {
-                     "CMDAccessMode": {
-                        "response": {
-                           "success": {"msg": "ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ãƒ¢ãƒ¼ãƒ\u2030ã?®æ\u203a´æ\u2013°"},
-                           "error": {"msg": "ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ãƒ¢ãƒ¼ãƒ\u2030ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ä»¥ä¸\u2039ã?®ã?¨ã?Šã\u201aŠã?§ã?™ã\u20ac\u201a%0%"}
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "ãŠçŸ¥ã‚‰ã› (ID: %0%) deleted"},
+                                "error": {"msg": "é€šçŸ¥ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã‚Œã¯èª°ã‹ãŒä½œã£ãŸã‚‚ã®ã‹ã€å­˜åœ¨ã—ãªã„ã‚‚ã®ãªã®ã§ã—ã‚‡ã†ã‹ï¼Ÿ"}
+                            },
+                            "description": "æ—¢å­˜ã®é€šçŸ¥ã®å‰Šé™¤"
                         },
-                        "description": "æŒ\u2021å®šã?\u2014ã?Ÿãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ãƒ¢ãƒ¼ãƒ\u2030ã\u201a\u2019æ\u203a´æ\u2013°ã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                     },
-                     "CMDLogging": {
-                        "response": {
-                           "success": {"msg": "ãƒ­ã\u201a®ãƒ³ã\u201a°è¨­å®šã\u201a\u2019æ\u203a´æ\u2013°ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a"},
-                           "error": {"msg": "ãƒ­ã\u201a®ãƒ³ã\u201a°ãƒ¢ãƒ¼ãƒ\u2030ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ä»¥ä¸\u2039ã?®é\u20acšã\u201aŠã?§ã?™ã\u20ac\u201a [true, false]"}
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "é€šçŸ¥ã®ä½œæˆ (ID: %0% | %1%)"},
+                                "error": {"msg": "é€šçŸ¥ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãŒã„ã£ã±ã„ã«ãªã£ã¦ã„ã‚‹ã®ã§ã¯ï¼Ÿ"}
+                            },
+                            "description": "æ–°ã—ã„é€šçŸ¥ã®ä½œæˆ"
                         },
-                        "description": "æŒ\u2021å®šã?\u2014ã?Ÿãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ãƒ­ã\u201a®ãƒ³ã\u201a°è¨­å®šã\u201a\u2019æ\u203a´æ\u2013°ã?™ã\u201a\u2039"
-                     },
-                     "GROUPChannel": {"description": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«è¨­å®šã\u201a\u2019ç®¡ç?\u2020ã?™ã\u201a\u2039ã\u201a³ãƒãƒ³ãƒ\u2030ã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a"},
-                     "CMDInfo": {
-                        "response": {
-                           "success": {
-                              "field": {
-                                 "1": {"title": "å\u203a½æ\u2014\u2014"},
-                                 "2": {"title": "ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ãƒ¢ãƒ¼ãƒ\u2030"},
-                                 "3": {"title": "ãƒ­ã\u201a®ãƒ³ã\u201a°ã\u201a\u2019æœ\u2030åŠ¹ã?«ã?™ã\u201a\u2039"},
-                                 "4": {"title": "ãƒ­ã\u201a®ãƒ³ã\u201a°è\u2021ªå\u2039\u2022å¾©å\u2026ƒãƒ?ãƒ£ãƒ³ãƒ?ãƒ«"}
-                              },
-                              "title": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«è¨­å®š"
-                           },
-                           "error": {"msg": "ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ãƒ¢ãƒ¼ãƒ\u2030ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯"}
+                        "GROUPNotification": {"description": "ã“ã®ã‚®ãƒ«ãƒ‰ã®é€šçŸ¥ã‚’ç®¡ç†ã™ã‚‹"},
+                        "CMDModify": {
+                            "response": {
+                                "success": {"msg": "é€šçŸ¥ã®ç·¨é›†"},
+                                "error": {"msg": "é€šçŸ¥ã®å¤‰æ›´ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã‚Œã¯ä»–ã®äººãŒä½œæˆã—ãŸã‚‚ã®ã‹ã€å­˜åœ¨ã—ãªã„ã‚‚ã®ãªã®ã§ã—ã‚‡ã†ã‹ï¼Ÿ"}
+                            },
+                            "description": "æ—¢å­˜ã®é€šçŸ¥ã®æ›´æ–°"
+                        }
+                    },
+                    "twitch": {
+                        "CMDUpdate": {
+                            "response": {
+                                "success": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®æ›´æ–°"},
+                                "error": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã®IDã®é€šçŸ¥ã¯å­˜åœ¨ã—ã¾ã™ã‹ï¼Ÿ"}
+                            },
+                            "description": "ãƒãƒ£ãƒ³ãƒãƒ«ã®ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®æ›´æ–°"
                         },
-                        "description": "æŒ\u2021å®šã?\u2014ã?Ÿãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®æƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                     }
-                  },
-                  "self": {
-                     "HYBRIDSelf": {
-                        "response": {
-                           "field": {
-                              "1": {"title": "ãƒ¦ãƒ¼ã\u201a¶ãƒ¼å??"},
-                              "2": {"title": "ã?\u201eã?§ã\u201a\u201c"},
-                              "3": {"title": "å\u2020\u2026éƒ¨çš\u201eã?ªå½¹å\u2030²"},
-                              "4": {"title": "æœ\u203aã?¾ã?\u2014ã?\u201eè¨\u20acèª"},
-                              "5": {
-                                 "title": "ã\u201a¢ã\u201a¤ã\u201a³ãƒ³URL",
-                                 "content": "[ãƒªãƒ³ã\u201a¯](%0%)"
-                              }
-                           },
-                           "title": "è\u2021ªå·±ç´¹ä»\u2039"
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "å‰Šé™¤ã•ã‚ŒãŸã‚¹ãƒˆãƒªãƒ¼ãƒ ã®é€šçŸ¥"},
+                                "error": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã®IDã®é€šçŸ¥ã¯å­˜åœ¨ã—ã¾ã™ã‹ï¼Ÿ"}
+                            },
+                            "description": "ãƒãƒ£ãƒ³ãƒãƒ«ã®ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®å‰Šé™¤"
                         },
-                        "description": "è\u2021ªåˆ\u2020ã?®è¨­å®šã\u201a\u2019ç®¡ç?\u2020ã?™ã\u201a\u2039ã?Ÿã\u201a?ã?®ã\u201a³ãƒãƒ³ãƒ\u2030ã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a"
-                     },
-                     "CMDLanguage": {
-                        "response": {
-                           "success": {"msg": "å¯¾å¿œè¨\u20acèªã?®æ\u203a´æ\u2013°"},
-                           "error": {"msg": "å¿œç­\u201dè¨\u20acèªã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ä»¥ä¸\u2039ã?®ã?¨ã?Šã\u201aŠã?§ã?™ã\u20ac\u201a%0%"}
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®é€šçŸ¥ã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚è©•ä¾¡å¾Œã€ã“ã‚Œã¯ã‚ªãƒ¼ãƒãƒ¼ãƒ“ãƒ¥ãƒ¼ã«è¡¨ç¤ºã•ã‚Œã¾ã™"},
+                                "error": {"msg": "åˆ¥ã®ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚URLã¯æœ‰åŠ¹ã§ã™ã‹ï¼Ÿã™ã§ã«ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã®é€šçŸ¥ã‚’å—ã‘ã¦ã„ã¾ã™ã‹ï¼Ÿãã‚Œã¨ã‚‚åˆ¶é™ã«é”ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                            },
+                            "description": "ãƒãƒ£ãƒ³ãƒãƒ«ã«å¯¾ã™ã‚‹ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®è¦æ±‚"
                         },
-                        "description": "ã\u201a¼ãƒ\u2039ã\u201a¢ã?®å¯¾å¿œè¨\u20acèªã\u201a\u2019æ\u203a´æ\u2013°"
-                     }
-                  }
-               },
-               "chatbot": {
-                  "learning": {
-                     "CMDChannelLink": {
-                        "success": {"msg": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ãƒªãƒ³ã\u201a¯ã\u201a\u2019æ\u203a´æ\u2013°ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aå¤\u2030æ\u203a´ã?Œå??æ˜ ã?\u2022ã\u201aŒã\u201a\u2039ã?¾ã?§ã?«æ\u2022°åˆ\u2020ã?\u2039ã?\u2039ã\u201a\u2039å ´å?ˆã?Œã?\u201aã\u201aŠã?¾ã?™ã\u20ac\u201a"},
-                        "description": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã?®ãƒ\u2021ãƒ¼ã\u201a¿ãƒ\u2014ãƒ¼ãƒ«ã?¨ã?\u2014ã?¦ä½¿ç\u201d¨ã?™ã\u201a\u2039ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ãƒªãƒ³ã\u201a¯",
-                        "error": {"invalid": {"arg": {"msg": "ãƒ?ãƒ£ãƒ?ãƒ«ã?®ãƒªãƒ³ã\u201a¯ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aãƒªãƒ³ã\u201a¯æ\u2022°ã?Œä¸Šé™?ã?«é?\u201dã?\u2014ã?¦ã?\u201eã\u201a\u2039ã?®ã?\u2039ã\u20ac?ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?Œå­˜åœ¨ã?\u2014ã?ªã?\u201eã?®ã?\u2039ã\u20ac\u201a"}}}
-                     },
-                     "CMDMode": {
-                        "success": {"msg": "ãƒ¢ãƒ¼ãƒ\u2030å¤\u2030æ\u203a´ã?«æˆ?åŠŸã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aå¤\u2030æ\u203a´ã?Œå??æ˜ ã?\u2022ã\u201aŒã\u201a\u2039ã?¾ã?§ã?«æ\u2022°åˆ\u2020ã?\u2039ã?\u2039ã\u201a\u2039ã?\u201cã?¨ã?Œã?\u201aã\u201aŠã?¾ã?™ã\u20ac\u201a"},
-                        "description": "ãƒ\u2021ãƒ¼ã\u201a¿ã\u201a»ãƒƒãƒˆã\u201a\u2019ä½¿ç\u201d¨ã?™ã\u201a\u2039ãƒ¢ãƒ¼ãƒ\u2030ã\u201a\u2019å®šç¾©ã?\u2014ã?¾ã?™ã\u20ac\u201a",
-                        "error": {"invalid": {"arg": {"msg": "ãƒ¢ãƒ¼ãƒ\u2030ã?®å¤\u2030æ\u203a´ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nåˆ©ç\u201d¨å?¯èƒ½ã?ªã\u201aªãƒ\u2014ã\u201a·ãƒ§ãƒ³ã?¯ %0%"}}}
-                     },
-                     "GROUPLearning": {"description": "ä½¿ç\u201d¨ã?™ã\u201a\u2039ãƒ\u2021ãƒ¼ã\u201a¿ã\u201a\u2019åˆ¶å¾¡ã?™ã\u201a\u2039ã\u201a³ãƒãƒ³ãƒ\u2030ã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã\u201a\u2039"}
-                  },
-                  "CMDSetup": {
-                     "response": {
+                        "HYBRIDTwitch": {
+                            "response": {"success": {"title": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥"}},
+                            "description": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®ä½œæˆãƒ»ç®¡ç†ãƒ»ä¸€è¦§è¡¨ç¤º"
+                        }
+                    },
+                    "last": {
+                        "GROUPLast": {"description": "å‰Šé™¤ãƒ»ç·¨é›†ã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾©å…ƒ"},
+                        "CMDEdited": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID"},
+                                        "2": {"title": "è‘—è€…r"},
+                                        "3": {"title": "å¤ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸"},
+                                        "4": {"title": "ã‚¢ã‚¿ãƒƒãƒãƒ¡ãƒ³ãƒˆ"}
+                                    },
+                                    "title": "ç·¨é›†ã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾©å…ƒ"
+                                },
+                                "error": {"msg": "å¾©å…ƒã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚‰ãªã„"}
+                            },
+                            "description": "ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã§æœ€å¾Œã«ç·¨é›†ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å¾©å…ƒã™ã‚‹"
+                        },
+                        "CMDDeleted": {
+                            "response": {
+                                "success": {
+                                    "field": {
+                                        "1": {"title": "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID"},
+                                        "2": {"title": "è‘—è€…r"},
+                                        "3": {"title": "å¤ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸"},
+                                        "4": {"title": "ã‚¢ã‚¿ãƒƒãƒãƒ¡ãƒ³ãƒˆ"}
+                                    },
+                                    "title": "å‰Šé™¤ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾©å…ƒ"
+                                },
+                                "error": {"msg": "å¾©å…ƒã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚‰ãªã„"}
+                            },
+                            "description": "ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã§å‰Šé™¤ã•ã‚ŒãŸæœ€å¾Œã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å¾©å…ƒã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚"
+                        }
+                    },
+                    "admin": {
+                        "CMDEval": {"description": "ã‚³ãƒ¼ãƒ‰ã®è©•ä¾¡ã«åˆ©ç”¨ã§ãã‚‹"},
+                        "CMDPing": {"description": "discordã‚„ä»–ã®ãƒªãƒ³ã‚¯å…ˆã‚µãƒ¼ãƒ“ã‚¹ã¸ã®Pingã‚’ç¢ºèªã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã§ãã‚‹"},
+                        "CMDChatlog": {"description": "ç¾åœ¨ã®ã‚®ãƒ«ãƒ‰ã§æŒ‡å®šã•ã‚ŒãŸãƒãƒ£ãƒ³ãƒãƒ«ã®æš—å·åŒ–ã•ã‚ŒãŸã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ãƒ­ã‚°ã‚’ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆã™ã‚‹"},
+                        "CMDClientIdentify": {"description": "ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ã®ã‚»ã‚«ãƒ³ãƒ€ãƒªãƒ¼ã‚½ã‚±ãƒƒãƒˆã«èª°ãŒæ¥ç¶šã—ã¦ã„ã‚‹ã‹ã‚’ç¢ºèªã™ã‚‹"},
+                        "CMDD43Z1Stats": {"description": "å®Ÿè¡Œä¸­ã®D43Z1ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«é–¢ã™ã‚‹ã„ãã¤ã‹ã®æƒ…å ±ã‚’è¡¨ç¤ºã™ã‚‹ãŸã‚ã«ä½¿ç”¨ã§ãã¾ã™ã€‚"},
+                        "CMDGlobalInfo": {"description": "ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ã®ã‚»ã‚«ãƒ³ãƒ€ãƒªãƒ¼ã‚½ã‚±ãƒƒãƒˆã«æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ã™ã¹ã¦ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®çµ±è¨ˆæƒ…å ±ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚"},
+                        "CMDD43Z1": {"description": "ç¾åœ¨ã®D43Z1ã®æ€§èƒ½è©•ä¾¡ã«ä½¿ç”¨å¯èƒ½"},
+                        "CMDInfo": {"description": "ã“ã®ãƒœãƒƒãƒˆã«é–¢ã™ã‚‹çµ±è¨ˆæƒ…å ±ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚"},
+                        "GROUPAdmin": {"description": "é–‹ç™ºè€…ã®ã¿ãŒä½¿ç”¨ã§ãã‚‹ã‚³ãƒãƒ³ãƒ‰ã‚’å«ã‚€"}
+                    },
+                    "hastebin": {"CMDHastebin": {
+                        "response": {
+                            "success": {"msg": "ã“ã“ã«ã‚ãªãŸã®ãƒ˜ã‚¤ã‚¹ãƒˆãŒã‚ã‚Šã¾ã™ã€‚"},
+                            "error": {"msg": "ãƒ•ã‚¡ã‚¤ãƒ«ãŒæä¾›ã•ã‚Œãªã„"}
+                        },
+                        "description": "æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ã‚’haste.hypercdn.deã«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã—ã¦ãã ã•ã„ã€‚"
+                    }},
+                    "anime": {
+                        "sfw": {
+                            "CMDCry": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% æ³£ã",
+                                        "1": "%1%ã¯%0%ã‚’æ³£ã‹ã›ãŸ"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "ä½•ã‹ã«ã¤ã‘ã¦æ³£ã"
+                            },
+                            "CMDKitsune": {
+                                "response": {
+                                    "success": {"msg": {"0": "ãŠå¾…ãŸã›ã—ã¾ã—ãŸã€‚"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDHolo": {
+                                "response": {
+                                    "success": {"msg": {"0": "ãƒ›ãƒ­ã®ã‚ˆã†ãªã‚‚ã®"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "ãƒ›ãƒ­ã£ã¦è¨€ã£ãŸã£ã‘ï¼Ÿ"
+                            },
+                            "CMDOokami": {
+                                "response": {
+                                    "success": {"msg": {"0": ":3"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDTail": {
+                                "response": {
+                                    "success": {"msg": {"0": "ãµã‚ãµã‚ã®å°»å°¾ :3"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDEevee": {
+                                "response": {
+                                    "success": {"msg": {"0": "ã‚¤ãƒ¼ãƒ–ã‚¤!"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "ã‚¤ãƒ¼ãƒ–ã‚¤?"
+                            },
+                            "CMDTickle": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% ãã™ãã£ãŸã„",
+                                        "1": "%1%ãŒ%0%ã«ãã™ãã‚‰ã‚Œã‚‹ã€‚"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’ãã™ãã‚‹"
+                            },
+                            "CMDBlush": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% ãƒãƒ¼ã‚¯",
+                                        "1": "%0% ã®ãŸã‚ã«èµ¤é¢ã™ã‚‹ã€‚%1%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã®ã›ã„ã§é¡”ãŒèµ¤ããªã‚‹"
+                            },
+                            "CMDSlap": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% å‘¨å›",
+                                        "1": "%1% ã«å©ã‹ã‚ŒãŸã€‚ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’å©ã"
+                            },
+                            "CMDFluff": {
+                                "response": {
+                                    "success": {"msg": {"0": "ã¨ã¦ã‚‚ãµã‚ãµã‚ã—ã¦ã„ã‚‹ :3"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "ãƒ•ãƒ¯ãƒ•ãƒ¯"
+                            },
+                            "CMDKiss": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% ã‚­ã‚¹ã‚’é…ã‚‹",
+                                        "1": "%0% ã‚­ã‚¹ %1% OwO"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã«ã‚­ã‚¹ã‚’ã™ã‚‹"
+                            },
+                            "CMDHug": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% æŠ±ãã—ã‚ãŸã„",
+                                        "1": "%0% ãƒã‚° %1%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’æŠ±ãã—ã‚ã‚‹"
+                            },
+                            "CMDSmile": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% ç¬‘ã‚ãªãã‚ƒ :)",
+                                        "1": "%1% ä½œã‚‰ã‚ŒãŸ %0% ã‚¹ãƒã‚¤ãƒ« :)"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã«å¾®ç¬‘ã‚€"
+                            },
+                            "CMDBite": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% å™›ã¿ã¤ã",
+                                        "1": "%1% ã«å™›ã¾ã‚Œã‚‹ã€‚ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’å™›ã‚€(ãŠã‚„ã¤ã‹ã‚‚ã—ã‚Œãªã„)"
+                            },
+                            "CMDLick": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% èª°ã‹ã‚’ãªã‚ã‚ˆã†ã¨ã™ã‚‹",
+                                        "1": "%0% èˆã‚ã‚‹ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’ãªã‚ã‚‹"
+                            },
+                            "CMDPat": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% æ’«ã§ã‚‹",
+                                        "1": "%1% ã®ãƒ˜ãƒƒãƒ‰ãƒ‘ãƒƒãƒˆã‚’å—ã‘ã¦ã„ã¾ã™ã€‚ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã®é ­ã‚’æ’«ã§ã‚‹"
+                            },
+                            "CMDPoke": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% è¦—ã„ã¦ã¿ã‚‹",
+                                        "1": "%1% ã«çªã‹ã‚Œã‚‹ã€‚ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’çªã"
+                            },
+                            "CMDCuddle": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% æŠ±ã£ã“ã—ãŸã„",
+                                        "1": "%1% ã«æŠ±ã‹ã‚Œã‚‹ã€‚ %0%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã‚’æŠ±ãã—ã‚ã‚‹"
+                            },
+                            "CMDNeko": {
+                                "response": {
+                                    "success": {"msg": {"0": ":3"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": ":3"
+                            },
+                            "CMDDance": {
+                                "response": {
+                                    "success": {"msg": {"0": "%0% dances"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "Dance!"
+                            },
+                            "CMDRandom": {
+                                "response": {
+                                    "success": {"msg": {"0": "UwU"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "ãƒ©ãƒ³ãƒ€ãƒ ç”»åƒ"
+                            },
+                            "CMDFeed": {
+                                "response": {
+                                    "success": {"msg": {
+                                        "0": "%0% ç¾å‘³ã—ã„ã‚‚ã®ã‚’é£Ÿã¹ã‚‹",
+                                        "1": "%0% ã§é£Ÿã¹ç‰©ã‚’å…±æœ‰ã—ã¦ã„ã¾ã™ã€‚ %1%"
+                                    }},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "èª°ã‹ã«é£Ÿã¹ã•ã›ã‚‹"
+                            },
+                            "CMDSenko": {
+                                "response": {
+                                    "success": {"msg": {"0": "_ã‚»ãƒ³ã‚³ãƒ¼ã®éŸ³_"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": ":3"
+                            }
+                        },
+                        "nsfw": {
+                            "CMDThreesome_FFM": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDYuri": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDPussylick": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDBlowjob": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDCum": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDYaoi": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDSolo": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDAnal": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDFuck": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDThreesome_FFF": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDThreesome_MMF": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDNeko": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            },
+                            "CMDRandom": {
+                                "response": {
+                                    "success": {"msg": {"0": ":C"}},
+                                    "error": {
+                                        "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                        "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                                    }
+                                },
+                                "description": "-NSFWã‚³ãƒ³ãƒ†ãƒ³ãƒ„-"
+                            }
+                        },
+                        "GROUPAnime": {"description": "ã‚¢ãƒ‹ãƒ¡ã‚’ãƒ†ãƒ¼ãƒã«ã—ãŸæ§˜ã€…ãªã‚³ãƒãƒ³ãƒ‰ã‚’åéŒ²"}
+                    },
+                    "tags": {
+                        "CMDDelete": {
+                            "response": {
+                                "success": {"msg": "ã‚¿ã‚° %0% å‰Šé™¤"},
+                                "error": {"msg": "ã‚¿ã‚°ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚ãªãŸãŒã‚ªãƒ¼ãƒŠãƒ¼ã§ã€ãã®ã‚¿ã‚°ã¯å­˜åœ¨ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                            },
+                            "description": "æ—¢å­˜ã®ã‚¿ã‚°ã‚’å‰Šé™¤ã™ã‚‹"
+                        },
+                        "CMDCreate": {
+                            "response": {
+                                "success": {"msg": "ã‚¿ã‚° %0% ä½œæˆã•ã‚ŒãŸ"},
+                                "error": {"msg": "ã‚¿ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ"}
+                            },
+                            "description": "ä¸ãˆã‚‰ã‚ŒãŸã‚¿ã‚°åã¨å†…å®¹ã§æ–°ã—ã„ã‚¿ã‚°ã‚’ä½œæˆã™ã‚‹"
+                        },
+                        "HYBRIDTag": {
+                            "response": {
+                                "success": {"msg": "%0%\n\n*ã‚¿ã‚°ã®ä½œæˆ %1%*"},
+                                "error": {"msg": "ã‚¿ã‚° %0% ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"}
+                            },
+                            "description": "ã“ã®ã‚®ãƒ«ãƒ‰ã®ã‚¿ã‚°ã®ä½œæˆã€ç®¡ç†ã€ä½¿ç”¨"
+                        },
+                        "CMDModify": {
+                            "response": {
+                                "success": {"msg": "ã‚¿ã‚° %0% æ›´æ–°"},
+                                "error": {"msg": "ã‚¿ã‚°ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚ãªãŸãŒã‚ªãƒ¼ãƒŠãƒ¼ã§ã€ãã®ã‚¿ã‚°ã¯å­˜åœ¨ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                            },
+                            "description": "ä¸ãˆã‚‰ã‚ŒãŸã‚¿ã‚°ã‚’æ–°ã—ã„å†…å®¹ã§ä¿®æ­£ã™ã‚‹"
+                        }
+                    },
+                    "info": {"CMDInfo": {
+                        "response": {
+                            "field": {
+                                "3": {"title": "ç¾åœ¨ã®Shard"},
+                                "4": {"title": "ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹"},
+                                "5": {"title": "æ‰€åœ¨åœ°"},
+                                "6": {
+                                    "title": "ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆ",
+                                    "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
+                                },
+                                "7": {
+                                    "title": "ãƒ‡ãƒ¼ã‚¿å‡¦ç†",
+                                    "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
+                                },
+                                "8": {
+                                    "title": "ãƒ¬ãƒãƒ¼ãƒˆå†…å®¹",
+                                    "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
+                                },
+                                "9": {
+                                    "title": "é€£çµ¡å…ˆ",
+                                    "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
+                                }
+                            },
+                            "title": "æƒ…å ±"
+                        },
+                        "description": "ç§ã«ã¤ã„ã¦ã®åŸºæœ¬çš„ãªæƒ…å ±ã‚’è¡¨ç¤ºã—ã¾ã™ã€‚"
+                    }}
+                }
+            },
+            "slash": {"structure": {
+                "avatar": {
+                    "RCMDAvatar": { "response": {
+                        "title": "ã‚¢ãƒã‚¿ãƒ¼",
+                        "success": { "field": { "1": {
+                            "title": "ãƒªãƒ³ã‚¯",
+                            "description": "[ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰](%0%)"
+                        }}},
+                        "error": { "msg":  "ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“"}
+                    }}
+                },
+                "twitch": {
+                    "CMDUpdate": {
+                        "response": {
+                            "success": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®æ›´æ–°"},
+                            "error": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã®IDã®é€šçŸ¥ã¯å­˜åœ¨ã—ã¾ã™ã‹ï¼Ÿ"}
+                        }
+                    },
+                    "CMDDelete": {
+                        "response": {
+                            "success": {"msg": "å‰Šé™¤ã•ã‚ŒãŸã‚¹ãƒˆãƒªãƒ¼ãƒ ã®é€šçŸ¥"},
+                            "error": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã®IDã®é€šçŸ¥ã¯å­˜åœ¨ã—ã¾ã™ã‹ï¼Ÿ"}
+                        }
+                    },
+                    "CMDCreate": {
+                        "response": {
+                            "success": {"msg": "ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®é€šçŸ¥ã‚’è¦æ±‚ã—ã¾ã—ãŸã€‚è©•ä¾¡å¾Œã€ã“ã‚Œã¯ã‚ªãƒ¼ãƒãƒ¼ãƒ“ãƒ¥ãƒ¼ã«è¡¨ç¤ºã•ã‚Œã¾ã™"},
+                            "error": {"msg": "åˆ¥ã®ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚URLã¯æœ‰åŠ¹ã§ã™ã‹ï¼Ÿã™ã§ã«ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã®é€šçŸ¥ã‚’å—ã‘ã¦ã„ã¾ã™ã‹ï¼Ÿãã‚Œã¨ã‚‚åˆ¶é™ã«é”ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                        }
+                    },
+                    "CMDList": {
+                        "response": {"success": {"title": "ã‚¹ãƒˆãƒªãƒ¼ãƒ é€šçŸ¥"}}
+                    }
+                },
+                "notification": {
+                    "CMDList": {"response": {"title": "ãŠçŸ¥ã‚‰ã›"}},
+                    "CMDCreate": {"response": {
+                        "success": {"msg": "é€šçŸ¥ã®ä½œæˆ (ID: %0% | %1%)"},
+                        "error": {"msg": "é€šçŸ¥ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãŒã„ã£ã±ã„ã«ãªã£ã¦ã„ã‚‹ã®ã§ã¯ï¼Ÿ"}
+                    }},
+                    "CMDDelete": {"response": {
+                        "success": {"msg": "é€šçŸ¥(ID: %0%)ã®å‰Šé™¤"},
+                        "error": {"msg": "é€šçŸ¥ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã‚Œã¯èª°ã‹ãŒä½œã£ãŸã‚‚ã®ã‹ã€å­˜åœ¨ã—ãªã„ã‚‚ã®ãªã®ã§ã—ã‚‡ã†ã‹ï¼Ÿ"}
+                    }},
+                    "CMDModify": {
+                        "response": {
+                            "success": {"msg": "é€šçŸ¥ã®ç·¨é›†"},
+                            "error": {"msg": "é€šçŸ¥ã®å¤‰æ›´ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã‚Œã¯èª°ã‹ãŒä½œã£ãŸã‚‚ã®ã‹ã€å­˜åœ¨ã—ãªã„ã‚‚ã®ãªã®ã§ã—ã‚‡ã†ã‹ï¼Ÿ"}
+                        },
+                        "description": "æ—¢å­˜ã®é€šçŸ¥ã®æ›´æ–°"
+                    }
+                },
+                "last": {
+                    "CMDEdited": {"response": {
                         "success": {
-                           "msg": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆæ©Ÿèƒ½ã?Œå®Œæˆ?ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a\nã?\u201cã?®æ©Ÿèƒ½ã?¯è\u2039±èªã?§ã?®ã?¿åˆ©ç\u201d¨å?¯èƒ½ã?§ã?\u201aã\u201aŠã\u20ac?ã\u201a¨ãƒ³ã\u201a¿ãƒ¼ãƒ\u2020ã\u201a¤ãƒ¡ãƒ³ãƒˆç\u203a®çš\u201eã?®ã?¿ã\u201a\u2019ç\u203a®çš\u201eã?¨ã?\u2014ã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a\nå\u203aç­\u201dã?¯æœªæ¤œè¨¼ã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?\u2039ã\u201a\u2030ç\u201dŸæˆ?ã?\u2022ã\u201aŒã?¾ã?™ - ä¸\u20acéƒ¨ã?®å\u203aç­\u201dã?¯æ\u2013\u2021è\u201eˆã?«ã\u201aˆã?£ã?¦ã?¯ä¸?é?©åˆ\u2021ã?¨æ\u20ac?ã\u201a?ã\u201aŒã\u201a\u2039å ´å?ˆã?Œã?\u201aã\u201aŠã?¾ã?™ã\u20ac\u201a\nãƒ«ãƒ¼ãƒˆãƒ\u2021ãƒ¼ã\u201a¿ã\u201a»ãƒƒãƒˆã?®èµ·æº?ã?«ã?¤ã?\u201eã?¦ã?®è©³ç´°ã?¯ã?\u201cã?¡ã\u201a\u2030ã\u201a\u2019ã?\u201dè¦§ã??ã? ã?\u2022ã?\u201e[ã?\u201cã?\u201cã?§](%0%)",
-                           "deactivated": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã?¯ç\u201e¡åŠ¹åŒ\u2013ã?\u2022ã\u201aŒã?¾ã?\u2014ã?Ÿ"
+                            "field": {
+                                "1": {"title": "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID"},
+                                "2": {"title": "è‘—è€…"},
+                                "3": {"title": "å¤ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸"},
+                                "4": {"title": "ã‚¢ã‚¿ãƒƒãƒãƒ¡ãƒ³ãƒˆ"}
+                            },
+                            "title": "ç·¨é›†ã—ãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾©å…ƒ"
                         },
-                        "error": {"create": {"failed": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã?®è¨­å®šã?«å¿\u2026è¦?ã?ªãƒ?ãƒ£ãƒ³ãƒ?ãƒ«è¨­å®šã?®ä½œæˆ?/æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a"}}
-                     },
-                     "chat": {"default": {"name": "xenia"}},
-                     "description": "Xeniaã?¨ãƒ?ãƒ£ãƒƒãƒˆã?™ã\u201a\u2039ã?Ÿã\u201a?ã?®ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã\u201a\u2019è¨­å®šã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?™ã\u20ac\u201a"
-                  },
-                  "GROUPChatbot": {"description": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆè¨­å®šã\u201a\u2019ç®¡ç?\u2020ã?™ã\u201a\u2039ã\u201a³ãƒãƒ³ãƒ\u2030ã?Œå?«ã?¾ã\u201aŒã?¦ã?\u201eã?¾ã?™ã\u20ac\u201a"},
-                  "CMDInfo": {
-                     "response": {
+                        "error": {"msg": "å¾©å…ƒã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚‰ãªã„"}
+                    }},
+                    "CMDDeleted": {"response": {
                         "success": {
-                           "field": {
-                              "1": {"title": "ä¸\u20acèˆ¬çš\u201eã?ªè¨­å®š"},
-                              "2": {"title": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«"},
-                              "3": {"title": "ãƒ¢ãƒ¼ãƒ\u2030"}
-                           },
-                           "title": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆæƒ\u2026å ±"
+                            "field": {
+                                "1": {"title": "ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ID"},
+                                "2": {"title": "è‘—è€…"},
+                                "3": {"title": "å¤ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸"},
+                                "4": {"title": "ã‚¢ã‚¿ãƒƒãƒãƒ¡ãƒ³ãƒˆ"}
+                            },
+                            "title": "å‰Šé™¤ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾©å…ƒ"
                         },
-                        "error": {"notfound": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?Œè¨­å®šã?\u2022ã\u201aŒã?¦ã?\u201eã?ªã?\u201e"}
-                     },
-                     "description": "ãƒ?ãƒ£ãƒƒãƒˆãƒœãƒƒãƒˆã?®è¨­å®šã?«é\u2013¢ã?™ã\u201a\u2039ä¸\u20acèˆ¬çš\u201eã?ªæƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  }
-               },
-               "notification": {
-                  "CMDList": {
-                     "response": {"title": "ã?ŠçŸ¥ã\u201a\u2030ã?\u203a"},
-                     "description": "æ\u2014¢å­˜ã?®é\u20acšçŸ¥ã\u201a\u2019è¦\u2039ã\u201a\u2039"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "é\u20acšçŸ¥(ID: %0%)å\u2030Šé™¤"},
-                        "error": {"msg": "é\u20acšçŸ¥ã?®å\u2030Šé™¤ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã\u201a\u201aã?\u2014ã?\u2039ã?\u2014ã?¦ã\u20ac?ã?\u201cã\u201aŒã?¯ä»\u2013ã?®èª°ã?\u2039ã?Œä½œæˆ?ã?\u2014ã?Ÿã?\u2039ã\u20ac?å­˜åœ¨ã?\u2014ã?ªã?\u201eã?®ã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "æ\u2014¢å­˜ã?®é\u20acšçŸ¥ã\u201a\u2019å\u2030Šé™¤ã?™ã\u201a\u2039"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "ä½œæˆ?ã?\u2022ã\u201aŒã?Ÿé\u20acšçŸ¥ (ID: %0% | %1%)"},
-                        "error": {"msg": "é\u20acšçŸ¥ã?®ä½œæˆ?ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã\u201a­ãƒ£ãƒƒã\u201a·ãƒ¥ã?Œä¸\u20acæ?¯ã?«ã?ªã?£ã?¦ã?\u201eã\u201a\u2039ã?®ã?§ã?¯ã?ªã?\u201eã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "æ\u2013°ã?\u2014ã?\u201eé\u20acšçŸ¥ã\u201a\u2019ä½œæˆ?ã?™ã\u201a\u2039"
-                  },
-                  "GROUPNotification": {"description": "ã?\u201cã?®ã\u201a®ãƒ«ãƒ\u2030ã?®é\u20acšçŸ¥ã\u201a\u2019ç®¡ç?\u2020ã?™ã\u201a\u2039"},
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "ç·¨é\u203a\u2020ã?\u2014ã?Ÿé\u20acšçŸ¥"},
-                        "error": {"msg": "é\u20acšçŸ¥ã?®å¤\u2030æ\u203a´ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?Šã??ã\u201a\u2030ã??ã?\u201cã\u201aŒã?¯ä»\u2013ã?®èª°ã?\u2039ã?Œä½œæˆ?ã?\u2014ã?Ÿã?\u2039ã\u20ac?å­˜åœ¨ã?\u2014ã?ªã?\u201eã?®ã?§ã?¯ã?ªã?\u201eã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "æ\u2014¢å­˜ã?®é\u20acšçŸ¥ã\u201a\u2019æ\u203a´æ\u2013°ã?™ã\u201a\u2039"
-                  }
-               },
-               "twitch": {
-                  "CMDUpdate": {
-                     "response": {
-                        "success": {"msg": "ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã\u201a\u2019æ\u203a´æ\u2013°ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a"},
-                        "error": {"msg": "ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201cã?®IDã?®é\u20acšçŸ¥ã?¯å­˜åœ¨ã?\u2014ã?¾ã?™ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã\u201a\u2019æ\u203a´æ\u2013°ã?™ã\u201a\u2039"
-                  },
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "å\u2030Šé™¤ã?\u2022ã\u201aŒã?Ÿã\u201a¹ãƒˆãƒªãƒ¼ãƒ ã?®é\u20acšçŸ¥"},
-                        "error": {"msg": "ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã?®å\u2030Šé™¤ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201cã?®IDã?®é\u20acšçŸ¥ã?¯å­˜åœ¨ã?\u2014ã?¾ã?™ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã\u201a\u2019å\u2030Šé™¤ã?™ã\u201a\u2039"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "è¦?æ±\u201aã?\u2022ã\u201aŒã?Ÿã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã\u20ac\u201aè©\u2022ä¾¡å¾Œã\u20ac?ã?\u201cã\u201aŒã?¯æ¦\u201aè¦?ã?«è¡¨ç¤ºã?\u2022ã\u201aŒã?¾ã?™ã\u20ac\u201a"},
-                        "error": {"msg": "åˆ¥ã?®ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã?®è¦?æ±\u201aã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aURLã?¯æœ\u2030åŠ¹ã?§ã?™ã?\u2039ã\u20ac?ãƒ?ãƒ£ãƒ?ãƒ«ã?¯ã?™ã?§ã?«ã?\u201cã?®ãƒ?ãƒ£ãƒ?ãƒ«ã?®é\u20acšçŸ¥ã\u201a\u2019å?\u2014ä¿¡ã?\u2014ã?¦ã?\u201eã?¾ã?™ã?\u2039ã\u20ac?ã?¾ã?Ÿã?¯uã?¯åˆ¶é™?ã?«ãƒ\u2019ãƒƒãƒˆã?\u2014ã?¦ã?\u201eã?¾ã?™ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã\u201a\u2019è¦?æ±\u201aã?™ã\u201a\u2039"
-                  },
-                  "HYBRIDTwitch": {
-                     "response": {"success": {"title": "ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥"}},
-                     "description": "ã\u201a¹ãƒˆãƒªãƒ¼ãƒ é\u20acšçŸ¥ã?®ä½œæˆ?ã?¨ç®¡ç?\u2020ã\u20ac?ãƒªã\u201a¹ãƒˆåŒ\u2013"
-                  }
-               },
-               "last": {
-                  "GROUPLast": {"description": "å\u2030Šé™¤ã?¾ã?Ÿã?¯ç·¨é\u203a\u2020ã?\u2022ã\u201aŒã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019å¾©å\u2026ƒã?™ã\u201a\u2039"},
-                  "CMDEdited": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ID"},
-                              "2": {"title": "è\u2018\u2014è\u20ac\u2026"},
-                              "3": {"title": "å?¤ã?\u201eãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸"},
-                              "4": {"title": "ã\u201a¢ã\u201a¿ãƒƒãƒ?ãƒ¡ãƒ³ãƒˆ"}
-                           },
-                           "title": "ç·¨é\u203a\u2020ã?\u2014ã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019å¾©å\u2026ƒ"
-                        },
-                        "error": {"msg": "å¾©å\u2026ƒã?™ã\u201a\u2039ã?Ÿã\u201a?ã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?Œè¦\u2039ã?¤ã?\u2039ã\u201aŠã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     },
-                     "description": "ã?\u201cã?®ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?§ç·¨é\u203a\u2020ã?\u2022ã\u201aŒã?Ÿæœ\u20acå¾Œã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019å¾©å\u2026ƒã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  },
-                  "CMDDeleted": {
-                     "response": {
-                        "success": {
-                           "field": {
-                              "1": {"title": "ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ID"},
-                              "2": {"title": "è\u2018\u2014è\u20ac\u2026"},
-                              "3": {"title": "å?¤ã?\u201eãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸"},
-                              "4": {"title": "ã\u201a¢ã\u201a¿ãƒƒãƒ?ãƒ¡ãƒ³ãƒˆ"}
-                           },
-                           "title": "å\u2030Šé™¤ã?\u2022ã\u201aŒã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019å¾©å\u2026ƒ"
-                        },
-                        "error": {"msg": "å¾©å\u2026ƒã?™ã\u201a\u2039ã?Ÿã\u201a?ã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?Œè¦\u2039ã?¤ã?\u2039ã\u201aŠã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     },
-                     "description": "ã?\u201cã?®ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?§å\u2030Šé™¤ã?\u2022ã\u201aŒã?Ÿæœ\u20acå¾Œã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019å¾©å\u2026ƒã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  }
-               },
-               "admin": {
-                  "CMDEval": {"description": "ã\u201a³ãƒ¼ãƒ\u2030ã?®è©\u2022ä¾¡ã?«ä½¿ç\u201d¨ã?§ã??ã\u201a\u2039"},
-                  "CMDPing": {"description": "Discordã\u201a\u201eä»\u2013ã?®é\u20ac£æ?ºã\u201aµãƒ¼ãƒ\u201cã\u201a¹ã?¸ã?®pingã\u201a\u2019ç¢ºèª?ã?™ã\u201a\u2039ã?Ÿã\u201a?ã?«ä½¿ç\u201d¨ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?™ã\u20ac\u201a"},
-                  "CMDChatlog": {"description": "ç?¾åœ¨ã?®ã\u201a®ãƒ«ãƒ\u2030ã?«ã?\u201aã\u201a\u2039ç\u2030¹å®šã?®ãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?®æš\u2014å?·åŒ\u2013ã?\u2022ã\u201aŒã?Ÿã\u201a­ãƒ£ãƒƒã\u201a·ãƒ¥ã?\u2022ã\u201aŒã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?®ãƒ­ã\u201a°ã\u201a\u2019ã\u201a¨ã\u201a¯ã\u201a¹ãƒ?ãƒ¼ãƒˆã?™ã\u201a\u2039"},
-                  "CMDClientIdentify": {"description": "ãƒ?ãƒƒã\u201a¯ã\u201a¨ãƒ³ãƒ\u2030ã?®ã\u201a»ã\u201a«ãƒ³ãƒ\u20acãƒªã\u201a½ã\u201a±ãƒƒãƒˆã?«èª°ã?Œæ¥ç¶šã?\u2022ã\u201aŒã?¦ã?\u201eã\u201a\u2039ã?\u2039ã\u201a\u2019è?ã??"},
-                  "CMDD43Z1Stats": {"description": "å®Ÿè¡Œä¸­ã?®D43Z1ã\u201a¤ãƒ³ã\u201a¹ã\u201a¿ãƒ³ã\u201a¹ã?«é\u2013¢ã?™ã\u201a\u2039ã?\u201eã??ã?¤ã?\u2039ã?®æƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?™ã\u201a\u2039ã?Ÿã\u201a?ã?«ä½¿ç\u201d¨ã?§ã??ã?¾ã?™ã\u20ac\u201a"},
-                  "CMDGlobalInfo": {"description": "ãƒ?ãƒƒã\u201a¯ã\u201a¨ãƒ³ãƒ\u2030ã?®ã\u201a»ã\u201a«ãƒ³ãƒ\u20acãƒªã\u201a½ã\u201a±ãƒƒãƒˆã?«æ¥ç¶šã?\u2022ã\u201aŒã?¦ã?\u201eã\u201a\u2039å\u2026¨ã?¦ã?®ã\u201a¤ãƒ³ã\u201a¹ã\u201a¿ãƒ³ã\u201a¹ã?®çµ±è¨ˆæƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"},
-                  "CMDD43Z1": {"description": "ç?¾åœ¨ã?®D43Z1ã?®æ\u20ac§èƒ½è©\u2022ä¾¡ã?«ä½¿ç\u201d¨å?¯èƒ½"},
-                  "CMDInfo": {"description": "ã?\u201cã?®ãƒœãƒƒãƒˆã?«é\u2013¢ã?™ã\u201a\u2039çµ±è¨ˆæƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"},
-                  "GROUPAdmin": {"description": "é\u2013\u2039ç™ºè\u20ac\u2026ã?®ã?¿ã?Œåˆ©ç\u201d¨ã?§ã??ã\u201a\u2039ã\u201a³ãƒãƒ³ãƒ\u2030ã\u201a\u2019å?«ã\u201a\u20ac"}
-               },
-               "hastebin": {"CMDHastebin": {
-                  "response": {
-                     "success": {"msg": "ã?\u201cã\u201aŒã?Œã??ã?®æ\u201e?æ°\u2014è¾¼ã?¿"},
-                     "error": {"msg": "æ??ä¾\u203aã?\u2022ã\u201aŒã?Ÿãƒ\u2022ã\u201a¡ã\u201a¤ãƒ«ã?¯ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201c"}
-                  },
-                  "description": "æ·»ä»˜ãƒ\u2022ã\u201a¡ã\u201a¤ãƒ«ã\u201a\u2019 haste.hypercdn.de ã?«ã\u201a¢ãƒƒãƒ\u2014ãƒ­ãƒ¼ãƒ\u2030ã?\u2014ã?¾ã?™ã\u20ac\u201a"
-               }},
-               "anime": {
-                  "sfw": {
-                     "CMDCry": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% æ³£ã??",
-                              "1": "%1% ä½œã\u201a\u2030ã\u201aŒã?Ÿ %0% ã\u201a¯ãƒ©ã\u201a¤"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ä½\u2022ã?\u2039ã?«ã?¤ã?\u2018ã?¦æ³£ã??"
-                     },
-                     "CMDKitsune": {
-                        "response": {
-                           "success": {"msg": {"0": "ã?Šå¾\u2026ã?Ÿã?\u203aã?\u2014ã?¾ã?\u2014ã?Ÿ"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDHolo": {
-                        "response": {
-                           "success": {"msg": {"0": "ãƒ\u203aãƒ­ã?®ã\u201aˆã?\u2020ã?ªã\u201a\u201aã?®:"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ãƒ\u203aãƒ­ã?£ã?¦è¨\u20acã?£ã?Ÿã?£ã?\u2018ï¼Ÿ"
-                     },
-                     "CMDOokami": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDTail": {
-                        "response": {
-                           "success": {"msg": {"0": "ã?µã\u201a?ã?µã\u201a?ã?®å°»å°¾ :3"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDEevee": {
-                        "response": {
-                           "success": {"msg": {"0": "ã\u201a¤ãƒ¼ãƒ\u2013ã\u201a¤!"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ã\u201a¤ãƒ¼ãƒ\u2013ã\u201a¤?"
-                     },
-                     "CMDTickle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% ã??ã?™ã??ã?£ã?Ÿã?\u201e",
-                              "1": "%1% ã?«ã??ã?™ã??ã\u201a\u2030ã\u201aŒã\u201a\u2039 %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019ã??ã?™ã??ã\u201a\u2039"
-                     },
-                     "CMDBlush": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% ãƒ?ãƒ¼ã\u201a¯",
-                              "1": "%0% ã?®ã?Ÿã\u201a?ã?«èµ¤é?¢ã?™ã\u201a\u2039 %1%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã?®ã?\u203aã?\u201eã?§è\u2014ªã?®ä¸­"
-                     },
-                     "CMDSlap": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% å?©ã??ã?¾ã??ã\u201a\u2039",
-                              "1": "%1% ã?«å?©ã?\u2039ã\u201aŒã?Ÿ %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019å?©ã??"
-                     },
-                     "CMDFluff": {
-                        "response": {
-                           "success": {"msg": {"0": "ã?¨ã?¦ã\u201a\u201aã?µã\u201a?ã?µã\u201a?ã?\u2014ã?¦ã?\u201eã\u201a\u2039 :3"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ãƒ\u2022ãƒ¯ãƒ\u2022ãƒ¯"
-                     },
-                     "CMDKiss": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% ã\u201a­ã\u201a¹ã\u201a\u2019é\u2026?ã\u201a\u2039",
-                              "1": "%0% ã\u201a­ã\u201a¹ %1% OwO"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã?«ã\u201a­ã\u201a¹ã\u201a\u2019ã?™ã\u201a\u2039"
-                     },
-                     "CMDHug": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% æŠ±ã??ã?\u2014ã\u201a?ã?Ÿã?\u201e",
-                              "1": "%0% ãƒ?ã\u201a° %1%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019æŠ±ã??ã?\u2014ã\u201a?ã\u201a\u2039"
-                     },
-                     "CMDSmile": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% ç¬\u2018ã\u201a?ã?ªã??ã\u201aƒ :)",
-                              "1": "%1% ä½œã\u201a\u2030ã\u201aŒã?Ÿ  %0% ã\u201a¹ãƒã\u201a¤ãƒ« :)"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã?«å¾®ç¬\u2018ã\u201a\u20ac"
-                     },
-                     "CMDBite": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% å™\u203aã?¿ã?¤ã??",
-                              "1": "%1% ã?«å™\u203aã?¾ã\u201aŒã\u201a\u2039ã\u20ac\u201a %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019å™\u203aã\u201a\u20ac(ã?Šã\u201a\u201eã?¤ã?\u2039ã\u201a\u201aã?\u2014ã\u201aŒã?ªã?\u201e)"
-                     },
-                     "CMDLick": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% èª°ã?\u2039ã\u201a\u2019ã?ªã\u201a?ã\u201aˆã?\u2020ã?¨ã?™ã\u201a\u2039",
-                              "1": "%0% èˆ?ã\u201a?ã\u201a\u2039 %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019ã?ªã\u201a?ã\u201a\u2039"
-                     },
-                     "CMDPat": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% æ\u2019«ã?§ã\u201a\u2039",
-                              "1": "%1% ã?®ãƒ˜ãƒƒãƒ\u2030ãƒ\u2018ãƒƒãƒˆã\u201a\u2019å?\u2014ã?\u2018ã?¦ã?\u201eã?¾ã?™ %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã?®é ­ã\u201a\u2019æ\u2019«ã?§ã\u201a\u2039"
-                     },
-                     "CMDPoke": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% è¦\u2014ã?\u201eã?¦ã?¿ã\u201a\u2039",
-                              "1": "%1% ã?«çª?ã?\u2039ã\u201aŒã\u201a\u2039 %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019çª?ã??"
-                     },
-                     "CMDCuddle": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% æŠ±ã?£ã?\u201cã?\u2014ã?Ÿã?\u201e",
-                              "1": "%1% ã?«æŠ±ã?\u2039ã\u201aŒã\u201a\u2039 %0%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã\u201a\u2019æŠ±ã??ã?\u2014ã\u201a?ã\u201a\u2039"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": ":3"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": ":3"
-                     },
-                     "CMDDance": {
-                        "response": {
-                           "success": {"msg": {"0": "%0% ãƒ\u20acãƒ³ã\u201a¹"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ãƒ\u20acãƒ³ã\u201a¹!"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": "UwU"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ãƒ©ãƒ³ãƒ\u20acãƒ ç\u201d»åƒ?"
-                     },
-                     "CMDFeed": {
-                        "response": {
-                           "success": {"msg": {
-                              "0": "%0% ç¾å\u2018³ã?\u2014ã?\u201eã\u201a\u201aã?®ã\u201a\u2019é£Ÿã?¹ã\u201a\u2039",
-                              "1": "%0% ã?§é£Ÿã?¹ç\u2030©ã\u201a\u2019å\u2026±æœ\u2030ã?\u2014ã?¦ã?\u201eã?¾ã?™ %1%"
-                           }},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "èª°ã?\u2039ã?«é£Ÿã?¹ã?\u2022ã?\u203aã\u201a\u2039"
-                     },
-                     "CMDSenko": {
-                        "response": {
-                           "success": {"msg": {"0": "_ã\u201a»ãƒ³ã\u201a³ãƒ¼ã?®éŸ³_"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": ":3"
-                     }
-                  },
-                  "nsfw": {
-                     "CMDThreesome_FFM": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDYuri": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDPussylick": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDBlowjob": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDCum": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDYaoi": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDSolo": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDAnal": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDFuck": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDThreesome_FFF": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDThreesome_MMF": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDNeko": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "-NSFWã\u201a³ãƒ³ãƒ\u2020ãƒ³ãƒ\u201e-"
-                     },
-                     "CMDRandom": {
-                        "response": {
-                           "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                           "error": {
-                              "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                              "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                           }
-                        },
-                        "description": "ãƒ©ãƒ³ãƒ\u20acãƒ ç\u201d»åƒ?"
-                     }
-                  },
-                  "GROUPAnime": {"description": "ã\u201a¢ãƒ\u2039ãƒ¡ã\u201a\u2019ãƒ\u2020ãƒ¼ãƒã?«ã?\u2014ã?Ÿæ§˜ã\u20ac\u2026ã?ªã\u201a³ãƒãƒ³ãƒ\u2030ã\u201a\u2019å?éŒ²"}
-               },
-               "tags": {
-                  "CMDDelete": {
-                     "response": {
-                        "success": {"msg": "ã\u201a¿ã\u201a° %0% å\u2030Šé™¤"},
-                        "error": {"msg": "ã\u201a¿ã\u201a°ã?®å\u2030Šé™¤ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201aã?ªã?Ÿã?¯ã\u201aªãƒ¼ãƒŠãƒ¼ã?§ã?\u201aã\u201aŠã\u20ac?ã\u201a¿ã\u201a°ã?¯å­˜åœ¨ã?\u2014ã?¾ã?™ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "æ\u2014¢å­˜ã?®ã\u201a¿ã\u201a°ã\u201a\u2019å\u2030Šé™¤ã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  },
-                  "CMDCreate": {
-                     "response": {
-                        "success": {"msg": "ã\u201a¿ã\u201a° %0% ã?Œä½œæˆ?ã?\u2022ã\u201aŒã?¾ã?\u2014ã?Ÿã\u20ac\u201a"},
-                        "error": {"msg": "ã\u201a¿ã\u201a°ã?®ä½œæˆ?ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     },
-                     "description": "æŒ\u2021å®šã?\u2014ã?Ÿã\u201a¿ã\u201a°å??ã?¨å\u2020\u2026å®¹ã\u201a\u2019æŒ?ã?¤æ\u2013°ã?\u2014ã?\u201eã\u201a¿ã\u201a°ã\u201a\u2019ä½œæˆ?ã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  },
-                  "HYBRIDTag": {
-                     "response": {
-                        "success": {"msg": "%0%\n\n*ã?«ã\u201aˆã?£ã?¦ä½œæˆ?ã?\u2022ã\u201aŒã?Ÿã\u201a¿ã\u201a° %1%*"},
-                        "error": {"msg": "ã\u201a¿ã\u201a° %0% ã?Œè¦\u2039ã?¤ã?\u2039ã\u201aŠã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     },
-                     "description": "ã?\u201cã?®ã\u201a®ãƒ«ãƒ\u2030ã?®ã\u201a¿ã\u201a°ã\u201a\u2019ä½œæˆ?ã\u20ac?ç®¡ç?\u2020ã\u20ac?ä½¿ç\u201d¨ã?™ã\u201a\u2039"
-                  },
-                  "CMDModify": {
-                     "response": {
-                        "success": {"msg": "ã\u201a¿ã\u201a° %0% æ\u203a´æ\u2013°"},
-                        "error": {"msg": "ã\u201a¿ã\u201a°ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201aã?ªã?Ÿã?¯æ\u2030\u20acæœ\u2030è\u20ac\u2026ã?§ã?\u201aã\u201aŠã\u20ac?ã\u201a¿ã\u201a°ã?¯å­˜åœ¨ã?\u2014ã?¾ã?™ã?\u2039ï¼Ÿ"}
-                     },
-                     "description": "ä¸ã?ˆã\u201a\u2030ã\u201aŒã?Ÿã\u201a¿ã\u201a°ã\u201a\u2019æ\u2013°ã?\u2014ã?\u201eå\u2020\u2026å®¹ã?§å¤\u2030æ\u203a´ã?\u2014ã?¾ã?™ã\u20ac\u201a"
-                  }
-               },
-               "info": {"CMDInfo": {
-                  "response": {
-                     "field": {
-                        "3": {"title": "ç?¾åœ¨ã?®ã\u201a·ãƒ£ãƒ¼ãƒ\u2030"},
-                        "4": {"title": "ã\u201a¤ãƒ³ã\u201a¹ã\u201a¿ãƒ³ã\u201a¹"},
-                        "5": {"title": "å ´æ\u2030\u20ac"},
+                        "error": {"msg": "å¾©å…ƒã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚‰ãªã„"}
+                    }}
+                },
+                "notificationn": {"CMDList": {"description": "æ—¢å­˜ã®é€šçŸ¥ã®è¡¨ç¤º"}},
+                "tag": {
+                    "RCMDTag": {"response": {
+                        "success": {"msg": "%0%\n\n*ã‚¿ã‚°ã®ä½œæˆ %1%*"},
+                        "error": {"msg": "ã‚¿ã‚° %0% ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚"}
+                    }},
+                    "s": {
+                        "CMDDelete": {"response": {
+                            "success": {"msg": "ã‚¿ã‚° %0% å‰Šé™¤"},
+                            "error": {"msg": "ã‚¿ã‚°ã®å‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚ãªãŸãŒã‚ªãƒ¼ãƒŠãƒ¼ã§ã€ãã®ã‚¿ã‚°ã¯å­˜åœ¨ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                        }},
+                        "CMDCreate": {"response": {
+                            "success": {"msg": "ã‚¿ã‚° %0% ä½œæˆã•ã‚ŒãŸ"},
+                            "error": {"msg": "ã‚¿ã‚°ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ"}
+                        }},
+                        "CMDModify": {"response": {
+                            "success": {"msg": "ã‚¿ã‚°%0% æ›´æ–°"},
+                            "error": {"msg": "ã‚¿ã‚°ã®æ›´æ–°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚ãªãŸãŒã‚ªãƒ¼ãƒŠãƒ¼ã§ã€ãã®ã‚¿ã‚°ã¯å­˜åœ¨ã—ã¦ã„ã¾ã™ã‹ï¼Ÿ"}
+                        }}
+                    }
+                },
+                "anime": {
+                    "nsfw": {
+                        "CMDCum": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDYuri": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDYaoi": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDPussylick": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDSolo": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDAnal": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDFuck": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDBlowjob": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDNeko": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDRandom": {"response": {
+                            "success": {"msg": {"0": ":C"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }}
+                    },
+                    "sfw": {
+                        "CMDCry": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% æ³£ã",
+                                "1": "%1%ã¯%0%ã‚’æ³£ã‹ã›ãŸ"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDTickle": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% ãã™ãã£ãŸã„",
+                                "1": "%1% ã«ãã™ãã‚‰ã‚Œã‚‹ã€‚ %0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDBlush": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% ãƒãƒ¼ã‚¯",
+                                "1": "%0% ã®ãŸã‚ã«èµ¤é¢ã™ã‚‹ã€‚ %1%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDSlap": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% å©ãã¾ãã‚‹",
+                                "1": "%1% ã«å©ã‹ã‚ŒãŸã€‚ %0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDKiss": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% ã‚­ã‚¹ã‚’é…ã‚‹",
+                                "1": "%0% ã‚­ã‚¹ %1% OwO"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDHug": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% æŠ±ãã—ã‚ãŸã„",
+                                "1": "%0% ãƒã‚° %1%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDSmile": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% ç¬‘ã‚ãªãã‚ƒ :)",
+                                "1": "%1% ä½œã‚‰ã‚ŒãŸ %0% ã‚¹ãƒã‚¤ãƒ« :)"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDBite": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% å™›ã¿ã¤ã",
+                                "1": "%1% ã«å™›ã¾ã‚Œã‚‹ã€‚%0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDLick": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% èª°ã‹ã‚’ãªã‚ã‚ˆã†ã¨ã™ã‚‹",
+                                "1": "%0% èˆã‚ã‚‹ %0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDPat": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% æ’«ã§ã‚‹",
+                                "1": "%1% ã®ãƒ˜ãƒƒãƒ‰ãƒ‘ãƒƒãƒˆã‚’å—ã‘ã¦ã„ã¾ã™ã€‚%0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDPoke": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% è¦—ã„ã¦ã¿ã‚‹",
+                                "1": "%1% ã«çªã‹ã‚Œã‚‹ã€‚%0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDCuddle": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% æŠ±ã£ã“ã—ãŸã„",
+                                "1": "%1% ã«æŠ±ã‹ã‚Œã‚‹ã€‚%0%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDNeko": {"response": {
+                            "success": {"msg": {"0": ":3"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDDance": {"response": {
+                            "success": {"msg": {"0": "%0% ãƒ€ãƒ³ã‚¹"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDFeed": {"response": {
+                            "success": {"msg": {
+                                "0": "%0% ç¾å‘³ã—ã„ã‚‚ã®ã‚’é£Ÿã¹ã‚‹",
+                                "1": "%0% ã§é£Ÿã¹ç‰©ã‚’å…±æœ‰ã—ã¦ã„ã¾ã™ã€‚%1%"
+                            }},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }},
+                        "CMDRandom": {"response": {
+                            "success": {"msg": {"0": "ãŠå¾…ãŸã›ã—ã¾ã—ãŸã€‚"}},
+                            "error": {
+                                "msg": "ä½•ã‹ãŒé–“é•ã£ã¦ã„ãŸ",
+                                "img": {"msg": "ç”³ã—è¨³ã‚ã‚Šã¾ã›ã‚“ãŒã€ã”å¸Œæœ›ã®ç”»åƒã‚’å–å¾—ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"}
+                            }
+                        }}
+                    }
+                },
+                "info": {"RCMDInfo": {"response": {
+                    "field": {
+                        "3": {"title": "ç¾åœ¨ã®Shard"},
+                        "4": {"title": "ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹"},
+                        "5": {"title": "æ‰€åœ¨åœ°"},
                         "6": {
-                           "title": "ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆ",
-                           "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
+                            "title": "ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆ",
+                            "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
                         },
                         "7": {
-                           "title": "ãƒ\u2021ãƒ¼ã\u201a¿å\u2021¦ç?\u2020",
-                           "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
+                            "title": "ãƒ‡ãƒ¼ã‚¿å‡¦ç†",
+                            "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
                         },
                         "8": {
-                           "title": "å ±å\u2018Šå\u2020\u2026å®¹",
-                           "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
+                            "title": "ãƒ¬ãƒãƒ¼ãƒˆå†…å®¹",
+                            "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
                         },
                         "9": {
-                           "title": "é\u20ac£çµ¡å\u2026ˆ",
-                           "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
+                            "title": "é€£çµ¡å…ˆ",
+                            "link_text": "[ã‚¦ã‚§ãƒ–ã‚µã‚¤ãƒˆã‚’è¦‹ã‚‹](%0%)"
                         }
-                     },
-                     "title": "æƒ\u2026å ±"
-                  },
-                  "description": "ç§?ã?«ã?¤ã?\u201eã?¦ã?®åŸºæœ¬çš\u201eã?ªæƒ\u2026å ±ã\u201a\u2019è¡¨ç¤ºã?\u2014ã?¾ã?™ã\u20ac\u201a"
-               }}
-            }
-         },
-         "slash": {"structure": {
-            "notification": {
-               "CMDList": {"response": {"title": "ã?ŠçŸ¥ã\u201a\u2030ã?\u203a"}},
-               "CMDCreate": {"response": {
-                  "success": {"msg": "é\u20acšçŸ¥ã?®ä½œæˆ? (ID: %0% | %1%)"},
-                  "error": {"msg": "é\u20acšçŸ¥ã?®ä½œæˆ?ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã\u201a­ãƒ£ãƒƒã\u201a·ãƒ¥ã?Œã?\u201eã?£ã?±ã?\u201eã?«ã?ªã?£ã?¦ã?\u201eã\u201a\u2039ã?®ã?§ã?¯ï¼Ÿ"}
-               }},
-               "CMDDelete": {"response": {
-                  "success": {"msg": "é\u20acšçŸ¥(ID: %0%)ã?®å\u2030Šé™¤"},
-                  "error": {"msg": "é\u20acšçŸ¥ã?®å\u2030Šé™¤ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201cã\u201aŒã?¯èª°ã?\u2039ã?Œä½œã?£ã?Ÿã\u201a\u201aã?®ã?\u2039ã\u20ac?å­˜åœ¨ã?\u2014ã?ªã?\u201eã\u201a\u201aã?®ã?ªã?®ã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-               }},
-               "CMDModify": {
-                  "response": {
-                     "success": {"msg": "é\u20acšçŸ¥ã?®ç·¨é\u203a\u2020"},
-                     "error": {"msg": "é\u20acšçŸ¥ã?®å¤\u2030æ\u203a´ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201cã\u201aŒã?¯ä»\u2013ã?®äººã?Œä½œæˆ?ã?\u2014ã?Ÿã\u201a\u201aã?®ã?\u2039ã\u20ac?å­˜åœ¨ã?\u2014ã?ªã?\u201eã\u201a\u201aã?®ã?ªã?®ã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-                  },
-                  "description": "æ\u2014¢å­˜ã?®é\u20acšçŸ¥ã?®æ\u203a´æ\u2013°"
-               }
+                    },
+                    "title": "æƒ…å ±"
+                }}}
+            }}
+        }}}}},
+        "default": {
+            "onMissingBotPerms": {
+                "description": "ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ãŒä¸è¶³ã—ã¦ã„ã‚‹ãŸã‚ã€ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚",
+                "title": "å¤±æ•—ã—ã¾ã—ãŸã€‚ãƒœãƒƒãƒˆã«ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ãŒãªã„",
+                "requiredPerms": {"fn": "å¿…è¦ãªãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³:"}
             },
-            "last": {
-               "CMDEdited": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ID"},
-                        "2": {"title": "è\u2018\u2014è\u20ac\u2026"},
-                        "3": {"title": "å?¤ã?\u201eãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸"},
-                        "4": {"title": "ã\u201a¢ã\u201a¿ãƒƒãƒ?ãƒ¡ãƒ³ãƒˆ"}
-                     },
-                     "title": "ç·¨é\u203a\u2020ã?\u2014ã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?®å¾©å\u2026ƒ"
-                  },
-                  "error": {"msg": "å¾©å\u2026ƒã?™ã\u201a\u2039ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?Œè¦\u2039ã?¤ã?\u2039ã\u201a\u2030ã?ªã?\u201e"}
-               }},
-               "CMDDeleted": {"response": {
-                  "success": {
-                     "field": {
-                        "1": {"title": "ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ID"},
-                        "2": {"title": "è\u2018\u2014è\u20ac\u2026"},
-                        "3": {"title": "å?¤ã?\u201eãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸"},
-                        "4": {"title": "ã\u201a¢ã\u201a¿ãƒƒãƒ?ãƒ¡ãƒ³ãƒˆ"}
-                     },
-                     "title": "å\u2030Šé™¤ã?\u2022ã\u201aŒã?Ÿãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?®å¾©å\u2026ƒ"
-                  },
-                  "error": {"msg": "å¾©å\u2026ƒã?™ã\u201a\u2039ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã?Œè¦\u2039ã?¤ã?\u2039ã\u201a\u2030ã?ªã?\u201e"}
-               }}
+            "onMissingMemberPerms": {
+                "description": "ã“ã‚“ãªã“ã¨ã‚’ã—ã¦ã¯ã„ã‘ãªã„ï¼ã€ã¨æ€ã£ã¦ã„ã¾ã™ã€‚",
+                "title": "å¤±æ•—ã—ã¾ã—ãŸã€‚ååˆ†ãªãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ãŒãªã„",
+                "requiredPerms": {"fn": "å¿…è¦ãªãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³:"}
             },
-            "notificationn": {"CMDList": {"description": "æ\u2014¢å­˜ã?®é\u20acšçŸ¥ã?®è¡¨ç¤º"}},
-            "tag": {
-               "RCMDTag": {"response": {
-                  "success": {"msg": "%0%\n\n*ã\u201a¿ã\u201a°ã?®ä½œæˆ? %1%*"},
-                  "error": {"msg": "ã\u201a¿ã\u201a° %0% ã?Œè¦\u2039ã?¤ã?\u2039ã\u201aŠã?¾ã?\u203aã\u201a\u201cã\u20ac\u201a"}
-               }},
-               "s": {
-                  "CMDDelete": {"response": {
-                     "success": {"msg": "ã\u201a¿ã\u201a° %0% å\u2030Šé™¤"},
-                     "error": {"msg": "ã\u201a¿ã\u201a°ã?®å\u2030Šé™¤ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201aã?ªã?Ÿã?Œã\u201aªãƒ¼ãƒŠãƒ¼ã?§ã\u20ac?ã??ã?®ã\u201a¿ã\u201a°ã?¯å­˜åœ¨ã?\u2014ã?¦ã?\u201eã?¾ã?™ã?\u2039ï¼Ÿ"}
-                  }},
-                  "CMDCreate": {"response": {
-                     "success": {"msg": "ã\u201a¿ã\u201a° %0% ä½œæˆ?ã?\u2022ã\u201aŒã?Ÿ"},
-                     "error": {"msg": "ã\u201a¿ã\u201a°ã?®ä½œæˆ?ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿ"}
-                  }},
-                  "CMDModify": {"response": {
-                     "success": {"msg": "ã\u201a¿ã\u201a° %0% ã?®æ\u203a´æ\u2013°"},
-                     "error": {"msg": "ã\u201a¿ã\u201a°ã?®æ\u203a´æ\u2013°ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã?\u201aã?ªã?Ÿã?Œã\u201aªãƒ¼ãƒŠãƒ¼ã?§ã\u20ac?ã??ã?®ã\u201a¿ã\u201a°ã?¯å­˜åœ¨ã?\u2014ã?¦ã?\u201eã?¾ã?™ã?\u2039ï¼Ÿ"}
-                  }}
-               }
+            "onError": {"title": "ã‚¨ãƒ©ãƒ¼"},
+            "onAdminPerms": {
+                "description": "ç§ã¯ç®¡ç†è€…æ¨©é™ã‚’æŒã£ã¦ã„ã‚‹ã‚ˆã†ã§ã™ã€‚ã“ã‚Œã¯ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ä¸Šã®ãƒªã‚¹ã‚¯ãŒã‚ã‚‹ãŸã‚ã€å¼·ããŠå‹§ã‚ã§ãã¾ã›ã‚“ã€‚ç§ã®ä»•äº‹ã«å¿…è¦ãªæ¨©é™ã®ã¿ã‚’å‰²ã‚Šå½“ã¦ã¦ãã ã•ã„ã€‚\n\nèª¤ã£ã¦ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ãŒå‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸå ´åˆã¯ã€ç§ã‚„ç§ã«å‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸãƒ­ãƒ¼ãƒ«ã‹ã‚‰ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³ã‚’å‰Šé™¤ã—ã¦ãã ã•ã„ã€‚\nã“ã®ã‚ˆã†ãªæ„å›³ãŒã‚ã‚‹å ´åˆã¯ã€ç§ã®BOT_IGNORE_ADMIN_PERMSã®è¨­å®šã‚’å¤‰æ›´ã—ã¦ã€ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ç„¡åŠ¹ã«ã—ã¦ãã ã•ã„ã€‚",
+                "title": "è­¦å‘Š ãƒœãƒƒãƒˆãŒç®¡ç†è€…æ¨©é™ã‚’æŒã£ã¦ã„ã‚‹"
             },
-            "anime": {
-               "nsfw": {
-                  "CMDCum": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDYuri": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDYaoi": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDPussylick": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDSolo": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDAnal": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDFuck": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDBlowjob": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": "(Â¬â\u20ac¿Â¬)"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "UwU"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }}
-               },
-               "sfw": {
-                  "CMDCry": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% æ³£ã??",
-                        "1": "%1% ä½œã\u201a\u2030ã\u201aŒã?Ÿ %0% ã\u201a¯ãƒ©ã\u201a¤"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDTickle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% ã??ã?™ã??ã?£ã?Ÿã?\u201e",
-                        "1": "%1% ã?«ã??ã?™ã??ã\u201a\u2030ã\u201aŒã\u201a\u2039 %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDBlush": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% ãƒ?ãƒ¼ã\u201a¯",
-                        "1": "%0% ã?®ã?Ÿã\u201a?ã?«èµ¤é?¢ã?™ã\u201a\u2039 %1%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDSlap": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% å?©ã??ã?¾ã??ã\u201a\u2039",
-                        "1": "%1% ã?«å?©ã?\u2039ã\u201aŒã?Ÿ %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDKiss": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% ã\u201a­ã\u201a¹ã\u201a\u2019é\u2026?ã\u201a\u2039",
-                        "1": "%0% ã\u201a­ã\u201a¹ %1% OwO"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDHug": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% æŠ±ã??ã?\u2014ã\u201a?ã?Ÿã?\u201e",
-                        "1": "%0% ãƒ?ã\u201a° %1%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDSmile": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% ç¬\u2018ã\u201a?ã?ªã??ã\u201aƒ :)",
-                        "1": "%1% ä½œã\u201a\u2030ã\u201aŒã?Ÿ  %0% ã\u201a¹ãƒã\u201a¤ãƒ« :)"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDBite": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% å™\u203aã?¿ã?¤ã??",
-                        "1": "%1% ã?«å™\u203aã?¾ã\u201aŒã\u201a\u2039ã\u20ac\u201a %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDLick": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% èª°ã?\u2039ã\u201a\u2019ã?ªã\u201a?ã\u201aˆã?\u2020ã?¨ã?™ã\u201a\u2039",
-                        "1": "%0% èˆ?ã\u201a?ã\u201a\u2039 %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDPat": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% æ\u2019«ã?§ã\u201a\u2039",
-                        "1": "%1% ã?®ãƒ˜ãƒƒãƒ\u2030ãƒ\u2018ãƒƒãƒˆã\u201a\u2019å?\u2014ã?\u2018ã?¦ã?\u201eã?¾ã?™ %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDPoke": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% è¦\u2014ã?\u201eã?¦ã?¿ã\u201a\u2039",
-                        "1": "%1% ã?«çª?ã?\u2039ã\u201aŒã\u201a\u2039 %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDCuddle": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% æŠ±ã?£ã?\u201cã?\u2014ã?Ÿã?\u201e",
-                        "1": "%1% ã?«æŠ±ã?\u2039ã\u201aŒã\u201a\u2039 %0%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDNeko": {"response": {
-                     "success": {"msg": {"0": ":3"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDDance": {"response": {
-                     "success": {"msg": {"0": "%0% ãƒ\u20acãƒ³ã\u201a¹"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDFeed": {"response": {
-                     "success": {"msg": {
-                        "0": "%0% ç¾å\u2018³ã?\u2014ã?\u201eã\u201a\u201aã?®ã\u201a\u2019é£Ÿã?¹ã\u201a\u2039",
-                        "1": "%0% ã?§é£Ÿã?¹ç\u2030©ã\u201a\u2019å\u2026±æœ\u2030ã?\u2014ã?¦ã?\u201eã?¾ã?™ %1%"
-                     }},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }},
-                  "CMDRandom": {"response": {
-                     "success": {"msg": {"0": "UwU"}},
-                     "error": {
-                        "msg": "ä½\u2022ã?\u2039ã?Œé\u2013\u201cé?\u2022ã?£ã?¦ã?\u201eã?Ÿ",
-                        "img": {"msg": "ç\u201d³ã?\u2014è¨³ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã?Œã\u20ac?ã?\u201då¸Œæœ\u203aã?®ç\u201d»åƒ?ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?\u201cã?¨ã?Œã?§ã??ã?¾ã?\u203aã\u201a\u201cã?§ã?\u2014ã?Ÿã\u20ac\u201a"}
-                     }
-                  }}
-               }
+            "onUnhandledException": {
+                "exception": {"msg": "ä½•ã‹æ‚ªã„ã“ã¨ãŒèµ·ããŸã®ã‹ã€ãã‚ŒãŒä½•ãªã®ã‹ã¯ã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å°‘ã—æ™‚é–“ã‚’ãŠã„ã¦ã‹ã‚‰ã€å†åº¦ãŠè©¦ã—ãã ã•ã„ã€‚ãã‚Œã§ã‚‚ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯ã€ãŠå•ã„åˆã‚ã›ãã ã•ã„ã€‚"},
+                "cacheexception": {"msg": "å¿…è¦ãªãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹ãŸã‚ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã«ä½•ã‚‰ã‹ã®ç†ç”±ã§å¤±æ•—ã—ã¾ã—ãŸ(%0%)ã€‚å°‘ã—æ™‚é–“ã‚’ãŠã„ã¦ã‹ã‚‰ã€å†åº¦ãŠè©¦ã—ãã ã•ã„ã€‚ãã‚Œã§ã‚‚ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯ã€ãŠå•ã„åˆã‚ã›ãã ã•ã„ã€‚"},
+                "backendexception": {"msg": "ãƒãƒƒã‚¯ã‚¨ãƒ³ãƒ‰ã¨ã®é€šä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸ(%0%)ã€‚å°‘ã—æ™‚é–“ã‚’ãŠã„ã¦ã‹ã‚‰ã€å†åº¦ãŠè©¦ã—ãã ã•ã„ã€‚ãã‚Œã§ã‚‚ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯ã€ãŠå•ã„åˆã‚ã›ãã ã•ã„ã€‚"},
+                "dataexception": {"msg": "å¿…è¦ãªãƒ‡ãƒ¼ã‚¿ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã«ä½•ã‚‰ã‹ã®ç†ç”±ã§å¤±æ•—ã—ã¾ã—ãŸ(%0%)ã€‚å°‘ã—æ™‚é–“ã‚’ãŠã„ã¦ã‹ã‚‰ã€å†åº¦ãŠè©¦ã—ãã ã•ã„ã€‚ãã‚Œã§ã‚‚ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯ã€ãŠå•ã„åˆã‚ã›ãã ã•ã„ã€‚"},
+                "title": "ãŠã£ã¨"
             },
-            "info": {"RCMDInfo": {"response": {
-               "field": {
-                  "3": {"title": "ç?¾åœ¨ã?®ã\u201a·ãƒ£ãƒ¼ãƒ\u2030"},
-                  "4": {"title": "ã\u201a¤ãƒ³ã\u201a¹ã\u201a¿ãƒ³ã\u201a¹"},
-                  "5": {"title": "æ\u2030\u20acåœ¨åœ°"},
-                  "6": {
-                     "title": "ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆ",
-                     "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
-                  },
-                  "7": {
-                     "title": "ãƒ\u2021ãƒ¼ã\u201a¿å\u2021¦ç?\u2020",
-                     "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
-                  },
-                  "8": {
-                     "title": "ãƒ¬ãƒ?ãƒ¼ãƒˆå\u2020\u2026å®¹",
-                     "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
-                  },
-                  "9": {
-                     "title": "é\u20ac£çµ¡å\u2026ˆ",
-                     "link_text": "[ã\u201a¦ã\u201a§ãƒ\u2013ã\u201aµã\u201a¤ãƒˆã\u201a\u2019è¦\u2039ã\u201a\u2039](%0%)"
-                  }
-               },
-               "title": "æƒ\u2026å ±"
-            }}}
-         }}
-      }}}}},
-      "default": {
-         "onMissingBotPerms": {
-            "description": "ãƒ\u2018ãƒ¼ãƒŸãƒƒã\u201a·ãƒ§ãƒ³ã?Œä¸?è¶³ã?\u2014ã?¦ã?\u201eã?¦ã\u201a³ãƒãƒ³ãƒ\u2030ã\u201a\u2019å®Ÿè¡Œã?§ã??ã?¾ã?\u203aã\u201a\u201c!",
-            "title": "å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aãƒœãƒƒãƒˆã?Œè¨±å?¯ã\u201a\u2019å¾\u2014ã\u201a\u2030ã\u201aŒã?ªã?\u201e",
-            "requiredPerms": {"fn": "å¿\u2026è¦?ã?ªãƒ\u2018ãƒ¼ãƒŸãƒƒã\u201a·ãƒ§ãƒ³"}
-         },
-         "onMissingMemberPerms": {
-            "description": "ã?\u201cã\u201a\u201cã?ªã?\u201cã?¨ã\u201a\u2019ã?\u2014ã?¦ã?¯ã?\u201eã?\u2018ã?ªã?\u201eï¼?ã\u20ac?ã?¨æ\u20ac?ã?£ã?¦ã?\u201eã\u201a\u2039äººã\u201a\u201aã?\u201eã\u201a\u2039ã?®ã?§ã?¯ã?ªã?\u201eã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ",
-            "title": "å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aè¨±å?¯ã?Œå??åˆ\u2020ã?§ã?¯ã?\u201aã\u201aŠã?¾ã?\u203aã\u201a\u201cã\u20ac\u201a",
-            "requiredPerms": {"fn": "å¿\u2026è¦?ã?ªè¨±å?¯"}
-         },
-         "onError": {"title": "ã\u201a¨ãƒ©ãƒ¼"},
-         "onAdminPerms": {
-            "description": "ç§?ã?¯ç®¡ç?\u2020è\u20ac\u2026æ¨©é™?ã\u201a\u2019æŒ?ã?£ã?¦ã?\u201eã\u201a\u2039ã\u201aˆã?\u2020ã?§ã?™ã\u20ac\u201aã?\u201cã\u201aŒã?¯ã\u201a»ã\u201a­ãƒ¥ãƒªãƒ\u2020ã\u201a£ä¸Šã?®ãƒªã\u201a¹ã\u201a¯ã?Œã?\u201aã\u201a\u2039ã?Ÿã\u201a?ã\u20ac?å¼·ã??ã?Šå\u2039§ã\u201a?ã?§ã??ã?¾ã?\u203aã\u201a\u201cã\u20ac\u201aç§?ã?®ä»\u2022äº\u2039ã?«å¿\u2026è¦?ã?ªæ¨©é™?ã?®ã?¿ã\u201a\u2019å\u2030²ã\u201aŠå½\u201cã?¦ã?¦ã??ã? ã?\u2022ã?\u201eã\u20ac\u201a\n\nèª¤ã?£ã?¦ãƒ\u2018ãƒ¼ãƒŸãƒƒã\u201a·ãƒ§ãƒ³ã?Œå\u2030²ã\u201aŠå½\u201cã?¦ã\u201a\u2030ã\u201aŒã?Ÿå ´å?ˆã?¯ã\u20ac?ç§?ã\u201a\u201eç§?ã?«å\u2030²ã\u201aŠå½\u201cã?¦ã\u201a\u2030ã\u201aŒã?Ÿãƒ­ãƒ¼ãƒ«ã?\u2039ã\u201a\u2030ãƒ\u2018ãƒ¼ãƒŸãƒƒã\u201a·ãƒ§ãƒ³ã\u201a\u2019å\u2030Šé™¤ã?\u2014ã?¦ã??ã? ã?\u2022ã?\u201eã\u20ac\u201a\nã?\u201cã?®ã\u201aˆã?\u2020ã?ªæ\u201e?å\u203a³ã?Œã?\u201aã\u201a\u2039å ´å?ˆã?¯ã\u20ac?ç§?ã?®BOT_IGNORE_ADMIN_PERMSã?®è¨­å®šã\u201a\u2019å¤\u2030æ\u203a´ã?\u2014ã?¦ã\u20ac?ã?\u201cã?®ãƒ¡ãƒƒã\u201a»ãƒ¼ã\u201a¸ã\u201a\u2019ç\u201e¡åŠ¹ã?«ã?\u2014ã?¦ã??ã? ã?\u2022ã?\u201eã\u20ac\u201a",
-            "title": "è­¦å\u2018Š ãƒœãƒƒãƒˆã?Œç®¡ç?\u2020è\u20ac\u2026æ¨©é™?ã\u201a\u2019æŒ?ã?£ã?¦ã?\u201eã\u201a\u2039"
-         },
-         "onUnhandledException": {
-            "exception": {"msg": "ä½\u2022ã?\u2039æ\u201aªã?\u201eã?\u201cã?¨ã?Œèµ·ã??ã?¦ã\u20ac?ã??ã\u201aŒã?Œä½\u2022ã?ªã?®ã?\u2039ã\u201aˆã??ã\u201a?ã?\u2039ã\u201aŠã?¾ã?\u203aã\u201a\u201cã\u20ac\u201aå°\u2018ã?\u2014å¾\u2026ã?£ã?¦ã?\u2039ã\u201a\u2030å\u2020?åº¦ã?Šè©¦ã?\u2014ã??ã? ã?\u2022ã?\u201eã\u20ac\u201aã??ã\u201aŒã?§ã\u201a\u201aã\u201a¨ãƒ©ãƒ¼ã?Œç¶šã??å ´å?ˆã?¯ã\u20ac?ã?Šå\u2022?ã?\u201eå?ˆã\u201a?ã?\u203aã??ã? ã?\u2022ã?\u201eã\u20ac\u201a"},
-            "cacheexception": {"msg": "å¿\u2026è¦?ã?ªãƒ\u2021ãƒ¼ã\u201a¿ã\u201a\u2019å?\u2013å¾\u2014ã?™ã\u201a\u2039ã?Ÿã\u201a?ã?®ã\u201a­ãƒ£ãƒƒã\u201a·ãƒ¥ã?¸ã?®ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ã?«ä½\u2022ã\u201a\u2030ã?\u2039ã?®ç?\u2020ç\u201d±ã?§å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿ(%0%)ã\u20ac\u201aå°\u2018ã?\u2014å¾\u2026ã?£ã?¦ã?\u2039ã\u201a\u2030å\u2020?åº¦ã?Šè©¦ã?\u2014ã??ã? ã?\u2022ã?\u201eã\u20ac\u201aã??ã\u201aŒã?§ã\u201a\u201aã\u201a¨ãƒ©ãƒ¼ã?Œç¶šã??å ´å?ˆã?¯ã\u20ac?ã?Šå\u2022?ã?\u201eå?ˆã\u201a?ã?\u203aã??ã? ã?\u2022ã?\u201eã\u20ac\u201a"},
-            "backendexception": {"msg": "ã?ªã?œã?\u2039ãƒ?ãƒƒã\u201a¯ã\u201a¨ãƒ³ãƒ\u2030ã?¨ã?®é\u20acšä¿¡ã?«å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿ(%0%)ã\u20ac\u201aå°\u2018ã?\u2014å¾\u2026ã?£ã?¦ã?\u2039ã\u201a\u2030å\u2020?åº¦ã?Šè©¦ã?\u2014ã??ã? ã?\u2022ã?\u201eã\u20ac\u201aã??ã\u201aŒã?§ã\u201a\u201aã\u201a¨ãƒ©ãƒ¼ã?Œç¶šã??å ´å?ˆã?¯ã\u20ac?ã?Šå\u2022?ã?\u201eå?ˆã\u201a?ã?\u203aã??ã? ã?\u2022ã?\u201eã\u20ac\u201a"},
-            "dataexception": {"msg": "å¿\u2026è¦?ã?ªãƒ\u2021ãƒ¼ã\u201a¿ã?¸ã?®ã\u201a¢ã\u201a¯ã\u201a»ã\u201a¹ã?«ä½\u2022ã\u201a\u2030ã?\u2039ã?®ç?\u2020ç\u201d±ã?§å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿ(%0%)ã\u20ac\u201aå°\u2018ã?\u2014å¾\u2026ã?£ã?¦ã?\u2039ã\u201a\u2030å\u2020?åº¦ã?Šè©¦ã?\u2014ã??ã? ã?\u2022ã?\u201eã\u20ac\u201aã??ã\u201aŒã?§ã\u201a\u201aã\u201a¨ãƒ©ãƒ¼ã?Œç¶šã??å ´å?ˆã?¯ã\u20ac?ã?Šå\u2022?ã?\u201eå?ˆã\u201a?ã?\u203aã??ã? ã?\u2022ã?\u201eã\u20ac\u201a"},
-            "title": "ã?Šã?£ã?¨"
-         },
-         "onMissingArgs": {
-            "usage": {"fn": "ä½¿ç\u201d¨æ³\u2022"},
-            "description": "ã?\u201cã?®ã\u201a³ãƒãƒ³ãƒ\u2030ã?¯ã\u20ac?ã\u201aˆã\u201aŠå¤šã??ã?®/ç\u2022°ã?ªã\u201a\u2039å¼\u2022æ\u2022°ã\u201a\u2019å¿\u2026è¦?ã?¨ã?\u2014ã?¾ã?™ã\u20ac\u201a",
-            "title": "å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aè­°è«\u2013ã?Œè¶³ã\u201aŠã?ªã?\u201e"
-         },
-         "onMissingNSFW": {
-            "hidden": "NSFWã?§ã?¯ã?ªã?\u201eãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?§å®Ÿè¡Œã?\u2022ã\u201aŒã?Ÿã?Ÿã\u201a?ã\u20ac?NSFWã\u201a³ãƒãƒ³ãƒ\u2030ã?®ä¸\u20acéƒ¨ã?Œé?è¡¨ç¤ºã?«ã?ªã\u201aŠã?¾ã?\u2014ã?Ÿã\u20ac\u201a",
-            "description": "NSFWã?®ã\u201a³ãƒãƒ³ãƒ\u2030ã?¯NSFWã?§ã?ªã?\u201eãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?§ã?¯ä½¿ç\u201d¨ã?§ã??ã?¾ã?\u203aã\u201a\u201cã\u20ac\u201a",
-            "title": "å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã\u201a³ãƒãƒ³ãƒ\u2030ã?«NSFWãƒ?ãƒ£ãƒ³ãƒ?ãƒ«ã?Œå¿\u2026è¦?"
-         },
-         "onCooldownActive": {
-            "description": "ã?¾ã?Ÿã\u201a\u201eã\u201a\u2039å\u2030?ã?«ã?\u2014ã?°ã\u201a\u2030ã??å¾\u2026ã?£ã?¦ã??ã? ã?\u2022ã?\u201e",
-            "title": "å¤±æ\u2022\u2014ã?\u2014ã?¾ã?\u2014ã?Ÿã\u20ac\u201aã\u201a¯ãƒ¼ãƒ«ãƒ\u20acã\u201a¦ãƒ³ ã\u201a¢ã\u201a¯ãƒ\u2020ã\u201a£ãƒ\u2013"
-         },
-         "onSuccess": {"title": "æˆ?åŠŸ"},
-         "estimatedCommand": {"msg": "ã?\u201aã?ªã?Ÿã?Œå\u2026¥åŠ\u203aã?\u2014ã?Ÿ `%0%` ã?¨ã?\u201eã?\u2020ã\u201a³ãƒãƒ³ãƒ\u2030ã?¯å­˜åœ¨ã?\u2014ã?ªã?\u201eã\u201aˆã?\u2020ã?§ã?™ã\u20ac\u201aä»£ã\u201a?ã\u201aŠã?« `%1%` ã\u201a\u2019ä½¿ã?\u201eã?Ÿã?\u2039ã?£ã?Ÿã?®ã?§ã?\u2014ã\u201a\u2021ã?\u2020ã?\u2039ï¼Ÿ"}
-      }
-   },
-   "languageDescription": "The default Japanese language package",
-   "languageId": "ja_JP",
-   "languageName": "Japanese-Default"
+            "onMissingArgs": {
+                "usage": {"fn": "ä½¿ç”¨æ–¹æ³•:"},
+                "description": "ã“ã®ã‚³ãƒãƒ³ãƒ‰ã¯ã€ã‚ˆã‚Šå¤šãã®/ç•°ãªã‚‹å¼•æ•°ã‚’å¿…è¦ã¨ã™ã‚‹",
+                "title": "å¤±æ•—ã—ã¾ã—ãŸã€‚ååˆ†ãªè­°è«–ãŒã§ããªã„"
+            },
+            "onMissingNSFW": {
+                "hidden": "NSFWã§ã¯ãªã„ãƒãƒ£ãƒ³ãƒãƒ«ã§å®Ÿè¡Œã•ã‚ŒãŸãŸã‚ã€NSFWã‚³ãƒãƒ³ãƒ‰ã®ä¸€éƒ¨ãŒéè¡¨ç¤ºã«ãªã‚Šã¾ã—ãŸã€‚",
+                "description": "NSFWã®ã‚³ãƒãƒ³ãƒ‰ã¯NSFWã§ãªã„ãƒãƒ£ãƒ³ãƒãƒ«ã§ã¯ä½¿ç”¨ã§ãã¾ã›ã‚“ã€‚",
+                "title": "å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚³ãƒãƒ³ãƒ‰ã«NSFWãƒãƒ£ãƒ³ãƒãƒ«ãŒå¿…è¦"
+            },
+            "onCooldownActive": {
+                "description": "å°‘ã—æ™‚é–“ã‚’ãŠã„ã¦ã‹ã‚‰å†åº¦è¡Œã£ã¦ãã ã•ã„ã€‚",
+                "title": "å¤±æ•—ã—ã¾ã—ãŸã€‚ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³ãƒ»ã‚¢ã‚¯ãƒ†ã‚£ãƒ–"
+            },
+            "onSuccess": {"title": "ã‚µã‚¯ã‚»ã‚¹"},
+            "estimatedCommand": {"msg": "ã‚ãªãŸãŒå…¥åŠ›ã—ãŸã‚³ãƒãƒ³ãƒ‰ `%0%` ã¯å­˜åœ¨ã—ãªã„ã‚ˆã†ã§ã™ã€‚ã‚‚ã—ã‹ã—ãŸã‚‰ã€ä»£ã‚ã‚Šã« `%1%` ã‚’ä½¿ã„ãŸã‹ã£ãŸã®ã§ã¯ï¼Ÿ"}
+        }
+    },
+    "languageDescription": "The default Japanese language package",
+    "languageId": "ja_JP",
+    "languageName": "Japanese-Default"
 }
