@@ -37,6 +37,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandGroupData;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -284,7 +285,6 @@ public abstract class Command{
 				onExecution(cmdArgs, commandEvent, translationPackage, ackRequired);
 			}
 			catch(Exception e){
-				logger.error("Unhandled exception: ", e);
 				commandEvent.getEvent().replyEmbeds(onUnhandledException(translationPackage, e)).queue();
 			}
 			finally{
@@ -443,20 +443,24 @@ public abstract class Command{
 	 * @return MessageEmbed
 	 */
 	public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
+		// log error & create code
+		String errorCode = RandomStringUtils.randomAlphanumeric(12);
+		logger.error("Unhandled exception: "+errorCode+":", e);
+		//
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"));
 		if(e instanceof DataException){
 			if(((DataException) e).getType().equals(DataException.Type.HTTP)){
-				embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name() + " (" + ((DataException) e).getCode() + ")"));
+				embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name() + " (" + ((DataException) e).getCode() + ")", errorCode));
 			}
 			else{
-				embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name()));
+				embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.dataexception.msg", ((DataException) e).getType().name(), errorCode));
 			}
 		}
 		else if(e instanceof CacheException){
-			embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.cacheexception.msg", ((CacheException) e).getType().name()));
+			embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.cacheexception.msg", ((CacheException) e).getType().name(), errorCode));
 		}
 		else if(e instanceof BackendException){
-			embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.backendexception.msg.msg", ((BackendException) e).getId()));
+			embedBuilder.setDescription(translationPackage.getTranslationWithPlaceholders("default.onUnhandledException.backendexception.msg.msg", ((BackendException) e).getId(), errorCode));
 		}
 		else{
 			embedBuilder.setDescription(translationPackage.getTranslation("default.onUnhandledException.exception.msg"));
