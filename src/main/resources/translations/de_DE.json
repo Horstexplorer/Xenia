@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte"
+                    "msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
                 },
                 "cacheexception": {
-                    "msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte"
+                    "msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
                 },
                 "backendexception": {
-                    "msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren uns bitte"
+                    "msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
                 },
                 "dataexception": {
-                    "msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktiere uns bitte"
+                    "msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
                 },
                 "title": "Oh je"
             },

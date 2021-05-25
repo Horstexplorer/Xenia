@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us"
+                    "msg": "Something bad happened and we are not quite sure what it was. Please wait a bit and try again. If the error persists please contact us with the following error code ```%1%```"
                 },
                 "cacheexception": {
-                    "msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"
+                    "msg": "Accessing the cache to get the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us with the following error code ```%1%```"
                 },
                 "backendexception": {
-                    "msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us"
+                    "msg": "Somehow the communication with my backend failed (%0%). Please wait a bit and try again. If the error persists please contact us with the following error code ```%1%```"
                 },
                 "dataexception": {
-                    "msg": "Accessing the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us"
+                    "msg": "Accessing the required data failed for some reason (%0%). Please wait a bit and try again. If the error persists please contact us with the following error code ```%1%```"
                 },
                 "title": "Oops"
             },

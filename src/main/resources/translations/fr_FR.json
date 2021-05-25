@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                    "msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
                 },
                 "cacheexception": {
-                    "msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                    "msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
                 },
                 "backendexception": {
-                    "msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                    "msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
                 },
                 "dataexception": {
-                    "msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter"
+                    "msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
                 },
                 "title": "Oups"
             },

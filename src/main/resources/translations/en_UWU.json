@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"
+                    "msg": "Something bad happened awnd we awe nowt quite suwe whawt iwt was. Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us with the following error code ```%1%```"
                 },
                 "cacheexception": {
-                    "msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"
+                    "msg": "Accessing the cache tuwu get the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us with the following error code ```%1%```"
                 },
                 "backendexception": {
-                    "msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"
+                    "msg": "somehow the communication with my backend faiwed (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us with the following error code ```%1%```"
                 },
                 "dataexception": {
-                    "msg": "Accessing the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us"
+                    "msg": "Accessing the wequiwed data faiwed fow sowme weason (%0%). Pwease wait a bit awnd twy again. If the ewwow pewsists pwease contact us with the following error code ```%1%```"
                 },
                 "title": "Oops"
             },

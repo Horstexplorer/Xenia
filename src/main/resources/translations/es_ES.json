@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"
+                    "msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
                 },
                 "cacheexception": {
-                    "msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"
+                    "msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
                 },
                 "backendexception": {
-                    "msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"
+                    "msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
                 },
                 "dataexception": {
-                    "msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros"
+                    "msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
                 },
                 "title": "Oops"
             },
