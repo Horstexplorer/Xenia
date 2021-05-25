@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.utils.paginator;
 
+import de.netbeacon.utils.locks.IdBasedLockHolder;
 import de.netbeacon.utils.shutdownhook.IShutdown;
 import de.netbeacon.utils.tuples.Triplet;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -27,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class PaginatorManager implements IShutdown{
 
@@ -47,8 +47,8 @@ public class PaginatorManager implements IShutdown{
 	private final ScheduledFuture<?> cleaner;
 	private static final long CLEAN_INTERVAL = 1000;
 
-	private final ReentrantLock reentrantLock = new ReentrantLock();
-	private static final long WAIT_TIME = 1000;
+	private final IdBasedLockHolder<Long> idBasedLockHolder = new IdBasedLockHolder<>();
+	private static final long WAIT_TIME = 2000;
 
 	public PaginatorManager(ScheduledExecutorService scheduledExecutorService){
 		cleaner = scheduledExecutorService.scheduleAtFixedRate(() -> {
@@ -62,9 +62,9 @@ public class PaginatorManager implements IShutdown{
 
 	public void createPaginator(TextChannel textChannel, User user, List<Page> pages){
 		try{
-			reentrantLock.lock();
+			idBasedLockHolder.getLock(user.getIdLong()).lock();
 			// check that we arent waiting for a result for this user already
-			if(creationRunning.containsKey(user.getIdLong())){
+			if(creationRunning.putIfAbsent(user.getIdLong(), false) == null){
 				var waiter = creationRunning.get(user.getIdLong());
 				long preWaitTime = System.currentTimeMillis();
 				synchronized(waiter){
@@ -74,7 +74,7 @@ public class PaginatorManager implements IShutdown{
 					throw new TimeoutException();
 				}
 			}
-			creationRunning.put(user.getIdLong(), false);
+			creationRunning.putIfAbsent(user.getIdLong(), false);
 			// remove existing
 			Paginator old = getPaginatorByUser(user.getIdLong());
 			if(old != null){
@@ -100,22 +100,16 @@ public class PaginatorManager implements IShutdown{
 		catch(InterruptedException | TimeoutException ignore){
 		}
 		finally{
-			reentrantLock.unlock();
+			idBasedLockHolder.getLock(user.getIdLong()).unlock();
 		}
 	}
 
 	public void usePaginator(Paginator paginator){
-		try{
-			reentrantLock.lock();
-			var paginatorTriplet = paginatorConcurrentHashMap.get(paginator.getMessageId());
-			if(paginatorTriplet == null){
-				return;
-			}
-			paginatorConcurrentHashMap.put(paginator.getMessageId(), new Triplet<>(paginatorTriplet.getValue1(), paginatorTriplet.getValue2(), paginatorTriplet.getValue3() + EST_LIFETIME));
+		var paginatorTriplet = paginatorConcurrentHashMap.get(paginator.getMessageId());
+		if(paginatorTriplet == null){
+			return;
 		}
-		finally{
-			reentrantLock.unlock();
-		}
+		paginatorConcurrentHashMap.put(paginator.getMessageId(), new Triplet<>(paginatorTriplet.getValue1(), paginatorTriplet.getValue2(), paginatorTriplet.getValue3() + EST_LIFETIME));
 	}
 
 	public Paginator getPaginatorByMessage(long messageId){
@@ -135,18 +129,12 @@ public class PaginatorManager implements IShutdown{
 	}
 
 	public void removePaginator(long messageId){
-		try{
-			reentrantLock.lock();
-			var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
-			if(paginatorTriplet == null){
-				return;
-			}
-			paginatorConcurrentHashMap.remove(messageId);
-			userPaginatorConcurrentHashMap.remove(paginatorTriplet.getValue2());
+		var paginatorTriplet = paginatorConcurrentHashMap.get(messageId);
+		if(paginatorTriplet == null){
+			return;
 		}
-		finally{
-			reentrantLock.unlock();
-		}
+		paginatorConcurrentHashMap.remove(messageId);
+		userPaginatorConcurrentHashMap.remove(paginatorTriplet.getValue2());
 	}
 
 	public Listener getListener(){
