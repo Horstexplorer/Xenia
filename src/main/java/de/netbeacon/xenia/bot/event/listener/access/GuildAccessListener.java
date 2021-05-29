@@ -63,12 +63,12 @@ public class GuildAccessListener extends ListenerAdapter{
 	public void onGuildReady(@NotNull GuildReadyEvent event){
 		try{
 			if(backendClient.getGuildCache().contains(event.getGuild().getIdLong())){
-				logger.info("Reloading Guild Async " + event.getGuild().getId());
+				logger.debug("Reloading Guild Async " + event.getGuild().getId());
 				backendClient.getGuildCache().get(event.getGuild().getIdLong()).clear(false);
 				backendClient.getGuildCache().remove(event.getGuild().getIdLong());
 			}
 			else{
-				logger.info("Loading Guild Async " + event.getGuild().getId());
+				logger.debug("Loading Guild Async " + event.getGuild().getId());
 			}
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
 			g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
@@ -188,7 +188,7 @@ public class GuildAccessListener extends ListenerAdapter{
 	@Override
 	public void onUnavailableGuildJoined(@NotNull UnavailableGuildJoinedEvent event){
 		try{
-			logger.info("Joined A New Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
+			logger.debug("Joined A New Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
 			backendClient.getGuildCache().get(event.getGuildIdLong());
 		}
 		catch(CacheException e){
@@ -205,7 +205,7 @@ public class GuildAccessListener extends ListenerAdapter{
 	@Override
 	public void onUnavailableGuildLeave(@NotNull UnavailableGuildLeaveEvent event){
 		try{
-			logger.info("Left A Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
+			logger.debug("Left A Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
 			backendClient.getGuildCache().delete(event.getGuildIdLong(), true);
 		}
 		catch(CacheException e){
@@ -221,12 +221,12 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildAvailable(@NotNull GuildAvailableEvent event){
-		logger.info("Guild " + event.getGuild().getName() + "(" + event.getGuild().getId() + ") Is Available");
+		logger.debug("Guild " + event.getGuild().getName() + "(" + event.getGuild().getId() + ") Is Available");
 	}
 
 	@Override
 	public void onGuildUnavailable(@NotNull GuildUnavailableEvent event){
-		logger.info("Guild " + event.getGuild().getName() + "(" + event.getGuild().getId() + ") Is Unavailable");
+		logger.debug("Guild " + event.getGuild().getName() + "(" + event.getGuild().getId() + ") Is Unavailable");
 	}
 
 	// will only work if the guild_member intent is set
