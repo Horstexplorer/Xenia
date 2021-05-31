@@ -30,14 +30,6 @@ public class Mention{
 		this.mentionType = mentionType;
 	}
 
-	public long getId(){
-		return id;
-	}
-
-	public Message.MentionType getMentionType(){
-		return mentionType;
-	}
-
 	public static Mention parse(String string){
 		Matcher m = Message.MentionType.CHANNEL.getPattern().matcher(string);
 		if(m.matches()){
@@ -56,6 +48,14 @@ public class Mention{
 			return new Mention(Long.parseLong(m.group(2)), Message.MentionType.EMOTE);
 		}
 		return null;
+	}
+
+	public long getId(){
+		return id;
+	}
+
+	public Message.MentionType getMentionType(){
+		return mentionType;
 	}
 
 }

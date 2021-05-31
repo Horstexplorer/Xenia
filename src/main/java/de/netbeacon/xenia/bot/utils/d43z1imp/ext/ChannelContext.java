@@ -31,11 +31,11 @@ public class ChannelContext extends ContentContext{
 
 	private final UUID uuid = UUID.randomUUID();
 	private final long channelId;
-	private long maxSize;
 	private final Set<String> metaTags = new HashSet<>();
 	private final List<Content> contents = new LinkedList<>();
 	private final ReentrantLock reentrantLock = new ReentrantLock();
 	private final Listener listener = new Listener(this);
+	private long maxSize;
 
 	public ChannelContext(long channelId, long maxSize){
 		//super(); -- we dont need this
@@ -78,7 +78,7 @@ public class ChannelContext extends ContentContext{
 
 	@Override
 	public String getDescription(){
-		return uuid.toString() + "_" + channelId;
+		return uuid + "_" + channelId;
 	}
 
 	@Override

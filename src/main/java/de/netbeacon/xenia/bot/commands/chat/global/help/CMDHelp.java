@@ -37,9 +37,9 @@ import java.util.stream.Collectors;
  */
 public class CMDHelp extends Command{
 
+	private static final int COMMANDS_PER_PAGE = 8;
 	private CommandGroup parent;
 	private HashMap<String, Command> commandMap;
-	private static final int COMMANDS_PER_PAGE = 8;
 
 	public CMDHelp(CommandGroup parent){
 		super("help", false, null, new HashSet<>(List.of(Permission.MESSAGE_ADD_REACTION)), null, null, null);

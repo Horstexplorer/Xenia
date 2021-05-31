@@ -26,6 +26,9 @@ import java.util.List;
 
 public class CmdArgFactory{
 
+	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private final static DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 	/**
 	 * Builds the CmdArgs from a given list of arguments and definitions
 	 * <p>
@@ -57,9 +60,6 @@ public class CmdArgFactory{
 		return cmdArgs;
 	}
 
-	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	private final static DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
 	/**
 	 * Tries to convert the string into any of the known types
 	 *
@@ -87,19 +87,19 @@ public class CmdArgFactory{
 				return (T) (Long) Long.parseLong(string);
 			}
 			else if(String.class.equals(tClass)){
-				return (T) (String) string;
+				return (T) string;
 			}
 			else if(LocalDateTime.class.equals(tClass)){
-				return (T) (LocalDateTime) LocalDateTime.parse(string, DTF);
+				return (T) LocalDateTime.parse(string, DTF);
 			}
 			else if(LocalDate.class.equals(tClass)){
-				return (T) (LocalDate) LocalDate.parse(string, DF);
+				return (T) LocalDate.parse(string, DF);
 			}
 			else if(HumanTime.class.equals(tClass)){
-				return (T) (HumanTime) HumanTime.parse(string);
+				return (T) HumanTime.parse(string);
 			}
 			else if(Mention.class.equals(tClass)){
-				return (T) (Mention) Mention.parse(string);
+				return (T) Mention.parse(string);
 			}
 			else{
 				return null;

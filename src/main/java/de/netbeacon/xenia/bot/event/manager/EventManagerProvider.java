@@ -24,8 +24,8 @@ import java.util.function.Function;
 
 public class EventManagerProvider implements IShutdown{
 
-	private Function<Object, IEventManager> eventManagerFactory = null;
 	private final ConcurrentHashMap<Long, IEventManager> eventManagers = new ConcurrentHashMap<>();
+	private Function<Object, IEventManager> eventManagerFactory = null;
 
 	public EventManagerProvider register(long id, IEventManager eventManager){
 		eventManagers.put(id, eventManager);

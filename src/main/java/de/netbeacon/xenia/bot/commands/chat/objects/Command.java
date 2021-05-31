@@ -48,16 +48,16 @@ public abstract class Command{
 
 	private final String alias;
 	private final LiamusJaccard.BitArray64 aliasBitArray;
-	private boolean isCommandHandler;
-	private CommandCooldown commandCooldown;
 	private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
 	private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
 	private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_EMBED_LINKS));
 	private final List<CmdArgDef> requiredArgs = new ArrayList<>();
 	private final HashMap<String, Command> children = new HashMap<>();
-	private boolean isHybrid = false;
 	private final boolean isNSFW;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private boolean isCommandHandler;
+	private CommandCooldown commandCooldown;
+	private boolean isHybrid = false;
 
 	/**
 	 * Creates a new instance of the command as command
@@ -101,6 +101,24 @@ public abstract class Command{
 		this.isNSFW = isNSFW;
 		this.aliasBitArray = LiamusJaccard.hashString(alias, 1);
 		this.isCommandHandler = true;
+	}
+
+	/**
+	 * Used to find the best matching command to the input string
+	 *
+	 * @param arg        the estimated command name
+	 * @param commandMap a map of the available commands
+	 *
+	 * @return List<Command>
+	 */
+	public static List<Command> getBestMatch(String arg, Map<String, Command> commandMap){
+		LiamusJaccard.BitArray64 argBitArray = LiamusJaccard.hashString(arg.toLowerCase(), 1);
+		List<Command> commands = new ArrayList<>(commandMap.values());
+		return commands.stream()
+			.map(command -> new Pair<>(command, LiamusJaccard.similarityCoefficient(argBitArray, command.getAliasBitArray())))
+			.sorted((o1, o2) -> o2.getValue2().compareTo(o1.getValue2()))
+			.map(Pair::getValue1)
+			.collect(Collectors.toList());
 	}
 
 	/**
@@ -524,7 +542,7 @@ public abstract class Command{
 	public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
 		// log error & create code
 		String errorCode = RandomStringUtils.randomAlphanumeric(12);
-		logger.error("Unhandled exception: Error Code: "+errorCode+" :", e);
+		logger.error("Unhandled exception: Error Code: " + errorCode + " :", e);
 		//
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"));
 		if(e instanceof DataException){
@@ -545,24 +563,6 @@ public abstract class Command{
 			embedBuilder.setDescription(translationPackage.getTranslation("default.onUnhandledException.exception.msg"));
 		}
 		return embedBuilder.build();
-	}
-
-	/**
-	 * Used to find the best matching command to the input string
-	 *
-	 * @param arg        the estimated command name
-	 * @param commandMap a map of the available commands
-	 *
-	 * @return List<Command>
-	 */
-	public static List<Command> getBestMatch(String arg, Map<String, Command> commandMap){
-		LiamusJaccard.BitArray64 argBitArray = LiamusJaccard.hashString(arg.toLowerCase(), 1);
-		List<Command> commands = new ArrayList<>(commandMap.values());
-		return commands.stream()
-			.map(command -> new Pair<>(command, LiamusJaccard.similarityCoefficient(argBitArray, command.getAliasBitArray())))
-			.sorted((o1, o2) -> o2.getValue2().compareTo(o1.getValue2()))
-			.map(Pair::getValue1)
-			.collect(Collectors.toList());
 	}
 
 	/**

@@ -23,8 +23,6 @@ import java.util.regex.Pattern;
 
 public class HumanTime{
 
-	private final LocalDateTime futureTime;
-
 	private final static Pattern SIMPLE_NUM = Pattern.compile("^\\d+$");
 	private final static Pattern EASY_TIME_DIF = Pattern.compile("^((\\d+y\\s*){0,1}(\\d+M\\s*){0,1}(\\d+d\\s*){0,1}(\\d+h\\s*){0,}(\\d+m\\s*){0,1}(\\d+s\\s*){0,1})$");
 	private final static Pattern DATE_FORMAT = Pattern.compile("^\\d{4}-\\d{1,2}-\\d{1,2}$");
@@ -32,13 +30,10 @@ public class HumanTime{
 	private final static Pattern DATE_TIME_PATTERN = Pattern.compile("^\\d{4}-\\d{1,2}-\\d{1,2}\\s+\\d{1,2}:\\d{1,2}:\\d{1,2}");
 	private final static DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	private final static Pattern SPACE = Pattern.compile("\\s+");
+	private final LocalDateTime futureTime;
 
 	private HumanTime(LocalDateTime futureTime){
 		this.futureTime = futureTime;
-	}
-
-	public LocalDateTime getFutureTime(){
-		return futureTime;
 	}
 
 	public static HumanTime parse(String string){
@@ -80,6 +75,10 @@ public class HumanTime{
 			return new HumanTime(LocalDateTime.parse(string, DTF));
 		}
 		return null;
+	}
+
+	public LocalDateTime getFutureTime(){
+		return futureTime;
 	}
 
 }

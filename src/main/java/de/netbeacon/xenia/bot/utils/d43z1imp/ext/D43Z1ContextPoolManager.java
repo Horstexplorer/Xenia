@@ -35,8 +35,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class D43Z1ContextPoolManager{
 
-	private final D43Z1Imp d43Z1Imp;
 	private static final long REFRESH_TIME = 1000 * 60 * 5;
+	private final D43Z1Imp d43Z1Imp;
 	private final ConcurrentHashMap<Long, Pair<IContextPool, Long>> guildPoolConcurrentHashMap = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<Long, ChannelContext> channelContextHashMap = new ConcurrentHashMap<>();
 

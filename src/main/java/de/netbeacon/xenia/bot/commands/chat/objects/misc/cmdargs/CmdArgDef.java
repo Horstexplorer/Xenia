@@ -25,9 +25,9 @@ public class CmdArgDef<T>{
 
 	private final String name;
 	private final Class<T> aClass;
-	private boolean isOptional;
 	private final Predicate<T> predicate;
 	private final String predicateAsString;
+	private boolean isOptional;
 
 	/**
 	 * Creates a new instance of this class
@@ -316,16 +316,11 @@ public class CmdArgDef<T>{
 			predicates.add(t -> {
 				Q res = gen.apply(t);
 				if(res instanceof Comparable && compareTo instanceof Comparable){
-					if(((Comparable<Q>) compareTo).compareTo(res) == result){
-						return true;
-					}
+					return ((Comparable<Q>) compareTo).compareTo(res) == result;
 				}
 				else{
-					if(compareTo.equals(res)){
-						return true;
-					}
+					return compareTo.equals(res);
 				}
-				return false;
 			});
 			return this;
 		}

@@ -32,13 +32,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MultiThreadedEventManager implements IExtendedEventManager{
 
-	private long lastEvent;
 	private final ScalingExecutor primaryScalingExecutor;
 	private final ScalingExecutor secondaryScalingExecutor;
 	private final CopyOnWriteArrayList<EventListener> listeners = new CopyOnWriteArrayList<>();
 	private final AtomicBoolean halt = new AtomicBoolean(false);
-
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private long lastEvent;
 
 	public MultiThreadedEventManager(){
 		this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);

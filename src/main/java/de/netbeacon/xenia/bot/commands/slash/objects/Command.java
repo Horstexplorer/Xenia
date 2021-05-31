@@ -54,13 +54,13 @@ public abstract class Command{
 	private final SubcommandData subcommandData;
 	private final SubcommandGroupData subcommandGroupData;
 	private final List<CmdArgDef> options = new ArrayList<>();
-	private CommandCooldown commandCooldown;
 	private final HashSet<Permission> memberPrimaryPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ));
 	private final HashSet<Role.Permissions.Bit> memberSecondaryPermissions = new HashSet<>(Collections.singletonList(Role.Permissions.Bit.BOT_INTERACT));
 	private final HashSet<Permission> botPermissions = new HashSet<>(Arrays.asList(Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_EMBED_LINKS));
 	private final AverageCounter processingAvgCounter = new AverageCounter();
 	private final boolean isNSFW;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private CommandCooldown commandCooldown;
 
 	/**
 	 * Basic command with options
@@ -445,7 +445,7 @@ public abstract class Command{
 	public MessageEmbed onUnhandledException(TranslationPackage translationPackage, Exception e){
 		// log error & create code
 		String errorCode = RandomStringUtils.randomAlphanumeric(12);
-		logger.error("Unhandled exception: "+errorCode+":", e);
+		logger.error("Unhandled exception: " + errorCode + ":", e);
 		//
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onUnhandledException.title"));
 		if(e instanceof DataException){

@@ -29,8 +29,8 @@ import java.util.concurrent.TimeUnit;
 public class TimeoutExecutor{
 
 	private static final ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-	private ScheduledFuture<?> timeoutTask;
 	private final Runnable runnable;
+	private ScheduledFuture<?> timeoutTask;
 
 	/**
 	 * Creates a new instance of this class

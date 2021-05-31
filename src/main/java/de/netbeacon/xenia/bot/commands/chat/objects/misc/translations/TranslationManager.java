@@ -34,9 +34,8 @@ import java.util.stream.Collectors;
 
 public class TranslationManager{
 
-	private static TranslationManager instance;
 	private static final Logger logger = LoggerFactory.getLogger(TranslationManager.class);
-
+	private static TranslationManager instance;
 	private final ConcurrentHashMap<String, TranslationPackage> translationPackages = new ConcurrentHashMap<>();
 
 	private TranslationManager() throws IOException{

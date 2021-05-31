@@ -53,13 +53,10 @@ public class XeniaWatchdog implements IShutdown{
 		private final Function<I, O> task;
 		private final Consumer<O> onSuccess;
 		private final Consumer<Pair<O, Exception>> onFailure;
-
+		private final Logger logger = LoggerFactory.getLogger(WatchTask.class);
 		private Predicate<O> predicate;
 		private Function<Void, I> inputProvider;
-
 		private O lastOutput;
-
-		private final Logger logger = LoggerFactory.getLogger(WatchTask.class);
 
 		public WatchTask(Function<I, O> task, Consumer<O> onSuccess, Consumer<Pair<O, Exception>> onFailure){
 			this.task = task;
