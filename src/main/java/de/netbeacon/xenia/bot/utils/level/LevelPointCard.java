@@ -29,20 +29,6 @@ import java.util.Random;
 
 public class LevelPointCard{
 
-	private static Font FONT;
-
-	private static final int CARD_BORDER = 20;
-	private static final int CARD_WIDTH = 1440;
-	private static final int CARD_HEIGHT = 360;
-	private static final int AVATAR_SIZE = 256;
-	private static final float FONT_SIZE = 60f;
-
-	public enum ColorSet{
-		Primary,
-		Secondary,
-		Tertiary
-	}
-
 	static final Color[] COLORS = new Color[]{
 		new Color(175, 255, 20),
 		new Color(255, 20, 175),
@@ -50,11 +36,13 @@ public class LevelPointCard{
 		new Color(255, 127, 0),
 		new Color(255, 20, 0)
 	};
-
 	static final Random random = new Random();
-
-	private ByteArrayOutputStream baos;
-
+	private static final int CARD_BORDER = 20;
+	private static final int CARD_WIDTH = 1440;
+	private static final int CARD_HEIGHT = 360;
+	private static final int AVATAR_SIZE = 256;
+	private static final float FONT_SIZE = 60f;
+	private static Font FONT;
 	static{
 		try{
 			FONT = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(LevelPointCard.class.getClassLoader().getResourceAsStream("fonts/ethnocentricrg.ttf")));
@@ -63,6 +51,7 @@ public class LevelPointCard{
 			e.printStackTrace();
 		}
 	}
+	private ByteArrayOutputStream baos;
 
 	public LevelPointCard(Member member){
 		String name = member.metaNickname();
@@ -179,12 +168,6 @@ public class LevelPointCard{
 		graphics2D.fillRect(x + rad / 2, y + 7 * height / 8, cwdth - cwdth / 2 - rad / 2, height / 8);
 	}
 
-	public enum Position{
-		Left,
-		Center,
-		Right
-	}
-
 	private float calculateFontSize(float maxSize, int unscaledLimit, String text){
 		return text.length() > unscaledLimit ? maxSize * unscaledLimit / (float) text.length() : maxSize;
 	}
@@ -203,6 +186,18 @@ public class LevelPointCard{
 			xs = x - (int) (text.length() * fontSize);
 		}
 		graphics2D.drawString(text, xs, y);
+	}
+
+	public enum ColorSet{
+		Primary,
+		Secondary,
+		Tertiary
+	}
+
+	public enum Position{
+		Left,
+		Center,
+		Right
 	}
 
 }

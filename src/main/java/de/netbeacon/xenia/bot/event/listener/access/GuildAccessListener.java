@@ -47,11 +47,10 @@ import java.util.function.Consumer;
 
 public class GuildAccessListener extends ListenerAdapter{
 
-	private final XeniaBackendClient backendClient;
-	private final Logger logger = LoggerFactory.getLogger(GuildAccessListener.class);
-
 	private static final int MEMBER_PRELOAD_COUNT_THRESHOLD = 10000; // disabled for now
 	private static final int MEMBER_LOGGING_COUNT_THRESHOLD = Integer.MAX_VALUE; // disabled for now
+	private final XeniaBackendClient backendClient;
+	private final Logger logger = LoggerFactory.getLogger(GuildAccessListener.class);
 
 	public GuildAccessListener(XeniaBackendClient backendClient){
 		this.backendClient = backendClient;

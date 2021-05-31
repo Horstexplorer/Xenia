@@ -30,11 +30,9 @@ public class SlidingTimeframeCounter{
 	private final long frames;
 
 	private final List<Long> frameList = new LinkedList<>();
-
+	private final ReentrantLock reentrantLock = new ReentrantLock();
 	private long head = System.nanoTime();
 	private long tail = System.nanoTime();
-
-	private final ReentrantLock reentrantLock = new ReentrantLock();
 
 	public SlidingTimeframeCounter(TimeUnit timeUnit, long units, long frames){
 		this.timeUnit = timeUnit;

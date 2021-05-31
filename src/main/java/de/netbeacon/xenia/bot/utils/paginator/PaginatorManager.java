@@ -31,24 +31,18 @@ import java.util.concurrent.*;
 
 public class PaginatorManager implements IShutdown{
 
-	private final Listener listener = new Listener(this);
-
 	protected static final String PREVIOUS = "\u2B05\uFE0F"; // arrow:left
 	protected static final String NEXT = "\u27A1\uFE0F"; // arrow:right
 	protected static final String CLOSE = "\u2716\uFE0F"; // heavy:multiplication:x
-
+	private static final long EST_LIFETIME = 1000 * 30;
+	private static final long CLEAN_INTERVAL = 1000;
+	private static final long WAIT_TIME = 2000;
+	private final Listener listener = new Listener(this);
 	private final ConcurrentHashMap<Long, Triplet<Paginator, Long, Long>> paginatorConcurrentHashMap = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<Long, Long> userPaginatorConcurrentHashMap = new ConcurrentHashMap<>();
-
 	private final ConcurrentHashMap<Long, Boolean> creationRunning = new ConcurrentHashMap<>();
-
-	private static final long EST_LIFETIME = 1000 * 30;
-
 	private final ScheduledFuture<?> cleaner;
-	private static final long CLEAN_INTERVAL = 1000;
-
 	private final IdBasedLockHolder<Long> idBasedLockHolder = new IdBasedLockHolder<>();
-	private static final long WAIT_TIME = 2000;
 
 	public PaginatorManager(ScheduledExecutorService scheduledExecutorService){
 		cleaner = scheduledExecutorService.scheduleAtFixedRate(() -> {

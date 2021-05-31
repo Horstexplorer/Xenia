@@ -64,17 +64,7 @@ public class D43Z1Imp implements IShutdown{
 	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
 	private final Eval eval;
-
-	public static D43Z1Imp getInstance() throws IOException{
-		return getInstance(false);
-	}
-
-	public static D43Z1Imp getInstance(boolean initializeIfNeeded) throws IOException{
-		if(instance == null && initializeIfNeeded){
-			instance = new D43Z1Imp();
-		}
-		return instance;
-	}
+	private final Lock lock = new ReentrantLock();
 
 	private D43Z1Imp() throws IOException{
 		/*
@@ -128,6 +118,17 @@ public class D43Z1Imp implements IShutdown{
 		);
 	}
 
+	public static D43Z1Imp getInstance() throws IOException{
+		return getInstance(false);
+	}
+
+	public static D43Z1Imp getInstance(boolean initializeIfNeeded) throws IOException{
+		if(instance == null && initializeIfNeeded){
+			instance = new D43Z1Imp();
+		}
+		return instance;
+	}
+
 	public TaskMaster<IContentprovider> getTaskMaster(){
 		return contentTaskMaster;
 	}
@@ -147,8 +148,6 @@ public class D43Z1Imp implements IShutdown{
 	public IContextPool getContextPoolByUUID(UUID uuid){
 		return contextPools.stream().filter(iContextPool -> iContextPool.getUUID().equals(uuid)).findFirst().orElse(null);
 	}
-
-	private final Lock lock = new ReentrantLock();
 
 	public ContentMatchBuffer getContentMatchBufferFor(long userId){
 		try{

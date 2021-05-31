@@ -110,9 +110,8 @@ public class EventWaiter{
 
 		private final Class<E> classToWait;
 		private final Predicate<E> condition;
-		private E event;
-
 		private final boolean isAsync;
+		private E event;
 		private Consumer<E> onSuccess;
 		private Consumer<Exception> onFailure;
 		private Future<?> cancelFuture = null;

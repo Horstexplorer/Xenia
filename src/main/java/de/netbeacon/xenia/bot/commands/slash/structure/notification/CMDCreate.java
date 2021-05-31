@@ -54,7 +54,7 @@ public class CMDCreate extends Command{
 		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{
-			Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
+			Notification notification = notificationCache.create(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
 		}
 		catch(DataException | CacheException ex){

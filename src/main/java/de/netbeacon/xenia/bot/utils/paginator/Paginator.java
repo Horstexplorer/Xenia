@@ -27,9 +27,9 @@ import java.util.function.BiConsumer;
 public class Paginator{
 
 	private final long channelId;
-	private long messageId = -1;
 	private final long userId;
 	private final List<Page> pages;
+	private long messageId = -1;
 	private boolean needsRedraw;
 	private int position;
 
@@ -41,22 +41,6 @@ public class Paginator{
 
 	protected synchronized void link(long messageId){
 		this.messageId = messageId;
-	}
-
-	public enum Move{
-
-		NEXT(1),
-		PREVIOUS(-1);
-
-		private final int i;
-
-		Move(int i){
-			this.i = i;
-		}
-
-		public int getI(){
-			return i;
-		}
 	}
 
 	public synchronized void movePosition(Move move){
@@ -139,6 +123,22 @@ public class Paginator{
 					thenNot.accept(user, throwable);
 				}
 			});
+		}
+	}
+
+	public enum Move{
+
+		NEXT(1),
+		PREVIOUS(-1);
+
+		private final int i;
+
+		Move(int i){
+			this.i = i;
+		}
+
+		public int getI(){
+			return i;
 		}
 	}
 

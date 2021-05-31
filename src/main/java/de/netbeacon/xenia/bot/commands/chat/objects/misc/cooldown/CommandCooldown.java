@@ -30,11 +30,6 @@ public class CommandCooldown{
 	private final ConcurrentHashMap<Long, Long> guildCooldown = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> userCooldown = new ConcurrentHashMap<>();
 
-	public enum Type{
-		User,
-		Guild;
-	}
-
 	/**
 	 * Creates a new instance of this class
 	 *
@@ -104,6 +99,11 @@ public class CommandCooldown{
 			return true;
 		}
 		return false;
+	}
+
+	public enum Type{
+		User,
+		Guild
 	}
 
 }

@@ -31,6 +31,26 @@ public class LevelPointManager{
 
 	private final ConcurrentHashMap<Guild, ConcurrentHashMap<Member, Long>> accessMap = new ConcurrentHashMap<>();
 
+	public static long calculateLevel(Member member){
+		return calculateLevel(member.getLevelPoints());
+	}
+
+	public static long calculateLevel(long levelPoints){
+		return CALCULATE_LEVEL.apply(levelPoints);
+	}
+
+	public static long calculateLevelMin(long level){
+		return CALCULATE_EP.apply(level);
+	}
+
+	public static long calculateLevelMax(long level){
+		return CALCULATE_EP.apply(level + 1);
+	}
+
+	public static LevelPointCard getLevelPointCard(Member member){
+		return new LevelPointCard(member);
+	}
+
 	public void trackGuild(Guild guild){
 		accessMap.put(guild, new ConcurrentHashMap<>());
 	}
@@ -84,26 +104,6 @@ public class LevelPointManager{
 		catch(Exception ignore){
 
 		}
-	}
-
-	public static long calculateLevel(Member member){
-		return calculateLevel(member.getLevelPoints());
-	}
-
-	public static long calculateLevel(long levelPoints){
-		return CALCULATE_LEVEL.apply(levelPoints);
-	}
-
-	public static long calculateLevelMin(long level){
-		return CALCULATE_EP.apply(level);
-	}
-
-	public static long calculateLevelMax(long level){
-		return CALCULATE_EP.apply(level + 1);
-	}
-
-	public static LevelPointCard getLevelPointCard(Member member){
-		return new LevelPointCard(member);
 	}
 
 }
