@@ -52,7 +52,7 @@ public class CMDCreate extends Command{
 		CmdArg<String> nameArg = cmdArgs.getByName("name");
 		CmdArg<String> contentArg = cmdArgs.getByName("content");
 		try{
-			tagCache.createNew(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
+			tagCache.create(nameArg.getValue(), commandEvent.getEvent().getUser().getIdLong(), contentArg.getName());
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", nameArg.getName()))).queue();
 		}
 		catch(CacheException e){

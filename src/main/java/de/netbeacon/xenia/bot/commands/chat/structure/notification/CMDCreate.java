@@ -54,7 +54,7 @@ public class CMDCreate extends Command{
 		// create a new notification
 		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
 		try{
-			Notification notification = notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
+			Notification notification = notificationCache.create(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getAuthor().getIdLong(), localDateTimeCmdArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), stringCmdArg.getValue());
 			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getAuthor().getAsTag()))).queue();
 		}
 		catch(DataException | CacheException ex){

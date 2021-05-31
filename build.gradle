@@ -64,6 +64,7 @@ dependencies {
     // clients
     implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.4' // purrbot api wrapper
     implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.3' // d43z1
+    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.12.0' // backend client
 }
 
 processResources {
