@@ -43,6 +43,7 @@ public class ButtonRegEntry{
 	private final ActionHandler actionHandler;
 	private final ExceptionHandler exceptionHandler;
 	private int remainingActivations;
+
 	public ButtonRegEntry(AllowedOrigins allowedOrigins, AllowedAccessor allowedAccessor, AllowedActivations allowedActivations, TimeoutPolicy timeoutPolicy, ActionHandler actionHandler, ExceptionHandler exceptionHandler){
 		this.allowedOrigins = allowedOrigins;
 		this.allowedAccessor = allowedAccessor;

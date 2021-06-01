@@ -16,8 +16,15 @@
 
 package de.netbeacon.xenia.bot.event.handler;
 
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonException;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonRegEntry;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ButtonHandler{
 
@@ -29,6 +36,50 @@ public class ButtonHandler{
 
 	public void handleClick(ButtonClickEvent buttonClickEvent){
 
+		try{
+			String btnid = buttonClickEvent.getButton().getId();
+
+			if(btnid == null){ // shouldnt happen
+				return;
+			}
+			ButtonRegEntry buttonRegEntry = buttonManager.get(btnid);
+
+			if(buttonRegEntry == null){
+				return;
+			}
+
+			Consumer<ButtonClickEvent> actionConsumer = buttonRegEntry.getActionHandler().getActionConsumer();
+			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
+
+			long guildId = buttonClickEvent.getGuild() != null ? buttonClickEvent.getGuild().getIdLong() : -1;
+			long channelId = buttonClickEvent.getChannel().getIdLong();
+			long messageId = buttonClickEvent.getMessageIdLong();
+
+			if(buttonClickEvent.getGuild() == null ? !buttonRegEntry.isAllowedOrigin(channelId, messageId) : !buttonRegEntry.isAllowedOrigin(guildId, channelId, messageId)){
+				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
+				return;
+			}
+
+			Member member = buttonClickEvent.getMember();
+			User user = buttonClickEvent.getUser();
+
+			if(member == null ? !buttonRegEntry.isAllowedAccessor(user) : !buttonRegEntry.isAllowedAccessor(member)){
+				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ACCESSOR), buttonClickEvent);
+				return;
+			}
+
+			if(!buttonRegEntry.isInTime() || !buttonRegEntry.allowsActivation()){
+				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.OUTDATED), buttonClickEvent);
+				return;
+			}
+
+			if(actionConsumer != null){
+				actionConsumer.accept(buttonClickEvent);
+			}
+
+		}catch(Exception e){
+			// ???
+		}
 	}
 
 }
