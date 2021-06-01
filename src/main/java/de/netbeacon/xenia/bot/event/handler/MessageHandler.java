@@ -29,6 +29,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldow
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
@@ -61,14 +62,16 @@ public class MessageHandler{
 	private final EventWaiter eventWaiter;
 	private final XeniaBackendClient backendClient;
 	private final PaginatorManager paginatorManager;
+	private final ButtonManager buttonManager;
 	private final LevelPointManager levelPointManager;
 	private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 	private final D43Z1ContextPoolManager contextPoolManager;
 
-	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
+	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.commandMap = commandMap;
 		this.eventWaiter = eventWaiter;
 		this.paginatorManager = paginatorManager;
+		this.buttonManager = buttonManager;
 		this.backendClient = backendClient;
 		this.contextPoolManager = contextPoolManager;
 		this.levelPointManager = levelPointManager;
@@ -168,7 +171,7 @@ public class MessageHandler{
 		}
 		args.remove(0);
 		// start the madness
-		command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager));
+		command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager));
 	}
 
 	public void processUpdate(GuildMessageUpdateEvent event){
