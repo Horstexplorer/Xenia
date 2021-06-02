@@ -51,7 +51,6 @@ public abstract class AdminCommand extends Command{
 	@Override
 	public void execute(List<String> args, CommandEvent commandEvent){
 		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
-		var member = commandEvent.getEvent().getMember();
 		var textChannel = commandEvent.getEvent().getChannel();
 
 		TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());

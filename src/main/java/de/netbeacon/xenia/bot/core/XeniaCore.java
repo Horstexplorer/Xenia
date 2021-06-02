@@ -118,7 +118,7 @@ public class XeniaCore{
 		TranslationManager translationManager = TranslationManager.getInstance(true);
 		PurrBotAPIWrapper.getInstance(true);
 		LevelPointManager levelPointManager = new LevelPointManager();
-		ButtonManager buttonManager = new ButtonManager();
+		ButtonManager buttonManager = new ButtonManager(this::getShardManager);
 		shutdownHook.addShutdownAble(buttonManager);
 		// d43z1
 		logger.info("Preparing D43Z1...");

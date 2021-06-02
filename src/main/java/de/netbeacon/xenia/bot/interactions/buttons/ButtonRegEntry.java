@@ -16,18 +16,19 @@
 
 package de.netbeacon.xenia.bot.interactions.buttons;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
-import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.interactions.ActionRow;
 import net.dv8tion.jda.api.interactions.button.Button;
 import net.dv8tion.jda.api.interactions.button.ButtonStyle;
+import net.dv8tion.jda.api.sharding.ShardManager;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -35,7 +36,7 @@ import java.util.function.Consumer;
 public class ButtonRegEntry{
 
 	private final String uuid = UUID.randomUUID().toString();
-	private final AllowedOrigins allowedOrigins;
+	private final AllowedOrigin allowedOrigin;
 	private final AllowedAccessor allowedAccessor;
 	private final AllowedActivations allowedActivations;
 	private final TimeoutPolicy timeoutPolicy;
@@ -43,9 +44,10 @@ public class ButtonRegEntry{
 	private final ActionHandler actionHandler;
 	private final ExceptionHandler exceptionHandler;
 	private int remainingActivations;
+	private boolean deactivated = false;
 
-	public ButtonRegEntry(AllowedOrigins allowedOrigins, AllowedAccessor allowedAccessor, AllowedActivations allowedActivations, TimeoutPolicy timeoutPolicy, ActionHandler actionHandler, ExceptionHandler exceptionHandler){
-		this.allowedOrigins = allowedOrigins;
+	public ButtonRegEntry(AllowedOrigin allowedOrigin, AllowedAccessor allowedAccessor, AllowedActivations allowedActivations, TimeoutPolicy timeoutPolicy, ActionHandler actionHandler, ExceptionHandler exceptionHandler){
+		this.allowedOrigin = allowedOrigin;
 		this.allowedAccessor = allowedAccessor;
 		this.allowedActivations = allowedActivations;
 		remainingActivations = allowedActivations.getValue();
@@ -59,15 +61,19 @@ public class ButtonRegEntry{
 		return uuid;
 	}
 
-	public boolean isAllowedOrigin(Long... values){
-		if(allowedOrigins.equals(AllowedOrigins.ANY)){
+	public boolean isAllowedOrigin(long messageId){
+		if(allowedOrigin.equals(AllowedOrigin.ANY)){
 			return true;
 		}
-		return allowedOrigins.getValues().containsAll(List.of(values));
+		return allowedOrigin.messageId() == messageId;
 	}
 
-	public boolean isAllowedOrigin(Guild guild, Channel channel, Message message){
-		return isAllowedOrigin(guild.getIdLong(), channel.getChannelId(), message.getId());
+	public boolean isAllowedOrigin(Message message){
+		return isAllowedOrigin(message.getId());
+	}
+
+	public AllowedOrigin getAllowedOrigin(){
+		return allowedOrigin;
 	}
 
 	public boolean isAllowedAccessor(long value){
@@ -81,6 +87,14 @@ public class ButtonRegEntry{
 		return isAllowedAccessor(user.getIdLong());
 	}
 
+	public boolean isAllowedAccessor(Member member){
+		return isAllowedAccessor(member.getIdLong()) || member.getRoles().stream().anyMatch(role -> allowedAccessor.getValue() == role.getIdLong());
+	}
+
+	public AllowedAccessor getAllowedAccessor(){
+		return allowedAccessor;
+	}
+
 	public boolean isInTime(){
 		if(timeoutPolicy.equals(TimeoutPolicy.NONE)){
 			return true;
@@ -88,8 +102,8 @@ public class ButtonRegEntry{
 		return System.currentTimeMillis() <= timeoutAt;
 	}
 
-	public boolean isAllowedAccessor(Member member){
-		return isAllowedAccessor(member.getIdLong()) || member.getRoles().stream().anyMatch(role -> allowedAccessor.getValue() == role.getIdLong());
+	public TimeoutPolicy getTimeoutPolicy(){
+		return timeoutPolicy;
 	}
 
 	public boolean allowsActivation(){
@@ -103,6 +117,10 @@ public class ButtonRegEntry{
 			}
 		}
 		return false;
+	}
+
+	public AllowedActivations getAllowedActivations(){
+		return allowedActivations;
 	}
 
 	public ActionHandler getActionHandler(){
@@ -121,16 +139,40 @@ public class ButtonRegEntry{
 		return isInTime() && (!allowedActivations.equals(AllowedActivations.UNLIMITED) || remainingActivations > 0);
 	}
 
-	public record AllowedOrigins(Long... values){
-
-		public static final AllowedOrigins ANY = new AllowedOrigins(-1L);
-
-		public static AllowedOrigins CUSTOM(Long... value){
-			return new AllowedOrigins(value);
+	public synchronized void deactivate(ShardManager shardManager){
+		if(deactivated){
+			return;
 		}
+		deactivated = true;
+		TextChannel textChannel = shardManager.getTextChannelById(allowedOrigin.channelId());
+		if(textChannel == null) return;
+		textChannel.retrieveMessageById(allowedOrigin.messageId()).queue(
+			message -> {
+				MessageBuilder messageBuilder = new MessageBuilder(message);
+				List<ActionRow> newRows = new ArrayList<>();
+				message.getActionRows().forEach(row -> {
+					List<Button> buttons = new ArrayList<>();
+					row.getButtons().forEach(button -> {
+						if(getUuid().equals(button.getId())){
+							buttons.add(button.asDisabled());
+						}else{
+							buttons.add(button);
+						}
+					});
+					newRows.add(ActionRow.of(buttons));
+				});
+				messageBuilder.setActionRows(newRows);
+				message.editMessage(messageBuilder.build()).queue();
+			}
+		);
+	}
 
-		public Set<Long> getValues(){
-			return new HashSet<>(List.of(values));
+	public record AllowedOrigin(long messageId, long channelId){
+
+		public static final AllowedOrigin ANY = new AllowedOrigin(0, 0);
+
+		public static AllowedOrigin CUSTOM(long messageId, long channelId){
+			return new AllowedOrigin(messageId, channelId);
 		}
 
 	}

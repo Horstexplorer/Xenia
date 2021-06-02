@@ -51,11 +51,9 @@ public class ButtonHandler{
 			Consumer<ButtonClickEvent> actionConsumer = buttonRegEntry.getActionHandler().getActionConsumer();
 			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
 
-			long guildId = buttonClickEvent.getGuild() != null ? buttonClickEvent.getGuild().getIdLong() : -1;
-			long channelId = buttonClickEvent.getChannel().getIdLong();
 			long messageId = buttonClickEvent.getMessageIdLong();
 
-			if(buttonClickEvent.getGuild() == null ? !buttonRegEntry.isAllowedOrigin(channelId, messageId) : !buttonRegEntry.isAllowedOrigin(guildId, channelId, messageId)){
+			if(!buttonRegEntry.isAllowedOrigin(messageId)){
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return;
 			}
@@ -69,6 +67,7 @@ public class ButtonHandler{
 			}
 
 			if(!buttonRegEntry.isInTime() || !buttonRegEntry.allowsActivation()){
+				buttonRegEntry.deactivate(buttonClickEvent.getJDA().getShardManager());
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.OUTDATED), buttonClickEvent);
 				return;
 			}

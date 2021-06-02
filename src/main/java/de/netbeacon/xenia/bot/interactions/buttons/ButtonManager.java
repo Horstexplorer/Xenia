@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.interactions.buttons;
 
 import de.netbeacon.utils.shutdownhook.IShutdown;
+import net.dv8tion.jda.api.sharding.ShardManager;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -24,6 +25,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Supplier;
 
 public class ButtonManager implements IShutdown{
 
@@ -31,12 +33,13 @@ public class ButtonManager implements IShutdown{
 	private final Lock lock = new ReentrantLock();
 	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
-	public ButtonManager(){
+	public ButtonManager(Supplier<ShardManager> shardManagerSupplier){
 		scheduledExecutorService.scheduleAtFixedRate(() -> {
 			try{
 				buttonRegistry.forEach((k, v) -> {
 					if(!v.keep()){
 						buttonRegistry.remove(k);
+						v.deactivate(shardManagerSupplier.get());
 					}
 				});
 			}
