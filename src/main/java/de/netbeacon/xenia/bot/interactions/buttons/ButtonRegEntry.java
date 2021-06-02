@@ -136,7 +136,7 @@ public class ButtonRegEntry{
 	}
 
 	public boolean keep(){
-		return isInTime() && (!allowedActivations.equals(AllowedActivations.UNLIMITED) || remainingActivations > 0);
+		return isInTime() && (allowedActivations.equals(AllowedActivations.UNLIMITED) || remainingActivations > 0);
 	}
 
 	public synchronized void deactivate(ShardManager shardManager){
