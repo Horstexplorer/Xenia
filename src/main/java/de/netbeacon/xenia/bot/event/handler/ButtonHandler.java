@@ -67,13 +67,17 @@ public class ButtonHandler{
 			}
 
 			if(!buttonRegEntry.isInTime() || !buttonRegEntry.allowsActivation()){
-				buttonRegEntry.deactivate(buttonClickEvent.getJDA().getShardManager());
+				buttonManager.deactivate(buttonRegEntry);
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.OUTDATED), buttonClickEvent);
 				return;
 			}
 
 			if(actionConsumer != null){
 				actionConsumer.accept(buttonClickEvent);
+			}
+
+			if(!buttonRegEntry.keep()){
+				buttonManager.deactivate(buttonRegEntry);
 			}
 
 		}catch(Exception e){

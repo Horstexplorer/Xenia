@@ -32,14 +32,16 @@ public class ButtonManager implements IShutdown{
 	private final ConcurrentHashMap<String, ButtonRegEntry> buttonRegistry = new ConcurrentHashMap<>();
 	private final Lock lock = new ReentrantLock();
 	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+	private final Supplier<ShardManager> shardManagerSupplier;
 
 	public ButtonManager(Supplier<ShardManager> shardManagerSupplier){
+		this.shardManagerSupplier = shardManagerSupplier;
 		scheduledExecutorService.scheduleAtFixedRate(() -> {
 			try{
 				buttonRegistry.forEach((k, v) -> {
 					if(!v.keep()){
 						buttonRegistry.remove(k);
-						v.deactivate(shardManagerSupplier.get());
+						v.deactivate(this.shardManagerSupplier.get());
 					}
 				});
 			}
@@ -56,6 +58,11 @@ public class ButtonManager implements IShutdown{
 		finally{
 			lock.unlock();
 		}
+	}
+
+	public void deactivate(ButtonRegEntry buttonRegEntry){
+		buttonRegEntry.deactivate(this.shardManagerSupplier.get());
+		buttonRegistry.remove(buttonRegEntry.getUuid());
 	}
 
 	public ButtonRegEntry get(String uuid){
