@@ -36,26 +36,43 @@ public class CMDBurger extends AdminCommand{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		var guild = commandEvent.getEvent().getGuild();
 		var channel = commandEvent.getEvent().getChannel();
 
 		channel.sendMessage("\uD83C\uDF54").queue(message -> {
-			ButtonRegEntry entry = new ButtonRegEntry(
+			ButtonRegEntry burger = new ButtonRegEntry(
 				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
 				ButtonRegEntry.AllowedAccessor.ANY,
-				ButtonRegEntry.AllowedActivations.LIMIT(3),
+				ButtonRegEntry.AllowedActivations.LIMIT(5),
 				ButtonRegEntry.TimeoutPolicy.NONE,
 				ButtonRegEntry.ActionHandler.CUSTOM((buttonClickEvent) -> {
 					buttonClickEvent.reply("-1 "+"\uD83C\uDF54").queue();
 				}),
-				ButtonRegEntry.ExceptionHandler.CUSTOM((exception, event) -> {})
+				ButtonRegEntry.ExceptionHandler.NONE,
+				ButtonRegEntry.DeactivationMode.SELF
 			);
-			commandEvent.getButtonManager().register(entry);
+			commandEvent.getButtonManager().register(burger);
+
+			ButtonRegEntry salad = new ButtonRegEntry(
+				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
+				ButtonRegEntry.AllowedAccessor.ANY,
+				ButtonRegEntry.AllowedActivations.ONCE,
+				ButtonRegEntry.TimeoutPolicy.NONE,
+				ButtonRegEntry.ActionHandler.CUSTOM((buttonClickEvent) -> {
+					buttonClickEvent.reply("The salad wasn't free. No more burgers.").queue();
+				}),
+				ButtonRegEntry.ExceptionHandler.NONE,
+				ButtonRegEntry.DeactivationMode.ALL
+			);
+			commandEvent.getButtonManager().register(salad);
+
+
+
 			Message messageNew = new MessageBuilder()
 				.append("Free burgers!")
 				.setActionRows(
 					ActionRow.of(
-						entry.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.ofUnicode("\uD83C\uDF54"))
+						burger.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.ofUnicode("\uD83C\uDF54")),
+						salad.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.ofUnicode("\uD83E\uDD57"))
 					)
 				).build();
 			message.editMessage(messageNew).queue();

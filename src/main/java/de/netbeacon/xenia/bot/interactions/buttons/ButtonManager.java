@@ -54,15 +54,24 @@ public class ButtonManager implements IShutdown{
 		try{
 			lock.lock();
 			buttonRegistry.put(buttonRegEntry.getUuid(), buttonRegEntry);
+			buttonRegEntry.setButtonManager(this);
 		}
 		finally{
 			lock.unlock();
 		}
 	}
 
+	public void unregister(ButtonRegEntry buttonRegEntry){
+		unregister(buttonRegEntry.getUuid());
+	}
+
+	public void unregister(String id){
+		buttonRegistry.remove(id);
+	}
+
 	public void deactivate(ButtonRegEntry buttonRegEntry){
 		buttonRegEntry.deactivate(this.shardManagerSupplier.get());
-		buttonRegistry.remove(buttonRegEntry.getUuid());
+		unregister(buttonRegEntry);
 	}
 
 	public ButtonRegEntry get(String uuid){

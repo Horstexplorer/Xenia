@@ -19,7 +19,9 @@ package de.netbeacon.xenia.bot.event.handler;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonException;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonRegEntry;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
@@ -45,15 +47,21 @@ public class ButtonHandler{
 			ButtonRegEntry buttonRegEntry = buttonManager.get(btnid);
 
 			if(buttonRegEntry == null){
+				return; // not found
+			}
+
+			Consumer<ButtonClickEvent> actionConsumer = buttonRegEntry.getActionHandler().actionConsumer();
+			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
+
+			Guild guild = buttonClickEvent.getGuild();
+			Message message = buttonClickEvent.getMessage();
+
+			if(guild == null || message == null){
+				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return;
 			}
 
-			Consumer<ButtonClickEvent> actionConsumer = buttonRegEntry.getActionHandler().getActionConsumer();
-			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
-
-			long messageId = buttonClickEvent.getMessageIdLong();
-
-			if(!buttonRegEntry.isAllowedOrigin(messageId)){
+			if(!buttonRegEntry.isAllowedOrigin(message)){
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return;
 			}
