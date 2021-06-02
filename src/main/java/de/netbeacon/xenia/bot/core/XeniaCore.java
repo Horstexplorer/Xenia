@@ -25,12 +25,14 @@ import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
+import de.netbeacon.xenia.bot.event.listener.interactions.ButtonListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.SlashCommandListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -116,6 +118,8 @@ public class XeniaCore{
 		TranslationManager translationManager = TranslationManager.getInstance(true);
 		PurrBotAPIWrapper.getInstance(true);
 		LevelPointManager levelPointManager = new LevelPointManager();
+		ButtonManager buttonManager = new ButtonManager(this::getShardManager);
+		shutdownHook.addShutdownAble(buttonManager);
 		// d43z1
 		logger.info("Preparing D43Z1...");
 		D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
@@ -149,9 +153,10 @@ public class XeniaCore{
 			.addEventListeners(
 				new StatusListener(),
 				new GuildAccessListener(xeniaBackendClient),
-				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager, levelPointManager),
-				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, contextPoolManager, levelPointManager),
+				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
+				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
 				new GuildReactionListener(eventWaiter),
+				new ButtonListener(eventWaiter, buttonManager),
 				paginatorManager.getListener()
 			);
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){

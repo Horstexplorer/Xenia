@@ -1,5 +1,5 @@
 /*
- *     Copyright 2020 Horstexplorer @ https://www.netbeacon.de
+ *     Copyright 2021 Horstexplorer @ https://www.netbeacon.de
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,28 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.backend.client.objects.internal.exceptions;
+package de.netbeacon.xenia.bot.interactions.buttons;
 
-public class BackendException extends RuntimeException{
+import java.util.Arrays;
 
-	private final int id;
+public class ButtonException extends RuntimeException{
 
-	public BackendException(int id, String string){
-		super(string);
-		this.id = id;
+	public enum Type {
+		UNKNOWN,
+		ILLEGAL_ORIGIN,
+		ILLEGAL_ACCESSOR,
+		OUTDATED
 	}
 
-	public BackendException(int id, Exception exception){
-		super(exception);
-		this.id = id;
+	private final Type type;
+
+	public ButtonException(Type type, String...message){
+		super(Arrays.toString(message));
+		this.type = type;
 	}
 
-	public int getId(){
-		return id;
+	public Type getType(){
+		return type;
 	}
 
 }

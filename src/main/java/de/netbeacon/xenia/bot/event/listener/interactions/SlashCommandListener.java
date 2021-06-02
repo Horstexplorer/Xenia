@@ -28,6 +28,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
 import de.netbeacon.xenia.bot.commands.slash.structure.twitch.RCMDGTwitch;
 import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
@@ -49,7 +50,7 @@ public class SlashCommandListener extends ListenerAdapter{
 	private final SlashCommandHandler slashCommandHandler;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
+	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.eventWaiter = eventWaiter;
 
 		HashMap<String, Command> globalCommandMap = new HashMap<>();
@@ -71,7 +72,7 @@ public class SlashCommandListener extends ListenerAdapter{
 		// register up to 100 commands which can be guild specifically toggled
 
 		// // // // // // // // // //
-		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, backendClient, contextPoolManager, levelPointManager);
+		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, buttonManager, backendClient, contextPoolManager, levelPointManager);
 	}
 
 	@Override

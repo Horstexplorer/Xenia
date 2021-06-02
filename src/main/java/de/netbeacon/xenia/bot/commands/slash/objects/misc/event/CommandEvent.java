@@ -18,6 +18,7 @@ package de.netbeacon.xenia.bot.commands.slash.objects.misc.event;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
@@ -30,6 +31,7 @@ public class CommandEvent{
 	private final XeniaBackendClient backendClient;
 	private final EventWaiter eventWaiter;
 	private final PaginatorManager paginatorManager;
+	private final ButtonManager buttonManager;
 	private final D43Z1ContextPoolManager poolManager;
 	private float estimatedProcessingTime;
 
@@ -38,12 +40,13 @@ public class CommandEvent{
 	 *
 	 * @param event GuildMessageReceivedEvent
 	 */
-	public CommandEvent(SlashCommandEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, D43Z1ContextPoolManager poolManager){
+	public CommandEvent(SlashCommandEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, D43Z1ContextPoolManager poolManager){
 		this.event = event;
 		this.backendDataPack = backendDataPack;
 		this.backendClient = backendClient;
 		this.eventWaiter = eventWaiter;
 		this.paginatorManager = paginatorManager;
+		this.buttonManager = buttonManager;
 		this.poolManager = poolManager;
 	}
 
@@ -91,6 +94,13 @@ public class CommandEvent{
 	public PaginatorManager getPaginatorManager(){
 		return paginatorManager;
 	}
+
+	/**
+	 * Returns the button manager
+	 *
+	 * @return ButtonManager
+	 */
+	public ButtonManager getButtonManager() { return buttonManager; }
 
 	/**
 	 * Returns the context pool manager

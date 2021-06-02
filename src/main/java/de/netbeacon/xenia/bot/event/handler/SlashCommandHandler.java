@@ -20,6 +20,7 @@ import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
+import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
@@ -40,14 +41,16 @@ public class SlashCommandHandler{
 	private final EventWaiter eventWaiter;
 	private final XeniaBackendClient backendClient;
 	private final PaginatorManager paginatorManager;
+	private final ButtonManager buttonManager;
 	private final D43Z1ContextPoolManager contextPoolManager;
 	private final LevelPointManager levelPointManager;
 
-	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
+	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
 		this.globalCommandMap = globalCommandMap;
 		this.guildCommandMap = new ConcurrentHashMap<>(guildCommandMap);
 		this.eventWaiter = eventWaiter;
 		this.paginatorManager = paginatorManager;
+		this.buttonManager = buttonManager;
 		this.backendClient = backendClient;
 		this.contextPoolManager = contextPoolManager;
 		this.levelPointManager = levelPointManager;
@@ -71,7 +74,7 @@ public class SlashCommandHandler{
 		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
-		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, contextPoolManager);
+		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager);
 		// check if xenia is active in this channel
 		if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)){
 			return;
