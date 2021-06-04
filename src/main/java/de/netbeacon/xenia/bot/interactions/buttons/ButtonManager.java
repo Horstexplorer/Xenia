@@ -52,14 +52,14 @@ public class ButtonManager implements IShutdown{
 	public void register(ButtonRegEntry buttonRegEntry){
 		try{
 			lock.lock();
-			buttonRegistry.put(buttonRegEntry.getUuid(), buttonRegEntry);
+			buttonRegistry.put(buttonRegEntry.getId(), buttonRegEntry);
 			ButtonRegEntry.TimeoutPolicy timeoutPolicy = buttonRegEntry.getTimeoutPolicy();
 			if(!timeoutPolicy.equals(ButtonRegEntry.TimeoutPolicy.NONE)){
 				Future<?> timeoutFuture = timeoutExecutorService.schedule(() -> {
 					unregister(buttonRegEntry);
 					buttonRegEntry.deactivate(shardManagerSupplier.get());
 				}, timeoutPolicy.timeoutInMS(), TimeUnit.MILLISECONDS);
-				timeoutRegistry.put(buttonRegEntry.getUuid(), timeoutFuture);
+				timeoutRegistry.put(buttonRegEntry.getId(), timeoutFuture);
 			}
 			buttonRegEntry.setButtonManager(this);
 		}
@@ -69,7 +69,7 @@ public class ButtonManager implements IShutdown{
 	}
 
 	public void unregister(ButtonRegEntry buttonRegEntry){
-		unregister(buttonRegEntry.getUuid());
+		unregister(buttonRegEntry.getId());
 	}
 
 	public void unregister(String id){

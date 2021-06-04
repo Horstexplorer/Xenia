@@ -26,6 +26,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
 
 public class ButtonRegEntry{
 
-	private final String uuid = UUID.randomUUID().toString();
+	private final String id = RandomStringUtils.randomPrint(100);
 	private ButtonManager buttonManager;
 	private final AllowedOrigin allowedOrigin;
 	private final AllowedAccessor allowedAccessor;
@@ -58,8 +59,8 @@ public class ButtonRegEntry{
 		this.deactivationMode = Objects.requireNonNull(deactivationMode);
 	}
 
-	public String getUuid(){
-		return uuid;
+	public String getId(){
+		return id;
 	}
 
 	public void setButtonManager(ButtonManager buttonManager){
@@ -108,7 +109,7 @@ public class ButtonRegEntry{
 	}
 
 	public Button getButton(ButtonStyle buttonStyle, String label){
-		return Button.of(buttonStyle, getUuid(), label);
+		return Button.of(buttonStyle, id, label);
 	}
 
 	public synchronized void deactivate(ShardManager shardManager){
@@ -124,7 +125,7 @@ public class ButtonRegEntry{
 				message.getActionRows().forEach(row -> {
 					List<Button> buttons = new ArrayList<>();
 					row.getButtons().forEach(button -> {
-						if(deactivationMode.equals(DeactivationMode.SELF) && getUuid().equals(button.getId())){
+						if(deactivationMode.equals(DeactivationMode.SELF) && id.equals(button.getId())){
 							// just disable this one
 							buttons.add(button.asDisabled());
 						}else if(deactivationMode.equals(DeactivationMode.ALL) || idBuff.contains(button.getId())){
@@ -251,7 +252,7 @@ public class ButtonRegEntry{
 		public static final DeactivationMode ALL = new DeactivationMode();
 
 		public Set<String> getIds() {
-			return Arrays.stream(buttons).map(ButtonRegEntry::getUuid).collect(Collectors.toSet());
+			return Arrays.stream(buttons).map(ButtonRegEntry::getId).collect(Collectors.toSet());
 		}
 	}
 
