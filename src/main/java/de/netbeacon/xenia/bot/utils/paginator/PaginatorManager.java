@@ -36,7 +36,7 @@ public class PaginatorManager implements IShutdown{
 	protected static final String CLOSE = "\u2716\uFE0F"; // heavy:multiplication:x
 	private static final long EST_LIFETIME = 1000 * 30;
 	private static final long CLEAN_INTERVAL = 1000;
-	private static final long WAIT_TIME = 2000;
+	private static final long WAIT_TIME = 5000;
 	private final Listener listener = new Listener(this);
 	private final ConcurrentHashMap<Long, Triplet<Paginator, Long, Long>> paginatorConcurrentHashMap = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<Long, Long> userPaginatorConcurrentHashMap = new ConcurrentHashMap<>();
@@ -58,7 +58,7 @@ public class PaginatorManager implements IShutdown{
 		try{
 			idBasedLockHolder.getLock(user.getIdLong()).lock();
 			// check that we arent waiting for a result for this user already
-			if(creationRunning.putIfAbsent(user.getIdLong(), false) == null){
+			if(creationRunning.putIfAbsent(user.getIdLong(), false) != null){
 				var waiter = creationRunning.get(user.getIdLong());
 				long preWaitTime = System.currentTimeMillis();
 				synchronized(waiter){
@@ -92,6 +92,7 @@ public class PaginatorManager implements IShutdown{
 			});
 		}
 		catch(InterruptedException | TimeoutException ignore){
+			ignore.printStackTrace();
 		}
 		finally{
 			idBasedLockHolder.getLock(user.getIdLong()).unlock();
