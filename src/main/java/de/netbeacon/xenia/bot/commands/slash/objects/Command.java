@@ -93,8 +93,8 @@ public abstract class Command{
 		if(options != null){
 			for(CmdArgDef option : options){
 				this.options.add(option);
-				commandData.addOption(option.getOptionData());
-				subcommandData.addOption(option.getOptionData());
+				commandData.addOptions(option.getOptionData());
+				subcommandData.addOptions(option.getOptionData());
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public abstract class Command{
 			if(command == null){
 				continue;
 			}
-			subcommandGroupData.addSubcommand(command.getSubCommandData());
+			subcommandGroupData.addSubcommands(command.getSubCommandData());
 			childCommands.put(command.getAlias(), command);
 		}
 	}
@@ -141,10 +141,10 @@ public abstract class Command{
 				continue;
 			}
 			if(areGroups){
-				commandData.addSubcommandGroup(command.getSubcommandGroupData());
+				commandData.addSubcommandGroups(command.getSubcommandGroupData());
 			}
 			else{
-				commandData.addSubcommand(command.getSubCommandData());
+				commandData.addSubcommands(command.getSubCommandData());
 			}
 			childCommands.put(command.getAlias(), command);
 		}

@@ -24,8 +24,8 @@ import de.netbeacon.xenia.bot.interactions.buttons.ButtonRegEntry;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.interactions.ActionRow;
-import net.dv8tion.jda.api.interactions.button.ButtonStyle;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.ButtonStyle;
 
 
 public class CMDBurger extends AdminCommand{
@@ -71,8 +71,8 @@ public class CMDBurger extends AdminCommand{
 				.append("Free burgers!")
 				.setActionRows(
 					ActionRow.of(
-						burger.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.ofUnicode("\uD83C\uDF54")),
-						salad.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.ofUnicode("\uD83E\uDD57"))
+						burger.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.fromUnicode("\uD83C\uDF54")),
+						salad.getButton(ButtonStyle.PRIMARY, " ").withEmoji(Emoji.fromUnicode("\uD83E\uDD57"))
 					)
 				).build();
 			message.editMessage(messageNew).queue();
