@@ -19,41 +19,48 @@ package de.netbeacon.xenia.bot.interactions.buttons;
 import de.netbeacon.utils.shutdownhook.IShutdown;
 import net.dv8tion.jda.api.sharding.ShardManager;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
 public class ButtonManager implements IShutdown{
 
-	private final ConcurrentHashMap<String, ButtonRegEntry> buttonRegistry = new ConcurrentHashMap<>();
-	private final Lock lock = new ReentrantLock();
-	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 	private final Supplier<ShardManager> shardManagerSupplier;
+
+	private final ConcurrentHashMap<String, ButtonRegEntry> buttonRegistry = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String, Future<?>> timeoutRegistry = new ConcurrentHashMap<>();
+
+	private final Lock lock = new ReentrantLock();
+
+	private final ScheduledExecutorService timeoutExecutorService = Executors.newScheduledThreadPool(2);
+
 
 	public ButtonManager(Supplier<ShardManager> shardManagerSupplier){
 		this.shardManagerSupplier = shardManagerSupplier;
-		scheduledExecutorService.scheduleAtFixedRate(() -> {
+		this.timeoutExecutorService.scheduleAtFixedRate(() -> {
 			try{
 				buttonRegistry.forEach((k, v) -> {
-					if(!v.keep()){
-						buttonRegistry.remove(k);
-						v.deactivate(this.shardManagerSupplier.get());
+					if(!v.allowsActivation() || !v.getTimeoutPolicy().isInTime()){
+						unregister(v);
 					}
 				});
-			}
-			catch(Exception ignore){
-			}
-		}, 1, 1, TimeUnit.MINUTES);
+			}catch(Exception ignore){}
+		}, 30, 30, TimeUnit.SECONDS);
 	}
 
 	public void register(ButtonRegEntry buttonRegEntry){
 		try{
 			lock.lock();
 			buttonRegistry.put(buttonRegEntry.getUuid(), buttonRegEntry);
+			ButtonRegEntry.TimeoutPolicy timeoutPolicy = buttonRegEntry.getTimeoutPolicy();
+			if(!timeoutPolicy.equals(ButtonRegEntry.TimeoutPolicy.NONE)){
+				Future<?> timeoutFuture = timeoutExecutorService.schedule(() -> {
+					unregister(buttonRegEntry);
+					buttonRegEntry.deactivate(shardManagerSupplier.get());
+				}, timeoutPolicy.timeoutInMS(), TimeUnit.MILLISECONDS);
+				timeoutRegistry.put(buttonRegEntry.getUuid(), timeoutFuture);
+			}
 			buttonRegEntry.setButtonManager(this);
 		}
 		finally{
@@ -67,6 +74,10 @@ public class ButtonManager implements IShutdown{
 
 	public void unregister(String id){
 		buttonRegistry.remove(id);
+		Future<?> future = timeoutRegistry.remove(id);
+		if(future != null){
+			future.cancel(false);
+		}
 	}
 
 	public void deactivate(ButtonRegEntry buttonRegEntry){
@@ -80,7 +91,7 @@ public class ButtonManager implements IShutdown{
 
 	@Override
 	public void onShutdown() throws Exception{
-		scheduledExecutorService.shutdown();
+		timeoutExecutorService.shutdown();
 	}
 
 }

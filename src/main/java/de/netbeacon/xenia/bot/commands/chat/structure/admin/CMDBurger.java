@@ -42,13 +42,13 @@ public class CMDBurger extends AdminCommand{
 			ButtonRegEntry burger = new ButtonRegEntry(
 				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
 				ButtonRegEntry.AllowedAccessor.ANY,
-				ButtonRegEntry.AllowedActivations.LIMIT(5),
+				ButtonRegEntry.AllowedActivations.LIMIT(10),
 				ButtonRegEntry.TimeoutPolicy.NONE,
 				ButtonRegEntry.ActionHandler.CUSTOM((buttonClickEvent) -> {
 					buttonClickEvent.reply("-1 "+"\uD83C\uDF54 taken by "+buttonClickEvent.getUser().getAsTag()).queue();
 				}),
 				ButtonRegEntry.ExceptionHandler.NONE,
-				ButtonRegEntry.DeactivationMode.SELF
+				ButtonRegEntry.DeactivationMode.ALL
 			);
 			commandEvent.getButtonManager().register(burger);
 

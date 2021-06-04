@@ -22,7 +22,6 @@ import de.netbeacon.xenia.bot.interactions.buttons.ButtonRegEntry;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 
 import java.util.function.BiConsumer;
@@ -54,27 +53,26 @@ public class ButtonHandler{
 			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
 
 			Guild guild = buttonClickEvent.getGuild();
+			Member member = buttonClickEvent.getMember();
 			Message message = buttonClickEvent.getMessage();
 
-			if(guild == null || message == null){
+			if(guild == null || message == null || member == null){
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return;
 			}
 
-			if(!buttonRegEntry.isAllowedOrigin(message)){
+			if(!buttonRegEntry.getAllowedOrigin().isAllowedOrigin(message)){
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return;
 			}
 
-			Member member = buttonClickEvent.getMember();
-			User user = buttonClickEvent.getUser();
 
-			if(member == null ? !buttonRegEntry.isAllowedAccessor(user) : !buttonRegEntry.isAllowedAccessor(member)){
+			if(!buttonRegEntry.getAllowedAccessor().isAllowedAccessor(member)){
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ACCESSOR), buttonClickEvent);
 				return;
 			}
 
-			if(!buttonRegEntry.isInTime() || !buttonRegEntry.allowsActivation()){
+			if(!buttonRegEntry.getTimeoutPolicy().isInTime() || !buttonRegEntry.allowsActivation()){
 				buttonManager.deactivate(buttonRegEntry);
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.OUTDATED), buttonClickEvent);
 				return;
@@ -84,7 +82,7 @@ public class ButtonHandler{
 				actionConsumer.accept(buttonClickEvent);
 			}
 
-			if(!buttonRegEntry.keep()){
+			if(!buttonRegEntry.getTimeoutPolicy().isInTime() || !buttonRegEntry.allowsActivation()){
 				buttonManager.deactivate(buttonRegEntry);
 			}
 
