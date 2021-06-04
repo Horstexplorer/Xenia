@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
+                    "msg": "Algo malo ha sucedido y no estamos seguros de qué ha sido. Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error `%1%`"
                 },
                 "cacheexception": {
-                    "msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
+                    "msg": "El acceso a la caché para obtener los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error `%1%`"
                 },
                 "backendexception": {
-                    "msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
+                    "msg": "De alguna manera la comunicación con mi backend falló (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error `%1%`"
                 },
                 "dataexception": {
-                    "msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error ```%1%```"
+                    "msg": "El acceso a los datos requeridos ha fallado por alguna razón (%0%). Por favor, espere un poco y vuelva a intentarlo. Si el error persiste, póngase en contacto con nosotros con el siguiente código de error `%1%`"
                 },
                 "title": "Oops"
             },
@@ -1865,6 +1865,22 @@
             },
             "estimatedCommand": {
                 "msg": "El comando que escribiste `%0%` no parece existir. ¿Quizás querías usar `%1%` en su lugar?"
+            },
+            "onUnknownButtonId": {
+                "title": "Botón desconocido",
+                "description": "Lo siento pero no sé qué hacer ahora, no recuerdo este botón - puede que esté obsoleto. Si cree que se trata de un error, póngase en contacto con nosotros con el siguiente código de error `%0%`."
+            },
+            "onIllegalOrigin": {
+                "title": "Origen inesperado",
+                "description": "Lo siento pero no espero que este botón sea llamado desde este contexto. Si cree que se trata de un error, póngase en contacto con nosotros con el siguiente código de error `%0%`."
+            },
+            "onIllegalAccessor": {
+                "title": "No autorizado",
+                "description": "No está permitido hacer eso"
+            },
+            "onOutdatedAccess": {
+                "title": "Solicitud obsoleta",
+                "description": "Lo siento, pero el botón ya no se puede utilizar"
             }
         }
     },

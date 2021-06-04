@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
+                    "msg": "Quelque chose de mal est arrivé et nous ne savons pas exactement ce que c'était. Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant `%1%`"
                 },
                 "cacheexception": {
-                    "msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
+                    "msg": "L'accès au cache pour obtenir les données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant `%1%`"
                 },
                 "backendexception": {
-                    "msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
+                    "msg": "D'une manière ou d'une autre, la communication avec mon backend a échoué (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant `%1%`"
                 },
                 "dataexception": {
-                    "msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant ```%1%```"
+                    "msg": "L'accès aux données requises a échoué pour une raison quelconque (%0%). Veuillez patienter un peu et réessayer. Si l'erreur persiste, veuillez nous contacter en indiquant le code d'erreur suivant `%1%`"
                 },
                 "title": "Oups"
             },
@@ -1865,6 +1865,22 @@
             },
             "estimatedCommand": {
                 "msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?"
+            },
+            "onUnknownButtonId": {
+                "title": "Bouton inconnu",
+                "description": "Désolé mais je ne sais pas quoi faire maintenant, je ne me souviens pas de ce bouton - il est peut-être périmé. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant : `%0%`."
+            },
+            "onIllegalOrigin": {
+                "title": "Origine inattendue",
+                "description": "Désolé, mais je ne m'attends pas à ce que ce bouton soit appelé dans ce contexte. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant : `%0%`."
+            },
+            "onIllegalAccessor": {
+                "title": "Non autorisé",
+                "description": "Vous n'avez pas le droit de faire ça."
+            },
+            "onOutdatedAccess": {
+                "title": "Demande dépassée",
+                "description": "Désolé mais le bouton ne peut plus être utilisé"
             }
         }
     },
