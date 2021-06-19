@@ -62,7 +62,7 @@ dependencies {
     implementation group: 'org.apache.tika', name: 'tika-core', version: '1.26' // https://mvnrepository.com/artifact/org.apache.tika/tika-core
 
     // clients
-    implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.4' // purrbot api wrapper
+    implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.5' // purrbot api wrapper
     implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.3' // d43z1
     implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.12.1' // backend client
 }
