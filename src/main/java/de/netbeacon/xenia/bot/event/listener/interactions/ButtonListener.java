@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.event.listener.interactions;
 
+import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.event.handler.ButtonHandler;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -28,9 +29,9 @@ public class ButtonListener extends ListenerAdapter{
 	private final EventWaiter eventWaiter;
 	private final ButtonHandler buttonHandler;
 
-	public ButtonListener(EventWaiter eventWaiter, ButtonManager buttonManager){
+	public ButtonListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, ButtonManager buttonManager){
 		this.eventWaiter = eventWaiter;
-		this.buttonHandler = new ButtonHandler(buttonManager);
+		this.buttonHandler = new ButtonHandler(backendClient, buttonManager);
 	}
 
 	@Override

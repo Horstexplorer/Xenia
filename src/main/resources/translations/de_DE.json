@@ -1831,16 +1831,16 @@
             },
             "onUnhandledException": {
                 "exception": {
-                    "msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
+                    "msg": "Es ist etwas Schlimmes passiert und wir sind nicht ganz sicher, was es war. Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode `%1%`"
                 },
                 "cacheexception": {
-                    "msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
+                    "msg": "Der Zugriff auf den Cache zum Abrufen der erforderlichen Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode `%1%`"
                 },
                 "backendexception": {
-                    "msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
+                    "msg": "Irgendwie ist die Kommunikation mit meinem Backend fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode `%1%`"
                 },
                 "dataexception": {
-                    "msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode ```%1%```"
+                    "msg": "Der Zugriff auf die benötigten Daten ist aus irgendeinem Grund fehlgeschlagen (%0%). Bitte warte ein wenig und versuche es erneut. Wenn der Fehler weiterhin besteht, kontaktieren Sie uns bitte mit folgendem Fehlercode `%1%`"
                 },
                 "title": "Oh je"
             },
@@ -1865,6 +1865,22 @@
             },
             "estimatedCommand": {
                 "msg": "Der eingegebene Befehl `%0%` scheint nicht zu existieren. Vielleicht wolltest du stattdessen `%1%` verwenden?"
+            },
+            "onUnknownButtonId": {
+                "title": "Unbekannter Button",
+                "description": "Entschuldigung, ich erinnere mich nicht an diese Schaltfläche - sie könnte veraltet sein. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie uns bitte mit dem folgenden Fehlercode `%0%`"
+            },
+            "onIllegalOrigin": {
+                "title": "Unerwartete Herkunft",
+                "description": "Entschuldigung, ich glaube nicht dass diese Schaltfläche aus diesem Kontext aufgerufen werden sollte. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie uns bitte mit dem folgenden Fehlercode `%0%`"
+            },
+            "onIllegalAccessor": {
+                "title": "Nicht autorisiert",
+                "description": "Das dürfen Sie nicht tun"
+            },
+            "onOutdatedAccess": {
+                "title": "Veraltete Anfrage",
+                "description": "Die Taste kann leider nicht mehr verwendet werden"
             }
         }
     },

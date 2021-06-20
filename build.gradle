@@ -29,7 +29,7 @@ dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.1_268' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_280' // https://mvnrepository.com/artifact/net.dv8tion/JDA
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.7' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
 
     // JSON
@@ -44,8 +44,8 @@ dependencies {
     // CRYPT
 
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4' // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.68' // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
-    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.68' // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69' // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69' // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
 
     // JS Engine (eval)
 
@@ -58,13 +58,13 @@ dependencies {
     // OTHER THINGS
 
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0' // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    implementation group: 'commons-io', name: 'commons-io', version: '2.9.0' // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation group: 'commons-io', name: 'commons-io', version: '2.10.0' // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'org.apache.tika', name: 'tika-core', version: '1.26' // https://mvnrepository.com/artifact/org.apache.tika/tika-core
 
     // clients
-    implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.4' // purrbot api wrapper
+    implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.5' // purrbot api wrapper
     implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.3' // d43z1
-    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.12.1' // backend client
+    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.13.0' // backend client
 }
 
 processResources {

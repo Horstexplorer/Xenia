@@ -156,7 +156,7 @@ public class XeniaCore{
 				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
 				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
 				new GuildReactionListener(eventWaiter),
-				new ButtonListener(eventWaiter, buttonManager),
+				new ButtonListener(xeniaBackendClient,  eventWaiter, buttonManager),
 				paginatorManager.getListener()
 			);
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
