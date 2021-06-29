@@ -47,6 +47,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static de.netbeacon.d43z.one.settings.StaticSettings.*;
+
 public class D43Z1Imp implements IShutdown{
 
 	private static D43Z1Imp instance;
@@ -65,6 +67,13 @@ public class D43Z1Imp implements IShutdown{
 
 	private final Eval eval;
 	private final Lock lock = new ReentrantLock();
+
+	static {
+		EVAL_MAX_PROCESSING_THREADS.override(Runtime.getRuntime().availableProcessors()); // max threads as cores
+		EVAL_MAX_CONCURRENT_TASKS.override(2); // max 2 conc tasks
+		EVAL_MAX_THREADS_PER_REQUEST.override(EVAL_MAX_PROCESSING_THREADS.get() / 2); // each task gets half of the cpu
+		EVAL_MAX_PROCESSING_TIME.override(1500); // max 1.5 seconds
+	}
 
 	private D43Z1Imp() throws IOException{
 		/*
