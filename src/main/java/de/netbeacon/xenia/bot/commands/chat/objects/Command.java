@@ -283,10 +283,13 @@ public abstract class Command{
 				// bot does not have the required permissions
 				if(selfMember.hasPermission(textChannel, Permission.MESSAGE_WRITE)){
 					if(selfMember.hasPermission(textChannel, Permission.MESSAGE_EMBED_LINKS)){
-						textChannel.sendMessage(onMissingBotPerms(commandEvent, translationPackage)).queue();
+						textChannel.sendMessageEmbeds(onMissingBotPerms(commandEvent, translationPackage)).queue();
 					}
 					else{
-						message.reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray())).mentionRepliedUser(false).queue();
+						message
+							.reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray()))
+							.mentionRepliedUser(false)
+							.queue();
 					}
 				}
 				return;
@@ -307,7 +310,10 @@ public abstract class Command{
 					)
 			){
 				// invalid permission
-				message.reply(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).mentionRepliedUser(false).queue();
+				message
+					.replyEmbeds(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE)))
+					.mentionRepliedUser(false)
+					.queue();
 				return;
 			}
 			// cooldown
@@ -315,7 +321,10 @@ public abstract class Command{
 				// process cd
 				if(!commandCooldown.allow(guild.getIdLong(), author.getIdLong())){
 					// cd running
-					message.reply(onCooldownActive(translationPackage)).mentionRepliedUser(false).queue();
+					message
+						.replyEmbeds(onCooldownActive(translationPackage))
+						.mentionRepliedUser(false)
+						.queue();
 					return;
 				}
 				// activate cd
@@ -323,14 +332,20 @@ public abstract class Command{
 			}
 			// check nsfw
 			if(!commandEvent.getEvent().getChannel().isNSFW() && isNSFW()){
-				message.reply(onMissingNSFW(translationPackage)).mentionRepliedUser(false).queue();
+				message
+					.replyEmbeds(onMissingNSFW(translationPackage))
+					.mentionRepliedUser(false)
+					.queue();
 				return;
 			}
 			// check required args
 			CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
 			if(!cmdArgs.verify()){
 				// missing args
-				message.reply(onMissingArgs(translationPackage)).mentionRepliedUser(false).queue();
+				message
+					.replyEmbeds(onMissingArgs(translationPackage))
+					.mentionRepliedUser(false)
+					.queue();
 				return;
 			}
 			// everything alright
@@ -338,7 +353,10 @@ public abstract class Command{
 				onExecution(cmdArgs, commandEvent, translationPackage);
 			}
 			catch(Exception e){
-				textChannel.sendMessage(onUnhandledException(translationPackage, e)).queue();
+				message
+					.replyEmbeds(onUnhandledException(translationPackage, e))
+					.mentionRepliedUser(false)
+					.queue();
 			}
 		}
 		else{
@@ -361,7 +379,10 @@ public abstract class Command{
 					}
 					TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
 					if(translationPackage == null){
-						message.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+						message
+							.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.")
+							.mentionRepliedUser(false)
+							.queue();
 						return;
 					}
 					if(commandEvent.getBackendDataPack().getbGuild().getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
@@ -378,10 +399,16 @@ public abstract class Command{
 						}
 						commandPathBuilder.append(" ").append(this.getAlias());
 						String commandPath = commandPathBuilder.toString().trim();
-						message.reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", commandPath + " " + args.get(0), commandPath + " " + estimatedCommands.get(0).getAlias()))).mentionRepliedUser(false).queue();
+						message
+							.replyEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", commandPath + " " + args.get(0), commandPath + " " + estimatedCommands.get(0).getAlias())))
+							.mentionRepliedUser(false)
+							.queue();
 					}
 					else{
-						message.reply(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).mentionRepliedUser(false).queue();
+						message
+							.replyEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias())))
+							.mentionRepliedUser(false)
+							.queue();
 					}
 				}
 			}
