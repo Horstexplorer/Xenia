@@ -24,7 +24,7 @@ import de.netbeacon.xenia.backend.client.objects.external.Member;
 import de.netbeacon.xenia.backend.client.objects.external.User;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
-import net.dv8tion.jda.api.Permission;
+import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
@@ -70,8 +70,7 @@ public class GuildAccessListener extends ListenerAdapter{
 				logger.debug("Loading Guild Async " + event.getGuild().getId());
 			}
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			g.setMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
-			g.updateAsync();
+			BackendQuickAction.Update.execute(g, event.getGuild(), true, false);
 			Consumer<Guild> updateChannelInfo = guild -> {
 				// update all channels
 				ChannelCache channelCache = guild.getChannelCache();
@@ -82,24 +81,7 @@ public class GuildAccessListener extends ListenerAdapter{
 							channelCache.delete(channel.getId());
 							continue;
 						}
-						// update all names & topics
-						channel.lSetMetaData(textChannel.getName(), textChannel.getTopic());
-						// update flags
-						Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(channel.getChannelFlags().getValue());
-						if(textChannel.isNews()){
-							channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-						}
-						else{
-							channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-						}
-						if(textChannel.isNSFW()){
-							channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-						}
-						else{
-							channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-						}
-						channel.lSetChannelFlags(channelFlags);
-						channel.updateAsync();
+						BackendQuickAction.Update.execute(channel, textChannel, true, false);
 					}
 					catch(CacheException e){
 						logger.error("A CacheException occurred during updating the channel data at the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
@@ -130,29 +112,14 @@ public class GuildAccessListener extends ListenerAdapter{
 		try{
 			logger.info("Joined A New Guild: " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			g.lSetMetaData(event.getGuild().getName(), event.getGuild().getIconUrl());
-			g.updateAsync();
+			BackendQuickAction.Update.execute(g, event.getGuild(), true, false);
 			event.getGuild().getTextChannels().forEach(textChannel -> {
 				backendClient.getBackendProcessor().getScalingExecutor().execute(() -> {
 					Channel channel = g.getChannelCache().get(textChannel.getIdLong());
 					if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){
 						channel.lSetTmpLoggingActive(false);
 					}
-					Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(channel.getChannelFlags().getValue());
-					if(textChannel.isNews()){
-						channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-					}
-					else{
-						channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-					}
-					if(textChannel.isNSFW()){
-						channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-					}
-					else{
-						channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-					}
-					channel.lSetChannelFlags(channelFlags);
-					channel.updateAsync();
+					BackendQuickAction.Update.execute(channel, textChannel, true, false);
 				});
 			});
 		}
@@ -236,10 +203,10 @@ public class GuildAccessListener extends ListenerAdapter{
 			User u = backendClient.getUserCache().get(event.getUser().getIdLong());
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
 			Member m = g.getMemberCache().get(event.getMember().getIdLong());
-			u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
-			m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
-			u.updateAsync(true);
-			m.updateAsync(true);
+
+			BackendQuickAction.Update.execute(u, event.getUser(), true, true);
+			BackendQuickAction.Update.execute(m, event.getMember(), true, true);
+
 		}
 		catch(CacheException e){
 			logger.error("A CacheException occurred during the GuildMemberJoinEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
@@ -277,10 +244,9 @@ public class GuildAccessListener extends ListenerAdapter{
 			User u = backendClient.getUserCache().get(event.getUser().getIdLong());
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
 			Member m = g.getMemberCache().get(event.getUser().getIdLong());
-			u.lSetMetaData(event.getUser().getAsTag(), event.getUser().getEffectiveAvatarUrl());
-			m.lSetMetaData(event.getMember().getEffectiveName(), event.getMember().hasPermission(Permission.ADMINISTRATOR), event.getMember().isOwner());
-			u.updateAsync(true);
-			m.updateAsync(true);
+
+			BackendQuickAction.Update.execute(u, event.getUser(), true, true);
+			BackendQuickAction.Update.execute(m, event.getMember(), true, true);
 		}
 		catch(CacheException e){
 			logger.error("A CacheException occurred during the GuildMemberUpdateEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
@@ -300,11 +266,10 @@ public class GuildAccessListener extends ListenerAdapter{
 		try{
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
 			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
 			if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){
 				c.lSetTmpLoggingActive(false);
 			}
-			c.updateAsync(true);
+			BackendQuickAction.Update.execute(c, event.getChannel(), true, false);
 		}
 		catch(CacheException e){
 			logger.error("A CacheException occurred during the TextChannelCreateEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
@@ -319,134 +284,22 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onTextChannelUpdateName(@NotNull TextChannelUpdateNameEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
-			Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
-			if(event.getChannel().isNews()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-			}
-			if(event.getChannel().isNSFW()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-			}
-			c.lSetChannelFlags(channelFlags);
-			c.updateAsync(true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelUpdateNameEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelUpdateNameEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelUpdateNameEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		channelUpdate(event.getChannel());
 	}
 
 	@Override
 	public void onTextChannelUpdateTopic(@NotNull TextChannelUpdateTopicEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
-			Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
-			if(event.getChannel().isNews()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-			}
-			if(event.getChannel().isNSFW()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-			}
-			c.lSetChannelFlags(channelFlags);
-			c.updateAsync(true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelUpdateTopicEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelUpdateTopicEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelUpdateTopicEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		channelUpdate(event.getChannel());
 	}
 
 	@Override
 	public void onTextChannelUpdateNSFW(@NotNull TextChannelUpdateNSFWEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
-			Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
-			if(event.getChannel().isNews()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-			}
-			if(event.getChannel().isNSFW()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-			}
-			c.lSetChannelFlags(channelFlags);
-			c.updateAsync(true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelUpdateNSFWEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelUpdateNSFWEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelUpdateNSFWEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		channelUpdate(event.getChannel());
 	}
 
 	@Override
 	public void onTextChannelUpdateNews(@NotNull TextChannelUpdateNewsEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			c.lSetMetaData(event.getChannel().getName(), event.getChannel().getTopic());
-			Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(c.getChannelFlags().getValue());
-			if(event.getChannel().isNews()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NEWS);
-			}
-			if(event.getChannel().isNSFW()){
-				channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
-			}
-			else{
-				channelFlags.unset(Channel.ChannelFlags.Flags.NSFW);
-			}
-			c.lSetChannelFlags(channelFlags);
-			c.updateAsync(true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelUpdateNewsEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelUpdateNewsEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelUpdateNewsEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		channelUpdate(event.getChannel());
 	}
 
 	@Override
@@ -466,6 +319,24 @@ public class GuildAccessListener extends ListenerAdapter{
 		}
 	}
 
+	private void channelUpdate(TextChannel textChannel){
+		try{
+			Guild g = backendClient.getGuildCache().get(textChannel.getGuild().getIdLong());
+			Channel c = g.getChannelCache().get(textChannel.getIdLong());
+
+			BackendQuickAction.Update.execute(c, textChannel, true, false);
+		}
+		catch(CacheException e){
+			logger.error("A CacheException occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
+		}
+		catch(DataException e){
+			logger.error("A DataException occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
+		}
+		catch(Exception e){
+			logger.error("An unknown error occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
+		}
+	}
+
 	// GUILD
 
 	@Override
@@ -478,11 +349,11 @@ public class GuildAccessListener extends ListenerAdapter{
 		guildMetaUpdate(event.getGuild());
 	}
 
-	public void guildMetaUpdate(net.dv8tion.jda.api.entities.Guild guild){
+	private void guildMetaUpdate(net.dv8tion.jda.api.entities.Guild guild){
 		try{
 			Guild g = backendClient.getGuildCache().get(guild.getIdLong());
-			g.lSetMetaData(guild.getName(), guild.getIconUrl());
-			g.updateAsync(true);
+
+			BackendQuickAction.Update.execute(g, guild, true, false);
 		}
 		catch(CacheException e){
 			logger.error("A CacheException occurred during the _meta_GuildUpdateEvent of guild " + guild.getIdLong(), e);
