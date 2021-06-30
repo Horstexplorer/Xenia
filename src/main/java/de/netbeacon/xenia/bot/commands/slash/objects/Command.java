@@ -217,7 +217,10 @@ public abstract class Command{
 		if(!isCommandGroup()){
 			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
 			if(translationPackage == null){
-				commandEvent.getEvent().reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
+				commandEvent.getEvent()
+					.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.")
+					.setEphemeral(true)
+					.queue();
 				return;
 			}
 			// check bot permissions
@@ -228,7 +231,10 @@ public abstract class Command{
 						commandEvent.getEvent().replyEmbeds(onMissingBotPerms(commandEvent, translationPackage)).queue();
 					}
 					else{
-						commandEvent.getEvent().reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray())).queue();
+						commandEvent.getEvent()
+							.reply(translationPackage.getTranslation("default.onMissingBotPerms.description") + "\n" + translationPackage.getTranslation("default.onMissingBotPerms.requiredPerms.fn") + " " + Arrays.toString(botPermissions.toArray()))
+							.setEphemeral(true)
+							.queue();
 					}
 				}
 				return;
@@ -249,7 +255,10 @@ public abstract class Command{
 					)
 			){
 				// invalid permission
-				commandEvent.getEvent().replyEmbeds(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE))).queue();
+				commandEvent.getEvent()
+					.replyEmbeds(onMissingMemberPerms(commandEvent, translationPackage, bGuild.getSettings().has(Guild.GuildSettings.Settings.VPERM_ENABLE)))
+					.setEphemeral(true)
+					.queue();
 				return;
 			}
 			// check cooldown
@@ -257,7 +266,10 @@ public abstract class Command{
 				// process cd
 				if(!commandCooldown.allow(guild.getIdLong(), author.getIdLong())){
 					// cd running
-					commandEvent.getEvent().replyEmbeds(onCooldownActive(translationPackage)).queue();
+					commandEvent.getEvent()
+						.replyEmbeds(onCooldownActive(translationPackage))
+						.setEphemeral(true)
+						.queue();
 					return;
 				}
 				// activate cd
@@ -269,12 +281,18 @@ public abstract class Command{
 				cmdArgs = CmdArgFactory.getArgs((s) -> commandEvent.getEvent().getOption(s), options);
 			}
 			catch(CmdArgFactory.Exception e){
-				commandEvent.getEvent().replyEmbeds(onBadOptions(translationPackage)).queue();
+				commandEvent.getEvent()
+					.replyEmbeds(onBadOptions(translationPackage))
+					.setEphemeral(true)
+					.queue();
 				return;
 			}
 			// check nsfw
 			if(!textChannel.isNSFW() && isNSFW()){
-				commandEvent.getEvent().replyEmbeds(onMissingNSFW(translationPackage)).queue();
+				commandEvent.getEvent()
+					.replyEmbeds(onMissingNSFW(translationPackage))
+					.setEphemeral(true)
+					.queue();
 				return;
 			}
 			// everything alright
@@ -285,7 +303,10 @@ public abstract class Command{
 				onExecution(cmdArgs, commandEvent, translationPackage, ackRequired);
 			}
 			catch(Exception e){
-				commandEvent.getEvent().replyEmbeds(onUnhandledException(translationPackage, e)).queue();
+				commandEvent.getEvent()
+					.replyEmbeds(onUnhandledException(translationPackage, e))
+					.setEphemeral(true)
+					.queue();
 			}
 			finally{
 				processingAvgCounter.add(System.currentTimeMillis() - startTime);

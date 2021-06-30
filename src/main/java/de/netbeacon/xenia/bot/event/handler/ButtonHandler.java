@@ -64,7 +64,10 @@ public class ButtonHandler{
 			ButtonRegEntry buttonRegEntry = buttonManager.get(btnid);
 
 			if(buttonRegEntry == null){
-				buttonClickEvent.replyEmbeds(onUnknownButtonId(translationManager.getDefaultTranslationPackage())).setEphemeral(true).queue();
+				buttonClickEvent
+					.replyEmbeds(onUnknownButtonId(translationManager.getDefaultTranslationPackage()))
+					.setEphemeral(true)
+					.queue();
 				return;
 			}
 
@@ -72,19 +75,28 @@ public class ButtonHandler{
 			BiConsumer<Exception, ButtonClickEvent> exceptionConsumer = buttonRegEntry.getExceptionHandler().exceptionConsumer();
 
 			if(guild == null || message == null || member == null || !buttonRegEntry.getAllowedOrigin().isAllowedOrigin(message)){
-				buttonClickEvent.replyEmbeds(onIllegalOrigin(translationManager.getDefaultTranslationPackage())).setEphemeral(true).queue();
+				buttonClickEvent
+					.replyEmbeds(onIllegalOrigin(translationManager.getDefaultTranslationPackage()))
+					.setEphemeral(true)
+					.queue();
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ORIGIN), buttonClickEvent);
 				return; // illegal origin, dont ack
 			}
 
 			if(!buttonRegEntry.getAllowedAccessor().isAllowedAccessor(member)){
-				buttonClickEvent.replyEmbeds(onIllegalAccessor(translationManager.getDefaultTranslationPackage())).setEphemeral(true).queue();
+				buttonClickEvent
+					.replyEmbeds(onIllegalAccessor(translationManager.getDefaultTranslationPackage()))
+					.setEphemeral(true)
+					.queue();
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.ILLEGAL_ACCESSOR), buttonClickEvent);
 				return;
 			}
 
 			if(!buttonRegEntry.getTimeoutPolicy().isInTime() || !buttonRegEntry.allowsActivation()){
-				buttonClickEvent.replyEmbeds(onOutdatedAccess(translationManager.getDefaultTranslationPackage())).setEphemeral(true).queue();
+				buttonClickEvent
+					.replyEmbeds(onOutdatedAccess(translationManager.getDefaultTranslationPackage()))
+					.setEphemeral(true)
+					.queue();
 				buttonManager.deactivate(buttonRegEntry);
 				if(exceptionConsumer != null) exceptionConsumer.accept(new ButtonException(ButtonException.Type.OUTDATED), buttonClickEvent);
 				return;

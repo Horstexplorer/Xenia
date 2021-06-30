@@ -21,6 +21,7 @@ import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
+import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
@@ -72,6 +73,11 @@ public class SlashCommandHandler{
 		Member bMember = bGuild.getMemberCache().get(event.getUser().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+		// try to update
+		try {
+			BackendQuickAction.Update.execute(bUser, event.getUser(), true, false);
+			BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
+		}catch(Exception ignore){}
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
 		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager);

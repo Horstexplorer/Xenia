@@ -30,6 +30,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
+import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
@@ -84,6 +85,11 @@ public class MessageHandler{
 		Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+		// try to update
+		try {
+			BackendQuickAction.Update.execute(bUser, event.getAuthor(), true, false);
+			BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
+		}catch(Exception ignore){}
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
 		// check if xenia has been disabled in which case we dont do anything
