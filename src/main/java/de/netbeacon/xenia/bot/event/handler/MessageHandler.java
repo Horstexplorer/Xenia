@@ -170,7 +170,7 @@ public class MessageHandler{
 				return;
 			}
 			if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
-				event.getChannel().sendMessage(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
+				event.getChannel().sendMessageEmbeds(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
 				return;
 			}
 			command = estimatedCommands.get(0);
@@ -202,7 +202,7 @@ public class MessageHandler{
 			bChannel.setTmpLoggingChannelId(-1);
 			return;
 		}
-		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
+		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
 			.addField("MessageID", event.getMessageId(), true)
 			.addField("Author", event.getAuthor().getAsTag(), true)
 			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
@@ -229,7 +229,7 @@ public class MessageHandler{
 			bChannel.setTmpLoggingChannelId(-1);
 			return;
 		}
-		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
+		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
 			.addField("MessageID", event.getMessageId(), true)
 			.addField("AuthorID", String.valueOf(message.getUserId()), true)
 			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)

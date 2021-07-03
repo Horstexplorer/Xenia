@@ -29,7 +29,7 @@ dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_288' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_291' // https://mvnrepository.com/artifact/net.dv8tion/JDA
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.5.7' // https://mvnrepository.com/artifact/club.minnced/discord-webhooks
 
     // JSON
@@ -64,7 +64,11 @@ dependencies {
     // clients
     implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.5' // purrbot api wrapper
     implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.3' // d43z1
-    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.13.2' // backend client
+    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.13.2', changing: true // backend client
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'hours'
 }
 
 processResources {
