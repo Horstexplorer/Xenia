@@ -27,7 +27,7 @@ import de.netbeacon.xenia.bot.commands.slash.structure.notification.RCMDGNotific
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
 import de.netbeacon.xenia.bot.commands.slash.structure.twitch.RCMDGTwitch;
-import de.netbeacon.xenia.bot.event.handler.SlashCommandHandler;
+import de.netbeacon.xenia.bot.event.handler.interactions.SlashCommandHandler;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;

@@ -17,7 +17,7 @@
 package de.netbeacon.xenia.bot.event.listener.interactions;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.event.handler.ButtonHandler;
+import de.netbeacon.xenia.bot.event.handler.interactions.ButtonHandler;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
