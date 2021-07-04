@@ -36,7 +36,7 @@ public class CMDPing extends AdminCommand{
 		double avgGatewayPing = XeniaCore.getInstance().getShardManager().getAverageGatewayPing();
 		double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
 		double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
-		Info info = new Info(commandEvent.getBackendClient().getBackendProcessor(), Info.Mode.Public);
+		Info info = new Info(commandEvent.getToolBundle().backendClient().getBackendProcessor(), Info.Mode.Public);
 		info.get();
 
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getAuthor())

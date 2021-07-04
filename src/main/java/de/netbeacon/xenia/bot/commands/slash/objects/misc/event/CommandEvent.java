@@ -16,23 +16,15 @@
 
 package de.netbeacon.xenia.bot.commands.slash.objects.misc.event;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
-import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
-import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 public class CommandEvent{
 
 	private final SlashCommandEvent event;
 	private final BackendDataPack backendDataPack;
-	private final XeniaBackendClient backendClient;
-	private final EventWaiter eventWaiter;
-	private final PaginatorManager paginatorManager;
-	private final ButtonManager buttonManager;
-	private final D43Z1ContextPoolManager poolManager;
+	private final ToolBundle toolBundle;
 	private float estimatedProcessingTime;
 
 	/**
@@ -40,14 +32,10 @@ public class CommandEvent{
 	 *
 	 * @param event GuildMessageReceivedEvent
 	 */
-	public CommandEvent(SlashCommandEvent event, BackendDataPack backendDataPack, XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, D43Z1ContextPoolManager poolManager){
+	public CommandEvent(SlashCommandEvent event, BackendDataPack backendDataPack, ToolBundle toolBundle){
 		this.event = event;
 		this.backendDataPack = backendDataPack;
-		this.backendClient = backendClient;
-		this.eventWaiter = eventWaiter;
-		this.paginatorManager = paginatorManager;
-		this.buttonManager = buttonManager;
-		this.poolManager = poolManager;
+		this.toolBundle = toolBundle;
 	}
 
 	/**
@@ -68,47 +56,8 @@ public class CommandEvent{
 		return backendDataPack;
 	}
 
-	/**
-	 * Returns the backend client
-	 *
-	 * @return Backend client
-	 */
-	public XeniaBackendClient getBackendClient(){
-		return backendClient;
-	}
-
-	/**
-	 * Returns the event waiter
-	 *
-	 * @return event waiter
-	 */
-	public EventWaiter getEventWaiter(){
-		return eventWaiter;
-	}
-
-	/**
-	 * Returns the pagination manager
-	 *
-	 * @return PaginatorManager
-	 */
-	public PaginatorManager getPaginatorManager(){
-		return paginatorManager;
-	}
-
-	/**
-	 * Returns the button manager
-	 *
-	 * @return ButtonManager
-	 */
-	public ButtonManager getButtonManager() { return buttonManager; }
-
-	/**
-	 * Returns the context pool manager
-	 *
-	 * @return D43Z1ContextPoolManager
-	 */
-	public D43Z1ContextPoolManager getPoolManager(){
-		return poolManager;
+	public ToolBundle getToolBundle(){
+		return toolBundle;
 	}
 
 	/**
@@ -129,76 +78,7 @@ public class CommandEvent{
 		return estimatedProcessingTime;
 	}
 
-	public static class BackendDataPack{
 
-		private final Guild bGuild;
-		private final User bUser;
-		private final Member bMember;
-		private final Channel bChannel;
-		private final License bLicense;
-
-		/**
-		 * Creates a new instance of this class
-		 *
-		 * @param bGuild
-		 * @param bUser
-		 * @param bMember
-		 * @param bChannel
-		 * @param bLicense
-		 */
-		public BackendDataPack(Guild bGuild, User bUser, Member bMember, Channel bChannel, License bLicense){
-			this.bGuild = bGuild;
-			this.bUser = bUser;
-			this.bMember = bMember;
-			this.bChannel = bChannel;
-			this.bLicense = bLicense;
-		}
-
-		/**
-		 * Returns the guild
-		 *
-		 * @return guild
-		 */
-		public Guild getbGuild(){
-			return bGuild;
-		}
-
-		/**
-		 * Returns the user
-		 *
-		 * @return user
-		 */
-		public User getbUser(){
-			return bUser;
-		}
-
-		/**
-		 * Returns the member
-		 *
-		 * @return member
-		 */
-		public Member getbMember(){
-			return bMember;
-		}
-
-		/**
-		 * Returns the channel
-		 *
-		 * @return channel
-		 */
-		public Channel getbChannel(){
-			return bChannel;
-		}
-
-		/**
-		 * Returns the license
-		 *
-		 * @return license
-		 */
-		public License getbLicense(){
-			return bLicense;
-		}
-
-	}
+	public static record BackendDataPack(Guild guild, User user, Member member, Channel channel, License license){}
 
 }

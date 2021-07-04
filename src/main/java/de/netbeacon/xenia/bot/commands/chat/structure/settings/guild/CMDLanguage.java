@@ -52,7 +52,7 @@ public class CMDLanguage extends Command{
 			if(translationPackage1 == null){
 				throw new IllegalArgumentException();
 			}
-			commandEvent.getBackendDataPack().getbGuild().setPreferredLanguage(translationPackage1.getLanguageId());
+			commandEvent.getBackendDataPack().guild().setPreferredLanguage(translationPackage1.getLanguageId());
 			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){

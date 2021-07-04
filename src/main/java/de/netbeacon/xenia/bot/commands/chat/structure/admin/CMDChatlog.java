@@ -44,12 +44,12 @@ public class CMDChatlog extends AdminCommand{
 		CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
 		CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
-		Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+		Channel bChannel = commandEvent.getBackendDataPack().channel();
 
 		if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
 			long cId = channelArg.getValue().getId();
-			if(commandEvent.getBackendDataPack().getbGuild().getChannelCache().contains(cId)){
-				bChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(cId);
+			if(commandEvent.getBackendDataPack().guild().getChannelCache().contains(cId)){
+				bChannel = commandEvent.getBackendDataPack().guild().getChannelCache().get(cId);
 			}
 		}
 

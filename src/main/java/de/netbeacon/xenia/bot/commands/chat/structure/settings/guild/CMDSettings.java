@@ -50,14 +50,14 @@ public class CMDSettings extends Command{
 		CmdArg<Boolean> mode = args.getByIndex(1);
 		try{
 			Guild.GuildSettings.Settings setting = Guild.GuildSettings.Settings.valueOf(settingA.getValue().toUpperCase());
-			Guild.GuildSettings guildSettings = new Guild.GuildSettings(commandEvent.getBackendDataPack().getbGuild().getSettings().getValue());
+			Guild.GuildSettings guildSettings = new Guild.GuildSettings(commandEvent.getBackendDataPack().guild().getSettings().getValue());
 			if(mode.getValue()){
 				guildSettings.set(setting);
 			}
 			else{
 				guildSettings.unset(setting);
 			}
-			commandEvent.getBackendDataPack().getbGuild().setGuildSettings(guildSettings);
+			commandEvent.getBackendDataPack().guild().setGuildSettings(guildSettings);
 			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){

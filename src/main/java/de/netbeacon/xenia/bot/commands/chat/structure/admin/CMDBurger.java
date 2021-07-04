@@ -50,7 +50,7 @@ public class CMDBurger extends AdminCommand{
 				ButtonRegEntry.ExceptionHandler.NONE,
 				ButtonRegEntry.DeactivationMode.ALL
 			);
-			commandEvent.getButtonManager().register(burger);
+			commandEvent.getToolBundle().buttonManager().register(burger);
 
 			ButtonRegEntry salad = new ButtonRegEntry(
 				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
@@ -63,7 +63,7 @@ public class CMDBurger extends AdminCommand{
 				ButtonRegEntry.ExceptionHandler.NONE,
 				ButtonRegEntry.DeactivationMode.ALL
 			);
-			commandEvent.getButtonManager().register(salad);
+			commandEvent.getToolBundle().buttonManager().register(salad);
 
 
 

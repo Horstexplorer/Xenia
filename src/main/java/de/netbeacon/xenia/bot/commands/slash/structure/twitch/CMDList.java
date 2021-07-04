@@ -44,7 +44,7 @@ public class CMDList extends Command{
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
 		// get all stream notifications
-		List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
+		List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
 		StringBuilder stringBuilder = new StringBuilder();
 		for(TwitchNotification twitchNotification : twitchNotifications){
 			stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");

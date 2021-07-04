@@ -46,15 +46,15 @@ public class CMDInfo extends AdminCommand{
 		Runtime runtime = Runtime.getRuntime();
 		GuildMessageReceivedEvent event = commandEvent.getEvent();
 		long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
-		Info bInfo = commandEvent.getBackendClient().getInfo(Info.Mode.Private);
+		Info bInfo = commandEvent.getToolBundle().backendClient().getInfo(Info.Mode.Private);
 		bInfo.get();
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getAuthor())
 			.addField("Xenia", "Version: " + AppInfo.get("buildVersion") + "_" + AppInfo.get("buildNumber"), false)
 			.addField("Gateway Ping:", shardManager.getAverageGatewayPing() + "ms", true)
 			.addField("Shards:", String.valueOf(event.getJDA().getShardInfo().getShardTotal()), true)
 			.addField("Shard:", String.valueOf(event.getJDA().getShardInfo().getShardId()), true)
-			.addField("Instance:", commandEvent.getBackendClient().getSetupData().getClientName(), true)
-			.addField("Location:", commandEvent.getBackendClient().getSetupData().getClientLocation(), true)
+			.addField("Instance:", commandEvent.getToolBundle().backendClient().getSetupData().getClientName(), true)
+			.addField("Location:", commandEvent.getToolBundle().backendClient().getSetupData().getClientLocation(), true)
 			.addField("Uptime:", String.format("%d days, %d hours, %d min, %d seconds",
 				(int) ((uptime / (1000 * 60 * 60 * 24))),
 				(int) ((uptime / (1000 * 60 * 60)) % 24),
@@ -67,9 +67,9 @@ public class CMDInfo extends AdminCommand{
 			.addField("Xenia-Backend", "Version: " + bInfo.getVersion(), false)
 			.addField("Request Ping:", bInfo.getPing() + "ms", false)
 			.addField("Guilds", String.valueOf(bInfo.getGuildCount()), true)
-			.addField("GuildsCOTI", String.valueOf(commandEvent.getBackendClient().getGuildCache().getAllAsList().size()), true)
+			.addField("GuildsCOTI", String.valueOf(commandEvent.getToolBundle().backendClient().getGuildCache().getAllAsList().size()), true)
 			.addField("Users", String.valueOf(bInfo.getUserCount()), true)
-			.addField("UsersCOTI", String.valueOf(commandEvent.getBackendClient().getUserCache().getAllAsList().size()), true)
+			.addField("UsersCOTI", String.valueOf(commandEvent.getToolBundle().backendClient().getUserCache().getAllAsList().size()), true)
 			.addField("Members", String.valueOf(bInfo.getMemberCount()), true)
 			.addField("Messages", String.valueOf(bInfo.getMessageCount()), true)
 			.addField("Channels", bInfo.getChannelCount() + "(" + (bInfo.getChannelCount() - bInfo.getForbiddenChannels()) + ")", true);

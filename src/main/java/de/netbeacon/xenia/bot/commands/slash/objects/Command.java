@@ -209,13 +209,13 @@ public abstract class Command{
 		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
 		var author = commandEvent.getEvent().getUser();
 		var member = commandEvent.getEvent().getMember();
-		var bMember = commandEvent.getBackendDataPack().getbMember();
+		var bMember = commandEvent.getBackendDataPack().member();
 		var textChannel = commandEvent.getEvent().getTextChannel();
 		var guild = commandEvent.getEvent().getGuild();
-		var bGuild = commandEvent.getBackendDataPack().getbGuild();
+		var bGuild = commandEvent.getBackendDataPack().guild();
 
 		if(!isCommandGroup()){
-			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().guild(), commandEvent.getBackendDataPack().member());
 			if(translationPackage == null){
 				commandEvent.getEvent()
 					.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.")
@@ -374,7 +374,7 @@ public abstract class Command{
 	 */
 	public MessageEmbed onMissingMemberPerms(CommandEvent commandEvent, TranslationPackage translationPackage, boolean vPerms){
 		var member = commandEvent.getEvent().getMember();
-		var gMember = commandEvent.getBackendDataPack().getbMember();
+		var gMember = commandEvent.getBackendDataPack().member();
 		var textChannel = commandEvent.getEvent().getTextChannel();
 
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))

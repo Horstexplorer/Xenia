@@ -48,12 +48,12 @@ public class CMDList extends Command{
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		// list all notifications
-		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+		NotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache();
 		StringBuilder stringBuilder = new StringBuilder();
 		for(Notification notification : notificationCache.getAllAsList()){
 			User user = null;
 			try{
-				user = commandEvent.getBackendClient().getUserCache().get(notification.getUserId());
+				user = commandEvent.getToolBundle().backendClient().getUserCache().get(notification.getUserId());
 			}
 			catch(Exception ignore){
 			}

@@ -52,7 +52,7 @@ public class CMDUpdate extends Command{
 		try{
 			CmdArg<Long> notificationid = cmdArgs.getByName("notification_id");
 			CmdArg<String> customMessage = cmdArgs.getByName("custom_message");
-			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
+			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
 			TwitchNotification notification = notificationCache.get(notificationid.getValue());
 			notification.setNotificationMessage(customMessage.getValue());
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();

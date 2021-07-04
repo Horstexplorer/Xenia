@@ -48,7 +48,7 @@ public class CMDSetup extends Command{
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		CmdArg<Mention> channelMention = args.getByIndex(0);
 		// check if already a channel has been set up
-		Channel existingChatChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream()
+		Channel existingChatChannel = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList().stream()
 			.filter(channel -> channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
 		if(channelMention.getValue() == null){
 			if(existingChatChannel != null){
@@ -65,7 +65,7 @@ public class CMDSetup extends Command{
 					.setNSFW(true)
 					.queue(textChannel -> {
 						try{
-							Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
+							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
 							Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);
@@ -101,7 +101,7 @@ public class CMDSetup extends Command{
 				}
 				if(textChannel.isNSFW()){
 					try{
-						Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
+						Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
 						Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 						d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 						channel.lSetD43Z1Settings(d43Z1Settings);
@@ -115,7 +115,7 @@ public class CMDSetup extends Command{
 				else{
 					textChannel.getManager().setNSFW(true).queue(success -> {
 						try{
-							Channel channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong());
+							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
 							Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);

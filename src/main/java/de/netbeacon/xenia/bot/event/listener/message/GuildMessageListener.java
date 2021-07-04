@@ -16,7 +16,6 @@
 
 package de.netbeacon.xenia.bot.event.listener.message;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.chat.global.help.CMDHelp;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.structure.admin.GROUPAdmin;
@@ -32,11 +31,8 @@ import de.netbeacon.xenia.bot.commands.chat.structure.settings.GROUPSettings;
 import de.netbeacon.xenia.bot.commands.chat.structure.tags.HYBRIDTag;
 import de.netbeacon.xenia.bot.commands.chat.structure.twitch.HYBRIDTwitch;
 import de.netbeacon.xenia.bot.event.handler.MessageHandler;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
-import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
-import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -52,8 +48,8 @@ public class GuildMessageListener extends ListenerAdapter{
 	private final EventWaiter eventWaiter;
 	private final MessageHandler commandHandler;
 
-	public GuildMessageListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
-		this.eventWaiter = eventWaiter;
+	public GuildMessageListener(ToolBundle toolBundle){
+		this.eventWaiter = toolBundle.eventWaiter();
 
 		HashMap<String, Command> commandMap = new HashMap<>();
 		Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
@@ -75,7 +71,7 @@ public class GuildMessageListener extends ListenerAdapter{
 		register.accept(new CMDMe());
 		register.accept(new CMDAvatar());
 
-		commandHandler = new MessageHandler(commandMap, eventWaiter, paginatorManager, buttonManager, backendClient, contextPoolManager, levelPointManager);
+		commandHandler = new MessageHandler(commandMap, toolBundle);
 	}
 
 	@Override

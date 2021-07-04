@@ -16,7 +16,6 @@
 
 package de.netbeacon.xenia.bot.event.listener.interactions;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.structure.anime.RCMDGAnime;
 import de.netbeacon.xenia.bot.commands.slash.structure.avatar.RCMDAvatar;
@@ -28,11 +27,8 @@ import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDGTags;
 import de.netbeacon.xenia.bot.commands.slash.structure.tag.RCMDTag;
 import de.netbeacon.xenia.bot.commands.slash.structure.twitch.RCMDGTwitch;
 import de.netbeacon.xenia.bot.event.handler.interactions.SlashCommandHandler;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
-import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
-import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -50,8 +46,8 @@ public class SlashCommandListener extends ListenerAdapter{
 	private final SlashCommandHandler slashCommandHandler;
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public SlashCommandListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
-		this.eventWaiter = eventWaiter;
+	public SlashCommandListener(ToolBundle toolBundle){
+		this.eventWaiter = toolBundle.eventWaiter();
 
 		HashMap<String, Command> globalCommandMap = new HashMap<>();
 		Consumer<Command> register = command -> globalCommandMap.put(command.getAlias(), command);
@@ -72,7 +68,7 @@ public class SlashCommandListener extends ListenerAdapter{
 		// register up to 100 commands which can be guild specifically toggled
 
 		// // // // // // // // // //
-		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, eventWaiter, paginatorManager, buttonManager, backendClient, contextPoolManager, levelPointManager);
+		this.slashCommandHandler = new SlashCommandHandler(globalCommandMap, guildCommandMap, toolBundle);
 	}
 
 	@Override

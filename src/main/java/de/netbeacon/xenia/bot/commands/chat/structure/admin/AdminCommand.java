@@ -53,7 +53,7 @@ public abstract class AdminCommand extends Command{
 		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
 		var textChannel = commandEvent.getEvent().getChannel();
 
-		TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+		TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().guild(), commandEvent.getBackendDataPack().member());
 		if(translationPackage == null){
 			textChannel.sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
 			return;

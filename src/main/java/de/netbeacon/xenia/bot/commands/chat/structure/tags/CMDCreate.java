@@ -45,7 +45,7 @@ public class CMDCreate extends Command{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> tag = cmdArgs.getByIndex(0);
 		CmdArg<String> content = cmdArgs.getByIndex(1);
 		try{

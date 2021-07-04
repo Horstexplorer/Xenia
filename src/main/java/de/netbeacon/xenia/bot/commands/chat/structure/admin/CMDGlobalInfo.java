@@ -48,7 +48,7 @@ public class CMDGlobalInfo extends AdminCommand{
 		Message m = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed()).complete();
 		try{
 			// get secondary websocket
-			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getBackendClient().getSecondaryWebsocketListener();
+			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getToolBundle().backendClient().getSecondaryWebsocketListener();
 			// create request
 			WSRequest wsRequest = new WSRequest.Builder()
 				.action("statistics")
@@ -91,8 +91,8 @@ public class CMDGlobalInfo extends AdminCommand{
 		// prepare StringBuilder
 		StringBuilder stringBuilder = new StringBuilder();
 		// get own statistics
-		SetupData setupData = commandEvent.getBackendClient().getSetupData();
-		Info info = commandEvent.getBackendClient().getInfo(Info.Mode.Private);
+		SetupData setupData = commandEvent.getToolBundle().backendClient().getSetupData();
+		Info info = commandEvent.getToolBundle().backendClient().getInfo(Info.Mode.Private);
 		Runtime runtime = Runtime.getRuntime();
 		stringBuilder.append(getFormattedStats(
 			setupData.getClientId(),

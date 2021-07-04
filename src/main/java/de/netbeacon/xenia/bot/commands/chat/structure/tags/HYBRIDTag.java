@@ -50,7 +50,7 @@ public class HYBRIDTag extends HybridCommand{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> tagA = cmdArgs.getByIndex(0);
 		try{
 			Tag tag = tagCache.get(tagA.getValue());

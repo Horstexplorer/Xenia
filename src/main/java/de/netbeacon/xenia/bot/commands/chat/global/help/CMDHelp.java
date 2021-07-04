@@ -97,7 +97,7 @@ public class CMDHelp extends Command{
 			pages.add(new Page(embedBuilder.build()));
 		}
 		// send result
-		commandEvent.getPaginatorManager().createPaginator(event.getChannel(), event.getAuthor(), pages);
+		commandEvent.getToolBundle().paginatorManager().createPaginator(event.getChannel(), event.getAuthor(), pages);
 	}
 
 }

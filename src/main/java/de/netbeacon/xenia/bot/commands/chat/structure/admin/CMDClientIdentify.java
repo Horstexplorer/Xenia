@@ -45,7 +45,7 @@ public class CMDClientIdentify extends AdminCommand{
 		Message m = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed()).complete();
 		try{
 			// get secondary websocket
-			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getBackendClient().getSecondaryWebsocketListener();
+			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getToolBundle().backendClient().getSecondaryWebsocketListener();
 			// create request
 			WSRequest wsRequest = new WSRequest.Builder()
 				.action("identify")
@@ -55,10 +55,10 @@ public class CMDClientIdentify extends AdminCommand{
 			// send request
 			List<WSResponse> wsResponses = secondaryWebsocketListener.getWsProcessorCore().process(wsRequest);
 			// send result
-			m.editMessage(getResultEmbed(true, commandEvent.getBackendClient().getSetupData(), wsResponses)).queue();
+			m.editMessage(getResultEmbed(true, commandEvent.getToolBundle().backendClient().getSetupData(), wsResponses)).queue();
 		}
 		catch(Exception e){
-			m.editMessage(getResultEmbed(false, commandEvent.getBackendClient().getSetupData(), new ArrayList<>())).queue();
+			m.editMessage(getResultEmbed(false, commandEvent.getToolBundle().backendClient().getSetupData(), new ArrayList<>())).queue();
 		}
 	}
 

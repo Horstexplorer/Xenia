@@ -60,7 +60,7 @@ public abstract class AnimeImageCommand extends Command{
 				if(mentionCmdArg.getValue() != null){
 					long mentionedId = mentionCmdArg.getValue().getId();
 					// resolve user with backend
-					var uc = commandEvent.getBackendClient().getUserCache();
+					var uc = commandEvent.getToolBundle().backendClient().getUserCache();
 					if(uc.contains(mentionedId)){
 						additionalUserTag = uc.get(mentionedId, false).getMetaUsername();
 					}

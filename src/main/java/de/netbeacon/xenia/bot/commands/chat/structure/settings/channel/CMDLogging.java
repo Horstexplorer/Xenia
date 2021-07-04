@@ -49,7 +49,7 @@ public class CMDLogging extends Command{
 			CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
 			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
 			CmdArg<Mention> mention2CmdArg = args.getByIndex(2);
-			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
