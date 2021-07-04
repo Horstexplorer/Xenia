@@ -44,7 +44,7 @@ public class HYBRIDRoles extends HybridCommand{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		Guild guild = commandEvent.getBackendDataPack().getbGuild();
+		Guild guild = commandEvent.getBackendDataPack().guild();
 		StringBuilder stringBuilder = new StringBuilder();
 		for(Role role : guild.getRoleCache().getAllAsList()){
 			stringBuilder.append(role.getId()).append(" ").append(role.getRoleName()).append(" ").append(Arrays.toString(role.getPermissions().getBits().toArray()));

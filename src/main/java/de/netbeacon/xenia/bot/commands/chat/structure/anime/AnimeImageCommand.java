@@ -60,7 +60,7 @@ public abstract class AnimeImageCommand extends Command{
 				if(mentionCmdArg.getValue() != null){
 					long mentionedId = mentionCmdArg.getValue().getId();
 					// resolve user with backend
-					var uc = commandEvent.getBackendClient().getUserCache();
+					var uc = commandEvent.getToolBundle().backendClient().getUserCache();
 					if(uc.contains(mentionedId)){
 						additionalUserTag = uc.get(mentionedId, false).getMetaUsername();
 					}
@@ -72,14 +72,14 @@ public abstract class AnimeImageCommand extends Command{
 			getImage(commandEvent, message, translationPackage, 0);
 		}
 		catch(Exception e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, ex -> {});
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, ex -> {});
 		}
 	}
 
 	private void getImage(CommandEvent commandEvent, String message, TranslationPackage translationPackage, int retries){
 		PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
 			url -> {
-				commandEvent.getEvent().getChannel().sendMessage(
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(
 					EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
 				).queue();
 			},
@@ -88,7 +88,7 @@ public abstract class AnimeImageCommand extends Command{
 					getImage(commandEvent, message, translationPackage, retries + 1);
 				}
 				else{
-					commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.img.msg"))).queue(s -> {}, e -> {});
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.img.msg"))).queue(s -> {}, e -> {});
 				}
 			}
 		);

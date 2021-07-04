@@ -26,6 +26,7 @@ import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.ButtonListener;
+import de.netbeacon.xenia.bot.event.listener.interactions.SelectionListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.SlashCommandListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
@@ -33,6 +34,7 @@ import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
 import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
+import de.netbeacon.xenia.bot.interactions.selection.SelectionManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
@@ -41,6 +43,7 @@ import de.netbeacon.xenia.bot.utils.misc.listener.*;
 import de.netbeacon.xenia.bot.utils.misc.task.TaskManager;
 import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
 import de.netbeacon.xenia.bot.utils.purrito.PurrBotAPIWrapper;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import de.netbeacon.xenia.bot.utils.shared.okhttpclient.SharedOkHttpClient;
 import net.dv8tion.jda.api.JDA;
@@ -118,8 +121,12 @@ public class XeniaCore{
 		TranslationManager translationManager = TranslationManager.getInstance(true);
 		PurrBotAPIWrapper.getInstance(true);
 		LevelPointManager levelPointManager = new LevelPointManager();
+
 		ButtonManager buttonManager = new ButtonManager(this::getShardManager);
 		shutdownHook.addShutdownAble(buttonManager);
+		SelectionManager selectionManager = new SelectionManager(this::getShardManager);
+		shutdownHook.addShutdownAble(selectionManager);
+
 		// d43z1
 		logger.info("Preparing D43Z1...");
 		D43Z1Imp d43z1 = D43Z1Imp.getInstance(true);
@@ -144,6 +151,16 @@ public class XeniaCore{
 		EventManagerProvider eventManagerProvider = new EventManagerProvider()
 			.setFactory(obj -> new MultiThreadedEventManager());
 		shutdownHook.addShutdownAble(eventManagerProvider);
+		// bundle tools
+		ToolBundle toolBundle = new ToolBundle(
+			xeniaBackendClient,
+			eventWaiter,
+			paginatorManager,
+			contextPoolManager,
+			levelPointManager,
+			buttonManager,
+			selectionManager
+		);
 		// setup shard builder
 		logger.info("Setting Up Shard Builder...");
 		DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
@@ -153,10 +170,11 @@ public class XeniaCore{
 			.addEventListeners(
 				new StatusListener(),
 				new GuildAccessListener(xeniaBackendClient),
-				new GuildMessageListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
-				new SlashCommandListener(xeniaBackendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager, levelPointManager),
+				new GuildMessageListener(toolBundle),
+				new SlashCommandListener(toolBundle),
 				new GuildReactionListener(eventWaiter),
 				new ButtonListener(xeniaBackendClient,  eventWaiter, buttonManager),
+				new SelectionListener(xeniaBackendClient, eventWaiter, selectionManager),
 				paginatorManager.getListener()
 			);
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){

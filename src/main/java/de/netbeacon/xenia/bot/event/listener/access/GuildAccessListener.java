@@ -26,6 +26,7 @@ import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheExcept
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelDeleteEvent;
 import net.dv8tion.jda.api.events.channel.text.update.TextChannelUpdateNSFWEvent;
@@ -55,6 +56,14 @@ public class GuildAccessListener extends ListenerAdapter{
 	public GuildAccessListener(XeniaBackendClient backendClient){
 		this.backendClient = backendClient;
 	}
+
+	// SHARD
+
+	@Override
+	public void onReady(@NotNull ReadyEvent event){
+		logger.info("Finished loading shard "+event.getJDA().getShardInfo().getShardString()+" with "+event.getJDA().getGuildCache().size()+" guilds.");
+	}
+
 
 	// GUILD
 
@@ -195,6 +204,7 @@ public class GuildAccessListener extends ListenerAdapter{
 		logger.debug("Guild " + event.getGuild().getName() + "(" + event.getGuild().getId() + ") Is Unavailable");
 	}
 
+	// MEMBER
 	// will only work if the guild_member intent is set
 
 	@Override

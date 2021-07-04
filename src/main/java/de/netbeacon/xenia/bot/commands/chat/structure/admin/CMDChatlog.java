@@ -44,12 +44,12 @@ public class CMDChatlog extends AdminCommand{
 		CmdArg<Mention> channelArg = args.getByIndex(0); // unused for now
 		CmdArg<Boolean> limitArg = args.getByIndex(1); // unused for now
 
-		Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+		Channel bChannel = commandEvent.getBackendDataPack().channel();
 
 		if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
 			long cId = channelArg.getValue().getId();
-			if(commandEvent.getBackendDataPack().getbGuild().getChannelCache().contains(cId)){
-				bChannel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(cId);
+			if(commandEvent.getBackendDataPack().guild().getChannelCache().contains(cId)){
+				bChannel = commandEvent.getBackendDataPack().guild().getChannelCache().get(cId);
 			}
 		}
 
@@ -69,10 +69,10 @@ public class CMDChatlog extends AdminCommand{
 		String jsonString = jsonObject.toString(3);
 		try{
 			String url = HastebinUtil.uploadToHastebin(jsonString);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, "Here is the [chatlog](" + url + ") [" + jsonArray.length() + " messages]")).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, "Here is the [chatlog](" + url + ") [" + jsonArray.length() + " messages]")).queue();
 		}
 		catch(Exception e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: " + jsonString.length() + ")")).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, "Something went wrong uploading the chat log (sizeOf: " + jsonString.length() + ")")).queue();
 		}
 	}
 

@@ -51,7 +51,7 @@ public class CMDAvatar extends Command{
 			commandEvent.getEvent().getJDA().retrieveUserById(mentionCmdArg.getValue().getId())
 				.queue(
 					user -> {
-						commandEvent.getEvent().getChannel().sendMessage(
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(
 							embedBuilder
 								.setColor(Color.GREEN)
 								.setImage(user.getEffectiveAvatarUrl() + "?size=512")
@@ -64,7 +64,7 @@ public class CMDAvatar extends Command{
 						).queue();
 					},
 					error -> {
-						commandEvent.getEvent().getChannel().sendMessage(
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(
 							embedBuilder
 								.setColor(Color.RED)
 								.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
@@ -74,7 +74,7 @@ public class CMDAvatar extends Command{
 				);
 		}
 		else{
-			commandEvent.getEvent().getChannel().sendMessage(
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(
 				embedBuilder
 					.setColor(Color.GREEN)
 					.setImage(commandEvent.getEvent().getAuthor().getEffectiveAvatarUrl() + "?size=512")

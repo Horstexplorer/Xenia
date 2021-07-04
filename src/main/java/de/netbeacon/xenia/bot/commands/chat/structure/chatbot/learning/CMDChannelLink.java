@@ -51,15 +51,15 @@ public class CMDChannelLink extends Command{
 			CmdArg<Boolean> modeArg = args.getByIndex(0);
 			CmdArg<Mention> channelMentionArg = args.getByIndex(1);
 
-			Channel channel = commandEvent.getBackendDataPack().getbChannel();
+			Channel channel = commandEvent.getBackendDataPack().channel();
 			if(channelMentionArg.getValue() != null){
 				TextChannel textChannel = commandEvent.getEvent().getGuild().getTextChannelById(channelMentionArg.getValue().getId());
 				if(textChannel == null){
 					throw new IllegalArgumentException();
 				}
-				channel = commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(textChannel.getIdLong(), false);
+				channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong(), false);
 			}
-			var v = commandEvent.getBackendDataPack().getbGuild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
+			var v = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
 			if(modeArg.getValue()
 				&& v
 				>= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
@@ -74,11 +74,11 @@ public class CMDChannelLink extends Command{
 				newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
 			}
 			channel.setD43Z1Settings(newD43Z1ChannelSettings);
-			commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
+			commandEvent.getToolBundle().contextPoolManager().getPoolFor(commandEvent.getBackendDataPack().guild(), true);
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "error.invalid.arg.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "error.invalid.arg.msg"))).queue();
 		}
 	}
 

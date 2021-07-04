@@ -17,31 +17,29 @@
 package de.netbeacon.xenia.bot.event.listener.interactions;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.event.handler.interactions.ButtonHandler;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
+import de.netbeacon.xenia.bot.event.handler.interactions.SelectionHandler;
+import de.netbeacon.xenia.bot.interactions.selection.SelectionManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class ButtonListener extends ListenerAdapter{
+public class SelectionListener extends ListenerAdapter{
 
 	private final EventWaiter eventWaiter;
-	private final ButtonHandler buttonHandler;
+	private final SelectionHandler selectionHandler;
 
-	public ButtonListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, ButtonManager buttonManager){
+	public SelectionListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, SelectionManager selectionManager){
 		this.eventWaiter = eventWaiter;
-		this.buttonHandler = new ButtonHandler(backendClient, buttonManager);
+		this.selectionHandler = new SelectionHandler(backendClient, selectionManager);
 	}
 
 	@Override
-	public void onButtonClick(@NotNull ButtonClickEvent event){
-		// button got clicked o.o
+	public void onSelectionMenu(@NotNull SelectionMenuEvent event){
 		if(eventWaiter.waitingOnThis(event)){
 			return;
 		}
-		buttonHandler.handleClick(event);
+		selectionHandler.onSelect(event);
 	}
-
 
 }

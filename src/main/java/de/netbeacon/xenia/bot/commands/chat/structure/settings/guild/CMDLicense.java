@@ -46,13 +46,13 @@ public class CMDLicense extends Command{
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		CmdArg<String> licenseKey = args.getByIndex(0);
-		License license = commandEvent.getBackendDataPack().getbLicense();
+		License license = commandEvent.getBackendDataPack().license();
 		try{
 			license.update(licenseKey.getValue());
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(DataException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 		}
 	}
 

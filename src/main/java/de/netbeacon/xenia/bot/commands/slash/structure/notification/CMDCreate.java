@@ -50,7 +50,7 @@ public class CMDCreate extends Command{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
-		NotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache();
+		NotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache();
 		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{

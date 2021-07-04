@@ -49,7 +49,7 @@ public class CMDInfo extends Command{
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		try{
 			CmdArg<Mention> mentionCmdArg = args.getByIndex(0);
-			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
@@ -63,7 +63,7 @@ public class CMDInfo extends Command{
 			).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 		}
 	}
 

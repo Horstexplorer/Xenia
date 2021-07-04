@@ -48,15 +48,15 @@ public class CMDMode extends Command{
 		try{
 			CmdArg<String> modeStringArg = args.getByIndex(0);
 			Guild.D43Z1Mode.Modes modeSelect = Guild.D43Z1Mode.Modes.valueOf(modeStringArg.getValue().toUpperCase());
-			Guild g = commandEvent.getBackendDataPack().getbGuild();
+			Guild g = commandEvent.getBackendDataPack().guild();
 			Guild.D43Z1Mode mode = new Guild.D43Z1Mode(0);
 			mode.set(modeSelect);
 			g.setD43Z1Mode(mode);
-			commandEvent.getPoolManager().getPoolFor(commandEvent.getBackendDataPack().getbGuild(), true);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
+			commandEvent.getToolBundle().contextPoolManager().getPoolFor(commandEvent.getBackendDataPack().guild(), true);
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
 		}
 	}
 

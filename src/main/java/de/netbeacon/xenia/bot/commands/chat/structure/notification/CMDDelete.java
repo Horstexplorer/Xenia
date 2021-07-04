@@ -47,16 +47,16 @@ public class CMDDelete extends Command{
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
 		try{
-			Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
-			if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().getbMember().metaIsAdministrator() || commandEvent.getBackendDataPack().getbMember().metaIsOwner())){
+			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
+			if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().member().metaIsAdministrator() || commandEvent.getBackendDataPack().member().metaIsOwner())){
 				throw new RuntimeException("User Does Not Own This Notification");
 			}
-			commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().delete(notification.getId());
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
+			commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().delete(notification.getId());
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
 		}
 		catch(DataException | CacheException ex){
 			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw ex;

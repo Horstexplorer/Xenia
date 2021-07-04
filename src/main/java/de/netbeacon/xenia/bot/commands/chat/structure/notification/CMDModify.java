@@ -51,7 +51,7 @@ public class CMDModify extends Command{
 		CmdArg<LocalDateTime> localDateTimeCmdArg = cmdArgs.getByIndex(1);
 		CmdArg<String> stringCmdArg = cmdArgs.getByIndex(2);
 		try{
-			Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
+			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
 			if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong()){
 				throw new RuntimeException("User Does Not Own This Notification");
 			}
@@ -63,7 +63,7 @@ public class CMDModify extends Command{
 		}
 		catch(DataException | CacheException ex){
 			if(ex instanceof DataException && ((DataException) ex).getCode() == 404){
-				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw ex;

@@ -44,7 +44,7 @@ public class CMDEdited extends Command{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
-		Channel bChannel = commandEvent.getBackendDataPack().getbChannel();
+		Channel bChannel = commandEvent.getBackendDataPack().channel();
 		MessageCache messageCache = bChannel.getMessageCache();
 		Message bMessage = bChannel.getMessageCache().getLast("edited");
 		if(bMessage == null){

@@ -47,7 +47,7 @@ public class HYBRIDTwitch extends HybridCommand{
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		// get all stream notifications
-		List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
+		List<TwitchNotification> twitchNotifications = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache().getAllAsList();
 		StringBuilder stringBuilder = new StringBuilder();
 		for(TwitchNotification twitchNotification : twitchNotifications){
 			stringBuilder.append(twitchNotification.getId()).append(" ").append(twitchNotification.getTwitchChannelName()).append(" --> ").append(twitchNotification.getChannel().getMetaChannelName()).append("\n");

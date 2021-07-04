@@ -54,7 +54,7 @@ public class CMDModify extends Command{
 		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{
-			Notification notification = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getNotificationCache().get(idArg.getValue());
+			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().get(idArg.getValue());
 			if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong()){
 				throw new RuntimeException("User Does Not Own This Notification");
 			}

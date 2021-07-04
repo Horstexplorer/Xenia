@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.event.handler;
+package de.netbeacon.xenia.bot.event.handler.interactions;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
-import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
-import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
-import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
@@ -39,22 +34,12 @@ public class SlashCommandHandler{
 
 	private final HashMap<String, Command> globalCommandMap;
 	private final ConcurrentHashMap<String, Command> guildCommandMap;
-	private final EventWaiter eventWaiter;
-	private final XeniaBackendClient backendClient;
-	private final PaginatorManager paginatorManager;
-	private final ButtonManager buttonManager;
-	private final D43Z1ContextPoolManager contextPoolManager;
-	private final LevelPointManager levelPointManager;
+	private final ToolBundle toolBundle;
 
-	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
+	public SlashCommandHandler(HashMap<String, Command> globalCommandMap, HashMap<String, Command> guildCommandMap, ToolBundle toolBundle){
 		this.globalCommandMap = globalCommandMap;
 		this.guildCommandMap = new ConcurrentHashMap<>(guildCommandMap);
-		this.eventWaiter = eventWaiter;
-		this.paginatorManager = paginatorManager;
-		this.buttonManager = buttonManager;
-		this.backendClient = backendClient;
-		this.contextPoolManager = contextPoolManager;
-		this.levelPointManager = levelPointManager;
+		this.toolBundle = toolBundle;
 	}
 
 	public List<CommandData> getGlobalCommandData(){
@@ -68,11 +53,11 @@ public class SlashCommandHandler{
 	public void handle(SlashCommandEvent event){
 		long start = System.currentTimeMillis();
 		// get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
-		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-		User bUser = backendClient.getUserCache().get(event.getUser().getIdLong());
+		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
+		User bUser = toolBundle.backendClient().getUserCache().get(event.getUser().getIdLong());
 		Member bMember = bGuild.getMemberCache().get(event.getUser().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+		License bLicense = toolBundle.backendClient().getLicenseCache().get(event.getGuild().getIdLong());
 		// try to update
 		try {
 			BackendQuickAction.Update.execute(bUser, event.getUser(), true, false);
@@ -80,13 +65,13 @@ public class SlashCommandHandler{
 		}catch(Exception ignore){}
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
-		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager);
+		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, toolBundle);
 		// check if xenia is active in this channel
 		if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)){
 			return;
 		}
 		// feed for leveling
-		levelPointManager.feed(bMember);
+		toolBundle.levelPointManager().feed(bMember);
 		// split to list
 		ArrayList<String> args = new ArrayList<>();
 		args.add(event.getName());

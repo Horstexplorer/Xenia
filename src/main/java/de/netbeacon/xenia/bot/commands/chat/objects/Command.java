@@ -266,14 +266,14 @@ public abstract class Command{
 		var selfMember = commandEvent.getEvent().getGuild().getSelfMember();
 		var author = commandEvent.getEvent().getAuthor();
 		var member = commandEvent.getEvent().getMember();
-		var bMember = commandEvent.getBackendDataPack().getbMember();
+		var bMember = commandEvent.getBackendDataPack().member();
 		var textChannel = commandEvent.getEvent().getChannel();
 		var guild = commandEvent.getEvent().getGuild();
-		var bGuild = commandEvent.getBackendDataPack().getbGuild();
+		var bGuild = commandEvent.getBackendDataPack().guild();
 		var message = commandEvent.getEvent().getMessage();
 
 		if(!isCommandHandler || (s2 && isHybrid)){
-			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+			TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().guild(), commandEvent.getBackendDataPack().member());
 			if(translationPackage == null){
 				message.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").mentionRepliedUser(false).queue();
 				return;
@@ -377,7 +377,7 @@ public abstract class Command{
 					if(estimatedCommands.isEmpty()){
 						return;
 					}
-					TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().getbGuild(), commandEvent.getBackendDataPack().getbMember());
+					TranslationPackage translationPackage = TranslationManager.getInstance().getTranslationPackage(commandEvent.getBackendDataPack().guild(), commandEvent.getBackendDataPack().member());
 					if(translationPackage == null){
 						message
 							.reply("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.")
@@ -385,7 +385,7 @@ public abstract class Command{
 							.queue();
 						return;
 					}
-					if(commandEvent.getBackendDataPack().getbGuild().getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
+					if(commandEvent.getBackendDataPack().guild().getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
 						args.set(0, estimatedCommands.get(0).getAlias());
 						execute(args, commandEvent, s2);
 						return;
@@ -476,7 +476,7 @@ public abstract class Command{
 	 */
 	public MessageEmbed onMissingMemberPerms(CommandEvent commandEvent, TranslationPackage translationPackage, boolean vPerms){
 		var member = commandEvent.getEvent().getMember();
-		var gMember = commandEvent.getBackendDataPack().getbMember();
+		var gMember = commandEvent.getBackendDataPack().member();
 		var textChannel = commandEvent.getEvent().getChannel();
 
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation("default.onMissingMemberPerms.title"))

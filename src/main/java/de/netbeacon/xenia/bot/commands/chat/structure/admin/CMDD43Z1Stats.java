@@ -87,7 +87,7 @@ public class CMDD43Z1Stats extends AdminCommand{
 			.addField("EVAL_MAX_PROCESSING_TIME", String.valueOf(EVAL_MAX_PROCESSING_TIME.get()), true)
 			.addField("EVAL_MIN_PROCESSING_TIME", String.valueOf(EVAL_MIN_PROCESSING_TIME.get()), true)
 			.build()));
-		commandEvent.getPaginatorManager().createPaginator(commandEvent.getEvent().getChannel(), commandEvent.getEvent().getAuthor(), pages);
+		commandEvent.getToolBundle().paginatorManager().createPaginator(commandEvent.getEvent().getChannel(), commandEvent.getEvent().getAuthor(), pages);
 	}
 
 }

@@ -47,13 +47,13 @@ public class CMDPrefix extends Command{
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		CmdArg<String> newPrefix = args.getByIndex(0);
 		String prefix = (newPrefix.getValue() != null) ? newPrefix.getValue() : "~";
-		Guild guild = commandEvent.getBackendDataPack().getbGuild();
+		Guild guild = commandEvent.getBackendDataPack().guild();
 		try{
 			guild.setPrefix(prefix);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", guild.getPrefix()))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", guild.getPrefix()))).queue();
 		}
 		catch(DataException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 		}
 	}
 

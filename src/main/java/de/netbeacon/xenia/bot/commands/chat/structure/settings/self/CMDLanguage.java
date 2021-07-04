@@ -49,11 +49,11 @@ public class CMDLanguage extends Command{
 			if(translationPackage1 == null){
 				throw new IllegalArgumentException();
 			}
-			commandEvent.getBackendDataPack().getbUser().setPreferredLanguage(translationPackage1.getLanguageId());
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+			commandEvent.getBackendDataPack().user().setPreferredLanguage(translationPackage1.getLanguageId());
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(TranslationManager.getInstance().getLanguageIds().toArray())))).queue();
 		}
 	}
 

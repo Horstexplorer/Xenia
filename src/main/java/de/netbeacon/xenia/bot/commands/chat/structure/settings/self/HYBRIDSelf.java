@@ -40,7 +40,7 @@ public class HYBRIDSelf extends HybridCommand{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		User user = commandEvent.getBackendDataPack().getbUser();
+		User user = commandEvent.getBackendDataPack().user();
 		commandEvent.getEvent().getChannel().sendMessage(
 			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
 				.addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), user.getMetaUsername(), false)

@@ -21,7 +21,6 @@ import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import de.netbeacon.utils.tuples.Pair;
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
@@ -29,16 +28,12 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldow
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
-import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
-import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
-import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
-import de.netbeacon.xenia.bot.utils.paginator.PaginatorManager;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -60,31 +55,21 @@ public class MessageHandler{
 
 	private final HashMap<String, Command> commandMap;
 	private final CommandCooldown commandCooldown = new CommandCooldown(CommandCooldown.Type.User, 1000);
-	private final EventWaiter eventWaiter;
-	private final XeniaBackendClient backendClient;
-	private final PaginatorManager paginatorManager;
-	private final ButtonManager buttonManager;
-	private final LevelPointManager levelPointManager;
+	private final ToolBundle toolBundle;
 	private final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
-	private final D43Z1ContextPoolManager contextPoolManager;
 
-	public MessageHandler(HashMap<String, Command> commandMap, EventWaiter eventWaiter, PaginatorManager paginatorManager, ButtonManager buttonManager, XeniaBackendClient backendClient, D43Z1ContextPoolManager contextPoolManager, LevelPointManager levelPointManager){
+	public MessageHandler(HashMap<String, Command> commandMap, ToolBundle toolBundle){
 		this.commandMap = commandMap;
-		this.eventWaiter = eventWaiter;
-		this.paginatorManager = paginatorManager;
-		this.buttonManager = buttonManager;
-		this.backendClient = backendClient;
-		this.contextPoolManager = contextPoolManager;
-		this.levelPointManager = levelPointManager;
+		this.toolBundle = toolBundle;
 	}
 
 	public void processNew(GuildMessageReceivedEvent event){ // ! note ! events from the bot itself get passed through
 		// get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
-		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-		User bUser = backendClient.getUserCache().get(event.getAuthor().getIdLong());
+		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
+		User bUser = toolBundle.backendClient().getUserCache().get(event.getAuthor().getIdLong());
 		Member bMember = bGuild.getMemberCache().get(event.getAuthor().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-		License bLicense = backendClient.getLicenseCache().get(event.getGuild().getIdLong());
+		License bLicense = toolBundle.backendClient().getLicenseCache().get(event.getGuild().getIdLong());
 		// try to update
 		try {
 			BackendQuickAction.Update.execute(bUser, event.getAuthor(), true, false);
@@ -97,7 +82,7 @@ public class MessageHandler{
 			return;
 		}
 		// feed for leveling
-		levelPointManager.feed(bMember);
+		toolBundle.levelPointManager().feed(bMember);
 		// get the message & check prefix
 		String msg = event.getMessage().getContentRaw();
 		if(!msg.startsWith(bGuild.getPrefix())){
@@ -170,18 +155,18 @@ public class MessageHandler{
 				return;
 			}
 			if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
-				event.getChannel().sendMessage(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
+				event.getChannel().sendMessageEmbeds(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
 				return;
 			}
 			command = estimatedCommands.get(0);
 		}
 		args.remove(0);
 		// start the madness
-		command.execute(args, new CommandEvent(event, backendDataPack, backendClient, eventWaiter, paginatorManager, buttonManager, contextPoolManager));
+		command.execute(args, new CommandEvent(event, backendDataPack, toolBundle));
 	}
 
 	public void processUpdate(GuildMessageUpdateEvent event){
-		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		MessageCache messageCache = bChannel.getMessageCache();
 		Message message = messageCache.get(event.getMessageIdLong());
@@ -202,7 +187,7 @@ public class MessageHandler{
 			bChannel.setTmpLoggingChannelId(-1);
 			return;
 		}
-		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
+		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
 			.addField("MessageID", event.getMessageId(), true)
 			.addField("Author", event.getAuthor().getAsTag(), true)
 			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
@@ -211,7 +196,7 @@ public class MessageHandler{
 	}
 
 	public void processDelete(GuildMessageDeleteEvent event){
-		Guild bGuild = backendClient.getGuildCache().get(event.getGuild().getIdLong());
+		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		MessageCache messageCache = bChannel.getMessageCache();
 		Message message = messageCache.get(event.getMessageIdLong());
@@ -229,7 +214,7 @@ public class MessageHandler{
 			bChannel.setTmpLoggingChannelId(-1);
 			return;
 		}
-		channel.sendMessage(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
+		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
 			.addField("MessageID", event.getMessageId(), true)
 			.addField("AuthorID", String.valueOf(message.getUserId()), true)
 			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
@@ -238,7 +223,7 @@ public class MessageHandler{
 	}
 
 	public void D43Z1_EXECUTE(GuildMessageReceivedEvent event, CommandEvent.BackendDataPack backendDataPack) throws Exception{
-		var bGuild = backendDataPack.getbGuild();
+		var bGuild = backendDataPack.guild();
 		var d43Z1Imp = D43Z1Imp.getInstance();
 
 		var taskMaster = d43Z1Imp.getTaskMaster();
@@ -250,7 +235,7 @@ public class MessageHandler{
 			event.getMessage().reply("thinking ...").mentionRepliedUser(false).queue(thinking -> {
 				// process
 				ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-				IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+				IContextPool contextPool = toolBundle.contextPoolManager().getPoolFor(bGuild);
 				EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
 					evalResult -> {
 						if(evalResult.ok()){
@@ -266,7 +251,7 @@ public class MessageHandler{
 		else{
 			// ??? -> Fallback for when bad things happen
 			ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-			IContextPool contextPool = contextPoolManager.getPoolFor(bGuild);
+			IContextPool contextPool = toolBundle.contextPoolManager().getPoolFor(bGuild);
 			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
 				evalResult -> {
 					if(evalResult.ok()){

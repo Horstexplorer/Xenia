@@ -50,7 +50,7 @@ public class CMDAccessMode extends Command{
 		try{
 			CmdArg<String> channelAccessModeArg = args.getByIndex(0);
 			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
-			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().getbChannel() : commandEvent.getBackendDataPack().getbGuild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
@@ -58,10 +58,10 @@ public class CMDAccessMode extends Command{
 			Channel.AccessMode accessMode = new Channel.AccessMode(0);
 			accessMode.set(accessModeMode);
 			channel.setAccessMode(accessMode);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", Arrays.toString(Channel.AccessMode.Mode.values())))).queue();
 		}
 	}
 

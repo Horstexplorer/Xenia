@@ -50,8 +50,8 @@ public class HYBRIDGuild extends HybridCommand{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage){
-		Guild guild = commandEvent.getBackendDataPack().getbGuild();
-		License license = commandEvent.getBackendDataPack().getbLicense();
+		Guild guild = commandEvent.getBackendDataPack().guild();
+		License license = commandEvent.getBackendDataPack().license();
 		commandEvent.getEvent().getChannel().sendMessage(
 			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
 				.addField(translationPackage.getTranslation(getClass(), "response.field.1.title"), guild.getPreferredLanguage(), true)

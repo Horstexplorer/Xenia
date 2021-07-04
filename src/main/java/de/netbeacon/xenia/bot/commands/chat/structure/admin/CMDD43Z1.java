@@ -59,7 +59,7 @@ public class CMDD43Z1 extends AdminCommand{
 				evalResult -> {
 					if(evalResult.ok()){
 						ContentMatchBuffer.Statistics statistics = d43Z1Imp.getContentMatchBufferFor(commandEvent.getEvent().getAuthor().getIdLong()).getStatistics();
-						commandEvent.getEvent().getChannel().sendMessage(
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(
 							EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response")
 								.addField("Input", evalResult.getContentMatch().getInput().getContent(), false)
 								.addField("Est Input", evalResult.getContentMatch().getEstimatedInput().getContent(), false)
@@ -73,7 +73,7 @@ public class CMDD43Z1 extends AdminCommand{
 						).queue();
 					}
 					else{
-						commandEvent.getEvent().getChannel().sendMessage(
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(
 							EmbedBuilderFactory.getDefaultEmbed("D43Z1 Response")
 								.setDescription(ExceptionUtils.getStackTrace(evalResult.getException()))
 								.build()
@@ -83,7 +83,7 @@ public class CMDD43Z1 extends AdminCommand{
 			eval.enqueue(evalRequest);
 		}
 		catch(Exception e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, "Something Went Wrong. Check Logs")).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, "Something Went Wrong. Check Logs")).queue();
 			logger.error("Something went wrong processing request ", e);
 		}
 	}

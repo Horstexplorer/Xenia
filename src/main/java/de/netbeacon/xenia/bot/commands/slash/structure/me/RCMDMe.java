@@ -39,7 +39,7 @@ public class RCMDMe extends Command{
 		commandEvent.getEvent().deferReply(false).queue(
 			commandHook -> {
 				try{
-					var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().getbMember()).getByteArrayOutputStream();
+					var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().member()).getByteArrayOutputStream();
 					commandHook.editOriginal(baos.toByteArray(), "stats.png").queue();
 				}
 				catch(Exception e){

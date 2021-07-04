@@ -50,14 +50,14 @@ public class HYBRIDTag extends HybridCommand{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
-		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> tagA = cmdArgs.getByIndex(0);
 		try{
 			Tag tag = tagCache.get(tagA.getValue());
 			commandEvent.getEvent().getChannel().sendMessage(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
 		}
 		catch(DataException | CacheException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.error.msg", tagA.getValue()))).queue();
 		}
 	}
 

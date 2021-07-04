@@ -70,7 +70,7 @@ public class CMDEval extends AdminCommand{
 					Matcher classMatcher = JavaClass.matcher(code);
 					if(classMatcher.find()){
 						// eval as java
-						Message message = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed("Java", code)).complete();
+						Message message = commandEvent.getEvent().getChannel().sendMessageEmbeds(getRequestEmbed("Java", code)).complete();
 						if(message == null){
 							throw new Exception("Error Sending Eval Message");
 						}
@@ -79,7 +79,7 @@ public class CMDEval extends AdminCommand{
 					else{
 						// eval as js
 						String engine = matcher.group(2).trim();
-						Message message = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed(((!engine.isBlank()) ? engine : "Default"), code)).complete();
+						Message message = commandEvent.getEvent().getChannel().sendMessageEmbeds(getRequestEmbed(((!engine.isBlank()) ? engine : "Default"), code)).complete();
 						if(message == null){
 							throw new Exception("Error Sending Eval Message");
 						}
@@ -87,11 +87,11 @@ public class CMDEval extends AdminCommand{
 					}
 				}
 				catch(Exception e){
-					commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, code, e.getMessage())).queue(s -> {}, ex -> {});
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", null, -1, code, e.getMessage())).queue(s -> {}, ex -> {});
 				}
 			}
 			catch(Exception e){
-				commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", null, -1, "Unknown", e.getMessage())).queue(s -> {}, ex -> {});
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", null, -1, "Unknown", e.getMessage())).queue(s -> {}, ex -> {});
 			}
 		}
 	}
@@ -115,13 +115,13 @@ public class CMDEval extends AdminCommand{
 			scriptEngine.put("commandEvent", commandEvent); // this might be dangerous
 			Object o = scriptEngine.eval(code);
 			message.editMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, e -> {
-				commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, ex -> {});
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, ex -> {});
 			});
 		}
 		catch(Exception e){
 			String finalEngine = engine;
 			message.editMessage(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, ex -> {
-				commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, exe -> {});
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, exe -> {});
 			});
 		}
 		logger.info("! EVAL FINISHED ! Engine: \"" + engine + "\"");
@@ -145,7 +145,6 @@ public class CMDEval extends AdminCommand{
 			if(!path.exists()){
 				path.mkdirs();
 			}
-			;
 			Files.write(Path.of(XeniaCore.getInstance().getConfig().getString("evalTmpPath") + filename), code.getBytes(), CREATE_NEW);
 			// start process
 			long start = System.currentTimeMillis();
@@ -167,18 +166,18 @@ public class CMDEval extends AdminCommand{
 			timeout.cancel(true);
 			if(process.exitValue() != 0){
 				message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> {
-					commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
 				});
 			}
 			else{
 				message.editMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> {
-					commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
 				});
 			}
 		}
 		catch(Exception e){
 			message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue(s -> {}, ex -> {
-				commandEvent.getEvent().getChannel().sendMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue();
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue();
 			});
 		}
 		finally{

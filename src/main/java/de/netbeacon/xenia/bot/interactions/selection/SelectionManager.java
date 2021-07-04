@@ -14,7 +14,22 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.commands.chat.structure.admin;
+package de.netbeacon.xenia.bot.interactions.selection;
 
-public class CMDOokami{
+import de.netbeacon.utils.shutdownhook.IShutdown;
+import net.dv8tion.jda.api.sharding.ShardManager;
+
+import java.util.function.Supplier;
+
+public class SelectionManager implements IShutdown{
+
+	public SelectionManager(Supplier<ShardManager> shardManagerSupplier){
+
+	}
+
+	@Override
+	public void onShutdown() throws Exception{
+
+	}
+
 }

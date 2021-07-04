@@ -58,7 +58,7 @@ public class CMDHastebin extends Command{
 		TextChannel textChannel = commandEvent.getEvent().getChannel();
 
 		if(attachments.isEmpty()){
-			textChannel.sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+			textChannel.sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			return;
 		}
 		StringBuilder stringBuilder = new StringBuilder()
@@ -102,7 +102,7 @@ public class CMDHastebin extends Command{
 		});
 
 		CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0])).join();
-		textChannel.sendMessage(onSuccess(translationPackage, stringBuilder.toString())).queue();
+		textChannel.sendMessageEmbeds(onSuccess(translationPackage, stringBuilder.toString())).queue();
 		// delete original message
 		commandEvent.getEvent().getMessage().delete().queue();
 	}

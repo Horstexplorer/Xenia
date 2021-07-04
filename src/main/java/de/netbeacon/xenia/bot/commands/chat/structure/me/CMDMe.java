@@ -37,7 +37,7 @@ public class CMDMe extends Command{
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		try{
-			var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().getbMember()).getByteArrayOutputStream();
+			var baos = LevelPointManager.getLevelPointCard(commandEvent.getBackendDataPack().member()).getByteArrayOutputStream();
 			commandEvent.getEvent().getChannel().sendFile(baos.toByteArray(), "stats.png").queue();
 		}
 		catch(Exception e){

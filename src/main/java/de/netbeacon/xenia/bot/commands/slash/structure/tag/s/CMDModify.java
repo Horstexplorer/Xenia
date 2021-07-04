@@ -50,7 +50,7 @@ public class CMDModify extends Command{
 
 	@Override
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage, boolean ackRequired) throws Exception{
-		TagCache tagCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTagCache();
+		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> nameArg = cmdArgs.getByName("name");
 		CmdArg<String> contentArg = cmdArgs.getByName("content");
 		try{
@@ -60,7 +60,6 @@ public class CMDModify extends Command{
 			}
 			tag.setTagContent(contentArg.getValue());
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
-			;
 		}
 		catch(DataException | CacheException e){
 			if(e instanceof DataException && ((DataException) e).getCode() == 404){

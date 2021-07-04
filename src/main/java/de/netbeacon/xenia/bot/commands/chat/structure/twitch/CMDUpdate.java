@@ -51,14 +51,14 @@ public class CMDUpdate extends Command{
 		try{
 			CmdArg<Long> notificationid = args.getByIndex(0);
 			CmdArg<String> customMessage = args.getByIndex(1);
-			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().getbGuild().getMiscCaches().getTwitchNotificationCache();
+			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
 			TwitchNotification notification = notificationCache.get(notificationid.getValue());
 			notification.setNotificationMessage(customMessage.getValue());
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(DataException | CacheException e){
 			if(e instanceof DataException && ((DataException) e).getCode() == 404){
-				commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue();
 			}
 			else{
 				throw e;
