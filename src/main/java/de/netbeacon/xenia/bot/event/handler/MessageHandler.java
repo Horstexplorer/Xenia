@@ -71,10 +71,12 @@ public class MessageHandler{
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		License bLicense = toolBundle.backendClient().getLicenseCache().get(event.getGuild().getIdLong());
 		// try to update
-		try {
+		try{
 			BackendQuickAction.Update.execute(bUser, event.getAuthor(), true, false);
 			BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
-		}catch(Exception ignore){}
+		}
+		catch(Exception ignore){
+		}
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
 		// check if xenia has been disabled in which case we dont do anything

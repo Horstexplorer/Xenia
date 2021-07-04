@@ -28,6 +28,7 @@ public class CommandEvent{
 	private final GuildMessageReceivedEvent event;
 	private final BackendDataPack backendDataPack;
 	private final ToolBundle toolBundle;
+
 	/**
 	 * Creates a new instance of this class
 	 *

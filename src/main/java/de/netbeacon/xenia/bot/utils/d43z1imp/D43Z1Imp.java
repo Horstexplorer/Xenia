@@ -52,28 +52,22 @@ import static de.netbeacon.d43z.one.settings.StaticSettings.*;
 public class D43Z1Imp implements IShutdown{
 
 	private static D43Z1Imp instance;
-
-	private final TaskMaster<IContentprovider> contentTaskMaster = new TaskMaster<>("Content TaskManager");
-	private final DefaultEvalTask defaultEvalTask = new DefaultEvalTask();
-
-	private final IContextPool contextPoolMaster;
-	private final List<IContextPool> contextPools = new LinkedList<>();
-
-	private final ConcurrentHashMap<Long, ContentMatchBuffer> contentMatchBuffers = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<ContentMatchBuffer, Long> invertedContentMatchBuffers = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<ContentMatchBuffer, Long> contentMatchBufferAccessTimestamp = new ConcurrentHashMap<>();
-
-	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-
-	private final Eval eval;
-	private final Lock lock = new ReentrantLock();
-
-	static {
+	static{
 		EVAL_MAX_PROCESSING_THREADS.override(Runtime.getRuntime().availableProcessors()); // max threads as cores
 		EVAL_MAX_CONCURRENT_TASKS.override(2); // max 2 conc tasks
 		EVAL_MAX_THREADS_PER_REQUEST.override(EVAL_MAX_PROCESSING_THREADS.get() / 2); // each task gets half of the cpu
 		EVAL_MAX_PROCESSING_TIME.override(1500); // max 1.5 seconds
 	}
+	private final TaskMaster<IContentprovider> contentTaskMaster = new TaskMaster<>("Content TaskManager");
+	private final DefaultEvalTask defaultEvalTask = new DefaultEvalTask();
+	private final IContextPool contextPoolMaster;
+	private final List<IContextPool> contextPools = new LinkedList<>();
+	private final ConcurrentHashMap<Long, ContentMatchBuffer> contentMatchBuffers = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<ContentMatchBuffer, Long> invertedContentMatchBuffers = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<ContentMatchBuffer, Long> contentMatchBufferAccessTimestamp = new ConcurrentHashMap<>();
+	private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+	private final Eval eval;
+	private final Lock lock = new ReentrantLock();
 
 	private D43Z1Imp() throws IOException{
 		/*

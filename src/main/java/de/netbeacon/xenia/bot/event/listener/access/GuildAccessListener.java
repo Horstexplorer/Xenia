@@ -61,7 +61,7 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onReady(@NotNull ReadyEvent event){
-		logger.info("Finished loading shard "+event.getJDA().getShardInfo().getShardString()+" with "+event.getJDA().getGuildCache().size()+" guilds.");
+		logger.info("Finished loading shard " + event.getJDA().getShardInfo().getShardString() + " with " + event.getJDA().getGuildCache().size() + " guilds.");
 	}
 
 
