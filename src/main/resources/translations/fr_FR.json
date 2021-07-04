@@ -1866,13 +1866,13 @@
             "estimatedCommand": {
                 "msg": "La commande que vous avez tapée `%0%` ne semble pas exister. Peut-être vouliez-vous utiliser `%1%` à la place ?"
             },
-            "onUnknownButtonId": {
-                "title": "Bouton inconnu",
-                "description": "Désolé mais je ne sais pas quoi faire maintenant, je ne me souviens pas de ce bouton - il est peut-être périmé. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant : `%0%`."
+            "onUnknownId": {
+                "title": "Composant inconnu",
+                "description": "Je suis désolé mais je ne sais pas quoi faire maintenant, je ne me souviens pas de ce bouton - il est peut-être périmé. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant `%0%`."
             },
             "onIllegalOrigin": {
                 "title": "Origine inattendue",
-                "description": "Désolé, mais je ne m'attends pas à ce que ce bouton soit appelé dans ce contexte. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant : `%0%`."
+                "description": "Désolé mais je ne m'attends pas à ce que ce composant soit appelé à partir de ce contexte. Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter en indiquant le code d'erreur suivant `%0%`."
             },
             "onIllegalAccessor": {
                 "title": "Non autorisé",
@@ -1880,7 +1880,7 @@
             },
             "onOutdatedAccess": {
                 "title": "Demande dépassée",
-                "description": "Désolé mais le bouton ne peut plus être utilisé"
+                "description": "Désolé mais le composant ne peut plus être utilisé"
             }
         }
     },

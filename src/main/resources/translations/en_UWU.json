@@ -1866,13 +1866,13 @@
             "estimatedCommand": {
                 "msg": "The command u typed `%0%` doesnt seem to exist. Maybe u wanted to uwse `%1%` instead? UwU"
             },
-            "onUnknownButtonId": {
-                "title": "Unknown button",
-                "description": "Sowwy but i dont know whawt tuwu duwu now, i dont wemembew thiws button - iwt might be outdated. If uwu think thiws iws an ewwow pwease contact us with the fowwowing ewwow code `%0%`"
+            "onUnknownId": {
+                "title": "Unknown component",
+                "description": "Sowwy but i dont know whawt tuwu duwu now, i dont wemembew thiws component - iwt might be outdated. If uwu think thiws iws an ewwow pwease contact us with the fowwowing ewwow code `%0%`"
             },
             "onIllegalOrigin": {
                 "title": "Unexpected owigin",
-                "description": "Sowwy but i dont expect thiws button tuwu be cawwed fwom thiws context. If uwu think thiws iws an ewwow pwease contact us with the fowwowing ewwow code `%0%`"
+                "description": "Sowwy but i dont expect thiws component tuwu be cawwed fwom thiws context. If uwu think thiws iws an ewwow pwease contact us with the fowwowing ewwow code `%0%`"
             },
             "onIllegalAccessor": {
                 "title": "Nowt authowized",
@@ -1880,7 +1880,7 @@
             },
             "onOutdatedAccess": {
                 "title": "Outdated wequest",
-                "description": "Sowwy but the the button cant be used anymowe"
+                "description": "Sowwy but the component cant be used anymowe"
             }
         }
     },
