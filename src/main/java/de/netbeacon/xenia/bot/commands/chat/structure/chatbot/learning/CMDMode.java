@@ -53,10 +53,10 @@ public class CMDMode extends Command{
 			mode.set(modeSelect);
 			g.setD43Z1Mode(mode);
 			commandEvent.getToolBundle().contextPoolManager().getPoolFor(commandEvent.getBackendDataPack().guild(), true);
-			commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "error.invalid.arg.msg", Arrays.toString(Guild.D43Z1Mode.Modes.values())))).queue();
 		}
 	}
 

@@ -47,7 +47,7 @@ public class CMDInfo extends Command{
 		Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList()
 			.stream().filter(channel1 -> channel1.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE)).findFirst().orElse(null);
 		if(channel == null){
-			commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.notfound"))).queue();
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.notfound"))).queue();
 			return;
 		}
 		commandEvent.getEvent().getChannel().sendMessage(

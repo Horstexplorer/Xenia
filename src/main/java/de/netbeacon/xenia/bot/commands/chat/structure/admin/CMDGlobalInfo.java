@@ -67,7 +67,7 @@ public class CMDGlobalInfo extends AdminCommand{
 			}
 		}
 		catch(Exception e){
-			m.editMessage(getResultEmbed()).queue();
+			m.editMessageEmbeds(getResultEmbed()).queue();
 		}
 	}
 

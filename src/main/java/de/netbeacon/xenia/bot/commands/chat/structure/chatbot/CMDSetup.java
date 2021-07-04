@@ -56,7 +56,7 @@ public class CMDSetup extends Command{
 				Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
 				d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
 				existingChatChannel.setD43Z1Settings(d43Z1Settings);
-				commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
+				commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
 			}
 			else{
 				// create new text channel to be used to chat with the bot
@@ -70,13 +70,13 @@ public class CMDSetup extends Command{
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);
 							channel.updateAsync(true);
-							commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
+							commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 						}
 						catch(Exception e){
-							commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+							commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 						}
 					}, failed -> {
-						commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
 					});
 			}
 		}
@@ -87,10 +87,10 @@ public class CMDSetup extends Command{
 					Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(existingChatChannel.getD43Z1Settings().getValue());
 					d43Z1Settings.unset(Channel.D43Z1Settings.Settings.ACTIVE);
 					existingChatChannel.setD43Z1Settings(d43Z1Settings);
-					commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.deactivated"))).queue();
 				}
 				catch(Exception e){
-					commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+					commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 				}
 			}
 			else{
@@ -106,10 +106,10 @@ public class CMDSetup extends Command{
 						d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 						channel.lSetD43Z1Settings(d43Z1Settings);
 						channel.updateAsync();
-						commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 					}
 					catch(Exception e){
-						commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 					}
 				}
 				else{
@@ -120,13 +120,13 @@ public class CMDSetup extends Command{
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);
 							channel.updateAsync();
-							commandEvent.getEvent().getChannel().sendMessage(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
+							commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 						}
 						catch(Exception e){
-							commandEvent.getEvent().getChannel().sendMessage(onUnhandledException(translationPackage, e)).queue();
+							commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 						}
 					}, failed -> {
-						commandEvent.getEvent().getChannel().sendMessage(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
+						commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
 					});
 				}
 			}

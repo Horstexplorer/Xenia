@@ -55,10 +55,10 @@ public class CMDClientIdentify extends AdminCommand{
 			// send request
 			List<WSResponse> wsResponses = secondaryWebsocketListener.getWsProcessorCore().process(wsRequest);
 			// send result
-			m.editMessage(getResultEmbed(true, commandEvent.getToolBundle().backendClient().getSetupData(), wsResponses)).queue();
+			m.editMessageEmbeds(getResultEmbed(true, commandEvent.getToolBundle().backendClient().getSetupData(), wsResponses)).queue();
 		}
 		catch(Exception e){
-			m.editMessage(getResultEmbed(false, commandEvent.getToolBundle().backendClient().getSetupData(), new ArrayList<>())).queue();
+			m.editMessageEmbeds(getResultEmbed(false, commandEvent.getToolBundle().backendClient().getSetupData(), new ArrayList<>())).queue();
 		}
 	}
 

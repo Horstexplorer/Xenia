@@ -45,7 +45,7 @@ public class CMDPing extends AdminCommand{
 			.addField("Rest Ping", restPing + "ms", true)
 			.addField("Backend Ping", info.getPing() + "ms", true);
 
-		commandEvent.getEvent().getChannel().sendMessage(embedBuilder.build()).queue();
+		commandEvent.getEvent().getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
 	}
 
 }

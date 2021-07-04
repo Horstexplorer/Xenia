@@ -62,7 +62,7 @@ public class CMDInfo extends AdminCommand{
 				(int) ((uptime / (1000)) % 60)), true)
 			.addField("Threads:", String.valueOf(Thread.activeCount()), true)
 			.addField("Memory Usage:", (runtime.totalMemory() - runtime.freeMemory()) / (1048576) + "Mb/" + runtime.totalMemory() / (1048576) + "Mb", true);
-		event.getChannel().sendMessage(embedBuilder.build()).queue();
+		event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
 		EmbedBuilder embedBuilder2 = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getAuthor())
 			.addField("Xenia-Backend", "Version: " + bInfo.getVersion(), false)
 			.addField("Request Ping:", bInfo.getPing() + "ms", false)
@@ -73,7 +73,7 @@ public class CMDInfo extends AdminCommand{
 			.addField("Members", String.valueOf(bInfo.getMemberCount()), true)
 			.addField("Messages", String.valueOf(bInfo.getMessageCount()), true)
 			.addField("Channels", bInfo.getChannelCount() + "(" + (bInfo.getChannelCount() - bInfo.getForbiddenChannels()) + ")", true);
-		event.getChannel().sendMessage(embedBuilder2.build()).queue();
+		event.getChannel().sendMessageEmbeds(embedBuilder2.build()).queue();
 	}
 
 }

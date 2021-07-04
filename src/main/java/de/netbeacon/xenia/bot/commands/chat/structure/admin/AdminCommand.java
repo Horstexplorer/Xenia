@@ -62,17 +62,17 @@ public abstract class AdminCommand extends Command{
 		CmdArgs cmdArgs = CmdArgFactory.getArgs(args, getCommandArgs());
 		if(!cmdArgs.verify()){
 			// missing args
-			textChannel.sendMessage(onMissingArgs(translationPackage)).queue();
+			textChannel.sendMessageEmbeds(onMissingArgs(translationPackage)).queue();
 			return;
 		}
 		if(commandEvent.getEvent().getAuthor().getIdLong() != XeniaCore.getInstance().getConfig().getLong("ownerID")){
 			// invalid permission
-			textChannel.sendMessage(onMissingMemberPerms(commandEvent, translationPackage, false)).queue();
+			textChannel.sendMessageEmbeds(onMissingMemberPerms(commandEvent, translationPackage, false)).queue();
 			return;
 		}
 		if(!selfMember.hasPermission(getBotPermissions())){
 			// bot does not have the required permissions
-			textChannel.sendMessage(onMissingBotPerms(commandEvent, translationPackage)).queue();
+			textChannel.sendMessageEmbeds(onMissingBotPerms(commandEvent, translationPackage)).queue();
 			return;
 		}
 		// everything alright
@@ -80,7 +80,7 @@ public abstract class AdminCommand extends Command{
 			onExecution(cmdArgs, commandEvent, translationPackage);
 		}
 		catch(Exception e){
-			textChannel.sendMessage(onUnhandledException(translationPackage, e)).queue();
+			textChannel.sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 		}
 	}
 
