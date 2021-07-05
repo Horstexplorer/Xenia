@@ -98,7 +98,7 @@ public class MessageHandler{
 			}
 			else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
 				// bot messages should be logged in some cases
-				if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING))){
+				if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING))){
 					// will return when it is from the bot but either the chatbot or selflearning is not active
 					return;
 				}
@@ -141,9 +141,6 @@ public class MessageHandler{
 		// get the command
 		Command command = commandMap.get(args.get(0));
 		if(command == null){
-			if(bGuild.getSettings().has(Guild.GuildSettings.Settings.DISABLE_COMMAND_AUTO_CORRECT_MESSAGE)){
-				return;
-			}
 			if(!event.getGuild().getSelfMember().hasPermission(event.getChannel(), Permission.MESSAGE_WRITE)){
 				return;
 			}
@@ -156,8 +153,11 @@ public class MessageHandler{
 				event.getChannel().sendMessage("Internal Error - Language Not Available.\nTry again, check the language settings or contact an administrator if the error persists.").queue();
 				return;
 			}
-			if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
+			if(bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT_MESSAGE)){
 				event.getChannel().sendMessageEmbeds(estimatedCommands.get(0).onError(translationPackage, translationPackage.getTranslationWithPlaceholders("default.estimatedCommand.msg", args.get(0), estimatedCommands.get(0).getAlias()))).queue();
+				return;
+			}
+			if(!bGuild.getSettings().has(Guild.GuildSettings.Settings.COMMAND_AUTO_CORRECT)){
 				return;
 			}
 			command = estimatedCommands.get(0);

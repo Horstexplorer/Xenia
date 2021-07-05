@@ -59,7 +59,7 @@ public class CMDChannelLink extends Command{
 				}
 				channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong(), false);
 			}
-			var v = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)).count();
+			var v = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)).count();
 			if(modeArg.getValue()
 				&& v
 				>= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
@@ -68,10 +68,10 @@ public class CMDChannelLink extends Command{
 			}
 			Channel.D43Z1Settings newD43Z1ChannelSettings = new Channel.D43Z1Settings(channel.getD43Z1Settings().getValue());
 			if(modeArg.getValue()){
-				newD43Z1ChannelSettings.set(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
+				newD43Z1ChannelSettings.set(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING);
 			}
 			else{
-				newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING);
+				newD43Z1ChannelSettings.unset(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING);
 			}
 			channel.setD43Z1Settings(newD43Z1ChannelSettings);
 			commandEvent.getToolBundle().contextPoolManager().getPoolFor(commandEvent.getBackendDataPack().guild(), true);
