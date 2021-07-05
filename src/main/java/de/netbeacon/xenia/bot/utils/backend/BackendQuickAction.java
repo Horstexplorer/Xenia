@@ -25,15 +25,16 @@ import net.dv8tion.jda.api.entities.TextChannel;
 
 public class BackendQuickAction{
 
-	public static class Update {
+	public static class Update{
 
 		public static void execute(User bUser, net.dv8tion.jda.api.entities.User jUser, boolean async, boolean securityOverride){
 
 			bUser.lSetMetaData(jUser.getAsTag(), jUser.getEffectiveAvatarUrl());
 
-			if(async) {
+			if(async){
 				bUser.updateAsync(securityOverride);
-			}else{
+			}
+			else{
 				bUser.update(securityOverride);
 			}
 		}
@@ -42,9 +43,10 @@ public class BackendQuickAction{
 
 			bMember.lSetMetaData(jMember.getEffectiveName(), jMember.hasPermission(Permission.ADMINISTRATOR), jMember.isOwner());
 
-			if(async) {
+			if(async){
 				bMember.updateAsync(securityOverride);
-			}else{
+			}
+			else{
 				bMember.update(securityOverride);
 			}
 		}
@@ -53,9 +55,10 @@ public class BackendQuickAction{
 
 			bGuild.setMetaData(jGuild.getName(), jGuild.getIconUrl());
 
-			if(async) {
+			if(async){
 				bGuild.updateAsync(securityOverride);
-			}else{
+			}
+			else{
 				bGuild.update(securityOverride);
 			}
 		}
@@ -64,13 +67,18 @@ public class BackendQuickAction{
 			bChannel.lSetMetaData(jChannel.getName(), jChannel.getTopic());
 
 			Channel.ChannelFlags channelFlags = new Channel.ChannelFlags(0);
-			if(jChannel.isNews())channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
-			if(jChannel.isNSFW())channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
+			if(jChannel.isNews()){
+				channelFlags.set(Channel.ChannelFlags.Flags.NEWS);
+			}
+			if(jChannel.isNSFW()){
+				channelFlags.set(Channel.ChannelFlags.Flags.NSFW);
+			}
 			bChannel.lSetChannelFlags(channelFlags);
 
-			if(async) {
+			if(async){
 				bChannel.updateAsync(securityOverride);
-			}else{
+			}
+			else{
 				bChannel.update(securityOverride);
 			}
 		}

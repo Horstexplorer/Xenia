@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.interactions.selection;
+package de.netbeacon.xenia.bot.interactions.records;
 
-import de.netbeacon.utils.shutdownhook.IShutdown;
-import net.dv8tion.jda.api.sharding.ShardManager;
+import net.dv8tion.jda.api.events.interaction.GenericComponentInteractionCreateEvent;
 
-import java.util.function.Supplier;
+import java.util.function.BiConsumer;
 
-public class SelectionManager implements IShutdown{
+public record ExceptionHandler(BiConsumer<Exception, GenericComponentInteractionCreateEvent> exceptionConsumer){
 
-	public SelectionManager(Supplier<ShardManager> shardManagerSupplier){
+	public static final ExceptionHandler NONE = new ExceptionHandler(null);
 
-	}
-
-	@Override
-	public void onShutdown() throws Exception{
-
+	public static ExceptionHandler CUSTOM(BiConsumer<Exception, GenericComponentInteractionCreateEvent> exceptionConsumer){
+		return new ExceptionHandler(exceptionConsumer);
 	}
 
 }

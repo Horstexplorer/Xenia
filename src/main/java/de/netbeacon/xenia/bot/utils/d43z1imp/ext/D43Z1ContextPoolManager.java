@@ -67,14 +67,14 @@ public class D43Z1ContextPoolManager{
 			// add to cache / hard refresh
 			Guild.D43Z1Mode d43Z1Mode = guild.getD43Z1Mode();
 			List<IContextPool> contextPools = new ArrayList<>();
-			if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.MASTER_ONLY)){
+			if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.MASTER)){
 				contextPools.add(d43Z1Imp.getContextPoolMaster());
 			}
 			else if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.MIX)){
 				contextPools.add(new ContextPool("channel_pool_" + guild.getId(), getContextFor(guild.getChannelCache().getDataMap().values())));
 				contextPools.add(d43Z1Imp.getContextPoolMaster());
 			}
-			else if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.SELF_LEARNING_ONLY)){
+			else if(d43Z1Mode.has(Guild.D43Z1Mode.Modes.SELF_LEARNING)){
 				contextPools.add(new ContextPool("channel_pool_" + guild.getId(), getContextFor(guild.getChannelCache().getDataMap().values())));
 			}
 			else{
@@ -93,7 +93,7 @@ public class D43Z1ContextPoolManager{
 	private List<ContentContext> getContextFor(Collection<Channel> channels){
 		List<ContentContext> channelContexts = new ArrayList<>();
 		for(Channel channel : channels){
-			if(channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)){
+			if(channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)){
 				if(!channelContextHashMap.containsKey(channel.getChannelId())){
 					ChannelContext channelContext = new ChannelContext(channel.getChannelId(), channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_LOGGING_C());
 					channel.getMessageCache().addEventListeners(channelContext.getListener());
@@ -140,7 +140,7 @@ public class D43Z1ContextPoolManager{
 			newObject.getChannelCache().addEventListeners(new CacheEventListener<>(){
 				@Override
 				public void onInsertion(Long newKey, Channel newObject){
-					if(!newObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)){
+					if(!newObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)){
 						return;
 					}
 					d43Z1ContextPoolManager.getPoolFor(newObject.getGuild(), true); // force a reload
@@ -148,7 +148,7 @@ public class D43Z1ContextPoolManager{
 
 				@Override
 				public void onRemoval(Long oldKey, Channel oldObject){
-					if(!oldObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVATE_SELF_LEARNING)){
+					if(!oldObject.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)){
 						return;
 					}
 					d43Z1ContextPoolManager.removeContextFor(oldObject);

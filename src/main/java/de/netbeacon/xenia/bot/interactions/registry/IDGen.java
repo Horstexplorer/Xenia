@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.event.handler.interactions;
+package de.netbeacon.xenia.bot.interactions.registry;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.interactions.selection.SelectionManager;
-import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
+import org.apache.commons.lang3.RandomStringUtils;
 
-public class SelectionHandler{
+public class IDGen{
 
-	public SelectionHandler(XeniaBackendClient backendClient, SelectionManager selectionManager){
-
-	}
-
-	public void onSelect(SelectionMenuEvent event){
-
+	public static synchronized String genString(int len){
+		return RandomStringUtils.randomPrint(len);
 	}
 
 }

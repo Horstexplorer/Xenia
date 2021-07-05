@@ -17,8 +17,7 @@
 package de.netbeacon.xenia.bot.utils.records;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
-import de.netbeacon.xenia.bot.interactions.selection.SelectionManager;
+import de.netbeacon.xenia.bot.interactions.registry.ComponentInteractionRegistry;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
 import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.level.LevelPointManager;
@@ -30,6 +29,5 @@ public record ToolBundle(
 	PaginatorManager paginatorManager,
 	D43Z1ContextPoolManager contextPoolManager,
 	LevelPointManager levelPointManager,
-	ButtonManager buttonManager,
-	SelectionManager selectionManager
+	ComponentInteractionRegistry componentInteractionRegistry
 ){}

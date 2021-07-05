@@ -16,32 +16,37 @@
 
 package de.netbeacon.xenia.bot.event.listener.interactions;
 
-import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
-import de.netbeacon.xenia.bot.event.handler.interactions.ButtonHandler;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonManager;
-import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
+import de.netbeacon.xenia.bot.event.handler.interactions.ComponentInteractionHandler;
+import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class ButtonListener extends ListenerAdapter{
+public class ComponentInteractionListener extends ListenerAdapter{
 
-	private final EventWaiter eventWaiter;
-	private final ButtonHandler buttonHandler;
+	private final ToolBundle toolBundle;
+	private final ComponentInteractionHandler componentInteractionHandler;
 
-	public ButtonListener(XeniaBackendClient backendClient, EventWaiter eventWaiter, ButtonManager buttonManager){
-		this.eventWaiter = eventWaiter;
-		this.buttonHandler = new ButtonHandler(backendClient, buttonManager);
+	public ComponentInteractionListener(ToolBundle toolBundle){
+		this.toolBundle = toolBundle;
+		this.componentInteractionHandler = new ComponentInteractionHandler(toolBundle);
 	}
 
 	@Override
 	public void onButtonClick(@NotNull ButtonClickEvent event){
-		// button got clicked o.o
-		if(eventWaiter.waitingOnThis(event)){
+		if(toolBundle.eventWaiter().waitingOnThis(event)){
 			return;
 		}
-		buttonHandler.handleClick(event);
+		componentInteractionHandler.handle(event);
 	}
 
+	@Override
+	public void onSelectionMenu(@NotNull SelectionMenuEvent event){
+		if(toolBundle.eventWaiter().waitingOnThis(event)){
+			return;
+		}
+		componentInteractionHandler.handle(event);
+	}
 
 }

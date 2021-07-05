@@ -1866,13 +1866,13 @@
             "estimatedCommand": {
                 "msg": "Der eingegebene Befehl `%0%` scheint nicht zu existieren. Vielleicht wolltest du stattdessen `%1%` verwenden?"
             },
-            "onUnknownButtonId": {
-                "title": "Unbekannter Button",
+            "onUnknownId": {
+                "title": "Unbekannter Komponent",
                 "description": "Entschuldigung, ich erinnere mich nicht an diese Schaltfläche - sie könnte veraltet sein. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie uns bitte mit dem folgenden Fehlercode `%0%`"
             },
             "onIllegalOrigin": {
                 "title": "Unerwartete Herkunft",
-                "description": "Entschuldigung, ich glaube nicht dass diese Schaltfläche aus diesem Kontext aufgerufen werden sollte. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie uns bitte mit dem folgenden Fehlercode `%0%`"
+                "description": "Entschuldigung, ich glaube nicht dass diese Komponent aus diesem Kontext aufgerufen werden sollte. Wenn Sie denken, dass dies ein Fehler ist, kontaktieren Sie uns bitte mit dem folgenden Fehlercode `%0%`"
             },
             "onIllegalAccessor": {
                 "title": "Nicht autorisiert",
@@ -1880,7 +1880,7 @@
             },
             "onOutdatedAccess": {
                 "title": "Veraltete Anfrage",
-                "description": "Die Taste kann leider nicht mehr verwendet werden"
+                "description": "Die Komponente kann leider nicht mehr verwendet werden"
             }
         }
     },

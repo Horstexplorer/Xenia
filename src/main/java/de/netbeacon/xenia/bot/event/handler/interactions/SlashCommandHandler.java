@@ -59,10 +59,12 @@ public class SlashCommandHandler{
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		License bLicense = toolBundle.backendClient().getLicenseCache().get(event.getGuild().getIdLong());
 		// try to update
-		try {
+		try{
 			BackendQuickAction.Update.execute(bUser, event.getUser(), true, false);
 			BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
-		}catch(Exception ignore){}
+		}
+		catch(Exception ignore){
+		}
 		// wrap in single object
 		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
 		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, toolBundle);

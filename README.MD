@@ -44,8 +44,8 @@ Some settings for the guild in general are available
 ```~settings guild settings OPTION true/false```  
 Options:
 ```
-DISABLE_COMMAND_AUTO_CORRECT_MESSAGE - Disables the typo response
-COMMAND_AUTO_CORRECT - Disables the typo response and executes the command it thinks is correct on typos
+COMMAND_AUTO_CORRECT_MESSAGE - Enables the typo response
+COMMAND_AUTO_CORRECT - Enables the typo response and executes the command it thinks is correct on typos
 ENFORCE_LANGUAGE - Enforce the set language as response language
 VPERM_ENABLE - Use the virtuale role/permission system provided by Xenia to check member/(role) permissions instead of the Discord one
 ```
@@ -82,9 +82,9 @@ You are able to customize the chat experience by swapping out or extending the e
 ```~chatbot learning mode MODE```
 Available modes are
 ```
-MASTER_ONLY - only use the existing datasets in chat
+MASTER - only use the existing datasets in chat
 MIX - extend the existing datasets with your own chats
-SELF_LEARNING_ONLY - only use your datasets
+SELF_LEARNING - only use your datasets
 ```
 To let Xenia know where to fetch your chats from use (will default to the current channel)
 ```~chatbot learning channel_link true/false #optional_channel_mention```

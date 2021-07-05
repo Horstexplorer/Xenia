@@ -1866,13 +1866,13 @@
             "estimatedCommand": {
                 "msg": "The command you typed `%0%` doesnt seem to exist. Maybe you wanted to use `%1%` instead?"
             },
-            "onUnknownButtonId": {
-                "title": "Unknown button",
+            "onUnknownId": {
+                "title": "Unknown component",
                 "description": "Sorry but I dont know what to do now, I dont remember this button - it might be outdated. If you think this is an error please contact us with the following error code `%0%`"
             },
             "onIllegalOrigin": {
                 "title": "Unexpected origin",
-                "description": "Sorry but I dont expect this button to be called from this context. If you think this is an error please contact us with the following error code `%0%`"
+                "description": "Sorry but I dont expect this component to be called from this context. If you think this is an error please contact us with the following error code `%0%`"
             },
             "onIllegalAccessor": {
                 "title": "Not allowed",
@@ -1880,7 +1880,7 @@
             },
             "onOutdatedAccess": {
                 "title": "Outdated request",
-                "description": "Sorry but the the button cant be used anymore"
+                "description": "Sorry but the component cant be used anymore"
             }
         }
     },

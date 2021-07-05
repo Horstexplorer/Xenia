@@ -20,7 +20,8 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
-import de.netbeacon.xenia.bot.interactions.buttons.ButtonRegEntry;
+import de.netbeacon.xenia.bot.interactions.records.*;
+import de.netbeacon.xenia.bot.interactions.type.buttons.ButtonRegEntryComponent;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Message;
@@ -39,32 +40,31 @@ public class CMDBurger extends AdminCommand{
 		var channel = commandEvent.getEvent().getChannel();
 
 		channel.sendMessage("\uD83C\uDF54").queue(message -> {
-			ButtonRegEntry burger = new ButtonRegEntry(
-				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
-				ButtonRegEntry.AllowedAccessor.ANY,
-				ButtonRegEntry.AllowedActivations.LIMIT(10),
-				ButtonRegEntry.TimeoutPolicy.NONE,
-				ButtonRegEntry.ActionHandler.CUSTOM((buttonClickEvent) -> {
-					buttonClickEvent.reply("-1 "+"\uD83C\uDF54 taken by "+buttonClickEvent.getUser().getAsTag()).queue();
+			ButtonRegEntryComponent burger = new ButtonRegEntryComponent(
+				Origin.CUSTOM(message.getIdLong(), channel.getIdLong()),
+				Accessor.ANY,
+				Activations.CUSTOM(10),
+				TimeoutPolicy.NONE,
+				ActionHandler.CUSTOM((buttonClickEvent) -> {
+					buttonClickEvent.reply("-1 " + "\uD83C\uDF54 taken by " + buttonClickEvent.getUser().getAsTag()).queue();
 				}),
-				ButtonRegEntry.ExceptionHandler.NONE,
-				ButtonRegEntry.DeactivationMode.ALL
+				ExceptionHandler.NONE,
+				DeactivationMode.ALL
 			);
-			commandEvent.getToolBundle().buttonManager().register(burger);
+			commandEvent.getToolBundle().componentInteractionRegistry().register(burger);
 
-			ButtonRegEntry salad = new ButtonRegEntry(
-				ButtonRegEntry.AllowedOrigin.CUSTOM(message.getIdLong(), channel.getIdLong()),
-				ButtonRegEntry.AllowedAccessor.ANY,
-				ButtonRegEntry.AllowedActivations.ONCE,
-				ButtonRegEntry.TimeoutPolicy.NONE,
-				ButtonRegEntry.ActionHandler.CUSTOM((buttonClickEvent) -> {
-					buttonClickEvent.reply("The salad wasn't free. No more burgers. "+buttonClickEvent.getUser().getAsTag()+" ruined it.").queue();
+			ButtonRegEntryComponent salad = new ButtonRegEntryComponent(
+				Origin.CUSTOM(message.getIdLong(), channel.getIdLong()),
+				Accessor.ANY,
+				Activations.ONCE,
+				TimeoutPolicy.NONE,
+				ActionHandler.CUSTOM((buttonClickEvent) -> {
+					buttonClickEvent.reply("The salad wasn't free. No more burgers. " + buttonClickEvent.getUser().getAsTag() + " ruined it.").queue();
 				}),
-				ButtonRegEntry.ExceptionHandler.NONE,
-				ButtonRegEntry.DeactivationMode.ALL
+				ExceptionHandler.NONE,
+				DeactivationMode.ALL
 			);
-			commandEvent.getToolBundle().buttonManager().register(salad);
-
+			commandEvent.getToolBundle().componentInteractionRegistry().register(salad);
 
 
 			Message messageNew = new MessageBuilder()

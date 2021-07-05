@@ -14,7 +14,18 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.interactions.selection;
+package de.netbeacon.xenia.bot.interactions.records;
 
-public class SelectionRegEntry{
+import net.dv8tion.jda.api.events.interaction.GenericComponentInteractionCreateEvent;
+
+import java.util.function.Consumer;
+
+public record ActionHandler(Consumer<GenericComponentInteractionCreateEvent> actionEventConsumer){
+
+	public static final ActionHandler NONE = new ActionHandler(null);
+
+	public static ActionHandler CUSTOM(Consumer<GenericComponentInteractionCreateEvent> actionEventConsumer){
+		return new ActionHandler(actionEventConsumer);
+	}
+
 }

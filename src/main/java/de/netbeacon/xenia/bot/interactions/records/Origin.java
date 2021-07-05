@@ -14,28 +14,35 @@
  * limitations under the License.
  */
 
-package de.netbeacon.xenia.bot.interactions.buttons;
+package de.netbeacon.xenia.bot.interactions.records;
 
-import java.util.Arrays;
+import net.dv8tion.jda.api.entities.Message;
 
-public class ButtonException extends RuntimeException{
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-	public enum Type {
-		UNKNOWN,
-		ILLEGAL_ORIGIN,
-		ILLEGAL_ACCESSOR,
-		OUTDATED
+public record Origin(Long... origin){
+
+	public static Origin ANY = new Origin((Long) null);
+
+	public static Origin CUSTOM(Long... origin){
+		return new Origin(origin);
 	}
 
-	private final Type type;
-
-	public ButtonException(Type type, String...message){
-		super(Arrays.toString(message));
-		this.type = type;
+	public Set<Long> asSet(){
+		return new HashSet<>(List.of(origin));
 	}
 
-	public Type getType(){
-		return type;
+	public boolean isAllowedOrigin(long messageId){
+		return origin[0] == messageId;
+	}
+
+	public boolean isAllowedOrigin(Message message){
+		if(this.equals(ANY)){
+			return true;
+		}
+		return isAllowedOrigin(message.getIdLong());
 	}
 
 }
