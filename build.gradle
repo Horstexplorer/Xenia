@@ -29,7 +29,7 @@ dependencies {
 
     // JDA
 
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_293' // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.3.0_294' // https://mvnrepository.com/artifact/net.dv8tion/JDA
 
     // JSON
 
@@ -63,7 +63,7 @@ dependencies {
     // clients
     implementation group: 'de.netbeacon.purrito', name: 'PurrBot-API-Wrapper', version: '2.0.5', changing: true // purrbot api wrapper
     implementation group: 'de.netbeacon.d43z1', name: 'D43Z1', version: '1.0.3', changing: true // d43z1
-    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.13.3', changing: true // backend client
+    implementation group: 'de.netbeacon.xenia.backend.client', name: 'Xenia-Backend-Client', version: '1.14.0', changing: true // backend client
     implementation group: 'de.netbeacon.utils', name: 'Logging-Utils', version: '1.0.0', changing: true // discord logging
 }
 
