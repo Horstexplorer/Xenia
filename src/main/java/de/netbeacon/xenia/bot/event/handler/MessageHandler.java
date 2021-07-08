@@ -21,7 +21,6 @@ import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import de.netbeacon.utils.tuples.Pair;
-import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -32,14 +31,10 @@ import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
-import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
-import java.util.stream.Collectors;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPattern;
 
@@ -96,28 +90,6 @@ public class MessageHandler{
 					logger.warn("An exception occurred while handing message over to D43Z1 ", e);
 				}
 			}
-			else if(bChannel.tmpLoggingIsActive()){ // check if the message should be logged
-				// bot messages should be logged in some cases
-				if(event.getAuthor().isBot() && !(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING))){
-					// will return when it is from the bot but either the chatbot or selflearning is not active
-					return;
-				}
-				// log the message
-				var message = event.getMessage();
-				bChannel.getMessageCache()
-					.create(
-						message.getIdLong(),
-						message.getTimeCreated().toInstant().toEpochMilli(),
-						message.getAuthor().getIdLong(),
-						message.getContentRaw(),
-						message.getAttachments().stream().map(net.dv8tion.jda.api.entities.Message.Attachment::getUrl).collect(Collectors.toList()),
-						true
-					);
-			}
-			return;
-		}
-		// ! note ! events from the bot itself get passed through | we filter em out here again
-		if(event.getAuthor().isBot()){
 			return;
 		}
 		// check if xenia is not active or inactive in which case we dont do anything
@@ -165,63 +137,6 @@ public class MessageHandler{
 		args.remove(0);
 		// start the madness
 		command.execute(args, new CommandEvent(event, backendDataPack, toolBundle));
-	}
-
-	public void processUpdate(GuildMessageUpdateEvent event){
-		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
-		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-		MessageCache messageCache = bChannel.getMessageCache();
-		Message message = messageCache.get(event.getMessageIdLong());
-		if(message == null){
-			return;
-		}
-		// update message content
-		message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
-		message.updateAsync(true);
-		// update thingy
-		messageCache.setLast("edited", message.getId());
-		// check if notification is active
-		if(bChannel.getTmpLoggingChannelId() == -1){
-			return;
-		}
-		TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-		if(channel == null){
-			bChannel.setTmpLoggingChannelId(-1);
-			return;
-		}
-		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
-			.addField("MessageID", event.getMessageId(), true)
-			.addField("Author", event.getAuthor().getAsTag(), true)
-			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-			.build()
-		).queue(s -> {}, e -> {});
-	}
-
-	public void processDelete(GuildMessageDeleteEvent event){
-		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
-		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-		MessageCache messageCache = bChannel.getMessageCache();
-		Message message = messageCache.get(event.getMessageIdLong());
-		if(message == null){
-			return;
-		}
-		// update thingy
-		messageCache.setLast("deleted", event.getMessageIdLong());
-		// try sending the message there
-		if(bChannel.getTmpLoggingChannelId() == -1){
-			return;
-		}
-		TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-		if(channel == null){
-			bChannel.setTmpLoggingChannelId(-1);
-			return;
-		}
-		channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
-			.addField("MessageID", event.getMessageId(), true)
-			.addField("AuthorID", String.valueOf(message.getUserId()), true)
-			.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-			.build()
-		).queue(s -> {}, e -> {});
 	}
 
 	public void D43Z1_EXECUTE(GuildMessageReceivedEvent event, CommandEvent.BackendDataPack backendDataPack) throws Exception{
