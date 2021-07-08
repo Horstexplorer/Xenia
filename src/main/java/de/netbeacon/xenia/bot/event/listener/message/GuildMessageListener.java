@@ -76,7 +76,7 @@ public class GuildMessageListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
-		if(event.isWebhookMessage() || (event.getAuthor().isBot() && !event.getGuild().getSelfMember().equals(event.getMember()))){
+		if(event.getAuthor().isSystem() || event.isWebhookMessage() || (event.getAuthor().isBot() && !event.getGuild().getSelfMember().equals(event.getMember()))){
 			return;
 		}
 		if(eventWaiter.waitingOnThis(event)){

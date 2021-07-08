@@ -88,11 +88,10 @@ public class MultiThreadedEventManager implements IExtendedEventManager{
 			try{
 				listener.onEvent(event);
 			}
-			catch(Throwable t){
-				JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", t);
-				if(t instanceof Error){
-					throw t;
-				}
+			catch(Exception e){
+				JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", e);
+			}catch(ExpectedInterruptException e){
+				break;
 			}
 		}
 	}
