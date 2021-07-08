@@ -72,7 +72,7 @@ public class GuildMessageCommandListener extends ListenerAdapter{
 		if(event.getAuthor().isSystem() || event.isWebhookMessage() || event.getAuthor().isBot()){
 			return;
 		}
-		commandHandler.processNew(event); // ! note ! events from the bot itself get passed through
+		commandHandler.processNew(event);
 	}
 
 }
