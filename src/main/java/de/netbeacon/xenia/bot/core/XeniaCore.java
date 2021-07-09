@@ -36,6 +36,7 @@ import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
+import de.netbeacon.xenia.bot.event.manager.shardmanager.ManualShardManagerBuilder;
 import de.netbeacon.xenia.bot.interactions.registry.ComponentInteractionRegistry;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.ext.D43Z1ContextPoolManager;
@@ -52,7 +53,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.ApplicationInfo;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -163,7 +163,7 @@ public class XeniaCore{
 		);
 		// setup shard builder
 		logger.info("Setting Up Shard Builder...");
-		DefaultShardManagerBuilder builder = DefaultShardManagerBuilder
+		ManualShardManagerBuilder builder = ManualShardManagerBuilder
 			.createLight(setupData.getDiscordToken(), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MESSAGE_REACTIONS)
 			.setEventManagerProvider(eventManagerProvider::provideOrCreate)
 			.setActivity(Activity.playing(config.getString("activity")))
@@ -181,6 +181,9 @@ public class XeniaCore{
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
 			builder
 				.setShardsTotal(setupData.getTotalShards());
+		}else {
+			builder
+				.setShardsTotal(1);
 		}
 		// prepare helper class
 		class SMH implements IShutdown{
@@ -203,7 +206,7 @@ public class XeniaCore{
 		shutdownHook.addShutdownAble(new SMH(shardManager));
 		// start shards
 		var wsc = xeniaBackendClient.getSecondaryWebsocketListener().getWsProcessorCore();
-		for(int shardId : setupData.getShards()){
+		for(int shardId : setupData.getShards().length == 0 ? new int[]{0} : setupData.getShards()){
 			WSRequest wsRequest = new WSRequest.Builder()
 				.mode(WSRequest.Mode.UNICAST)
 				.recipient(0)
@@ -215,11 +218,13 @@ public class XeniaCore{
 				.exitOn(WSRequest.ExitOn.INSTANT)
 				.build();
 			wsc.process(wsRequest);
+			logger.info("Waiting for Shard "+shardId);
 			synchronized(ShardStartupProcessor.SYNC){
 				try{
-					ShardStartupProcessor.SYNC.wait(setupData.getTotalShards() * 6000L);
+					ShardStartupProcessor.SYNC.wait(setupData.getTotalShards() * 10000L);
 				}catch(Exception ignore){}
 			}
+			logger.info("Finished Waiting for Shard "+shardId);
 			shardManager.start(shardId);
 			logger.info("Started Shard "+shardId);
 			WSRequest wsRequest2 = new WSRequest.Builder()
