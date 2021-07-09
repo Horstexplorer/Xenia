@@ -31,26 +31,19 @@ import de.netbeacon.xenia.bot.commands.chat.structure.settings.GROUPSettings;
 import de.netbeacon.xenia.bot.commands.chat.structure.tags.HYBRIDTag;
 import de.netbeacon.xenia.bot.commands.chat.structure.twitch.HYBRIDTwitch;
 import de.netbeacon.xenia.bot.event.handler.MessageHandler;
-import de.netbeacon.xenia.bot.utils.eventwaiter.EventWaiter;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageEmbedEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageUpdateEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-public class GuildMessageListener extends ListenerAdapter{
+public class GuildMessageCommandListener extends ListenerAdapter{
 
-	private final EventWaiter eventWaiter;
 	private final MessageHandler commandHandler;
 
-	public GuildMessageListener(ToolBundle toolBundle){
-		this.eventWaiter = toolBundle.eventWaiter();
-
+	public GuildMessageCommandListener(ToolBundle toolBundle){
 		HashMap<String, Command> commandMap = new HashMap<>();
 		Consumer<Command> register = command -> commandMap.put(command.getAlias(), command);
 
@@ -76,33 +69,10 @@ public class GuildMessageListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event){
-		if(event.isWebhookMessage() || (event.getAuthor().isBot() && !event.getGuild().getSelfMember().equals(event.getMember()))){
+		if(event.getAuthor().isSystem() || event.isWebhookMessage() || event.getAuthor().isBot()){
 			return;
 		}
-		if(eventWaiter.waitingOnThis(event)){
-			return;
-		}
-		commandHandler.processNew(event); // ! note ! events from the bot itself get passed through
-	}
-
-	@Override
-	public void onGuildMessageUpdate(@NotNull GuildMessageUpdateEvent event){
-		if(event.getAuthor().isBot()){
-			return;
-		}
-		eventWaiter.waitingOnThis(event);
-		commandHandler.processUpdate(event);
-	}
-
-	@Override
-	public void onGuildMessageDelete(@NotNull GuildMessageDeleteEvent event){
-		eventWaiter.waitingOnThis(event);
-		commandHandler.processDelete(event);
-	}
-
-	@Override
-	public void onGuildMessageEmbed(@NotNull GuildMessageEmbedEvent event){
-		eventWaiter.waitingOnThis(event);
+		commandHandler.processNew(event);
 	}
 
 }

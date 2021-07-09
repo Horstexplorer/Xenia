@@ -27,7 +27,9 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.Translatio
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.ComponentInteractionListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.SlashCommandListener;
-import de.netbeacon.xenia.bot.event.listener.message.GuildMessageListener;
+import de.netbeacon.xenia.bot.event.listener.message.GuildMessageAutoModListener;
+import de.netbeacon.xenia.bot.event.listener.message.GuildMessageCommandListener;
+import de.netbeacon.xenia.bot.event.listener.message.GuildMessageLoggingListener;
 import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
@@ -164,11 +166,12 @@ public class XeniaCore{
 			.setActivity(Activity.playing(config.getString("activity")))
 			.addEventListeners(
 				new StatusListener(),
+				new GuildMessageLoggingListener(toolBundle),
+				new GuildMessageAutoModListener(toolBundle),
 				new GuildAccessListener(xeniaBackendClient),
-				new GuildMessageListener(toolBundle),
+				new GuildMessageCommandListener(toolBundle),
 				new GuildReactionListener(eventWaiter),
 				paginatorManager.getListener(),
-
 				new SlashCommandListener(toolBundle),
 				new ComponentInteractionListener(toolBundle)
 			);
