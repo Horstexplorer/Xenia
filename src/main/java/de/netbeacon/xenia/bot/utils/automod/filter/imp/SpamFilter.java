@@ -23,7 +23,7 @@ import de.netbeacon.xenia.bot.event.manager.ExpectedInterruptException;
 import de.netbeacon.xenia.bot.utils.automod.filter.AFilter;
 import net.dv8tion.jda.api.entities.Message;
 
-public class FloodFilter extends AFilter{
+public class SpamFilter extends AFilter{
 
 	@Override
 	public void filter(Message message, Guild bGuild, Channel bChannel, User bUser) throws ExpectedInterruptException{
