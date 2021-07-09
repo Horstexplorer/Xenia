@@ -177,7 +177,8 @@ public class XeniaCore{
 			);
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
 			builder
-				.setShardsTotal(setupData.getTotalShards());
+				.setShardsTotal(setupData.getTotalShards())
+				.setShards(setupData.getShards());
 		}else {
 			builder
 				.setShardsTotal(1);
