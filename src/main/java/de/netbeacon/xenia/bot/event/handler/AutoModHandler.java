@@ -21,7 +21,9 @@ import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.User;
 import de.netbeacon.xenia.bot.event.manager.ExpectedInterruptException;
 import de.netbeacon.xenia.bot.utils.automod.filter.AFilter;
-import de.netbeacon.xenia.bot.utils.automod.filter.imp.*;
+import de.netbeacon.xenia.bot.utils.automod.filter.imp.SpamFilter;
+import de.netbeacon.xenia.bot.utils.automod.filter.imp.URLFilter;
+import de.netbeacon.xenia.bot.utils.automod.filter.imp.WordFilter;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -34,9 +36,7 @@ public class AutoModHandler{
 	private final List<AFilter> filters = new ArrayList<>(){{
 		add(new WordFilter());
 		add(new URLFilter());
-		add(new SpecialCharFilter());
-		add(new MultiLineSpamFilter());
-		add(new FloodFilter());
+		add(new SpamFilter());
 	}};
 
 	public AutoModHandler(ToolBundle toolBundle){
