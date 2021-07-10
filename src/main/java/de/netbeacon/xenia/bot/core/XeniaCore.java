@@ -23,6 +23,8 @@ import de.netbeacon.utils.shutdownhook.ShutdownHook;
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
 import de.netbeacon.xenia.backend.client.objects.external.system.SetupData;
 import de.netbeacon.xenia.backend.client.objects.internal.BackendSettings;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.WSRequest;
+import de.netbeacon.xenia.backend.client.objects.internal.ws.processor.imp2.ShardStartupProcessor;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.ComponentInteractionListener;
@@ -52,6 +54,7 @@ import net.dv8tion.jda.api.entities.ApplicationInfo;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 import net.dv8tion.jda.api.sharding.ShardManager;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,10 +181,11 @@ public class XeniaCore{
 		if(setupData.getTotalShards() != 0 && setupData.getShards().length != 0){
 			builder
 				.setShardsTotal(setupData.getTotalShards())
-				.setShards(setupData.getShards());
+				.setShards(setupData.getShards()[0]); // only prepare first shard as work around
 		}else {
 			builder
-				.setShardsTotal(1);
+				.setShardsTotal(1)
+				.setShards(0);
 		}
 		// prepare helper class
 		class SMH implements IShutdown{
@@ -199,44 +203,49 @@ public class XeniaCore{
 
 		}
 		// create shards
-		logger.info("Building ShardManager");
-		shardManager = builder.build();
+		logger.info("Building ShardManager & Waiting for shards to start");
+		shardManager = builder.build(false);
 		shutdownHook.addShutdownAble(new SMH(shardManager));
 		// start shards
-		//var wsc = xeniaBackendClient.getSecondaryWebsocketListener().getWsProcessorCore();
-		//for(int shardId : setupData.getShards().length == 0 ? new int[]{0} : setupData.getShards()){
-		//	WSRequest wsRequest = new WSRequest.Builder()
-		//		.mode(WSRequest.Mode.UNICAST)
-		//		.recipient(0)
-		//		.action("shardstartup")
-		//		.payload(new JSONObject()
-		//			.put("shardId", shardId)
-		//			.put("task", "enqueue")
-		//		)
-		//		.exitOn(WSRequest.ExitOn.INSTANT)
-		//		.build();
-		//	wsc.process(wsRequest);
-		//	logger.info("Waiting for Shard "+shardId);
-		//	synchronized(ShardStartupProcessor.SYNC){
-		//		try{
-		//			ShardStartupProcessor.SYNC.wait(setupData.getTotalShards() * 10000L);
-		//		}catch(Exception ignore){}
-		//	}
-		//	logger.info("Finished Waiting for Shard "+shardId);
-		//	shardManager.start(shardId);
-		//	logger.info("Started Shard "+shardId);
-		//	WSRequest wsRequest2 = new WSRequest.Builder()
-		//		.mode(WSRequest.Mode.UNICAST)
-		//		.recipient(0)
-		//		.action("shardstartup")
-		//		.payload(new JSONObject()
-		//			.put("shardId", shardId)
-		//			.put("task", "started")
-		//		)
-		//		.exitOn(WSRequest.ExitOn.INSTANT)
-		//		.build();
-		//	wsc.process(wsRequest2);
-		//}
+		var wsc = xeniaBackendClient.getSecondaryWebsocketListener().getWsProcessorCore();
+		for(int shardId : setupData.getShards().length == 0 ? new int[]{0} : setupData.getShards()){
+			WSRequest wsRequest = new WSRequest.Builder()
+				.mode(WSRequest.Mode.UNICAST)
+				.recipient(0)
+				.action("shardstartup")
+				.payload(new JSONObject()
+					.put("shardId", shardId)
+					.put("task", "enqueue")
+				)
+				.exitOn(WSRequest.ExitOn.INSTANT)
+				.build();
+			wsc.process(wsRequest);
+			logger.debug("Waiting for Shard "+shardId);
+			synchronized(ShardStartupProcessor.SYNC){
+				try{
+					ShardStartupProcessor.SYNC.wait(setupData.getTotalShards() * 10000L);
+				}catch(Exception ignore){}
+			}
+			logger.debug("Finished Waiting for Shard "+shardId);
+			shardManager.start(shardId);
+			synchronized(StatusListener.STATUS_LOGGED_IN){
+				try{
+					StatusListener.STATUS_LOGGED_IN.wait();
+				}catch(Exception ignore){}
+			}
+			logger.debug("Started Shard "+shardId);
+			WSRequest wsRequest2 = new WSRequest.Builder()
+				.mode(WSRequest.Mode.UNICAST)
+				.recipient(0)
+				.action("shardstartup")
+				.payload(new JSONObject()
+					.put("shardId", shardId)
+					.put("task", "started")
+				)
+				.exitOn(WSRequest.ExitOn.INSTANT)
+				.build();
+			wsc.process(wsRequest2);
+		}
 		// application info
 		logger.info("Getting Application Info...");
 		ApplicationInfo applicationInfo = shardManager.retrieveApplicationInfo().complete();

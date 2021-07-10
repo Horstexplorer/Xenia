@@ -20,6 +20,8 @@ import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
 import de.netbeacon.xenia.backend.client.objects.external.Channel;
 import de.netbeacon.xenia.backend.client.objects.external.Guild;
 import de.netbeacon.xenia.backend.client.objects.external.Message;
+import de.netbeacon.xenia.backend.client.objects.external.User;
+import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
 import de.netbeacon.xenia.bot.utils.embedfactory.EmbedBuilderFactory;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -38,6 +40,12 @@ public class LoggingHandler{
 	}
 
 	public void processCreate(GuildMessageReceivedEvent event){
+		User bUser = toolBundle.backendClient().getUserCache().get(event.getAuthor().getIdLong());
+		try{
+			BackendQuickAction.Update.execute(bUser, event.getAuthor(), true, false);
+		}
+		catch(Exception ignore){
+		}
 		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
 		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
 		if(bChannel.tmpLoggingIsActive()){

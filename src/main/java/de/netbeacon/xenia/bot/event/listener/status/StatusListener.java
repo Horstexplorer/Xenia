@@ -16,6 +16,7 @@
 
 package de.netbeacon.xenia.bot.event.listener.status;
 
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.*;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.CloseCode;
@@ -26,6 +27,14 @@ import org.slf4j.LoggerFactory;
 public class StatusListener extends ListenerAdapter{
 
 	private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
+	public static final Object STATUS_LOGGED_IN = new Object();
+
+	@Override
+	public void onStatusChange(@NotNull StatusChangeEvent event){
+		if(event.getNewStatus().equals(JDA.Status.CONNECTING_TO_WEBSOCKET)){
+			synchronized(STATUS_LOGGED_IN){ STATUS_LOGGED_IN.notify(); }
+		}
+	}
 
 	@Override
 	public void onResumed(@NotNull ResumedEvent event){
