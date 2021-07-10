@@ -181,7 +181,8 @@ public class XeniaCore{
 				.setShards(setupData.getShards());
 		}else {
 			builder
-				.setShardsTotal(1);
+				.setShardsTotal(1)
+				.setShards(0);
 		}
 		// prepare helper class
 		class SMH implements IShutdown{
