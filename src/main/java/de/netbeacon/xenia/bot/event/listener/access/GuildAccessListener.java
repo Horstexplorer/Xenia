@@ -48,8 +48,6 @@ import java.util.function.Consumer;
 
 public class GuildAccessListener extends ListenerAdapter{
 
-	private static final int MEMBER_PRELOAD_COUNT_THRESHOLD = 10000; // disabled for now
-	private static final int MEMBER_LOGGING_COUNT_THRESHOLD = Integer.MAX_VALUE; // disabled for now
 	private final XeniaBackendClient backendClient;
 	private final Logger logger = LoggerFactory.getLogger(GuildAccessListener.class);
 
@@ -103,7 +101,7 @@ public class GuildAccessListener extends ListenerAdapter{
 					}
 				}
 			};
-			g.initAsync(event.getGuild().getMemberCount() <= MEMBER_PRELOAD_COUNT_THRESHOLD, updateChannelInfo);
+			g.initAsync(updateChannelInfo);
 		}
 		catch(CacheException e){
 			logger.error("A CacheException occurred during the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
@@ -125,9 +123,6 @@ public class GuildAccessListener extends ListenerAdapter{
 			event.getGuild().getTextChannels().forEach(textChannel -> {
 				backendClient.getBackendProcessor().getScalingExecutor().execute(() -> {
 					Channel channel = g.getChannelCache().get(textChannel.getIdLong());
-					if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){
-						channel.lSetTmpLoggingActive(false);
-					}
 					BackendQuickAction.Update.execute(channel, textChannel, true, false);
 				});
 			});
@@ -276,9 +271,6 @@ public class GuildAccessListener extends ListenerAdapter{
 		try{
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
 			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			if(event.getGuild().getMemberCount() >= MEMBER_LOGGING_COUNT_THRESHOLD){
-				c.lSetTmpLoggingActive(false);
-			}
 			BackendQuickAction.Update.execute(c, event.getChannel(), true, false);
 		}
 		catch(CacheException e){
