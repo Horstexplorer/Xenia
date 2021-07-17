@@ -53,7 +53,7 @@ public class BackendQuickAction{
 
 		public static void execute(Guild bGuild, net.dv8tion.jda.api.entities.Guild jGuild, boolean async, boolean securityOverride){
 
-			bGuild.setMetaData(jGuild.getName(), jGuild.getIconUrl());
+			bGuild.lSetMetaData(jGuild.getName(), jGuild.getIconUrl());
 
 			if(async){
 				bGuild.updateAsync(securityOverride);
