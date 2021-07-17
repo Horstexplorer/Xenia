@@ -77,7 +77,7 @@ public class GuildAccessListener extends ListenerAdapter{
 				logger.debug("Loading Guild Async " + event.getGuild().getId());
 			}
 			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			BackendQuickAction.Update.execute(g, event.getGuild(), true, false);
+			BackendQuickAction.Update.execute(g, event.getGuild(), true, true);
 			Consumer<Guild> updateChannelInfo = guild -> {
 				// update all channels
 				ChannelCache channelCache = guild.getChannelCache();
