@@ -16,11 +16,6 @@
 
 package de.netbeacon.xenia.bot.event.handler;
 
-import de.netbeacon.d43z.one.eval.io.EvalRequest;
-import de.netbeacon.d43z.one.objects.base.Content;
-import de.netbeacon.d43z.one.objects.bp.IContextPool;
-import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
-import de.netbeacon.utils.tuples.Pair;
 import de.netbeacon.xenia.backend.client.objects.external.*;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -28,11 +23,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
-import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
-import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
-import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
-import de.netbeacon.xenia.bot.utils.shared.executor.SharedExecutor;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.slf4j.Logger;
@@ -82,14 +73,6 @@ public class MessageHandler{
 		// get the message & check prefix
 		String msg = event.getMessage().getContentRaw();
 		if(!msg.startsWith(bGuild.getPrefix())){
-			if(bChannel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ACTIVE) && event.getChannel().isNSFW() && !event.getAuthor().isBot()){ // bot messages should be logged in some cases but we do not want to process em
-				try{
-					D43Z1_EXECUTE(event, backendDataPack);
-				}
-				catch(Exception e){
-					logger.warn("An exception occurred while handing message over to D43Z1 ", e);
-				}
-			}
 			return;
 		}
 		// check if xenia is not active or inactive in which case we dont do anything
@@ -137,46 +120,6 @@ public class MessageHandler{
 		args.remove(0);
 		// start the madness
 		command.execute(args, new CommandEvent(event, backendDataPack, toolBundle));
-	}
-
-	public void D43Z1_EXECUTE(GuildMessageReceivedEvent event, CommandEvent.BackendDataPack backendDataPack) throws Exception{
-		var bGuild = backendDataPack.guild();
-		var d43Z1Imp = D43Z1Imp.getInstance();
-
-		var taskMaster = d43Z1Imp.getTaskMaster();
-		var content = new Content(event.getMessage().getContentRaw());
-		var taskResult = taskMaster.getTaskOrDefault(content, 0.7F, d43Z1Imp.getDefaultEvalTask());
-
-		if(taskResult.getValue1() instanceof DefaultEvalTask){
-			// send thinking...
-			event.getMessage().reply("thinking ...").mentionRepliedUser(false).queue(thinking -> {
-				// process
-				ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-				IContextPool contextPool = toolBundle.contextPoolManager().getPoolFor(bGuild);
-				EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
-					evalResult -> {
-						if(evalResult.ok()){
-							thinking.editMessage(evalResult.getContentMatch().getEstimatedOutput().getContent()).mentionRepliedUser(false).queue();
-						}
-					}, SharedExecutor.getInstance().getScheduledExecutor());
-				((DefaultEvalTask) taskResult.getValue1()).execute(content, new Pair<>(d43Z1Imp.getEval(), evalRequest));
-			});
-		}
-		else if(taskResult.getValue1() instanceof AnimeTask){
-			((AnimeTask) taskResult.getValue1()).execute(content, new Pair<>(event.getMember(), event.getChannel()));
-		}
-		else{
-			// ??? -> Fallback for when bad things happen
-			ContentMatchBuffer contextMatchBuffer = d43Z1Imp.getContentMatchBufferFor(event.getAuthor().getIdLong());
-			IContextPool contextPool = toolBundle.contextPoolManager().getPoolFor(bGuild);
-			EvalRequest evalRequest = new EvalRequest(contextPool, contextMatchBuffer, new Content(event.getMessage().getContentRaw()),
-				evalResult -> {
-					if(evalResult.ok()){
-						event.getMessage().reply(evalResult.getContentMatch().getEstimatedOutput().getContent()).mentionRepliedUser(false).queue();
-					}
-				}, SharedExecutor.getInstance().getScheduledExecutor());
-			d43Z1Imp.getEval().enqueue(evalRequest);
-		}
 	}
 
 }

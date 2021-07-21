@@ -29,10 +29,7 @@ import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.Translatio
 import de.netbeacon.xenia.bot.event.listener.access.GuildAccessListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.ComponentInteractionListener;
 import de.netbeacon.xenia.bot.event.listener.interactions.SlashCommandListener;
-import de.netbeacon.xenia.bot.event.listener.message.GuildMessageAutoModListener;
-import de.netbeacon.xenia.bot.event.listener.message.GuildMessageCommandListener;
-import de.netbeacon.xenia.bot.event.listener.message.GuildMessageLoggingListener;
-import de.netbeacon.xenia.bot.event.listener.message.GuildReactionListener;
+import de.netbeacon.xenia.bot.event.listener.message.*;
 import de.netbeacon.xenia.bot.event.listener.status.StatusListener;
 import de.netbeacon.xenia.bot.event.manager.EventManagerProvider;
 import de.netbeacon.xenia.bot.event.manager.MultiThreadedEventManager;
@@ -173,6 +170,7 @@ public class XeniaCore{
 				new GuildMessageAutoModListener(toolBundle),
 				new GuildAccessListener(xeniaBackendClient),
 				new GuildMessageCommandListener(toolBundle),
+				new XeniaChatListener(toolBundle),
 				new GuildReactionListener(eventWaiter),
 				paginatorManager.getListener(),
 				new SlashCommandListener(toolBundle),
