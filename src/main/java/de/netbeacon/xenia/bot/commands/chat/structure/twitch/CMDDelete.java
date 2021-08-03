@@ -49,7 +49,7 @@ public class CMDDelete extends Command{
 		try{
 			CmdArg<Long> notificationid = args.getByIndex(0);
 			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
-			notificationCache.delete(notificationid.getValue());
+			notificationCache.delete(notificationid.getValue()).execute();
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(DataException | CacheException e){
