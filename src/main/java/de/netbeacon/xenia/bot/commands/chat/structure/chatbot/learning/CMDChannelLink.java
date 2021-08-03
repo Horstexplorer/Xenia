@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.chatbot.learning;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -57,12 +57,12 @@ public class CMDChannelLink extends Command{
 				if(textChannel == null){
 					throw new IllegalArgumentException();
 				}
-				channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong(), false);
+				channel = commandEvent.getBackendDataPack().guild().getChannelCache().retrieve(textChannel.getIdLong(), false).execute();
 			}
 			var v = commandEvent.getBackendDataPack().guild().getChannelCache().getAllAsList().stream().map(Channel::getD43Z1Settings).filter(settings -> settings.has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)).count();
 			if(modeArg.getValue()
 				&& v
-				>= channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
+				>= channel.getBackendProcessor().getBackendClient().getLicenseCache().retrieve(channel.getGuildId(), true).execute().getPerk_CHANNEL_D43Z1_SELFLEARNING_C()
 			){
 				throw new IllegalArgumentException();
 			}

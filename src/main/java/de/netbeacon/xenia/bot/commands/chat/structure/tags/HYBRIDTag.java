@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.tags;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.HybridCommand;
@@ -53,7 +53,7 @@ public class HYBRIDTag extends HybridCommand{
 		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> tagA = cmdArgs.getByIndex(0);
 		try{
-			Tag tag = tagCache.get(tagA.getValue());
+			Tag tag = tagCache.retrieve(tagA.getValue(), true).execute();
 			commandEvent.getEvent().getChannel().sendMessage(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
 		}
 		catch(DataException | CacheException e){

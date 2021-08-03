@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.settings.channel;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -49,7 +49,7 @@ public class CMDLogging extends Command{
 			CmdArg<Boolean> channelLoggingArg = args.getByIndex(0);
 			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
 			CmdArg<Mention> mention2CmdArg = args.getByIndex(2);
-			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().retrieve(mentionCmdArg.getValue().getId(), true).execute();
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
@@ -57,7 +57,7 @@ public class CMDLogging extends Command{
 			if(mention2CmdArg.getValue() != null){
 				channel.setTmpLoggingChannelId(mention2CmdArg.getValue().getId());
 			}
-			channel.update();
+			channel.update().execute();
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(IllegalArgumentException e){

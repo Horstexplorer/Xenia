@@ -18,8 +18,8 @@ package de.netbeacon.xenia.bot.commands.chat.objects;
 
 import de.netbeacon.d43z.one.algo.LiamusJaccard;
 import de.netbeacon.utils.tuples.Pair;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.BackendException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;

@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.settings.channel;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -50,7 +50,7 @@ public class CMDAccessMode extends Command{
 		try{
 			CmdArg<String> channelAccessModeArg = args.getByIndex(0);
 			CmdArg<Mention> mentionCmdArg = args.getByIndex(1);
-			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().get(mentionCmdArg.getValue().getId(), false);
+			Channel channel = (mentionCmdArg.getValue() == null) ? commandEvent.getBackendDataPack().channel() : commandEvent.getBackendDataPack().guild().getChannelCache().retrieveOrCreate(mentionCmdArg.getValue().getId(), true).execute();
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
