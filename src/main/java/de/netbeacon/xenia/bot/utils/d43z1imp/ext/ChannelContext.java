@@ -20,7 +20,7 @@ import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.base.ContentContext;
 import de.netbeacon.d43z.one.objects.base.ContentShard;
 import de.netbeacon.utils.json.serial.JSONSerializationException;
-import de.netbeacon.xenia.backend.client.objects.external.Message;
+import de.netbeacon.xenia.backend.client.objects.apidata.Message;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import org.json.JSONObject;
 

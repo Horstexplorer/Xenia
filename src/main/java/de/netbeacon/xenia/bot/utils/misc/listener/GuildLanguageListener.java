@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.utils.misc.listener;
 
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
@@ -42,7 +42,7 @@ public class GuildLanguageListener implements CacheEventListener<Long, Guild>{
 				return;
 			}
 			newObject.setPreferredLanguage(translationPackage.getLanguageId());
-			newObject.update();
+			newObject.update().queue();
 		}
 	}
 

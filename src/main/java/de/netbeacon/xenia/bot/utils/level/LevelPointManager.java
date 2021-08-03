@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.utils.level;
 
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.Member;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Member;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -99,10 +99,9 @@ public class LevelPointManager{
 			}
 			gM.put(member, System.currentTimeMillis());
 			member.lSetLevelPoints(member.getLevelPoints() + POINTS_PER_MESSAGE);
-			member.updateAsync();
+			member.update().queue();
 		}
 		catch(Exception ignore){
-
 		}
 	}
 

@@ -16,7 +16,8 @@
 
 package de.netbeacon.xenia.bot.utils.misc.listener;
 
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
+
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 
 public class NotificationListenerInserter implements CacheEventListener<Long, Guild>{

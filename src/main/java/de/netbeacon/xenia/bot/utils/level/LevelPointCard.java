@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.utils.level;
 
-import de.netbeacon.xenia.backend.client.objects.external.Member;
+import de.netbeacon.xenia.backend.client.objects.apidata.Member;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
