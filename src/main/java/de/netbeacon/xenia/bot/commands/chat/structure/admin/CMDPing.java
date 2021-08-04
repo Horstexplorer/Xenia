@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.admin;
 
-import de.netbeacon.xenia.backend.client.objects.external.system.Info;
+import de.netbeacon.xenia.backend.client.objects.apidata.system.Info;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
@@ -37,7 +37,7 @@ public class CMDPing extends AdminCommand{
 		double gatewayPing = commandEvent.getEvent().getJDA().getGatewayPing();
 		double restPing = commandEvent.getEvent().getJDA().getRestPing().complete();
 		Info info = new Info(commandEvent.getToolBundle().backendClient().getBackendProcessor(), Info.Mode.Public);
-		info.get();
+		info.get().execute();
 
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Ping", commandEvent.getEvent().getAuthor())
 			.addField("AVG Gateway Ping:", avgGatewayPing + "ms", true)

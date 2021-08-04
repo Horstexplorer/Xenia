@@ -16,10 +16,10 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.notification;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.User;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.User;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -53,7 +53,7 @@ public class CMDList extends Command{
 		for(Notification notification : notificationCache.getAllAsList()){
 			User user = null;
 			try{
-				user = commandEvent.getToolBundle().backendClient().getUserCache().get(notification.getUserId());
+				user = commandEvent.getToolBundle().backendClient().getUserCache().retrieve(notification.getUserId(), true).execute();
 			}
 			catch(Exception ignore){
 			}

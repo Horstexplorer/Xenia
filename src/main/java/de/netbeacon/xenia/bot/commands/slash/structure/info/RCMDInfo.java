@@ -17,7 +17,7 @@
 package de.netbeacon.xenia.bot.commands.slash.structure.info;
 
 import de.netbeacon.utils.appinfo.AppInfo;
-import de.netbeacon.xenia.backend.client.objects.external.system.Info;
+import de.netbeacon.xenia.backend.client.objects.apidata.system.Info;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationPackage;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;

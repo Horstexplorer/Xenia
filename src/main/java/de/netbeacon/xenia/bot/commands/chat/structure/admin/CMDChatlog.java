@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.admin;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Message;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Message;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.Mention;
@@ -49,11 +49,11 @@ public class CMDChatlog extends AdminCommand{
 		if(channelArg.getValue() != null && channelArg.getValue().getId() > 0){
 			long cId = channelArg.getValue().getId();
 			if(commandEvent.getBackendDataPack().guild().getChannelCache().contains(cId)){
-				bChannel = commandEvent.getBackendDataPack().guild().getChannelCache().get(cId);
+				bChannel = commandEvent.getBackendDataPack().guild().getChannelCache().retrieve(cId, true).execute();
 			}
 		}
 
-		List<Message> messages = bChannel.getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false);
+		List<Message> messages = bChannel.getMessageCache().retrieveAllFromBackend(limitArg.getValue() != null && limitArg.getValue(), false).execute();
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject = new JSONObject()
 			.put("guildId", commandEvent.getEvent().getGuild().getIdLong())

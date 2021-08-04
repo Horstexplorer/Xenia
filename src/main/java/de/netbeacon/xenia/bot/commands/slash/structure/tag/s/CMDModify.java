@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.tag.s;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -54,7 +54,7 @@ public class CMDModify extends Command{
 		CmdArg<String> nameArg = cmdArgs.getByName("name");
 		CmdArg<String> contentArg = cmdArgs.getByName("content");
 		try{
-			Tag tag = tagCache.get(nameArg.getValue());
+			Tag tag = tagCache.retrieve(nameArg.getValue(), true).execute();
 			if(commandEvent.getEvent().getUser().getIdLong() != tag.getUserId()){
 				throw new RuntimeException("User Does Not Own This Tag");
 			}

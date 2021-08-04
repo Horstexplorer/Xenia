@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.admin;
 
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgDef;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgFactory;

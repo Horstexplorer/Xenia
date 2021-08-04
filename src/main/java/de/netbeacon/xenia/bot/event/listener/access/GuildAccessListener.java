@@ -17,14 +17,12 @@
 package de.netbeacon.xenia.bot.event.listener.access;
 
 import de.netbeacon.xenia.backend.client.core.XeniaBackendClient;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.User;
 import de.netbeacon.xenia.backend.client.objects.cache.ChannelCache;
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.Member;
-import de.netbeacon.xenia.backend.client.objects.external.User;
-import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
-import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
+import de.netbeacon.xenia.bot.utils.backend.action.BackendActions;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.channel.text.TextChannelCreateEvent;
@@ -44,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class GuildAccessListener extends ListenerAdapter{
@@ -67,126 +66,78 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildReady(@NotNull GuildReadyEvent event){
-		try{
-			if(backendClient.getGuildCache().contains(event.getGuild().getIdLong())){
-				logger.debug("Reloading Guild Async " + event.getGuild().getId());
-				backendClient.getGuildCache().get(event.getGuild().getIdLong()).clear(false);
-				backendClient.getGuildCache().remove(event.getGuild().getIdLong());
-			}
-			else{
-				logger.debug("Loading Guild Async " + event.getGuild().getId());
-			}
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			BackendQuickAction.Update.execute(g, event.getGuild(), true, true);
+		var guildCache = backendClient.getGuildCache();
+		var licenseCache = backendClient.getLicenseCache();
+		var guildId = event.getGuild().getIdLong();
+
+		if(guildCache.contains(guildId)){
+			logger.debug("Reloading Guild Async " + guildId);
+			guildCache.get_(guildId).clear(false);
+			guildCache.remove_(guildId);
+			licenseCache.remove_(guildId);
+		}
+		else{
+			logger.debug("Loading Guild Async " + guildId);
+		}
+
+		BackendActions.allOf(List.of(
+			guildCache.retrieveOrCreate(guildId, true),
+			licenseCache.retrieve(guildId, true)
+		)).queue(barb -> {
+			Guild bGuild = barb.get(Guild.class);
+			BackendQuickAction.Update.execute(bGuild, event.getGuild(), true, true);
 			Consumer<Guild> updateChannelInfo = guild -> {
-				// update all channels
 				ChannelCache channelCache = guild.getChannelCache();
 				for(Channel channel : channelCache.getAllAsList()){
-					try{
-						TextChannel textChannel = event.getGuild().getTextChannelById(channel.getId());
-						if(textChannel == null){ // does no longer exist
-							channelCache.delete(channel.getId());
-							continue;
-						}
-						BackendQuickAction.Update.execute(channel, textChannel, true, false);
+					TextChannel textChannel = event.getGuild().getTextChannelById(channel.getId());
+					if(textChannel == null){ // does no longer exist
+						channelCache.delete(channel.getId()).queue();
+						continue;
 					}
-					catch(CacheException e){
-						logger.error("A CacheException occurred during updating the channel data at the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-					}
-					catch(DataException e){
-						logger.error("A DataException occurred during updating the channel data at the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-					}
-					catch(Exception e){
-						logger.error("An unknown error occurred during updating the channel data at the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-					}
+					BackendQuickAction.Update.execute(channel, textChannel, true, false);
 				}
 			};
-			g.initAsync(updateChannelInfo);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildReadyEvent of guild " + event.getGuild().getIdLong(), e);
-		}
+			bGuild.initAsync(updateChannelInfo);
+		});
 	}
 
 	@Override
 	public void onGuildJoin(@NotNull GuildJoinEvent event){
-		try{
-			logger.info("Joined A New Guild: " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			BackendQuickAction.Update.execute(g, event.getGuild(), true, false);
+		var guildCache = backendClient.getGuildCache();
+		var licenseCache = backendClient.getLicenseCache();
+		var guildId = event.getGuild().getIdLong();
+
+		logger.info("Joined A New Guild: " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
+
+		BackendActions.allOf(List.of(
+			guildCache.retrieveOrCreate(guildId, true),
+			licenseCache.retrieve(guildId, true)
+		)).queue(barb -> {
+			Guild bGuild = barb.get(Guild.class);
+			BackendQuickAction.Update.execute(bGuild, event.getGuild(), true, true);
 			event.getGuild().getTextChannels().forEach(textChannel -> {
-				backendClient.getBackendProcessor().getScalingExecutor().execute(() -> {
-					Channel channel = g.getChannelCache().get(textChannel.getIdLong());
-					BackendQuickAction.Update.execute(channel, textChannel, true, false);
-				});
+				bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true)
+					.queue(bChannel -> BackendQuickAction.Update.execute(bChannel, textChannel, true, false));
 			});
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildJoinEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildJoinEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildJoinEvent of guild " + event.getGuild().getIdLong(), e);
-		}
+		});
 	}
 
 	@Override
 	public void onGuildLeave(@NotNull GuildLeaveEvent event){
-		try{
-			logger.info("Guild Has Been Left: " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
-			backendClient.getGuildCache().delete(event.getGuild().getIdLong(), true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildLeaveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildLeaveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildLeaveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
+		logger.info("Guild Has Been Left: " + event.getGuild().getName() + "(" + event.getGuild().getId() + ")");
+		backendClient.getGuildCache().delete(event.getGuild().getIdLong()).queue();
 	}
 
 	@Override
 	public void onUnavailableGuildJoined(@NotNull UnavailableGuildJoinedEvent event){
-		try{
-			logger.debug("Joined A New Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
-			backendClient.getGuildCache().get(event.getGuildIdLong());
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the UnavailableGuildJoinedEvent of guild " + event.getGuildIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the UnavailableGuildJoinedEvent of guild " + event.getGuildIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the UnavailableGuildJoinedEvent of guild " + event.getGuildIdLong(), e);
-		}
+		logger.debug("Joined A New Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
+		backendClient.getGuildCache().retrieveOrCreate(event.getGuildIdLong(), true).queue();
 	}
 
 	@Override
 	public void onUnavailableGuildLeave(@NotNull UnavailableGuildLeaveEvent event){
-		try{
-			logger.debug("Left A Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
-			backendClient.getGuildCache().delete(event.getGuildIdLong(), true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the UnavailableGuildLeaveEvent of guild " + event.getGuildIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the UnavailableGuildLeaveEvent of guild " + event.getGuildIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the UnavailableGuildLeaveEvent of guild " + event.getGuildIdLong(), e);
-		}
+		logger.debug("Left A Guild Which Is Unavailable ATM: Unknown_Name (" + event.getGuildId() + ")");
+		backendClient.getGuildCache().delete(event.getGuildIdLong()).queue();
 	}
 
 	@Override
@@ -204,84 +155,74 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event){
-		try{
-			User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Member m = g.getMemberCache().get(event.getMember().getIdLong());
+		var guildCache = backendClient.getGuildCache();
+		var licenseCache = backendClient.getLicenseCache();
+		var userCache = backendClient.getUserCache();
+		var guildId = event.getGuild().getIdLong();
+		var userId = event.getUser().getIdLong();
 
-			BackendQuickAction.Update.execute(u, event.getUser(), true, true);
-			BackendQuickAction.Update.execute(m, event.getMember(), true, true);
-
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildMemberJoinEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildMemberJoinEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildMemberJoinEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
+		BackendActions.allOf(List.of(
+			guildCache.retrieveOrCreate(guildId, true),
+			licenseCache.retrieve(guildId, true),
+			userCache.retrieveOrCreate(userId, true)
+		)).queue(barb -> {
+			Guild bGuild = barb.get(Guild.class);
+			User bUser = barb.get(User.class);
+			BackendQuickAction.Update.execute(bUser, event.getUser(), true, true);
+			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> {
+				BackendQuickAction.Update.execute(bMember, event.getMember(), true, true);
+			});
+		});
 	}
 
 	@Override
 	public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			if(event.getMember() != null){
-				g.getMemberCache().delete(event.getMember().getIdLong(), true);
-			}
+		if(event.getMember() == null){
+			return;
 		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildMemberRemoveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildMemberRemoveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildMemberRemoveEvent of guild " + event.getGuild().getIdLong(), e);
-		}
+		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
+			bGuild.getMemberCache().delete(event.getMember().getIdLong()).queue();
+		});
 	}
 
 	@Override
 	public void onGuildMemberUpdate(@NotNull GuildMemberUpdateEvent event){
-		try{
-			User u = backendClient.getUserCache().get(event.getUser().getIdLong());
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Member m = g.getMemberCache().get(event.getUser().getIdLong());
+		var guildCache = backendClient.getGuildCache();
+		var licenseCache = backendClient.getLicenseCache();
+		var userCache = backendClient.getUserCache();
+		var guildId = event.getGuild().getIdLong();
+		var userId = event.getUser().getIdLong();
 
-			BackendQuickAction.Update.execute(u, event.getUser(), true, true);
-			BackendQuickAction.Update.execute(m, event.getMember(), true, true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the GuildMemberUpdateEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the GuildMemberUpdateEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the GuildMemberUpdateEvent of guild " + event.getGuild().getIdLong() + ", member " + event.getMember().getIdLong(), e);
-		}
+		BackendActions.allOf(List.of(
+			guildCache.retrieveOrCreate(guildId, true),
+			licenseCache.retrieve(guildId, true),
+			userCache.retrieveOrCreate(userId, true)
+		)).queue(barb -> {
+			Guild bGuild = barb.get(Guild.class);
+			User bUser = barb.get(User.class);
+			BackendQuickAction.Update.execute(bUser, event.getUser(), true, true);
+			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> {
+				BackendQuickAction.Update.execute(bMember, event.getMember(), true, true);
+			});
+		});
 	}
 
 	// CHANNEL
 
 	@Override
 	public void onTextChannelCreate(@NotNull TextChannelCreateEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(event.getChannel().getIdLong());
-			BackendQuickAction.Update.execute(c, event.getChannel(), true, false);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelCreateEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelCreateEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelCreateEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		var guildCache = backendClient.getGuildCache();
+		var licenseCache = backendClient.getLicenseCache();
+		var guildId = event.getGuild().getIdLong();
+		BackendActions.allOf(List.of(
+			guildCache.retrieveOrCreate(guildId, true),
+			licenseCache.retrieve(guildId, true)
+		)).queue(barb -> {
+			Guild bGuild = barb.get(Guild.class);
+			bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
+				BackendQuickAction.Update.execute(bChannel, event.getChannel(), true, false);
+			});
+		});
 	}
 
 	@Override
@@ -306,37 +247,17 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onTextChannelDelete(@NotNull TextChannelDeleteEvent event){
-		try{
-			Guild g = backendClient.getGuildCache().get(event.getGuild().getIdLong());
-			g.getChannelCache().delete(event.getChannel().getIdLong(), true);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelDeleteEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelDeleteEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelDeleteEvent of guild " + event.getGuild().getIdLong() + ", channel " + event.getChannel().getIdLong(), e);
-		}
+		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
+			bGuild.getChannelCache().delete(event.getGuild().getIdLong()).queue();
+		});
 	}
 
 	private void channelUpdate(TextChannel textChannel){
-		try{
-			Guild g = backendClient.getGuildCache().get(textChannel.getGuild().getIdLong());
-			Channel c = g.getChannelCache().get(textChannel.getIdLong());
-
-			BackendQuickAction.Update.execute(c, textChannel, true, false);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the TextChannelUpdateEvent of guild " + textChannel.getGuild().getIdLong() + ", channel " + textChannel.getIdLong(), e);
-		}
+		backendClient.getGuildCache().retrieveOrCreate(textChannel.getGuild().getIdLong(), true).queue(bGuild -> {
+			bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).queue(bChannel -> {
+				BackendQuickAction.Update.execute(bChannel, textChannel, true, false);
+			});
+		});
 	}
 
 	// GUILD
@@ -352,20 +273,9 @@ public class GuildAccessListener extends ListenerAdapter{
 	}
 
 	private void guildMetaUpdate(net.dv8tion.jda.api.entities.Guild guild){
-		try{
-			Guild g = backendClient.getGuildCache().get(guild.getIdLong());
-
-			BackendQuickAction.Update.execute(g, guild, true, false);
-		}
-		catch(CacheException e){
-			logger.error("A CacheException occurred during the _meta_GuildUpdateEvent of guild " + guild.getIdLong(), e);
-		}
-		catch(DataException e){
-			logger.error("A DataException occurred during the _meta_GuildUpdateEvent of guild " + guild.getIdLong(), e);
-		}
-		catch(Exception e){
-			logger.error("An unknown error occurred during the _meta_GuildUpdateEvent of guild " + guild.getIdLong(), e);
-		}
+		backendClient.getGuildCache().retrieveOrCreate(guild.getIdLong(), true).queue(bGuild -> {
+			BackendQuickAction.Update.execute(bGuild, guild, true, false);
+		});
 	}
 
 }

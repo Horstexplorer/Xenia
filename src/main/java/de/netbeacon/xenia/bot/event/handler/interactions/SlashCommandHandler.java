@@ -16,10 +16,11 @@
 
 package de.netbeacon.xenia.bot.event.handler.interactions;
 
-import de.netbeacon.xenia.backend.client.objects.external.*;
+import de.netbeacon.xenia.backend.client.objects.apidata.*;
 import de.netbeacon.xenia.bot.commands.slash.objects.Command;
 import de.netbeacon.xenia.bot.commands.slash.objects.misc.event.CommandEvent;
 import de.netbeacon.xenia.bot.utils.backend.BackendQuickAction;
+import de.netbeacon.xenia.bot.utils.backend.action.BackendActions;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -52,52 +53,56 @@ public class SlashCommandHandler{
 
 	public void handle(SlashCommandEvent event){
 		long start = System.currentTimeMillis();
+		var backendClient = toolBundle.backendClient();
 		// get backend data (move this back before the stm block when traffic is too high; this will speed up preloading data)
-		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
-		User bUser = toolBundle.backendClient().getUserCache().get(event.getUser().getIdLong());
-		Member bMember = bGuild.getMemberCache().get(event.getUser().getIdLong());
-		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
-		License bLicense = toolBundle.backendClient().getLicenseCache().get(event.getGuild().getIdLong());
-		// try to update
-		try{
+		BackendActions.allOf(List.of(
+			backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true),
+			backendClient.getLicenseCache().retrieve(event.getGuild().getIdLong(), true),
+			backendClient.getUserCache().retrieveOrCreate(event.getUser().getIdLong(), true)
+		)).queue(barb1 -> {
+			Guild bGuild = barb1.get(Guild.class);
+			User bUser = barb1.get(User.class);
+			License bLicense = barb1.get(License.class);
 			BackendQuickAction.Update.execute(bUser, event.getUser(), true, false);
-			BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
-		}
-		catch(Exception ignore){
-		}
-		// wrap in single object
-		CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
-		CommandEvent commandEvent = new CommandEvent(event, backendDataPack, toolBundle);
-		// check if xenia is active in this channel
-		if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)){
-			return;
-		}
-		// feed for leveling
-		toolBundle.levelPointManager().feed(bMember);
-		// split to list
-		ArrayList<String> args = new ArrayList<>();
-		args.add(event.getName());
-		if(event.getSubcommandGroup() != null){
-			args.add(event.getSubcommandGroup());
-		}
-		if(event.getSubcommandName() != null){
-			args.add(event.getSubcommandName());
-		}
-		if(args.isEmpty()){
-			return;
-		}
-		// update processing time
-		commandEvent.addProcessingTime(System.currentTimeMillis() - start);
-		// execute command
-		Command command = globalCommandMap.get(args.get(0));
-		if(command == null){
-			command = guildCommandMap.get(args.get(0));
-			if(command == null){
-				return;
-			}
-		}
-		args.remove(0);
-		command.execute(args, commandEvent);
+			BackendActions.allOf(List.of(
+				bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true),
+				bGuild.getMemberCache().retrieveOrCreate(event.getUser().getIdLong(), true)
+			)).queue(barb2 -> {
+				Channel bChannel = barb2.get(Channel.class);
+				Member bMember = barb2.get(Member.class);
+				BackendQuickAction.Update.execute(bMember, event.getMember(), true, false);
+				// wrap in single object
+				CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
+				CommandEvent commandEvent = new CommandEvent(event, backendDataPack, toolBundle);
+				// check if xenia is active in this channel
+				if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE)){
+					return;
+				}
+				// feed for leveling
+				toolBundle.levelPointManager().feed(bMember);
+				// split to list
+				ArrayList<String> args = new ArrayList<>();
+				args.add(event.getName());
+				if(event.getSubcommandGroup() != null){
+					args.add(event.getSubcommandGroup());
+				}
+				if(event.getSubcommandName() != null){
+					args.add(event.getSubcommandName());
+				}
+				// update processing time
+				commandEvent.addProcessingTime(System.currentTimeMillis() - start);
+				// execute command
+				Command command = globalCommandMap.get(args.get(0));
+				if(command == null){
+					command = guildCommandMap.get(args.get(0));
+					if(command == null){
+						return;
+					}
+				}
+				args.remove(0);
+				command.execute(args, commandEvent);
+			});
+		});
 	}
 
 }

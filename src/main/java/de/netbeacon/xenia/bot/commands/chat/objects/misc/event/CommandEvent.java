@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.event;
 
-import de.netbeacon.xenia.backend.client.objects.external.*;
+import de.netbeacon.xenia.backend.client.objects.apidata.*;
 import de.netbeacon.xenia.bot.utils.records.ToolBundle;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 

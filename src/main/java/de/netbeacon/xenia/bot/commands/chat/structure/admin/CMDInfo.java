@@ -17,7 +17,7 @@
 package de.netbeacon.xenia.bot.commands.chat.structure.admin;
 
 import de.netbeacon.utils.appinfo.AppInfo;
-import de.netbeacon.xenia.backend.client.objects.external.system.Info;
+import de.netbeacon.xenia.backend.client.objects.apidata.system.Info;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.event.CommandEvent;
@@ -47,7 +47,7 @@ public class CMDInfo extends AdminCommand{
 		GuildMessageReceivedEvent event = commandEvent.getEvent();
 		long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
 		Info bInfo = commandEvent.getToolBundle().backendClient().getInfo(Info.Mode.Private);
-		bInfo.get();
+		bInfo.get().execute();
 		EmbedBuilder embedBuilder = EmbedBuilderFactory.getDefaultEmbed("Info", commandEvent.getEvent().getAuthor())
 			.addField("Xenia", "Version: " + AppInfo.get("buildVersion") + "_" + AppInfo.get("buildNumber"), false)
 			.addField("Gateway Ping:", shardManager.getAverageGatewayPing() + "ms", true)

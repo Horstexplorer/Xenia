@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.utils.automod.filter.imp;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.User;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.User;
 import de.netbeacon.xenia.bot.event.manager.ExpectedInterruptException;
 import de.netbeacon.xenia.bot.utils.automod.filter.AFilter;
 import net.dv8tion.jda.api.entities.Message;

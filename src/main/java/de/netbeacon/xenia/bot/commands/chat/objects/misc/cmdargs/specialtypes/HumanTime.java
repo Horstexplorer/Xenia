@@ -46,24 +46,12 @@ public class HumanTime{
 				char last = var.charAt(var.length() - 1);
 				int value = Integer.parseInt(var.substring(0, var.length() - 1));
 				switch(last){
-					case 'y':
-						localDateTime = localDateTime.plus(value, ChronoUnit.YEARS);
-						break;
-					case 'M':
-						localDateTime = localDateTime.plus(value, ChronoUnit.MONTHS);
-						break;
-					case 'd':
-						localDateTime = localDateTime.plus(value, ChronoUnit.DAYS);
-						break;
-					case 'h':
-						localDateTime = localDateTime.plus(value, ChronoUnit.HOURS);
-						break;
-					case 'm':
-						localDateTime = localDateTime.plus(value, ChronoUnit.MINUTES);
-						break;
-					case 's':
-						localDateTime = localDateTime.plus(value, ChronoUnit.SECONDS);
-						break;
+					case 'y' -> localDateTime = localDateTime.plus(value, ChronoUnit.YEARS);
+					case 'M' -> localDateTime = localDateTime.plus(value, ChronoUnit.MONTHS);
+					case 'd' -> localDateTime = localDateTime.plus(value, ChronoUnit.DAYS);
+					case 'h' -> localDateTime = localDateTime.plus(value, ChronoUnit.HOURS);
+					case 'm' -> localDateTime = localDateTime.plus(value, ChronoUnit.MINUTES);
+					case 's' -> localDateTime = localDateTime.plus(value, ChronoUnit.SECONDS);
 				}
 			}
 			return new HumanTime(localDateTime);

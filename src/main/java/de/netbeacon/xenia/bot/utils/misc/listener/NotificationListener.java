@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.utils.misc.listener;
 
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataEventListener;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import de.netbeacon.xenia.bot.core.XeniaCore;
@@ -69,7 +69,9 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
 			catch(Exception ignore){
 			}
 			try{
-				XeniaCore.getInstance().getBackendClient().getGuildCache().get(notification.getGuildId()).getMiscCaches().getNotificationCache().delete(notification.getId());
+				XeniaCore.getInstance().getBackendClient().getGuildCache().retrieve(notification.getGuildId(), true).queue(bGuild -> {
+					bGuild.getMiscCaches().getNotificationCache().delete(notification.getId()).queue();
+				});
 			}
 			catch(Exception ignore){
 			}
