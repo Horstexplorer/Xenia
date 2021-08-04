@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.tag.s;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -52,11 +52,11 @@ public class CMDDelete extends Command{
 		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> nameArg = cmdArgs.getByName("name");
 		try{
-			Tag tag = tagCache.get(nameArg.getValue());
+			Tag tag = tagCache.retrieve(nameArg.getValue(), true).execute();
 			if(tag.getUserId() != commandEvent.getEvent().getUser().getIdLong() && !(commandEvent.getBackendDataPack().member().metaIsAdministrator() || commandEvent.getBackendDataPack().member().metaIsOwner())){
 				throw new RuntimeException("User Does Not Own This Tag");
 			}
-			tagCache.delete(tag.getId());
+			tagCache.delete(tag.getId()).execute();
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getId()))).queue();
 		}
 		catch(DataException | CacheException e){

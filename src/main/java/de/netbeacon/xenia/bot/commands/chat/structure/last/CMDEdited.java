@@ -16,10 +16,10 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.last;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Message;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.backend.client.objects.cache.MessageCache;
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Message;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;

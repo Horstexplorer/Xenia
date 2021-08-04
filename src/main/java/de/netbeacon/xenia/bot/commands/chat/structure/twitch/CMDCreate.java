@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.twitch;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TwitchNotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -57,7 +57,7 @@ public class CMDCreate extends Command{
 			}
 			// create new
 			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
-			notificationCache.createNew(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue());
+			notificationCache.create(commandEvent.getEvent().getChannel().getIdLong(), m.group(2), customMessageC.getValue()).execute();
 			// send response
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}

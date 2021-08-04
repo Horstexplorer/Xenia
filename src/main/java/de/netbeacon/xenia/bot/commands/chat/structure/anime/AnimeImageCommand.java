@@ -19,7 +19,7 @@ package de.netbeacon.xenia.bot.commands.chat.structure.anime;
 
 import de.netbeacon.purrito.qol.typewrap.ContentType;
 import de.netbeacon.purrito.qol.typewrap.ImageType;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -62,7 +62,7 @@ public abstract class AnimeImageCommand extends Command{
 					// resolve user with backend
 					var uc = commandEvent.getToolBundle().backendClient().getUserCache();
 					if(uc.contains(mentionedId)){
-						additionalUserTag = uc.get(mentionedId, false).getMetaUsername();
+						additionalUserTag = uc.get_(mentionedId).getMetaUsername();
 					}
 				}
 			}

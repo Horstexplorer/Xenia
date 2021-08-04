@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.twitch;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.TwitchNotification;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TwitchNotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.TwitchNotification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -53,7 +53,7 @@ public class CMDUpdate extends Command{
 			CmdArg<Long> notificationid = cmdArgs.getByName("notification_id");
 			CmdArg<String> customMessage = cmdArgs.getByName("custom_message");
 			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
-			TwitchNotification notification = notificationCache.get(notificationid.getValue());
+			TwitchNotification notification = notificationCache.retrieve(notificationid.getValue(), true).execute();
 			notification.setNotificationMessage(customMessage.getValue());
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}

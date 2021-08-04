@@ -21,8 +21,8 @@ import de.netbeacon.d43z.one.objects.base.Content;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.d43z.one.objects.eval.ContentMatchBuffer;
 import de.netbeacon.utils.tuples.Pair;
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.anime.AnimeTask;
 import de.netbeacon.xenia.bot.utils.d43z1imp.taskmanager.tasks.eval.DefaultEvalTask;
@@ -42,8 +42,9 @@ public class XeniaChatHandler{
 	}
 
 	public void handle(GuildMessageReceivedEvent event){
-		Guild bGuild = toolBundle.backendClient().getGuildCache().get(event.getGuild().getIdLong());
-		Channel bChannel = bGuild.getChannelCache().get(event.getChannel().getIdLong());
+
+		Guild bGuild = toolBundle.backendClient().getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).execute();
+		Channel bChannel = bGuild.getChannelCache().retrieve(event.getChannel().getIdLong(), true).execute();
 
 		String msg = event.getMessage().getContentRaw();
 		if(msg.startsWith(bGuild.getPrefix())){

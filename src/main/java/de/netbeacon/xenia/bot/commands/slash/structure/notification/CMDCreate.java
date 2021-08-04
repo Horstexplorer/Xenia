@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.notification;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.NotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
@@ -54,7 +54,7 @@ public class CMDCreate extends Command{
 		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{
-			Notification notification = notificationCache.create(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue());
+			Notification notification = notificationCache.create(commandEvent.getEvent().getChannel().getIdLong(), commandEvent.getEvent().getUser().getIdLong(), durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli(), messageArg.getValue()).execute();
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId(), commandEvent.getEvent().getUser().getAsTag()))).queue();
 		}
 		catch(DataException | CacheException ex){

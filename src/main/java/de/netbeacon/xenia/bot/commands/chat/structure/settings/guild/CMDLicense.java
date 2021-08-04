@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.settings.guild;
 
-import de.netbeacon.xenia.backend.client.objects.external.License;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.License;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
@@ -48,7 +48,7 @@ public class CMDLicense extends Command{
 		CmdArg<String> licenseKey = args.getByIndex(0);
 		License license = commandEvent.getBackendDataPack().license();
 		try{
-			license.update(licenseKey.getValue());
+			license.updateLicenseKey(licenseKey.getValue());
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(DataException e){

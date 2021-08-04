@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.chatbot;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArg;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;
@@ -65,11 +65,11 @@ public class CMDSetup extends Command{
 					.setNSFW(true)
 					.queue(textChannel -> {
 						try{
-							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
+							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).execute();
 							Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);
-							channel.updateAsync(true);
+							channel.update(true).queue();
 							commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 						}
 						catch(Exception e){
@@ -101,11 +101,11 @@ public class CMDSetup extends Command{
 				}
 				if(textChannel.isNSFW()){
 					try{
-						Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
+						Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).execute();
 						Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 						d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 						channel.lSetD43Z1Settings(d43Z1Settings);
-						channel.updateAsync();
+						channel.update().queue();
 						commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 					}
 					catch(Exception e){
@@ -115,11 +115,11 @@ public class CMDSetup extends Command{
 				else{
 					textChannel.getManager().setNSFW(true).queue(success -> {
 						try{
-							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().get(textChannel.getIdLong());
+							Channel channel = commandEvent.getBackendDataPack().guild().getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).execute();
 							Channel.D43Z1Settings d43Z1Settings = new Channel.D43Z1Settings(0);
 							d43Z1Settings.set(Channel.D43Z1Settings.Settings.ACTIVE);
 							channel.lSetD43Z1Settings(d43Z1Settings);
-							channel.updateAsync();
+							channel.update().queue();
 							commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", "https://github.com/Horstexplorer/Xenia/blob/master/src/main/resources/d43z1.index"))).queue();
 						}
 						catch(Exception e){

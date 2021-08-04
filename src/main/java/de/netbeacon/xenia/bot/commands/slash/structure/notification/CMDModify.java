@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.notification;
 
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
@@ -54,13 +54,13 @@ public class CMDModify extends Command{
 		CmdArg<HumanTime> durationArg = cmdArgs.getByName("duration");
 		CmdArg<String> messageArg = cmdArgs.getByName("message");
 		try{
-			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().get(idArg.getValue());
+			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().retrieve(idArg.getValue(), true).execute();
 			if(notification.getUserId() != commandEvent.getEvent().getUser().getIdLong()){
 				throw new RuntimeException("User Does Not Own This Notification");
 			}
 			notification.lSetNotificationTarget(durationArg.getValue().getFutureTime().toInstant(ZoneOffset.UTC).toEpochMilli());
 			notification.lSetNotificationMessage(messageArg.getValue());
-			notification.update();
+			notification.update().execute();
 
 			commandEvent.getEvent().reply(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg")) + " (ID: " + notification.getId() + ")").queue();
 		}

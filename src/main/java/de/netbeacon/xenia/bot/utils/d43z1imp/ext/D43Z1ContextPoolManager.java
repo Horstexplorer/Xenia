@@ -22,8 +22,8 @@ import de.netbeacon.d43z.one.objects.base.ContextPool;
 import de.netbeacon.d43z.one.objects.bp.IContextPool;
 import de.netbeacon.utils.locks.IdBasedLockHolder;
 import de.netbeacon.utils.tuples.Pair;
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.APIDataEventListener;
 import de.netbeacon.xenia.backend.client.objects.internal.objects.CacheEventListener;
 import de.netbeacon.xenia.bot.utils.d43z1imp.D43Z1Imp;
@@ -95,12 +95,12 @@ public class D43Z1ContextPoolManager{
 		for(Channel channel : channels){
 			if(channel.getD43Z1Settings().has(Channel.D43Z1Settings.Settings.ENABLE_SELF_LEARNING)){
 				if(!channelContextHashMap.containsKey(channel.getChannelId())){
-					ChannelContext channelContext = new ChannelContext(channel.getChannelId(), channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_LOGGING_C());
+					ChannelContext channelContext = new ChannelContext(channel.getChannelId(), channel.getBackendProcessor().getBackendClient().getLicenseCache().retrieve(channel.getGuildId(), true).execute().getPerk_CHANNEL_LOGGING_C());
 					channel.getMessageCache().addEventListeners(channelContext.getListener());
 					channelContextHashMap.put(channel.getChannelId(), channelContext);
 				}
 				var channelContext = channelContextHashMap.get(channel.getChannelId());
-				channelContext.setMaxSize(channel.getBackendProcessor().getBackendClient().getLicenseCache().get(channel.getGuildId()).getPerk_CHANNEL_LOGGING_C());
+				channelContext.setMaxSize(channel.getBackendProcessor().getBackendClient().getLicenseCache().retrieve(channel.getGuildId(), true).execute().getPerk_CHANNEL_LOGGING_C());
 				channelContexts.add(channelContext);
 			}
 			else{

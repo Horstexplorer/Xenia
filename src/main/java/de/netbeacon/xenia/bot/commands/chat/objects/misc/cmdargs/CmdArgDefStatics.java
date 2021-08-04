@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.HumanTime;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.specialtypes.Mention;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.translations.TranslationManager;

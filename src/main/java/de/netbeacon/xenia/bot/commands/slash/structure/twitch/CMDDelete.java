@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.twitch;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TwitchNotificationCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -50,7 +50,7 @@ public class CMDDelete extends Command{
 		try{
 			CmdArg<Long> notificationid = cmdArgs.getByName("notification_id");
 			TwitchNotificationCache notificationCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTwitchNotificationCache();
-			notificationCache.delete(notificationid.getValue());
+			notificationCache.delete(notificationid.getValue()).execute();
 			commandEvent.getEvent().replyEmbeds(onSuccess(translationPackage, translationPackage.getTranslation(getClass(), "response.success.msg"))).queue();
 		}
 		catch(DataException | CacheException e){

@@ -16,8 +16,8 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.notification;
 
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Notification;
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Notification;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.Command;
@@ -47,11 +47,11 @@ public class CMDDelete extends Command{
 	public void onExecution(CmdArgs cmdArgs, CommandEvent commandEvent, TranslationPackage translationPackage) throws Exception{
 		CmdArg<Long> longCmdArg = cmdArgs.getByIndex(0);
 		try{
-			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().get(longCmdArg.getValue());
+			Notification notification = commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().retrieve(longCmdArg.getValue(), true).execute();
 			if(notification.getUserId() != commandEvent.getEvent().getAuthor().getIdLong() && !(commandEvent.getBackendDataPack().member().metaIsAdministrator() || commandEvent.getBackendDataPack().member().metaIsOwner())){
 				throw new RuntimeException("User Does Not Own This Notification");
 			}
-			commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().delete(notification.getId());
+			commandEvent.getBackendDataPack().guild().getMiscCaches().getNotificationCache().delete(notification.getId()).execute();
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onSuccess(translationPackage, translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", notification.getId()))).queue();
 		}
 		catch(DataException | CacheException ex){

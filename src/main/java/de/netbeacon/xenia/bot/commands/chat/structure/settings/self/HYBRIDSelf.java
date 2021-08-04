@@ -16,7 +16,7 @@
 
 package de.netbeacon.xenia.bot.commands.chat.structure.settings.self;
 
-import de.netbeacon.xenia.backend.client.objects.external.User;
+import de.netbeacon.xenia.backend.client.objects.apidata.User;
 import de.netbeacon.xenia.bot.commands.chat.objects.CommandGroup;
 import de.netbeacon.xenia.bot.commands.chat.objects.HybridCommand;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs.CmdArgs;

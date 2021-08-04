@@ -16,9 +16,9 @@
 
 package de.netbeacon.xenia.bot.commands.slash.structure.tag;
 
+import de.netbeacon.xenia.backend.client.objects.apidata.Role;
+import de.netbeacon.xenia.backend.client.objects.apidata.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.cache.misc.TagCache;
-import de.netbeacon.xenia.backend.client.objects.external.Role;
-import de.netbeacon.xenia.backend.client.objects.external.misc.Tag;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.CacheException;
 import de.netbeacon.xenia.backend.client.objects.internal.exceptions.DataException;
 import de.netbeacon.xenia.bot.commands.chat.objects.misc.cooldown.CommandCooldown;
@@ -53,7 +53,7 @@ public class RCMDTag extends Command{
 		TagCache tagCache = commandEvent.getBackendDataPack().guild().getMiscCaches().getTagCache();
 		CmdArg<String> nameArg = cmdArgs.getByName("name");
 		try{
-			Tag tag = tagCache.get(nameArg.getValue());
+			Tag tag = tagCache.retrieve(nameArg.getValue(), true).execute();
 			commandEvent.getEvent().reply(MentionRemover.process(translationPackage.getTranslationWithPlaceholders(getClass(), "response.success.msg", tag.getTagContent(), tag.getMember().getUser().getMetaUsername()))).queue();
 		}
 		catch(DataException | CacheException e){

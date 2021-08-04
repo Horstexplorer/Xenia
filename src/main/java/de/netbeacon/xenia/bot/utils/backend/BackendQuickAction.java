@@ -16,10 +16,10 @@
 
 package de.netbeacon.xenia.bot.utils.backend;
 
-import de.netbeacon.xenia.backend.client.objects.external.Channel;
-import de.netbeacon.xenia.backend.client.objects.external.Guild;
-import de.netbeacon.xenia.backend.client.objects.external.Member;
-import de.netbeacon.xenia.backend.client.objects.external.User;
+import de.netbeacon.xenia.backend.client.objects.apidata.Channel;
+import de.netbeacon.xenia.backend.client.objects.apidata.Guild;
+import de.netbeacon.xenia.backend.client.objects.apidata.Member;
+import de.netbeacon.xenia.backend.client.objects.apidata.User;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.TextChannel;
 
@@ -32,10 +32,10 @@ public class BackendQuickAction{
 			bUser.lSetMetaData(jUser.getAsTag(), jUser.getEffectiveAvatarUrl());
 
 			if(async){
-				bUser.updateAsync(securityOverride);
+				bUser.update(securityOverride).queue();
 			}
 			else{
-				bUser.update(securityOverride);
+				bUser.update(securityOverride).execute();
 			}
 		}
 
@@ -44,10 +44,10 @@ public class BackendQuickAction{
 			bMember.lSetMetaData(jMember.getEffectiveName(), jMember.hasPermission(Permission.ADMINISTRATOR), jMember.isOwner());
 
 			if(async){
-				bMember.updateAsync(securityOverride);
+				bMember.update(securityOverride).queue();
 			}
 			else{
-				bMember.update(securityOverride);
+				bMember.update(securityOverride).execute();
 			}
 		}
 
@@ -56,10 +56,10 @@ public class BackendQuickAction{
 			bGuild.lSetMetaData(jGuild.getName(), jGuild.getIconUrl());
 
 			if(async){
-				bGuild.updateAsync(securityOverride);
+				bGuild.update(securityOverride).queue();
 			}
 			else{
-				bGuild.update(securityOverride);
+				bGuild.update(securityOverride).execute();
 			}
 		}
 
@@ -76,10 +76,10 @@ public class BackendQuickAction{
 			bChannel.lSetChannelFlags(channelFlags);
 
 			if(async){
-				bChannel.updateAsync(securityOverride);
+				bChannel.update(securityOverride).queue();
 			}
 			else{
-				bChannel.update(securityOverride);
+				bChannel.update(securityOverride).execute();
 			}
 		}
 
