@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static de.netbeacon.xenia.bot.utils.statics.pattern.StaticPattern.ArgPattern;
 
@@ -79,7 +80,7 @@ public class MessageHandler{
 				toolBundle.levelPointManager().feed(bMember);
 				// get the message & check prefix
 				String msg = event.getMessage().getContentRaw();
-				if(!msg.startsWith(bGuild.getPrefix())){
+				if(!msg.startsWith(Pattern.quote(bGuild.getPrefix()))){
 					return;
 				}
 				// check if xenia is not active or inactive in which case we dont do anything
