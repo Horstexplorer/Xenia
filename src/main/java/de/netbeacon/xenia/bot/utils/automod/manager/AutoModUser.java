@@ -30,4 +30,5 @@ public class AutoModUser{
 	public void newResult(FilterResult filterResult){
 
 	}
+
 }

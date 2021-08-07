@@ -84,7 +84,7 @@ public class CmdArgs{
 		return true;
 	}
 
-	public List<CmdArg> getAll(){ return cmdArgs; }
+	public List<CmdArg> getAll(){return cmdArgs;}
 
 	/**
 	 * Returns the number of elements within this container

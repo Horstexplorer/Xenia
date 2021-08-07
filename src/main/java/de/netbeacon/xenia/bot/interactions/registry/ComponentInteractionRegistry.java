@@ -52,7 +52,8 @@ public class ComponentInteractionRegistry implements IShutdown{
 					}
 				});
 			}
-			catch(Exception ignored){}
+			catch(Exception ignored){
+			}
 		}, 30, 30, TimeUnit.SECONDS);
 	}
 

@@ -18,10 +18,12 @@ public class BackendActionResultBundle{
 	}
 
 	public <T extends APIDataObject<T>> T get(Class<T> clazz, int pos){
-		if(!map.containsKey(clazz))
+		if(!map.containsKey(clazz)){
 			return null;
-		if(map.get(clazz).size() <= pos)
+		}
+		if(map.get(clazz).size() <= pos){
 			return null;
+		}
 		return (T) map.get(clazz).get(pos);
 	}
 

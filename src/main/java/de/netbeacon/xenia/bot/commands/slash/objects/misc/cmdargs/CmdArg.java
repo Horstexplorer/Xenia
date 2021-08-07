@@ -26,9 +26,9 @@ public class CmdArg<T>{
 		this.def = def;
 	}
 
-	public String getName(){ return def.getName(); }
+	public String getName(){return def.getName();}
 
-	public T getValue(){ return data; }
+	public T getValue(){return data;}
 
 	public CmdArgDef<T> getDef(){
 		return def;

@@ -32,7 +32,7 @@ public interface IJSONSerializable{
 	 *
 	 * @throws JSONSerializationException on exception
 	 */
-	default JSONObject asJSON() throws JSONSerializationException{ return null; }
+	default JSONObject asJSON() throws JSONSerializationException{return null;}
 
 	/**
 	 * Sets up an object from a given serialized copy

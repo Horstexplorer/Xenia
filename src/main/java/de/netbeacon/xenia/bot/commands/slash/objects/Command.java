@@ -150,11 +150,11 @@ public abstract class Command{
 		}
 	}
 
-	public String getAlias(){ return alias; }
+	public String getAlias(){return alias;}
 
-	public boolean isNSFW(){ return isNSFW; }
+	public boolean isNSFW(){return isNSFW;}
 
-	public boolean isCommandGroup(){ return !childCommands.isEmpty(); }
+	public boolean isCommandGroup(){return !childCommands.isEmpty();}
 
 	/**
 	 * Returns the required permissions of the bot
@@ -187,17 +187,17 @@ public abstract class Command{
 		return commandCooldown;
 	}
 
-	public List<Command> getChildCommands(){ return new ArrayList<>(childCommands.values()); }
+	public List<Command> getChildCommands(){return new ArrayList<>(childCommands.values());}
 
-	public Command getChildCommand(String alias){ return childCommands.get(alias); }
+	public Command getChildCommand(String alias){return childCommands.get(alias);}
 
-	public CommandData getCommandData(){ return commandData; }
+	public CommandData getCommandData(){return commandData;}
 
-	public SubcommandData getSubCommandData(){ return subcommandData; }
+	public SubcommandData getSubCommandData(){return subcommandData;}
 
-	public SubcommandGroupData getSubcommandGroupData(){ return subcommandGroupData; }
+	public SubcommandGroupData getSubcommandGroupData(){return subcommandGroupData;}
 
-	public List<CmdArgDef> getOptions(){ return options; }
+	public List<CmdArgDef> getOptions(){return options;}
 
 	/**
 	 * Used to execute the command

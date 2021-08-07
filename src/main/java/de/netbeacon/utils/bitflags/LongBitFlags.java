@@ -47,7 +47,7 @@ public abstract class LongBitFlags{
 		return ((value >>> bit.getPos()) & 1) == 1;
 	}
 
-	public <T extends LongBit> List<T> getBits(){ return new ArrayList<>(); }
+	public <T extends LongBit> List<T> getBits(){return new ArrayList<>();}
 
 	public interface LongBit{
 

@@ -44,7 +44,7 @@ public class AutoModHandler{
 		this.toolBundle = toolBundle;
 	}
 
-	public void process(GuildMessageReceivedEvent event) throws ExpectedInterruptException {
+	public void process(GuildMessageReceivedEvent event) throws ExpectedInterruptException{
 		var backendClient = toolBundle.backendClient();
 		// get data from backend
 		var barb = BackendActions.allOf(List.of(
@@ -60,4 +60,5 @@ public class AutoModHandler{
 			filter.filter(event.getMessage(), bGuild, bChannel, bUser);
 		}
 	}
+
 }
