@@ -67,27 +67,23 @@ public class RCMDAvatar extends Command{
 				else if(userId.getValue() != null){
 					commandEvent.getEvent().getJDA().retrieveUserById(userId.getValue())
 						.queue(
-							user -> {
-								interactionHook.editOriginalEmbeds(
-									embedBuilder
-										.setColor(Color.GREEN)
-										.setImage(user.getEffectiveAvatarUrl() + "?size=512")
-										.setDescription(
-											"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
-												"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
-												"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
-										)
-										.build()
-								).queue();
-							},
-							error -> {
-								interactionHook.editOriginalEmbeds(
-									embedBuilder
-										.setColor(Color.RED)
-										.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
-										.build()
-								).queue();
-							}
+							user -> interactionHook.editOriginalEmbeds(
+								embedBuilder
+									.setColor(Color.GREEN)
+									.setImage(user.getEffectiveAvatarUrl() + "?size=512")
+									.setDescription(
+										"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
+											"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
+											"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
+									)
+									.build()
+							).queue(),
+							error -> interactionHook.editOriginalEmbeds(
+								embedBuilder
+									.setColor(Color.RED)
+									.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
+									.build()
+							).queue()
 						);
 				}
 				else{

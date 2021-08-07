@@ -119,7 +119,7 @@ public class CmdArgDef<T>{
 				if(object instanceof Comparable && t instanceof Comparable){
 					return ((Comparable<T>) object).compareTo(t) <= 0;
 				}
-				return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+				return true; // it's not a number so we don't know - assume true (this is not great but should do for us)
 			});
 			return this;
 		}
@@ -129,7 +129,7 @@ public class CmdArgDef<T>{
 				if(object instanceof Comparable && t instanceof Comparable){
 					return ((Comparable<T>) object).compareTo(t) >= 0;
 				}
-				return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+				return true; // it's not a number, so we don't know - assume true (this is not great but should do for us)
 			});
 			return this;
 		}
@@ -314,13 +314,10 @@ public class CmdArgDef<T>{
 
 		public static class Builder<T>{
 
-			private Function<OptionMapping, Object> unwrap;
-			private Function<Object, T> parse;
-
 			public Parser<T> from(OptionType from, Class<T> to){
 				var unwrapped = getUnwrapStrategy(from, to);
-				unwrap = unwrapped.getValue2();
-				parse = getParseStrategy(unwrapped.getValue1(), to);
+				Function<OptionMapping, Object> unwrap = unwrapped.getValue2();
+				Function<Object, T> parse = getParseStrategy(unwrapped.getValue1(), to);
 				return new Parser<>(unwrap, parse);
 			}
 
@@ -358,7 +355,7 @@ public class CmdArgDef<T>{
 					return (o) -> (T) o;
 				}
 				else if(Boolean.class.equals(out)){ // shouldnt be needed
-					return (o) -> (T) (Boolean) Boolean.valueOf(String.valueOf(o));
+					return (o) -> (T) Boolean.valueOf(String.valueOf(o));
 				}
 				else if(Integer.class.equals(out)){
 					return (o) -> (T) (Integer) Integer.parseInt(String.valueOf(o));
@@ -376,13 +373,13 @@ public class CmdArgDef<T>{
 					return (o) -> (T) String.valueOf(o);
 				}
 				else if(LocalDateTime.class.equals(out)){
-					return (o) -> (T) (LocalDateTime) LocalDateTime.parse(String.valueOf(o), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+					return (o) -> (T) LocalDateTime.parse(String.valueOf(o), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 				}
 				else if(LocalDate.class.equals(out)){
-					return (o) -> (T) (LocalDate) LocalDate.parse(String.valueOf(o), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					return (o) -> (T) LocalDate.parse(String.valueOf(o), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				}
 				else if(HumanTime.class.equals(out)){
-					return (o) -> (T) (HumanTime) HumanTime.parse(String.valueOf(o));
+					return (o) -> (T) HumanTime.parse(String.valueOf(o));
 				}
 				else{ // might cause issues but we should notice at some point later
 					return (o) -> (T) o;

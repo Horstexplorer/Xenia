@@ -24,7 +24,7 @@ import java.util.Set;
 
 public record Origin(Long... origin){
 
-	public static Origin ANY = new Origin((Long) null);
+	public static final Origin ANY = new Origin((Long) null);
 
 	public static Origin CUSTOM(Long... origin){
 		return new Origin(origin);

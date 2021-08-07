@@ -42,7 +42,7 @@ public class CMDClientIdentify extends AdminCommand{
 
 	@Override
 	public void onExecution(CmdArgs args, CommandEvent commandEvent, TranslationPackage translationPackage){
-		Message m = commandEvent.getEvent().getChannel().sendMessage(getRequestEmbed()).complete();
+		Message m = commandEvent.getEvent().getChannel().sendMessageEmbeds(getRequestEmbed()).complete();
 		try{
 			// get secondary websocket
 			SecondaryWebsocketListener secondaryWebsocketListener = commandEvent.getToolBundle().backendClient().getSecondaryWebsocketListener();

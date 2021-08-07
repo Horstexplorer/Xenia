@@ -84,7 +84,7 @@ public class Paginator{
 			return;
 		}
 		if(messageId < 0){
-			textChannel.sendMessage(getPage().getAsMessageEmbed()).queue(message -> {
+			textChannel.sendMessageEmbeds(getPage().getAsMessageEmbed()).queue(message -> {
 				link(message.getIdLong());
 				if(pages.size() > 1){
 					message.addReaction(PaginatorManager.PREVIOUS).queue();
@@ -102,7 +102,7 @@ public class Paginator{
 		}
 		else if(needsRedraw){
 			needsRedraw = false;
-			textChannel.editMessageById(messageId, getPage().getAsMessageEmbed()).queue(message -> {
+			textChannel.editMessageEmbedsById(messageId, getPage().getAsMessageEmbed()).queue(message -> {
 				if(reactionEmote != null && user != null){
 					try{
 						if(reactionEmote.isEmoji()){

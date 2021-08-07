@@ -53,7 +53,7 @@ public class HYBRIDRoles extends HybridCommand{
 		if(roleS.isEmpty()){
 			roleS = translationPackage.getTranslation(getClass().getName() + ".response.is_empty");
 		}
-		commandEvent.getEvent().getChannel().sendMessage(
+		commandEvent.getEvent().getChannel().sendMessageEmbeds(
 			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.title"), commandEvent.getEvent().getAuthor())
 				.setDescription(roleS)
 				.build()

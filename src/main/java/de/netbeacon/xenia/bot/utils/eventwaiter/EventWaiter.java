@@ -178,7 +178,7 @@ public class EventWaiter{
 		}
 
 		/**
-		 * Whether or not this is wants async execution
+		 * Whether this is wants async execution
 		 *
 		 * @return boolean
 		 */

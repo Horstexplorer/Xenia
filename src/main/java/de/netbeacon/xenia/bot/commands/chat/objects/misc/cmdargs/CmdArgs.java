@@ -17,6 +17,7 @@
 package de.netbeacon.xenia.bot.commands.chat.objects.misc.cmdargs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CmdArgs{
@@ -34,9 +35,7 @@ public class CmdArgs{
 	 * @param args predefined arguements
 	 */
 	public CmdArgs(CmdArg... args){
-		for(CmdArg arg : args){
-			cmdArgs.add(arg);
-		}
+		cmdArgs.addAll(Arrays.asList(args));
 	}
 
 	/**
@@ -45,9 +44,7 @@ public class CmdArgs{
 	 * @param args cmd args
 	 */
 	public void add(CmdArg... args){
-		for(CmdArg arg : args){
-			cmdArgs.add(arg);
-		}
+		cmdArgs.addAll(Arrays.asList(args));
 	}
 
 	/**

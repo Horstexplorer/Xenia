@@ -50,7 +50,7 @@ public class CMDInfo extends Command{
 			commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.notfound"))).queue();
 			return;
 		}
-		commandEvent.getEvent().getChannel().sendMessage(
+		commandEvent.getEvent().getChannel().sendMessageEmbeds(
 			EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getD43Z1Settings().getBits().toArray()), false)
 				.addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), channel.getMetaChannelName() + "(" + channel.getChannelId() + ")", false)

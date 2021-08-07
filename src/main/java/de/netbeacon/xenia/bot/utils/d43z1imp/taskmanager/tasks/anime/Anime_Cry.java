@@ -37,15 +37,11 @@ public class Anime_Cry extends AnimeTask{
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
 				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.CRY, ContentType.RANDOM)
-					.async(url -> {
-						textChannel.sendMessage(
-							EmbedBuilderFactory.getDefaultEmbed(":c").setImage(url).build()
-						).queue();
-					}, e -> {
-						textChannel.sendMessage(
-							"\u2764\uFE0F"
-						).queue();
-					});
+					.async(url -> textChannel.sendMessageEmbeds(
+						EmbedBuilderFactory.getDefaultEmbed(":c").setImage(url).build()
+					).queue(), e -> textChannel.sendMessage(
+						"\u2764\uFE0F"
+					).queue());
 				return null;
 			}
 		);

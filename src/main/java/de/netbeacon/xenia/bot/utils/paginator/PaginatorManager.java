@@ -57,7 +57,7 @@ public class PaginatorManager implements IShutdown{
 	public void createPaginator(TextChannel textChannel, User user, List<Page> pages){
 		try{
 			idBasedLockHolder.getLock(user.getIdLong()).lock();
-			// check that we arent waiting for a result for this user already
+			// check that we aren't waiting for a result for this user already
 			if(creationRunning.putIfAbsent(user.getIdLong(), false) != null){
 				var waiter = creationRunning.get(user.getIdLong());
 				long preWaitTime = System.currentTimeMillis();
@@ -91,8 +91,8 @@ public class PaginatorManager implements IShutdown{
 				}
 			});
 		}
-		catch(InterruptedException | TimeoutException ignore){
-			ignore.printStackTrace();
+		catch(InterruptedException | TimeoutException e){
+			e.printStackTrace();
 		}
 		finally{
 			idBasedLockHolder.getLock(user.getIdLong()).unlock();
@@ -162,17 +162,17 @@ public class PaginatorManager implements IShutdown{
 			}
 			paginatorManager.usePaginator(paginator);
 			switch(event.getReactionEmote().getEmoji()){
-				case NEXT:{
+				case NEXT -> {
 					paginator.movePosition(Paginator.Move.NEXT);
 					paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
 					break;
 				}
-				case PREVIOUS:{
+				case PREVIOUS -> {
 					paginator.movePosition(Paginator.Move.PREVIOUS);
 					paginator.drawCurrent(event.getChannel(), event.getUser(), event.getReactionEmote());
 					break;
 				}
-				case CLOSE:{
+				case CLOSE -> {
 					paginatorManager.removePaginator(event.getMessageIdLong());
 				}
 			}

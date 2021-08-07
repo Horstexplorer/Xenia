@@ -64,14 +64,12 @@ public class NotificationListener implements CacheEventListener<Long, Notificati
 				if(textChannel == null){
 					return;
 				}
-				textChannel.sendMessage("<@!" + notification.getUserId() + ">").embed(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s -> {}, f -> {});
+				textChannel.sendMessage("<@!" + notification.getUserId() + ">").setEmbeds(getNotificationMessage(notification.getUserId(), notification.getNotificationMessage())).queue(s -> {}, f -> {});
 			}
 			catch(Exception ignore){
 			}
 			try{
-				XeniaCore.getInstance().getBackendClient().getGuildCache().retrieve(notification.getGuildId(), true).queue(bGuild -> {
-					bGuild.getMiscCaches().getNotificationCache().delete(notification.getId()).queue();
-				});
+				XeniaCore.getInstance().getBackendClient().getGuildCache().retrieve(notification.getGuildId(), true).queue(bGuild -> bGuild.getMiscCaches().getNotificationCache().delete(notification.getId()).queue());
 			}
 			catch(Exception ignore){
 			}

@@ -19,7 +19,7 @@ package de.netbeacon.utils.json.serial;
 import org.json.JSONObject;
 
 /**
- * Should be added to objects for easy serialization to and from json objects
+ * Should be added to object for easy serialization to and from json objects
  *
  * @author horstexplorer
  */
@@ -32,7 +32,7 @@ public interface IJSONSerializable{
 	 *
 	 * @throws JSONSerializationException on exception
 	 */
-	public default JSONObject asJSON() throws JSONSerializationException{ return null; }
+	default JSONObject asJSON() throws JSONSerializationException{ return null; }
 
 	/**
 	 * Sets up an object from a given serialized copy
@@ -41,8 +41,6 @@ public interface IJSONSerializable{
 	 *
 	 * @throws JSONSerializationException on exception
 	 */
-	public default void fromJSON(JSONObject jsonObject) throws JSONSerializationException{}
-
-	;
+	default void fromJSON(JSONObject jsonObject) throws JSONSerializationException{}
 
 }

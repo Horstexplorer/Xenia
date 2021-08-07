@@ -37,15 +37,11 @@ public class Anime_Hug extends AnimeTask{
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
 				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.HUG, ContentType.RANDOM)
-					.async(url -> {
-						textChannel.sendMessage(
-							EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
-						).queue();
-					}, e -> {
-						textChannel.sendMessage(
-							"\uD83E\uDD17"
-						).queue();
-					});
+					.async(url -> textChannel.sendMessageEmbeds(
+						EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
+					).queue(), e -> textChannel.sendMessage(
+						"\uD83E\uDD17"
+					).queue());
 				return null;
 			}
 		);

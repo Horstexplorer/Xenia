@@ -75,8 +75,6 @@ public class XeniaCore{
 
 	private final long ownerId;
 
-	private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
-
 	private XeniaCore() throws LoginException, IOException{
 		// shutdown hook
 		ShutdownHook shutdownHook = new ShutdownHook();
@@ -92,6 +90,7 @@ public class XeniaCore{
 		}
 		shutdownHook.addShutdownAble(new SEH());
 		// load config
+		Logger logger = LoggerFactory.getLogger(XeniaCore.class);
 		logger.info("Loading Config...");
 		config = new Config(new File("./xenia/config/sys.config"));
 

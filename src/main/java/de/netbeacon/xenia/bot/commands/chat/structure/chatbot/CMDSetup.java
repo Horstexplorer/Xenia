@@ -75,9 +75,7 @@ public class CMDSetup extends Command{
 						catch(Exception e){
 							commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 						}
-					}, failed -> {
-						commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
-					});
+					}, failed -> commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue());
 			}
 		}
 		else{
@@ -125,9 +123,7 @@ public class CMDSetup extends Command{
 						catch(Exception e){
 							commandEvent.getEvent().getChannel().sendMessageEmbeds(onUnhandledException(translationPackage, e)).queue();
 						}
-					}, failed -> {
-						commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue();
-					});
+					}, failed -> commandEvent.getEvent().getChannel().sendMessageEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.create.failed"))).queue());
 				}
 			}
 		}

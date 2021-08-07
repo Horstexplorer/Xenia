@@ -32,11 +32,11 @@ public class HastebinUtil{
 	}
 
 	public static String uploadToHastebin(String host, String content) throws Exception{
-		RequestBody requestBody = RequestBody.create(content, MediaType.parse("text/html; charset=utf-8"));
+		RequestBody requestBody = RequestBody.create(MediaType.parse("text/html; charset=utf-8"), content);
 		Request request = new Request.Builder().post(requestBody).url(host + "/documents").build();
 		try(Response response = SharedOkHttpClient.getInstance().newCall(request).execute()){
 			if(response.code() != 200){
-				throw new Exception("Error Executing Request: " + response.code() + " " + request.toString());
+				throw new Exception("Error Executing Request: " + response.code() + " " + request);
 			}
 			JSONObject jsonObject = new JSONObject(response.body().string());
 			return host + "/" + jsonObject.getString("key");

@@ -240,7 +240,7 @@ public abstract class Command{
 				return;
 			}
 			if(selfMember.hasPermission(Permission.ADMINISTRATOR) && !bGuild.getSettings().has(Guild.GuildSettings.Settings.BOT_IGNORE_ADMIN_PERMS)){
-				commandEvent.getEvent().getTextChannel().sendMessage(onAdminPerms(translationPackage)).mentionRepliedUser(false).queue(); // cant use reply here
+				commandEvent.getEvent().getTextChannel().sendMessageEmbeds(onAdminPerms(translationPackage)).mentionRepliedUser(false).queue(); // cant use reply here
 			}
 			// check user permissions
 			if(

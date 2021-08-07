@@ -36,15 +36,11 @@ public class Anime_Blush extends AnimeTask{
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
 				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.BLUSH, ContentType.RANDOM)
-					.async(url -> {
-						textChannel.sendMessage(
-							EmbedBuilderFactory.getDefaultEmbed("Xenia blushes").setImage(url).build()
-						).queue();
-					}, e -> {
-						textChannel.sendMessage(
-							"\uD83D\uDE0A"
-						).queue();
-					});
+					.async(url -> textChannel.sendMessageEmbeds(
+						EmbedBuilderFactory.getDefaultEmbed("Xenia blushes").setImage(url).build()
+					).queue(), e -> textChannel.sendMessage(
+						"\uD83D\uDE0A"
+					).queue());
 				return null;
 			}
 		);

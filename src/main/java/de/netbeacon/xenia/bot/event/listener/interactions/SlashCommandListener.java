@@ -80,11 +80,7 @@ public class SlashCommandListener extends ListenerAdapter{
 		event.getJDA()
 			.updateCommands()
 			.addCommands(slashCommandHandler.getGlobalCommandData())
-			.queue(s -> {
-				logger.info("Updated Global Commands");
-			}, f -> {
-				logger.warn("Failed To Update Global Commands", f);
-			});
+			.queue(s -> logger.info("Updated Global Commands"), f -> logger.warn("Failed To Update Global Commands", f));
 	}
 
 	@Override
@@ -94,11 +90,7 @@ public class SlashCommandListener extends ListenerAdapter{
 			event.getGuild()
 				.updateCommands()
 				.addCommands(slashCommandHandler.getGuildCommandData(event.getGuild().getIdLong()))
-				.queue(s -> {
-					logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong());
-				}, f -> {
-					logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f);
-				});
+				.queue(s -> logger.debug("Updated Guild Commands For Guild " + event.getGuild().getIdLong()), f -> logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong(), f));
 		}
 		catch(Exception ignore){
 			logger.debug("Failed To Update Commands For Guild " + event.getGuild().getIdLong());

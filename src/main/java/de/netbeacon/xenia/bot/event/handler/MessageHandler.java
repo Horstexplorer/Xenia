@@ -72,7 +72,7 @@ public class MessageHandler{
 
 				// wrap in single object
 				CommandEvent.BackendDataPack backendDataPack = new CommandEvent.BackendDataPack(bGuild, bUser, bMember, bChannel, bLicense);
-				// check if xenia has been disabled in which case we dont do anything
+				// check if xenia has been disabled in which case we don't do anything
 				if(bChannel.getAccessMode().has(Channel.AccessMode.Mode.DISABLED)){
 					return;
 				}
@@ -83,7 +83,7 @@ public class MessageHandler{
 				if(!msg.startsWith(Pattern.quote(bGuild.getPrefix()))){
 					return;
 				}
-				// check if xenia is not active or inactive in which case we dont do anything
+				// check if xenia is not active or inactive in which case we don't do anything
 				if(!bChannel.getAccessMode().has(Channel.AccessMode.Mode.ACTIVE) || bChannel.getAccessMode().has(Channel.AccessMode.Mode.INACTIVE)){
 					return;
 				}
