@@ -47,7 +47,7 @@ public abstract class IntegerBitFlags{
 		return ((value >>> bit.getPos()) & 1) == 1;
 	}
 
-	public <T extends IntBit> List<T> getBits(){ return new ArrayList<>(); }
+	public <T extends IntBit> List<T> getBits(){return new ArrayList<>();}
 
 	public interface IntBit{
 

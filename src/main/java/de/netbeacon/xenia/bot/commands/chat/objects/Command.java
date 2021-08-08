@@ -295,7 +295,7 @@ public abstract class Command{
 				return;
 			}
 			if(selfMember.hasPermission(Permission.ADMINISTRATOR) && !bGuild.getSettings().has(Guild.GuildSettings.Settings.BOT_IGNORE_ADMIN_PERMS)){
-				message.reply(onAdminPerms(translationPackage)).mentionRepliedUser(false).queue();
+				message.replyEmbeds(onAdminPerms(translationPackage)).mentionRepliedUser(false).queue();
 			}
 			// user permissions
 			if(

@@ -38,9 +38,9 @@ public abstract class CommandGroup extends Command{
 	/**
 	 * Creates a new instance of this class which acts as a command group
 	 *
-	 * @param parent if this group is located inside of another group this should be set accordingly, else null
+	 * @param parent if this group is located inside another group this should be set accordingly, else null
 	 * @param alias  of the command group
-	 * @param isNSFW if the command is an nsfw command
+	 * @param isNSFW if the command is a nsfw command
 	 */
 	public CommandGroup(CommandGroup parent, String alias, boolean isNSFW){
 		super(alias, isNSFW);
@@ -51,10 +51,10 @@ public abstract class CommandGroup extends Command{
 	/**
 	 * Creates a new instance of this class which acts both as a command and as a command group
 	 *
-	 * @param parent                    if this group is located inside of another group this should be set accordingly, else null
+	 * @param parent                    if this group is located inside another group this should be set accordingly, else null
 	 * @param alias                     of the command group / command
-	 * @param isNSFW                    if the command is an nsfw command
-	 * @param commandCooldown           cooldown of the command on execution in command mode
+	 * @param isNSFW                    if the command is a nsfw command
+	 * @param commandCooldown           cool down of the command on execution in command mode
 	 * @param botPermissions            required for the user on execution in command mode
 	 * @param memberPrimaryPermission   required for the member on execution in command mode
 	 * @param memberSecondaryPermission required for the member on execution in command mode

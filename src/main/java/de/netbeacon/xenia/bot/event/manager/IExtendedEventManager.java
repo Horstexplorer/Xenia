@@ -22,8 +22,8 @@ import net.dv8tion.jda.api.hooks.IEventManager;
 
 public interface IExtendedEventManager extends IEventManager, IShutdown{
 
-	default long getLastEventTimestamp(){ return -1; }
+	default long getLastEventTimestamp(){return -1;}
 
-	default long getLastEventTimeDif(){ return -1; }
+	default long getLastEventTimeDif(){return -1;}
 
 }

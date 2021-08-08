@@ -74,64 +74,60 @@ public class LoggingHandler{
 	}
 
 	public void processUpdate(GuildMessageUpdateEvent event){
-		toolBundle.backendClient().getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
-			bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
-				MessageCache messageCache = bChannel.getMessageCache();
-				Message message = messageCache.get_(event.getMessageIdLong());
-				if(message == null){
-					return;
-				}
-				// update message content
-				message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
-				message.update(true).queue();
-				// update thingy
-				messageCache.setLast("edited", message.getId());
-				// check if notification is active
-				if(bChannel.getTmpLoggingChannelId() == -1){
-					return;
-				}
-				TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-				if(channel == null){
-					bChannel.setTmpLoggingChannelId(-1);
-					return;
-				}
-				channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
-					.addField("MessageID", event.getMessageId(), true)
-					.addField("Author", event.getAuthor().getAsTag(), true)
-					.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-					.build()
-				).queue();
-			});
-		});
+		toolBundle.backendClient().getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
+			MessageCache messageCache = bChannel.getMessageCache();
+			Message message = messageCache.get_(event.getMessageIdLong());
+			if(message == null){
+				return;
+			}
+			// update message content
+			message.lSetMessageContent(event.getMessage().getContentRaw(), messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey());
+			message.update(true).queue();
+			// update thingy
+			messageCache.setLast("edited", message.getId());
+			// check if notification is active
+			if(bChannel.getTmpLoggingChannelId() == -1){
+				return;
+			}
+			TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
+			if(channel == null){
+				bChannel.setTmpLoggingChannelId(-1);
+				return;
+			}
+			channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Edited!")
+				.addField("MessageID", event.getMessageId(), true)
+				.addField("Author", event.getAuthor().getAsTag(), true)
+				.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+				.build()
+			).queue();
+		}));
 	}
 
 	public void processDelete(GuildMessageDeleteEvent event){
-		toolBundle.backendClient().getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
-			bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
-				MessageCache messageCache = bChannel.getMessageCache();
-				Message message = messageCache.get_(event.getMessageIdLong());
-				if(message == null){
-					return;
-				}
-				// update thingy
-				messageCache.setLast("deleted", event.getMessageIdLong());
-				// try sending the message there
-				if(bChannel.getTmpLoggingChannelId() == -1){
-					return;
-				}
-				TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
-				if(channel == null){
-					bChannel.setTmpLoggingChannelId(-1);
-					return;
-				}
-				channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
-					.addField("MessageID", event.getMessageId(), true)
-					.addField("AuthorID", String.valueOf(message.getUserId()), true)
-					.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
-					.build()
-				).queue();
-			});
-		});
+		toolBundle.backendClient().getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
+			MessageCache messageCache = bChannel.getMessageCache();
+			Message message = messageCache.get_(event.getMessageIdLong());
+			if(message == null){
+				return;
+			}
+			// update thingy
+			messageCache.setLast("deleted", event.getMessageIdLong());
+			// try sending the message there
+			if(bChannel.getTmpLoggingChannelId() == -1){
+				return;
+			}
+			TextChannel channel = event.getGuild().getTextChannelById(bChannel.getTmpLoggingChannelId());
+			if(channel == null){
+				bChannel.setTmpLoggingChannelId(-1);
+				return;
+			}
+			channel.sendMessageEmbeds(EmbedBuilderFactory.getDefaultEmbed("Message Deleted!")
+				.addField("MessageID", event.getMessageId(), true)
+				.addField("AuthorID", String.valueOf(message.getUserId()), true)
+				.addField("Old Message", message.getOldMessageContent(messageCache.getBackendProcessor().getBackendClient().getBackendSettings().getMessageCryptKey()), false)
+				.build()
+			).queue();
+		}));
 	}
 
 }

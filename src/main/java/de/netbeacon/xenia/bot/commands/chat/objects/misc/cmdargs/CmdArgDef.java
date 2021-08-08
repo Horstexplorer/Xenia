@@ -35,7 +35,7 @@ public class CmdArgDef<T>{
 	 * @param name              name of the argument
 	 * @param aClass            of the target type
 	 * @param predicate         to find matching values
-	 * @param predicateAsString what the requirements are for this arg in a human readable format
+	 * @param predicateAsString what the requirements are for this arg in a human-readable format
 	 */
 	private CmdArgDef(String name, Class<T> aClass, Predicate<T> predicate, String predicateAsString){
 		this.name = name;
@@ -104,7 +104,7 @@ public class CmdArgDef<T>{
 	}
 
 	/**
-	 * Used to retrieve some human readable information about the string
+	 * Used to retrieve some human-readable information about the string
 	 *
 	 * @return String
 	 */
@@ -161,7 +161,7 @@ public class CmdArgDef<T>{
 				if(object instanceof Comparable && t instanceof Comparable){
 					return ((Comparable<T>) object).compareTo(t) <= 0;
 				}
-				return true; // its not a number so we dont know - assume true (this is not great but should do for us)
+				return true; // it's not a number, so we don't know - assume true (this is not great but should do for us)
 			});
 			return this;
 		}
@@ -362,7 +362,7 @@ public class CmdArgDef<T>{
 			if(predicate == null){
 				predicate = t -> true;
 			}
-			return new CmdArgDef<T>(name, aClass, predicate, predicateAsString);
+			return new CmdArgDef<>(name, aClass, predicate, predicateAsString);
 		}
 
 		/**
@@ -385,7 +385,7 @@ public class CmdArgDef<T>{
 			if(predicate == null){
 				predicate = t -> true;
 			}
-			return new CmdArgDef<T>(name, aClass, predicate, predicateAsString);
+			return new CmdArgDef<>(name, aClass, predicate, predicateAsString);
 		}
 
 	}

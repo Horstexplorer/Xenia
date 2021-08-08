@@ -158,12 +158,12 @@ public class LevelPointCard{
 	private void drawProgressBar(Graphics2D graphics2D, Color bar, long min, long current, long max, int x, int y, int width, int height, int rad){
 		int cwdth = (int) ((width / (float) (max - min)) * (float) (current - min));
 		graphics2D.setColor(bar);
-		graphics2D.fillRect(x + rad / 2, y + 0 * height / 8, cwdth - cwdth / 3 - rad / 2, height / 8 + 1);
-		graphics2D.fillRect(x + rad / 5, y + 1 * height / 8, cwdth - cwdth / 7 - rad / 5, height / 8 + 1);
+		graphics2D.fillRect(x + rad / 2, y + 0 / 8, cwdth - cwdth / 3 - rad / 2, height / 8 + 1);
+		graphics2D.fillRect(x + rad / 5, y + height / 8, cwdth - cwdth / 7 - rad / 5, height / 8 + 1);
 		graphics2D.fillRect(x + rad / 10, y + 2 * height / 8, cwdth - cwdth / 15 - rad / 10, height / 8 + 1);
 		graphics2D.fillRect(x + rad / 30, y + 3 * height / 8, cwdth - cwdth / 5 - rad / 30, height / 8 + 1);
 		graphics2D.fillRect(x + rad / 30, y + 4 * height / 8, cwdth - cwdth / 35 - rad / 30, height / 8 + 1);
-		graphics2D.fillRect(x + rad / 10, y + 5 * height / 8, cwdth - 0 - rad / 10, height / 8 + 1);
+		graphics2D.fillRect(x + rad / 10, y + 5 * height / 8, cwdth - rad / 10, height / 8 + 1);
 		graphics2D.fillRect(x + rad / 5, y + 6 * height / 8, cwdth - cwdth / 5 - rad / 5, height / 8 + 1);
 		graphics2D.fillRect(x + rad / 2, y + 7 * height / 8, cwdth - cwdth / 2 - rad / 2, height / 8);
 	}

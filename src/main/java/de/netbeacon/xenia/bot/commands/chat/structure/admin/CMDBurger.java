@@ -45,9 +45,7 @@ public class CMDBurger extends AdminCommand{
 				Accessor.ANY,
 				Activations.CUSTOM(10),
 				TimeoutPolicy.NONE,
-				ActionHandler.CUSTOM((buttonClickEvent) -> {
-					buttonClickEvent.reply("-1 " + "\uD83C\uDF54 taken by " + buttonClickEvent.getUser().getAsTag()).queue();
-				}),
+				ActionHandler.CUSTOM((buttonClickEvent) -> buttonClickEvent.reply("-1 " + "\uD83C\uDF54 taken by " + buttonClickEvent.getUser().getAsTag()).queue()),
 				ExceptionHandler.NONE,
 				DeactivationMode.ALL
 			);
@@ -58,9 +56,7 @@ public class CMDBurger extends AdminCommand{
 				Accessor.ANY,
 				Activations.ONCE,
 				TimeoutPolicy.NONE,
-				ActionHandler.CUSTOM((buttonClickEvent) -> {
-					buttonClickEvent.reply("The salad wasn't free. No more burgers. " + buttonClickEvent.getUser().getAsTag() + " ruined it.").queue();
-				}),
+				ActionHandler.CUSTOM((buttonClickEvent) -> buttonClickEvent.reply("The salad wasn't free. No more burgers. " + buttonClickEvent.getUser().getAsTag() + " ruined it.").queue()),
 				ExceptionHandler.NONE,
 				DeactivationMode.ALL
 			);

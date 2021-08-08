@@ -26,13 +26,15 @@ import org.slf4j.LoggerFactory;
 
 public class StatusListener extends ListenerAdapter{
 
-	private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
 	public static final Object STATUS_LOGGED_IN = new Object();
+	private final Logger logger = LoggerFactory.getLogger(StatusListener.class);
 
 	@Override
 	public void onStatusChange(@NotNull StatusChangeEvent event){
 		if(event.getNewStatus().equals(JDA.Status.CONNECTING_TO_WEBSOCKET)){
-			synchronized(STATUS_LOGGED_IN){ STATUS_LOGGED_IN.notify(); }
+			synchronized(STATUS_LOGGED_IN){
+				STATUS_LOGGED_IN.notify();
+			}
 		}
 	}
 

@@ -78,13 +78,15 @@ public class XeniaChatHandler{
 				evalResult -> {
 					if(evalResult.ok()){
 						event.getMessage().reply(evalResult.getContentMatch().getEstimatedOutput().getContent()).mentionRepliedUser(false).queue();
-					}else {
+					}
+					else{
 						event.getMessage().reply(":(").mentionRepliedUser(false).queue();
 					}
 				}, SharedExecutor.getInstance().getScheduledExecutor());
 			if(taskResult.getValue1() instanceof DefaultEvalTask){
 				((DefaultEvalTask) taskResult.getValue1()).execute(content, new Pair<>(d43Z1Imp.getEval(), evalRequest));
-			}else {
+			}
+			else{
 				d43Z1Imp.getEval().enqueue(evalRequest);
 			}
 		}

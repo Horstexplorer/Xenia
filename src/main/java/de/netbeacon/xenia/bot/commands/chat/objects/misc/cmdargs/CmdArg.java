@@ -35,7 +35,7 @@ public class CmdArg<T>{
 	/**
 	 * Checks if the value matches the definition
 	 * <p>
-	 * Will return true if it either matches or doesnt exist while being optional
+	 * Will return true if it either matches or does not exist while being optional
 	 *
 	 * @return true if it does match
 	 */

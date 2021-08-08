@@ -55,6 +55,6 @@ public class CmdArgs{
 		return (T) cmdArgs.get(name);
 	}
 
-	public Collection<CmdArg> getAll(){ return cmdArgs.values(); }
+	public Collection<CmdArg> getAll(){return cmdArgs.values();}
 
 }

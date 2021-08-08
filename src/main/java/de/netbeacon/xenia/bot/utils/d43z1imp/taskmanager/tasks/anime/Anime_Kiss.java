@@ -29,22 +29,18 @@ public class Anime_Kiss extends AnimeTask{
 
 	public Anime_Kiss(int pos){
 		super(pos, "send when xenia is supposed to kiss", List.of(
-			new LPTrigger("kiss_me", LiamusPattern.compile("\0 kiss me \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-			new LPTrigger("<3", LiamusPattern.compile("\0 <3 \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
+				new LPTrigger("kiss_me", LiamusPattern.compile("\0 kiss me \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("<3", LiamusPattern.compile("\0 <3 \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
 				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.KISS, ContentType.RANDOM)
-					.async(url -> {
-						textChannel.sendMessage(
-							EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
-						).queue();
-					}, e -> {
-						textChannel.sendMessage(
-							"\u2764\uFE0F"
-						).queue();
-					});
+					.async(url -> textChannel.sendMessageEmbeds(
+						EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
+					).queue(), e -> textChannel.sendMessage(
+						"\u2764\uFE0F"
+					).queue());
 				return null;
 			}
 		);

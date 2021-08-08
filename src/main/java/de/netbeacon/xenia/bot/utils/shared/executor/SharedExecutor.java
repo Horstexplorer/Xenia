@@ -74,7 +74,7 @@ public class SharedExecutor implements IShutdown{
 	 *
 	 * @return scheduled executor
 	 */
-	public ScheduledExecutorService getScheduledExecutor(){ return scheduledExecutorService; }
+	public ScheduledExecutorService getScheduledExecutor(){return scheduledExecutorService;}
 
 	@Override
 	public void onShutdown() throws Exception{

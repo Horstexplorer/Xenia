@@ -67,7 +67,7 @@ public class CmdArgFactory{
 	 * @param tClass target class
 	 * @param <T>    return this object
 	 *
-	 * @return T or null if its an unknown class
+	 * @return T or null if it's an unknown class
 	 */
 	private static <T> T fromString(String string, Class<T> tClass){
 		try{

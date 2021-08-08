@@ -40,8 +40,8 @@ public class MultiThreadedEventManager implements IExtendedEventManager{
 	private long lastEvent;
 
 	public MultiThreadedEventManager(){
-		this.primaryScalingExecutor = new ScalingExecutor(2, 30, -1, 10, TimeUnit.SECONDS);
-		this.secondaryScalingExecutor = new ScalingExecutor(2, 16, -1, 10, TimeUnit.SECONDS);
+		this.primaryScalingExecutor = new ScalingExecutor(2, 14, -1, 10, TimeUnit.SECONDS);
+		this.secondaryScalingExecutor = new ScalingExecutor(2, 6, -1, 10, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -90,7 +90,8 @@ public class MultiThreadedEventManager implements IExtendedEventManager{
 			}
 			catch(Exception e){
 				JDAImpl.LOG.error("One of the EventListeners had an uncaught exception", e);
-			}catch(ExpectedInterruptException e){
+			}
+			catch(ExpectedInterruptException e){
 				break;
 			}
 		}

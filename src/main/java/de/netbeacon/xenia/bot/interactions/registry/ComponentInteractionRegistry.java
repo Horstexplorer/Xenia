@@ -52,7 +52,8 @@ public class ComponentInteractionRegistry implements IShutdown{
 					}
 				});
 			}
-			catch(Exception ignored){}
+			catch(Exception ignored){
+			}
 		}, 30, 30, TimeUnit.SECONDS);
 	}
 
@@ -122,9 +123,8 @@ public class ComponentInteractionRegistry implements IShutdown{
 							else if(component instanceof SelectionMenu){
 								components.add(((SelectionMenu) component).asDisabled());
 							}
-							else{
-								// just remove em
-							}
+							// just remove em
+
 							if(!v.getId().equals(component.getId())){ // unregister
 								ComponentRegistryEntry componentRegistryEntry = get(component.getId());
 								if(componentRegistryEntry != null){
@@ -142,9 +142,7 @@ public class ComponentInteractionRegistry implements IShutdown{
 				messageBuilder.setActionRows(actionRowList);
 				message.editMessage(messageBuilder.build()).queue();
 			},
-			throwable -> {
-				throwable.printStackTrace();
-			}
+			Throwable::printStackTrace
 		);
 	}
 

@@ -134,7 +134,7 @@ public class Config{
 	}
 
 	/**
-	 * Returns an long array for the given key
+	 * Returns a long array for the given key
 	 *
 	 * @param key key
 	 *
@@ -155,7 +155,7 @@ public class Config{
 	}
 
 	/**
-	 * Returns an string array for the given key
+	 * Returns a string array for the given key
 	 *
 	 * @param key key
 	 *

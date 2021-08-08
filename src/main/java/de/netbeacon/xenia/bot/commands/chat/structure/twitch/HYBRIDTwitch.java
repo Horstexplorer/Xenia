@@ -57,7 +57,7 @@ public class HYBRIDTwitch extends HybridCommand{
 			.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
 			.setDescription(stringBuilder)
 			.build();
-		commandEvent.getEvent().getChannel().sendMessage(result).queue();
+		commandEvent.getEvent().getChannel().sendMessageEmbeds(result).queue();
 	}
 
 }

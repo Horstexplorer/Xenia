@@ -115,10 +115,8 @@ public class GuildAccessListener extends ListenerAdapter{
 		)).queue(barb -> {
 			Guild bGuild = barb.get(Guild.class);
 			BackendQuickAction.Update.execute(bGuild, event.getGuild(), true, true);
-			event.getGuild().getTextChannels().forEach(textChannel -> {
-				bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true)
-					.queue(bChannel -> BackendQuickAction.Update.execute(bChannel, textChannel, true, false));
-			});
+			event.getGuild().getTextChannels().forEach(textChannel -> bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true)
+				.queue(bChannel -> BackendQuickAction.Update.execute(bChannel, textChannel, true, false)));
 		});
 	}
 
@@ -169,9 +167,7 @@ public class GuildAccessListener extends ListenerAdapter{
 			Guild bGuild = barb.get(Guild.class);
 			User bUser = barb.get(User.class);
 			BackendQuickAction.Update.execute(bUser, event.getUser(), true, true);
-			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> {
-				BackendQuickAction.Update.execute(bMember, event.getMember(), true, true);
-			});
+			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> BackendQuickAction.Update.execute(bMember, event.getMember(), true, true));
 		});
 	}
 
@@ -180,9 +176,7 @@ public class GuildAccessListener extends ListenerAdapter{
 		if(event.getMember() == null){
 			return;
 		}
-		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
-			bGuild.getMemberCache().delete(event.getMember().getIdLong()).queue();
-		});
+		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> bGuild.getMemberCache().delete(event.getMember().getIdLong()).queue());
 	}
 
 	@Override
@@ -201,9 +195,7 @@ public class GuildAccessListener extends ListenerAdapter{
 			Guild bGuild = barb.get(Guild.class);
 			User bUser = barb.get(User.class);
 			BackendQuickAction.Update.execute(bUser, event.getUser(), true, true);
-			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> {
-				BackendQuickAction.Update.execute(bMember, event.getMember(), true, true);
-			});
+			bGuild.getMemberCache().retrieveOrCreate(userId, true).queue(bMember -> BackendQuickAction.Update.execute(bMember, event.getMember(), true, true));
 		});
 	}
 
@@ -219,9 +211,7 @@ public class GuildAccessListener extends ListenerAdapter{
 			licenseCache.retrieve(guildId, true)
 		)).queue(barb -> {
 			Guild bGuild = barb.get(Guild.class);
-			bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> {
-				BackendQuickAction.Update.execute(bChannel, event.getChannel(), true, false);
-			});
+			bGuild.getChannelCache().retrieveOrCreate(event.getChannel().getIdLong(), true).queue(bChannel -> BackendQuickAction.Update.execute(bChannel, event.getChannel(), true, false));
 		});
 	}
 
@@ -247,17 +237,11 @@ public class GuildAccessListener extends ListenerAdapter{
 
 	@Override
 	public void onTextChannelDelete(@NotNull TextChannelDeleteEvent event){
-		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> {
-			bGuild.getChannelCache().delete(event.getGuild().getIdLong()).queue();
-		});
+		backendClient.getGuildCache().retrieveOrCreate(event.getGuild().getIdLong(), true).queue(bGuild -> bGuild.getChannelCache().delete(event.getGuild().getIdLong()).queue());
 	}
 
 	private void channelUpdate(TextChannel textChannel){
-		backendClient.getGuildCache().retrieveOrCreate(textChannel.getGuild().getIdLong(), true).queue(bGuild -> {
-			bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).queue(bChannel -> {
-				BackendQuickAction.Update.execute(bChannel, textChannel, true, false);
-			});
-		});
+		backendClient.getGuildCache().retrieveOrCreate(textChannel.getGuild().getIdLong(), true).queue(bGuild -> bGuild.getChannelCache().retrieveOrCreate(textChannel.getIdLong(), true).queue(bChannel -> BackendQuickAction.Update.execute(bChannel, textChannel, true, false)));
 	}
 
 	// GUILD
@@ -273,9 +257,7 @@ public class GuildAccessListener extends ListenerAdapter{
 	}
 
 	private void guildMetaUpdate(net.dv8tion.jda.api.entities.Guild guild){
-		backendClient.getGuildCache().retrieveOrCreate(guild.getIdLong(), true).queue(bGuild -> {
-			BackendQuickAction.Update.execute(bGuild, guild, true, false);
-		});
+		backendClient.getGuildCache().retrieveOrCreate(guild.getIdLong(), true).queue(bGuild -> BackendQuickAction.Update.execute(bGuild, guild, true, false));
 	}
 
 }

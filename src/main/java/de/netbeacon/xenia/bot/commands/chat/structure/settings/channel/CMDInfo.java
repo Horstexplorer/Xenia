@@ -53,7 +53,7 @@ public class CMDInfo extends Command{
 			if(channel == null){
 				throw new IllegalArgumentException();
 			}
-			commandEvent.getEvent().getChannel().sendMessage(
+			commandEvent.getEvent().getChannel().sendMessageEmbeds(
 				EmbedBuilderFactory.getDefaultEmbed(translationPackage.getTranslation(getClass(), "response.success.title"), commandEvent.getEvent().getAuthor())
 					.addField(translationPackage.getTranslation(getClass(), "response.success.field.1.title"), Arrays.toString(channel.getChannelFlags().getBits().toArray()), false)
 					.addField(translationPackage.getTranslation(getClass(), "response.success.field.2.title"), Arrays.toString(channel.getAccessMode().getBits().toArray()), false)

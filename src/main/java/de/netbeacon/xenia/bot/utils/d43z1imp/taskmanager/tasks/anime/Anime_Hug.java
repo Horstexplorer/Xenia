@@ -29,23 +29,19 @@ public class Anime_Hug extends AnimeTask{
 
 	public Anime_Hug(int pos){
 		super(pos, "send when xenia is supposed to hug", List.of(
-			new LPTrigger("please_hug", LiamusPattern.compile("\0 please \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-			new LPTrigger("give_hug", LiamusPattern.compile("\0 give \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
-			new LPTrigger("need_hug", LiamusPattern.compile("\0 need \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
+				new LPTrigger("please_hug", LiamusPattern.compile("\0 please \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("give_hug", LiamusPattern.compile("\0 give \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat()),
+				new LPTrigger("need_hug", LiamusPattern.compile("\0 need \0 hug \0"), LPTrigger.defaultToBool(), LPTrigger.defaultToFloat())
 			),
 			(content, pair) -> {
 				var member = pair.getValue1();
 				var textChannel = pair.getValue2();
 				PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(ImageType.SFW.HUG, ContentType.RANDOM)
-					.async(url -> {
-						textChannel.sendMessage(
-							EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
-						).queue();
-					}, e -> {
-						textChannel.sendMessage(
-							"\uD83E\uDD17"
-						).queue();
-					});
+					.async(url -> textChannel.sendMessageEmbeds(
+						EmbedBuilderFactory.getDefaultEmbed("@" + member.getUser().getAsTag()).setImage(url).build()
+					).queue(), e -> textChannel.sendMessage(
+						"\uD83E\uDD17"
+					).queue());
 				return null;
 			}
 		);

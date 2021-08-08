@@ -78,11 +78,9 @@ public abstract class AnimeImageCommand extends Command{
 
 	private void getImage(CommandEvent commandEvent, String message, TranslationPackage translationPackage, int retries){
 		PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
-			url -> {
-				commandEvent.getEvent().getChannel().sendMessageEmbeds(
-					EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
-				).queue();
-			},
+			url -> commandEvent.getEvent().getChannel().sendMessageEmbeds(
+				EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
+			).queue(),
 			error -> {
 				if(imageType.equals(ImageType.SFW.RANDOM) || imageType.equals(ImageType.NSFW.RANDOM) && retries < 5){
 					getImage(commandEvent, message, translationPackage, retries + 1);

@@ -50,27 +50,23 @@ public class CMDAvatar extends Command{
 		if(mentionCmdArg.getValue() != null){
 			commandEvent.getEvent().getJDA().retrieveUserById(mentionCmdArg.getValue().getId())
 				.queue(
-					user -> {
-						commandEvent.getEvent().getChannel().sendMessageEmbeds(
-							embedBuilder
-								.setColor(Color.GREEN)
-								.setImage(user.getEffectiveAvatarUrl() + "?size=512")
-								.setDescription(
-									"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
-										"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
-										"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
-								)
-								.build()
-						).queue();
-					},
-					error -> {
-						commandEvent.getEvent().getChannel().sendMessageEmbeds(
-							embedBuilder
-								.setColor(Color.RED)
-								.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
-								.build()
-						).queue();
-					}
+					user -> commandEvent.getEvent().getChannel().sendMessageEmbeds(
+						embedBuilder
+							.setColor(Color.GREEN)
+							.setImage(user.getEffectiveAvatarUrl() + "?size=512")
+							.setDescription(
+								"[256px](" + user.getEffectiveAvatarUrl() + "?size=256) " +
+									"[512px](" + user.getEffectiveAvatarUrl() + "?size=512) " +
+									"[1024px](" + user.getEffectiveAvatarUrl() + "?size=1024) "
+							)
+							.build()
+					).queue(),
+					error -> commandEvent.getEvent().getChannel().sendMessageEmbeds(
+						embedBuilder
+							.setColor(Color.RED)
+							.setDescription(translationPackage.getTranslation(getClass(), "error.msg"))
+							.build()
+					).queue()
 				);
 		}
 		else{

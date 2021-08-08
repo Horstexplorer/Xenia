@@ -32,8 +32,10 @@ public class GuildMessageAutoModListener extends ListenerAdapter{
 	}
 
 	@Override
-	public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) throws ExpectedInterruptException {
-		if(event.getAuthor().isBot() || event.getAuthor().isSystem() || event.isWebhookMessage()) return;
+	public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) throws ExpectedInterruptException{
+		if(event.getAuthor().isBot() || event.getAuthor().isSystem() || event.isWebhookMessage()){
+			return;
+		}
 		autoModHandler.process(event);
 	}
 

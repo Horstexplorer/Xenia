@@ -66,9 +66,7 @@ public abstract class AnimeImageCommand extends Command{
 					// get image
 					getImage(ack, translationPackage, message, 0);
 				},
-				err -> {
-					commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, e -> {});
-				}
+				err -> commandEvent.getEvent().replyEmbeds(onError(translationPackage, translationPackage.getTranslation(getClass(), "response.error.msg"))).queue(s -> {}, e -> {})
 			);
 		}
 		catch(Exception e){
@@ -78,11 +76,9 @@ public abstract class AnimeImageCommand extends Command{
 
 	private void getImage(InteractionHook ack, TranslationPackage translationPackage, String message, int retries){
 		PurrBotAPIWrapper.getInstance().getAnimeImageUrlOf(imageType, contentType).async(
-			url -> {
-				ack.editOriginalEmbeds(
-					EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
-				).queue();
-			},
+			url -> ack.editOriginalEmbeds(
+				EmbedBuilderFactory.getDefaultEmbed(message).setImage(url).build()
+			).queue(),
 			error -> {
 				if(imageType.equals(ImageType.SFW.RANDOM) || imageType.equals(ImageType.NSFW.RANDOM) && retries < 5){
 					// retry

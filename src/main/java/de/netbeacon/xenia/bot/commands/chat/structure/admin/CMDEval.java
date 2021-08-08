@@ -114,15 +114,11 @@ public class CMDEval extends AdminCommand{
 			ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName(engine);
 			scriptEngine.put("commandEvent", commandEvent); // this might be dangerous
 			Object o = scriptEngine.eval(code);
-			message.editMessage(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, e -> {
-				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, ex -> {});
-			});
+			message.editMessageEmbeds(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, e -> commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", scriptEngine.getFactory().getEngineName(), System.currentTimeMillis() - start, code, o.toString())).queue(s -> {}, ex -> {}));
 		}
 		catch(Exception e){
 			String finalEngine = engine;
-			message.editMessage(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, ex -> {
-				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, exe -> {});
-			});
+			message.editMessageEmbeds(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, ex -> commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "\"" + finalEngine + "\"", System.currentTimeMillis() - start, code, e.getMessage())).queue(s -> {}, exe -> {}));
 		}
 		logger.info("! EVAL FINISHED ! Engine: \"" + engine + "\"");
 	}
@@ -165,20 +161,14 @@ public class CMDEval extends AdminCommand{
 			process.waitFor();
 			timeout.cancel(true);
 			if(process.exitValue() != 0){
-				message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> {
-					commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
-				});
+				message.editMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue());
 			}
 			else{
-				message.editMessage(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> {
-					commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue();
-				});
+				message.editMessageEmbeds(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue(s -> {}, ex -> commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.GREEN, "Success", "Java", System.currentTimeMillis() - start, code, stringBuilder.toString())).queue());
 			}
 		}
 		catch(Exception e){
-			message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue(s -> {}, ex -> {
-				commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue();
-			});
+			message.editMessage(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue(s -> {}, ex -> commandEvent.getEvent().getChannel().sendMessageEmbeds(getResultEmbed(Color.RED, "Failed", "Java", -1, code, e.getMessage())).queue());
 		}
 		finally{
 			logger.info("! EVAL FINISHED ! Engine: Java");

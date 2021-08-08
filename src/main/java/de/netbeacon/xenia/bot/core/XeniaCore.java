@@ -75,8 +75,6 @@ public class XeniaCore{
 
 	private final long ownerId;
 
-	private final Logger logger = LoggerFactory.getLogger(XeniaCore.class);
-
 	private XeniaCore() throws LoginException, IOException{
 		// shutdown hook
 		ShutdownHook shutdownHook = new ShutdownHook();
@@ -92,6 +90,7 @@ public class XeniaCore{
 		}
 		shutdownHook.addShutdownAble(new SEH());
 		// load config
+		Logger logger = LoggerFactory.getLogger(XeniaCore.class);
 		logger.info("Loading Config...");
 		config = new Config(new File("./xenia/config/sys.config"));
 
@@ -180,7 +179,8 @@ public class XeniaCore{
 			builder
 				.setShardsTotal(setupData.getTotalShards())
 				.setShards(setupData.getShards()[0]); // only prepare first shard as work around
-		}else {
+		}
+		else{
 			builder
 				.setShardsTotal(1)
 				.setShards(0);
@@ -218,20 +218,24 @@ public class XeniaCore{
 				.exitOn(WSRequest.ExitOn.INSTANT)
 				.build();
 			wsc.process(wsRequest);
-			logger.debug("Waiting for Shard "+shardId);
+			logger.debug("Waiting for Shard " + shardId);
 			synchronized(ShardStartupProcessor.SYNC){
 				try{
 					ShardStartupProcessor.SYNC.wait(setupData.getTotalShards() * 10000L);
-				}catch(Exception ignore){}
+				}
+				catch(Exception ignore){
+				}
 			}
-			logger.debug("Finished Waiting for Shard "+shardId);
+			logger.debug("Finished Waiting for Shard " + shardId);
 			shardManager.start(shardId);
 			synchronized(StatusListener.STATUS_LOGGED_IN){
 				try{
 					StatusListener.STATUS_LOGGED_IN.wait();
-				}catch(Exception ignore){}
+				}
+				catch(Exception ignore){
+				}
 			}
-			logger.debug("Started Shard "+shardId);
+			logger.debug("Started Shard " + shardId);
 			WSRequest wsRequest2 = new WSRequest.Builder()
 				.mode(WSRequest.Mode.UNICAST)
 				.recipient(0)

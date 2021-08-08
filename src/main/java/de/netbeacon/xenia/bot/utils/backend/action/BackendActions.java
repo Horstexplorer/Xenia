@@ -18,7 +18,9 @@ public class BackendActions{
 			var inner = ExecutionAction.accumulate(actions, Collectors.toList());
 			Map<Class<?>, List<APIDataObject<?>>> map = new HashMap<>();
 			for(var o : inner.execute()){
-				if(!map.containsKey(o.getClass())) map.put(o.getClass(), new ArrayList<>());
+				if(!map.containsKey(o.getClass())){
+					map.put(o.getClass(), new ArrayList<>());
+				}
 				map.get(o.getClass()).add(o);
 			}
 			return new BackendActionResultBundle(map);
