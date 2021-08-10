@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class BackendActions{
 
 	public static ExecutionAction<BackendActionResultBundle> allOf(List<ExecutionAction<? extends APIDataObject<?>>> actions){
+		if(actions.isEmpty()) throw new IllegalArgumentException();
 		Supplier<BackendActionResultBundle> fun = () -> {
 			var inner = ExecutionAction.accumulate(actions, Collectors.toList());
 			Map<Class<?>, List<APIDataObject<?>>> map = new HashMap<>();
@@ -25,7 +26,7 @@ public class BackendActions{
 			}
 			return new BackendActionResultBundle(map);
 		};
-		return new SupplierExecutionAction<>(fun);
+		return new SupplierExecutionAction<>(actions.get(0).getExecutor(), fun);
 	}
 
 }
