@@ -48,7 +48,7 @@ dependencies {
 
     // JS Engine (eval)
 
-    implementation group: 'org.codehaus.groovy', name: 'groovy-jsr223', version: '3.0.8' // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-jsr223
+    implementation group: 'org.codehaus.groovy', name: 'groovy-jsr223', version: '3.0.9' // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-jsr223
 
     // OKHTTP
 
